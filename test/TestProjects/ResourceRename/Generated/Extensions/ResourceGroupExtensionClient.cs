@@ -34,7 +34,7 @@ namespace ResourceRename
 
         /// <summary> Gets a collection of SshPublicKeyInfoResources in the SshPublicKeyInfoResource. </summary>
         /// <returns> An object representing collection of SshPublicKeyInfoResources and their operations over a SshPublicKeyInfoResource. </returns>
-        public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfoResources()
+        public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfos()
         {
             return GetCachedClient(Client => new SshPublicKeyInfoCollection(Client, Id));
         }

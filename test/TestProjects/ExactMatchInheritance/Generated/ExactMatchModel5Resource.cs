@@ -28,9 +28,9 @@ namespace ExactMatchInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics;
-        private readonly ExactMatchModel5SRestOperations _exactMatchModel5ResourceExactMatchModel5sRestClient;
-        private readonly ExactMatchModel5ResourceData _data;
+        private readonly ClientDiagnostics _exactMatchModel5ClientDiagnostics;
+        private readonly ExactMatchModel5SRestOperations _exactMatchModel5RestClient;
+        private readonly ExactMatchModel5Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Resource"/> class for mocking. </summary>
         protected ExactMatchModel5Resource()
@@ -40,7 +40,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel5Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5ResourceData data) : this(client, data.Id)
+        internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ExactMatchModel5Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string exactMatchModel5ResourceExactMatchModel5sApiVersion);
-            _exactMatchModel5ResourceExactMatchModel5sRestClient = new ExactMatchModel5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ResourceExactMatchModel5sApiVersion);
+            _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string exactMatchModel5ApiVersion);
+            _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace ExactMatchInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ExactMatchModel5ResourceData Data
+        public virtual ExactMatchModel5Data Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel5Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.Get");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.Get");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel5ResourceExactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
@@ -113,11 +113,11 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel5Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.Get");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.Get");
             scope.Start();
             try
             {
-                var response = _exactMatchModel5ResourceExactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
@@ -143,14 +143,14 @@ namespace ExactMatchInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _exactMatchModel5ResourceExactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -174,14 +174,14 @@ namespace ExactMatchInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _exactMatchModel5ResourceExactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace ExactMatchInheritance
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _exactMatchModel5ResourceExactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -233,7 +233,7 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.SetTags");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace ExactMatchInheritance
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _exactMatchModel5ResourceExactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,14 +263,14 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _exactMatchModel5ResourceExactMatchModel5sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,14 +292,14 @@ namespace ExactMatchInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
+            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _exactMatchModel5ResourceExactMatchModel5sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ExactMatchModel5Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

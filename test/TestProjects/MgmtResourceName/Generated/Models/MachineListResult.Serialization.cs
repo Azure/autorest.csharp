@@ -16,7 +16,7 @@ namespace MgmtResourceName.Models
     {
         internal static MachineListResult DeserializeMachineListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<MachineResourceData>> value = default;
+            Optional<IReadOnlyList<MachineData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtResourceName.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<MachineResourceData> array = new List<MachineResourceData>();
+                    List<MachineData> array = new List<MachineData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MachineResourceData.DeserializeMachineResourceData(item));
+                        array.Add(MachineData.DeserializeMachineData(item));
                     }
                     value = array;
                     continue;

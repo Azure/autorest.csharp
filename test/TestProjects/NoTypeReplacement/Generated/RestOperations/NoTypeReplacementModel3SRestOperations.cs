@@ -108,7 +108,7 @@ namespace NoTypeReplacement
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3ResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NoTypeReplacementModel3ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3ResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<NoTypeReplacementModel3Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace NoTypeReplacement
             {
                 case 200:
                     {
-                        NoTypeReplacementModel3ResourceData value = default;
+                        NoTypeReplacementModel3Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = NoTypeReplacementModel3ResourceData.DeserializeNoTypeReplacementModel3ResourceData(document.RootElement);
+                        value = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NoTypeReplacementModel3ResourceData> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3ResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<NoTypeReplacementModel3Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace NoTypeReplacement
             {
                 case 200:
                     {
-                        NoTypeReplacementModel3ResourceData value = default;
+                        NoTypeReplacementModel3Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = NoTypeReplacementModel3ResourceData.DeserializeNoTypeReplacementModel3ResourceData(document.RootElement);
+                        value = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NoTypeReplacementModel3ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public async Task<Response<NoTypeReplacementModel3Data>> GetAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace NoTypeReplacement
             {
                 case 200:
                     {
-                        NoTypeReplacementModel3ResourceData value = default;
+                        NoTypeReplacementModel3Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = NoTypeReplacementModel3ResourceData.DeserializeNoTypeReplacementModel3ResourceData(document.RootElement);
+                        value = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((NoTypeReplacementModel3ResourceData)null, message.Response);
+                    return Response.FromValue((NoTypeReplacementModel3Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NoTypeReplacementModel3ResourceData> Get(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public Response<NoTypeReplacementModel3Data> Get(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace NoTypeReplacement
             {
                 case 200:
                     {
-                        NoTypeReplacementModel3ResourceData value = default;
+                        NoTypeReplacementModel3Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = NoTypeReplacementModel3ResourceData.DeserializeNoTypeReplacementModel3ResourceData(document.RootElement);
+                        value = NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((NoTypeReplacementModel3ResourceData)null, message.Response);
+                    return Response.FromValue((NoTypeReplacementModel3Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

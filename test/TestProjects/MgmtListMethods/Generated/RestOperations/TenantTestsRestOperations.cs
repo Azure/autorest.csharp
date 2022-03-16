@@ -63,7 +63,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TenantTestResourceData>> GetAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantTestData>> GetAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
@@ -73,13 +73,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantTestResourceData value = default;
+                        TenantTestData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TenantTestResourceData.DeserializeTenantTestResourceData(document.RootElement);
+                        value = TenantTestData.DeserializeTenantTestData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TenantTestResourceData)null, message.Response);
+                    return Response.FromValue((TenantTestData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -91,7 +91,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TenantTestResourceData> Get(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<TenantTestData> Get(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
 
@@ -101,19 +101,19 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantTestResourceData value = default;
+                        TenantTestData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TenantTestResourceData.DeserializeTenantTestResourceData(document.RootElement);
+                        value = TenantTestData.DeserializeTenantTestData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TenantTestResourceData)null, message.Response);
+                    return Response.FromValue((TenantTestData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string tenantTestName, TenantTestResourceData parameters)
+        internal HttpMessage CreateCreateRequest(string tenantTestName, TenantTestData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateAsync(string tenantTestName, TenantTestResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -161,7 +161,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Create(string tenantTestName, TenantTestResourceData parameters, CancellationToken cancellationToken = default)
+        public Response Create(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNull(parameters, nameof(parameters));

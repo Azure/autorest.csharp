@@ -24,8 +24,8 @@ namespace MgmtPropertyChooser
     /// <summary> A class representing collection of VirtualMachine and their operations over its parent. </summary>
     public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachineResource>, IAsyncEnumerable<VirtualMachineResource>
     {
-        private readonly ClientDiagnostics _virtualMachineResourceVirtualMachinesClientDiagnostics;
-        private readonly VirtualMachinesRestOperations _virtualMachineResourceVirtualMachinesRestClient;
+        private readonly ClientDiagnostics _virtualMachineClientDiagnostics;
+        private readonly VirtualMachinesRestOperations _virtualMachineRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineCollection"/> class for mocking. </summary>
         protected VirtualMachineCollection()
@@ -37,9 +37,9 @@ namespace MgmtPropertyChooser
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VirtualMachineCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineResourceVirtualMachinesClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", VirtualMachineResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineResource.ResourceType, out string virtualMachineResourceVirtualMachinesApiVersion);
-            _virtualMachineResourceVirtualMachinesRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineResourceVirtualMachinesApiVersion);
+            _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", VirtualMachineResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineResource.ResourceType, out string virtualMachineApiVersion);
+            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<VirtualMachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vmName, VirtualMachineResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<VirtualMachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.CreateOrUpdate");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<VirtualMachineResource> CreateOrUpdate(WaitUntil waitUntil, string vmName, VirtualMachineResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineResource> CreateOrUpdate(WaitUntil waitUntil, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.CreateOrUpdate");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken);
-                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters, cancellationToken);
+                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -130,11 +130,11 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtPropertyChooser
         {
             async Task<Page<VirtualMachineResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+                using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineResourceVirtualMachinesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -213,11 +213,11 @@ namespace MgmtPropertyChooser
         {
             Page<VirtualMachineResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
+                using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineResourceVirtualMachinesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _virtualMachineRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,7 +242,7 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.Exists");
             scope.Start();
             try
             {
@@ -296,11 +296,11 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -325,11 +325,11 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());

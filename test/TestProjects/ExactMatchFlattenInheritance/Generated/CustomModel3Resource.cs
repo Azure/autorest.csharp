@@ -27,9 +27,9 @@ namespace ExactMatchFlattenInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _customModel3ResourceCustomModel3sClientDiagnostics;
-        private readonly CustomModel3SRestOperations _customModel3ResourceCustomModel3sRestClient;
-        private readonly CustomModel3ResourceData _data;
+        private readonly ClientDiagnostics _customModel3ClientDiagnostics;
+        private readonly CustomModel3SRestOperations _customModel3RestClient;
+        private readonly CustomModel3Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Resource"/> class for mocking. </summary>
         protected CustomModel3Resource()
@@ -39,7 +39,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel3Resource(ArmClient client, CustomModel3ResourceData data) : this(client, new ResourceIdentifier(data.Id))
+        internal CustomModel3Resource(ArmClient client, CustomModel3Data data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal CustomModel3Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _customModel3ResourceCustomModel3sClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string customModel3ResourceCustomModel3sApiVersion);
-            _customModel3ResourceCustomModel3sRestClient = new CustomModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ResourceCustomModel3sApiVersion);
+            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual CustomModel3ResourceData Data
+        public virtual CustomModel3Data Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CustomModel3Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _customModel3ResourceCustomModel3sClientDiagnostics.CreateScope("CustomModel3Resource.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Resource.Get");
             scope.Start();
             try
             {
-                var response = await _customModel3ResourceCustomModel3sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel3Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _customModel3ResourceCustomModel3sClientDiagnostics.CreateScope("CustomModel3Resource.Get");
+            using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Resource.Get");
             scope.Start();
             try
             {
-                var response = _customModel3ResourceCustomModel3sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());

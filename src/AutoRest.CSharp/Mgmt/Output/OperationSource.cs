@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public OperationSource(CSharpType returnType, Resource? resource, Schema schema)
         {
             ReturnType = returnType;
-            TypeName = $"{returnType.Name}OperationSource";
+            TypeName = $"{(resource != null ? resource.ResourceName : returnType.Name)}OperationSource";
             Interface = new CSharpType(typeof(IOperationSource<>), returnType);
             Resource = resource;
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");

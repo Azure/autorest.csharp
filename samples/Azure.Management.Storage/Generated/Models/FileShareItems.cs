@@ -17,20 +17,20 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of FileShareItems. </summary>
         internal FileShareItems()
         {
-            Value = new ChangeTrackingList<FileShareResourceData>();
+            Value = new ChangeTrackingList<FileShareData>();
         }
 
         /// <summary> Initializes a new instance of FileShareItems. </summary>
         /// <param name="value"> List of file shares returned. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size. </param>
-        internal FileShareItems(IReadOnlyList<FileShareResourceData> value, string nextLink)
+        internal FileShareItems(IReadOnlyList<FileShareData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List of file shares returned. </summary>
-        public IReadOnlyList<FileShareResourceData> Value { get; }
+        public IReadOnlyList<FileShareData> Value { get; }
         /// <summary> Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size. </summary>
         public string NextLink { get; }
     }

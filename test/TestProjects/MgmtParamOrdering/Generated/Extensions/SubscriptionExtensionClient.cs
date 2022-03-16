@@ -20,8 +20,8 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _availabilitySetResourceAvailabilitySetsClientDiagnostics;
-        private AvailabilitySetsRestOperations _availabilitySetResourceAvailabilitySetsRestClient;
+        private ClientDiagnostics _availabilitySetClientDiagnostics;
+        private AvailabilitySetsRestOperations _availabilitySetRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
         protected SubscriptionExtensionClient()
@@ -35,8 +35,8 @@ namespace MgmtParamOrdering
         {
         }
 
-        private ClientDiagnostics AvailabilitySetResourceAvailabilitySetsClientDiagnostics => _availabilitySetResourceAvailabilitySetsClientDiagnostics ??= new ClientDiagnostics("MgmtParamOrdering", AvailabilitySetResource.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetResourceAvailabilitySetsRestClient => _availabilitySetResourceAvailabilitySetsRestClient ??= new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySetResource.ResourceType));
+        private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("MgmtParamOrdering", AvailabilitySetResource.ResourceType.Namespace, DiagnosticOptions);
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySetResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
-        public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImageResources(string location, string publisherName)
+        public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(string location, string publisherName)
         {
             return new VirtualMachineExtensionImageCollection(Client, Id, location, publisherName);
         }
@@ -61,15 +61,15 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<AvailabilitySetResource> GetAvailabilitySetResourcesAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<AvailabilitySetResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySetResources");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetResourceAvailabilitySetsRestClient.ListBySubscriptionAsync(Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await AvailabilitySetRestClient.ListBySubscriptionAsync(Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -80,11 +80,11 @@ namespace MgmtParamOrdering
             }
             async Task<Page<AvailabilitySetResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySetResources");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetResourceAvailabilitySetsRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await AvailabilitySetRestClient.ListBySubscriptionNextPageAsync(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -104,15 +104,15 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<AvailabilitySetResource> GetAvailabilitySetResources(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<AvailabilitySetResource> GetAvailabilitySets(string expand = null, CancellationToken cancellationToken = default)
         {
             Page<AvailabilitySetResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySetResources");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetResourceAvailabilitySetsRestClient.ListBySubscription(Id.SubscriptionId, expand, cancellationToken: cancellationToken);
+                    var response = AvailabilitySetRestClient.ListBySubscription(Id.SubscriptionId, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -123,11 +123,11 @@ namespace MgmtParamOrdering
             }
             Page<AvailabilitySetResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySetResources");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetResourceAvailabilitySetsRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken);
+                    var response = AvailabilitySetRestClient.ListBySubscriptionNextPage(nextLink, Id.SubscriptionId, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySetResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

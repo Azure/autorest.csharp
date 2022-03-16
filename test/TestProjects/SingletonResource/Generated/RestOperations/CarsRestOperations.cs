@@ -108,7 +108,7 @@ namespace SingletonResource
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string carName, CarResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string carName, CarData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CarResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string carName, CarResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CarData>> PutAsync(string subscriptionId, string resourceGroupName, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace SingletonResource
             {
                 case 200:
                     {
-                        CarResourceData value = default;
+                        CarData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CarResourceData.DeserializeCarResourceData(document.RootElement);
+                        value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CarResourceData> Put(string subscriptionId, string resourceGroupName, string carName, CarResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<CarData> Put(string subscriptionId, string resourceGroupName, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace SingletonResource
             {
                 case 200:
                     {
-                        CarResourceData value = default;
+                        CarData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CarResourceData.DeserializeCarResourceData(document.RootElement);
+                        value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CarResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
+        public async Task<Response<CarData>> GetAsync(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace SingletonResource
             {
                 case 200:
                     {
-                        CarResourceData value = default;
+                        CarData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CarResourceData.DeserializeCarResourceData(document.RootElement);
+                        value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CarResourceData)null, message.Response);
+                    return Response.FromValue((CarData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CarResourceData> Get(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
+        public Response<CarData> Get(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace SingletonResource
             {
                 case 200:
                     {
-                        CarResourceData value = default;
+                        CarData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CarResourceData.DeserializeCarResourceData(document.RootElement);
+                        value = CarData.DeserializeCarData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CarResourceData)null, message.Response);
+                    return Response.FromValue((CarData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

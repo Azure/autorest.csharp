@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static ListBlobInventoryPolicy DeserializeListBlobInventoryPolicy(JsonElement element)
         {
-            Optional<IReadOnlyList<BlobInventoryPolicyResourceData>> value = default;
+            Optional<IReadOnlyList<BlobInventoryPolicyData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -26,10 +26,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<BlobInventoryPolicyResourceData> array = new List<BlobInventoryPolicyResourceData>();
+                    List<BlobInventoryPolicyData> array = new List<BlobInventoryPolicyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobInventoryPolicyResourceData.DeserializeBlobInventoryPolicyResourceData(item));
+                        array.Add(BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(item));
                     }
                     value = array;
                     continue;

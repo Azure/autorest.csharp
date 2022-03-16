@@ -18,7 +18,7 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of TypeOneListResult. </summary>
         /// <param name="value"> The list of of typeones. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal TypeOneListResult(IEnumerable<TypeOneResourceData> value)
+        internal TypeOneListResult(IEnumerable<TypeOneData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of TypeOneListResult. </summary>
         /// <param name="value"> The list of of typeones. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </param>
-        internal TypeOneListResult(IReadOnlyList<TypeOneResourceData> value, string nextLink)
+        internal TypeOneListResult(IReadOnlyList<TypeOneData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of of typeones. </summary>
-        public IReadOnlyList<TypeOneResourceData> Value { get; }
+        public IReadOnlyList<TypeOneData> Value { get; }
         /// <summary> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </summary>
         public string NextLink { get; }
     }

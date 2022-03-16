@@ -16,7 +16,7 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static ResourceModel1ListResult DeserializeResourceModel1ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ResourceModel1ResourceData>> value = default;
+            Optional<IReadOnlyList<ResourceModel1Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace SupersetFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ResourceModel1ResourceData> array = new List<ResourceModel1ResourceData>();
+                    List<ResourceModel1Data> array = new List<ResourceModel1Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceModel1ResourceData.DeserializeResourceModel1ResourceData(item));
+                        array.Add(ResourceModel1Data.DeserializeResourceModel1Data(item));
                     }
                     value = array;
                     continue;

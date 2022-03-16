@@ -27,9 +27,9 @@ namespace SingletonResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _carResourceCarsClientDiagnostics;
-        private readonly CarsRestOperations _carResourceCarsRestClient;
-        private readonly CarResourceData _data;
+        private readonly ClientDiagnostics _carClientDiagnostics;
+        private readonly CarsRestOperations _carRestClient;
+        private readonly CarData _data;
 
         /// <summary> Initializes a new instance of the <see cref="CarResource"/> class for mocking. </summary>
         protected CarResource()
@@ -39,7 +39,7 @@ namespace SingletonResource
         /// <summary> Initializes a new instance of the <see cref = "CarResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CarResource(ArmClient client, CarResourceData data) : this(client, data.Id)
+        internal CarResource(ArmClient client, CarData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal CarResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _carResourceCarsClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string carResourceCarsApiVersion);
-            _carResourceCarsRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carResourceCarsApiVersion);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace SingletonResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual CarResourceData Data
+        public virtual CarData Data
         {
             get
             {
@@ -84,7 +84,7 @@ namespace SingletonResource
 
         /// <summary> Gets an object representing a IgnitionResource along with the instance operations that can be performed on it in the CarResource. </summary>
         /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
-        public virtual IgnitionResource GetIgnitionResource()
+        public virtual IgnitionResource GetIgnition()
         {
             return new IgnitionResource(Client, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
         }
@@ -96,11 +96,11 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CarResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _carResourceCarsClientDiagnostics.CreateScope("CarResource.Get");
+            using var scope = _carClientDiagnostics.CreateScope("CarResource.Get");
             scope.Start();
             try
             {
-                var response = await _carResourceCarsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CarResource(Client, response.Value), response.GetRawResponse());
@@ -119,11 +119,11 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CarResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _carResourceCarsClientDiagnostics.CreateScope("CarResource.Get");
+            using var scope = _carClientDiagnostics.CreateScope("CarResource.Get");
             scope.Start();
             try
             {
-                var response = _carResourceCarsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CarResource(Client, response.Value), response.GetRawResponse());

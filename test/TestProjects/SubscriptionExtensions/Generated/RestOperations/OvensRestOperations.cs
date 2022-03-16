@@ -116,7 +116,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string ovenName, OvenResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -148,7 +148,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string ovenName, OvenResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -175,7 +175,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string ovenName, OvenResourceData parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -220,7 +220,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<OvenResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
+        public async Task<Response<OvenData>> GetAsync(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -232,13 +232,13 @@ namespace SubscriptionExtensions
             {
                 case 200:
                     {
-                        OvenResourceData value = default;
+                        OvenData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = OvenResourceData.DeserializeOvenResourceData(document.RootElement);
+                        value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((OvenResourceData)null, message.Response);
+                    return Response.FromValue((OvenData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -250,7 +250,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<OvenResourceData> Get(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
+        public Response<OvenData> Get(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -262,13 +262,13 @@ namespace SubscriptionExtensions
             {
                 case 200:
                     {
-                        OvenResourceData value = default;
+                        OvenData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = OvenResourceData.DeserializeOvenResourceData(document.RootElement);
+                        value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((OvenResourceData)null, message.Response);
+                    return Response.FromValue((OvenData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

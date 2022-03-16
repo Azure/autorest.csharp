@@ -34,14 +34,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets a collection of AnotherParentResources in the AnotherParentResource. </summary>
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
-        public virtual AnotherParentCollection GetAnotherParentResources()
+        public virtual AnotherParentCollection GetAnotherParents()
         {
             return GetCachedClient(Client => new AnotherParentCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of TheParentResources in the TheParentResource. </summary>
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
-        public virtual TheParentCollection GetTheParentResources()
+        public virtual TheParentCollection GetTheParents()
         {
             return GetCachedClient(Client => new TheParentCollection(Client, Id));
         }

@@ -30,7 +30,7 @@ namespace MgmtKeyvault.Tests.Mock
             string location = "westus";
             string name = "hsm1";
 
-            var collection = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000")).GetDeletedManagedHsmResources();
+            var collection = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000")).GetDeletedManagedHsms();
             await collection.GetAsync(location, name);
         }
     }

@@ -27,9 +27,9 @@ namespace MgmtExtensionResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient;
-        private readonly PolicyDefinitionResourceData _data;
+        private readonly ClientDiagnostics _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _managementGroupPolicyDefinitionPolicyDefinitionsRestClient;
+        private readonly PolicyDefinitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinitionResource"/> class for mocking. </summary>
         protected ManagementGroupPolicyDefinitionResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "ManagementGroupPolicyDefinitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagementGroupPolicyDefinitionResource(ArmClient client, PolicyDefinitionResourceData data) : this(client, data.Id)
+        internal ManagementGroupPolicyDefinitionResource(ArmClient client, PolicyDefinitionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ManagementGroupPolicyDefinitionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string managementGroupPolicyDefinitionResourcePolicyDefinitionsApiVersion);
-            _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionResourcePolicyDefinitionsApiVersion);
+            _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
+            _managementGroupPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PolicyDefinitionResourceData Data
+        public virtual PolicyDefinitionData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ManagementGroupPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = await _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ManagementGroupPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementGroupPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Delete");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Delete");
+            using var scope = _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("ManagementGroupPolicyDefinitionResource.Delete");
             scope.Start();
             try
             {
-                var response = _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _managementGroupPolicyDefinitionPolicyDefinitionsRestClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

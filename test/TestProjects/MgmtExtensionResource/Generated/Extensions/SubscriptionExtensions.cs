@@ -30,17 +30,17 @@ namespace MgmtExtensionResource
         /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionExtensions. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
-        public static SubSingletonResource GetSubSingletonResource(this Subscription subscription)
+        public static SubSingletonResource GetSubSingleton(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubSingletonResource();
+            return GetExtensionClient(subscription).GetSubSingleton();
         }
 
         /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionPolicyDefinitionResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
-        public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitionResources(this Subscription subscription)
+        public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitionResources();
+            return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitions();
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionResourceAsync(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSubscriptionPolicyDefinitionResources().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionPolicyDefinitions(subscription).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinitionResource(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubscriptionPolicyDefinitionResources().Get(policyDefinitionName, cancellationToken);
+            return GetSubscriptionPolicyDefinitions(subscription).Get(policyDefinitionName, cancellationToken);
         }
 
         /// <summary>

@@ -16,16 +16,16 @@ namespace MgmtOperations.Models
     {
         internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element)
         {
-            IReadOnlyList<AvailabilitySetChildResourceData> value = default;
+            IReadOnlyList<AvailabilitySetChildData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<AvailabilitySetChildResourceData> array = new List<AvailabilitySetChildResourceData>();
+                    List<AvailabilitySetChildData> array = new List<AvailabilitySetChildData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetChildResourceData.DeserializeAvailabilitySetChildResourceData(item));
+                        array.Add(AvailabilitySetChildData.DeserializeAvailabilitySetChildData(item));
                     }
                     value = array;
                     continue;

@@ -24,8 +24,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(exist, type != null, $"Type {name} should {(exist ? string.Empty : "not")} exist");
         }
 
-        [TestCase(true, "OSProfile", "VirtualMachineResourceData")]
-        [TestCase(false, "OsProfile", "VirtualMachineResourceData")]
+        [TestCase(true, "OSProfile", "VirtualMachineData")]
+        [TestCase(false, "OsProfile", "VirtualMachineData")]
         [TestCase(true, "EnableAutomaticOSUpgrade", "AutomaticOSUpgradePolicy")]
         [TestCase(false, "EnableAutomaticOsUpgrade", "AutomaticOSUpgradePolicy")]
         [TestCase(true, "OSType", "ImageOSDisk")]
@@ -34,8 +34,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(false, "OsState", "ImageOSDisk")]
         [TestCase(true, "IPTagType", "VirtualMachineScaleSetIPTag")]
         [TestCase(false, "IpTagType", "VirtualMachineScaleSetIPTag")]
-        [TestCase(true, "ResourceType", "ImageResourceData")]
-        [TestCase(false, "Type", "ImageResourceData")]
+        [TestCase(true, "ResourceType", "ImageData")]
+        [TestCase(false, "Type", "ImageData")]
         [TestCase(true, "VirtualMachineExtensionHandlerInstanceViewType", "VirtualMachineExtensionHandlerInstanceView")]
         [TestCase(false, "Type", "VirtualMachineExtensionHandlerInstanceView")]
         public void ValidatePropertyName(bool exist, string propertyName, string className)

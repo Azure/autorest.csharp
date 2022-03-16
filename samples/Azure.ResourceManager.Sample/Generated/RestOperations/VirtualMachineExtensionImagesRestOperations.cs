@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineExtensionImageResourceData>> GetAsync(string subscriptionId, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImageData>> GetAsync(string subscriptionId, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -84,13 +84,13 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImageResourceData value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VirtualMachineExtensionImageResourceData)null, message.Response);
+                    return Response.FromValue((VirtualMachineExtensionImageData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineExtensionImageResourceData> Get(string subscriptionId, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImageData> Get(string subscriptionId, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -119,13 +119,13 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImageResourceData value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VirtualMachineExtensionImageResourceData)null, message.Response);
+                    return Response.FromValue((VirtualMachineExtensionImageData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageResourceData>>> ListTypesAsync(string subscriptionId, string location, string publisherName, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListTypesAsync(string subscriptionId, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -171,12 +171,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImageResourceData> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImageResourceData> array = new List<VirtualMachineExtensionImageResourceData>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImageResourceData>> ListTypes(string subscriptionId, string location, string publisherName, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListTypes(string subscriptionId, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -205,12 +205,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImageResourceData> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImageResourceData> array = new List<VirtualMachineExtensionImageResourceData>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -266,7 +266,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/> or <paramref name="type"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/> or <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageResourceData>>> ListVersionsAsync(string subscriptionId, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListVersionsAsync(string subscriptionId, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -279,12 +279,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImageResourceData> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImageResourceData> array = new List<VirtualMachineExtensionImageResourceData>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -305,7 +305,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/> or <paramref name="type"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="publisherName"/> or <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImageResourceData>> ListVersions(string subscriptionId, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListVersions(string subscriptionId, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -318,12 +318,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImageResourceData> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImageResourceData> array = new List<VirtualMachineExtensionImageResourceData>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImageResourceData.DeserializeVirtualMachineExtensionImageResourceData(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);

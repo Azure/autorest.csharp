@@ -37,7 +37,7 @@ namespace MgmtLRO
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, FakeResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,7 +69,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -96,7 +96,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string fakeName, FakeResourceData parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -296,7 +296,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakeResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeData>> GetAsync(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -308,13 +308,13 @@ namespace MgmtLRO
             {
                 case 200:
                     {
-                        FakeResourceData value = default;
+                        FakeData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeResourceData.DeserializeFakeResourceData(document.RootElement);
+                        value = FakeData.DeserializeFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeResourceData)null, message.Response);
+                    return Response.FromValue((FakeData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -328,7 +328,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakeResourceData> Get(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<FakeData> Get(string subscriptionId, string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -340,13 +340,13 @@ namespace MgmtLRO
             {
                 case 200:
                     {
-                        FakeResourceData value = default;
+                        FakeData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeResourceData.DeserializeFakeResourceData(document.RootElement);
+                        value = FakeData.DeserializeFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeResourceData)null, message.Response);
+                    return Response.FromValue((FakeData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

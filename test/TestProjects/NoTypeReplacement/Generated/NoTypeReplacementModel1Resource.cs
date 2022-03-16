@@ -27,9 +27,9 @@ namespace NoTypeReplacement
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _noTypeReplacementModel1ResourceNoTypeReplacementModel1sClientDiagnostics;
-        private readonly NoTypeReplacementModel1SRestOperations _noTypeReplacementModel1ResourceNoTypeReplacementModel1sRestClient;
-        private readonly NoTypeReplacementModel1ResourceData _data;
+        private readonly ClientDiagnostics _noTypeReplacementModel1ClientDiagnostics;
+        private readonly NoTypeReplacementModel1SRestOperations _noTypeReplacementModel1RestClient;
+        private readonly NoTypeReplacementModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel1Resource"/> class for mocking. </summary>
         protected NoTypeReplacementModel1Resource()
@@ -39,7 +39,7 @@ namespace NoTypeReplacement
         /// <summary> Initializes a new instance of the <see cref = "NoTypeReplacementModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal NoTypeReplacementModel1Resource(ArmClient client, NoTypeReplacementModel1ResourceData data) : this(client, data.Id)
+        internal NoTypeReplacementModel1Resource(ArmClient client, NoTypeReplacementModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace NoTypeReplacement
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal NoTypeReplacementModel1Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _noTypeReplacementModel1ResourceNoTypeReplacementModel1sClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string noTypeReplacementModel1ResourceNoTypeReplacementModel1sApiVersion);
-            _noTypeReplacementModel1ResourceNoTypeReplacementModel1sRestClient = new NoTypeReplacementModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ResourceNoTypeReplacementModel1sApiVersion);
+            _noTypeReplacementModel1ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string noTypeReplacementModel1ApiVersion);
+            _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace NoTypeReplacement
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual NoTypeReplacementModel1ResourceData Data
+        public virtual NoTypeReplacementModel1Data Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NoTypeReplacementModel1Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _noTypeReplacementModel1ResourceNoTypeReplacementModel1sClientDiagnostics.CreateScope("NoTypeReplacementModel1Resource.Get");
+            using var scope = _noTypeReplacementModel1ClientDiagnostics.CreateScope("NoTypeReplacementModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel1ResourceNoTypeReplacementModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NoTypeReplacementModel1Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _noTypeReplacementModel1ResourceNoTypeReplacementModel1sClientDiagnostics.CreateScope("NoTypeReplacementModel1Resource.Get");
+            using var scope = _noTypeReplacementModel1ClientDiagnostics.CreateScope("NoTypeReplacementModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel1ResourceNoTypeReplacementModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _noTypeReplacementModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1Resource(Client, response.Value), response.GetRawResponse());

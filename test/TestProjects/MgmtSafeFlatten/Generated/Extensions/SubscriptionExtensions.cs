@@ -31,9 +31,9 @@ namespace MgmtSafeFlatten
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeOneResource> GetTypeOneResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeOneResourcesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace MgmtSafeFlatten
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeOneResource> GetTypeOneResources(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<TypeOneResource> GetTypeOnes(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeOneResources(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace MgmtSafeFlatten
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeTwoResource> GetTypeTwoResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeTwoResourcesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace MgmtSafeFlatten
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeTwoResource> GetTypeTwoResources(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<TypeTwoResource> GetTypeTwos(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeTwoResources(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeTwos(cancellationToken);
         }
     }
 }

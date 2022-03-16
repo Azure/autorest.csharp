@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,7 +69,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakeParentWithAncestorResourceData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithAncestorData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -82,9 +82,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithAncestorResourceData value = default;
+                        FakeParentWithAncestorData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeParentWithAncestorResourceData.DeserializeFakeParentWithAncestorResourceData(document.RootElement);
+                        value = FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -100,7 +100,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakeParentWithAncestorResourceData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithAncestorData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -113,9 +113,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithAncestorResourceData value = default;
+                        FakeParentWithAncestorData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeParentWithAncestorResourceData.DeserializeFakeParentWithAncestorResourceData(document.RootElement);
+                        value = FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -150,7 +150,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakeParentWithAncestorResourceData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithAncestorData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -162,13 +162,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithAncestorResourceData value = default;
+                        FakeParentWithAncestorData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeParentWithAncestorResourceData.DeserializeFakeParentWithAncestorResourceData(document.RootElement);
+                        value = FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeParentWithAncestorResourceData)null, message.Response);
+                    return Response.FromValue((FakeParentWithAncestorData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -181,7 +181,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakeParentWithAncestorResourceData> Get(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithAncestorData> Get(string subscriptionId, string fakeName, string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -193,13 +193,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithAncestorResourceData value = default;
+                        FakeParentWithAncestorData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeParentWithAncestorResourceData.DeserializeFakeParentWithAncestorResourceData(document.RootElement);
+                        value = FakeParentWithAncestorData.DeserializeFakeParentWithAncestorData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeParentWithAncestorResourceData)null, message.Response);
+                    return Response.FromValue((FakeParentWithAncestorData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

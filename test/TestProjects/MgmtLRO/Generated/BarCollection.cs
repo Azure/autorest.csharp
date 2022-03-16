@@ -24,8 +24,8 @@ namespace MgmtLRO
     /// <summary> A class representing collection of Bar and their operations over its parent. </summary>
     public partial class BarCollection : ArmCollection, IEnumerable<BarResource>, IAsyncEnumerable<BarResource>
     {
-        private readonly ClientDiagnostics _barResourceBarsClientDiagnostics;
-        private readonly BarsRestOperations _barResourceBarsRestClient;
+        private readonly ClientDiagnostics _barClientDiagnostics;
+        private readonly BarsRestOperations _barRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class for mocking. </summary>
         protected BarCollection()
@@ -37,9 +37,9 @@ namespace MgmtLRO
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _barResourceBarsClientDiagnostics = new ClientDiagnostics("MgmtLRO", BarResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(BarResource.ResourceType, out string barResourceBarsApiVersion);
-            _barResourceBarsRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barResourceBarsApiVersion);
+            _barClientDiagnostics = new ClientDiagnostics("MgmtLRO", BarResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(BarResource.ResourceType, out string barApiVersion);
+            _barRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarResourceData body, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _barResourceBarsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtLROArmOperation<BarResource>(new BarResourceOperationSource(Client), _barResourceBarsClientDiagnostics, Pipeline, _barResourceBarsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
+                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarResourceData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _barResourceBarsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new MgmtLROArmOperation<BarResource>(new BarResourceOperationSource(Client), _barResourceBarsClientDiagnostics, Pipeline, _barResourceBarsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
+                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -130,11 +130,11 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Get");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = await _barResourceBarsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Get");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = _barResourceBarsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtLRO
         {
             async Task<Page<BarResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetAll");
+                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _barResourceBarsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _barRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -213,11 +213,11 @@ namespace MgmtLRO
         {
             Page<BarResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetAll");
+                using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _barResourceBarsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _barRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BarResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,7 +242,7 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Exists");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Exists");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -296,11 +296,11 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetIfExists");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _barResourceBarsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BarResource>(null, response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
@@ -325,11 +325,11 @@ namespace MgmtLRO
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetIfExists");
+            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _barResourceBarsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BarResource>(null, response.GetRawResponse());
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());

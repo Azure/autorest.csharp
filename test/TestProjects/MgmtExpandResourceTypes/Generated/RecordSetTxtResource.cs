@@ -28,9 +28,9 @@ namespace MgmtExpandResourceTypes
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _recordSetTxtResourceRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetTxtResourceRecordSetsRestClient;
-        private readonly RecordSetResourceData _data;
+        private readonly ClientDiagnostics _recordSetTxtRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetTxtRecordSetsRestClient;
+        private readonly RecordSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetTxtResource"/> class for mocking. </summary>
         protected RecordSetTxtResource()
@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetTxtResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetTxtResource(ArmClient client, RecordSetResourceData data) : this(client, data.Id)
+        internal RecordSetTxtResource(ArmClient client, RecordSetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal RecordSetTxtResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetTxtResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string recordSetTxtResourceRecordSetsApiVersion);
-            _recordSetTxtResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetTxtResourceRecordSetsApiVersion);
+            _recordSetTxtRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string recordSetTxtRecordSetsApiVersion);
+            _recordSetTxtRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetTxtRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RecordSetResourceData Data
+        public virtual RecordSetData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RecordSetTxtResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Get");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetTxtResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetTxtRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetTxtResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RecordSetTxtResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Get");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Get");
             scope.Start();
             try
             {
-                var response = _recordSetTxtResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken);
+                var response = _recordSetTxtRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetTxtResource(Client, response.Value), response.GetRawResponse());
@@ -141,11 +141,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Delete");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Delete");
             scope.Start();
             try
             {
-                var response = await _recordSetTxtResourceRecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetTxtRecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -168,11 +168,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Delete");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Delete");
             scope.Start();
             try
             {
-                var response = _recordSetTxtResourceRecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, ifMatch, cancellationToken);
+                var response = _recordSetTxtRecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, ifMatch, cancellationToken);
                 var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -194,15 +194,15 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<RecordSetTxtResource>> UpdateAsync(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetTxtResource>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Update");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Update");
             scope.Start();
             try
             {
-                var response = await _recordSetTxtResourceRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetTxtRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetTxtResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -221,15 +221,15 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<RecordSetTxtResource> Update(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetTxtResource> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetTxtResourceRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Update");
+            using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxtResource.Update");
             scope.Start();
             try
             {
-                var response = _recordSetTxtResourceRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
+                var response = _recordSetTxtRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "TXT".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
                 return Response.FromValue(new RecordSetTxtResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

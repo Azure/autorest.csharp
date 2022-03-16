@@ -25,8 +25,8 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class representing collection of SharedGallery and their operations over its parent. </summary>
     public partial class SharedGalleryCollection : ArmCollection, IEnumerable<SharedGalleryResource>, IAsyncEnumerable<SharedGalleryResource>
     {
-        private readonly ClientDiagnostics _sharedGalleryResourceSharedGalleriesClientDiagnostics;
-        private readonly SharedGalleriesRestOperations _sharedGalleryResourceSharedGalleriesRestClient;
+        private readonly ClientDiagnostics _sharedGalleryClientDiagnostics;
+        private readonly SharedGalleriesRestOperations _sharedGalleryRestClient;
         private readonly string _location;
 
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryCollection"/> class for mocking. </summary>
@@ -43,9 +43,9 @@ namespace MgmtHierarchicalNonResource
         internal SharedGalleryCollection(ArmClient client, ResourceIdentifier id, string location) : base(client, id)
         {
             _location = location;
-            _sharedGalleryResourceSharedGalleriesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGalleryResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(SharedGalleryResource.ResourceType, out string sharedGalleryResourceSharedGalleriesApiVersion);
-            _sharedGalleryResourceSharedGalleriesRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryResourceSharedGalleriesApiVersion);
+            _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGalleryResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SharedGalleryResource.ResourceType, out string sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,11 +70,11 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
             try
             {
-                var response = await _sharedGalleryResourceSharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
@@ -100,11 +100,11 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
             try
             {
-                var response = _sharedGalleryResourceSharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
+                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
@@ -129,11 +129,11 @@ namespace MgmtHierarchicalNonResource
         {
             async Task<Page<SharedGalleryResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sharedGalleryResourceSharedGalleriesRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sharedGalleryRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
@@ -149,11 +149,11 @@ namespace MgmtHierarchicalNonResource
             }
             async Task<Page<SharedGalleryResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sharedGalleryResourceSharedGalleriesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sharedGalleryRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
@@ -182,11 +182,11 @@ namespace MgmtHierarchicalNonResource
         {
             Page<SharedGalleryResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sharedGalleryResourceSharedGalleriesRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
+                    var response = _sharedGalleryRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
@@ -202,11 +202,11 @@ namespace MgmtHierarchicalNonResource
             }
             Page<SharedGalleryResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sharedGalleryResourceSharedGalleriesRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
+                    var response = _sharedGalleryRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
                         value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
@@ -236,7 +236,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
             try
             {
@@ -290,11 +290,11 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _sharedGalleryResourceSharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SharedGalleryResource>(null, response.GetRawResponse());
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
@@ -320,11 +320,11 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _sharedGalleryResourceSharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
+                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SharedGalleryResource>(null, response.GetRawResponse());
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);

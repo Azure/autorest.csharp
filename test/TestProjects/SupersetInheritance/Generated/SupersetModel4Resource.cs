@@ -28,9 +28,9 @@ namespace SupersetInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _supersetModel4ResourceSupersetModel4sClientDiagnostics;
-        private readonly SupersetModel4SRestOperations _supersetModel4ResourceSupersetModel4sRestClient;
-        private readonly SupersetModel4ResourceData _data;
+        private readonly ClientDiagnostics _supersetModel4ClientDiagnostics;
+        private readonly SupersetModel4SRestOperations _supersetModel4RestClient;
+        private readonly SupersetModel4Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Resource"/> class for mocking. </summary>
         protected SupersetModel4Resource()
@@ -40,7 +40,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel4Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SupersetModel4Resource(ArmClient client, SupersetModel4ResourceData data) : this(client, data.Id)
+        internal SupersetModel4Resource(ArmClient client, SupersetModel4Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SupersetModel4Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel4ResourceSupersetModel4sClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string supersetModel4ResourceSupersetModel4sApiVersion);
-            _supersetModel4ResourceSupersetModel4sRestClient = new SupersetModel4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel4ResourceSupersetModel4sApiVersion);
+            _supersetModel4ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string supersetModel4ApiVersion);
+            _supersetModel4RestClient = new SupersetModel4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel4ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace SupersetInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SupersetModel4ResourceData Data
+        public virtual SupersetModel4Data Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel4Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.Get");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.Get");
             scope.Start();
             try
             {
-                var response = await _supersetModel4ResourceSupersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel4Resource(Client, response.Value), response.GetRawResponse());
@@ -113,11 +113,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel4Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.Get");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.Get");
             scope.Start();
             try
             {
-                var response = _supersetModel4ResourceSupersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel4Resource(Client, response.Value), response.GetRawResponse());
@@ -143,14 +143,14 @@ namespace SupersetInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _supersetModel4ResourceSupersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -174,14 +174,14 @@ namespace SupersetInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _supersetModel4ResourceSupersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace SupersetInheritance
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _supersetModel4ResourceSupersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -233,7 +233,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.SetTags");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace SupersetInheritance
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _supersetModel4ResourceSupersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,14 +263,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _supersetModel4ResourceSupersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,14 +292,14 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _supersetModel4ResourceSupersetModel4sClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _supersetModel4ResourceSupersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new SupersetModel4Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

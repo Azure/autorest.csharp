@@ -34,21 +34,21 @@ namespace NoTypeReplacement
 
         /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the NoTypeReplacementModel1Resource. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
-        public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1Resources()
+        public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s()
         {
             return GetCachedClient(Client => new NoTypeReplacementModel1Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the NoTypeReplacementModel2Resource. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
-        public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2Resources()
+        public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s()
         {
             return GetCachedClient(Client => new NoTypeReplacementModel2Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the NoTypeReplacementModel3Resource. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
-        public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3Resources()
+        public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s()
         {
             return GetCachedClient(Client => new NoTypeReplacementModel3Collection(Client, Id));
         }

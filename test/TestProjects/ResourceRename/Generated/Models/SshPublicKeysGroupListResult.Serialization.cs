@@ -16,16 +16,16 @@ namespace ResourceRename.Models
     {
         internal static SshPublicKeysGroupListResult DeserializeSshPublicKeysGroupListResult(JsonElement element)
         {
-            IReadOnlyList<SshPublicKeyInfoResourceData> value = default;
+            IReadOnlyList<SshPublicKeyInfoData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<SshPublicKeyInfoResourceData> array = new List<SshPublicKeyInfoResourceData>();
+                    List<SshPublicKeyInfoData> array = new List<SshPublicKeyInfoData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SshPublicKeyInfoResourceData.DeserializeSshPublicKeyInfoResourceData(item));
+                        array.Add(SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(item));
                     }
                     value = array;
                     continue;

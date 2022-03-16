@@ -25,8 +25,8 @@ namespace MgmtKeyvault
     /// <summary> A class representing collection of Vault and their operations over its parent. </summary>
     public partial class VaultCollection : ArmCollection, IEnumerable<VaultResource>, IAsyncEnumerable<VaultResource>
     {
-        private readonly ClientDiagnostics _vaultResourceVaultsClientDiagnostics;
-        private readonly VaultsRestOperations _vaultResourceVaultsRestClient;
+        private readonly ClientDiagnostics _vaultClientDiagnostics;
+        private readonly VaultsRestOperations _vaultRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VaultCollection"/> class for mocking. </summary>
         protected VaultCollection()
@@ -38,9 +38,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VaultCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _vaultResourceVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", VaultResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VaultResource.ResourceType, out string vaultResourceVaultsApiVersion);
-            _vaultResourceVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultResourceVaultsApiVersion);
+            _vaultClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", VaultResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VaultResource.ResourceType, out string vaultApiVersion);
+            _vaultRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,12 +68,12 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.CreateOrUpdate");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation<VaultResource>(new VaultResourceOperationSource(Client), _vaultResourceVaultsClientDiagnostics, Pipeline, _vaultResourceVaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _vaultRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation<VaultResource>(new VaultOperationSource(Client), _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -101,12 +101,12 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.CreateOrUpdate");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation<VaultResource>(new VaultResourceOperationSource(Client), _vaultResourceVaultsClientDiagnostics, Pipeline, _vaultResourceVaultsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _vaultRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation<VaultResource>(new VaultOperationSource(Client), _vaultClientDiagnostics, Pipeline, _vaultRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vaultName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -131,11 +131,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.Get");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.Get");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
@@ -160,11 +160,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.Get");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.Get");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken);
+                var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtKeyvault
         {
             async Task<Page<VaultResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetAll");
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _vaultResourceVaultsRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _vaultRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VaultResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtKeyvault
             }
             async Task<Page<VaultResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetAll");
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _vaultResourceVaultsRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _vaultRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VaultResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -231,11 +231,11 @@ namespace MgmtKeyvault
         {
             Page<VaultResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetAll");
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _vaultResourceVaultsRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
+                    var response = _vaultRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VaultResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -246,11 +246,11 @@ namespace MgmtKeyvault
             }
             Page<VaultResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetAll");
+                using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _vaultResourceVaultsRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
+                    var response = _vaultRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VaultResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -275,7 +275,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.Exists");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.Exists");
             scope.Start();
             try
             {
@@ -302,7 +302,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.Exists");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.Exists");
             scope.Start();
             try
             {
@@ -329,11 +329,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetIfExists");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VaultResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
@@ -358,11 +358,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultCollection.GetIfExists");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken);
+                var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vaultName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VaultResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());

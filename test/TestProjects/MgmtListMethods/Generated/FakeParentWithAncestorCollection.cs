@@ -23,8 +23,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of FakeParentWithAncestor and their operations over its parent. </summary>
     public partial class FakeParentWithAncestorCollection : ArmCollection, IEnumerable<FakeParentWithAncestorResource>, IAsyncEnumerable<FakeParentWithAncestorResource>
     {
-        private readonly ClientDiagnostics _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics;
-        private readonly FakeParentWithAncestorsRestOperations _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient;
+        private readonly ClientDiagnostics _fakeParentWithAncestorClientDiagnostics;
+        private readonly FakeParentWithAncestorsRestOperations _fakeParentWithAncestorRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorCollection"/> class for mocking. </summary>
         protected FakeParentWithAncestorCollection()
@@ -36,9 +36,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakeParentWithAncestorCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FakeParentWithAncestorResource.ResourceType, out string fakeParentWithAncestorResourceFakeParentWithAncestorsApiVersion);
-            _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient = new FakeParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorResourceFakeParentWithAncestorsApiVersion);
+            _fakeParentWithAncestorClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(FakeParentWithAncestorResource.ResourceType, out string fakeParentWithAncestorApiVersion);
+            _fakeParentWithAncestorRestClient = new FakeParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakeParentWithAncestorResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakeParentWithAncestorResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -94,16 +94,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakeParentWithAncestorResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeParentWithAncestorResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
+                var response = _fakeParentWithAncestorRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestorResource>(Response.FromValue(new FakeParentWithAncestorResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -129,11 +129,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Get");
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken);
+                var response = _fakeParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorResource(Client, response.Value), response.GetRawResponse());
@@ -185,11 +185,11 @@ namespace MgmtListMethods
         {
             async Task<Page<FakeParentWithAncestorResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
+                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.ListAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorRestClient.ListAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -200,11 +200,11 @@ namespace MgmtListMethods
             }
             async Task<Page<FakeParentWithAncestorResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
+                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithAncestorRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -227,11 +227,11 @@ namespace MgmtListMethods
         {
             Page<FakeParentWithAncestorResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
+                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.List(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorRestClient.List(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,11 +242,11 @@ namespace MgmtListMethods
             }
             Page<FakeParentWithAncestorResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
+                using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithAncestorRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithAncestorResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -271,7 +271,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.Exists");
             scope.Start();
             try
             {
@@ -325,11 +325,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<FakeParentWithAncestorResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorResource(Client, response.Value), response.GetRawResponse());
@@ -354,11 +354,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
 
-            using var scope = _fakeParentWithAncestorResourceFakeParentWithAncestorsClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
+            using var scope = _fakeParentWithAncestorClientDiagnostics.CreateScope("FakeParentWithAncestorCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fakeParentWithAncestorResourceFakeParentWithAncestorsRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<FakeParentWithAncestorResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithAncestorResource(Client, response.Value), response.GetRawResponse());

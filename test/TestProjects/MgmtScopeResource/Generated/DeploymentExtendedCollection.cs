@@ -23,8 +23,8 @@ namespace MgmtScopeResource
     /// <summary> A class representing collection of DeploymentExtended and their operations over its parent. </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtendedResource>, IAsyncEnumerable<DeploymentExtendedResource>
     {
-        private readonly ClientDiagnostics _deploymentExtendedResourceDeploymentsClientDiagnostics;
-        private readonly DeploymentsRestOperations _deploymentExtendedResourceDeploymentsRestClient;
+        private readonly ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
+        private readonly DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedCollection"/> class for mocking. </summary>
         protected DeploymentExtendedCollection()
@@ -36,9 +36,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeploymentExtendedCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deploymentExtendedResourceDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DeploymentExtendedResource.ResourceType, out string deploymentExtendedResourceDeploymentsApiVersion);
-            _deploymentExtendedResourceDeploymentsRestClient = new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedResourceDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeploymentExtendedResource.ResourceType, out string deploymentExtendedDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
         }
 
         /// <summary>
@@ -57,12 +57,12 @@ namespace MgmtScopeResource
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedResourceDeploymentsRestClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedResourceOperationSource(Client), _deploymentExtendedResourceDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedResourceDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -90,12 +90,12 @@ namespace MgmtScopeResource
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedResourceDeploymentsRestClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedResourceOperationSource(Client), _deploymentExtendedResourceDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedResourceDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _deploymentExtendedDeploymentsRestClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
+                var operation = new MgmtScopeResourceArmOperation<DeploymentExtendedResource>(new DeploymentExtendedOperationSource(Client), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -120,11 +120,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedResourceDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
@@ -149,11 +149,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Get");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedResourceDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
@@ -178,11 +178,11 @@ namespace MgmtScopeResource
         {
             async Task<Page<DeploymentExtendedResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentExtendedResourceDeploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeAsync(Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -193,11 +193,11 @@ namespace MgmtScopeResource
             }
             async Task<Page<DeploymentExtendedResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deploymentExtendedResourceDeploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPageAsync(nextLink, Id, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -222,11 +222,11 @@ namespace MgmtScopeResource
         {
             Page<DeploymentExtendedResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentExtendedResourceDeploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
+                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScope(Id, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -237,11 +237,11 @@ namespace MgmtScopeResource
             }
             Page<DeploymentExtendedResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
+                using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deploymentExtendedResourceDeploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
+                    var response = _deploymentExtendedDeploymentsRestClient.ListAtScopeNextPage(nextLink, Id, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentExtendedResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -266,7 +266,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
             try
             {
@@ -293,7 +293,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.Exists");
             scope.Start();
             try
             {
@@ -320,11 +320,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deploymentExtendedResourceDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeploymentExtendedResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
@@ -349,11 +349,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
 
-            using var scope = _deploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
+            using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtendedCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deploymentExtendedResourceDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
+                var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeploymentExtendedResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());

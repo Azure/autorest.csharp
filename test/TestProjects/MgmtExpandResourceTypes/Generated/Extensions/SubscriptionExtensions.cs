@@ -36,9 +36,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ZoneResource> GetZoneResourcesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetZoneResourcesByDnszoneAsync(top, cancellationToken);
+            return GetExtensionClient(subscription).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ZoneResource> GetZoneResourcesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        public static Pageable<ZoneResource> GetZonesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetZoneResourcesByDnszone(top, cancellationToken);
+            return GetExtensionClient(subscription).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>

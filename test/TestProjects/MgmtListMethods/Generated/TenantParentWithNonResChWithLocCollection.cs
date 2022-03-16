@@ -23,8 +23,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of TenantParentWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLocResource>, IAsyncEnumerable<TenantParentWithNonResChWithLocResource>
     {
-        private readonly ClientDiagnostics _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics;
-        private readonly TenantParentWithNonResChWithLocsRestOperations _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient;
+        private readonly ClientDiagnostics _tenantParentWithNonResChWithLocClientDiagnostics;
+        private readonly TenantParentWithNonResChWithLocsRestOperations _tenantParentWithNonResChWithLocRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChWithLocCollection"/> class for mocking. </summary>
         protected TenantParentWithNonResChWithLocCollection()
@@ -36,9 +36,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TenantParentWithNonResChWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithNonResChWithLocResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(TenantParentWithNonResChWithLocResource.ResourceType, out string tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsApiVersion);
-            _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient = new TenantParentWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsApiVersion);
+            _tenantParentWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithNonResChWithLocResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(TenantParentWithNonResChWithLocResource.ResourceType, out string tenantParentWithNonResChWithLocApiVersion);
+            _tenantParentWithNonResChWithLocRestClient = new TenantParentWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<TenantParentWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<TenantParentWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChWithLocResource>(Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -94,16 +94,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<TenantParentWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TenantParentWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken);
+                var response = _tenantParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChWithLocResource>(Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -129,11 +129,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Get");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithNonResChWithLocRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Get");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken);
+                var response = _tenantParentWithNonResChWithLocRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -185,11 +185,11 @@ namespace MgmtListMethods
         {
             async Task<Page<TenantParentWithNonResChWithLocResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
+                using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantParentWithNonResChWithLocRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -200,11 +200,11 @@ namespace MgmtListMethods
             }
             async Task<Page<TenantParentWithNonResChWithLocResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
+                using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _tenantParentWithNonResChWithLocRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -227,11 +227,11 @@ namespace MgmtListMethods
         {
             Page<TenantParentWithNonResChWithLocResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
+                using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    var response = _tenantParentWithNonResChWithLocRestClient.List(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,11 +242,11 @@ namespace MgmtListMethods
             }
             Page<TenantParentWithNonResChWithLocResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
+                using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _tenantParentWithNonResChWithLocRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -271,7 +271,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -325,11 +325,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExists");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithNonResChWithLocRestClient.GetAsync(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithNonResChWithLocResource>(null, response.GetRawResponse());
                 return Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -354,11 +354,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
 
-            using var scope = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExists");
+            using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _tenantParentWithNonResChWithLocResourceTenantParentWithNonResChWithLocsRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken);
+                var response = _tenantParentWithNonResChWithLocRestClient.Get(Id.Name, tenantParentWithNonResChWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<TenantParentWithNonResChWithLocResource>(null, response.GetRawResponse());
                 return Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());

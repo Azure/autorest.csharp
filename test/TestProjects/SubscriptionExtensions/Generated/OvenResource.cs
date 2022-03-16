@@ -28,9 +28,9 @@ namespace SubscriptionExtensions
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _ovenResourceOvensClientDiagnostics;
-        private readonly OvensRestOperations _ovenResourceOvensRestClient;
-        private readonly OvenResourceData _data;
+        private readonly ClientDiagnostics _ovenClientDiagnostics;
+        private readonly OvensRestOperations _ovenRestClient;
+        private readonly OvenData _data;
 
         /// <summary> Initializes a new instance of the <see cref="OvenResource"/> class for mocking. </summary>
         protected OvenResource()
@@ -40,7 +40,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref = "OvenResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal OvenResource(ArmClient client, OvenResourceData data) : this(client, data.Id)
+        internal OvenResource(ArmClient client, OvenData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace SubscriptionExtensions
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal OvenResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _ovenResourceOvensClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string ovenResourceOvensApiVersion);
-            _ovenResourceOvensRestClient = new OvensRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenResourceOvensApiVersion);
+            _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string ovenApiVersion);
+            _ovenRestClient = new OvensRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual OvenResourceData Data
+        public virtual OvenData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<OvenResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.Get");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.Get");
             scope.Start();
             try
             {
-                var response = await _ovenResourceOvensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new OvenResource(Client, response.Value), response.GetRawResponse());
@@ -113,11 +113,11 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<OvenResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.Get");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.Get");
             scope.Start();
             try
             {
-                var response = _ovenResourceOvensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new OvenResource(Client, response.Value), response.GetRawResponse());
@@ -143,14 +143,14 @@ namespace SubscriptionExtensions
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.AddTag");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _ovenResourceOvensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -174,14 +174,14 @@ namespace SubscriptionExtensions
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.AddTag");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _ovenResourceOvensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.SetTags");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.SetTags");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace SubscriptionExtensions
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _ovenResourceOvensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -233,7 +233,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.SetTags");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.SetTags");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace SubscriptionExtensions
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _ovenResourceOvensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,14 +263,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.RemoveTag");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _ovenResourceOvensRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _ovenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,14 +292,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _ovenResourceOvensClientDiagnostics.CreateScope("OvenResource.RemoveTag");
+            using var scope = _ovenClientDiagnostics.CreateScope("OvenResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _ovenResourceOvensRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _ovenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new OvenResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

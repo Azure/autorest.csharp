@@ -34,7 +34,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of FakePolicyAssignmentResources in the FakePolicyAssignmentResource. </summary>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
-        public virtual FakePolicyAssignmentCollection GetFakePolicyAssignmentResources()
+        public virtual FakePolicyAssignmentCollection GetFakePolicyAssignments()
         {
             return GetCachedClient(Client => new FakePolicyAssignmentCollection(Client, Id));
         }

@@ -17,20 +17,20 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of DeploymentListResult. </summary>
         internal DeploymentListResult()
         {
-            Value = new ChangeTrackingList<DeploymentExtendedResourceData>();
+            Value = new ChangeTrackingList<DeploymentExtendedData>();
         }
 
         /// <summary> Initializes a new instance of DeploymentListResult. </summary>
         /// <param name="value"> An array of deployments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal DeploymentListResult(IReadOnlyList<DeploymentExtendedResourceData> value, string nextLink)
+        internal DeploymentListResult(IReadOnlyList<DeploymentExtendedData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> An array of deployments. </summary>
-        public IReadOnlyList<DeploymentExtendedResourceData> Value { get; }
+        public IReadOnlyList<DeploymentExtendedData> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>
         public string NextLink { get; }
     }

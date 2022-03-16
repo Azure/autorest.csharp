@@ -27,9 +27,9 @@ namespace Azure.Management.Storage
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _encryptionScopeResourceEncryptionScopesClientDiagnostics;
-        private readonly EncryptionScopesRestOperations _encryptionScopeResourceEncryptionScopesRestClient;
-        private readonly EncryptionScopeResourceData _data;
+        private readonly ClientDiagnostics _encryptionScopeClientDiagnostics;
+        private readonly EncryptionScopesRestOperations _encryptionScopeRestClient;
+        private readonly EncryptionScopeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeResource"/> class for mocking. </summary>
         protected EncryptionScopeResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "EncryptionScopeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal EncryptionScopeResource(ArmClient client, EncryptionScopeResourceData data) : this(client, data.Id)
+        internal EncryptionScopeResource(ArmClient client, EncryptionScopeData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal EncryptionScopeResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _encryptionScopeResourceEncryptionScopesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string encryptionScopeResourceEncryptionScopesApiVersion);
-            _encryptionScopeResourceEncryptionScopesRestClient = new EncryptionScopesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeResourceEncryptionScopesApiVersion);
+            _encryptionScopeClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string encryptionScopeApiVersion);
+            _encryptionScopeRestClient = new EncryptionScopesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual EncryptionScopeResourceData Data
+        public virtual EncryptionScopeData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<EncryptionScopeResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeResource.Get");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeResource.Get");
             scope.Start();
             try
             {
-                var response = await _encryptionScopeResourceEncryptionScopesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _encryptionScopeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<EncryptionScopeResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeResource.Get");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeResource.Get");
             scope.Start();
             try
             {
-                var response = _encryptionScopeResourceEncryptionScopesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _encryptionScopeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
@@ -138,15 +138,15 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual async Task<Response<EncryptionScopeResource>> UpdateAsync(EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScopeResource>> UpdateAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeResource.Update");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeResource.Update");
             scope.Start();
             try
             {
-                var response = await _encryptionScopeResourceEncryptionScopesRestClient.PatchAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken).ConfigureAwait(false);
+                var response = await _encryptionScopeRestClient.PatchAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -164,15 +164,15 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual Response<EncryptionScopeResource> Update(EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScopeResource> Update(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeResource.Update");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeResource.Update");
             scope.Start();
             try
             {
-                var response = _encryptionScopeResourceEncryptionScopesRestClient.Patch(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken);
+                var response = _encryptionScopeRestClient.Patch(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken);
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

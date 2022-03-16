@@ -239,7 +239,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<XmlInstanceResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
+        public async Task<Response<XmlInstanceData>> GetAsync(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -251,13 +251,13 @@ namespace XmlDeserialization
             {
                 case 200:
                     {
-                        XmlInstanceResourceData value = default;
+                        XmlInstanceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(document.RootElement);
+                        value = XmlInstanceData.DeserializeXmlInstanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((XmlInstanceResourceData)null, message.Response);
+                    return Response.FromValue((XmlInstanceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -270,7 +270,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<XmlInstanceResourceData> Get(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
+        public Response<XmlInstanceData> Get(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -282,19 +282,19 @@ namespace XmlDeserialization
             {
                 case 200:
                     {
-                        XmlInstanceResourceData value = default;
+                        XmlInstanceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(document.RootElement);
+                        value = XmlInstanceData.DeserializeXmlInstanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((XmlInstanceResourceData)null, message.Response);
+                    return Response.FromValue((XmlInstanceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceResourceData parameters, string ifMatch)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -331,7 +331,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<XmlInstanceResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<XmlInstanceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -345,9 +345,9 @@ namespace XmlDeserialization
                 case 200:
                 case 201:
                     {
-                        XmlInstanceResourceData value = default;
+                        XmlInstanceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(document.RootElement);
+                        value = XmlInstanceData.DeserializeXmlInstanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -364,7 +364,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<XmlInstanceResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<XmlInstanceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -378,9 +378,9 @@ namespace XmlDeserialization
                 case 200:
                 case 201:
                     {
-                        XmlInstanceResourceData value = default;
+                        XmlInstanceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(document.RootElement);
+                        value = XmlInstanceData.DeserializeXmlInstanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

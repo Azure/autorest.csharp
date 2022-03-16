@@ -28,9 +28,9 @@ namespace Azure.Management.Storage
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics;
-        private readonly BlobInventoryPoliciesRestOperations _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient;
-        private readonly BlobInventoryPolicyResourceData _data;
+        private readonly ClientDiagnostics _blobInventoryPolicyClientDiagnostics;
+        private readonly BlobInventoryPoliciesRestOperations _blobInventoryPolicyRestClient;
+        private readonly BlobInventoryPolicyData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicyResource"/> class for mocking. </summary>
         protected BlobInventoryPolicyResource()
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobInventoryPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobInventoryPolicyResource(ArmClient client, BlobInventoryPolicyResourceData data) : this(client, data.Id)
+        internal BlobInventoryPolicyResource(ArmClient client, BlobInventoryPolicyData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BlobInventoryPolicyResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string blobInventoryPolicyResourceBlobInventoryPoliciesApiVersion);
-            _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient = new BlobInventoryPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobInventoryPolicyResourceBlobInventoryPoliciesApiVersion);
+            _blobInventoryPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string blobInventoryPolicyApiVersion);
+            _blobInventoryPolicyRestClient = new BlobInventoryPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobInventoryPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobInventoryPolicyResourceData Data
+        public virtual BlobInventoryPolicyData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobInventoryPolicyResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Get");
+            using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Get");
             scope.Start();
             try
             {
-                var response = await _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobInventoryPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobInventoryPolicyResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Get");
+            using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Get");
             scope.Start();
             try
             {
-                var response = _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _blobInventoryPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value), response.GetRawResponse());
@@ -140,11 +140,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Delete");
+            using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Delete");
             scope.Start();
             try
             {
-                var response = await _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobInventoryPolicyRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -166,11 +166,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Delete");
+            using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyResource.Delete");
             scope.Start();
             try
             {
-                var response = _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _blobInventoryPolicyRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

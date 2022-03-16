@@ -29,9 +29,9 @@ namespace MgmtRenameRules
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _imageResourceImagesClientDiagnostics;
-        private readonly ImagesRestOperations _imageResourceImagesRestClient;
-        private readonly ImageResourceData _data;
+        private readonly ClientDiagnostics _imageClientDiagnostics;
+        private readonly ImagesRestOperations _imageRestClient;
+        private readonly ImageData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ImageResource"/> class for mocking. </summary>
         protected ImageResource()
@@ -41,7 +41,7 @@ namespace MgmtRenameRules
         /// <summary> Initializes a new instance of the <see cref = "ImageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ImageResource(ArmClient client, ImageResourceData data) : this(client, data.Id)
+        internal ImageResource(ArmClient client, ImageData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ImageResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _imageResourceImagesClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string imageResourceImagesApiVersion);
-            _imageResourceImagesRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageResourceImagesApiVersion);
+            _imageClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string imageApiVersion);
+            _imageRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtRenameRules
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ImageResourceData Data
+        public virtual ImageData Data
         {
             get
             {
@@ -93,11 +93,11 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImageResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Get");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Get");
             scope.Start();
             try
             {
-                var response = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
@@ -118,11 +118,11 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImageResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Get");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Get");
             scope.Start();
             try
             {
-                var response = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
@@ -143,12 +143,12 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Delete");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Delete");
             scope.Start();
             try
             {
-                var response = await _imageResourceImagesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation(_imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _imageRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtRenameRulesArmOperation(_imageClientDiagnostics, Pipeline, _imageRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -169,12 +169,12 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Delete");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Delete");
             scope.Start();
             try
             {
-                var response = _imageResourceImagesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation(_imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _imageRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new MgmtRenameRulesArmOperation(_imageClientDiagnostics, Pipeline, _imageRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -199,12 +199,12 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Update");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Update");
             scope.Start();
             try
             {
-                var response = await _imageResourceImagesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageResourceOperationSource(Client), _imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _imageRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -229,12 +229,12 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.Update");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.Update");
             scope.Start();
             try
             {
-                var response = _imageResourceImagesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageResourceOperationSource(Client), _imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _imageRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -260,14 +260,14 @@ namespace MgmtRenameRules
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.AddTag");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -291,14 +291,14 @@ namespace MgmtRenameRules
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.AddTag");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.SetTags");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.SetTags");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace MgmtRenameRules
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -350,7 +350,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.SetTags");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.SetTags");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtRenameRules
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -380,14 +380,14 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.RemoveTag");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -409,14 +409,14 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageResource.RemoveTag");
+            using var scope = _imageClientDiagnostics.CreateScope("ImageResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new ImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

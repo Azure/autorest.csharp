@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
     {
         internal static FakePolicyAssignmentListResult DeserializeFakePolicyAssignmentListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<FakePolicyAssignmentResourceData>> value = default;
+            Optional<IReadOnlyList<FakePolicyAssignmentData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<FakePolicyAssignmentResourceData> array = new List<FakePolicyAssignmentResourceData>();
+                    List<FakePolicyAssignmentData> array = new List<FakePolicyAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(item));
+                        array.Add(FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(item));
                     }
                     value = array;
                     continue;

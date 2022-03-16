@@ -17,20 +17,20 @@ namespace SupersetInheritance.Models
         /// <summary> Initializes a new instance of SupersetModel1ListResult. </summary>
         internal SupersetModel1ListResult()
         {
-            Value = new ChangeTrackingList<SupersetModel1ResourceData>();
+            Value = new ChangeTrackingList<SupersetModel1Data>();
         }
 
         /// <summary> Initializes a new instance of SupersetModel1ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal SupersetModel1ListResult(IReadOnlyList<SupersetModel1ResourceData> value, string nextLink)
+        internal SupersetModel1ListResult(IReadOnlyList<SupersetModel1Data> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<SupersetModel1ResourceData> Value { get; }
+        public IReadOnlyList<SupersetModel1Data> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

@@ -29,9 +29,9 @@ namespace Azure.ResourceManager.Sample
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics;
-        private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupResourceDedicatedHostGroupsRestClient;
-        private readonly DedicatedHostGroupResourceData _data;
+        private readonly ClientDiagnostics _dedicatedHostGroupClientDiagnostics;
+        private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupRestClient;
+        private readonly DedicatedHostGroupData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupResource"/> class for mocking. </summary>
         protected DedicatedHostGroupResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHostGroupResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DedicatedHostGroupResource(ArmClient client, DedicatedHostGroupResourceData data) : this(client, data.Id)
+        internal DedicatedHostGroupResource(ArmClient client, DedicatedHostGroupData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DedicatedHostGroupResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string dedicatedHostGroupResourceDedicatedHostGroupsApiVersion);
-            _dedicatedHostGroupResourceDedicatedHostGroupsRestClient = new DedicatedHostGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupResourceDedicatedHostGroupsApiVersion);
+            _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string dedicatedHostGroupApiVersion);
+            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DedicatedHostGroupResourceData Data
+        public virtual DedicatedHostGroupData Data
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of DedicatedHostResources in the DedicatedHostResource. </summary>
         /// <returns> An object representing collection of DedicatedHostResources and their operations over a DedicatedHostResource. </returns>
-        public virtual DedicatedHostCollection GetDedicatedHostResources()
+        public virtual DedicatedHostCollection GetDedicatedHosts()
         {
             return GetCachedClient(Client => new DedicatedHostCollection(Client, Id));
         }
@@ -100,9 +100,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostResourceAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            return await GetDedicatedHostResources().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
+            return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -114,9 +114,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<DedicatedHostResource> GetDedicatedHostResource(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, CancellationToken cancellationToken = default)
         {
-            return GetDedicatedHostResources().Get(hostName, cancellationToken);
+            return GetDedicatedHosts().Get(hostName, cancellationToken);
         }
 
         /// <summary>
@@ -127,11 +127,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DedicatedHostGroupResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -151,11 +151,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DedicatedHostGroupResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Get");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
@@ -176,11 +176,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Delete");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Delete");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new SampleArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -202,11 +202,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Delete");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Delete");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new SampleArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -231,11 +231,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Update");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Update");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostGroupRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -257,11 +257,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.Update");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.Update");
             scope.Start();
             try
             {
-                var response = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var response = _dedicatedHostGroupRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -285,14 +285,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.AddTag");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -316,14 +316,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.AddTag");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -345,7 +345,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.SetTags");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.SetTags");
             scope.Start();
             try
             {
@@ -353,7 +353,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -375,7 +375,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.SetTags");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.SetTags");
             scope.Start();
             try
             {
@@ -383,7 +383,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -405,14 +405,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.RemoveTag");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _dedicatedHostGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -434,14 +434,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics.CreateScope("DedicatedHostGroupResource.RemoveTag");
+            using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroupResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _dedicatedHostGroupResourceDedicatedHostGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _dedicatedHostGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHostGroupResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

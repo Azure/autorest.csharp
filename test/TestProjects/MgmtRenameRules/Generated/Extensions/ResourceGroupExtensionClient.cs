@@ -34,21 +34,21 @@ namespace MgmtRenameRules
 
         /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
-        public virtual VirtualMachineCollection GetVirtualMachineResources()
+        public virtual VirtualMachineCollection GetVirtualMachines()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
-        public virtual ImageCollection GetImageResources()
+        public virtual ImageCollection GetImages()
         {
             return GetCachedClient(Client => new ImageCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
-        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSetResources()
+        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {
             return GetCachedClient(Client => new VirtualMachineScaleSetCollection(Client, Id));
         }

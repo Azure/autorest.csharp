@@ -108,7 +108,7 @@ namespace MgmtResourceName
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NetworkResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<NetworkData>> PutAsync(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        NetworkResourceData value = default;
+                        NetworkData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = NetworkResourceData.DeserializeNetworkResourceData(document.RootElement);
+                        value = NetworkData.DeserializeNetworkData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NetworkResourceData> Put(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<NetworkData> Put(string subscriptionId, string resourceGroupName, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        NetworkResourceData value = default;
+                        NetworkData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = NetworkResourceData.DeserializeNetworkResourceData(document.RootElement);
+                        value = NetworkData.DeserializeNetworkData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NetworkResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string networkResourceName, CancellationToken cancellationToken = default)
+        public async Task<Response<NetworkData>> GetAsync(string subscriptionId, string resourceGroupName, string networkResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        NetworkResourceData value = default;
+                        NetworkData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = NetworkResourceData.DeserializeNetworkResourceData(document.RootElement);
+                        value = NetworkData.DeserializeNetworkData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((NetworkResourceData)null, message.Response);
+                    return Response.FromValue((NetworkData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NetworkResourceData> Get(string subscriptionId, string resourceGroupName, string networkResourceName, CancellationToken cancellationToken = default)
+        public Response<NetworkData> Get(string subscriptionId, string resourceGroupName, string networkResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        NetworkResourceData value = default;
+                        NetworkData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = NetworkResourceData.DeserializeNetworkResourceData(document.RootElement);
+                        value = NetworkData.DeserializeNetworkData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((NetworkResourceData)null, message.Response);
+                    return Response.FromValue((NetworkData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

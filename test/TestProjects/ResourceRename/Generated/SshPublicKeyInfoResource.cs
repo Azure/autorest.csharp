@@ -27,9 +27,9 @@ namespace ResourceRename
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics;
-        private readonly SshPublicKeysRestOperations _sshPublicKeyInfoResourceSshPublicKeysRestClient;
-        private readonly SshPublicKeyInfoResourceData _data;
+        private readonly ClientDiagnostics _sshPublicKeyInfoSshPublicKeysClientDiagnostics;
+        private readonly SshPublicKeysRestOperations _sshPublicKeyInfoSshPublicKeysRestClient;
+        private readonly SshPublicKeyInfoData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoResource"/> class for mocking. </summary>
         protected SshPublicKeyInfoResource()
@@ -39,7 +39,7 @@ namespace ResourceRename
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKeyInfoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoResourceData data) : this(client, data.Id)
+        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace ResourceRename
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SshPublicKeyInfoResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string sshPublicKeyInfoResourceSshPublicKeysApiVersion);
-            _sshPublicKeyInfoResourceSshPublicKeysRestClient = new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyInfoResourceSshPublicKeysApiVersion);
+            _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);
+            _sshPublicKeyInfoSshPublicKeysRestClient = new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyInfoSshPublicKeysApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace ResourceRename
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SshPublicKeyInfoResourceData Data
+        public virtual SshPublicKeyInfoData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SshPublicKeyInfoResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Get");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Get");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyInfoResourceSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SshPublicKeyInfoResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Get");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Get");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyInfoResourceSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Delete");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Delete");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyInfoResourceSshPublicKeysRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new ResourceRenameArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Delete");
+            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoResource.Delete");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyInfoResourceSshPublicKeysRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new ResourceRenameArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

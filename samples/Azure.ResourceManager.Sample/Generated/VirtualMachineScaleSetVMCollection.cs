@@ -23,8 +23,8 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineScaleSetVM and their operations over its parent. </summary>
     public partial class VirtualMachineScaleSetVMCollection : ArmCollection, IEnumerable<VirtualMachineScaleSetVMResource>, IAsyncEnumerable<VirtualMachineScaleSetVMResource>
     {
-        private readonly ClientDiagnostics _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics;
-        private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient;
+        private readonly ClientDiagnostics _virtualMachineScaleSetVMClientDiagnostics;
+        private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVMRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMCollection"/> class for mocking. </summary>
         protected VirtualMachineScaleSetVMCollection()
@@ -36,9 +36,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VirtualMachineScaleSetVMCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSetVMResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineScaleSetVMResource.ResourceType, out string virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsApiVersion);
-            _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsApiVersion);
+            _virtualMachineScaleSetVMClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSetVMResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineScaleSetVMResource.ResourceType, out string virtualMachineScaleSetVMApiVersion);
+            _virtualMachineScaleSetVMRestClient = new VirtualMachineScaleSetVMsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVMApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,17 +61,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<VirtualMachineScaleSetVMResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVMResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<VirtualMachineScaleSetVMResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.CreateOrUpdate");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<VirtualMachineScaleSetVMResource>(new VirtualMachineScaleSetVMResourceOperationSource(Client), _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetVMRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<VirtualMachineScaleSetVMResource>(new VirtualMachineScaleSetVMOperationSource(Client), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, _virtualMachineScaleSetVMRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,17 +94,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<VirtualMachineScaleSetVMResource> CreateOrUpdate(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVMResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineScaleSetVMResource> CreateOrUpdate(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.CreateOrUpdate");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken);
-                var operation = new SampleArmOperation<VirtualMachineScaleSetVMResource>(new VirtualMachineScaleSetVMResourceOperationSource(Client), _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetVMRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken);
+                var operation = new SampleArmOperation<VirtualMachineScaleSetVMResource>(new VirtualMachineScaleSetVMOperationSource(Client), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, _virtualMachineScaleSetVMRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,11 +129,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Get");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetVMRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Get");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken);
+                var response = _virtualMachineScaleSetVMRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineScaleSetVMResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVMRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachineScaleSetVMResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVMRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -233,11 +233,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineScaleSetVMResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVMRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -248,11 +248,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachineScaleSetVMResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVMRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVMResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -277,7 +277,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Exists");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Exists");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Exists");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.Exists");
             scope.Start();
             try
             {
@@ -331,11 +331,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetVMRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSetVMResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());
@@ -360,11 +360,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
+                var response = _virtualMachineScaleSetVMRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSetVMResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());

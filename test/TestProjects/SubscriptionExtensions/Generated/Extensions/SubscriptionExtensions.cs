@@ -28,9 +28,9 @@ namespace SubscriptionExtensions
         /// <summary> Gets a collection of ToasterResources in the ToasterResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
-        public static ToasterCollection GetToasterResources(this Subscription subscription)
+        public static ToasterCollection GetToasters(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetToasterResources();
+            return GetExtensionClient(subscription).GetToasters();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public static async Task<Response<ToasterResource>> GetToasterResourceAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ToasterResource>> GetToasterAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetToasterResources().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public static Response<ToasterResource> GetToasterResource(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        public static Response<ToasterResource> GetToaster(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetToasterResources().Get(toasterName, cancellationToken);
+            return subscription.GetToasters().Get(toasterName, cancellationToken);
         }
     }
 }

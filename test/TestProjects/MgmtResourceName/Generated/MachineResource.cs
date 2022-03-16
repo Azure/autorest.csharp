@@ -27,9 +27,9 @@ namespace MgmtResourceName
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _machineResourceMachinesClientDiagnostics;
-        private readonly MachinesRestOperations _machineResourceMachinesRestClient;
-        private readonly MachineResourceData _data;
+        private readonly ClientDiagnostics _machineClientDiagnostics;
+        private readonly MachinesRestOperations _machineRestClient;
+        private readonly MachineData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MachineResource"/> class for mocking. </summary>
         protected MachineResource()
@@ -39,7 +39,7 @@ namespace MgmtResourceName
         /// <summary> Initializes a new instance of the <see cref = "MachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MachineResource(ArmClient client, MachineResourceData data) : this(client, data.Id)
+        internal MachineResource(ArmClient client, MachineData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal MachineResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _machineResourceMachinesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string machineResourceMachinesApiVersion);
-            _machineResourceMachinesRestClient = new MachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, machineResourceMachinesApiVersion);
+            _machineClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string machineApiVersion);
+            _machineRestClient = new MachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, machineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual MachineResourceData Data
+        public virtual MachineData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<MachineResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineResource.Get");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineResource.Get");
             scope.Start();
             try
             {
-                var response = await _machineResourceMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MachineResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineResource.Get");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineResource.Get");
             scope.Start();
             try
             {
-                var response = _machineResourceMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());

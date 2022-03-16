@@ -29,9 +29,9 @@ namespace MgmtMultipleParentResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _subParentResourceSubParentsClientDiagnostics;
-        private readonly SubParentsRestOperations _subParentResourceSubParentsRestClient;
-        private readonly SubParentResourceData _data;
+        private readonly ClientDiagnostics _subParentClientDiagnostics;
+        private readonly SubParentsRestOperations _subParentRestClient;
+        private readonly SubParentData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentResource"/> class for mocking. </summary>
         protected SubParentResource()
@@ -41,7 +41,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "SubParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentResource(ArmClient client, SubParentResourceData data) : this(client, data.Id)
+        internal SubParentResource(ArmClient client, SubParentData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtMultipleParentResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubParentResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subParentResourceSubParentsClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string subParentResourceSubParentsApiVersion);
-            _subParentResourceSubParentsRestClient = new SubParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentResourceSubParentsApiVersion);
+            _subParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string subParentApiVersion);
+            _subParentRestClient = new SubParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubParentResourceData Data
+        public virtual SubParentData Data
         {
             get
             {
@@ -86,7 +86,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets a collection of TheParentSubParentChildResources in the TheParentSubParentChildResource. </summary>
         /// <returns> An object representing collection of TheParentSubParentChildResources and their operations over a TheParentSubParentChildResource. </returns>
-        public virtual TheParentSubParentChildCollection GetTheParentSubParentChildResources()
+        public virtual TheParentSubParentChildCollection GetTheParentSubParentChildren()
         {
             return GetCachedClient(Client => new TheParentSubParentChildCollection(Client, Id));
         }
@@ -101,9 +101,9 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual async Task<Response<TheParentSubParentChildResource>> GetTheParentSubParentChildResourceAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TheParentSubParentChildResource>> GetTheParentSubParentChildAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetTheParentSubParentChildResources().GetAsync(childName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetTheParentSubParentChildren().GetAsync(childName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
-        public virtual Response<TheParentSubParentChildResource> GetTheParentSubParentChildResource(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<TheParentSubParentChildResource> GetTheParentSubParentChild(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetTheParentSubParentChildResources().Get(childName, expand, cancellationToken);
+            return GetTheParentSubParentChildren().Get(childName, expand, cancellationToken);
         }
 
         /// <summary>
@@ -130,11 +130,11 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SubParentResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Get");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Get");
             scope.Start();
             try
             {
-                var response = await _subParentResourceSubParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubParentResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Get");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Get");
             scope.Start();
             try
             {
-                var response = _subParentResourceSubParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _subParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
@@ -180,12 +180,12 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Delete");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Delete");
             scope.Start();
             try
             {
-                var response = await _subParentResourceSubParentsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMultipleParentResourceArmOperation(_subParentResourceSubParentsClientDiagnostics, Pipeline, _subParentResourceSubParentsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _subParentRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtMultipleParentResourceArmOperation(_subParentClientDiagnostics, Pipeline, _subParentRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -206,12 +206,12 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Delete");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Delete");
             scope.Start();
             try
             {
-                var response = _subParentResourceSubParentsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtMultipleParentResourceArmOperation(_subParentResourceSubParentsClientDiagnostics, Pipeline, _subParentResourceSubParentsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _subParentRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new MgmtMultipleParentResourceArmOperation(_subParentClientDiagnostics, Pipeline, _subParentRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -236,12 +236,12 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Update");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Update");
             scope.Start();
             try
             {
-                var response = await _subParentResourceSubParentsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMultipleParentResourceArmOperation<SubParentResource>(new SubParentResourceOperationSource(Client), _subParentResourceSubParentsClientDiagnostics, Pipeline, _subParentResourceSubParentsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _subParentRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtMultipleParentResourceArmOperation<SubParentResource>(new SubParentOperationSource(Client), _subParentClientDiagnostics, Pipeline, _subParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -266,12 +266,12 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.Update");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.Update");
             scope.Start();
             try
             {
-                var response = _subParentResourceSubParentsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
-                var operation = new MgmtMultipleParentResourceArmOperation<SubParentResource>(new SubParentResourceOperationSource(Client), _subParentResourceSubParentsClientDiagnostics, Pipeline, _subParentResourceSubParentsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _subParentRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
+                var operation = new MgmtMultipleParentResourceArmOperation<SubParentResource>(new SubParentOperationSource(Client), _subParentClientDiagnostics, Pipeline, _subParentRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -297,14 +297,14 @@ namespace MgmtMultipleParentResource
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.AddTag");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _subParentResourceSubParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -328,14 +328,14 @@ namespace MgmtMultipleParentResource
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.AddTag");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _subParentResourceSubParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -357,7 +357,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.SetTags");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.SetTags");
             scope.Start();
             try
             {
@@ -365,7 +365,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _subParentResourceSubParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -387,7 +387,7 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.SetTags");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.SetTags");
             scope.Start();
             try
             {
@@ -395,7 +395,7 @@ namespace MgmtMultipleParentResource
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _subParentResourceSubParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -417,14 +417,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.RemoveTag");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _subParentResourceSubParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -446,14 +446,14 @@ namespace MgmtMultipleParentResource
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _subParentResourceSubParentsClientDiagnostics.CreateScope("SubParentResource.RemoveTag");
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _subParentResourceSubParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _subParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new SubParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

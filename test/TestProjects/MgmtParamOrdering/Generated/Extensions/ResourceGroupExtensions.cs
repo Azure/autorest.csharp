@@ -29,9 +29,9 @@ namespace MgmtParamOrdering
         /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
-        public static AvailabilitySetCollection GetAvailabilitySetResources(this ResourceGroup resourceGroup)
+        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetAvailabilitySetResources();
+            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetResourceAsync(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
+        public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetAvailabilitySetResources().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -59,17 +59,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static Response<AvailabilitySetResource> GetAvailabilitySetResource(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
+        public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetAvailabilitySetResources().Get(availabilitySetName, cancellationToken);
+            return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DedicatedHostGroupResources in the DedicatedHostGroupResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
-        public static DedicatedHostGroupCollection GetDedicatedHostGroupResources(this ResourceGroup resourceGroup)
+        public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetDedicatedHostGroupResources();
+            return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
 
         /// <summary>
@@ -82,9 +82,9 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupResourceAsync(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDedicatedHostGroupResources().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -97,17 +97,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
-        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroupResource(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
+        public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDedicatedHostGroupResources().Get(hostGroupName, cancellationToken);
+            return resourceGroup.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
         }
 
         /// <summary> Gets a collection of WorkspaceResources in the WorkspaceResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
-        public static WorkspaceCollection GetWorkspaceResources(this ResourceGroup resourceGroup)
+        public static WorkspaceCollection GetWorkspaces(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetWorkspaceResources();
+            return GetExtensionClient(resourceGroup).GetWorkspaces();
         }
 
         /// <summary>
@@ -120,9 +120,9 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public static async Task<Response<WorkspaceResource>> GetWorkspaceResourceAsync(this ResourceGroup resourceGroup, string workspaceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<WorkspaceResource>> GetWorkspaceAsync(this ResourceGroup resourceGroup, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetWorkspaceResources().GetAsync(workspaceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetWorkspaces().GetAsync(workspaceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -135,17 +135,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public static Response<WorkspaceResource> GetWorkspaceResource(this ResourceGroup resourceGroup, string workspaceName, CancellationToken cancellationToken = default)
+        public static Response<WorkspaceResource> GetWorkspace(this ResourceGroup resourceGroup, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetWorkspaceResources().Get(workspaceName, cancellationToken);
+            return resourceGroup.GetWorkspaces().Get(workspaceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
-        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSetResources(this ResourceGroup resourceGroup)
+        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSetResources();
+            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -159,9 +159,9 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetResourceAsync(this ResourceGroup resourceGroup, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroup resourceGroup, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetVirtualMachineScaleSetResources().GetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResource(this ResourceGroup resourceGroup, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroup resourceGroup, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetVirtualMachineScaleSetResources().Get(vmScaleSetName, expand, cancellationToken);
+            return resourceGroup.GetVirtualMachineScaleSets().Get(vmScaleSetName, expand, cancellationToken);
         }
     }
 }

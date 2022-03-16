@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     extraParamNames.Add($"default");
                 }
             }
-            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
+            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.ResourceName.ResourceNameToPlural()}", extraParamNames)};");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)

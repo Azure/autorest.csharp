@@ -27,9 +27,9 @@ namespace Azure.Management.Storage
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics;
-        private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient;
-        private readonly ObjectReplicationPolicyResourceData _data;
+        private readonly ClientDiagnostics _objectReplicationPolicyClientDiagnostics;
+        private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPolicyRestClient;
+        private readonly ObjectReplicationPolicyData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyResource"/> class for mocking. </summary>
         protected ObjectReplicationPolicyResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "ObjectReplicationPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ObjectReplicationPolicyResource(ArmClient client, ObjectReplicationPolicyResourceData data) : this(client, data.Id)
+        internal ObjectReplicationPolicyResource(ArmClient client, ObjectReplicationPolicyData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ObjectReplicationPolicyResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string objectReplicationPolicyResourceObjectReplicationPoliciesApiVersion);
-            _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient = new ObjectReplicationPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyResourceObjectReplicationPoliciesApiVersion);
+            _objectReplicationPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string objectReplicationPolicyApiVersion);
+            _objectReplicationPolicyRestClient = new ObjectReplicationPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ObjectReplicationPolicyResourceData Data
+        public virtual ObjectReplicationPolicyData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ObjectReplicationPolicyResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Get");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Get");
             scope.Start();
             try
             {
-                var response = await _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _objectReplicationPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ObjectReplicationPolicyResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ObjectReplicationPolicyResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Get");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Get");
             scope.Start();
             try
             {
-                var response = _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _objectReplicationPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ObjectReplicationPolicyResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Delete");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Delete");
             scope.Start();
             try
             {
-                var response = await _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _objectReplicationPolicyRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Delete");
+            using var scope = _objectReplicationPolicyClientDiagnostics.CreateScope("ObjectReplicationPolicyResource.Delete");
             scope.Start();
             try
             {
-                var response = _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _objectReplicationPolicyRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

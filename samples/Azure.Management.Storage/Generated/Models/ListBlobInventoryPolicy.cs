@@ -17,17 +17,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of ListBlobInventoryPolicy. </summary>
         internal ListBlobInventoryPolicy()
         {
-            Value = new ChangeTrackingList<BlobInventoryPolicyResourceData>();
+            Value = new ChangeTrackingList<BlobInventoryPolicyData>();
         }
 
         /// <summary> Initializes a new instance of ListBlobInventoryPolicy. </summary>
         /// <param name="value"> List of blob inventory policies. </param>
-        internal ListBlobInventoryPolicy(IReadOnlyList<BlobInventoryPolicyResourceData> value)
+        internal ListBlobInventoryPolicy(IReadOnlyList<BlobInventoryPolicyData> value)
         {
             Value = value;
         }
 
         /// <summary> List of blob inventory policies. </summary>
-        public IReadOnlyList<BlobInventoryPolicyResourceData> Value { get; }
+        public IReadOnlyList<BlobInventoryPolicyData> Value { get; }
     }
 }

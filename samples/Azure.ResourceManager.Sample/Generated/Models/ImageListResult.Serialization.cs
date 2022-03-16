@@ -16,16 +16,16 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static ImageListResult DeserializeImageListResult(JsonElement element)
         {
-            IReadOnlyList<ImageResourceData> value = default;
+            IReadOnlyList<ImageData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<ImageResourceData> array = new List<ImageResourceData>();
+                    List<ImageData> array = new List<ImageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageResourceData.DeserializeImageResourceData(item));
+                        array.Add(ImageData.DeserializeImageData(item));
                     }
                     value = array;
                     continue;

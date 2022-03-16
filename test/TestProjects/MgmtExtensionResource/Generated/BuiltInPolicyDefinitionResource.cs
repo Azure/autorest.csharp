@@ -27,9 +27,9 @@ namespace MgmtExtensionResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient;
-        private readonly PolicyDefinitionResourceData _data;
+        private readonly ClientDiagnostics _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _builtInPolicyDefinitionPolicyDefinitionsRestClient;
+        private readonly PolicyDefinitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionResource"/> class for mocking. </summary>
         protected BuiltInPolicyDefinitionResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "BuiltInPolicyDefinitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BuiltInPolicyDefinitionResource(ArmClient client, PolicyDefinitionResourceData data) : this(client, data.Id)
+        internal BuiltInPolicyDefinitionResource(ArmClient client, PolicyDefinitionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BuiltInPolicyDefinitionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string builtInPolicyDefinitionResourcePolicyDefinitionsApiVersion);
-            _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionResourcePolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PolicyDefinitionResourceData Data
+        public virtual PolicyDefinitionData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = await _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BuiltInPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltIn(Id.Name, cancellationToken);
+                var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());

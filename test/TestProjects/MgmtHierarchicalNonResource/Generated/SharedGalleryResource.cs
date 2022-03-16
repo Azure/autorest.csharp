@@ -28,13 +28,13 @@ namespace MgmtHierarchicalNonResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _sharedGalleryResourceSharedGalleriesClientDiagnostics;
-        private readonly SharedGalleriesRestOperations _sharedGalleryResourceSharedGalleriesRestClient;
+        private readonly ClientDiagnostics _sharedGalleryClientDiagnostics;
+        private readonly SharedGalleriesRestOperations _sharedGalleryRestClient;
         private readonly ClientDiagnostics _sharedGalleryImagesClientDiagnostics;
         private readonly SharedGalleryImagesRestOperations _sharedGalleryImagesRestClient;
         private readonly ClientDiagnostics _sharedGalleryImageVersionsClientDiagnostics;
         private readonly SharedGalleryImageVersionsRestOperations _sharedGalleryImageVersionsRestClient;
-        private readonly SharedGalleryResourceData _data;
+        private readonly SharedGalleryData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryResource"/> class for mocking. </summary>
         protected SharedGalleryResource()
@@ -44,7 +44,7 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Initializes a new instance of the <see cref = "SharedGalleryResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGalleryResource(ArmClient client, SharedGalleryResourceData data) : this(client, data.Id)
+        internal SharedGalleryResource(ArmClient client, SharedGalleryData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -55,9 +55,9 @@ namespace MgmtHierarchicalNonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SharedGalleryResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sharedGalleryResourceSharedGalleriesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string sharedGalleryResourceSharedGalleriesApiVersion);
-            _sharedGalleryResourceSharedGalleriesRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryResourceSharedGalleriesApiVersion);
+            _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
             _sharedGalleryImageVersionsClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
@@ -75,7 +75,7 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SharedGalleryResourceData Data
+        public virtual SharedGalleryData Data
         {
             get
             {
@@ -99,11 +99,11 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SharedGalleryResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryResource.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryResource.Get");
             scope.Start();
             try
             {
-                var response = await _sharedGalleryResourceSharedGalleriesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
@@ -124,11 +124,11 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SharedGalleryResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryResource.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryResource.Get");
             scope.Start();
             try
             {
-                var response = _sharedGalleryResourceSharedGalleriesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);

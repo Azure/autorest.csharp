@@ -24,8 +24,8 @@ namespace Pagination
     /// <summary> A class representing collection of PageSizeStringModel and their operations over its parent. </summary>
     public partial class PageSizeStringModelCollection : ArmCollection, IEnumerable<PageSizeStringModelResource>, IAsyncEnumerable<PageSizeStringModelResource>
     {
-        private readonly ClientDiagnostics _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics;
-        private readonly PageSizeStringModelsRestOperations _pageSizeStringModelResourcePageSizeStringModelsRestClient;
+        private readonly ClientDiagnostics _pageSizeStringModelClientDiagnostics;
+        private readonly PageSizeStringModelsRestOperations _pageSizeStringModelRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeStringModelCollection"/> class for mocking. </summary>
         protected PageSizeStringModelCollection()
@@ -37,9 +37,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PageSizeStringModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeStringModelResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(PageSizeStringModelResource.ResourceType, out string pageSizeStringModelResourcePageSizeStringModelsApiVersion);
-            _pageSizeStringModelResourcePageSizeStringModelsRestClient = new PageSizeStringModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeStringModelResourcePageSizeStringModelsApiVersion);
+            _pageSizeStringModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeStringModelResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(PageSizeStringModelResource.ResourceType, out string pageSizeStringModelApiVersion);
+            _pageSizeStringModelRestClient = new PageSizeStringModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeStringModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<PageSizeStringModelResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeStringModelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<PageSizeStringModelResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _pageSizeStringModelResourcePageSizeStringModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeStringModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -93,16 +93,16 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<PageSizeStringModelResource> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeStringModelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PageSizeStringModelResource> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _pageSizeStringModelResourcePageSizeStringModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _pageSizeStringModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
                 var operation = new PaginationArmOperation<PageSizeStringModelResource>(Response.FromValue(new PageSizeStringModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -127,11 +127,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeStringModelResourcePageSizeStringModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeStringModelResourcePageSizeStringModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());
@@ -182,11 +182,11 @@ namespace Pagination
         {
             async Task<Page<PageSizeStringModelResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
+                using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeStringModelResourcePageSizeStringModelsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeStringModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -197,11 +197,11 @@ namespace Pagination
             }
             async Task<Page<PageSizeStringModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
+                using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeStringModelResourcePageSizeStringModelsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _pageSizeStringModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -224,11 +224,11 @@ namespace Pagination
         {
             Page<PageSizeStringModelResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
+                using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeStringModelResourcePageSizeStringModelsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
+                    var response = _pageSizeStringModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -239,11 +239,11 @@ namespace Pagination
             }
             Page<PageSizeStringModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
+                using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeStringModelResourcePageSizeStringModelsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
+                    var response = _pageSizeStringModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeStringModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -268,7 +268,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
             scope.Start();
             try
             {
@@ -295,7 +295,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.Exists");
             scope.Start();
             try
             {
@@ -322,11 +322,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _pageSizeStringModelResourcePageSizeStringModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeStringModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeStringModelResource>(null, response.GetRawResponse());
                 return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());
@@ -351,11 +351,11 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
+            using var scope = _pageSizeStringModelClientDiagnostics.CreateScope("PageSizeStringModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _pageSizeStringModelResourcePageSizeStringModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeStringModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PageSizeStringModelResource>(null, response.GetRawResponse());
                 return Response.FromValue(new PageSizeStringModelResource(Client, response.Value), response.GetRawResponse());

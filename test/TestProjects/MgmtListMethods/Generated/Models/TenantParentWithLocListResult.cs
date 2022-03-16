@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of TenantParentWithLocListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal TenantParentWithLocListResult(IEnumerable<TenantParentWithLocResourceData> value)
+        internal TenantParentWithLocListResult(IEnumerable<TenantParentWithLocData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of TenantParentWithLocListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal TenantParentWithLocListResult(IReadOnlyList<TenantParentWithLocResourceData> value, string nextLink)
+        internal TenantParentWithLocListResult(IReadOnlyList<TenantParentWithLocData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of fakes. </summary>
-        public IReadOnlyList<TenantParentWithLocResourceData> Value { get; }
+        public IReadOnlyList<TenantParentWithLocData> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>
         public string NextLink { get; }
     }

@@ -17,20 +17,20 @@ namespace Pagination.Models
         /// <summary> Initializes a new instance of PageSizeInt32ModelListResult. </summary>
         internal PageSizeInt32ModelListResult()
         {
-            Value = new ChangeTrackingList<PageSizeInt32ModelResourceData>();
+            Value = new ChangeTrackingList<PageSizeInt32ModelData>();
         }
 
         /// <summary> Initializes a new instance of PageSizeInt32ModelListResult. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal PageSizeInt32ModelListResult(IReadOnlyList<PageSizeInt32ModelResourceData> value, string nextLink)
+        internal PageSizeInt32ModelListResult(IReadOnlyList<PageSizeInt32ModelData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the value. </summary>
-        public IReadOnlyList<PageSizeInt32ModelResourceData> Value { get; }
+        public IReadOnlyList<PageSizeInt32ModelData> Value { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }

@@ -23,8 +23,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of FakeParentWithNonResCh and their operations over its parent. </summary>
     public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResChResource>, IAsyncEnumerable<FakeParentWithNonResChResource>
     {
-        private readonly ClientDiagnostics _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics;
-        private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient;
+        private readonly ClientDiagnostics _fakeParentWithNonResChClientDiagnostics;
+        private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResChCollection"/> class for mocking. </summary>
         protected FakeParentWithNonResChCollection()
@@ -36,9 +36,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakeParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResChResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FakeParentWithNonResChResource.ResourceType, out string fakeParentWithNonResChResourceFakeParentWithNonResChesApiVersion);
-            _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient = new FakeParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithNonResChResourceFakeParentWithNonResChesApiVersion);
+            _fakeParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResChResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(FakeParentWithNonResChResource.ResourceType, out string fakeParentWithNonResChApiVersion);
+            _fakeParentWithNonResChRestClient = new FakeParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakeParentWithNonResChResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakeParentWithNonResChResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CreateOrUpdate");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResChResource>(Response.FromValue(new FakeParentWithNonResChResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -94,16 +94,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakeParentWithNonResChResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeParentWithNonResChResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CreateOrUpdate");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken);
+                var response = _fakeParentWithNonResChRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResChResource>(Response.FromValue(new FakeParentWithNonResChResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -129,11 +129,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Get");
             scope.Start();
             try
             {
-                var response = _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken);
+                var response = _fakeParentWithNonResChRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
@@ -185,11 +185,11 @@ namespace MgmtListMethods
         {
             async Task<Page<FakeParentWithNonResChResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
+                using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.ListTestAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithNonResChRestClient.ListTestAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -200,11 +200,11 @@ namespace MgmtListMethods
             }
             async Task<Page<FakeParentWithNonResChResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
+                using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeParentWithNonResChRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -227,11 +227,11 @@ namespace MgmtListMethods
         {
             Page<FakeParentWithNonResChResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
+                using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.ListTest(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithNonResChRestClient.ListTest(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,11 +242,11 @@ namespace MgmtListMethods
             }
             Page<FakeParentWithNonResChResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
+                using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeParentWithNonResChRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -271,7 +271,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Exists");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Exists");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.Exists");
             scope.Start();
             try
             {
@@ -325,11 +325,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<FakeParentWithNonResChResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
@@ -354,11 +354,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
-            using var scope = _fakeParentWithNonResChResourceFakeParentWithNonResChesClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
+            using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fakeParentWithNonResChResourceFakeParentWithNonResChesRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
+                var response = _fakeParentWithNonResChRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<FakeParentWithNonResChResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());

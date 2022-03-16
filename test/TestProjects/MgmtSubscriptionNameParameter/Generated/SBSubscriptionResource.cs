@@ -27,9 +27,9 @@ namespace MgmtSubscriptionNameParameter
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _sbSubscriptionResourceSubscriptionsClientDiagnostics;
-        private readonly SubscriptionsRestOperations _sbSubscriptionResourceSubscriptionsRestClient;
-        private readonly SBSubscriptionResourceData _data;
+        private readonly ClientDiagnostics _sbSubscriptionSubscriptionsClientDiagnostics;
+        private readonly SubscriptionsRestOperations _sbSubscriptionSubscriptionsRestClient;
+        private readonly SBSubscriptionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SBSubscriptionResource"/> class for mocking. </summary>
         protected SBSubscriptionResource()
@@ -39,7 +39,7 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Initializes a new instance of the <see cref = "SBSubscriptionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SBSubscriptionResource(ArmClient client, SBSubscriptionResourceData data) : this(client, data.Id)
+        internal SBSubscriptionResource(ArmClient client, SBSubscriptionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SBSubscriptionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sbSubscriptionResourceSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string sbSubscriptionResourceSubscriptionsApiVersion);
-            _sbSubscriptionResourceSubscriptionsRestClient = new SubscriptionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionResourceSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtSubscriptionNameParameter
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SBSubscriptionResourceData Data
+        public virtual SBSubscriptionData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SBSubscriptionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _sbSubscriptionResourceSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Get");
             scope.Start();
             try
             {
-                var response = await _sbSubscriptionResourceSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SBSubscriptionResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SBSubscriptionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _sbSubscriptionResourceSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Get");
             scope.Start();
             try
             {
-                var response = _sbSubscriptionResourceSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SBSubscriptionResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _sbSubscriptionResourceSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Delete");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _sbSubscriptionResourceSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _sbSubscriptionResourceSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Delete");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionResource.Delete");
             scope.Start();
             try
             {
-                var response = _sbSubscriptionResourceSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

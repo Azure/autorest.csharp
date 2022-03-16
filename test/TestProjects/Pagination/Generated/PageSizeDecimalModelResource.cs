@@ -27,9 +27,9 @@ namespace Pagination
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _pageSizeDecimalModelResourcePageSizeDecimalModelsClientDiagnostics;
-        private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelResourcePageSizeDecimalModelsRestClient;
-        private readonly PageSizeDecimalModelResourceData _data;
+        private readonly ClientDiagnostics _pageSizeDecimalModelClientDiagnostics;
+        private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelRestClient;
+        private readonly PageSizeDecimalModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModelResource"/> class for mocking. </summary>
         protected PageSizeDecimalModelResource()
@@ -39,7 +39,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeDecimalModelResource(ArmClient client, PageSizeDecimalModelResourceData data) : this(client, new ResourceIdentifier(data.Id))
+        internal PageSizeDecimalModelResource(ArmClient client, PageSizeDecimalModelData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeDecimalModelResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeDecimalModelResourcePageSizeDecimalModelsClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string pageSizeDecimalModelResourcePageSizeDecimalModelsApiVersion);
-            _pageSizeDecimalModelResourcePageSizeDecimalModelsRestClient = new PageSizeDecimalModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelResourcePageSizeDecimalModelsApiVersion);
+            _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string pageSizeDecimalModelApiVersion);
+            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Pagination
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PageSizeDecimalModelResourceData Data
+        public virtual PageSizeDecimalModelData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PageSizeDecimalModelResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeDecimalModelResourcePageSizeDecimalModelsClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Get");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeDecimalModelResourcePageSizeDecimalModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModelResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeDecimalModelResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeDecimalModelResourcePageSizeDecimalModelsClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Get");
+            using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModelResource.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeDecimalModelResourcePageSizeDecimalModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModelResource(Client, response.Value), response.GetRawResponse());

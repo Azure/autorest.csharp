@@ -28,9 +28,9 @@ namespace TenantOnly
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _billingAccountResourceBillingAccountsClientDiagnostics;
-        private readonly BillingAccountsRestOperations _billingAccountResourceBillingAccountsRestClient;
-        private readonly BillingAccountResourceData _data;
+        private readonly ClientDiagnostics _billingAccountClientDiagnostics;
+        private readonly BillingAccountsRestOperations _billingAccountRestClient;
+        private readonly BillingAccountData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountResource"/> class for mocking. </summary>
         protected BillingAccountResource()
@@ -40,7 +40,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "BillingAccountResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BillingAccountResource(ArmClient client, BillingAccountResourceData data) : this(client, data.Id)
+        internal BillingAccountResource(ArmClient client, BillingAccountData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BillingAccountResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _billingAccountResourceBillingAccountsClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string billingAccountResourceBillingAccountsApiVersion);
-            _billingAccountResourceBillingAccountsRestClient = new BillingAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountResourceBillingAccountsApiVersion);
+            _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace TenantOnly
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BillingAccountResourceData Data
+        public virtual BillingAccountData Data
         {
             get
             {
@@ -85,7 +85,7 @@ namespace TenantOnly
 
         /// <summary> Gets a collection of AgreementResources in the AgreementResource. </summary>
         /// <returns> An object representing collection of AgreementResources and their operations over a AgreementResource. </returns>
-        public virtual AgreementCollection GetAgreementResources()
+        public virtual AgreementCollection GetAgreements()
         {
             return GetCachedClient(Client => new AgreementCollection(Client, Id));
         }
@@ -100,9 +100,9 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public virtual async Task<Response<AgreementResource>> GetAgreementResourceAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AgreementResource>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetAgreementResources().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -115,9 +115,9 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public virtual Response<AgreementResource> GetAgreementResource(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<AgreementResource> GetAgreement(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetAgreementResources().Get(agreementName, expand, cancellationToken);
+            return GetAgreements().Get(agreementName, expand, cancellationToken);
         }
 
         /// <summary>
@@ -129,11 +129,11 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BillingAccountResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.Get");
             scope.Start();
             try
             {
-                var response = await _billingAccountResourceBillingAccountsRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
@@ -154,11 +154,11 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BillingAccountResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.Get");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.Get");
             scope.Start();
             try
             {
-                var response = _billingAccountResourceBillingAccountsRestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _billingAccountRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
@@ -184,14 +184,14 @@ namespace TenantOnly
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.AddTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountResourceBillingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -215,14 +215,14 @@ namespace TenantOnly
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.AddTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountResourceBillingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -244,7 +244,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.SetTags");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.SetTags");
             scope.Start();
             try
             {
@@ -252,7 +252,7 @@ namespace TenantOnly
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountResourceBillingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -274,7 +274,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.SetTags");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.SetTags");
             scope.Start();
             try
             {
@@ -282,7 +282,7 @@ namespace TenantOnly
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountResourceBillingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -304,14 +304,14 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.RemoveTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _billingAccountResourceBillingAccountsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -333,14 +333,14 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _billingAccountResourceBillingAccountsClientDiagnostics.CreateScope("BillingAccountResource.RemoveTag");
+            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _billingAccountResourceBillingAccountsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccountResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

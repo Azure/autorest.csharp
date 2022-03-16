@@ -24,8 +24,8 @@ namespace MgmtResourceName
     /// <summary> A class representing collection of Network and their operations over its parent. </summary>
     public partial class NetworkCollection : ArmCollection, IEnumerable<NetworkResource>, IAsyncEnumerable<NetworkResource>
     {
-        private readonly ClientDiagnostics _networkResourceClientDiagnostics;
-        private readonly NetworkResourcesRestOperations _networkResourceRestClient;
+        private readonly ClientDiagnostics _networkNetworkResourcesClientDiagnostics;
+        private readonly NetworkResourcesRestOperations _networkNetworkResourcesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="NetworkCollection"/> class for mocking. </summary>
         protected NetworkCollection()
@@ -37,9 +37,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal NetworkCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _networkResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", NetworkResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(NetworkResource.ResourceType, out string networkResourceApiVersion);
-            _networkResourceRestClient = new NetworkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, networkResourceApiVersion);
+            _networkNetworkResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", NetworkResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(NetworkResource.ResourceType, out string networkNetworkResourcesApiVersion);
+            _networkNetworkResourcesRestClient = new NetworkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, networkNetworkResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<NetworkResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string networkResourceName, NetworkResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<NetworkResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _networkResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _networkNetworkResourcesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtResourceNameArmOperation<NetworkResource>(Response.FromValue(new NetworkResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -93,16 +93,16 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<NetworkResource> CreateOrUpdate(WaitUntil waitUntil, string networkResourceName, NetworkResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<NetworkResource> CreateOrUpdate(WaitUntil waitUntil, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _networkResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken);
+                var response = _networkNetworkResourcesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken);
                 var operation = new MgmtResourceNameArmOperation<NetworkResource>(Response.FromValue(new NetworkResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -127,11 +127,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.Get");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Get");
             scope.Start();
             try
             {
-                var response = await _networkResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken).ConfigureAwait(false);
+                var response = await _networkNetworkResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.Get");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Get");
             scope.Start();
             try
             {
-                var response = _networkResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken);
+                var response = _networkNetworkResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
@@ -181,11 +181,11 @@ namespace MgmtResourceName
         {
             async Task<Page<NetworkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.GetAll");
+                using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _networkResourceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _networkNetworkResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new NetworkResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -207,11 +207,11 @@ namespace MgmtResourceName
         {
             Page<NetworkResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.GetAll");
+                using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _networkResourceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _networkNetworkResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new NetworkResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -236,7 +236,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.Exists");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.Exists");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.Exists");
             scope.Start();
             try
             {
@@ -290,11 +290,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _networkResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _networkNetworkResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<NetworkResource>(null, response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
@@ -319,11 +319,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
 
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _networkResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken: cancellationToken);
+                var response = _networkNetworkResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<NetworkResource>(null, response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());

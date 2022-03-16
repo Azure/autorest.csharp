@@ -8,10 +8,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtExtensionResourceTests() : base("MgmtExtensionResource") { }
 
-        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitionResources", true)]
-        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitions", false)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitionResources", true)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitions", false)]
+        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitionResources", false)]
+        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitions", true)]
+        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitionResources", false)]
+        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitions", true)]
         [TestCase("ResourceGroupExtensions", "GetPolicyDefinitionResources", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyDefinitions", false)]
         [TestCase("ManagementGroupPolicyDefinitionCollection", "CreateOrUpdate", true)]

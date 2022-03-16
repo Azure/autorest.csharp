@@ -20,10 +20,10 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _typeOneResourceCommonClientDiagnostics;
-        private CommonRestOperations _typeOneResourceCommonRestClient;
-        private ClientDiagnostics _typeTwoResourceCommonClientDiagnostics;
-        private CommonRestOperations _typeTwoResourceCommonRestClient;
+        private ClientDiagnostics _typeOneCommonClientDiagnostics;
+        private CommonRestOperations _typeOneCommonRestClient;
+        private ClientDiagnostics _typeTwoCommonClientDiagnostics;
+        private CommonRestOperations _typeTwoCommonRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
         protected SubscriptionExtensionClient()
@@ -37,10 +37,10 @@ namespace MgmtExtensionCommonRestOperation
         {
         }
 
-        private ClientDiagnostics TypeOneResourceCommonClientDiagnostics => _typeOneResourceCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOneResource.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeOneResourceCommonRestClient => _typeOneResourceCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeOneResource.ResourceType));
-        private ClientDiagnostics TypeTwoResourceCommonClientDiagnostics => _typeTwoResourceCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwoResource.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeTwoResourceCommonRestClient => _typeTwoResourceCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeTwoResource.ResourceType));
+        private ClientDiagnostics TypeOneCommonClientDiagnostics => _typeOneCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOneResource.ResourceType.Namespace, DiagnosticOptions);
+        private CommonRestOperations TypeOneCommonRestClient => _typeOneCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeOneResource.ResourceType));
+        private ClientDiagnostics TypeTwoCommonClientDiagnostics => _typeTwoCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwoResource.ResourceType.Namespace, DiagnosticOptions);
+        private CommonRestOperations TypeTwoCommonRestClient => _typeTwoCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeTwoResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -55,15 +55,15 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TypeOneResource> GetTypeOneResourcesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<TypeOneResource> GetTypeOnesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeOneResourceCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOneResources");
+                using var scope = TypeOneCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
                 scope.Start();
                 try
                 {
-                    var response = await TypeOneResourceCommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await TypeOneCommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -82,15 +82,15 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TypeOneResource> GetTypeOneResources(CancellationToken cancellationToken = default)
+        public virtual Pageable<TypeOneResource> GetTypeOnes(CancellationToken cancellationToken = default)
         {
             Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeOneResourceCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOneResources");
+                using var scope = TypeOneCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeOnes");
                 scope.Start();
                 try
                 {
-                    var response = TypeOneResourceCommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = TypeOneCommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -109,15 +109,15 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TypeTwoResource> GetTypeTwoResourcesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<TypeTwoResource> GetTypeTwosAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<TypeTwoResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeTwoResourceCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwoResources");
+                using var scope = TypeTwoCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
                 scope.Start();
                 try
                 {
-                    var response = await TypeTwoResourceCommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await TypeTwoCommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -136,15 +136,15 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TypeTwoResource> GetTypeTwoResources(CancellationToken cancellationToken = default)
+        public virtual Pageable<TypeTwoResource> GetTypeTwos(CancellationToken cancellationToken = default)
         {
             Page<TypeTwoResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = TypeTwoResourceCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwoResources");
+                using var scope = TypeTwoCommonClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetTypeTwos");
                 scope.Start();
                 try
                 {
-                    var response = TypeTwoResourceCommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = TypeTwoCommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new TypeTwoResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)

@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ObjectReplicationPolicyResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicyData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -159,13 +159,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicyResourceData value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ObjectReplicationPolicyResourceData.DeserializeObjectReplicationPolicyResourceData(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ObjectReplicationPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ObjectReplicationPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -179,7 +179,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ObjectReplicationPolicyResourceData> Get(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicyData> Get(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -192,19 +192,19 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicyResourceData value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ObjectReplicationPolicyResourceData.DeserializeObjectReplicationPolicyResourceData(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ObjectReplicationPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ObjectReplicationPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyResourceData properties)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -239,7 +239,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ObjectReplicationPolicyResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyResourceData properties, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicyData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -253,9 +253,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicyResourceData value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ObjectReplicationPolicyResourceData.DeserializeObjectReplicationPolicyResourceData(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -272,7 +272,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ObjectReplicationPolicyResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyResourceData properties, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicyData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -286,9 +286,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicyResourceData value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ObjectReplicationPolicyResourceData.DeserializeObjectReplicationPolicyResourceData(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

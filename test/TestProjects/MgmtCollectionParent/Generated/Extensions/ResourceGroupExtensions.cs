@@ -28,7 +28,7 @@ namespace MgmtCollectionParent
         /// <summary> Gets a collection of OrderResources in the OrderResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
-        public static OrderCollection GetOrderResources(this ResourceGroup resourceGroup)
+        public static OrderResourceCollection GetOrderResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetOrderResources();
         }

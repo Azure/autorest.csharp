@@ -34,14 +34,14 @@ namespace MgmtSafeFlatten
 
         /// <summary> Gets a collection of TypeOneResources in the TypeOneResource. </summary>
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
-        public virtual TypeOneCollection GetTypeOneResources()
+        public virtual TypeOneCollection GetTypeOnes()
         {
             return GetCachedClient(Client => new TypeOneCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of TypeTwoResources in the TypeTwoResource. </summary>
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
-        public virtual TypeTwoCollection GetTypeTwoResources()
+        public virtual TypeTwoCollection GetTypeTwos()
         {
             return GetCachedClient(Client => new TypeTwoCollection(Client, Id));
         }

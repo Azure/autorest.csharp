@@ -24,8 +24,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
     public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccountResource>, IAsyncEnumerable<DeletedAccountResource>
     {
-        private readonly ClientDiagnostics _deletedAccountResourceDeletedAccountsClientDiagnostics;
-        private readonly DeletedAccountsRestOperations _deletedAccountResourceDeletedAccountsRestClient;
+        private readonly ClientDiagnostics _deletedAccountClientDiagnostics;
+        private readonly DeletedAccountsRestOperations _deletedAccountRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class for mocking. </summary>
         protected DeletedAccountCollection()
@@ -37,9 +37,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeletedAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedAccountResourceDeletedAccountsClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccountResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DeletedAccountResource.ResourceType, out string deletedAccountResourceDeletedAccountsApiVersion);
-            _deletedAccountResourceDeletedAccountsRestClient = new DeletedAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountResourceDeletedAccountsApiVersion);
+            _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccountResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeletedAccountResource.ResourceType, out string deletedAccountApiVersion);
+            _deletedAccountRestClient = new DeletedAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,11 +66,11 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deletedAccountResourceDeletedAccountsRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());
@@ -97,11 +97,11 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = _deletedAccountResourceDeletedAccountsRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken);
+                var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());
@@ -124,11 +124,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<DeletedAccountResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deletedAccountResourceDeletedAccountsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deletedAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -139,11 +139,11 @@ namespace Azure.Management.Storage
             }
             async Task<Page<DeletedAccountResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deletedAccountResourceDeletedAccountsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deletedAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -166,11 +166,11 @@ namespace Azure.Management.Storage
         {
             Page<DeletedAccountResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deletedAccountResourceDeletedAccountsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = _deletedAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -181,11 +181,11 @@ namespace Azure.Management.Storage
             }
             Page<DeletedAccountResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deletedAccountResourceDeletedAccountsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    var response = _deletedAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeletedAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -212,7 +212,7 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -270,11 +270,11 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deletedAccountResourceDeletedAccountsRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedAccountResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());
@@ -301,11 +301,11 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _deletedAccountResourceDeletedAccountsClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deletedAccountResourceDeletedAccountsRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
+                var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedAccountResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());

@@ -108,7 +108,7 @@ namespace SupersetInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7ResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel7SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SupersetModel7ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7ResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel7Data>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel7ResourceData value = default;
+                        SupersetModel7Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SupersetModel7ResourceData.DeserializeSupersetModel7ResourceData(document.RootElement);
+                        value = SupersetModel7Data.DeserializeSupersetModel7Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel7SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SupersetModel7ResourceData> Put(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7ResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<SupersetModel7Data> Put(string subscriptionId, string resourceGroupName, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel7ResourceData value = default;
+                        SupersetModel7Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SupersetModel7ResourceData.DeserializeSupersetModel7ResourceData(document.RootElement);
+                        value = SupersetModel7Data.DeserializeSupersetModel7Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SupersetModel7ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string supersetModel7SName, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel7Data>> GetAsync(string subscriptionId, string resourceGroupName, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel7ResourceData value = default;
+                        SupersetModel7Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SupersetModel7ResourceData.DeserializeSupersetModel7ResourceData(document.RootElement);
+                        value = SupersetModel7Data.DeserializeSupersetModel7Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SupersetModel7ResourceData)null, message.Response);
+                    return Response.FromValue((SupersetModel7Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SupersetModel7ResourceData> Get(string subscriptionId, string resourceGroupName, string supersetModel7SName, CancellationToken cancellationToken = default)
+        public Response<SupersetModel7Data> Get(string subscriptionId, string resourceGroupName, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel7ResourceData value = default;
+                        SupersetModel7Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SupersetModel7ResourceData.DeserializeSupersetModel7ResourceData(document.RootElement);
+                        value = SupersetModel7Data.DeserializeSupersetModel7Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SupersetModel7ResourceData)null, message.Response);
+                    return Response.FromValue((SupersetModel7Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

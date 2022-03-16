@@ -27,9 +27,9 @@ namespace ExactMatchFlattenInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _customModel2ResourceCustomModel2sClientDiagnostics;
-        private readonly CustomModel2SRestOperations _customModel2ResourceCustomModel2sRestClient;
-        private readonly CustomModel2ResourceData _data;
+        private readonly ClientDiagnostics _customModel2ClientDiagnostics;
+        private readonly CustomModel2SRestOperations _customModel2RestClient;
+        private readonly CustomModel2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Resource"/> class for mocking. </summary>
         protected CustomModel2Resource()
@@ -39,7 +39,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel2Resource(ArmClient client, CustomModel2ResourceData data) : this(client, data.Id)
+        internal CustomModel2Resource(ArmClient client, CustomModel2Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal CustomModel2Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _customModel2ResourceCustomModel2sClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string customModel2ResourceCustomModel2sApiVersion);
-            _customModel2ResourceCustomModel2sRestClient = new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ResourceCustomModel2sApiVersion);
+            _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string customModel2ApiVersion);
+            _customModel2RestClient = new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual CustomModel2ResourceData Data
+        public virtual CustomModel2Data Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CustomModel2Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Resource.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Resource.Get");
             scope.Start();
             try
             {
-                var response = await _customModel2ResourceCustomModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel2Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Resource.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Resource.Get");
             scope.Start();
             try
             {
-                var response = _customModel2ResourceCustomModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());

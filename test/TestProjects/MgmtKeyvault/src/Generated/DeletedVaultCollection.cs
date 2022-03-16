@@ -21,8 +21,8 @@ namespace MgmtKeyvault
     /// <summary> A class representing collection of DeletedVault and their operations over its parent. </summary>
     public partial class DeletedVaultCollection : ArmCollection
     {
-        private readonly ClientDiagnostics _deletedVaultResourceVaultsClientDiagnostics;
-        private readonly VaultsRestOperations _deletedVaultResourceVaultsRestClient;
+        private readonly ClientDiagnostics _deletedVaultVaultsClientDiagnostics;
+        private readonly VaultsRestOperations _deletedVaultVaultsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedVaultCollection"/> class for mocking. </summary>
         protected DeletedVaultCollection()
@@ -34,9 +34,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeletedVaultCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedVaultResourceVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedVaultResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DeletedVaultResource.ResourceType, out string deletedVaultResourceVaultsApiVersion);
-            _deletedVaultResourceVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultResourceVaultsApiVersion);
+            _deletedVaultVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedVaultResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeletedVaultResource.ResourceType, out string deletedVaultVaultsApiVersion);
+            _deletedVaultVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultVaultsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -63,11 +63,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Get");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deletedVaultResourceVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedVaultVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
@@ -94,11 +94,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Get");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Get");
             scope.Start();
             try
             {
-                var response = _deletedVaultResourceVaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken);
+                var response = _deletedVaultVaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
@@ -125,7 +125,7 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
             scope.Start();
             try
             {
@@ -154,7 +154,7 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.Exists");
             scope.Start();
             try
             {
@@ -183,11 +183,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deletedVaultResourceVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deletedVaultVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedVaultResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
@@ -214,11 +214,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(vaultName, nameof(vaultName));
 
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deletedVaultResourceVaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken);
+                var response = _deletedVaultVaultsRestClient.GetDeleted(Id.SubscriptionId, location, vaultName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedVaultResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());

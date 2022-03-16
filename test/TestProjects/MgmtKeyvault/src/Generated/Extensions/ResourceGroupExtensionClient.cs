@@ -34,14 +34,14 @@ namespace MgmtKeyvault
 
         /// <summary> Gets a collection of VaultResources in the VaultResource. </summary>
         /// <returns> An object representing collection of VaultResources and their operations over a VaultResource. </returns>
-        public virtual VaultCollection GetVaultResources()
+        public virtual VaultCollection GetVaults()
         {
             return GetCachedClient(Client => new VaultCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of ManagedHsmResources in the ManagedHsmResource. </summary>
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
-        public virtual ManagedHsmCollection GetManagedHsmResources()
+        public virtual ManagedHsmCollection GetManagedHsms()
         {
             return GetCachedClient(Client => new ManagedHsmCollection(Client, Id));
         }

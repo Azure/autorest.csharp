@@ -30,9 +30,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets a collection of ResourceModel1Resources in the ResourceModel1Resource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
-        public static ResourceModel1Collection GetResourceModel1Resources(this ResourceGroup resourceGroup)
+        public static ResourceModel1Collection GetResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetResourceModel1Resources();
+            return GetExtensionClient(resourceGroup).GetResourceModel1s();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public static async Task<Response<ResourceModel1Resource>> GetResourceModel1ResourceAsync(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResourceModel1Resources().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetResourceModel1s().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,17 +58,17 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public static Response<ResourceModel1Resource> GetResourceModel1Resource(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
+        public static Response<ResourceModel1Resource> GetResourceModel1(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResourceModel1Resources().Get(resourceModel1SName, cancellationToken);
+            return resourceGroup.GetResourceModel1s().Get(resourceModel1SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TrackedResourceModel1Resources in the TrackedResourceModel1Resource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
-        public static TrackedResourceModel1Collection GetTrackedResourceModel1Resources(this ResourceGroup resourceGroup)
+        public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetTrackedResourceModel1Resources();
+            return GetExtensionClient(resourceGroup).GetTrackedResourceModel1s();
         }
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1ResourceAsync(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetTrackedResourceModel1Resources().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetTrackedResourceModel1s().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1Resource(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetTrackedResourceModel1Resources().Get(trackedResourceModel1SName, cancellationToken);
+            return resourceGroup.GetTrackedResourceModel1s().Get(trackedResourceModel1SName, cancellationToken);
         }
 
         /// <summary>

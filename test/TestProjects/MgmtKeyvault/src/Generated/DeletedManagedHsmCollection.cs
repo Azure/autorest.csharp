@@ -21,8 +21,8 @@ namespace MgmtKeyvault
     /// <summary> A class representing collection of DeletedManagedHsm and their operations over its parent. </summary>
     public partial class DeletedManagedHsmCollection : ArmCollection
     {
-        private readonly ClientDiagnostics _deletedManagedHsmResourceManagedHsmsClientDiagnostics;
-        private readonly ManagedHsmsRestOperations _deletedManagedHsmResourceManagedHsmsRestClient;
+        private readonly ClientDiagnostics _deletedManagedHsmManagedHsmsClientDiagnostics;
+        private readonly ManagedHsmsRestOperations _deletedManagedHsmManagedHsmsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmCollection"/> class for mocking. </summary>
         protected DeletedManagedHsmCollection()
@@ -34,9 +34,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeletedManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedManagedHsmResourceManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedManagedHsmResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DeletedManagedHsmResource.ResourceType, out string deletedManagedHsmResourceManagedHsmsApiVersion);
-            _deletedManagedHsmResourceManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmResourceManagedHsmsApiVersion);
+            _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedManagedHsmResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeletedManagedHsmResource.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
+            _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -63,11 +63,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Get");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deletedManagedHsmResourceManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -94,11 +94,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Get");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Get");
             scope.Start();
             try
             {
-                var response = _deletedManagedHsmResourceManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken);
+                var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -125,7 +125,7 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
             scope.Start();
             try
             {
@@ -154,7 +154,7 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.Exists");
             scope.Start();
             try
             {
@@ -183,11 +183,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deletedManagedHsmResourceManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, location, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeletedManagedHsmResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -214,11 +214,11 @@ namespace MgmtKeyvault
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deletedManagedHsmResourceManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken: cancellationToken);
+                var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, location, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeletedManagedHsmResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());

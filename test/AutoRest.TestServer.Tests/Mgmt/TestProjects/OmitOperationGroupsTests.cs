@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Model1Data", false)]
         [TestCase("Model1Update", false)]
         [TestCase("Model1ListResult", false)]
-        [TestCase("Model2ResourceData", true)]
+        [TestCase("Model2Data", true)]
         [TestCase("ModelX", true)]
         [TestCase("ModelY", true)]
         [TestCase("Model3", true)]

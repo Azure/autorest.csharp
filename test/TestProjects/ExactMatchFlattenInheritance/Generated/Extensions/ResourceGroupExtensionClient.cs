@@ -58,21 +58,21 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the AzureResourceFlattenModel1Resource. </summary>
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
-        public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1Resources()
+        public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s()
         {
             return GetCachedClient(Client => new AzureResourceFlattenModel1Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of CustomModel2Resources in the CustomModel2Resource. </summary>
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
-        public virtual CustomModel2Collection GetCustomModel2Resources()
+        public virtual CustomModel2Collection GetCustomModel2s()
         {
             return GetCachedClient(Client => new CustomModel2Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of CustomModel3Resources in the CustomModel3Resource. </summary>
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
-        public virtual CustomModel3Collection GetCustomModel3Resources()
+        public virtual CustomModel3Collection GetCustomModel3s()
         {
             return GetCachedClient(Client => new CustomModel3Collection(Client, Id));
         }

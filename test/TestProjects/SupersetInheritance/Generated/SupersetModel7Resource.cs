@@ -27,9 +27,9 @@ namespace SupersetInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _supersetModel7ResourceSupersetModel7sClientDiagnostics;
-        private readonly SupersetModel7SRestOperations _supersetModel7ResourceSupersetModel7sRestClient;
-        private readonly SupersetModel7ResourceData _data;
+        private readonly ClientDiagnostics _supersetModel7ClientDiagnostics;
+        private readonly SupersetModel7SRestOperations _supersetModel7RestClient;
+        private readonly SupersetModel7Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel7Resource"/> class for mocking. </summary>
         protected SupersetModel7Resource()
@@ -39,7 +39,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel7Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SupersetModel7Resource(ArmClient client, SupersetModel7ResourceData data) : this(client, new ResourceIdentifier(data.Id))
+        internal SupersetModel7Resource(ArmClient client, SupersetModel7Data data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SupersetModel7Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel7ResourceSupersetModel7sClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string supersetModel7ResourceSupersetModel7sApiVersion);
-            _supersetModel7ResourceSupersetModel7sRestClient = new SupersetModel7SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel7ResourceSupersetModel7sApiVersion);
+            _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string supersetModel7ApiVersion);
+            _supersetModel7RestClient = new SupersetModel7SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel7ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace SupersetInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SupersetModel7ResourceData Data
+        public virtual SupersetModel7Data Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel7Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel7ResourceSupersetModel7sClientDiagnostics.CreateScope("SupersetModel7Resource.Get");
+            using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Resource.Get");
             scope.Start();
             try
             {
-                var response = await _supersetModel7ResourceSupersetModel7sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel7Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel7ResourceSupersetModel7sClientDiagnostics.CreateScope("SupersetModel7Resource.Get");
+            using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Resource.Get");
             scope.Start();
             try
             {
-                var response = _supersetModel7ResourceSupersetModel7sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());

@@ -12,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(TypeOneResourceData), typeof(LayerTwoSingle), "LayerTwoMyProp", "MyProp")]
-        [TestCase(typeof(TypeOneResourceData), typeof(WritableSubResource), "LayerOneConflictId", "Id")]
+        [TestCase(typeof(TypeOneData), typeof(LayerTwoSingle), "LayerTwoMyProp", "MyProp")]
+        [TestCase(typeof(TypeOneData), typeof(WritableSubResource), "LayerOneConflictId", "Id")]
         [TestCase(typeof(TypeFour), typeof(LayerOneProperties), "LayerOneUniqueId", "UniqueId")]
         public void ValidatePropertyForwarder(Type newType, Type originalType, string newName, string originalName)
         {

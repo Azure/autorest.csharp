@@ -34,7 +34,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantTestResources in the TenantTestResource. </summary>
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
-        public virtual TenantTestCollection GetTenantTestResources()
+        public virtual TenantTestCollection GetTenantTests()
         {
             return GetCachedClient(Client => new TenantTestCollection(Client, Id));
         }

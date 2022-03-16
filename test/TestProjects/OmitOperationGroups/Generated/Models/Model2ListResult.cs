@@ -17,20 +17,20 @@ namespace OmitOperationGroups.Models
         /// <summary> Initializes a new instance of Model2ListResult. </summary>
         internal Model2ListResult()
         {
-            Value = new ChangeTrackingList<Model2ResourceData>();
+            Value = new ChangeTrackingList<Model2Data>();
         }
 
         /// <summary> Initializes a new instance of Model2ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal Model2ListResult(IReadOnlyList<Model2ResourceData> value, string nextLink)
+        internal Model2ListResult(IReadOnlyList<Model2Data> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<Model2ResourceData> Value { get; }
+        public IReadOnlyList<Model2Data> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

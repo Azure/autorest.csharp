@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
         internal VirtualMachineExtensionsListResult()
         {
-            Value = new ChangeTrackingList<VirtualMachineExtensionResourceData>();
+            Value = new ChangeTrackingList<VirtualMachineExtensionData>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
         /// <param name="value"> The list of extensions. </param>
-        internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionResourceData> value)
+        internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionData> value)
         {
             Value = value;
         }
 
         /// <summary> The list of extensions. </summary>
-        public IReadOnlyList<VirtualMachineExtensionResourceData> Value { get; }
+        public IReadOnlyList<VirtualMachineExtensionData> Value { get; }
     }
 }

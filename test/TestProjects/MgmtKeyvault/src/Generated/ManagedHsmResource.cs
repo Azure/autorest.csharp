@@ -29,11 +29,11 @@ namespace MgmtKeyvault
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _managedHsmResourceManagedHsmsClientDiagnostics;
-        private readonly ManagedHsmsRestOperations _managedHsmResourceManagedHsmsRestClient;
+        private readonly ClientDiagnostics _managedHsmClientDiagnostics;
+        private readonly ManagedHsmsRestOperations _managedHsmRestClient;
         private readonly ClientDiagnostics _mhsmPrivateLinkResourcesClientDiagnostics;
         private readonly MhsmPrivateLinkResourcesRestOperations _mhsmPrivateLinkResourcesRestClient;
-        private readonly ManagedHsmResourceData _data;
+        private readonly ManagedHsmData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagedHsmResource"/> class for mocking. </summary>
         protected ManagedHsmResource()
@@ -43,7 +43,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "ManagedHsmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagedHsmResource(ArmClient client, ManagedHsmResourceData data) : this(client, data.Id)
+        internal ManagedHsmResource(ArmClient client, ManagedHsmData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -54,9 +54,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ManagedHsmResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managedHsmResourceManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string managedHsmResourceManagedHsmsApiVersion);
-            _managedHsmResourceManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmResourceManagedHsmsApiVersion);
+            _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string managedHsmApiVersion);
+            _managedHsmRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
             _mhsmPrivateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _mhsmPrivateLinkResourcesRestClient = new MhsmPrivateLinkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
@@ -72,7 +72,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ManagedHsmResourceData Data
+        public virtual ManagedHsmData Data
         {
             get
             {
@@ -90,7 +90,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets a collection of MhsmPrivateEndpointConnectionResources in the MhsmPrivateEndpointConnectionResource. </summary>
         /// <returns> An object representing collection of MhsmPrivateEndpointConnectionResources and their operations over a MhsmPrivateEndpointConnectionResource. </returns>
-        public virtual MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnectionResources()
+        public virtual MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnections()
         {
             return GetCachedClient(Client => new MhsmPrivateEndpointConnectionCollection(Client, Id));
         }
@@ -104,9 +104,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
-        public virtual async Task<Response<MhsmPrivateEndpointConnectionResource>> GetMhsmPrivateEndpointConnectionResourceAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MhsmPrivateEndpointConnectionResource>> GetMhsmPrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return await GetMhsmPrivateEndpointConnectionResources().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            return await GetMhsmPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -118,9 +118,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
-        public virtual Response<MhsmPrivateEndpointConnectionResource> GetMhsmPrivateEndpointConnectionResource(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual Response<MhsmPrivateEndpointConnectionResource> GetMhsmPrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return GetMhsmPrivateEndpointConnectionResources().Get(privateEndpointConnectionName, cancellationToken);
+            return GetMhsmPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
         /// <summary>
@@ -131,11 +131,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ManagedHsmResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Get");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Get");
             scope.Start();
             try
             {
-                var response = await _managedHsmResourceManagedHsmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ManagedHsmResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Get");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Get");
             scope.Start();
             try
             {
-                var response = _managedHsmResourceManagedHsmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -180,12 +180,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Delete");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Delete");
             scope.Start();
             try
             {
-                var response = await _managedHsmResourceManagedHsmsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation(_managedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _managedHsmResourceManagedHsmsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _managedHsmRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation(_managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -206,12 +206,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Delete");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Delete");
             scope.Start();
             try
             {
-                var response = _managedHsmResourceManagedHsmsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation(_managedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _managedHsmResourceManagedHsmsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _managedHsmRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation(_managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -232,16 +232,16 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ManagedHsmResource>> UpdateAsync(WaitUntil waitUntil, ManagedHsmResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ManagedHsmResource>> UpdateAsync(WaitUntil waitUntil, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Update");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Update");
             scope.Start();
             try
             {
-                var response = await _managedHsmResourceManagedHsmsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation<ManagedHsmResource>(new ManagedHsmResourceOperationSource(Client), _managedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _managedHsmResourceManagedHsmsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _managedHsmRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation<ManagedHsmResource>(new ManagedHsmOperationSource(Client), _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -262,16 +262,16 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ManagedHsmResource> Update(WaitUntil waitUntil, ManagedHsmResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ManagedHsmResource> Update(WaitUntil waitUntil, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.Update");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.Update");
             scope.Start();
             try
             {
-                var response = _managedHsmResourceManagedHsmsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation<ManagedHsmResource>(new ManagedHsmResourceOperationSource(Client), _managedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _managedHsmResourceManagedHsmsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _managedHsmRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation<ManagedHsmResource>(new ManagedHsmOperationSource(Client), _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -351,14 +351,14 @@ namespace MgmtKeyvault
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.AddTag");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _managedHsmResourceManagedHsmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -382,14 +382,14 @@ namespace MgmtKeyvault
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.AddTag");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _managedHsmResourceManagedHsmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -411,7 +411,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.SetTags");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.SetTags");
             scope.Start();
             try
             {
@@ -419,7 +419,7 @@ namespace MgmtKeyvault
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _managedHsmResourceManagedHsmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -441,7 +441,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.SetTags");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.SetTags");
             scope.Start();
             try
             {
@@ -449,7 +449,7 @@ namespace MgmtKeyvault
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _managedHsmResourceManagedHsmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -471,14 +471,14 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.RemoveTag");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _managedHsmResourceManagedHsmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _managedHsmRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -500,14 +500,14 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _managedHsmResourceManagedHsmsClientDiagnostics.CreateScope("ManagedHsmResource.RemoveTag");
+            using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsmResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _managedHsmResourceManagedHsmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _managedHsmRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ManagedHsmResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

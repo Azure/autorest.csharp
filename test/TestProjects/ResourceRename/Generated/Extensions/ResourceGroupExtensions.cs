@@ -28,9 +28,9 @@ namespace ResourceRename
         /// <summary> Gets a collection of SshPublicKeyInfoResources in the SshPublicKeyInfoResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SshPublicKeyInfoResources and their operations over a SshPublicKeyInfoResource. </returns>
-        public static SshPublicKeyInfoCollection GetSshPublicKeyInfoResources(this ResourceGroup resourceGroup)
+        public static SshPublicKeyInfoCollection GetSshPublicKeyInfos(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetSshPublicKeyInfoResources();
+            return GetExtensionClient(resourceGroup).GetSshPublicKeyInfos();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response<SshPublicKeyInfoResource>> GetSshPublicKeyInfoResourceAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfoResource>> GetSshPublicKeyInfoAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetSshPublicKeyInfoResources().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetSshPublicKeyInfos().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response<SshPublicKeyInfoResource> GetSshPublicKeyInfoResource(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static Response<SshPublicKeyInfoResource> GetSshPublicKeyInfo(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetSshPublicKeyInfoResources().Get(sshPublicKeyName, cancellationToken);
+            return resourceGroup.GetSshPublicKeyInfos().Get(sshPublicKeyName, cancellationToken);
         }
     }
 }

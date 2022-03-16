@@ -108,7 +108,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5ResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ExactMatchModel5ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5ResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel5Data>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel5ResourceData value = default;
+                        ExactMatchModel5Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ExactMatchModel5ResourceData.DeserializeExactMatchModel5ResourceData(document.RootElement);
+                        value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ExactMatchModel5ResourceData> Put(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5ResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel5Data> Put(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel5ResourceData value = default;
+                        ExactMatchModel5Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ExactMatchModel5ResourceData.DeserializeExactMatchModel5ResourceData(document.RootElement);
+                        value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ExactMatchModel5ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel5Data>> GetAsync(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel5ResourceData value = default;
+                        ExactMatchModel5Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ExactMatchModel5ResourceData.DeserializeExactMatchModel5ResourceData(document.RootElement);
+                        value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ExactMatchModel5ResourceData)null, message.Response);
+                    return Response.FromValue((ExactMatchModel5Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ExactMatchModel5ResourceData> Get(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel5Data> Get(string subscriptionId, string resourceGroupName, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel5ResourceData value = default;
+                        ExactMatchModel5Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ExactMatchModel5ResourceData.DeserializeExactMatchModel5ResourceData(document.RootElement);
+                        value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ExactMatchModel5ResourceData)null, message.Response);
+                    return Response.FromValue((ExactMatchModel5Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

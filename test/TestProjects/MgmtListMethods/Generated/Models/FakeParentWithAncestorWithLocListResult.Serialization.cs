@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static FakeParentWithAncestorWithLocListResult DeserializeFakeParentWithAncestorWithLocListResult(JsonElement element)
         {
-            IReadOnlyList<FakeParentWithAncestorWithLocResourceData> value = default;
+            IReadOnlyList<FakeParentWithAncestorWithLocData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<FakeParentWithAncestorWithLocResourceData> array = new List<FakeParentWithAncestorWithLocResourceData>();
+                    List<FakeParentWithAncestorWithLocData> array = new List<FakeParentWithAncestorWithLocData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeParentWithAncestorWithLocResourceData.DeserializeFakeParentWithAncestorWithLocResourceData(item));
+                        array.Add(FakeParentWithAncestorWithLocData.DeserializeFakeParentWithAncestorWithLocData(item));
                     }
                     value = array;
                     continue;

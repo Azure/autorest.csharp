@@ -16,7 +16,7 @@ namespace MgmtSubscriptionNameParameter.Models
     {
         internal static SBSubscriptionListResult DeserializeSBSubscriptionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<SBSubscriptionResourceData>> value = default;
+            Optional<IReadOnlyList<SBSubscriptionData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtSubscriptionNameParameter.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<SBSubscriptionResourceData> array = new List<SBSubscriptionResourceData>();
+                    List<SBSubscriptionData> array = new List<SBSubscriptionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SBSubscriptionResourceData.DeserializeSBSubscriptionResourceData(item));
+                        array.Add(SBSubscriptionData.DeserializeSBSubscriptionData(item));
                     }
                     value = array;
                     continue;

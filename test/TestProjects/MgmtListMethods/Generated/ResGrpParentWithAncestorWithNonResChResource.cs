@@ -29,9 +29,9 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics;
-        private readonly ResGrpParentWithAncestorWithNonResChesRestOperations _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient;
-        private readonly ResGrpParentWithAncestorWithNonResChResourceData _data;
+        private readonly ClientDiagnostics _resGrpParentWithAncestorWithNonResChClientDiagnostics;
+        private readonly ResGrpParentWithAncestorWithNonResChesRestOperations _resGrpParentWithAncestorWithNonResChRestClient;
+        private readonly ResGrpParentWithAncestorWithNonResChData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithNonResChResource"/> class for mocking. </summary>
         protected ResGrpParentWithAncestorWithNonResChResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithAncestorWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResGrpParentWithAncestorWithNonResChResource(ArmClient client, ResGrpParentWithAncestorWithNonResChResourceData data) : this(client, data.Id)
+        internal ResGrpParentWithAncestorWithNonResChResource(ArmClient client, ResGrpParentWithAncestorWithNonResChData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ResGrpParentWithAncestorWithNonResChResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesApiVersion);
-            _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient = new ResGrpParentWithAncestorWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesApiVersion);
+            _resGrpParentWithAncestorWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithNonResChApiVersion);
+            _resGrpParentWithAncestorWithNonResChRestClient = new ResGrpParentWithAncestorWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResGrpParentWithAncestorWithNonResChResourceData Data
+        public virtual ResGrpParentWithAncestorWithNonResChData Data
         {
             get
             {
@@ -92,11 +92,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.Get");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, response.Value), response.GetRawResponse());
@@ -116,11 +116,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResGrpParentWithAncestorWithNonResChResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.Get");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, response.Value), response.GetRawResponse());
@@ -143,11 +143,11 @@ namespace MgmtListMethods
         {
             async Task<Page<NonResourceChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.GetNonResourceChild");
+                using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.GetNonResourceChild");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithNonResChRestClient.ListNonResourceChildAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -170,11 +170,11 @@ namespace MgmtListMethods
         {
             Page<NonResourceChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.GetNonResourceChild");
+                using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.GetNonResourceChild");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.ListNonResourceChild(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithNonResChRestClient.ListNonResourceChild(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -200,14 +200,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.AddTag");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -231,14 +231,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.AddTag");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -260,7 +260,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.SetTags");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.SetTags");
             scope.Start();
             try
             {
@@ -268,7 +268,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -290,7 +290,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.SetTags");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.SetTags");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,14 +320,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.RemoveTag");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _resGrpParentWithAncestorWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -349,14 +349,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.RemoveTag");
+            using var scope = _resGrpParentWithAncestorWithNonResChClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _resGrpParentWithAncestorWithNonResChResourceResGrpParentWithAncestorWithNonResChesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _resGrpParentWithAncestorWithNonResChRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

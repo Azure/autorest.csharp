@@ -28,9 +28,9 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets a collection of ZoneResources in the ZoneResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
-        public static ZoneCollection GetZoneResources(this ResourceGroup resourceGroup)
+        public static ZoneCollection GetZones(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetZoneResources();
+            return GetExtensionClient(resourceGroup).GetZones();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
-        public static async Task<Response<ZoneResource>> GetZoneResourceAsync(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ZoneResource>> GetZoneAsync(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetZoneResources().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetZones().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
-        public static Response<ZoneResource> GetZoneResource(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
+        public static Response<ZoneResource> GetZone(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetZoneResources().Get(zoneName, cancellationToken);
+            return resourceGroup.GetZones().Get(zoneName, cancellationToken);
         }
     }
 }

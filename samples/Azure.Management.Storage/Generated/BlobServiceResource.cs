@@ -27,9 +27,9 @@ namespace Azure.Management.Storage
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _blobServiceResourceBlobServicesClientDiagnostics;
-        private readonly BlobServicesRestOperations _blobServiceResourceBlobServicesRestClient;
-        private readonly BlobServiceResourceData _data;
+        private readonly ClientDiagnostics _blobServiceClientDiagnostics;
+        private readonly BlobServicesRestOperations _blobServiceRestClient;
+        private readonly BlobServiceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobServiceResource"/> class for mocking. </summary>
         protected BlobServiceResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobServiceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobServiceResource(ArmClient client, BlobServiceResourceData data) : this(client, data.Id)
+        internal BlobServiceResource(ArmClient client, BlobServiceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BlobServiceResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _blobServiceResourceBlobServicesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string blobServiceResourceBlobServicesApiVersion);
-            _blobServiceResourceBlobServicesRestClient = new BlobServicesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobServiceResourceBlobServicesApiVersion);
+            _blobServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string blobServiceApiVersion);
+            _blobServiceRestClient = new BlobServicesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobServiceResourceData Data
+        public virtual BlobServiceData Data
         {
             get
             {
@@ -84,7 +84,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a collection of BlobContainerResources in the BlobContainerResource. </summary>
         /// <returns> An object representing collection of BlobContainerResources and their operations over a BlobContainerResource. </returns>
-        public virtual BlobContainerCollection GetBlobContainerResources()
+        public virtual BlobContainerCollection GetBlobContainers()
         {
             return GetCachedClient(Client => new BlobContainerCollection(Client, Id));
         }
@@ -98,9 +98,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
-        public virtual async Task<Response<BlobContainerResource>> GetBlobContainerResourceAsync(string containerName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainerResource>> GetBlobContainerAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            return await GetBlobContainerResources().GetAsync(containerName, cancellationToken).ConfigureAwait(false);
+            return await GetBlobContainers().GetAsync(containerName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -112,9 +112,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
-        public virtual Response<BlobContainerResource> GetBlobContainerResource(string containerName, CancellationToken cancellationToken = default)
+        public virtual Response<BlobContainerResource> GetBlobContainer(string containerName, CancellationToken cancellationToken = default)
         {
-            return GetBlobContainerResources().Get(containerName, cancellationToken);
+            return GetBlobContainers().Get(containerName, cancellationToken);
         }
 
         /// <summary>
@@ -125,11 +125,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobServiceResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _blobServiceResourceBlobServicesClientDiagnostics.CreateScope("BlobServiceResource.Get");
+            using var scope = _blobServiceClientDiagnostics.CreateScope("BlobServiceResource.Get");
             scope.Start();
             try
             {
-                var response = await _blobServiceResourceBlobServicesRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _blobServiceRestClient.GetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobServiceResource(Client, response.Value), response.GetRawResponse());
@@ -149,11 +149,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobServiceResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _blobServiceResourceBlobServicesClientDiagnostics.CreateScope("BlobServiceResource.Get");
+            using var scope = _blobServiceClientDiagnostics.CreateScope("BlobServiceResource.Get");
             scope.Start();
             try
             {
-                var response = _blobServiceResourceBlobServicesRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _blobServiceRestClient.GetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobServiceResource(Client, response.Value), response.GetRawResponse());
@@ -174,15 +174,15 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<BlobServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BlobServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _blobServiceResourceBlobServicesClientDiagnostics.CreateScope("BlobServiceResource.CreateOrUpdate");
+            using var scope = _blobServiceClientDiagnostics.CreateScope("BlobServiceResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _blobServiceResourceBlobServicesRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _blobServiceRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -204,15 +204,15 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<BlobServiceResource> CreateOrUpdate(WaitUntil waitUntil, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BlobServiceResource> CreateOrUpdate(WaitUntil waitUntil, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _blobServiceResourceBlobServicesClientDiagnostics.CreateScope("BlobServiceResource.CreateOrUpdate");
+            using var scope = _blobServiceClientDiagnostics.CreateScope("BlobServiceResource.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _blobServiceResourceBlobServicesRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                var response = _blobServiceRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
                 var operation = new StorageArmOperation<BlobServiceResource>(Response.FromValue(new BlobServiceResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

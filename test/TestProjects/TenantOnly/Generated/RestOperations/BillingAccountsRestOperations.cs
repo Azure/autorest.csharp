@@ -124,7 +124,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BillingAccountResourceData>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BillingAccountData>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
@@ -134,13 +134,13 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        BillingAccountResourceData value = default;
+                        BillingAccountData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BillingAccountResourceData.DeserializeBillingAccountResourceData(document.RootElement);
+                        value = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BillingAccountResourceData)null, message.Response);
+                    return Response.FromValue((BillingAccountData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -152,7 +152,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BillingAccountResourceData> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<BillingAccountData> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
@@ -162,19 +162,19 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        BillingAccountResourceData value = default;
+                        BillingAccountData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BillingAccountResourceData.DeserializeBillingAccountResourceData(document.RootElement);
+                        value = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BillingAccountResourceData)null, message.Response);
+                    return Response.FromValue((BillingAccountData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string billingAccountName, BillingAccountResourceData parameters)
+        internal HttpMessage CreateCreateRequest(string billingAccountName, BillingAccountData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -200,7 +200,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateAsync(string billingAccountName, BillingAccountResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -223,7 +223,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Create(string billingAccountName, BillingAccountResourceData parameters, CancellationToken cancellationToken = default)
+        public Response Create(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             Argument.AssertNotNull(parameters, nameof(parameters));

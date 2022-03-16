@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var resource = set.Resource;
             var client = set.RestClient;
-            string? resourceName = resource is not null ? resource.Type.Name : client.Resources.Contains(DefaultResource) ? DefaultResource?.Type.Name : null;
+            string? resourceName = resource is not null ? resource.ResourceName : client.Resources.Contains(DefaultResource) ? DefaultResource?.ResourceName : null;
 
             string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
 

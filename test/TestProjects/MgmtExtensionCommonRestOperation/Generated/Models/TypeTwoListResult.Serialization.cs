@@ -16,16 +16,16 @@ namespace MgmtExtensionCommonRestOperation.Models
     {
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element)
         {
-            IReadOnlyList<TypeTwoResourceData> value = default;
+            IReadOnlyList<TypeTwoData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<TypeTwoResourceData> array = new List<TypeTwoResourceData>();
+                    List<TypeTwoData> array = new List<TypeTwoData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TypeTwoResourceData.DeserializeTypeTwoResourceData(item));
+                        array.Add(TypeTwoData.DeserializeTypeTwoData(item));
                     }
                     value = array;
                     continue;

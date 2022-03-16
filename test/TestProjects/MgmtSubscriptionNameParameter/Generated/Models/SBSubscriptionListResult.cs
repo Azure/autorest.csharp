@@ -17,20 +17,20 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <summary> Initializes a new instance of SBSubscriptionListResult. </summary>
         internal SBSubscriptionListResult()
         {
-            Value = new ChangeTrackingList<SBSubscriptionResourceData>();
+            Value = new ChangeTrackingList<SBSubscriptionData>();
         }
 
         /// <summary> Initializes a new instance of SBSubscriptionListResult. </summary>
         /// <param name="value"> Result of the List Subscriptions operation. </param>
         /// <param name="nextLink"> Link to the next set of results. Not empty if Value contains incomplete list of subscriptions. </param>
-        internal SBSubscriptionListResult(IReadOnlyList<SBSubscriptionResourceData> value, string nextLink)
+        internal SBSubscriptionListResult(IReadOnlyList<SBSubscriptionData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Result of the List Subscriptions operation. </summary>
-        public IReadOnlyList<SBSubscriptionResourceData> Value { get; }
+        public IReadOnlyList<SBSubscriptionData> Value { get; }
         /// <summary> Link to the next set of results. Not empty if Value contains incomplete list of subscriptions. </summary>
         public string NextLink { get; }
     }

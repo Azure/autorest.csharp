@@ -29,11 +29,11 @@ namespace MgmtKeyvault
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _vaultResourceVaultsClientDiagnostics;
-        private readonly VaultsRestOperations _vaultResourceVaultsRestClient;
+        private readonly ClientDiagnostics _vaultClientDiagnostics;
+        private readonly VaultsRestOperations _vaultRestClient;
         private readonly ClientDiagnostics _privateLinkResourcesClientDiagnostics;
         private readonly PrivateLinkResourcesRestOperations _privateLinkResourcesRestClient;
-        private readonly VaultResourceData _data;
+        private readonly VaultData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VaultResource"/> class for mocking. </summary>
         protected VaultResource()
@@ -43,7 +43,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "VaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VaultResource(ArmClient client, VaultResourceData data) : this(client, data.Id)
+        internal VaultResource(ArmClient client, VaultData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -54,9 +54,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VaultResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _vaultResourceVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string vaultResourceVaultsApiVersion);
-            _vaultResourceVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultResourceVaultsApiVersion);
+            _vaultClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string vaultApiVersion);
+            _vaultRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
             _privateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
@@ -72,7 +72,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VaultResourceData Data
+        public virtual VaultData Data
         {
             get
             {
@@ -90,7 +90,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets a collection of PrivateEndpointConnectionResources in the PrivateEndpointConnectionResource. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnectionResources and their operations over a PrivateEndpointConnectionResource. </returns>
-        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnectionResources()
+        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return GetCachedClient(Client => new PrivateEndpointConnectionCollection(Client, Id));
         }
@@ -104,9 +104,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> GetPrivateEndpointConnectionResourceAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PrivateEndpointConnectionResource>> GetPrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return await GetPrivateEndpointConnectionResources().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            return await GetPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -118,9 +118,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
-        public virtual Response<PrivateEndpointConnectionResource> GetPrivateEndpointConnectionResource(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual Response<PrivateEndpointConnectionResource> GetPrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return GetPrivateEndpointConnectionResources().Get(privateEndpointConnectionName, cancellationToken);
+            return GetPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
         /// <summary>
@@ -131,11 +131,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VaultResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Get");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Get");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VaultResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Get");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Get");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
@@ -180,11 +180,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Delete");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Delete");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtKeyvaultArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -206,11 +206,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Delete");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Delete");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _vaultRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtKeyvaultArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -235,11 +235,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Update");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Update");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -261,11 +261,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.Update");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.Update");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var response = _vaultRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
                 return Response.FromValue(new VaultResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -288,11 +288,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
             scope.Start();
             try
             {
-                var response = await _vaultResourceVaultsRestClient.UpdateAccessPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, operationKind, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _vaultRestClient.UpdateAccessPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, operationKind, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -315,11 +315,11 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.UpdateAccessPolicy");
             scope.Start();
             try
             {
-                var response = _vaultResourceVaultsRestClient.UpdateAccessPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, operationKind, parameters, cancellationToken);
+                var response = _vaultRestClient.UpdateAccessPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, operationKind, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -397,14 +397,14 @@ namespace MgmtKeyvault
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.AddTag");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -428,14 +428,14 @@ namespace MgmtKeyvault
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.AddTag");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -457,7 +457,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.SetTags");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.SetTags");
             scope.Start();
             try
             {
@@ -465,7 +465,7 @@ namespace MgmtKeyvault
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -487,7 +487,7 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.SetTags");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.SetTags");
             scope.Start();
             try
             {
@@ -495,7 +495,7 @@ namespace MgmtKeyvault
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -517,14 +517,14 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.RemoveTag");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _vaultResourceVaultsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _vaultRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -546,14 +546,14 @@ namespace MgmtKeyvault
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _vaultResourceVaultsClientDiagnostics.CreateScope("VaultResource.RemoveTag");
+            using var scope = _vaultClientDiagnostics.CreateScope("VaultResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _vaultResourceVaultsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _vaultRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VaultResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

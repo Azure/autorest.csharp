@@ -31,15 +31,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return resourceName.EndsWith(ResourceSuffix) ? resourceName : resourceName + ResourceSuffix;
         }
-
-        /// <summary>
-        /// Trim `Resource` suffix of a resource name
-        /// </summary>
-        /// <param name="resourceName"></param>
-        /// <returns></returns>
-        public static string TrimResourceSuffixFromResourceName(this string resourceName)
-        {
-            return resourceName.EndsWith(ResourceSuffix) ? resourceName.Substring(0, resourceName.Length - ResourceSuffix.Length) : resourceName;
-        }
     }
 }

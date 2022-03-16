@@ -28,9 +28,9 @@ namespace SubscriptionExtensions
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _toasterResourceToastersClientDiagnostics;
-        private readonly ToastersRestOperations _toasterResourceToastersRestClient;
-        private readonly ToasterResourceData _data;
+        private readonly ClientDiagnostics _toasterClientDiagnostics;
+        private readonly ToastersRestOperations _toasterRestClient;
+        private readonly ToasterData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ToasterResource"/> class for mocking. </summary>
         protected ToasterResource()
@@ -40,7 +40,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref = "ToasterResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ToasterResource(ArmClient client, ToasterResourceData data) : this(client, data.Id)
+        internal ToasterResource(ArmClient client, ToasterData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace SubscriptionExtensions
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ToasterResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _toasterResourceToastersClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string toasterResourceToastersApiVersion);
-            _toasterResourceToastersRestClient = new ToastersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterResourceToastersApiVersion);
+            _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string toasterApiVersion);
+            _toasterRestClient = new ToastersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ToasterResourceData Data
+        public virtual ToasterData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ToasterResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.Get");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.Get");
             scope.Start();
             try
             {
-                var response = await _toasterResourceToastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _toasterRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ToasterResource(Client, response.Value), response.GetRawResponse());
@@ -113,11 +113,11 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ToasterResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.Get");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.Get");
             scope.Start();
             try
             {
-                var response = _toasterResourceToastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _toasterRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ToasterResource(Client, response.Value), response.GetRawResponse());
@@ -143,14 +143,14 @@ namespace SubscriptionExtensions
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.AddTag");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toasterResourceToastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _toasterRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -174,14 +174,14 @@ namespace SubscriptionExtensions
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.AddTag");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toasterResourceToastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _toasterRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.SetTags");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.SetTags");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace SubscriptionExtensions
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toasterResourceToastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _toasterRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -233,7 +233,7 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.SetTags");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.SetTags");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace SubscriptionExtensions
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toasterResourceToastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _toasterRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,14 +263,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.RemoveTag");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _toasterResourceToastersRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _toasterRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,14 +292,14 @@ namespace SubscriptionExtensions
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _toasterResourceToastersClientDiagnostics.CreateScope("ToasterResource.RemoveTag");
+            using var scope = _toasterClientDiagnostics.CreateScope("ToasterResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _toasterResourceToastersRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var originalResponse = _toasterRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new ToasterResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

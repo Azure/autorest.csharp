@@ -28,9 +28,9 @@ namespace MgmtSafeFlatten
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _typeTwoResourceCommonClientDiagnostics;
-        private readonly CommonRestOperations _typeTwoResourceCommonRestClient;
-        private readonly TypeTwoResourceData _data;
+        private readonly ClientDiagnostics _typeTwoCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeTwoCommonRestClient;
+        private readonly TypeTwoData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class for mocking. </summary>
         protected TypeTwoResource()
@@ -40,7 +40,7 @@ namespace MgmtSafeFlatten
         /// <summary> Initializes a new instance of the <see cref = "TypeTwoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TypeTwoResource(ArmClient client, TypeTwoResourceData data) : this(client, data.Id)
+        internal TypeTwoResource(ArmClient client, TypeTwoData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtSafeFlatten
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TypeTwoResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeTwoResourceCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string typeTwoResourceCommonApiVersion);
-            _typeTwoResourceCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoResourceCommonApiVersion);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtSafeFlatten
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TypeTwoResourceData Data
+        public virtual TypeTwoData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TypeTwoResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
             scope.Start();
             try
             {
-                var response = await _typeTwoResourceCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TypeTwoResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.Get");
             scope.Start();
             try
             {
-                var response = _typeTwoResourceCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
@@ -145,14 +145,14 @@ namespace MgmtSafeFlatten
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.AddTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoResourceCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -176,14 +176,14 @@ namespace MgmtSafeFlatten
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.AddTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoResourceCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.SetTags");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.SetTags");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace MgmtSafeFlatten
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoResourceCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.SetTags");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.SetTags");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace MgmtSafeFlatten
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoResourceCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -265,14 +265,14 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.RemoveTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeTwoResourceCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,14 +294,14 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _typeTwoResourceCommonClientDiagnostics.CreateScope("TypeTwoResource.RemoveTag");
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeTwoResourceCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeTwoResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

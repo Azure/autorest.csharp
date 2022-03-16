@@ -28,9 +28,9 @@ namespace MgmtExtensionCommonRestOperation
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _typeOneResourceCommonClientDiagnostics;
-        private readonly CommonRestOperations _typeOneResourceCommonRestClient;
-        private readonly TypeOneResourceData _data;
+        private readonly ClientDiagnostics _typeOneCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeOneCommonRestClient;
+        private readonly TypeOneData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TypeOneResource"/> class for mocking. </summary>
         protected TypeOneResource()
@@ -40,7 +40,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <summary> Initializes a new instance of the <see cref = "TypeOneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TypeOneResource(ArmClient client, TypeOneResourceData data) : this(client, data.Id)
+        internal TypeOneResource(ArmClient client, TypeOneData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TypeOneResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeOneResourceCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string typeOneResourceCommonApiVersion);
-            _typeOneResourceCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneResourceCommonApiVersion);
+            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtExtensionCommonRestOperation
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TypeOneResourceData Data
+        public virtual TypeOneData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TypeOneResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
             scope.Start();
             try
             {
-                var response = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TypeOneResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.Get");
             scope.Start();
             try
             {
-                var response = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
@@ -145,14 +145,14 @@ namespace MgmtExtensionCommonRestOperation
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -176,14 +176,14 @@ namespace MgmtExtensionCommonRestOperation
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace MgmtExtensionCommonRestOperation
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.SetTags");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace MgmtExtensionCommonRestOperation
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -265,14 +265,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,14 +294,14 @@ namespace MgmtExtensionCommonRestOperation
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TypeOneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

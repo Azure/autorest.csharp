@@ -18,7 +18,7 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of WorkspaceListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal WorkspaceListResult(IEnumerable<WorkspaceResourceData> value)
+        internal WorkspaceListResult(IEnumerable<WorkspaceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of WorkspaceListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <param name="nextLink"> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </param>
-        internal WorkspaceListResult(IReadOnlyList<WorkspaceResourceData> value, string nextLink)
+        internal WorkspaceListResult(IReadOnlyList<WorkspaceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of dedicated hosts. </summary>
-        public IReadOnlyList<WorkspaceResourceData> Value { get; }
+        public IReadOnlyList<WorkspaceData> Value { get; }
         /// <summary> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </summary>
         public string NextLink { get; }
     }

@@ -27,9 +27,9 @@ namespace MgmtResourceName
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _networkResourceClientDiagnostics;
-        private readonly NetworkResourcesRestOperations _networkResourceRestClient;
-        private readonly NetworkResourceData _data;
+        private readonly ClientDiagnostics _networkNetworkResourcesClientDiagnostics;
+        private readonly NetworkResourcesRestOperations _networkNetworkResourcesRestClient;
+        private readonly NetworkData _data;
 
         /// <summary> Initializes a new instance of the <see cref="NetworkResource"/> class for mocking. </summary>
         protected NetworkResource()
@@ -39,7 +39,7 @@ namespace MgmtResourceName
         /// <summary> Initializes a new instance of the <see cref = "NetworkResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal NetworkResource(ArmClient client, NetworkResourceData data) : this(client, data.Id)
+        internal NetworkResource(ArmClient client, NetworkData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal NetworkResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _networkResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string networkResourceApiVersion);
-            _networkResourceRestClient = new NetworkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, networkResourceApiVersion);
+            _networkNetworkResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string networkNetworkResourcesApiVersion);
+            _networkNetworkResourcesRestClient = new NetworkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, networkNetworkResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual NetworkResourceData Data
+        public virtual NetworkData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NetworkResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkResource.Get");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkResource.Get");
             scope.Start();
             try
             {
-                var response = await _networkResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _networkNetworkResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NetworkResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _networkResourceClientDiagnostics.CreateScope("NetworkResource.Get");
+            using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkResource.Get");
             scope.Start();
             try
             {
-                var response = _networkResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _networkNetworkResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());

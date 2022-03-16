@@ -23,8 +23,8 @@ namespace MgmtRenameRules
     /// <summary> A class representing collection of VirtualMachineScaleSetVm and their operations over its parent. </summary>
     public partial class VirtualMachineScaleSetVmCollection : ArmCollection, IEnumerable<VirtualMachineScaleSetVmResource>, IAsyncEnumerable<VirtualMachineScaleSetVmResource>
     {
-        private readonly ClientDiagnostics _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics;
-        private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient;
+        private readonly ClientDiagnostics _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics;
+        private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVmCollection"/> class for mocking. </summary>
         protected VirtualMachineScaleSetVmCollection()
@@ -36,9 +36,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VirtualMachineScaleSetVmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", VirtualMachineScaleSetVmResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineScaleSetVmResource.ResourceType, out string virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsApiVersion);
-            _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsApiVersion);
+            _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", VirtualMachineScaleSetVmResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineScaleSetVmResource.ResourceType, out string virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
+            _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,17 +61,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<VirtualMachineScaleSetVmResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVmResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<VirtualMachineScaleSetVmResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVmData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.CreateOrUpdate");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetVmResource>(new VirtualMachineScaleSetVmResourceOperationSource(Client), _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetVmResource>(new VirtualMachineScaleSetVmOperationSource(Client), _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,17 +94,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<VirtualMachineScaleSetVmResource> CreateOrUpdate(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVmResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineScaleSetVmResource> CreateOrUpdate(WaitUntil waitUntil, string instanceId, VirtualMachineScaleSetVmData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.CreateOrUpdate");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetVmResource>(new VirtualMachineScaleSetVmResourceOperationSource(Client), _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetVmResource>(new VirtualMachineScaleSetVmOperationSource(Client), _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,11 +129,11 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Get");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Get");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken);
+                var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtRenameRules
         {
             async Task<Page<VirtualMachineScaleSetVmResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtRenameRules
             }
             async Task<Page<VirtualMachineScaleSetVmResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -233,11 +233,11 @@ namespace MgmtRenameRules
         {
             Page<VirtualMachineScaleSetVmResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -248,11 +248,11 @@ namespace MgmtRenameRules
             }
             Page<VirtualMachineScaleSetVmResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -277,7 +277,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Exists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Exists");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Exists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.Exists");
             scope.Start();
             try
             {
@@ -331,11 +331,11 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSetVmResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());
@@ -360,11 +360,11 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
+                var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineScaleSetVmResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());

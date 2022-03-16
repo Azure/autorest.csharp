@@ -28,9 +28,9 @@ namespace Azure.ResourceManager.Sample
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics;
-        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient;
-        private readonly VirtualMachineExtensionImageResourceData _data;
+        private readonly ClientDiagnostics _virtualMachineExtensionImageClientDiagnostics;
+        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageRestClient;
+        private readonly VirtualMachineExtensionImageData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageResource"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageResource()
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionImageResource(ArmClient client, VirtualMachineExtensionImageResourceData data) : this(client, data.Id)
+        internal VirtualMachineExtensionImageResource(ArmClient client, VirtualMachineExtensionImageData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineExtensionImageResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
-            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
+            _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string virtualMachineExtensionImageApiVersion);
+            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionImageResourceData Data
+        public virtual VirtualMachineExtensionImageData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineExtensionImageResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.Get");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineExtensionImageResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.Get");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
@@ -145,14 +145,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.AddTag");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -176,14 +176,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.AddTag");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.SetTags");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.SetTags");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.SetTags");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.SetTags");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -265,14 +265,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.RemoveTag");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,14 +294,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.RemoveTag");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

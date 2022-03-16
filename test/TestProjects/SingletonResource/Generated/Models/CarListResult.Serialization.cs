@@ -16,7 +16,7 @@ namespace SingletonResource.Models
     {
         internal static CarListResult DeserializeCarListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<CarResourceData>> value = default;
+            Optional<IReadOnlyList<CarData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace SingletonResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<CarResourceData> array = new List<CarResourceData>();
+                    List<CarData> array = new List<CarData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CarResourceData.DeserializeCarResourceData(item));
+                        array.Add(CarData.DeserializeCarData(item));
                     }
                     value = array;
                     continue;

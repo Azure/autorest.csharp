@@ -27,9 +27,9 @@ namespace MgmtExtensionResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient;
-        private readonly PolicyDefinitionResourceData _data;
+        private readonly ClientDiagnostics _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _subscriptionPolicyDefinitionPolicyDefinitionsRestClient;
+        private readonly PolicyDefinitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinitionResource"/> class for mocking. </summary>
         protected SubscriptionPolicyDefinitionResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionPolicyDefinitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubscriptionPolicyDefinitionResource(ArmClient client, PolicyDefinitionResourceData data) : this(client, data.Id)
+        internal SubscriptionPolicyDefinitionResource(ArmClient client, PolicyDefinitionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubscriptionPolicyDefinitionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string subscriptionPolicyDefinitionResourcePolicyDefinitionsApiVersion);
-            _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionResourcePolicyDefinitionsApiVersion);
+            _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
+            _subscriptionPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PolicyDefinitionResourceData Data
+        public virtual PolicyDefinitionData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SubscriptionPolicyDefinitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Get");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionPolicyDefinitionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Get");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Get");
             scope.Start();
             try
             {
-                var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Delete");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.DeleteAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.DeleteAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Delete");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionResource.Delete");
             scope.Start();
             try
             {
-                var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.Delete(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Delete(Id.SubscriptionId, Id.Name, cancellationToken);
                 var operation = new MgmtExtensionResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

@@ -116,7 +116,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName, FileServiceResourceData parameters)
+        internal HttpMessage CreateSetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName, FileServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FileServiceResourceData>> SetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, FileServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -163,9 +163,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceResourceData value = default;
+                        FileServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileServiceResourceData.DeserializeFileServiceResourceData(document.RootElement);
+                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -181,7 +181,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FileServiceResourceData> SetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, FileServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<FileServiceData> SetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -194,9 +194,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceResourceData value = default;
+                        FileServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileServiceResourceData.DeserializeFileServiceResourceData(document.RootElement);
+                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -233,7 +233,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FileServiceResourceData>> GetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceData>> GetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -245,13 +245,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceResourceData value = default;
+                        FileServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileServiceResourceData.DeserializeFileServiceResourceData(document.RootElement);
+                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FileServiceResourceData)null, message.Response);
+                    return Response.FromValue((FileServiceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -264,7 +264,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FileServiceResourceData> GetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<FileServiceData> GetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -276,13 +276,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceResourceData value = default;
+                        FileServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileServiceResourceData.DeserializeFileServiceResourceData(document.RootElement);
+                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FileServiceResourceData)null, message.Response);
+                    return Response.FromValue((FileServiceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

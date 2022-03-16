@@ -24,8 +24,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of MgmtGroupParent and their operations over its parent. </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParentResource>, IAsyncEnumerable<MgmtGroupParentResource>
     {
-        private readonly ClientDiagnostics _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics;
-        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentResourceMgmtGroupParentsRestClient;
+        private readonly ClientDiagnostics _mgmtGroupParentClientDiagnostics;
+        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class for mocking. </summary>
         protected MgmtGroupParentCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal MgmtGroupParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGroupParentResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(MgmtGroupParentResource.ResourceType, out string mgmtGroupParentResourceMgmtGroupParentsApiVersion);
-            _mgmtGroupParentResourceMgmtGroupParentsRestClient = new MgmtGroupParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGroupParentResourceMgmtGroupParentsApiVersion);
+            _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGroupParentResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(MgmtGroupParentResource.ResourceType, out string mgmtGroupParentApiVersion);
+            _mgmtGroupParentRestClient = new MgmtGroupParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGroupParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,16 +62,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<MgmtGroupParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string mgmtGroupParentName, MgmtGroupParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MgmtGroupParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _mgmtGroupParentResourceMgmtGroupParentsRestClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<MgmtGroupParentResource>(Response.FromValue(new MgmtGroupParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -95,16 +95,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<MgmtGroupParentResource> CreateOrUpdate(WaitUntil waitUntil, string mgmtGroupParentName, MgmtGroupParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MgmtGroupParentResource> CreateOrUpdate(WaitUntil waitUntil, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentResourceMgmtGroupParentsRestClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
+                var response = _mgmtGroupParentRestClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<MgmtGroupParentResource>(Response.FromValue(new MgmtGroupParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,11 +130,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _mgmtGroupParentResourceMgmtGroupParentsRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentResourceMgmtGroupParentsRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken);
+                var response = _mgmtGroupParentRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtListMethods
         {
             async Task<Page<MgmtGroupParentResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGroupParentResourceMgmtGroupParentsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGroupParentRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -201,11 +201,11 @@ namespace MgmtListMethods
             }
             async Task<Page<MgmtGroupParentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _mgmtGroupParentResourceMgmtGroupParentsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mgmtGroupParentRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -228,11 +228,11 @@ namespace MgmtListMethods
         {
             Page<MgmtGroupParentResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGroupParentResourceMgmtGroupParentsRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGroupParentRestClient.List(Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -243,11 +243,11 @@ namespace MgmtListMethods
             }
             Page<MgmtGroupParentResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _mgmtGroupParentResourceMgmtGroupParentsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mgmtGroupParentRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -272,7 +272,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
             try
             {
@@ -299,7 +299,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
             try
             {
@@ -326,11 +326,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _mgmtGroupParentResourceMgmtGroupParentsRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGroupParentResource>(null, response.GetRawResponse());
                 return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentResourceMgmtGroupParentsRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
+                var response = _mgmtGroupParentRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<MgmtGroupParentResource>(null, response.GetRawResponse());
                 return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());

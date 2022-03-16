@@ -25,8 +25,8 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class representing collection of Fake and their operations over its parent. </summary>
     public partial class FakeCollection : ArmCollection, IEnumerable<FakeResource>, IAsyncEnumerable<FakeResource>
     {
-        private readonly ClientDiagnostics _fakeResourceFakesClientDiagnostics;
-        private readonly FakesRestOperations _fakeResourceFakesRestClient;
+        private readonly ClientDiagnostics _fakeClientDiagnostics;
+        private readonly FakesRestOperations _fakeRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakeCollection"/> class for mocking. </summary>
         protected FakeCollection()
@@ -38,9 +38,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeResourceFakesClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", FakeResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FakeResource.ResourceType, out string fakeResourceFakesApiVersion);
-            _fakeResourceFakesRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeResourceFakesApiVersion);
+            _fakeClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", FakeResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(FakeResource.ResourceType, out string fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,16 +62,16 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakeResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FakeNameAsEnum fakeName, FakeResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakeResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeResourceOperationSource(Client), _fakeResourceFakesClientDiagnostics, Pipeline, _fakeResourceFakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,16 +93,16 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakeResource> CreateOrUpdate(WaitUntil waitUntil, FakeNameAsEnum fakeName, FakeResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeResource> CreateOrUpdate(WaitUntil waitUntil, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeResourceOperationSource(Client), _fakeResourceFakesClientDiagnostics, Pipeline, _fakeResourceFakesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -124,11 +124,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakeResource>> GetAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -150,11 +150,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeResource> Get(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -178,11 +178,11 @@ namespace MgmtNonStringPathVariable
         {
             async Task<Page<FakeResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeResourceFakesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -206,11 +206,11 @@ namespace MgmtNonStringPathVariable
         {
             Page<FakeResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.GetAll");
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fakeResourceFakesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
+                    var response = _fakeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new FakeResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,7 +232,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.Exists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -256,7 +256,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.Exists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
             try
             {
@@ -280,11 +280,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakeResource>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<FakeResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -306,11 +306,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeResource> GetIfExists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<FakeResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());

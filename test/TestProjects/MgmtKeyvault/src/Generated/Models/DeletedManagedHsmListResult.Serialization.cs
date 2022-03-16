@@ -16,7 +16,7 @@ namespace MgmtKeyvault.Models
     {
         internal static DeletedManagedHsmListResult DeserializeDeletedManagedHsmListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<DeletedManagedHsmResourceData>> value = default;
+            Optional<IReadOnlyList<DeletedManagedHsmData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<DeletedManagedHsmResourceData> array = new List<DeletedManagedHsmResourceData>();
+                    List<DeletedManagedHsmData> array = new List<DeletedManagedHsmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeletedManagedHsmResourceData.DeserializeDeletedManagedHsmResourceData(item));
+                        array.Add(DeletedManagedHsmData.DeserializeDeletedManagedHsmData(item));
                     }
                     value = array;
                     continue;

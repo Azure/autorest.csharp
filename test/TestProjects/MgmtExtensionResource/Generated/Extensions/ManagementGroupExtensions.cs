@@ -28,9 +28,9 @@ namespace MgmtExtensionResource
         /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupPolicyDefinitionResource. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
-        public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitionResources(this ManagementGroup managementGroup)
+        public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroup managementGroup)
         {
-            return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitionResources();
+            return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitions();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionResourceAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetManagementGroupPolicyDefinitionResources().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetManagementGroupPolicyDefinitions(managementGroup).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinitionResource(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetManagementGroupPolicyDefinitionResources().Get(policyDefinitionName, cancellationToken);
+            return GetManagementGroupPolicyDefinitions(managementGroup).Get(policyDefinitionName, cancellationToken);
         }
     }
 }

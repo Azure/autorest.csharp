@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
-                $"Get{resource.Type.Name}",
+                $"Get{resource.ResourceName}",
                 $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
                 GetMethodModifiers(),
                 resource.Type,
@@ -279,8 +279,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
             {
-                // name after `Get{ResourceType}`
-                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.Type.Name}",
+                // name after `Get{ResourceName}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
@@ -304,7 +304,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
         {
-            return $"Get{resourceCollection.Resource.Type.Name.ResourceNameToPlural()}";
+            return $"Get{resourceCollection.Resource.ResourceName.ResourceNameToPlural()}";
         }
 
         protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)

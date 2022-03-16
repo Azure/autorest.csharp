@@ -37,7 +37,7 @@ namespace MgmtRenameRules
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionResourceData extensionParameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,7 +72,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionResourceData extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -101,7 +101,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionResourceData extensionParameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -317,7 +317,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VirtualMachineScaleSetExtensionResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetExtensionData>> GetAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -330,13 +330,13 @@ namespace MgmtRenameRules
             {
                 case 200:
                     {
-                        VirtualMachineScaleSetExtensionResourceData value = default;
+                        VirtualMachineScaleSetExtensionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineScaleSetExtensionResourceData.DeserializeVirtualMachineScaleSetExtensionResourceData(document.RootElement);
+                        value = VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VirtualMachineScaleSetExtensionResourceData)null, message.Response);
+                    return Response.FromValue((VirtualMachineScaleSetExtensionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -351,7 +351,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VirtualMachineScaleSetExtensionResourceData> Get(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetExtensionData> Get(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -364,13 +364,13 @@ namespace MgmtRenameRules
             {
                 case 200:
                     {
-                        VirtualMachineScaleSetExtensionResourceData value = default;
+                        VirtualMachineScaleSetExtensionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineScaleSetExtensionResourceData.DeserializeVirtualMachineScaleSetExtensionResourceData(document.RootElement);
+                        value = VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VirtualMachineScaleSetExtensionResourceData)null, message.Response);
+                    return Response.FromValue((VirtualMachineScaleSetExtensionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

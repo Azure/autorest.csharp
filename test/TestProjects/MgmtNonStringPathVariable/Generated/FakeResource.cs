@@ -29,9 +29,9 @@ namespace MgmtNonStringPathVariable
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _fakeResourceFakesClientDiagnostics;
-        private readonly FakesRestOperations _fakeResourceFakesRestClient;
-        private readonly FakeResourceData _data;
+        private readonly ClientDiagnostics _fakeClientDiagnostics;
+        private readonly FakesRestOperations _fakeRestClient;
+        private readonly FakeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class for mocking. </summary>
         protected FakeResource()
@@ -41,7 +41,7 @@ namespace MgmtNonStringPathVariable
         /// <summary> Initializes a new instance of the <see cref = "FakeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakeResource(ArmClient client, FakeResourceData data) : this(client, data.Id)
+        internal FakeResource(ArmClient client, FakeData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FakeResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeResourceFakesClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string fakeResourceFakesApiVersion);
-            _fakeResourceFakesRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeResourceFakesApiVersion);
+            _fakeClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtNonStringPathVariable
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakeResourceData Data
+        public virtual FakeData Data
         {
             get
             {
@@ -93,11 +93,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakeResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Get");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -118,11 +118,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Get");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -143,11 +143,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Delete");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Delete");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtNonStringPathVariableArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -169,11 +169,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Delete");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Delete");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _fakeRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtNonStringPathVariableArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -199,12 +199,12 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Update");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Update");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeResourceOperationSource(Client), _fakeResourceFakesClientDiagnostics, Pipeline, _fakeResourceFakesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _fakeRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -229,12 +229,12 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Update");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Update");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeResourceOperationSource(Client), _fakeResourceFakesClientDiagnostics, Pipeline, _fakeResourceFakesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _fakeRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation<FakeResource>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -260,14 +260,14 @@ namespace MgmtNonStringPathVariable
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.AddTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -291,14 +291,14 @@ namespace MgmtNonStringPathVariable
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.AddTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.SetTags");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -350,7 +350,7 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.SetTags");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtNonStringPathVariable
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -380,14 +380,14 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.RemoveTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -409,14 +409,14 @@ namespace MgmtNonStringPathVariable
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.RemoveTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

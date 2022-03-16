@@ -24,8 +24,8 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of ResGrpParentWithAncestorWithNonResChWithLoc and their operations over its parent. </summary>
     public partial class ResGrpParentWithAncestorWithNonResChWithLocCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorWithNonResChWithLocResource>, IAsyncEnumerable<ResGrpParentWithAncestorWithNonResChWithLocResource>
     {
-        private readonly ClientDiagnostics _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics;
-        private readonly ResGrpParentWithAncestorWithNonResChWithLocsRestOperations _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient;
+        private readonly ClientDiagnostics _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics;
+        private readonly ResGrpParentWithAncestorWithNonResChWithLocsRestOperations _resGrpParentWithAncestorWithNonResChWithLocRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithNonResChWithLocCollection"/> class for mocking. </summary>
         protected ResGrpParentWithAncestorWithNonResChWithLocCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ResGrpParentWithAncestorWithNonResChWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithNonResChWithLocResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLocResource.ResourceType, out string resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsApiVersion);
-            _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient = new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsApiVersion);
+            _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithNonResChWithLocResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLocResource.ResourceType, out string resGrpParentWithAncestorWithNonResChWithLocApiVersion);
+            _resGrpParentWithAncestorWithNonResChWithLocRestClient = new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,16 +62,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CreateOrUpdate");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -95,16 +95,16 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CreateOrUpdate");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<ResGrpParentWithAncestorWithNonResChWithLocResource>(Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,11 +130,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtListMethods
         {
             async Task<Page<ResGrpParentWithAncestorWithNonResChWithLocResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.ListTestAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.ListTestAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -201,11 +201,11 @@ namespace MgmtListMethods
             }
             async Task<Page<ResGrpParentWithAncestorWithNonResChWithLocResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -228,11 +228,11 @@ namespace MgmtListMethods
         {
             Page<ResGrpParentWithAncestorWithNonResChWithLocResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.ListTest(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.ListTest(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -243,11 +243,11 @@ namespace MgmtListMethods
             }
             Page<ResGrpParentWithAncestorWithNonResChWithLocResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
+                using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -272,7 +272,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -299,7 +299,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -326,11 +326,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithNonResChWithLocResource>(null, response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
-            using var scope = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
+            using var scope = _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateScope("ResGrpParentWithAncestorWithNonResChWithLocCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _resGrpParentWithAncestorWithNonResChWithLocResourceResGrpParentWithAncestorWithNonResChWithLocsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken);
+                var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<ResGrpParentWithAncestorWithNonResChWithLocResource>(null, response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, response.Value), response.GetRawResponse());

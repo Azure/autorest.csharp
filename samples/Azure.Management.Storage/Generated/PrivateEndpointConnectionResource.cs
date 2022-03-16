@@ -27,9 +27,9 @@ namespace Azure.Management.Storage
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics;
-        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient;
-        private readonly PrivateEndpointConnectionResourceData _data;
+        private readonly ClientDiagnostics _privateEndpointConnectionClientDiagnostics;
+        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionRestClient;
+        private readonly PrivateEndpointConnectionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionResource"/> class for mocking. </summary>
         protected PrivateEndpointConnectionResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "PrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionResource(ArmClient client, PrivateEndpointConnectionResourceData data) : this(client, data.Id)
+        internal PrivateEndpointConnectionResource(ArmClient client, PrivateEndpointConnectionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PrivateEndpointConnectionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string privateEndpointConnectionResourcePrivateEndpointConnectionsApiVersion);
-            _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionResourcePrivateEndpointConnectionsApiVersion);
+            _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string privateEndpointConnectionApiVersion);
+            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PrivateEndpointConnectionResourceData Data
+        public virtual PrivateEndpointConnectionData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateEndpointConnectionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateEndpointConnectionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _privateEndpointConnectionRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _privateEndpointConnectionRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

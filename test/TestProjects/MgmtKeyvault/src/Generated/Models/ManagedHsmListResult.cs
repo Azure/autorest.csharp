@@ -17,20 +17,20 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of ManagedHsmListResult. </summary>
         internal ManagedHsmListResult()
         {
-            Value = new ChangeTrackingList<ManagedHsmResourceData>();
+            Value = new ChangeTrackingList<ManagedHsmData>();
         }
 
         /// <summary> Initializes a new instance of ManagedHsmListResult. </summary>
         /// <param name="value"> The list of managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        internal ManagedHsmListResult(IReadOnlyList<ManagedHsmResourceData> value, string nextLink)
+        internal ManagedHsmListResult(IReadOnlyList<ManagedHsmData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of managed HSM Pools. </summary>
-        public IReadOnlyList<ManagedHsmResourceData> Value { get; }
+        public IReadOnlyList<ManagedHsmData> Value { get; }
         /// <summary> The URL to get the next set of managed HSM Pools. </summary>
         public string NextLink { get; }
     }

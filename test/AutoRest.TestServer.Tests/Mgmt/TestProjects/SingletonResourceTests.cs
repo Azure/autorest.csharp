@@ -36,8 +36,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(isExists, method != null);
         }
 
-        [TestCase("ParentCollection", true)]
-        [TestCase("ParentResourceCollection", false)]
+        [TestCase("ParentResourceCollection", true)]
+        [TestCase("ParentCollection", false)]
         [TestCase("SingletonResourceCollection", false)]
         [TestCase("SingletonResource2Collection", false)]
         public void ValidateCollections(string collection, bool isExists)
@@ -47,18 +47,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
+        [TestCase("ParentResource", "GetSingleton", false)]
         [TestCase("ParentResource", "GetSingletonResources", false)]
-        [TestCase("CarResource", "GetIgnition", false)]
+        [TestCase("CarResource", "GetIgnition", true)]
         [TestCase("CarResource", "GetIgnitions", false)]
-        [TestCase("CarResource", "GetIgnitionResource", true)]
-        [TestCase("CarResource", "GetIgnitionResources", false)]
-        [TestCase("ResourceGroupExtensions", "GetCarResource", true)]
-        [TestCase("ResourceGroupExtensions", "GetCarResources", true)]
-        [TestCase("ResourceGroupExtensions", "GetCar", false)]
-        [TestCase("ResourceGroupExtensions", "GetCars", false)]
+        [TestCase("ResourceGroupExtensions", "GetCar", true)]
+        [TestCase("ResourceGroupExtensions", "GetCars", true)]
         [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
         [TestCase("ResourceGroupExtensions", "GetParentResource", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResourc", false)]
+        [TestCase("ResourceGroupExtensions", "GetParents", false)]
+        [TestCase("ResourceGroupExtensions", "GetParent", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())

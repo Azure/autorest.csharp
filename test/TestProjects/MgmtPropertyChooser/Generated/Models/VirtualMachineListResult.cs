@@ -18,7 +18,7 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal VirtualMachineListResult(IEnumerable<VirtualMachineResourceData> value)
+        internal VirtualMachineListResult(IEnumerable<VirtualMachineData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <param name="nextLink"> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineResourceData> value, string nextLink)
+        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of virtual machines. </summary>
-        public IReadOnlyList<VirtualMachineResourceData> Value { get; }
+        public IReadOnlyList<VirtualMachineData> Value { get; }
         /// <summary> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </summary>
         public string NextLink { get; }
     }

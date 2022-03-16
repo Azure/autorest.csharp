@@ -24,8 +24,8 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class representing collection of RecordSetCaa and their operations over its parent. </summary>
     public partial class RecordSetCaaCollection : ArmCollection, IEnumerable<RecordSetCaaResource>, IAsyncEnumerable<RecordSetCaaResource>
     {
-        private readonly ClientDiagnostics _recordSetCaaResourceRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetCaaResourceRecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetCaaRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetCaaRecordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetCaaCollection"/> class for mocking. </summary>
         protected RecordSetCaaCollection()
@@ -37,9 +37,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal RecordSetCaaCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetCaaResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCaaResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(RecordSetCaaResource.ResourceType, out string recordSetCaaResourceRecordSetsApiVersion);
-            _recordSetCaaResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCaaResourceRecordSetsApiVersion);
+            _recordSetCaaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCaaResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(RecordSetCaaResource.ResourceType, out string recordSetCaaRecordSetsApiVersion);
+            _recordSetCaaRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCaaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -63,16 +63,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<RecordSetCaaResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<RecordSetCaaResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetCaaResourceRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetCaaRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCaaResource>(Response.FromValue(new RecordSetCaaResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -97,16 +97,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<RecordSetCaaResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<RecordSetCaaResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetCaaResourceRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetCaaRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCaaResource>(Response.FromValue(new RecordSetCaaResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -131,11 +131,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetCaaResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetCaaResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetCaaResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetCaaResourceRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetCaaRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaaResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetCaaResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetCaaResourceRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetCaaRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaaResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,11 +232,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetCaaResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetCaaResourceRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetCaaRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaaResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -247,11 +247,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetCaaResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetCaaResourceRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetCaaRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaaResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -275,7 +275,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
             scope.Start();
             try
             {
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
             scope.Start();
             try
             {
@@ -327,11 +327,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _recordSetCaaResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetCaaResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetCaaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetCaaResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetCaaResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());

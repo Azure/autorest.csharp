@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ManagementPolicyResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicyData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -79,13 +79,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicyResourceData value = default;
+                        ManagementPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ManagementPolicyResourceData.DeserializeManagementPolicyResourceData(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ManagementPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ManagementPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ManagementPolicyResourceData> Get(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicyData> Get(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -111,19 +111,19 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicyResourceData value = default;
+                        ManagementPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ManagementPolicyResourceData.DeserializeManagementPolicyResourceData(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ManagementPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ManagementPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyResourceData properties)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -158,7 +158,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ManagementPolicyResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyResourceData properties, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicyData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -171,9 +171,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicyResourceData value = default;
+                        ManagementPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ManagementPolicyResourceData.DeserializeManagementPolicyResourceData(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -190,7 +190,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ManagementPolicyResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyResourceData properties, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicyData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -203,9 +203,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicyResourceData value = default;
+                        ManagementPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ManagementPolicyResourceData.DeserializeManagementPolicyResourceData(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

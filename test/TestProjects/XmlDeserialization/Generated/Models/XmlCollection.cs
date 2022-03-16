@@ -17,14 +17,14 @@ namespace XmlDeserialization.Models
         /// <summary> Initializes a new instance of XmlCollection. </summary>
         internal XmlCollection()
         {
-            Value = new ChangeTrackingList<XmlInstanceResourceData>();
+            Value = new ChangeTrackingList<XmlInstanceData>();
         }
 
         /// <summary> Initializes a new instance of XmlCollection. </summary>
         /// <param name="value"> Page values. </param>
         /// <param name="count"> Total record count number across all pages. </param>
         /// <param name="nextLink"> Next page link if any. </param>
-        internal XmlCollection(IReadOnlyList<XmlInstanceResourceData> value, long? count, string nextLink)
+        internal XmlCollection(IReadOnlyList<XmlInstanceData> value, long? count, string nextLink)
         {
             Value = value;
             Count = count;
@@ -32,7 +32,7 @@ namespace XmlDeserialization.Models
         }
 
         /// <summary> Page values. </summary>
-        public IReadOnlyList<XmlInstanceResourceData> Value { get; }
+        public IReadOnlyList<XmlInstanceData> Value { get; }
         /// <summary> Total record count number across all pages. </summary>
         public long? Count { get; }
         /// <summary> Next page link if any. </summary>

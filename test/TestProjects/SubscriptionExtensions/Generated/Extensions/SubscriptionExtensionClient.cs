@@ -34,7 +34,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets a collection of ToasterResources in the ToasterResource. </summary>
         /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
-        public virtual ToasterCollection GetToasterResources()
+        public virtual ToasterCollection GetToasters()
         {
             return GetCachedClient(Client => new ToasterCollection(Client, Id));
         }

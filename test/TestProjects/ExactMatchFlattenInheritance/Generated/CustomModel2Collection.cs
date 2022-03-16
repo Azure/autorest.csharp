@@ -24,8 +24,8 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class representing collection of CustomModel2 and their operations over its parent. </summary>
     public partial class CustomModel2Collection : ArmCollection, IEnumerable<CustomModel2Resource>, IAsyncEnumerable<CustomModel2Resource>
     {
-        private readonly ClientDiagnostics _customModel2ResourceCustomModel2sClientDiagnostics;
-        private readonly CustomModel2SRestOperations _customModel2ResourceCustomModel2sRestClient;
+        private readonly ClientDiagnostics _customModel2ClientDiagnostics;
+        private readonly CustomModel2SRestOperations _customModel2RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Collection"/> class for mocking. </summary>
         protected CustomModel2Collection()
@@ -37,9 +37,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal CustomModel2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _customModel2ResourceCustomModel2sClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel2Resource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(CustomModel2Resource.ResourceType, out string customModel2ResourceCustomModel2sApiVersion);
-            _customModel2ResourceCustomModel2sRestClient = new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ResourceCustomModel2sApiVersion);
+            _customModel2ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel2Resource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(CustomModel2Resource.ResourceType, out string customModel2ApiVersion);
+            _customModel2RestClient = new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,11 +66,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _customModel2ResourceCustomModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -98,11 +98,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _customModel2ResourceCustomModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
+                var response = _customModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, foo, cancellationToken);
                 var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -128,11 +128,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = await _customModel2ResourceCustomModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());
@@ -157,11 +157,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.Get");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = _customModel2ResourceCustomModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());
@@ -184,11 +184,11 @@ namespace ExactMatchFlattenInheritance
         {
             async Task<Page<CustomModel2Resource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _customModel2ResourceCustomModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _customModel2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new CustomModel2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -211,11 +211,11 @@ namespace ExactMatchFlattenInheritance
         {
             Page<CustomModel2Resource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
+                using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _customModel2ResourceCustomModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _customModel2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new CustomModel2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -240,7 +240,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -267,7 +267,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -294,11 +294,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _customModel2ResourceCustomModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2Resource>(null, response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());
@@ -323,11 +323,11 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _customModel2ResourceCustomModel2sClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _customModel2ResourceCustomModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<CustomModel2Resource>(null, response.GetRawResponse());
                 return Response.FromValue(new CustomModel2Resource(Client, response.Value), response.GetRawResponse());

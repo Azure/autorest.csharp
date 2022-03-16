@@ -28,9 +28,9 @@ namespace MgmtSafeFlatten
         /// <summary> Gets a collection of TypeOneResources in the TypeOneResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
-        public static TypeOneCollection GetTypeOneResources(this ResourceGroup resourceGroup)
+        public static TypeOneCollection GetTypeOnes(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetTypeOneResources();
+            return GetExtensionClient(resourceGroup).GetTypeOnes();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public static async Task<Response<TypeOneResource>> GetTypeOneResourceAsync(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
+        public static async Task<Response<TypeOneResource>> GetTypeOneAsync(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetTypeOneResources().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,17 +58,17 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public static Response<TypeOneResource> GetTypeOneResource(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
+        public static Response<TypeOneResource> GetTypeOne(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetTypeOneResources().Get(typeOneName, cancellationToken);
+            return resourceGroup.GetTypeOnes().Get(typeOneName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TypeTwoResources in the TypeTwoResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
-        public static TypeTwoCollection GetTypeTwoResources(this ResourceGroup resourceGroup)
+        public static TypeTwoCollection GetTypeTwos(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetTypeTwoResources();
+            return GetExtensionClient(resourceGroup).GetTypeTwos();
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public static async Task<Response<TypeTwoResource>> GetTypeTwoResourceAsync(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
+        public static async Task<Response<TypeTwoResource>> GetTypeTwoAsync(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetTypeTwoResources().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -96,9 +96,9 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public static Response<TypeTwoResource> GetTypeTwoResource(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
+        public static Response<TypeTwoResource> GetTypeTwo(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetTypeTwoResources().Get(typeTwoName, cancellationToken);
+            return resourceGroup.GetTypeTwos().Get(typeTwoName, cancellationToken);
         }
     }
 }

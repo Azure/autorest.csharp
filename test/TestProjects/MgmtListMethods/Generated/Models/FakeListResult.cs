@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of FakeListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal FakeListResult(IEnumerable<FakeResourceData> value)
+        internal FakeListResult(IEnumerable<FakeData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of FakeListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal FakeListResult(IReadOnlyList<FakeResourceData> value, string nextLink)
+        internal FakeListResult(IReadOnlyList<FakeData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of fakes. </summary>
-        public IReadOnlyList<FakeResourceData> Value { get; }
+        public IReadOnlyList<FakeData> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>
         public string NextLink { get; }
     }

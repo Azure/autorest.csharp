@@ -28,9 +28,9 @@ namespace XmlDeserialization
         /// <summary> Gets a collection of XmlInstanceResources in the XmlInstanceResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
-        public static XmlInstanceCollection GetXmlInstanceResources(this ResourceGroup resourceGroup)
+        public static XmlInstanceCollection GetXmlInstances(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetXmlInstanceResources();
+            return GetExtensionClient(resourceGroup).GetXmlInstances();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public static async Task<Response<XmlInstanceResource>> GetXmlInstanceResourceAsync(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
+        public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetXmlInstanceResources().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public static Response<XmlInstanceResource> GetXmlInstanceResource(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
+        public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetXmlInstanceResources().Get(xmlName, cancellationToken);
+            return resourceGroup.GetXmlInstances().Get(xmlName, cancellationToken);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of PrivateEndpointConnection and their operations over its parent. </summary>
     public partial class PrivateEndpointConnectionCollection : ArmCollection, IEnumerable<PrivateEndpointConnectionResource>, IAsyncEnumerable<PrivateEndpointConnectionResource>
     {
-        private readonly ClientDiagnostics _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics;
-        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient;
+        private readonly ClientDiagnostics _privateEndpointConnectionClientDiagnostics;
+        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionCollection"/> class for mocking. </summary>
         protected PrivateEndpointConnectionCollection()
@@ -36,9 +36,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PrivateEndpointConnectionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", PrivateEndpointConnectionResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(PrivateEndpointConnectionResource.ResourceType, out string privateEndpointConnectionResourcePrivateEndpointConnectionsApiVersion);
-            _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionResourcePrivateEndpointConnectionsApiVersion);
+            _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", PrivateEndpointConnectionResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(PrivateEndpointConnectionResource.ResourceType, out string privateEndpointConnectionApiVersion);
+            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public virtual async Task<ArmOperation<PrivateEndpointConnectionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string privateEndpointConnectionName, PrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<PrivateEndpointConnectionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
             Argument.AssertNotNull(properties, nameof(properties));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.CreateOrUpdate");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _privateEndpointConnectionRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -94,16 +94,16 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public virtual ArmOperation<PrivateEndpointConnectionResource> CreateOrUpdate(WaitUntil waitUntil, string privateEndpointConnectionName, PrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PrivateEndpointConnectionResource> CreateOrUpdate(WaitUntil waitUntil, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
             Argument.AssertNotNull(properties, nameof(properties));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.CreateOrUpdate");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken);
+                var response = _privateEndpointConnectionRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken);
                 var operation = new StorageArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -129,11 +129,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Get");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+                var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Get");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Get");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken);
+                var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
@@ -185,11 +185,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<PrivateEndpointConnectionResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetAll");
+                using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _privateEndpointConnectionRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnectionResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -212,11 +212,11 @@ namespace Azure.Management.Storage
         {
             Page<PrivateEndpointConnectionResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetAll");
+                using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _privateEndpointConnectionRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PrivateEndpointConnectionResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -241,7 +241,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Exists");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Exists");
             scope.Start();
             try
             {
@@ -268,7 +268,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Exists");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.Exists");
             scope.Start();
             try
             {
@@ -295,11 +295,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetIfExists");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<PrivateEndpointConnectionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
@@ -324,11 +324,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(privateEndpointConnectionName, nameof(privateEndpointConnectionName));
 
-            using var scope = _privateEndpointConnectionResourcePrivateEndpointConnectionsClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetIfExists");
+            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionResourcePrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
+                var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<PrivateEndpointConnectionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());

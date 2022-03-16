@@ -24,8 +24,8 @@ namespace MgmtExtensionResource
     /// <summary> A class representing collection of SubscriptionPolicyDefinition and their operations over its parent. </summary>
     public partial class SubscriptionPolicyDefinitionCollection : ArmCollection, IEnumerable<SubscriptionPolicyDefinitionResource>, IAsyncEnumerable<SubscriptionPolicyDefinitionResource>
     {
-        private readonly ClientDiagnostics _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient;
+        private readonly ClientDiagnostics _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _subscriptionPolicyDefinitionPolicyDefinitionsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionPolicyDefinitionCollection"/> class for mocking. </summary>
         protected SubscriptionPolicyDefinitionCollection()
@@ -37,9 +37,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SubscriptionPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", SubscriptionPolicyDefinitionResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(SubscriptionPolicyDefinitionResource.ResourceType, out string subscriptionPolicyDefinitionResourcePolicyDefinitionsApiVersion);
-            _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionResourcePolicyDefinitionsApiVersion);
+            _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", SubscriptionPolicyDefinitionResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SubscriptionPolicyDefinitionResource.ResourceType, out string subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
+            _subscriptionPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subscriptionPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,16 +62,16 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SubscriptionPolicyDefinitionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SubscriptionPolicyDefinitionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CreateOrUpdate");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExtensionResourceArmOperation<SubscriptionPolicyDefinitionResource>(Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -95,16 +95,16 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SubscriptionPolicyDefinitionResource> CreateOrUpdate(WaitUntil waitUntil, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SubscriptionPolicyDefinitionResource> CreateOrUpdate(WaitUntil waitUntil, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CreateOrUpdate");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.CreateOrUpdate(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken);
+                var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.CreateOrUpdate(Id.SubscriptionId, policyDefinitionName, parameters, cancellationToken);
                 var operation = new MgmtExtensionResourceArmOperation<SubscriptionPolicyDefinitionResource>(Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,11 +130,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Get");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Get");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken);
+                var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtExtensionResource
         {
             async Task<Page<SubscriptionPolicyDefinitionResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
+                using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtExtensionResource
             }
             async Task<Page<SubscriptionPolicyDefinitionResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
+                using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,11 +232,11 @@ namespace MgmtExtensionResource
         {
             Page<SubscriptionPolicyDefinitionResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
+                using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
+                    var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -247,11 +247,11 @@ namespace MgmtExtensionResource
             }
             Page<SubscriptionPolicyDefinitionResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
+                using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
+                    var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SubscriptionPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -276,7 +276,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -330,11 +330,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExists");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.GetAsync(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SubscriptionPolicyDefinitionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -359,11 +359,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _subscriptionPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExists");
+            using var scope = _subscriptionPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("SubscriptionPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _subscriptionPolicyDefinitionResourcePolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _subscriptionPolicyDefinitionPolicyDefinitionsRestClient.Get(Id.SubscriptionId, policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SubscriptionPolicyDefinitionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new SubscriptionPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());

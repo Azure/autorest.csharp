@@ -28,9 +28,9 @@ namespace MgmtLRO
         /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
-        public static FakeCollection GetFakeResources(this ResourceGroup resourceGroup)
+        public static FakeCollection GetFakes(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetFakeResources();
+            return GetExtensionClient(resourceGroup).GetFakes();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static async Task<Response<FakeResource>> GetFakeResourceAsync(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetFakeResources().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,17 +60,17 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static Response<FakeResource> GetFakeResource(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<FakeResource> GetFake(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetFakeResources().Get(fakeName, expand, cancellationToken);
+            return resourceGroup.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the BarResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
-        public static BarCollection GetBarResources(this ResourceGroup resourceGroup)
+        public static BarCollection GetBars(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetBarResources();
+            return GetExtensionClient(resourceGroup).GetBars();
         }
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public static async Task<Response<BarResource>> GetBarResourceAsync(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
+        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetBarResources().GetAsync(barName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public static Response<BarResource> GetBarResource(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
+        public static Response<BarResource> GetBar(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetBarResources().Get(barName, cancellationToken);
+            return resourceGroup.GetBars().Get(barName, cancellationToken);
         }
     }
 }

@@ -28,9 +28,9 @@ namespace SupersetFlattenInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics;
-        private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1ResourceTrackedResourceModel1sRestClient;
-        private readonly TrackedResourceModel1ResourceData _data;
+        private readonly ClientDiagnostics _trackedResourceModel1ClientDiagnostics;
+        private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1RestClient;
+        private readonly TrackedResourceModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Resource"/> class for mocking. </summary>
         protected TrackedResourceModel1Resource()
@@ -40,7 +40,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TrackedResourceModel1Resource(ArmClient client, TrackedResourceModel1ResourceData data) : this(client, data.Id)
+        internal TrackedResourceModel1Resource(ArmClient client, TrackedResourceModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TrackedResourceModel1Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string trackedResourceModel1ResourceTrackedResourceModel1sApiVersion);
-            _trackedResourceModel1ResourceTrackedResourceModel1sRestClient = new TrackedResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ResourceTrackedResourceModel1sApiVersion);
+            _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string trackedResourceModel1ApiVersion);
+            _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TrackedResourceModel1ResourceData Data
+        public virtual TrackedResourceModel1Data Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TrackedResourceModel1Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Get");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = await _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -113,11 +113,11 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TrackedResourceModel1Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Get");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -143,14 +143,14 @@ namespace SupersetFlattenInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -174,14 +174,14 @@ namespace SupersetFlattenInheritance
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace SupersetFlattenInheritance
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -233,7 +233,7 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.SetTags");
             scope.Start();
             try
             {
@@ -241,7 +241,7 @@ namespace SupersetFlattenInheritance
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -263,14 +263,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -292,14 +292,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
+            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Resource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _trackedResourceModel1ResourceTrackedResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new TrackedResourceModel1Resource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

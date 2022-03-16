@@ -27,9 +27,9 @@ namespace MgmtKeyvault
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _deletedVaultResourceVaultsClientDiagnostics;
-        private readonly VaultsRestOperations _deletedVaultResourceVaultsRestClient;
-        private readonly DeletedVaultResourceData _data;
+        private readonly ClientDiagnostics _deletedVaultVaultsClientDiagnostics;
+        private readonly VaultsRestOperations _deletedVaultVaultsRestClient;
+        private readonly DeletedVaultData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedVaultResource"/> class for mocking. </summary>
         protected DeletedVaultResource()
@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "DeletedVaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedVaultResource(ArmClient client, DeletedVaultResourceData data) : this(client, data.Id)
+        internal DeletedVaultResource(ArmClient client, DeletedVaultData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DeletedVaultResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedVaultResourceVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string deletedVaultResourceVaultsApiVersion);
-            _deletedVaultResourceVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultResourceVaultsApiVersion);
+            _deletedVaultVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string deletedVaultVaultsApiVersion);
+            _deletedVaultVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultVaultsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeletedVaultResourceData Data
+        public virtual DeletedVaultData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeletedVaultResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultResource.Get");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultResource.Get");
             scope.Start();
             try
             {
-                var response = await _deletedVaultResourceVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedVaultVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeletedVaultResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultResource.Get");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultResource.Get");
             scope.Start();
             try
             {
-                var response = _deletedVaultResourceVaultsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _deletedVaultVaultsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
@@ -139,12 +139,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> PurgeDeletedAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultResource.PurgeDeleted");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultResource.PurgeDeleted");
             scope.Start();
             try
             {
-                var response = await _deletedVaultResourceVaultsRestClient.PurgeDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation(_deletedVaultResourceVaultsClientDiagnostics, Pipeline, _deletedVaultResourceVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _deletedVaultVaultsRestClient.PurgeDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -165,12 +165,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation PurgeDeleted(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedVaultResourceVaultsClientDiagnostics.CreateScope("DeletedVaultResource.PurgeDeleted");
+            using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVaultResource.PurgeDeleted");
             scope.Start();
             try
             {
-                var response = _deletedVaultResourceVaultsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation(_deletedVaultResourceVaultsClientDiagnostics, Pipeline, _deletedVaultResourceVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _deletedVaultVaultsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

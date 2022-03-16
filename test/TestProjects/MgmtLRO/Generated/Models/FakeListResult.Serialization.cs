@@ -16,16 +16,16 @@ namespace MgmtLRO.Models
     {
         internal static FakeListResult DeserializeFakeListResult(JsonElement element)
         {
-            IReadOnlyList<FakeResourceData> value = default;
+            IReadOnlyList<FakeData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<FakeResourceData> array = new List<FakeResourceData>();
+                    List<FakeData> array = new List<FakeData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeResourceData.DeserializeFakeResourceData(item));
+                        array.Add(FakeData.DeserializeFakeData(item));
                     }
                     value = array;
                     continue;

@@ -27,15 +27,5 @@ namespace AutoRest.TestServer.Tests.Mgmt
             Assert.AreEqual(expected, result);
 
         }
-
-        [TestCase("MetadataRole", "MetadataRole")]
-        [TestCase("PrivateResource", "Private")]
-        [TestCase("PrivateResource2", "PrivateResource2")]
-        public void ValidateRemoveResourceSuffixFromResourceName(string resourceName, string expected)
-        {
-            var result = resourceName.TrimResourceSuffixFromResourceName();
-            Assert.AreEqual(expected, result);
-
-        }
     }
 }

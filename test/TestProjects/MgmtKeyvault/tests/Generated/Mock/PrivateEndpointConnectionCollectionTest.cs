@@ -30,7 +30,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: KeyVaultPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.PrivateEndpointConnectionResourceData properties = new MgmtKeyvault.PrivateEndpointConnectionResourceData()
+            MgmtKeyvault.PrivateEndpointConnectionData properties = new MgmtKeyvault.PrivateEndpointConnectionData()
             {
                 Etag = "",
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.PrivateLinkServiceConnectionState()
@@ -41,7 +41,7 @@ namespace MgmtKeyvault.Tests.Mock
             };
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnectionResources();
+            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnections();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, properties);
         }
 
@@ -52,7 +52,7 @@ namespace MgmtKeyvault.Tests.Mock
             string privateEndpointConnectionName = "sample-pec";
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnectionResources();
+            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnections();
             await collection.GetAsync(privateEndpointConnectionName);
         }
 
@@ -62,7 +62,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: KeyVaultListPrivateEndpointConnection
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
-            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnectionResources();
+            var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnections();
             await foreach (var _ in collection.GetAllAsync())
             {
             }

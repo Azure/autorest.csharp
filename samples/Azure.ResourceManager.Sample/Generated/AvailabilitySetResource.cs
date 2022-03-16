@@ -29,9 +29,9 @@ namespace Azure.ResourceManager.Sample
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _availabilitySetResourceAvailabilitySetsClientDiagnostics;
-        private readonly AvailabilitySetsRestOperations _availabilitySetResourceAvailabilitySetsRestClient;
-        private readonly AvailabilitySetResourceData _data;
+        private readonly ClientDiagnostics _availabilitySetClientDiagnostics;
+        private readonly AvailabilitySetsRestOperations _availabilitySetRestClient;
+        private readonly AvailabilitySetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class for mocking. </summary>
         protected AvailabilitySetResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetResource(ArmClient client, AvailabilitySetResourceData data) : this(client, data.Id)
+        internal AvailabilitySetResource(ArmClient client, AvailabilitySetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AvailabilitySetResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _availabilitySetResourceAvailabilitySetsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string availabilitySetResourceAvailabilitySetsApiVersion);
-            _availabilitySetResourceAvailabilitySetsRestClient = new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetResourceAvailabilitySetsApiVersion);
+            _availabilitySetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string availabilitySetApiVersion);
+            _availabilitySetRestClient = new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetResourceData Data
+        public virtual AvailabilitySetData Data
         {
             get
             {
@@ -92,11 +92,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AvailabilitySetResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
@@ -116,11 +116,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AvailabilitySetResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
@@ -141,11 +141,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new SampleArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -167,11 +167,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _availabilitySetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new SampleArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -196,11 +196,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -222,11 +222,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var response = _availabilitySetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -247,11 +247,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.GetAvailableSizes");
+                using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.GetAvailableSizes");
                 scope.Start();
                 try
                 {
-                    var response = await _availabilitySetResourceAvailabilitySetsRestClient.ListAvailableSizesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _availabilitySetRestClient.ListAvailableSizesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -274,11 +274,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.GetAvailableSizes");
+                using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.GetAvailableSizes");
                 scope.Start();
                 try
                 {
-                    var response = _availabilitySetResourceAvailabilitySetsRestClient.ListAvailableSizes(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _availabilitySetRestClient.ListAvailableSizes(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -304,14 +304,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -335,14 +335,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -364,7 +364,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -394,7 +394,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
             try
             {
@@ -402,7 +402,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -424,14 +424,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -453,14 +453,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

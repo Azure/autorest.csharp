@@ -16,7 +16,7 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static CustomModel2ListResult DeserializeCustomModel2ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<CustomModel2ResourceData>> value = default;
+            Optional<IReadOnlyList<CustomModel2Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace ExactMatchFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<CustomModel2ResourceData> array = new List<CustomModel2ResourceData>();
+                    List<CustomModel2Data> array = new List<CustomModel2Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(CustomModel2ResourceData.DeserializeCustomModel2ResourceData(item));
+                        array.Add(CustomModel2Data.DeserializeCustomModel2Data(item));
                     }
                     value = array;
                     continue;

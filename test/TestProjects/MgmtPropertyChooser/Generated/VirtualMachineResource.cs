@@ -29,9 +29,9 @@ namespace MgmtPropertyChooser
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _virtualMachineResourceVirtualMachinesClientDiagnostics;
-        private readonly VirtualMachinesRestOperations _virtualMachineResourceVirtualMachinesRestClient;
-        private readonly VirtualMachineResourceData _data;
+        private readonly ClientDiagnostics _virtualMachineClientDiagnostics;
+        private readonly VirtualMachinesRestOperations _virtualMachineRestClient;
+        private readonly VirtualMachineData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineResource"/> class for mocking. </summary>
         protected VirtualMachineResource()
@@ -41,7 +41,7 @@ namespace MgmtPropertyChooser
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineResource(ArmClient client, VirtualMachineResourceData data) : this(client, data.Id)
+        internal VirtualMachineResource(ArmClient client, VirtualMachineData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtPropertyChooser
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineResourceVirtualMachinesClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string virtualMachineResourceVirtualMachinesApiVersion);
-            _virtualMachineResourceVirtualMachinesRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineResourceVirtualMachinesApiVersion);
+            _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string virtualMachineApiVersion);
+            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtPropertyChooser
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineResourceData Data
+        public virtual VirtualMachineData Data
         {
             get
             {
@@ -92,11 +92,11 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -116,11 +116,11 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -142,12 +142,12 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyChooserArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtPropertyChooserArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -169,12 +169,12 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
-                var operation = new MgmtPropertyChooserArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
+                var operation = new MgmtPropertyChooserArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -199,12 +199,12 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Update");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Update");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -229,12 +229,12 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Update");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Update");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new MgmtPropertyChooserArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -260,14 +260,14 @@ namespace MgmtPropertyChooser
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -291,14 +291,14 @@ namespace MgmtPropertyChooser
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -320,7 +320,7 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace MgmtPropertyChooser
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -350,7 +350,7 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
             scope.Start();
             try
             {
@@ -358,7 +358,7 @@ namespace MgmtPropertyChooser
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -380,14 +380,14 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -409,14 +409,14 @@ namespace MgmtPropertyChooser
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

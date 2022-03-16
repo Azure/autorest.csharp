@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             string name = "fakeXml";
             string type = "Microsoft.XmlDeserialization/xmls";
             XElement xElement = BuildXElement(id, name, type);
-            XmlInstanceResourceData xmlInstanceData = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(xElement);
+            XmlInstanceData xmlInstanceData = XmlInstanceData.DeserializeXmlInstanceData(xElement);
             Assert.AreEqual(id, xmlInstanceData.Id.ToString());
             Assert.AreEqual(name, xmlInstanceData.Name);
             Assert.AreEqual(type, xmlInstanceData.ResourceType.ToString());
@@ -36,8 +36,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             string type = "Microsoft.XmlDeserialization/xmls";
             XElement xElement = BuildXElement(id, name, type);
             // ResourceIdentifier changes to lazy initialization, so you won't get the parsing error until you fetch properties
-            Assert.DoesNotThrow(() => XmlInstanceResourceData.DeserializeXmlInstanceResourceData(xElement));
-            Assert.Throws<FormatException>(() => { var _ = XmlInstanceResourceData.DeserializeXmlInstanceResourceData(xElement).Id.SubscriptionId; });
+            Assert.DoesNotThrow(() => XmlInstanceData.DeserializeXmlInstanceData(xElement));
+            Assert.Throws<FormatException>(() => { var _ = XmlInstanceData.DeserializeXmlInstanceData(xElement).Id.SubscriptionId; });
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             string name = "fakeXml";
             string type = "";
             XElement xElement = BuildXElement(id, name, type);
-            Assert.Throws<ArgumentException>(() => XmlInstanceResourceData.DeserializeXmlInstanceResourceData(xElement));
+            Assert.Throws<ArgumentException>(() => XmlInstanceData.DeserializeXmlInstanceData(xElement));
         }
 
         private static XElement BuildXElement(string id, string name, string type)

@@ -24,8 +24,8 @@ namespace MgmtScopeResource
     /// <summary> A class representing collection of FakePolicyAssignment and their operations over its parent. </summary>
     public partial class FakePolicyAssignmentCollection : ArmCollection, IEnumerable<FakePolicyAssignmentResource>, IAsyncEnumerable<FakePolicyAssignmentResource>
     {
-        private readonly ClientDiagnostics _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics;
-        private readonly FakePolicyAssignmentsRestOperations _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient;
+        private readonly ClientDiagnostics _fakePolicyAssignmentClientDiagnostics;
+        private readonly FakePolicyAssignmentsRestOperations _fakePolicyAssignmentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FakePolicyAssignmentCollection"/> class for mocking. </summary>
         protected FakePolicyAssignmentCollection()
@@ -37,9 +37,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakePolicyAssignmentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignmentResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FakePolicyAssignmentResource.ResourceType, out string fakePolicyAssignmentResourceFakePolicyAssignmentsApiVersion);
-            _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentResourceFakePolicyAssignmentsApiVersion);
+            _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignmentResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(FakePolicyAssignmentResource.ResourceType, out string fakePolicyAssignmentApiVersion);
+            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
         }
 
         /// <summary>
@@ -53,16 +53,16 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.CreateOrUpdate");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _fakePolicyAssignmentRestClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -86,16 +86,16 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakePolicyAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakePolicyAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.CreateOrUpdate");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
+                var response = _fakePolicyAssignmentRestClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
                 var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignmentResource>(Response.FromValue(new FakePolicyAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -121,11 +121,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Get");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.GetAsync(Id, policyAssignmentName, cancellationToken).ConfigureAwait(false);
+                var response = await _fakePolicyAssignmentRestClient.GetAsync(Id, policyAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
@@ -150,11 +150,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Get");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Get");
             scope.Start();
             try
             {
-                var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.Get(Id, policyAssignmentName, cancellationToken);
+                var response = _fakePolicyAssignmentRestClient.Get(Id, policyAssignmentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
@@ -187,11 +187,11 @@ namespace MgmtScopeResource
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -202,11 +202,11 @@ namespace MgmtScopeResource
                 }
                 async Task<Page<FakePolicyAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -221,11 +221,11 @@ namespace MgmtScopeResource
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -236,11 +236,11 @@ namespace MgmtScopeResource
                 }
                 async Task<Page<FakePolicyAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -255,11 +255,11 @@ namespace MgmtScopeResource
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListAsync(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -270,11 +270,11 @@ namespace MgmtScopeResource
                 }
                 async Task<Page<FakePolicyAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -289,11 +289,11 @@ namespace MgmtScopeResource
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -304,11 +304,11 @@ namespace MgmtScopeResource
                 }
                 async Task<Page<FakePolicyAssignmentResource>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _fakePolicyAssignmentRestClient.ListForResourceNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -342,11 +342,11 @@ namespace MgmtScopeResource
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -357,11 +357,11 @@ namespace MgmtScopeResource
                 }
                 Page<FakePolicyAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -376,11 +376,11 @@ namespace MgmtScopeResource
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -391,11 +391,11 @@ namespace MgmtScopeResource
                 }
                 Page<FakePolicyAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -410,11 +410,11 @@ namespace MgmtScopeResource
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.List(Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -425,11 +425,11 @@ namespace MgmtScopeResource
                 }
                 Page<FakePolicyAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListNextPage(nextLink, Id.SubscriptionId, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -444,11 +444,11 @@ namespace MgmtScopeResource
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResource(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForResource(Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -459,11 +459,11 @@ namespace MgmtScopeResource
                 }
                 Page<FakePolicyAssignmentResource> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
+                    using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetAll");
                     scope.Start();
                     try
                     {
-                        var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.ListForResourceNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _fakePolicyAssignmentRestClient.ListForResourceNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.ResourceType.Namespace, Id.Parent.SubstringAfterProviderNamespace(), Id.ResourceType.GetLastType(), Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new FakePolicyAssignmentResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -489,7 +489,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Exists");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Exists");
             scope.Start();
             try
             {
@@ -516,7 +516,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Exists");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.Exists");
             scope.Start();
             try
             {
@@ -543,11 +543,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakePolicyAssignmentRestClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<FakePolicyAssignmentResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());
@@ -572,11 +572,11 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
 
-            using var scope = _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
+            using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignmentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
+                var response = _fakePolicyAssignmentRestClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<FakePolicyAssignmentResource>(null, response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignmentResource(Client, response.Value), response.GetRawResponse());

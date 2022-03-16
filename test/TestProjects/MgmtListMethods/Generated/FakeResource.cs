@@ -28,9 +28,9 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _fakeResourceFakesClientDiagnostics;
-        private readonly FakesRestOperations _fakeResourceFakesRestClient;
-        private readonly FakeResourceData _data;
+        private readonly ClientDiagnostics _fakeClientDiagnostics;
+        private readonly FakesRestOperations _fakeRestClient;
+        private readonly FakeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class for mocking. </summary>
         protected FakeResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "FakeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakeResource(ArmClient client, FakeResourceData data) : this(client, data.Id)
+        internal FakeResource(ArmClient client, FakeData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FakeResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeResourceFakesClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string fakeResourceFakesApiVersion);
-            _fakeResourceFakesRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeResourceFakesApiVersion);
+            _fakeClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakeResourceData Data
+        public virtual FakeData Data
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocResources in the FakeParentWithAncestorWithNonResChWithLocResource. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocResources and their operations over a FakeParentWithAncestorWithNonResChWithLocResource. </returns>
-        public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocResources()
+        public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
             return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id));
         }
@@ -99,9 +99,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithAncestorWithNonResChWithLocResource>> GetFakeParentWithAncestorWithNonResChWithLocResourceAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithAncestorWithNonResChWithLocResource>> GetFakeParentWithAncestorWithNonResChWithLocAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentWithAncestorWithNonResChWithLocResources().GetAsync(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParentWithAncestorWithNonResChWithLocs().GetAsync(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -113,14 +113,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResChWithLocResource(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResChWithLoc(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChWithLocResources().Get(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
+            return GetFakeParentWithAncestorWithNonResChWithLocs().Get(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChResources in the FakeParentWithAncestorWithNonResChResource. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChResources and their operations over a FakeParentWithAncestorWithNonResChResource. </returns>
-        public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChResources()
+        public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
             return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChCollection(Client, Id));
         }
@@ -134,9 +134,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithAncestorWithNonResChResource>> GetFakeParentWithAncestorWithNonResChResourceAsync(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithAncestorWithNonResChResource>> GetFakeParentWithAncestorWithNonResChAsync(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentWithAncestorWithNonResChResources().GetAsync(fakeParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParentWithAncestorWithNonResChes().GetAsync(fakeParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,14 +148,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
-        public virtual Response<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChResource(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResCh(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChResources().Get(fakeParentWithAncestorWithNonResChName, cancellationToken);
+            return GetFakeParentWithAncestorWithNonResChes().Get(fakeParentWithAncestorWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocResources in the FakeParentWithAncestorWithLocResource. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocResources and their operations over a FakeParentWithAncestorWithLocResource. </returns>
-        public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocResources()
+        public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
             return GetCachedClient(Client => new FakeParentWithAncestorWithLocCollection(Client, Id));
         }
@@ -169,9 +169,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithAncestorWithLocResource>> GetFakeParentWithAncestorWithLocResourceAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithAncestorWithLocResource>> GetFakeParentWithAncestorWithLocAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentWithAncestorWithLocResources().GetAsync(fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParentWithAncestorWithLocs().GetAsync(fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -183,14 +183,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
-        public virtual Response<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocResource(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLoc(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithLocResources().Get(fakeParentWithAncestorWithLocName, cancellationToken);
+            return GetFakeParentWithAncestorWithLocs().Get(fakeParentWithAncestorWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorResources in the FakeParentWithAncestorResource. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorResources and their operations over a FakeParentWithAncestorResource. </returns>
-        public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestorResources()
+        public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
             return GetCachedClient(Client => new FakeParentWithAncestorCollection(Client, Id));
         }
@@ -204,9 +204,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithAncestorResource>> GetFakeParentWithAncestorResourceAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithAncestorResource>> GetFakeParentWithAncestorAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentWithAncestorResources().GetAsync(fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParentWithAncestors().GetAsync(fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -218,14 +218,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
-        public virtual Response<FakeParentWithAncestorResource> GetFakeParentWithAncestorResource(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithAncestorResource> GetFakeParentWithAncestor(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorResources().Get(fakeParentWithAncestorName, cancellationToken);
+            return GetFakeParentWithAncestors().Get(fakeParentWithAncestorName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithNonResChResources in the FakeParentWithNonResChResource. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChResources and their operations over a FakeParentWithNonResChResource. </returns>
-        public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChResources()
+        public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
             return GetCachedClient(Client => new FakeParentWithNonResChCollection(Client, Id));
         }
@@ -239,9 +239,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithNonResChResource>> GetFakeParentWithNonResChResourceAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithNonResChResource>> GetFakeParentWithNonResChAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentWithNonResChResources().GetAsync(fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParentWithNonResChes().GetAsync(fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -253,14 +253,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual Response<FakeParentWithNonResChResource> GetFakeParentWithNonResChResource(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithNonResChResource> GetFakeParentWithNonResCh(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithNonResChResources().Get(fakeParentWithNonResChName, cancellationToken);
+            return GetFakeParentWithNonResChes().Get(fakeParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentResources in the FakeParentResource. </summary>
         /// <returns> An object representing collection of FakeParentResources and their operations over a FakeParentResource. </returns>
-        public virtual FakeParentCollection GetFakeParentResources()
+        public virtual FakeParentCollection GetFakeParents()
         {
             return GetCachedClient(Client => new FakeParentCollection(Client, Id));
         }
@@ -274,9 +274,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentResource>> GetFakeParentResourceAsync(string fakeParentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentResource>> GetFakeParentAsync(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            return await GetFakeParentResources().GetAsync(fakeParentName, cancellationToken).ConfigureAwait(false);
+            return await GetFakeParents().GetAsync(fakeParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -288,9 +288,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
-        public virtual Response<FakeParentResource> GetFakeParentResource(string fakeParentName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentResource> GetFakeParent(string fakeParentName, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentResources().Get(fakeParentName, cancellationToken);
+            return GetFakeParents().Get(fakeParentName, cancellationToken);
         }
 
         /// <summary>
@@ -302,11 +302,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakeResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Get");
             scope.Start();
             try
             {
-                var response = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -327,11 +327,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FakeResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.Get");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.Get");
             scope.Start();
             try
             {
-                var response = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.Name, expand, cancellationToken);
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
@@ -357,14 +357,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.AddTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -388,14 +388,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.AddTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -417,7 +417,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.SetTags");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
             try
             {
@@ -425,7 +425,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -447,7 +447,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.SetTags");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.SetTags");
             scope.Start();
             try
             {
@@ -455,7 +455,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -477,14 +477,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.RemoveTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _fakeResourceFakesRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -506,14 +506,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _fakeResourceFakesClientDiagnostics.CreateScope("FakeResource.RemoveTag");
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _fakeResourceFakesRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
+                var originalResponse = _fakeRestClient.Get(Id.SubscriptionId, Id.Name, null, cancellationToken);
                 return Response.FromValue(new FakeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

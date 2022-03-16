@@ -344,7 +344,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeOneResourceData>> GetTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeOneData>> GetTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -356,13 +356,13 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeOneResourceData value = default;
+                        TypeOneData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TypeOneResourceData.DeserializeTypeOneResourceData(document.RootElement);
+                        value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TypeOneResourceData)null, message.Response);
+                    return Response.FromValue((TypeOneData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -375,7 +375,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeOneResourceData> GetTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
+        public Response<TypeOneData> GetTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -387,19 +387,19 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeOneResourceData value = default;
+                        TypeOneData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TypeOneResourceData.DeserializeTypeOneResourceData(document.RootElement);
+                        value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TypeOneResourceData)null, message.Response);
+                    return Response.FromValue((TypeOneData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneResourceData typeOne)
+        internal HttpMessage CreateCreateOrUpdateTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -431,7 +431,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeOneResourceData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneResourceData typeOne, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeOneData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -444,9 +444,9 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeOneResourceData value = default;
+                        TypeOneData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TypeOneResourceData.DeserializeTypeOneResourceData(document.RootElement);
+                        value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -462,7 +462,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeOneResourceData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneResourceData typeOne, CancellationToken cancellationToken = default)
+        public Response<TypeOneData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -475,9 +475,9 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeOneResourceData value = default;
+                        TypeOneData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TypeOneResourceData.DeserializeTypeOneResourceData(document.RootElement);
+                        value = TypeOneData.DeserializeTypeOneData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -512,7 +512,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeTwoResourceData>> GetTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeTwoData>> GetTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -524,13 +524,13 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeTwoResourceData value = default;
+                        TypeTwoData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TypeTwoResourceData.DeserializeTypeTwoResourceData(document.RootElement);
+                        value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TypeTwoResourceData)null, message.Response);
+                    return Response.FromValue((TypeTwoData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -543,7 +543,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeTwoResourceData> GetTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
+        public Response<TypeTwoData> GetTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -555,19 +555,19 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeTwoResourceData value = default;
+                        TypeTwoData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TypeTwoResourceData.DeserializeTypeTwoResourceData(document.RootElement);
+                        value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TypeTwoResourceData)null, message.Response);
+                    return Response.FromValue((TypeTwoData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoResourceData typeTwo)
+        internal HttpMessage CreateCreateOrUpdateTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -599,7 +599,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeTwoResourceData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoResourceData typeTwo, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeTwoData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -612,9 +612,9 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeTwoResourceData value = default;
+                        TypeTwoData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TypeTwoResourceData.DeserializeTypeTwoResourceData(document.RootElement);
+                        value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -630,7 +630,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeTwoResourceData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoResourceData typeTwo, CancellationToken cancellationToken = default)
+        public Response<TypeTwoData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -643,9 +643,9 @@ namespace MgmtSafeFlatten
             {
                 case 200:
                     {
-                        TypeTwoResourceData value = default;
+                        TypeTwoData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TypeTwoResourceData.DeserializeTypeTwoResourceData(document.RootElement);
+                        value = TypeTwoData.DeserializeTypeTwoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

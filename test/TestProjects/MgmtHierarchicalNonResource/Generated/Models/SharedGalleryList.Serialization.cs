@@ -16,16 +16,16 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static SharedGalleryList DeserializeSharedGalleryList(JsonElement element)
         {
-            IReadOnlyList<SharedGalleryResourceData> value = default;
+            IReadOnlyList<SharedGalleryData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<SharedGalleryResourceData> array = new List<SharedGalleryResourceData>();
+                    List<SharedGalleryData> array = new List<SharedGalleryData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SharedGalleryResourceData.DeserializeSharedGalleryResourceData(item));
+                        array.Add(SharedGalleryData.DeserializeSharedGalleryData(item));
                     }
                     value = array;
                     continue;

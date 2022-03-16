@@ -24,8 +24,8 @@ namespace MgmtExtensionResource
     /// <summary> A class representing collection of BuiltInPolicyDefinition and their operations over its parent. </summary>
     public partial class BuiltInPolicyDefinitionCollection : ArmCollection, IEnumerable<BuiltInPolicyDefinitionResource>, IAsyncEnumerable<BuiltInPolicyDefinitionResource>
     {
-        private readonly ClientDiagnostics _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
-        private readonly PolicyDefinitionsRestOperations _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient;
+        private readonly ClientDiagnostics _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _builtInPolicyDefinitionPolicyDefinitionsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BuiltInPolicyDefinitionCollection"/> class for mocking. </summary>
         protected BuiltInPolicyDefinitionCollection()
@@ -37,9 +37,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BuiltInPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinitionResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(BuiltInPolicyDefinitionResource.ResourceType, out string builtInPolicyDefinitionResourcePolicyDefinitionsApiVersion);
-            _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionResourcePolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinitionResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(BuiltInPolicyDefinitionResource.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -64,11 +64,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -93,11 +93,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Get");
             scope.Start();
             try
             {
-                var response = _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
+                var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -122,11 +122,11 @@ namespace MgmtExtensionResource
         {
             async Task<Page<BuiltInPolicyDefinitionResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
+                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -137,11 +137,11 @@ namespace MgmtExtensionResource
             }
             async Task<Page<BuiltInPolicyDefinitionResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
+                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -166,11 +166,11 @@ namespace MgmtExtensionResource
         {
             Page<BuiltInPolicyDefinitionResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
+                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
+                    var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -181,11 +181,11 @@ namespace MgmtExtensionResource
             }
             Page<BuiltInPolicyDefinitionResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
+                using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                    var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new BuiltInPolicyDefinitionResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -210,7 +210,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -237,7 +237,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.Exists");
             scope.Start();
             try
             {
@@ -264,11 +264,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<BuiltInPolicyDefinitionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
@@ -293,11 +293,11 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
-            using var scope = _builtInPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
+            using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinitionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _builtInPolicyDefinitionResourcePolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<BuiltInPolicyDefinitionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());

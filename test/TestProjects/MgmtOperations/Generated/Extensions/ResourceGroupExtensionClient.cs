@@ -20,8 +20,8 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
-        private ClientDiagnostics _availabilitySetResourceAvailabilitySetsClientDiagnostics;
-        private AvailabilitySetsRestOperations _availabilitySetResourceAvailabilitySetsRestClient;
+        private ClientDiagnostics _availabilitySetClientDiagnostics;
+        private AvailabilitySetsRestOperations _availabilitySetRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
         protected ResourceGroupExtensionClient()
@@ -35,8 +35,8 @@ namespace MgmtOperations
         {
         }
 
-        private ClientDiagnostics AvailabilitySetResourceAvailabilitySetsClientDiagnostics => _availabilitySetResourceAvailabilitySetsClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySetResource.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetResourceAvailabilitySetsRestClient => _availabilitySetResourceAvailabilitySetsRestClient ??= new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySetResource.ResourceType));
+        private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySetResource.ResourceType.Namespace, DiagnosticOptions);
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySetResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -46,16 +46,16 @@ namespace MgmtOperations
 
         /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
-        public virtual AvailabilitySetCollection GetAvailabilitySetResources()
+        public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
-        public virtual UnpatchableCollection GetUnpatchableResources()
+        public virtual UnpatchableResourceCollection GetUnpatchableResources()
         {
-            return GetCachedClient(Client => new UnpatchableCollection(Client, Id));
+            return GetCachedClient(Client => new UnpatchableResourceCollection(Client, Id));
         }
 
         /// <summary>
@@ -68,12 +68,12 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = await AvailabilitySetResourceAvailabilitySetsRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetResourceAvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetResourceAvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await AvailabilitySetRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,12 +95,12 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = AvailabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = AvailabilitySetResourceAvailabilitySetsRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
-                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetResourceAvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetResourceAvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = AvailabilitySetRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

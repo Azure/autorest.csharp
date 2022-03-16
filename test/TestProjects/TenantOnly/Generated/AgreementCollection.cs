@@ -23,8 +23,8 @@ namespace TenantOnly
     /// <summary> A class representing collection of Agreement and their operations over its parent. </summary>
     public partial class AgreementCollection : ArmCollection, IEnumerable<AgreementResource>, IAsyncEnumerable<AgreementResource>
     {
-        private readonly ClientDiagnostics _agreementResourceAgreementsClientDiagnostics;
-        private readonly AgreementsRestOperations _agreementResourceAgreementsRestClient;
+        private readonly ClientDiagnostics _agreementClientDiagnostics;
+        private readonly AgreementsRestOperations _agreementRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AgreementCollection"/> class for mocking. </summary>
         protected AgreementCollection()
@@ -36,9 +36,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal AgreementCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _agreementResourceAgreementsClientDiagnostics = new ClientDiagnostics("TenantOnly", AgreementResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(AgreementResource.ResourceType, out string agreementResourceAgreementsApiVersion);
-            _agreementResourceAgreementsRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementResourceAgreementsApiVersion);
+            _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", AgreementResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(AgreementResource.ResourceType, out string agreementApiVersion);
+            _agreementRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -64,11 +64,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.Get");
             scope.Start();
             try
             {
-                var response = await _agreementResourceAgreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _agreementRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
@@ -94,11 +94,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.Get");
             scope.Start();
             try
             {
-                var response = _agreementResourceAgreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken);
+                var response = _agreementRestClient.Get(Id.Name, agreementName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
@@ -122,11 +122,11 @@ namespace TenantOnly
         {
             async Task<Page<AgreementResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.GetAll");
+                using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _agreementResourceAgreementsRestClient.ListAsync(Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _agreementRestClient.ListAsync(Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new AgreementResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -150,11 +150,11 @@ namespace TenantOnly
         {
             Page<AgreementResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.GetAll");
+                using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _agreementResourceAgreementsRestClient.List(Id.Name, expand, cancellationToken: cancellationToken);
+                    var response = _agreementRestClient.List(Id.Name, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new AgreementResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -180,7 +180,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.Exists");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
             try
             {
@@ -208,7 +208,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.Exists");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.Exists");
             scope.Start();
             try
             {
@@ -236,11 +236,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _agreementResourceAgreementsRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _agreementRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<AgreementResource>(null, response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
@@ -266,11 +266,11 @@ namespace TenantOnly
         {
             Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _agreementResourceAgreementsRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
+                var response = _agreementRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<AgreementResource>(null, response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());

@@ -28,9 +28,9 @@ namespace MgmtRenameRules
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics;
-        private readonly VirtualMachineScaleSetRollingUpgradesRestOperations _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient;
-        private readonly VirtualMachineScaleSetRollingUpgradeResourceData _data;
+        private readonly ClientDiagnostics _virtualMachineScaleSetRollingUpgradeClientDiagnostics;
+        private readonly VirtualMachineScaleSetRollingUpgradesRestOperations _virtualMachineScaleSetRollingUpgradeRestClient;
+        private readonly VirtualMachineScaleSetRollingUpgradeData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetRollingUpgradeResource()
@@ -40,7 +40,7 @@ namespace MgmtRenameRules
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetRollingUpgradeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetRollingUpgradeResource(ArmClient client, VirtualMachineScaleSetRollingUpgradeResourceData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetRollingUpgradeResource(ArmClient client, VirtualMachineScaleSetRollingUpgradeData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineScaleSetRollingUpgradeResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesApiVersion);
-            _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesApiVersion);
+            _virtualMachineScaleSetRollingUpgradeClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetRollingUpgradeApiVersion);
+            _virtualMachineScaleSetRollingUpgradeRestClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetRollingUpgradeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtRenameRules
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetRollingUpgradeResourceData Data
+        public virtual VirtualMachineScaleSetRollingUpgradeData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineScaleSetRollingUpgradeResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.Get");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRollingUpgradeRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetRollingUpgradeResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.Get");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _virtualMachineScaleSetRollingUpgradeRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, response.Value), response.GetRawResponse());
@@ -145,14 +145,14 @@ namespace MgmtRenameRules
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.AddTag");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRollingUpgradeRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -176,14 +176,14 @@ namespace MgmtRenameRules
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.AddTag");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRollingUpgradeRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.SetTags");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.SetTags");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace MgmtRenameRules
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRollingUpgradeRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.SetTags");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.SetTags");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace MgmtRenameRules
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRollingUpgradeRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -265,14 +265,14 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.RemoveTag");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRollingUpgradeRestClient.GetLatestAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,14 +294,14 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.RemoveTag");
+            using var scope = _virtualMachineScaleSetRollingUpgradeClientDiagnostics.CreateScope("VirtualMachineScaleSetRollingUpgradeResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRollingUpgradeRestClient.GetLatest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgradeResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

@@ -20,8 +20,8 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _resourceLinkResourceResourceLinksClientDiagnostics;
-        private ResourceLinksRestOperations _resourceLinkResourceResourceLinksRestClient;
+        private ClientDiagnostics _resourceLinkClientDiagnostics;
+        private ResourceLinksRestOperations _resourceLinkRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
         protected SubscriptionExtensionClient()
@@ -35,8 +35,8 @@ namespace MgmtScopeResource
         {
         }
 
-        private ClientDiagnostics ResourceLinkResourceResourceLinksClientDiagnostics => _resourceLinkResourceResourceLinksClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", ResourceLinkResource.ResourceType.Namespace, DiagnosticOptions);
-        private ResourceLinksRestOperations ResourceLinkResourceResourceLinksRestClient => _resourceLinkResourceResourceLinksRestClient ??= new ResourceLinksRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResourceLinkResource.ResourceType));
+        private ClientDiagnostics ResourceLinkClientDiagnostics => _resourceLinkClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", ResourceLinkResource.ResourceType.Namespace, DiagnosticOptions);
+        private ResourceLinksRestOperations ResourceLinkRestClient => _resourceLinkRestClient ??= new ResourceLinksRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResourceLinkResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -46,7 +46,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
-        public virtual DeploymentExtendedCollection GetDeploymentExtendedResources()
+        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
             return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }
@@ -59,15 +59,15 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceLinkResource> GetResourceLinkResourcesAsync(string filter = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(string filter = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<ResourceLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ResourceLinkResourceResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinkResources");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = await ResourceLinkResourceResourceLinksRestClient.ListAtSubscriptionAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ResourceLinkRestClient.ListAtSubscriptionAsync(Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -78,11 +78,11 @@ namespace MgmtScopeResource
             }
             async Task<Page<ResourceLinkResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ResourceLinkResourceResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinkResources");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = await ResourceLinkResourceResourceLinksRestClient.ListAtSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await ResourceLinkRestClient.ListAtSubscriptionNextPageAsync(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -102,15 +102,15 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceLinkResource> GetResourceLinkResources(string filter = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<ResourceLinkResource> GetResourceLinks(string filter = null, CancellationToken cancellationToken = default)
         {
             Page<ResourceLinkResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ResourceLinkResourceResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinkResources");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = ResourceLinkResourceResourceLinksRestClient.ListAtSubscription(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
+                    var response = ResourceLinkRestClient.ListAtSubscription(Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -121,11 +121,11 @@ namespace MgmtScopeResource
             }
             Page<ResourceLinkResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ResourceLinkResourceResourceLinksClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinkResources");
+                using var scope = ResourceLinkClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetResourceLinks");
                 scope.Start();
                 try
                 {
-                    var response = ResourceLinkResourceResourceLinksRestClient.ListAtSubscriptionNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
+                    var response = ResourceLinkRestClient.ListAtSubscriptionNextPage(nextLink, Id.SubscriptionId, filter, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLinkResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

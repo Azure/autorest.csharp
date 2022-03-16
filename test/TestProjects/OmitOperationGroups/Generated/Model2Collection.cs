@@ -24,8 +24,8 @@ namespace OmitOperationGroups
     /// <summary> A class representing collection of Model2 and their operations over its parent. </summary>
     public partial class Model2Collection : ArmCollection, IEnumerable<Model2Resource>, IAsyncEnumerable<Model2Resource>
     {
-        private readonly ClientDiagnostics _model2ResourceModel2sClientDiagnostics;
-        private readonly Model2SRestOperations _model2ResourceModel2sRestClient;
+        private readonly ClientDiagnostics _model2ClientDiagnostics;
+        private readonly Model2SRestOperations _model2RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="Model2Collection"/> class for mocking. </summary>
         protected Model2Collection()
@@ -37,9 +37,9 @@ namespace OmitOperationGroups
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal Model2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _model2ResourceModel2sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2Resource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(Model2Resource.ResourceType, out string model2ResourceModel2sApiVersion);
-            _model2ResourceModel2sRestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ResourceModel2sApiVersion);
+            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2Resource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(Model2Resource.ResourceType, out string model2ApiVersion);
+            _model2RestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<Model2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string model2SName, Model2ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Model2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _model2ResourceModel2sRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -93,16 +93,16 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<Model2Resource> CreateOrUpdate(WaitUntil waitUntil, string model2SName, Model2ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Model2Resource> CreateOrUpdate(WaitUntil waitUntil, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _model2ResourceModel2sRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
+                var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
                 var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -127,11 +127,11 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.Get");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
             try
             {
-                var response = await _model2ResourceModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
+                var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.Get");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Get");
             scope.Start();
             try
             {
-                var response = _model2ResourceModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken);
+                var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
@@ -181,11 +181,11 @@ namespace OmitOperationGroups
         {
             async Task<Page<Model2Resource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.GetAll");
+                using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _model2ResourceModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _model2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Model2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -207,11 +207,11 @@ namespace OmitOperationGroups
         {
             Page<Model2Resource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.GetAll");
+                using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _model2ResourceModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _model2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Model2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -236,7 +236,7 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.Exists");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.Exists");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.Exists");
             scope.Start();
             try
             {
@@ -290,11 +290,11 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _model2ResourceModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<Model2Resource>(null, response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
@@ -319,11 +319,11 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
 
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _model2ResourceModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
+                var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, model2SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<Model2Resource>(null, response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());

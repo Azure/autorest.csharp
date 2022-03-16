@@ -28,9 +28,9 @@ namespace MgmtExtensionResource
         /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the BuiltInPolicyDefinitionResource. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
-        public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitionResources(this Tenant tenant)
+        public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this Tenant tenant)
         {
-            return GetExtensionClient(tenant).GetBuiltInPolicyDefinitionResources();
+            return GetExtensionClient(tenant).GetBuiltInPolicyDefinitions();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionResourceAsync(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetBuiltInPolicyDefinitionResources().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await tenant.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinitionResource(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return tenant.GetBuiltInPolicyDefinitionResources().Get(policyDefinitionName, cancellationToken);
+            return tenant.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
         }
     }
 }

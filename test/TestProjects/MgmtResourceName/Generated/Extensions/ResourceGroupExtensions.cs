@@ -28,9 +28,9 @@ namespace MgmtResourceName
         /// <summary> Gets a collection of MachineResources in the MachineResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
-        public static MachineCollection GetMachineResources(this ResourceGroup resourceGroup)
+        public static MachineCollection GetMachines(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetMachineResources();
+            return GetExtensionClient(resourceGroup).GetMachines();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
-        public static async Task<Response<MachineResource>> GetMachineResourceAsync(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetMachineResources().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetMachines().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,15 +56,15 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
-        public static Response<MachineResource> GetMachineResource(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
+        public static Response<MachineResource> GetMachine(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetMachineResources().Get(machineName, cancellationToken);
+            return resourceGroup.GetMachines().Get(machineName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DiskResources in the DiskResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DiskResources and their operations over a DiskResource. </returns>
-        public static DiskCollection GetDiskResources(this ResourceGroup resourceGroup)
+        public static DiskResourceCollection GetDiskResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetDiskResources();
         }
@@ -136,9 +136,9 @@ namespace MgmtResourceName
         /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
-        public static NetworkCollection GetNetworkResources(this ResourceGroup resourceGroup)
+        public static NetworkCollection GetNetworks(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetNetworkResources();
+            return GetExtensionClient(resourceGroup).GetNetworks();
         }
 
         /// <summary>
@@ -150,9 +150,9 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
-        public static async Task<Response<NetworkResource>> GetNetworkResourceAsync(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetNetworkResources().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetNetworks().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
-        public static Response<NetworkResource> GetNetworkResource(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        public static Response<NetworkResource> GetNetwork(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetNetworkResources().Get(networkResourceName, cancellationToken);
+            return resourceGroup.GetNetworks().Get(networkResourceName, cancellationToken);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MgmtMultipleParentResource.Models
         /// <summary> Initializes a new instance of AnotherParentsListResult. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal AnotherParentsListResult(IEnumerable<AnotherParentResourceData> value)
+        internal AnotherParentsListResult(IEnumerable<AnotherParentData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtMultipleParentResource.Models
         /// <summary> Initializes a new instance of AnotherParentsListResult. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
-        internal AnotherParentsListResult(IReadOnlyList<AnotherParentResourceData> value, string nextLink)
+        internal AnotherParentsListResult(IReadOnlyList<AnotherParentData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of run commands. </summary>
-        public IReadOnlyList<AnotherParentResourceData> Value { get; }
+        public IReadOnlyList<AnotherParentData> Value { get; }
         /// <summary> The uri to fetch the next page of run commands. </summary>
         public string NextLink { get; }
     }

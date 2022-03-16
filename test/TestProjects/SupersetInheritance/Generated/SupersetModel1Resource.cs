@@ -27,9 +27,9 @@ namespace SupersetInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _supersetModel1ResourceSupersetModel1sClientDiagnostics;
-        private readonly SupersetModel1SRestOperations _supersetModel1ResourceSupersetModel1sRestClient;
-        private readonly SupersetModel1ResourceData _data;
+        private readonly ClientDiagnostics _supersetModel1ClientDiagnostics;
+        private readonly SupersetModel1SRestOperations _supersetModel1RestClient;
+        private readonly SupersetModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Resource"/> class for mocking. </summary>
         protected SupersetModel1Resource()
@@ -39,7 +39,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SupersetModel1Resource(ArmClient client, SupersetModel1ResourceData data) : this(client, data.Id)
+        internal SupersetModel1Resource(ArmClient client, SupersetModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SupersetModel1Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel1ResourceSupersetModel1sClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string supersetModel1ResourceSupersetModel1sApiVersion);
-            _supersetModel1ResourceSupersetModel1sRestClient = new SupersetModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel1ResourceSupersetModel1sApiVersion);
+            _supersetModel1ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string supersetModel1ApiVersion);
+            _supersetModel1RestClient = new SupersetModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace SupersetInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SupersetModel1ResourceData Data
+        public virtual SupersetModel1Data Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SupersetModel1Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel1ResourceSupersetModel1sClientDiagnostics.CreateScope("SupersetModel1Resource.Get");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = await _supersetModel1ResourceSupersetModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SupersetModel1Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _supersetModel1ResourceSupersetModel1sClientDiagnostics.CreateScope("SupersetModel1Resource.Get");
+            using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = _supersetModel1ResourceSupersetModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1Resource(Client, response.Value), response.GetRawResponse());

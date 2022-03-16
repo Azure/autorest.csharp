@@ -28,9 +28,9 @@ namespace MgmtKeyvault
         /// <summary> Gets a collection of VaultResources in the VaultResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VaultResources and their operations over a VaultResource. </returns>
-        public static VaultCollection GetVaultResources(this ResourceGroup resourceGroup)
+        public static VaultCollection GetVaults(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetVaultResources();
+            return GetExtensionClient(resourceGroup).GetVaults();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
-        public static async Task<Response<VaultResource>> GetVaultResourceAsync(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
+        public static async Task<Response<VaultResource>> GetVaultAsync(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetVaultResources().GetAsync(vaultName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetVaults().GetAsync(vaultName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,17 +58,17 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
-        public static Response<VaultResource> GetVaultResource(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
+        public static Response<VaultResource> GetVault(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetVaultResources().Get(vaultName, cancellationToken);
+            return resourceGroup.GetVaults().Get(vaultName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ManagedHsmResources in the ManagedHsmResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
-        public static ManagedHsmCollection GetManagedHsmResources(this ResourceGroup resourceGroup)
+        public static ManagedHsmCollection GetManagedHsms(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetManagedHsmResources();
+            return GetExtensionClient(resourceGroup).GetManagedHsms();
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<ManagedHsmResource>> GetManagedHsmResourceAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<ManagedHsmResource>> GetManagedHsmAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetManagedHsmResources().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetManagedHsms().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -96,9 +96,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<ManagedHsmResource> GetManagedHsmResource(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<ManagedHsmResource> GetManagedHsm(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetManagedHsmResources().Get(name, cancellationToken);
+            return resourceGroup.GetManagedHsms().Get(name, cancellationToken);
         }
     }
 }

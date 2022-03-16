@@ -29,9 +29,9 @@ namespace MgmtParamOrdering
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics;
-        private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient;
-        private readonly VirtualMachineScaleSetResourceData _data;
+        private readonly ClientDiagnostics _virtualMachineScaleSetClientDiagnostics;
+        private readonly VirtualMachineScaleSetsRestOperations _virtualMachineScaleSetRestClient;
+        private readonly VirtualMachineScaleSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetResource()
@@ -41,7 +41,7 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetResource(ArmClient client, VirtualMachineScaleSetResourceData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetResource(ArmClient client, VirtualMachineScaleSetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineScaleSetResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetResourceVirtualMachineScaleSetsApiVersion);
-            _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient = new VirtualMachineScaleSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetResourceVirtualMachineScaleSetsApiVersion);
+            _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetApiVersion);
+            _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetResourceData Data
+        public virtual VirtualMachineScaleSetData Data
         {
             get
             {
@@ -93,11 +93,11 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineScaleSetResource>> GetAsync(ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, response.Value), response.GetRawResponse());
@@ -118,11 +118,11 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineScaleSetResource> Get(ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, response.Value), response.GetRawResponse());
@@ -144,12 +144,12 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, bool forceDeletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Delete");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Delete");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -171,12 +171,12 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, bool forceDeletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Delete");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Delete");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -201,12 +201,12 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Update");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Update");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation<VirtualMachineScaleSetResource>(new VirtualMachineScaleSetResourceOperationSource(Client), _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation<VirtualMachineScaleSetResource>(new VirtualMachineScaleSetOperationSource(Client), _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -231,12 +231,12 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Update");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Update");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation<VirtualMachineScaleSetResource>(new VirtualMachineScaleSetResourceOperationSource(Client), _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation<VirtualMachineScaleSetResource>(new VirtualMachineScaleSetOperationSource(Client), _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -259,12 +259,12 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeallocateAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Deallocate");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Deallocate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -287,12 +287,12 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Deallocate(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Deallocate");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Deallocate");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, expand).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -318,12 +318,12 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(vmInstanceIDs, nameof(vmInstanceIDs));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.DeleteInstances");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.DeleteInstances");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.DeleteInstancesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeleteInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.DeleteInstancesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeleteInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -349,12 +349,12 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(vmInstanceIDs, nameof(vmInstanceIDs));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.DeleteInstances");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.DeleteInstances");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.DeleteInstances(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics, Pipeline, _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.CreateDeleteInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.DeleteInstances(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateDeleteInstancesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmInstanceIDs, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -379,11 +379,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.GetInstanceView");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.GetInstanceView");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetInstanceViewAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRestClient.GetInstanceViewAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, expand, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -406,11 +406,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.GetInstanceView");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.GetInstanceView");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetInstanceView(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, expand, cancellationToken);
+                var response = _virtualMachineScaleSetRestClient.GetInstanceView(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, expand, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -434,14 +434,14 @@ namespace MgmtParamOrdering
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.AddTag");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -465,14 +465,14 @@ namespace MgmtParamOrdering
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.AddTag");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -494,7 +494,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetTags");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetTags");
             scope.Start();
             try
             {
@@ -502,7 +502,7 @@ namespace MgmtParamOrdering
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -524,7 +524,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetTags");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetTags");
             scope.Start();
             try
             {
@@ -532,7 +532,7 @@ namespace MgmtParamOrdering
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -554,14 +554,14 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.RemoveTag");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -583,14 +583,14 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineScaleSetResourceVirtualMachineScaleSetsClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.RemoveTag");
+            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineScaleSetResourceVirtualMachineScaleSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

@@ -46,7 +46,7 @@ namespace OmitOperationGroups
 
         /// <summary> Gets a collection of Model2Resources in the Model2Resource. </summary>
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
-        public virtual Model2Collection GetModel2Resources()
+        public virtual Model2Collection GetModel2s()
         {
             return GetCachedClient(Client => new Model2Collection(Client, Id));
         }

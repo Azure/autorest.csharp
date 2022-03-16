@@ -27,9 +27,9 @@ namespace ExactMatchInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _exactMatchModel1ResourceExactMatchModel1sClientDiagnostics;
-        private readonly ExactMatchModel1SRestOperations _exactMatchModel1ResourceExactMatchModel1sRestClient;
-        private readonly ExactMatchModel1ResourceData _data;
+        private readonly ClientDiagnostics _exactMatchModel1ClientDiagnostics;
+        private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
+        private readonly ExactMatchModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Resource"/> class for mocking. </summary>
         protected ExactMatchModel1Resource()
@@ -39,7 +39,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ExactMatchModel1Resource(ArmClient client, ExactMatchModel1ResourceData data) : this(client, data.Id)
+        internal ExactMatchModel1Resource(ArmClient client, ExactMatchModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ExactMatchModel1Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _exactMatchModel1ResourceExactMatchModel1sClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string exactMatchModel1ResourceExactMatchModel1sApiVersion);
-            _exactMatchModel1ResourceExactMatchModel1sRestClient = new ExactMatchModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ResourceExactMatchModel1sApiVersion);
+            _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace ExactMatchInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ExactMatchModel1ResourceData Data
+        public virtual ExactMatchModel1Data Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel1Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _exactMatchModel1ResourceExactMatchModel1sClientDiagnostics.CreateScope("ExactMatchModel1Resource.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel1ResourceExactMatchModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel1Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _exactMatchModel1ResourceExactMatchModel1sClientDiagnostics.CreateScope("ExactMatchModel1Resource.Get");
+            using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = _exactMatchModel1ResourceExactMatchModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());

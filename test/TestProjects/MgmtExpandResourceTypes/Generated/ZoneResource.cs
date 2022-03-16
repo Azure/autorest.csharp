@@ -29,11 +29,11 @@ namespace MgmtExpandResourceTypes
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _zoneResourceZonesClientDiagnostics;
-        private readonly ZonesRestOperations _zoneResourceZonesRestClient;
+        private readonly ClientDiagnostics _zoneClientDiagnostics;
+        private readonly ZonesRestOperations _zoneRestClient;
         private readonly ClientDiagnostics _recordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
-        private readonly ZoneResourceData _data;
+        private readonly ZoneData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ZoneResource"/> class for mocking. </summary>
         protected ZoneResource()
@@ -43,7 +43,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "ZoneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ZoneResource(ArmClient client, ZoneResourceData data) : this(client, data.Id)
+        internal ZoneResource(ArmClient client, ZoneData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -54,9 +54,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ZoneResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _zoneResourceZonesClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string zoneResourceZonesApiVersion);
-            _zoneResourceZonesRestClient = new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneResourceZonesApiVersion);
+            _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string zoneApiVersion);
+            _zoneRestClient = new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
             _recordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _recordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
@@ -72,7 +72,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ZoneResourceData Data
+        public virtual ZoneData Data
         {
             get
             {
@@ -90,7 +90,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets a collection of RecordSetAResources in the RecordSetAResource. </summary>
         /// <returns> An object representing collection of RecordSetAResources and their operations over a RecordSetAResource. </returns>
-        public virtual RecordSetACollection GetRecordSetAResources()
+        public virtual RecordSetACollection GetRecordSetAs()
         {
             return GetCachedClient(Client => new RecordSetACollection(Client, Id));
         }
@@ -103,9 +103,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetAResource>> GetRecordSetAResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetAResource>> GetRecordSetAAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetAResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetAs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -116,14 +116,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetAResource> GetRecordSetAResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetAResource> GetRecordSetA(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetAResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetAs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetAaaaResources in the RecordSetAaaaResource. </summary>
         /// <returns> An object representing collection of RecordSetAaaaResources and their operations over a RecordSetAaaaResource. </returns>
-        public virtual RecordSetAaaaCollection GetRecordSetAaaaResources()
+        public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
             return GetCachedClient(Client => new RecordSetAaaaCollection(Client, Id));
         }
@@ -136,9 +136,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetAaaaResource>> GetRecordSetAaaaResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetAaaaResource>> GetRecordSetAaaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetAaaaResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetAaaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -149,14 +149,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetAaaaResource> GetRecordSetAaaaResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetAaaaResource> GetRecordSetAaaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetAaaaResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetAaaas().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetCaaResources in the RecordSetCaaResource. </summary>
         /// <returns> An object representing collection of RecordSetCaaResources and their operations over a RecordSetCaaResource. </returns>
-        public virtual RecordSetCaaCollection GetRecordSetCaaResources()
+        public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
             return GetCachedClient(Client => new RecordSetCaaCollection(Client, Id));
         }
@@ -169,9 +169,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetCaaResource>> GetRecordSetCaaResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetCaaResource>> GetRecordSetCaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetCaaResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetCaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -182,14 +182,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetCaaResource> GetRecordSetCaaResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetCaaResource> GetRecordSetCaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetCaaResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetCaas().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetCNameResources in the RecordSetCNameResource. </summary>
         /// <returns> An object representing collection of RecordSetCNameResources and their operations over a RecordSetCNameResource. </returns>
-        public virtual RecordSetCNameCollection GetRecordSetCNameResources()
+        public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
             return GetCachedClient(Client => new RecordSetCNameCollection(Client, Id));
         }
@@ -202,9 +202,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetCNameResource>> GetRecordSetCNameResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetCNameResource>> GetRecordSetCNameAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetCNameResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetCNames().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -215,14 +215,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetCNameResource> GetRecordSetCNameResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetCNameResource> GetRecordSetCName(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetCNameResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetCNames().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetMxResources in the RecordSetMxResource. </summary>
         /// <returns> An object representing collection of RecordSetMxResources and their operations over a RecordSetMxResource. </returns>
-        public virtual RecordSetMxCollection GetRecordSetMxResources()
+        public virtual RecordSetMxCollection GetRecordSetMxes()
         {
             return GetCachedClient(Client => new RecordSetMxCollection(Client, Id));
         }
@@ -235,9 +235,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetMxResource>> GetRecordSetMxResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetMxResource>> GetRecordSetMxAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetMxResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetMxes().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -248,14 +248,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetMxResource> GetRecordSetMxResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetMxResource> GetRecordSetMx(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetMxResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetMxes().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetNsResources in the RecordSetNsResource. </summary>
         /// <returns> An object representing collection of RecordSetNsResources and their operations over a RecordSetNsResource. </returns>
-        public virtual RecordSetNsCollection GetRecordSetNsResources()
+        public virtual RecordSetNsCollection GetRecordSetNs()
         {
             return GetCachedClient(Client => new RecordSetNsCollection(Client, Id));
         }
@@ -268,9 +268,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetNsResource>> GetRecordSetNsResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetNsResource>> GetRecordSetNsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetNsResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -281,14 +281,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetNsResource> GetRecordSetNsResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetNsResource> GetRecordSetNs(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetNsResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetNs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetPtrResources in the RecordSetPtrResource. </summary>
         /// <returns> An object representing collection of RecordSetPtrResources and their operations over a RecordSetPtrResource. </returns>
-        public virtual RecordSetPtrCollection GetRecordSetPtrResources()
+        public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
             return GetCachedClient(Client => new RecordSetPtrCollection(Client, Id));
         }
@@ -301,9 +301,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetPtrResource>> GetRecordSetPtrResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetPtrResource>> GetRecordSetPtrAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetPtrResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetPtrs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -314,14 +314,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetPtrResource> GetRecordSetPtrResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetPtrResource> GetRecordSetPtr(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetPtrResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetPtrs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetSoaResources in the RecordSetSoaResource. </summary>
         /// <returns> An object representing collection of RecordSetSoaResources and their operations over a RecordSetSoaResource. </returns>
-        public virtual RecordSetSoaCollection GetRecordSetSoaResources()
+        public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
             return GetCachedClient(Client => new RecordSetSoaCollection(Client, Id));
         }
@@ -334,9 +334,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetSoaResource>> GetRecordSetSoaResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetSoaResource>> GetRecordSetSoaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetSoaResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetSoas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -347,14 +347,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetSoaResource> GetRecordSetSoaResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetSoaResource> GetRecordSetSoa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetSoaResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetSoas().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetSrvResources in the RecordSetSrvResource. </summary>
         /// <returns> An object representing collection of RecordSetSrvResources and their operations over a RecordSetSrvResource. </returns>
-        public virtual RecordSetSrvCollection GetRecordSetSrvResources()
+        public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
             return GetCachedClient(Client => new RecordSetSrvCollection(Client, Id));
         }
@@ -367,9 +367,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetSrvResource>> GetRecordSetSrvResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetSrvResource>> GetRecordSetSrvAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetSrvResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetSrvs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -380,14 +380,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetSrvResource> GetRecordSetSrvResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetSrvResource> GetRecordSetSrv(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetSrvResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetSrvs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetTxtResources in the RecordSetTxtResource. </summary>
         /// <returns> An object representing collection of RecordSetTxtResources and their operations over a RecordSetTxtResource. </returns>
-        public virtual RecordSetTxtCollection GetRecordSetTxtResources()
+        public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
             return GetCachedClient(Client => new RecordSetTxtCollection(Client, Id));
         }
@@ -400,9 +400,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetTxtResource>> GetRecordSetTxtResourceAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetTxtResource>> GetRecordSetTxtAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return await GetRecordSetTxtResources().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+            return await GetRecordSetTxts().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -413,9 +413,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetTxtResource> GetRecordSetTxtResource(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetTxtResource> GetRecordSetTxt(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            return GetRecordSetTxtResources().Get(relativeRecordSetName, cancellationToken);
+            return GetRecordSetTxts().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary>
@@ -426,11 +426,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ZoneResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.Get");
             scope.Start();
             try
             {
-                var response = await _zoneResourceZonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ZoneResource(Client, response.Value), response.GetRawResponse());
@@ -450,11 +450,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ZoneResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.Get");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.Get");
             scope.Start();
             try
             {
-                var response = _zoneResourceZonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ZoneResource(Client, response.Value), response.GetRawResponse());
@@ -476,12 +476,12 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.Delete");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.Delete");
             scope.Start();
             try
             {
-                var response = await _zoneResourceZonesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExpandResourceTypesArmOperation(_zoneResourceZonesClientDiagnostics, Pipeline, _zoneResourceZonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response, OperationFinalStateVia.Location);
+                var response = await _zoneRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtExpandResourceTypesArmOperation(_zoneClientDiagnostics, Pipeline, _zoneRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -503,12 +503,12 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.Delete");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.Delete");
             scope.Start();
             try
             {
-                var response = _zoneResourceZonesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
-                var operation = new MgmtExpandResourceTypesArmOperation(_zoneResourceZonesClientDiagnostics, Pipeline, _zoneResourceZonesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response, OperationFinalStateVia.Location);
+                var response = _zoneRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
+                var operation = new MgmtExpandResourceTypesArmOperation(_zoneClientDiagnostics, Pipeline, _zoneRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -710,14 +710,14 @@ namespace MgmtExpandResourceTypes
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.AddTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zoneResourceZonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -741,14 +741,14 @@ namespace MgmtExpandResourceTypes
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.AddTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zoneResourceZonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -770,7 +770,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.SetTags");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.SetTags");
             scope.Start();
             try
             {
@@ -778,7 +778,7 @@ namespace MgmtExpandResourceTypes
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zoneResourceZonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -800,7 +800,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.SetTags");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.SetTags");
             scope.Start();
             try
             {
@@ -808,7 +808,7 @@ namespace MgmtExpandResourceTypes
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zoneResourceZonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -830,14 +830,14 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.RemoveTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _zoneResourceZonesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -859,14 +859,14 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _zoneResourceZonesClientDiagnostics.CreateScope("ZoneResource.RemoveTag");
+            using var scope = _zoneClientDiagnostics.CreateScope("ZoneResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _zoneResourceZonesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ZoneResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

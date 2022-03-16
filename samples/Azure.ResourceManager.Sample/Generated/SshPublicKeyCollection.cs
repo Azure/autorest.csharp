@@ -24,8 +24,8 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of SshPublicKey and their operations over its parent. </summary>
     public partial class SshPublicKeyCollection : ArmCollection, IEnumerable<SshPublicKeyResource>, IAsyncEnumerable<SshPublicKeyResource>
     {
-        private readonly ClientDiagnostics _sshPublicKeyResourceSshPublicKeysClientDiagnostics;
-        private readonly SshPublicKeysRestOperations _sshPublicKeyResourceSshPublicKeysRestClient;
+        private readonly ClientDiagnostics _sshPublicKeyClientDiagnostics;
+        private readonly SshPublicKeysRestOperations _sshPublicKeyRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyCollection"/> class for mocking. </summary>
         protected SshPublicKeyCollection()
@@ -37,9 +37,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SshPublicKeyCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sshPublicKeyResourceSshPublicKeysClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKeyResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(SshPublicKeyResource.ResourceType, out string sshPublicKeyResourceSshPublicKeysApiVersion);
-            _sshPublicKeyResourceSshPublicKeysRestClient = new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyResourceSshPublicKeysApiVersion);
+            _sshPublicKeyClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKeyResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SshPublicKeyResource.ResourceType, out string sshPublicKeyApiVersion);
+            _sshPublicKeyRestClient = new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,16 +62,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SshPublicKeyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string sshPublicKeyName, SshPublicKeyResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SshPublicKeyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.CreateOrUpdate");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyResourceSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -95,16 +95,16 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SshPublicKeyResource> CreateOrUpdate(WaitUntil waitUntil, string sshPublicKeyName, SshPublicKeyResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SshPublicKeyResource> CreateOrUpdate(WaitUntil waitUntil, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.CreateOrUpdate");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyResourceSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken);
+                var response = _sshPublicKeyRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken);
                 var operation = new SampleArmOperation<SshPublicKeyResource>(Response.FromValue(new SshPublicKeyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,11 +130,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyResourceSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.Get");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyResourceSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
+                var response = _sshPublicKeyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<SshPublicKeyResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
+                using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeyResourceSshPublicKeysRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sshPublicKeyRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -201,11 +201,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<SshPublicKeyResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
+                using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sshPublicKeyResourceSshPublicKeysRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sshPublicKeyRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -228,11 +228,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<SshPublicKeyResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
+                using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeyResourceSshPublicKeysRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _sshPublicKeyRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -243,11 +243,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<SshPublicKeyResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
+                using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sshPublicKeyResourceSshPublicKeysRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _sshPublicKeyRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SshPublicKeyResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -272,7 +272,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
             try
             {
@@ -299,7 +299,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.Exists");
             scope.Start();
             try
             {
@@ -326,11 +326,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyResourceSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SshPublicKeyResource>(null, response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
-            using var scope = _sshPublicKeyResourceSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
+            using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyResourceSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
+                var response = _sshPublicKeyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SshPublicKeyResource>(null, response.GetRawResponse());
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());

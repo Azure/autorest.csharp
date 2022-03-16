@@ -37,7 +37,7 @@ namespace MgmtMultipleParentResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentResourceData subBody)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentData subBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,7 +72,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentResourceData subBody, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -101,7 +101,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentResourceData subBody, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -316,7 +316,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentData>> GetAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -329,13 +329,13 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        SubParentResourceData value = default;
+                        SubParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
+                        value = SubParentData.DeserializeSubParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentResourceData)null, message.Response);
+                    return Response.FromValue((SubParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -350,7 +350,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/> or <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentResourceData> Get(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public Response<SubParentData> Get(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -363,13 +363,13 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                     {
-                        SubParentResourceData value = default;
+                        SubParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
+                        value = SubParentData.DeserializeSubParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentResourceData)null, message.Response);
+                    return Response.FromValue((SubParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

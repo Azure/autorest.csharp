@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PrivateEndpointConnectionResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async Task<Response<PrivateEndpointConnectionData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -159,13 +159,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionResourceData value = default;
+                        PrivateEndpointConnectionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
+                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PrivateEndpointConnectionResourceData)null, message.Response);
+                    return Response.FromValue((PrivateEndpointConnectionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -179,7 +179,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PrivateEndpointConnectionResourceData> Get(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnectionData> Get(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -192,19 +192,19 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionResourceData value = default;
+                        PrivateEndpointConnectionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
+                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PrivateEndpointConnectionResourceData)null, message.Response);
+                    return Response.FromValue((PrivateEndpointConnectionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionResourceData properties)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -239,7 +239,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PrivateEndpointConnectionResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
+        public async Task<Response<PrivateEndpointConnectionData>> PutAsync(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -253,9 +253,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionResourceData value = default;
+                        PrivateEndpointConnectionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
+                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -272,7 +272,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PrivateEndpointConnectionResourceData> Put(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnectionData> Put(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -286,9 +286,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionResourceData value = default;
+                        PrivateEndpointConnectionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
+                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

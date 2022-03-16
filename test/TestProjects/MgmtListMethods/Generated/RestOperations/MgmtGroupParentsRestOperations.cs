@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGroupParentName, MgmtGroupParentResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MgmtGroupParentResourceData>> CreateOrUpdateAsync(string groupId, string mgmtGroupParentName, MgmtGroupParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGroupParentData>> CreateOrUpdateAsync(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
@@ -78,9 +78,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGroupParentResourceData value = default;
+                        MgmtGroupParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MgmtGroupParentResourceData.DeserializeMgmtGroupParentResourceData(document.RootElement);
+                        value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MgmtGroupParentResourceData> CreateOrUpdate(string groupId, string mgmtGroupParentName, MgmtGroupParentResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<MgmtGroupParentData> CreateOrUpdate(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
@@ -107,9 +107,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGroupParentResourceData value = default;
+                        MgmtGroupParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MgmtGroupParentResourceData.DeserializeMgmtGroupParentResourceData(document.RootElement);
+                        value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MgmtGroupParentResourceData>> GetAsync(string groupId, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGroupParentData>> GetAsync(string groupId, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
@@ -152,13 +152,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGroupParentResourceData value = default;
+                        MgmtGroupParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MgmtGroupParentResourceData.DeserializeMgmtGroupParentResourceData(document.RootElement);
+                        value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MgmtGroupParentResourceData)null, message.Response);
+                    return Response.FromValue((MgmtGroupParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -170,7 +170,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MgmtGroupParentResourceData> Get(string groupId, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public Response<MgmtGroupParentData> Get(string groupId, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
@@ -181,13 +181,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGroupParentResourceData value = default;
+                        MgmtGroupParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MgmtGroupParentResourceData.DeserializeMgmtGroupParentResourceData(document.RootElement);
+                        value = MgmtGroupParentData.DeserializeMgmtGroupParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MgmtGroupParentResourceData)null, message.Response);
+                    return Response.FromValue((MgmtGroupParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

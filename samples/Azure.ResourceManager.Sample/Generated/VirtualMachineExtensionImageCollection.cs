@@ -24,8 +24,8 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over its parent. </summary>
     public partial class VirtualMachineExtensionImageCollection : ArmCollection, IEnumerable<VirtualMachineExtensionImageResource>, IAsyncEnumerable<VirtualMachineExtensionImageResource>
     {
-        private readonly ClientDiagnostics _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics;
-        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient;
+        private readonly ClientDiagnostics _virtualMachineExtensionImageClientDiagnostics;
+        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageRestClient;
         private readonly string _location;
         private readonly string _publisherName;
 
@@ -45,9 +45,9 @@ namespace Azure.ResourceManager.Sample
         {
             _location = location;
             _publisherName = publisherName;
-            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionImageResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineExtensionImageResource.ResourceType, out string virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
-            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
+            _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionImageResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineExtensionImageResource.ResourceType, out string virtualMachineExtensionImageApiVersion);
+            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -74,11 +74,11 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
@@ -105,11 +105,11 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
+                var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
@@ -132,11 +132,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineExtensionImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineExtensionImageRestClient.ListTypesAsync(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -159,11 +159,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineExtensionImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken);
+                    var response = _virtualMachineExtensionImageRestClient.ListTypes(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -194,11 +194,11 @@ namespace Azure.ResourceManager.Sample
 
             async Task<Page<VirtualMachineExtensionImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineExtensionImageRestClient.ListVersionsAsync(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -229,11 +229,11 @@ namespace Azure.ResourceManager.Sample
 
             Page<VirtualMachineExtensionImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
+                    var response = _virtualMachineExtensionImageRestClient.ListVersions(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -260,7 +260,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {
@@ -318,11 +318,11 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionImageResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
@@ -349,11 +349,11 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken);
+                var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionImageResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());

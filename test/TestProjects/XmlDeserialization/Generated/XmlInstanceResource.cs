@@ -27,9 +27,9 @@ namespace XmlDeserialization
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _xmlInstanceResourceXmlDeserializationClientDiagnostics;
-        private readonly XmlDeserializationRestOperations _xmlInstanceResourceXmlDeserializationRestClient;
-        private readonly XmlInstanceResourceData _data;
+        private readonly ClientDiagnostics _xmlInstanceXmlDeserializationClientDiagnostics;
+        private readonly XmlDeserializationRestOperations _xmlInstanceXmlDeserializationRestClient;
+        private readonly XmlInstanceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="XmlInstanceResource"/> class for mocking. </summary>
         protected XmlInstanceResource()
@@ -39,7 +39,7 @@ namespace XmlDeserialization
         /// <summary> Initializes a new instance of the <see cref = "XmlInstanceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal XmlInstanceResource(ArmClient client, XmlInstanceResourceData data) : this(client, data.Id)
+        internal XmlInstanceResource(ArmClient client, XmlInstanceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace XmlDeserialization
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal XmlInstanceResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _xmlInstanceResourceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string xmlInstanceResourceXmlDeserializationApiVersion);
-            _xmlInstanceResourceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceResourceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace XmlDeserialization
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual XmlInstanceResourceData Data
+        public virtual XmlInstanceData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<XmlInstanceResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Get");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Get");
             scope.Start();
             try
             {
-                var response = await _xmlInstanceResourceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstanceResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<XmlInstanceResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Get");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Get");
             scope.Start();
             try
             {
-                var response = _xmlInstanceResourceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstanceResource(Client, response.Value), response.GetRawResponse());
@@ -143,11 +143,11 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
             scope.Start();
             try
             {
-                var response = await _xmlInstanceResourceXmlDeserializationRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new XmlDeserializationArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -173,11 +173,11 @@ namespace XmlDeserialization
         {
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.Delete");
             scope.Start();
             try
             {
-                var response = _xmlInstanceResourceXmlDeserializationRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
                 var operation = new XmlDeserializationArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -198,11 +198,11 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetEntityTagAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.GetEntityTag");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.GetEntityTag");
             scope.Start();
             try
             {
-                var response = await _xmlInstanceResourceXmlDeserializationRestClient.GetEntityTagAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _xmlInstanceXmlDeserializationRestClient.GetEntityTagAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -220,11 +220,11 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetEntityTag(CancellationToken cancellationToken = default)
         {
-            using var scope = _xmlInstanceResourceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.GetEntityTag");
+            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstanceResource.GetEntityTag");
             scope.Start();
             try
             {
-                var response = _xmlInstanceResourceXmlDeserializationRestClient.GetEntityTag(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _xmlInstanceXmlDeserializationRestClient.GetEntityTag(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)

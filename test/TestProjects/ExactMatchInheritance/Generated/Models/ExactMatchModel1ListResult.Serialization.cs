@@ -16,7 +16,7 @@ namespace ExactMatchInheritance.Models
     {
         internal static ExactMatchModel1ListResult DeserializeExactMatchModel1ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ExactMatchModel1ResourceData>> value = default;
+            Optional<IReadOnlyList<ExactMatchModel1Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace ExactMatchInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ExactMatchModel1ResourceData> array = new List<ExactMatchModel1ResourceData>();
+                    List<ExactMatchModel1Data> array = new List<ExactMatchModel1Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ExactMatchModel1ResourceData.DeserializeExactMatchModel1ResourceData(item));
+                        array.Add(ExactMatchModel1Data.DeserializeExactMatchModel1Data(item));
                     }
                     value = array;
                     continue;

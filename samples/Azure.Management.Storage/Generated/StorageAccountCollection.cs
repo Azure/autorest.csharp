@@ -25,8 +25,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of StorageAccount and their operations over its parent. </summary>
     public partial class StorageAccountCollection : ArmCollection, IEnumerable<StorageAccountResource>, IAsyncEnumerable<StorageAccountResource>
     {
-        private readonly ClientDiagnostics _storageAccountResourceStorageAccountsClientDiagnostics;
-        private readonly StorageAccountsRestOperations _storageAccountResourceStorageAccountsRestClient;
+        private readonly ClientDiagnostics _storageAccountClientDiagnostics;
+        private readonly StorageAccountsRestOperations _storageAccountRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountCollection"/> class for mocking. </summary>
         protected StorageAccountCollection()
@@ -38,9 +38,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal StorageAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _storageAccountResourceStorageAccountsClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", StorageAccountResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(StorageAccountResource.ResourceType, out string storageAccountResourceStorageAccountsApiVersion);
-            _storageAccountResourceStorageAccountsRestClient = new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, storageAccountResourceStorageAccountsApiVersion);
+            _storageAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", StorageAccountResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(StorageAccountResource.ResourceType, out string storageAccountApiVersion);
+            _storageAccountRestClient = new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, storageAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,12 +68,12 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.CreateOrUpdate");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _storageAccountResourceStorageAccountsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<StorageAccountResource>(new StorageAccountResourceOperationSource(Client), _storageAccountResourceStorageAccountsClientDiagnostics, Pipeline, _storageAccountResourceStorageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _storageAccountRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageArmOperation<StorageAccountResource>(new StorageAccountOperationSource(Client), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -101,12 +101,12 @@ namespace Azure.Management.Storage
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.CreateOrUpdate");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _storageAccountResourceStorageAccountsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken);
-                var operation = new StorageArmOperation<StorageAccountResource>(new StorageAccountResourceOperationSource(Client), _storageAccountResourceStorageAccountsClientDiagnostics, Pipeline, _storageAccountResourceStorageAccountsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _storageAccountRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters, cancellationToken);
+                var operation = new StorageArmOperation<StorageAccountResource>(new StorageAccountOperationSource(Client), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, accountName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -132,11 +132,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.Get");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = await _storageAccountResourceStorageAccountsRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new StorageAccountResource(Client, response.Value), response.GetRawResponse());
@@ -162,11 +162,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.Get");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = _storageAccountResourceStorageAccountsRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken);
+                var response = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new StorageAccountResource(Client, response.Value), response.GetRawResponse());
@@ -190,11 +190,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
             scope.Start();
             try
             {
-                var response = await _storageAccountResourceStorageAccountsRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, accountName, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, accountName, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -216,11 +216,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.CheckNameAvailability");
             scope.Start();
             try
             {
-                var response = _storageAccountResourceStorageAccountsRestClient.CheckNameAvailability(Id.SubscriptionId, accountName, cancellationToken);
+                var response = _storageAccountRestClient.CheckNameAvailability(Id.SubscriptionId, accountName, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -241,11 +241,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageAccountResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
+                using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _storageAccountResourceStorageAccountsRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _storageAccountRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -256,11 +256,11 @@ namespace Azure.Management.Storage
             }
             async Task<Page<StorageAccountResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
+                using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _storageAccountResourceStorageAccountsRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _storageAccountRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -283,11 +283,11 @@ namespace Azure.Management.Storage
         {
             Page<StorageAccountResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
+                using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _storageAccountResourceStorageAccountsRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _storageAccountRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -298,11 +298,11 @@ namespace Azure.Management.Storage
             }
             Page<StorageAccountResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
+                using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _storageAccountResourceStorageAccountsRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _storageAccountRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -328,7 +328,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.Exists");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -356,7 +356,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.Exists");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -384,11 +384,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _storageAccountResourceStorageAccountsRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.GetPropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<StorageAccountResource>(null, response.GetRawResponse());
                 return Response.FromValue(new StorageAccountResource(Client, response.Value), response.GetRawResponse());
@@ -414,11 +414,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
-            using var scope = _storageAccountResourceStorageAccountsClientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
+            using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _storageAccountResourceStorageAccountsRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken);
+                var response = _storageAccountRestClient.GetProperties(Id.SubscriptionId, Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<StorageAccountResource>(null, response.GetRawResponse());
                 return Response.FromValue(new StorageAccountResource(Client, response.Value), response.GetRawResponse());

@@ -27,9 +27,9 @@ namespace SupersetFlattenInheritance
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _resourceModel1ResourceResourceModel1sClientDiagnostics;
-        private readonly ResourceModel1SRestOperations _resourceModel1ResourceResourceModel1sRestClient;
-        private readonly ResourceModel1ResourceData _data;
+        private readonly ClientDiagnostics _resourceModel1ClientDiagnostics;
+        private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
+        private readonly ResourceModel1Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class for mocking. </summary>
         protected ResourceModel1Resource()
@@ -39,7 +39,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceModel1Resource(ArmClient client, ResourceModel1ResourceData data) : this(client, data.Id)
+        internal ResourceModel1Resource(ArmClient client, ResourceModel1Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ResourceModel1Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resourceModel1ResourceResourceModel1sClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string resourceModel1ResourceResourceModel1sApiVersion);
-            _resourceModel1ResourceResourceModel1sRestClient = new ResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ResourceResourceModel1sApiVersion);
+            _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);
+            _resourceModel1RestClient = new ResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResourceModel1ResourceData Data
+        public virtual ResourceModel1Data Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResourceModel1Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceModel1ResourceResourceModel1sClientDiagnostics.CreateScope("ResourceModel1Resource.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = await _resourceModel1ResourceResourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1Resource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceModel1Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceModel1ResourceResourceModel1sClientDiagnostics.CreateScope("ResourceModel1Resource.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Resource.Get");
             scope.Start();
             try
             {
-                var response = _resourceModel1ResourceResourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1Resource(Client, response.Value), response.GetRawResponse());

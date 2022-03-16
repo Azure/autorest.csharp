@@ -28,9 +28,9 @@ namespace MgmtPropertyChooser
         /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
-        public static VirtualMachineCollection GetVirtualMachineResources(this ResourceGroup resourceGroup)
+        public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetVirtualMachineResources();
+            return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineResourceAsync(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetVirtualMachineResources().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public static Response<VirtualMachineResource> GetVirtualMachineResource(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetVirtualMachineResources().Get(vmName, cancellationToken);
+            return resourceGroup.GetVirtualMachines().Get(vmName, cancellationToken);
         }
     }
 }

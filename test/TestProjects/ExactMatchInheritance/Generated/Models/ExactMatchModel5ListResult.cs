@@ -17,20 +17,20 @@ namespace ExactMatchInheritance.Models
         /// <summary> Initializes a new instance of ExactMatchModel5ListResult. </summary>
         internal ExactMatchModel5ListResult()
         {
-            Value = new ChangeTrackingList<ExactMatchModel5ResourceData>();
+            Value = new ChangeTrackingList<ExactMatchModel5Data>();
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel5ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal ExactMatchModel5ListResult(IReadOnlyList<ExactMatchModel5ResourceData> value, string nextLink)
+        internal ExactMatchModel5ListResult(IReadOnlyList<ExactMatchModel5Data> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<ExactMatchModel5ResourceData> Value { get; }
+        public IReadOnlyList<ExactMatchModel5Data> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

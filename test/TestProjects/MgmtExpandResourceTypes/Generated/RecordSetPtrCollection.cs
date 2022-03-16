@@ -24,8 +24,8 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class representing collection of RecordSetPtr and their operations over its parent. </summary>
     public partial class RecordSetPtrCollection : ArmCollection, IEnumerable<RecordSetPtrResource>, IAsyncEnumerable<RecordSetPtrResource>
     {
-        private readonly ClientDiagnostics _recordSetPtrResourceRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetPtrResourceRecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetPtrRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetPtrRecordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetPtrCollection"/> class for mocking. </summary>
         protected RecordSetPtrCollection()
@@ -37,9 +37,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal RecordSetPtrCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetPtrResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetPtrResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(RecordSetPtrResource.ResourceType, out string recordSetPtrResourceRecordSetsApiVersion);
-            _recordSetPtrResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetPtrResourceRecordSetsApiVersion);
+            _recordSetPtrRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetPtrResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(RecordSetPtrResource.ResourceType, out string recordSetPtrRecordSetsApiVersion);
+            _recordSetPtrRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetPtrRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -63,16 +63,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<RecordSetPtrResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<RecordSetPtrResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrResourceRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetPtrRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtrResource>(Response.FromValue(new RecordSetPtrResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -97,16 +97,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<RecordSetPtrResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<RecordSetPtrResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetPtrResourceRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetPtrRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtrResource>(Response.FromValue(new RecordSetPtrResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -131,11 +131,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetPtrResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetPtrResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetPtrResourceRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetPtrRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetPtrResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetPtrResourceRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetPtrRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,11 +232,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetPtrResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetPtrResourceRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetPtrRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -247,11 +247,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetPtrResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetPtrResourceRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetPtrRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -275,7 +275,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
             scope.Start();
             try
             {
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
             scope.Start();
             try
             {
@@ -327,11 +327,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetPtrResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
+            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetPtrResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetPtrResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());

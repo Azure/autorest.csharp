@@ -24,8 +24,8 @@ namespace MgmtResourceName
     /// <summary> A class representing collection of Machine and their operations over its parent. </summary>
     public partial class MachineCollection : ArmCollection, IEnumerable<MachineResource>, IAsyncEnumerable<MachineResource>
     {
-        private readonly ClientDiagnostics _machineResourceMachinesClientDiagnostics;
-        private readonly MachinesRestOperations _machineResourceMachinesRestClient;
+        private readonly ClientDiagnostics _machineClientDiagnostics;
+        private readonly MachinesRestOperations _machineRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MachineCollection"/> class for mocking. </summary>
         protected MachineCollection()
@@ -37,9 +37,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal MachineCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _machineResourceMachinesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", MachineResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(MachineResource.ResourceType, out string machineResourceMachinesApiVersion);
-            _machineResourceMachinesRestClient = new MachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, machineResourceMachinesApiVersion);
+            _machineClientDiagnostics = new ClientDiagnostics("MgmtResourceName", MachineResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(MachineResource.ResourceType, out string machineApiVersion);
+            _machineRestClient = new MachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, machineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<MachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _machineResourceMachinesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _machineRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -93,16 +93,16 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<MachineResource> CreateOrUpdate(WaitUntil waitUntil, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MachineResource> CreateOrUpdate(WaitUntil waitUntil, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _machineResourceMachinesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, machineName, parameters, cancellationToken);
+                var response = _machineRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, machineName, parameters, cancellationToken);
                 var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -127,11 +127,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.Get");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Get");
             scope.Start();
             try
             {
-                var response = await _machineResourceMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken).ConfigureAwait(false);
+                var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
@@ -155,11 +155,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.Get");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Get");
             scope.Start();
             try
             {
-                var response = _machineResourceMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken);
+                var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
@@ -181,11 +181,11 @@ namespace MgmtResourceName
         {
             async Task<Page<MachineResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.GetAll");
+                using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _machineResourceMachinesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _machineRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new MachineResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -207,11 +207,11 @@ namespace MgmtResourceName
         {
             Page<MachineResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.GetAll");
+                using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _machineResourceMachinesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _machineRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new MachineResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -236,7 +236,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.Exists");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.Exists");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.Exists");
             scope.Start();
             try
             {
@@ -290,11 +290,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _machineResourceMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<MachineResource>(null, response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
@@ -319,11 +319,11 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
 
-            using var scope = _machineResourceMachinesClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
+            using var scope = _machineClientDiagnostics.CreateScope("MachineCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _machineResourceMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken);
+                var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<MachineResource>(null, response.GetRawResponse());
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());

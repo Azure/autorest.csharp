@@ -39,11 +39,11 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineResource> GetVirtualMachineResourcesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetVirtualMachineResourcesByLocationAsync(location, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachinesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineResource> GetVirtualMachineResourcesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetVirtualMachineResourcesByLocation(location, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachinesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace MgmtRenameRules
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineResource> GetVirtualMachineResourcesAsync(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineResourcesAsync(statusOnly, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace MgmtRenameRules
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineResource> GetVirtualMachineResources(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachineResource> GetVirtualMachines(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineResources(statusOnly, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachines(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace MgmtRenameRules
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ImageResource> GetImageResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<ImageResource> GetImagesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetImageResourcesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetImagesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -113,9 +113,9 @@ namespace MgmtRenameRules
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ImageResource> GetImageResources(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<ImageResource> GetImages(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetImageResources(cancellationToken);
+            return GetExtensionClient(subscription).GetImages(cancellationToken);
         }
 
         /// <summary>
@@ -126,9 +126,9 @@ namespace MgmtRenameRules
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSetResourcesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineScaleSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -139,9 +139,9 @@ namespace MgmtRenameRules
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResources(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSetResources(cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineScaleSets(cancellationToken);
         }
 
         /// <summary>

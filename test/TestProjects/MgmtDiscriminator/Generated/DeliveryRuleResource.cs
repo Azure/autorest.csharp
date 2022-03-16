@@ -27,9 +27,9 @@ namespace MgmtDiscriminator
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _deliveryRuleResourceDeliveryRulesClientDiagnostics;
-        private readonly DeliveryRulesRestOperations _deliveryRuleResourceDeliveryRulesRestClient;
-        private readonly DeliveryRuleResourceData _data;
+        private readonly ClientDiagnostics _deliveryRuleClientDiagnostics;
+        private readonly DeliveryRulesRestOperations _deliveryRuleRestClient;
+        private readonly DeliveryRuleData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeliveryRuleResource"/> class for mocking. </summary>
         protected DeliveryRuleResource()
@@ -39,7 +39,7 @@ namespace MgmtDiscriminator
         /// <summary> Initializes a new instance of the <see cref = "DeliveryRuleResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeliveryRuleResource(ArmClient client, DeliveryRuleResourceData data) : this(client, data.Id)
+        internal DeliveryRuleResource(ArmClient client, DeliveryRuleData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtDiscriminator
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DeliveryRuleResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deliveryRuleResourceDeliveryRulesClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string deliveryRuleResourceDeliveryRulesApiVersion);
-            _deliveryRuleResourceDeliveryRulesRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleResourceDeliveryRulesApiVersion);
+            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string deliveryRuleApiVersion);
+            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtDiscriminator
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeliveryRuleResourceData Data
+        public virtual DeliveryRuleData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeliveryRuleResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleResource.Get");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Get");
             scope.Start();
             try
             {
-                var response = await _deliveryRuleResourceDeliveryRulesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deliveryRuleRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeliveryRuleResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleResource.Get");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Get");
             scope.Start();
             try
             {
-                var response = _deliveryRuleResourceDeliveryRulesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _deliveryRuleRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());
@@ -139,12 +139,12 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleResource.Delete");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Delete");
             scope.Start();
             try
             {
-                var response = await _deliveryRuleResourceDeliveryRulesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleResourceDeliveryRulesClientDiagnostics, Pipeline, _deliveryRuleResourceDeliveryRulesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _deliveryRuleRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -165,12 +165,12 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleResource.Delete");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleResource.Delete");
             scope.Start();
             try
             {
-                var response = _deliveryRuleResourceDeliveryRulesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleResourceDeliveryRulesClientDiagnostics, Pipeline, _deliveryRuleResourceDeliveryRulesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _deliveryRuleRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

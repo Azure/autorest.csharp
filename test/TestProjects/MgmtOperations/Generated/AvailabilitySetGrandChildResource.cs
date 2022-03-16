@@ -28,9 +28,9 @@ namespace MgmtOperations
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics;
-        private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient;
-        private readonly AvailabilitySetGrandChildResourceData _data;
+        private readonly ClientDiagnostics _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics;
+        private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildavailabilitySetGrandChildRestClient;
+        private readonly AvailabilitySetGrandChildData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildResource"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildResource()
@@ -40,7 +40,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetGrandChildResource(ArmClient client, AvailabilitySetGrandChildResourceData data) : this(client, data.Id)
+        internal AvailabilitySetGrandChildResource(ArmClient client, AvailabilitySetGrandChildData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AvailabilitySetGrandChildResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string availabilitySetGrandChildResourceavailabilitySetGrandChildApiVersion);
-            _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetGrandChildResourceavailabilitySetGrandChildApiVersion);
+            _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string availabilitySetGrandChildavailabilitySetGrandChildApiVersion);
+            _availabilitySetGrandChildavailabilitySetGrandChildRestClient = new AvailabilitySetGrandChildRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetGrandChildavailabilitySetGrandChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtOperations
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetGrandChildResourceData Data
+        public virtual AvailabilitySetGrandChildData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AvailabilitySetGrandChildResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.Get");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.Get");
             scope.Start();
             try
             {
-                var response = await _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AvailabilitySetGrandChildResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.Get");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.Get");
             scope.Start();
             try
             {
-                var response = _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value), response.GetRawResponse());
@@ -145,14 +145,14 @@ namespace MgmtOperations
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.AddTag");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -176,14 +176,14 @@ namespace MgmtOperations
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.AddTag");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.SetTags");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.SetTags");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace MgmtOperations
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.SetTags");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.SetTags");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace MgmtOperations
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -265,14 +265,14 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.RemoveTag");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,14 +294,14 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.RemoveTag");
+            using var scope = _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics.CreateScope("AvailabilitySetGrandChildResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var originalResponse = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetGrandChildResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

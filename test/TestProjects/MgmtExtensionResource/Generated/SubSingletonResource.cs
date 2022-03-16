@@ -27,9 +27,9 @@ namespace MgmtExtensionResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _subSingletonResourceSubSingletonsClientDiagnostics;
-        private readonly SubSingletonsRestOperations _subSingletonResourceSubSingletonsRestClient;
-        private readonly SubSingletonResourceData _data;
+        private readonly ClientDiagnostics _subSingletonClientDiagnostics;
+        private readonly SubSingletonsRestOperations _subSingletonRestClient;
+        private readonly SubSingletonData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubSingletonResource"/> class for mocking. </summary>
         protected SubSingletonResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "SubSingletonResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubSingletonResource(ArmClient client, SubSingletonResourceData data) : this(client, data.Id)
+        internal SubSingletonResource(ArmClient client, SubSingletonData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubSingletonResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subSingletonResourceSubSingletonsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string subSingletonResourceSubSingletonsApiVersion);
-            _subSingletonResourceSubSingletonsRestClient = new SubSingletonsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonResourceSubSingletonsApiVersion);
+            _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
+            _subSingletonRestClient = new SubSingletonsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubSingletonResourceData Data
+        public virtual SubSingletonData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SubSingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _subSingletonResourceSubSingletonsClientDiagnostics.CreateScope("SubSingletonResource.Get");
+            using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Get");
             scope.Start();
             try
             {
-                var response = await _subSingletonResourceSubSingletonsRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var response = await _subSingletonRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubSingletonResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _subSingletonResourceSubSingletonsClientDiagnostics.CreateScope("SubSingletonResource.Get");
+            using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Get");
             scope.Start();
             try
             {
-                var response = _subSingletonResourceSubSingletonsRestClient.Get(Id.SubscriptionId, cancellationToken);
+                var response = _subSingletonRestClient.Get(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
@@ -138,11 +138,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _subSingletonResourceSubSingletonsClientDiagnostics.CreateScope("SubSingletonResource.Execute");
+            using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Execute");
             scope.Start();
             try
             {
-                var response = await _subSingletonResourceSubSingletonsRestClient.ExecuteAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var response = await _subSingletonRestClient.ExecuteAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -160,11 +160,11 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Execute(CancellationToken cancellationToken = default)
         {
-            using var scope = _subSingletonResourceSubSingletonsClientDiagnostics.CreateScope("SubSingletonResource.Execute");
+            using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingletonResource.Execute");
             scope.Start();
             try
             {
-                var response = _subSingletonResourceSubSingletonsRestClient.Execute(Id.SubscriptionId, cancellationToken);
+                var response = _subSingletonRestClient.Execute(Id.SubscriptionId, cancellationToken);
                 return response;
             }
             catch (Exception e)

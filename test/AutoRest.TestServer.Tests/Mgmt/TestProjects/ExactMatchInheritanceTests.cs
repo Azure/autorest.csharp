@@ -19,8 +19,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(ResourceData), typeof(ExactMatchModel1ResourceData))]
-        [TestCase(typeof(TrackedResourceData), typeof(ExactMatchModel5ResourceData))]
+        [TestCase(typeof(ResourceData), typeof(ExactMatchModel1Data))]
+        [TestCase(typeof(TrackedResourceData), typeof(ExactMatchModel5Data))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]
@@ -36,22 +36,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(ExactMatchModel1ResourceData), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel1Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel3), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel4), new string[] { }, new Type[] { })]
-        [TestCase(typeof(ExactMatchModel5ResourceData), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
+        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(ExactMatchModel7), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel8), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
 
-        [TestCase(true, "ResourceType", "ExactMatchModel1ResourceData")]
-        [TestCase(false, "Type", "ExactMatchModel1ResourceData")]
-        [TestCase(true, "ResourceType", "ExactMatchModel5ResourceData")]
-        [TestCase(false, "Type", "ExactMatchModel5ResourceData")]
-        [TestCase(false, "ExactMatchModel11Type", "ExactMatchModel5ResourceData")]
+        [TestCase(true, "ResourceType", "ExactMatchModel1Data")]
+        [TestCase(false, "Type", "ExactMatchModel1Data")]
+        [TestCase(true, "ResourceType", "ExactMatchModel5Data")]
+        [TestCase(false, "Type", "ExactMatchModel5Data")]
+        [TestCase(false, "ExactMatchModel11Type", "ExactMatchModel5Data")]
         [TestCase(true, "ExactMatchModel7Type", "ExactMatchModel2")]
         [TestCase(false, "ResourceType", "ExactMatchModel2")]
         [TestCase(false, "Type", "ExactMatchModel2")]

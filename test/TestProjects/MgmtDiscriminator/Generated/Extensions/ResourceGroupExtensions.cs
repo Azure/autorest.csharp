@@ -28,9 +28,9 @@ namespace MgmtDiscriminator
         /// <summary> Gets a collection of DeliveryRuleResources in the DeliveryRuleResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
-        public static DeliveryRuleCollection GetDeliveryRuleResources(this ResourceGroup resourceGroup)
+        public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetDeliveryRuleResources();
+            return GetExtensionClient(resourceGroup).GetDeliveryRules();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleResourceAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDeliveryRuleResources().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<DeliveryRuleResource> GetDeliveryRuleResource(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDeliveryRuleResources().Get(name, cancellationToken);
+            return resourceGroup.GetDeliveryRules().Get(name, cancellationToken);
         }
     }
 }

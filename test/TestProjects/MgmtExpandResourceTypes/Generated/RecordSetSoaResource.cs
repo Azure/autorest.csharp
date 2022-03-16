@@ -28,9 +28,9 @@ namespace MgmtExpandResourceTypes
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _recordSetSoaResourceRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetSoaResourceRecordSetsRestClient;
-        private readonly RecordSetResourceData _data;
+        private readonly ClientDiagnostics _recordSetSoaRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetSoaRecordSetsRestClient;
+        private readonly RecordSetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetSoaResource"/> class for mocking. </summary>
         protected RecordSetSoaResource()
@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetSoaResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetSoaResource(ArmClient client, RecordSetResourceData data) : this(client, data.Id)
+        internal RecordSetSoaResource(ArmClient client, RecordSetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal RecordSetSoaResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetSoaResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string recordSetSoaResourceRecordSetsApiVersion);
-            _recordSetSoaResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSoaResourceRecordSetsApiVersion);
+            _recordSetSoaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string recordSetSoaRecordSetsApiVersion);
+            _recordSetSoaRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSoaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RecordSetResourceData Data
+        public virtual RecordSetData Data
         {
             get
             {
@@ -91,11 +91,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RecordSetSoaResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Get");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetSoaResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetSoaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetSoaResource(Client, response.Value), response.GetRawResponse());
@@ -115,11 +115,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RecordSetSoaResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Get");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Get");
             scope.Start();
             try
             {
-                var response = _recordSetSoaResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken);
+                var response = _recordSetSoaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetSoaResource(Client, response.Value), response.GetRawResponse());
@@ -141,11 +141,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Delete");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Delete");
             scope.Start();
             try
             {
-                var response = await _recordSetSoaResourceRecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetSoaRecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -168,11 +168,11 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Delete");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Delete");
             scope.Start();
             try
             {
-                var response = _recordSetSoaResourceRecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, ifMatch, cancellationToken);
+                var response = _recordSetSoaRecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, ifMatch, cancellationToken);
                 var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -194,15 +194,15 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<RecordSetSoaResource>> UpdateAsync(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetSoaResource>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Update");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Update");
             scope.Start();
             try
             {
-                var response = await _recordSetSoaResourceRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetSoaRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetSoaResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -221,15 +221,15 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<RecordSetSoaResource> Update(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetSoaResource> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetSoaResourceRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Update");
+            using var scope = _recordSetSoaRecordSetsClientDiagnostics.CreateScope("RecordSetSoaResource.Update");
             scope.Start();
             try
             {
-                var response = _recordSetSoaResourceRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
+                var response = _recordSetSoaRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "SOA".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
                 return Response.FromValue(new RecordSetSoaResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

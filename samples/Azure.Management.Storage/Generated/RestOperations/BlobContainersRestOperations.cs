@@ -134,7 +134,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer)
+        internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -169,7 +169,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BlobContainerResourceData>> CreateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> CreateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -184,9 +184,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -203,7 +203,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BlobContainerResourceData> Create(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Create(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -218,9 +218,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -228,7 +228,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -263,7 +263,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BlobContainerResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> UpdateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -277,9 +277,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -296,7 +296,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BlobContainerResourceData> Update(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Update(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -310,9 +310,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -350,7 +350,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BlobContainerResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -363,13 +363,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BlobContainerResourceData)null, message.Response);
+                    return Response.FromValue((BlobContainerData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -383,7 +383,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BlobContainerResourceData> Get(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Get(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -396,13 +396,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainerResourceData value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainerResourceData.DeserializeBlobContainerResourceData(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BlobContainerResourceData)null, message.Response);
+                    return Response.FromValue((BlobContainerData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -669,7 +669,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyResourceData parameters, string ifMatch)
+        internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData parameters, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -714,7 +714,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ImmutabilityPolicyResourceData>> CreateOrUpdateImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyResourceData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> CreateOrUpdateImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -727,9 +727,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -747,7 +747,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ImmutabilityPolicyResourceData> CreateOrUpdateImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyResourceData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> CreateOrUpdateImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -760,9 +760,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -807,7 +807,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ImmutabilityPolicyResourceData>> GetImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> GetImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -820,13 +820,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ImmutabilityPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ImmutabilityPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -841,7 +841,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ImmutabilityPolicyResourceData> GetImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> GetImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -854,13 +854,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ImmutabilityPolicyResourceData)null, message.Response);
+                    return Response.FromValue((ImmutabilityPolicyData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -900,7 +900,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ImmutabilityPolicyResourceData>> DeleteImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> DeleteImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -914,9 +914,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -933,7 +933,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ImmutabilityPolicyResourceData> DeleteImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> DeleteImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -947,9 +947,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -990,7 +990,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ImmutabilityPolicyResourceData>> LockImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> LockImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1004,9 +1004,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1023,7 +1023,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ImmutabilityPolicyResourceData> LockImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> LockImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1037,9 +1037,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1047,7 +1047,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateExtendImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyResourceData parameters)
+        internal HttpMessage CreateExtendImmutabilityPolicyRequest(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1088,7 +1088,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ImmutabilityPolicyResourceData>> ExtendImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyResourceData parameters = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicyData>> ExtendImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1102,9 +1102,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1122,7 +1122,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/> or <paramref name="ifMatch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ImmutabilityPolicyResourceData> ExtendImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyResourceData parameters = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicyData> ExtendImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1136,9 +1136,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ImmutabilityPolicyResourceData value = default;
+                        ImmutabilityPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ImmutabilityPolicyResourceData.DeserializeImmutabilityPolicyResourceData(document.RootElement);
+                        value = ImmutabilityPolicyData.DeserializeImmutabilityPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

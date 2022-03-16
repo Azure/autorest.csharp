@@ -27,9 +27,9 @@ namespace MgmtKeyvault
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _deletedManagedHsmResourceManagedHsmsClientDiagnostics;
-        private readonly ManagedHsmsRestOperations _deletedManagedHsmResourceManagedHsmsRestClient;
-        private readonly DeletedManagedHsmResourceData _data;
+        private readonly ClientDiagnostics _deletedManagedHsmManagedHsmsClientDiagnostics;
+        private readonly ManagedHsmsRestOperations _deletedManagedHsmManagedHsmsRestClient;
+        private readonly DeletedManagedHsmData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmResource"/> class for mocking. </summary>
         protected DeletedManagedHsmResource()
@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "DeletedManagedHsmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedManagedHsmResource(ArmClient client, DeletedManagedHsmResourceData data) : this(client, data.Id)
+        internal DeletedManagedHsmResource(ArmClient client, DeletedManagedHsmData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DeletedManagedHsmResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedManagedHsmResourceManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string deletedManagedHsmResourceManagedHsmsApiVersion);
-            _deletedManagedHsmResourceManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmResourceManagedHsmsApiVersion);
+            _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
+            _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeletedManagedHsmResourceData Data
+        public virtual DeletedManagedHsmData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeletedManagedHsmResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.Get");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.Get");
             scope.Start();
             try
             {
-                var response = await _deletedManagedHsmResourceManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedManagedHsmManagedHsmsRestClient.GetDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeletedManagedHsmResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.Get");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.Get");
             scope.Start();
             try
             {
-                var response = _deletedManagedHsmResourceManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _deletedManagedHsmManagedHsmsRestClient.GetDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedManagedHsmResource(Client, response.Value), response.GetRawResponse());
@@ -139,12 +139,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> PurgeDeletedAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.PurgeDeleted");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.PurgeDeleted");
             scope.Start();
             try
             {
-                var response = await _deletedManagedHsmResourceManagedHsmsRestClient.PurgeDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation(_deletedManagedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _deletedManagedHsmResourceManagedHsmsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _deletedManagedHsmManagedHsmsRestClient.PurgeDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, _deletedManagedHsmManagedHsmsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -165,12 +165,12 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation PurgeDeleted(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _deletedManagedHsmResourceManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.PurgeDeleted");
+            using var scope = _deletedManagedHsmManagedHsmsClientDiagnostics.CreateScope("DeletedManagedHsmResource.PurgeDeleted");
             scope.Start();
             try
             {
-                var response = _deletedManagedHsmResourceManagedHsmsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation(_deletedManagedHsmResourceManagedHsmsClientDiagnostics, Pipeline, _deletedManagedHsmResourceManagedHsmsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _deletedManagedHsmManagedHsmsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, _deletedManagedHsmManagedHsmsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

@@ -23,8 +23,8 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineExtension and their operations over its parent. </summary>
     public partial class VirtualMachineExtensionCollection : ArmCollection, IEnumerable<VirtualMachineExtensionResource>, IAsyncEnumerable<VirtualMachineExtensionResource>
     {
-        private readonly ClientDiagnostics _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics;
-        private readonly VirtualMachineExtensionsRestOperations _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient;
+        private readonly ClientDiagnostics _virtualMachineExtensionClientDiagnostics;
+        private readonly VirtualMachineExtensionsRestOperations _virtualMachineExtensionRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionCollection"/> class for mocking. </summary>
         protected VirtualMachineExtensionCollection()
@@ -36,9 +36,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VirtualMachineExtensionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineExtensionResource.ResourceType, out string virtualMachineExtensionResourceVirtualMachineExtensionsApiVersion);
-            _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient = new VirtualMachineExtensionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionResourceVirtualMachineExtensionsApiVersion);
+            _virtualMachineExtensionClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineExtensionResource.ResourceType, out string virtualMachineExtensionApiVersion);
+            _virtualMachineExtensionRestClient = new VirtualMachineExtensionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,17 +61,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<VirtualMachineExtensionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionResourceData extensionParameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<VirtualMachineExtensionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.CreateOrUpdate");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionResourceOperationSource(Client), _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics, Pipeline, _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineExtensionRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionOperationSource(Client), _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,17 +94,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public virtual ArmOperation<VirtualMachineExtensionResource> CreateOrUpdate(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionResourceData extensionParameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineExtensionResource> CreateOrUpdate(WaitUntil waitUntil, string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
             Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.CreateOrUpdate");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken);
-                var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionResourceOperationSource(Client), _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics, Pipeline, _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineExtensionRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters, cancellationToken);
+                var operation = new SampleArmOperation<VirtualMachineExtensionResource>(new VirtualMachineExtensionOperationSource(Client), _virtualMachineExtensionClientDiagnostics, Pipeline, _virtualMachineExtensionRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, extensionParameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -130,11 +130,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionResource(Client, response.Value), response.GetRawResponse());
@@ -160,11 +160,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken);
+                var response = _virtualMachineExtensionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineExtensionResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetAll");
+                using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineExtensionRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtensionResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -216,11 +216,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineExtensionResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetAll");
+                using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
+                    var response = _virtualMachineExtensionRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineExtensionResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -246,7 +246,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.Exists");
             scope.Start();
             try
             {
@@ -302,11 +302,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionResource(Client, response.Value), response.GetRawResponse());
@@ -332,11 +332,11 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(vmExtensionName, nameof(vmExtensionName));
 
-            using var scope = _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionClientDiagnostics.CreateScope("VirtualMachineExtensionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
+                var response = _virtualMachineExtensionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<VirtualMachineExtensionResource>(null, response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineExtensionResource(Client, response.Value), response.GetRawResponse());

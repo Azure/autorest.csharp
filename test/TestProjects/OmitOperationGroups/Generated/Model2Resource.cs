@@ -28,11 +28,11 @@ namespace OmitOperationGroups
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _model2ResourceModel2sClientDiagnostics;
-        private readonly Model2SRestOperations _model2ResourceModel2sRestClient;
+        private readonly ClientDiagnostics _model2ClientDiagnostics;
+        private readonly Model2SRestOperations _model2RestClient;
         private readonly ClientDiagnostics _model4sClientDiagnostics;
         private readonly Model4SRestOperations _model4sRestClient;
-        private readonly Model2ResourceData _data;
+        private readonly Model2Data _data;
 
         /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class for mocking. </summary>
         protected Model2Resource()
@@ -42,7 +42,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Model2Resource(ArmClient client, Model2ResourceData data) : this(client, data.Id)
+        internal Model2Resource(ArmClient client, Model2Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -53,9 +53,9 @@ namespace OmitOperationGroups
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Model2Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _model2ResourceModel2sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string model2ResourceModel2sApiVersion);
-            _model2ResourceModel2sRestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ResourceModel2sApiVersion);
+            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string model2ApiVersion);
+            _model2RestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
             _model4sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _model4sRestClient = new Model4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
@@ -71,7 +71,7 @@ namespace OmitOperationGroups
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual Model2ResourceData Data
+        public virtual Model2Data Data
         {
             get
             {
@@ -94,11 +94,11 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model2Resource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Resource.Get");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Resource.Get");
             scope.Start();
             try
             {
-                var response = await _model2ResourceModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());
@@ -117,11 +117,11 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model2Resource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _model2ResourceModel2sClientDiagnostics.CreateScope("Model2Resource.Get");
+            using var scope = _model2ClientDiagnostics.CreateScope("Model2Resource.Get");
             scope.Start();
             try
             {
-                var response = _model2ResourceModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2Resource(Client, response.Value), response.GetRawResponse());

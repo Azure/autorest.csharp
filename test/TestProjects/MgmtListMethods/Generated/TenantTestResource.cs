@@ -28,9 +28,9 @@ namespace MgmtListMethods
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _tenantTestResourceTenantTestsClientDiagnostics;
-        private readonly TenantTestsRestOperations _tenantTestResourceTenantTestsRestClient;
-        private readonly TenantTestResourceData _data;
+        private readonly ClientDiagnostics _tenantTestClientDiagnostics;
+        private readonly TenantTestsRestOperations _tenantTestRestClient;
+        private readonly TenantTestData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TenantTestResource"/> class for mocking. </summary>
         protected TenantTestResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "TenantTestResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TenantTestResource(ArmClient client, TenantTestResourceData data) : this(client, data.Id)
+        internal TenantTestResource(ArmClient client, TenantTestData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TenantTestResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _tenantTestResourceTenantTestsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string tenantTestResourceTenantTestsApiVersion);
-            _tenantTestResourceTenantTestsRestClient = new TenantTestsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestResourceTenantTestsApiVersion);
+            _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string tenantTestApiVersion);
+            _tenantTestRestClient = new TenantTestsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TenantTestResourceData Data
+        public virtual TenantTestData Data
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets a collection of TenantParentWithNonResChWithLocResources in the TenantParentWithNonResChWithLocResource. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocResources and their operations over a TenantParentWithNonResChWithLocResource. </returns>
-        public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocResources()
+        public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
             return GetCachedClient(Client => new TenantParentWithNonResChWithLocCollection(Client, Id));
         }
@@ -99,9 +99,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual async Task<Response<TenantParentWithNonResChWithLocResource>> GetTenantParentWithNonResChWithLocResourceAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithNonResChWithLocResource>> GetTenantParentWithNonResChWithLocAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await GetTenantParentWithNonResChWithLocResources().GetAsync(tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetTenantParentWithNonResChWithLocs().GetAsync(tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -113,14 +113,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public virtual Response<TenantParentWithNonResChWithLocResource> GetTenantParentWithNonResChWithLocResource(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantParentWithNonResChWithLocResource> GetTenantParentWithNonResChWithLoc(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetTenantParentWithNonResChWithLocResources().Get(tenantParentWithNonResChWithLocName, cancellationToken);
+            return GetTenantParentWithNonResChWithLocs().Get(tenantParentWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantParentWithNonResChResources in the TenantParentWithNonResChResource. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChResources and their operations over a TenantParentWithNonResChResource. </returns>
-        public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChResources()
+        public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
             return GetCachedClient(Client => new TenantParentWithNonResChCollection(Client, Id));
         }
@@ -134,9 +134,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<TenantParentWithNonResChResource>> GetTenantParentWithNonResChResourceAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithNonResChResource>> GetTenantParentWithNonResChAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await GetTenantParentWithNonResChResources().GetAsync(tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetTenantParentWithNonResChes().GetAsync(tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,14 +148,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
-        public virtual Response<TenantParentWithNonResChResource> GetTenantParentWithNonResChResource(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantParentWithNonResChResource> GetTenantParentWithNonResCh(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetTenantParentWithNonResChResources().Get(tenantParentWithNonResChName, cancellationToken);
+            return GetTenantParentWithNonResChes().Get(tenantParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantParentWithLocResources in the TenantParentWithLocResource. </summary>
         /// <returns> An object representing collection of TenantParentWithLocResources and their operations over a TenantParentWithLocResource. </returns>
-        public virtual TenantParentWithLocCollection GetTenantParentWithLocResources()
+        public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
             return GetCachedClient(Client => new TenantParentWithLocCollection(Client, Id));
         }
@@ -169,9 +169,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual async Task<Response<TenantParentWithLocResource>> GetTenantParentWithLocResourceAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithLocResource>> GetTenantParentWithLocAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return await GetTenantParentWithLocResources().GetAsync(tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetTenantParentWithLocs().GetAsync(tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -183,14 +183,14 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual Response<TenantParentWithLocResource> GetTenantParentWithLocResource(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantParentWithLocResource> GetTenantParentWithLoc(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetTenantParentWithLocResources().Get(tenantParentWithLocName, cancellationToken);
+            return GetTenantParentWithLocs().Get(tenantParentWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantParentResources in the TenantParentResource. </summary>
         /// <returns> An object representing collection of TenantParentResources and their operations over a TenantParentResource. </returns>
-        public virtual TenantParentCollection GetTenantParentResources()
+        public virtual TenantParentCollection GetTenantParents()
         {
             return GetCachedClient(Client => new TenantParentCollection(Client, Id));
         }
@@ -204,9 +204,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
-        public virtual async Task<Response<TenantParentResource>> GetTenantParentResourceAsync(string tenantParentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentResource>> GetTenantParentAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            return await GetTenantParentResources().GetAsync(tenantParentName, cancellationToken).ConfigureAwait(false);
+            return await GetTenantParents().GetAsync(tenantParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -218,9 +218,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
-        public virtual Response<TenantParentResource> GetTenantParentResource(string tenantParentName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantParentResource> GetTenantParent(string tenantParentName, CancellationToken cancellationToken = default)
         {
-            return GetTenantParentResources().Get(tenantParentName, cancellationToken);
+            return GetTenantParents().Get(tenantParentName, cancellationToken);
         }
 
         /// <summary>
@@ -232,11 +232,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TenantTestResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.Get");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.Get");
             scope.Start();
             try
             {
-                var response = await _tenantTestResourceTenantTestsRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantTestRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
@@ -257,11 +257,11 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TenantTestResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.Get");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.Get");
             scope.Start();
             try
             {
-                var response = _tenantTestResourceTenantTestsRestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _tenantTestRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
@@ -287,14 +287,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.AddTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestResourceTenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -318,14 +318,14 @@ namespace MgmtListMethods
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.AddTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestResourceTenantTestsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -347,7 +347,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.SetTags");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.SetTags");
             scope.Start();
             try
             {
@@ -355,7 +355,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestResourceTenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -377,7 +377,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.SetTags");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.SetTags");
             scope.Start();
             try
             {
@@ -385,7 +385,7 @@ namespace MgmtListMethods
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestResourceTenantTestsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -407,14 +407,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.RemoveTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _tenantTestResourceTenantTestsRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _tenantTestRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -436,14 +436,14 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _tenantTestResourceTenantTestsClientDiagnostics.CreateScope("TenantTestResource.RemoveTag");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _tenantTestResourceTenantTestsRestClient.Get(Id.Name, null, cancellationToken);
+                var originalResponse = _tenantTestRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new TenantTestResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

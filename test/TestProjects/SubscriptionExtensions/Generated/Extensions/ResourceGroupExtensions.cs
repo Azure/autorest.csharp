@@ -28,9 +28,9 @@ namespace SubscriptionExtensions
         /// <summary> Gets a collection of OvenResources in the OvenResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
-        public static OvenCollection GetOvenResources(this ResourceGroup resourceGroup)
+        public static OvenCollection GetOvens(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetOvenResources();
+            return GetExtensionClient(resourceGroup).GetOvens();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public static async Task<Response<OvenResource>> GetOvenResourceAsync(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        public static async Task<Response<OvenResource>> GetOvenAsync(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetOvenResources().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public static Response<OvenResource> GetOvenResource(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        public static Response<OvenResource> GetOven(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetOvenResources().Get(ovenName, cancellationToken);
+            return resourceGroup.GetOvens().Get(ovenName, cancellationToken);
         }
     }
 }

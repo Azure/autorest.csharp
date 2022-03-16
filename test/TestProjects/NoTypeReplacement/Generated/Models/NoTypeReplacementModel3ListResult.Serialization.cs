@@ -16,7 +16,7 @@ namespace NoTypeReplacement.Models
     {
         internal static NoTypeReplacementModel3ListResult DeserializeNoTypeReplacementModel3ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<NoTypeReplacementModel3ResourceData>> value = default;
+            Optional<IReadOnlyList<NoTypeReplacementModel3Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace NoTypeReplacement.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<NoTypeReplacementModel3ResourceData> array = new List<NoTypeReplacementModel3ResourceData>();
+                    List<NoTypeReplacementModel3Data> array = new List<NoTypeReplacementModel3Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NoTypeReplacementModel3ResourceData.DeserializeNoTypeReplacementModel3ResourceData(item));
+                        array.Add(NoTypeReplacementModel3Data.DeserializeNoTypeReplacementModel3Data(item));
                     }
                     value = array;
                     continue;

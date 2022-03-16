@@ -34,7 +34,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
-        public virtual DeploymentExtendedCollection GetDeploymentExtendedResources()
+        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
             return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }

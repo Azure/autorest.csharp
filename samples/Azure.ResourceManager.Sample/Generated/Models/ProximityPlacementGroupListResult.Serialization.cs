@@ -16,16 +16,16 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static ProximityPlacementGroupListResult DeserializeProximityPlacementGroupListResult(JsonElement element)
         {
-            IReadOnlyList<ProximityPlacementGroupResourceData> value = default;
+            IReadOnlyList<ProximityPlacementGroupData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<ProximityPlacementGroupResourceData> array = new List<ProximityPlacementGroupResourceData>();
+                    List<ProximityPlacementGroupData> array = new List<ProximityPlacementGroupData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ProximityPlacementGroupResourceData.DeserializeProximityPlacementGroupResourceData(item));
+                        array.Add(ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(item));
                     }
                     value = array;
                     continue;

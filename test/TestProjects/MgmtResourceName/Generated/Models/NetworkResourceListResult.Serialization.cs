@@ -16,7 +16,7 @@ namespace MgmtResourceName.Models
     {
         internal static NetworkResourceListResult DeserializeNetworkResourceListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<NetworkResourceData>> value = default;
+            Optional<IReadOnlyList<NetworkData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtResourceName.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<NetworkResourceData> array = new List<NetworkResourceData>();
+                    List<NetworkData> array = new List<NetworkData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(NetworkResourceData.DeserializeNetworkResourceData(item));
+                        array.Add(NetworkData.DeserializeNetworkData(item));
                     }
                     value = array;
                     continue;

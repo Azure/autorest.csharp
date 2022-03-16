@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel1ResourceData))]
+        [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel1Data))]
         [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel2))]
         [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel3))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4))]
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(AzureResourceFlattenModel1ResourceData), new string[] { "location", "foo", "fooPropertiesFoo" }, new Type[] { typeof(AzureLocation), typeof(string), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel1Data), new string[] { "location", "foo", "fooPropertiesFoo" }, new Type[] { typeof(AzureLocation), typeof(string), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel2), new string[] { "location", "new" }, new Type[] { typeof(AzureLocation), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel3), new string[] { "location", "new" }, new Type[] { typeof(AzureLocation), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel4), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]

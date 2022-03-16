@@ -108,7 +108,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1ResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ResourceModel1ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1ResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        ResourceModel1ResourceData value = default;
+                        ResourceModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResourceModel1ResourceData.DeserializeResourceModel1ResourceData(document.RootElement);
+                        value = ResourceModel1Data.DeserializeResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ResourceModel1ResourceData> Put(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1ResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<ResourceModel1Data> Put(string subscriptionId, string resourceGroupName, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        ResourceModel1ResourceData value = default;
+                        ResourceModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResourceModel1ResourceData.DeserializeResourceModel1ResourceData(document.RootElement);
+                        value = ResourceModel1Data.DeserializeResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ResourceModel1ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string resourceModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        ResourceModel1ResourceData value = default;
+                        ResourceModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResourceModel1ResourceData.DeserializeResourceModel1ResourceData(document.RootElement);
+                        value = ResourceModel1Data.DeserializeResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResourceModel1ResourceData)null, message.Response);
+                    return Response.FromValue((ResourceModel1Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ResourceModel1ResourceData> Get(string subscriptionId, string resourceGroupName, string resourceModel1SName, CancellationToken cancellationToken = default)
+        public Response<ResourceModel1Data> Get(string subscriptionId, string resourceGroupName, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        ResourceModel1ResourceData value = default;
+                        ResourceModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResourceModel1ResourceData.DeserializeResourceModel1ResourceData(document.RootElement);
+                        value = ResourceModel1Data.DeserializeResourceModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResourceModel1ResourceData)null, message.Response);
+                    return Response.FromValue((ResourceModel1Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

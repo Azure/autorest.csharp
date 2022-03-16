@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetExtensionProfile DeserializeVirtualMachineScaleSetExtensionProfile(JsonElement element)
         {
-            Optional<IList<VirtualMachineScaleSetExtensionResourceData>> extensions = default;
+            Optional<IList<VirtualMachineScaleSetExtensionData>> extensions = default;
             Optional<string> extensionsTimeBudget = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -48,10 +48,10 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<VirtualMachineScaleSetExtensionResourceData> array = new List<VirtualMachineScaleSetExtensionResourceData>();
+                    List<VirtualMachineScaleSetExtensionData> array = new List<VirtualMachineScaleSetExtensionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetExtensionResourceData.DeserializeVirtualMachineScaleSetExtensionResourceData(item));
+                        array.Add(VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(item));
                     }
                     extensions = array;
                     continue;

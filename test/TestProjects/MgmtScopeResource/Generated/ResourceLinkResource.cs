@@ -27,9 +27,9 @@ namespace MgmtScopeResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _resourceLinkResourceResourceLinksClientDiagnostics;
-        private readonly ResourceLinksRestOperations _resourceLinkResourceResourceLinksRestClient;
-        private readonly ResourceLinkResourceData _data;
+        private readonly ClientDiagnostics _resourceLinkClientDiagnostics;
+        private readonly ResourceLinksRestOperations _resourceLinkRestClient;
+        private readonly ResourceLinkData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLinkResource"/> class for mocking. </summary>
         protected ResourceLinkResource()
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "ResourceLinkResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceLinkResource(ArmClient client, ResourceLinkResourceData data) : this(client, data.Id)
+        internal ResourceLinkResource(ArmClient client, ResourceLinkData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ResourceLinkResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resourceLinkResourceResourceLinksClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string resourceLinkResourceResourceLinksApiVersion);
-            _resourceLinkResourceResourceLinksRestClient = new ResourceLinksRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkResourceResourceLinksApiVersion);
+            _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string resourceLinkApiVersion);
+            _resourceLinkRestClient = new ResourceLinksRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResourceLinkResourceData Data
+        public virtual ResourceLinkData Data
         {
             get
             {
@@ -90,11 +90,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResourceLinkResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceLinkResourceResourceLinksClientDiagnostics.CreateScope("ResourceLinkResource.Get");
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkResource.Get");
             scope.Start();
             try
             {
-                var response = await _resourceLinkResourceResourceLinksRestClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinkRestClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
@@ -114,11 +114,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLinkResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceLinkResourceResourceLinksClientDiagnostics.CreateScope("ResourceLinkResource.Get");
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkResource.Get");
             scope.Start();
             try
             {
-                var response = _resourceLinkResourceResourceLinksRestClient.Get(Id, cancellationToken);
+                var response = _resourceLinkRestClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
@@ -139,11 +139,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceLinkResourceResourceLinksClientDiagnostics.CreateScope("ResourceLinkResource.Delete");
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkResource.Delete");
             scope.Start();
             try
             {
-                var response = await _resourceLinkResourceResourceLinksRestClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceLinkRestClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtScopeResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _resourceLinkResourceResourceLinksClientDiagnostics.CreateScope("ResourceLinkResource.Delete");
+            using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLinkResource.Delete");
             scope.Start();
             try
             {
-                var response = _resourceLinkResourceResourceLinksRestClient.Delete(Id, cancellationToken);
+                var response = _resourceLinkRestClient.Delete(Id, cancellationToken);
                 var operation = new MgmtScopeResourceArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);

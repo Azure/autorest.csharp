@@ -137,7 +137,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<WorkspaceResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        public async Task<Response<WorkspaceData>> GetAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -149,13 +149,13 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        WorkspaceResourceData value = default;
+                        WorkspaceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = WorkspaceResourceData.DeserializeWorkspaceResourceData(document.RootElement);
+                        value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((WorkspaceResourceData)null, message.Response);
+                    return Response.FromValue((WorkspaceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -168,7 +168,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<WorkspaceResourceData> Get(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
+        public Response<WorkspaceData> Get(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -180,19 +180,19 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        WorkspaceResourceData value = default;
+                        WorkspaceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = WorkspaceResourceData.DeserializeWorkspaceResourceData(document.RootElement);
+                        value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((WorkspaceResourceData)null, message.Response);
+                    return Response.FromValue((WorkspaceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -224,7 +224,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -252,7 +252,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceResourceData parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -376,7 +376,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<WorkspaceResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, PatchableWorkspaceData data, CancellationToken cancellationToken = default)
+        public async Task<Response<WorkspaceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, PatchableWorkspaceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -389,9 +389,9 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        WorkspaceResourceData value = default;
+                        WorkspaceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = WorkspaceResourceData.DeserializeWorkspaceResourceData(document.RootElement);
+                        value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -407,7 +407,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<WorkspaceResourceData> Update(string subscriptionId, string resourceGroupName, string workspaceName, PatchableWorkspaceData data, CancellationToken cancellationToken = default)
+        public Response<WorkspaceData> Update(string subscriptionId, string resourceGroupName, string workspaceName, PatchableWorkspaceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -420,9 +420,9 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        WorkspaceResourceData value = default;
+                        WorkspaceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = WorkspaceResourceData.DeserializeWorkspaceResourceData(document.RootElement);
+                        value = WorkspaceData.DeserializeWorkspaceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

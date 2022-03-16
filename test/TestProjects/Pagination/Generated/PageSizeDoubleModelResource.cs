@@ -27,9 +27,9 @@ namespace Pagination
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _pageSizeDoubleModelResourcePageSizeDoubleModelsClientDiagnostics;
-        private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelResourcePageSizeDoubleModelsRestClient;
-        private readonly PageSizeDoubleModelResourceData _data;
+        private readonly ClientDiagnostics _pageSizeDoubleModelClientDiagnostics;
+        private readonly PageSizeDoubleModelsRestOperations _pageSizeDoubleModelRestClient;
+        private readonly PageSizeDoubleModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModelResource"/> class for mocking. </summary>
         protected PageSizeDoubleModelResource()
@@ -39,7 +39,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeDoubleModelResource(ArmClient client, PageSizeDoubleModelResourceData data) : this(client, new ResourceIdentifier(data.Id))
+        internal PageSizeDoubleModelResource(ArmClient client, PageSizeDoubleModelData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeDoubleModelResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeDoubleModelResourcePageSizeDoubleModelsClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string pageSizeDoubleModelResourcePageSizeDoubleModelsApiVersion);
-            _pageSizeDoubleModelResourcePageSizeDoubleModelsRestClient = new PageSizeDoubleModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelResourcePageSizeDoubleModelsApiVersion);
+            _pageSizeDoubleModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string pageSizeDoubleModelApiVersion);
+            _pageSizeDoubleModelRestClient = new PageSizeDoubleModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Pagination
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PageSizeDoubleModelResourceData Data
+        public virtual PageSizeDoubleModelData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PageSizeDoubleModelResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeDoubleModelResourcePageSizeDoubleModelsClientDiagnostics.CreateScope("PageSizeDoubleModelResource.Get");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelResource.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeDoubleModelResourcePageSizeDoubleModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeDoubleModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeDoubleModelResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeDoubleModelResourcePageSizeDoubleModelsClientDiagnostics.CreateScope("PageSizeDoubleModelResource.Get");
+            using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModelResource.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeDoubleModelResourcePageSizeDoubleModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeDoubleModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModelResource(Client, response.Value), response.GetRawResponse());

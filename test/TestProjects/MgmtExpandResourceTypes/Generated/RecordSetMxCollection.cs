@@ -24,8 +24,8 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class representing collection of RecordSetMx and their operations over its parent. </summary>
     public partial class RecordSetMxCollection : ArmCollection, IEnumerable<RecordSetMxResource>, IAsyncEnumerable<RecordSetMxResource>
     {
-        private readonly ClientDiagnostics _recordSetMxResourceRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetMxResourceRecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetMxRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetMxRecordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetMxCollection"/> class for mocking. </summary>
         protected RecordSetMxCollection()
@@ -37,9 +37,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal RecordSetMxCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetMxResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetMxResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(RecordSetMxResource.ResourceType, out string recordSetMxResourceRecordSetsApiVersion);
-            _recordSetMxResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetMxResourceRecordSetsApiVersion);
+            _recordSetMxRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetMxResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(RecordSetMxResource.ResourceType, out string recordSetMxRecordSetsApiVersion);
+            _recordSetMxRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetMxRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -63,16 +63,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<RecordSetMxResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<RecordSetMxResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetMxResourceRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetMxRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetMxResource>(Response.FromValue(new RecordSetMxResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -97,16 +97,16 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<RecordSetMxResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<RecordSetMxResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetMxResourceRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var response = _recordSetMxRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
                 var operation = new MgmtExpandResourceTypesArmOperation<RecordSetMxResource>(Response.FromValue(new RecordSetMxResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -131,11 +131,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetMxResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetMxRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetMxResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetMxResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetMxRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new RecordSetMxResource(Client, response.Value), response.GetRawResponse());
@@ -188,11 +188,11 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<RecordSetMxResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
+                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetMxResourceRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetMxRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<RecordSetMxResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
+                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetMxResourceRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _recordSetMxRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,11 +232,11 @@ namespace MgmtExpandResourceTypes
         {
             Page<RecordSetMxResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
+                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetMxResourceRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetMxRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -247,11 +247,11 @@ namespace MgmtExpandResourceTypes
             }
             Page<RecordSetMxResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
+                using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetMxResourceRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    var response = _recordSetMxRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new RecordSetMxResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -275,7 +275,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
             scope.Start();
             try
             {
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.Exists");
             scope.Start();
             try
             {
@@ -327,11 +327,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _recordSetMxResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetMxRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetMxResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetMxResource(Client, response.Value), response.GetRawResponse());
@@ -355,11 +355,11 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetMxResourceRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
+            using var scope = _recordSetMxRecordSetsClientDiagnostics.CreateScope("RecordSetMxCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetMxResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetMxRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "MX".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<RecordSetMxResource>(null, response.GetRawResponse());
                 return Response.FromValue(new RecordSetMxResource(Client, response.Value), response.GetRawResponse());

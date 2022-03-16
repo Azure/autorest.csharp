@@ -23,8 +23,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of EncryptionScope and their operations over its parent. </summary>
     public partial class EncryptionScopeCollection : ArmCollection, IEnumerable<EncryptionScopeResource>, IAsyncEnumerable<EncryptionScopeResource>
     {
-        private readonly ClientDiagnostics _encryptionScopeResourceEncryptionScopesClientDiagnostics;
-        private readonly EncryptionScopesRestOperations _encryptionScopeResourceEncryptionScopesRestClient;
+        private readonly ClientDiagnostics _encryptionScopeClientDiagnostics;
+        private readonly EncryptionScopesRestOperations _encryptionScopeRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeCollection"/> class for mocking. </summary>
         protected EncryptionScopeCollection()
@@ -36,9 +36,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal EncryptionScopeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _encryptionScopeResourceEncryptionScopesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", EncryptionScopeResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(EncryptionScopeResource.ResourceType, out string encryptionScopeResourceEncryptionScopesApiVersion);
-            _encryptionScopeResourceEncryptionScopesRestClient = new EncryptionScopesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeResourceEncryptionScopesApiVersion);
+            _encryptionScopeClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", EncryptionScopeResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(EncryptionScopeResource.ResourceType, out string encryptionScopeApiVersion);
+            _encryptionScopeRestClient = new EncryptionScopesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,16 +61,16 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public virtual async Task<ArmOperation<EncryptionScopeResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string encryptionScopeName, EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<EncryptionScopeResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.CreateOrUpdate");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _encryptionScopeResourceEncryptionScopesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+                var response = await _encryptionScopeRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation<EncryptionScopeResource>(Response.FromValue(new EncryptionScopeResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -94,16 +94,16 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public virtual ArmOperation<EncryptionScopeResource> CreateOrUpdate(WaitUntil waitUntil, string encryptionScopeName, EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<EncryptionScopeResource> CreateOrUpdate(WaitUntil waitUntil, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.CreateOrUpdate");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _encryptionScopeResourceEncryptionScopesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken);
+                var response = _encryptionScopeRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken);
                 var operation = new StorageArmOperation<EncryptionScopeResource>(Response.FromValue(new EncryptionScopeResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -129,11 +129,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.Get");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.Get");
             scope.Start();
             try
             {
-                var response = await _encryptionScopeResourceEncryptionScopesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken).ConfigureAwait(false);
+                var response = await _encryptionScopeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
@@ -158,11 +158,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.Get");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.Get");
             scope.Start();
             try
             {
-                var response = _encryptionScopeResourceEncryptionScopesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken);
+                var response = _encryptionScopeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
@@ -185,11 +185,11 @@ namespace Azure.Management.Storage
         {
             async Task<Page<EncryptionScopeResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
+                using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _encryptionScopeResourceEncryptionScopesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _encryptionScopeRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScopeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -200,11 +200,11 @@ namespace Azure.Management.Storage
             }
             async Task<Page<EncryptionScopeResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
+                using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _encryptionScopeResourceEncryptionScopesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _encryptionScopeRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScopeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -227,11 +227,11 @@ namespace Azure.Management.Storage
         {
             Page<EncryptionScopeResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
+                using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _encryptionScopeResourceEncryptionScopesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _encryptionScopeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScopeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,11 +242,11 @@ namespace Azure.Management.Storage
             }
             Page<EncryptionScopeResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
+                using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _encryptionScopeResourceEncryptionScopesRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _encryptionScopeRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScopeResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -271,7 +271,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.Exists");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.Exists");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.Exists");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.Exists");
             scope.Start();
             try
             {
@@ -325,11 +325,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetIfExists");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _encryptionScopeResourceEncryptionScopesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _encryptionScopeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<EncryptionScopeResource>(null, response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());
@@ -354,11 +354,11 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
 
-            using var scope = _encryptionScopeResourceEncryptionScopesClientDiagnostics.CreateScope("EncryptionScopeCollection.GetIfExists");
+            using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScopeCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _encryptionScopeResourceEncryptionScopesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
+                var response = _encryptionScopeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<EncryptionScopeResource>(null, response.GetRawResponse());
                 return Response.FromValue(new EncryptionScopeResource(Client, response.Value), response.GetRawResponse());

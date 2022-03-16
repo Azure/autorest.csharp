@@ -20,8 +20,8 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
-        private ClientDiagnostics _deploymentExtendedResourceDeploymentsClientDiagnostics;
-        private DeploymentsRestOperations _deploymentExtendedResourceDeploymentsRestClient;
+        private ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
+        private DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class for mocking. </summary>
         protected TenantExtensionClient()
@@ -35,8 +35,8 @@ namespace MgmtScopeResource
         {
         }
 
-        private ClientDiagnostics DeploymentExtendedResourceDeploymentsClientDiagnostics => _deploymentExtendedResourceDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, DiagnosticOptions);
-        private DeploymentsRestOperations DeploymentExtendedResourceDeploymentsRestClient => _deploymentExtendedResourceDeploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtendedResource.ResourceType));
+        private ClientDiagnostics DeploymentExtendedDeploymentsClientDiagnostics => _deploymentExtendedDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, DiagnosticOptions);
+        private DeploymentsRestOperations DeploymentExtendedDeploymentsRestClient => _deploymentExtendedDeploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtendedResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -46,7 +46,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
-        public virtual DeploymentExtendedCollection GetDeploymentExtendedResources()
+        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
             return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }
@@ -54,7 +54,7 @@ namespace MgmtScopeResource
         /// <summary> Gets a collection of ResourceLinkResources in the ResourceLinkResource. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
-        public virtual ResourceLinkCollection GetResourceLinkResources(string scope)
+        public virtual ResourceLinkCollection GetResourceLinks(string scope)
         {
             return new ResourceLinkCollection(Client, Id, scope);
         }
@@ -68,11 +68,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope0.Start();
             try
             {
-                var response = await DeploymentExtendedResourceDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
+                var response = await DeploymentExtendedDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -91,11 +91,11 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedResourceDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
+            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope0.Start();
             try
             {
-                var response = DeploymentExtendedResourceDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
+                var response = DeploymentExtendedDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
                 return response;
             }
             catch (Exception e)

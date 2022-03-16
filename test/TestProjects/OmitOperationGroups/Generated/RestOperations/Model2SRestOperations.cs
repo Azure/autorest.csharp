@@ -108,7 +108,7 @@ namespace OmitOperationGroups
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string model2SName, Model2ResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<Model2ResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string model2SName, Model2ResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Model2Data>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model2ResourceData value = default;
+                        Model2Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Model2ResourceData.DeserializeModel2ResourceData(document.RootElement);
+                        value = Model2Data.DeserializeModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<Model2ResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string model2SName, Model2ResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<Model2Data> CreateOrUpdate(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model2ResourceData value = default;
+                        Model2Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Model2ResourceData.DeserializeModel2ResourceData(document.RootElement);
+                        value = Model2Data.DeserializeModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<Model2ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<Model2Data>> GetAsync(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model2ResourceData value = default;
+                        Model2Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Model2ResourceData.DeserializeModel2ResourceData(document.RootElement);
+                        value = Model2Data.DeserializeModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((Model2ResourceData)null, message.Response);
+                    return Response.FromValue((Model2Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<Model2ResourceData> Get(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
+        public Response<Model2Data> Get(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace OmitOperationGroups
             {
                 case 200:
                     {
-                        Model2ResourceData value = default;
+                        Model2Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Model2ResourceData.DeserializeModel2ResourceData(document.RootElement);
+                        value = Model2Data.DeserializeModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((Model2ResourceData)null, message.Response);
+                    return Response.FromValue((Model2Data)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

@@ -28,9 +28,9 @@ namespace MgmtRenameRules
         /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
-        public static VirtualMachineCollection GetVirtualMachineResources(this ResourceGroup resourceGroup)
+        public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetVirtualMachineResources();
+            return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineResourceAsync(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetVirtualMachineResources().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,17 +58,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public static Response<VirtualMachineResource> GetVirtualMachineResource(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetVirtualMachineResources().Get(vmName, cancellationToken);
+            return resourceGroup.GetVirtualMachines().Get(vmName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
-        public static ImageCollection GetImageResources(this ResourceGroup resourceGroup)
+        public static ImageCollection GetImages(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetImageResources();
+            return GetExtensionClient(resourceGroup).GetImages();
         }
 
         /// <summary>
@@ -82,9 +82,9 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public static async Task<Response<ImageResource>> GetImageResourceAsync(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<ImageResource>> GetImageAsync(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetImageResources().GetAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetImages().GetAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -98,17 +98,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public static Response<ImageResource> GetImageResource(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<ImageResource> GetImage(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetImageResources().Get(imageName, expand, cancellationToken);
+            return resourceGroup.GetImages().Get(imageName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
-        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSetResources(this ResourceGroup resourceGroup)
+        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSetResources();
+            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetResourceAsync(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetVirtualMachineScaleSetResources().GetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -136,9 +136,9 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResource(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetVirtualMachineScaleSetResources().Get(vmScaleSetName, cancellationToken);
+            return resourceGroup.GetVirtualMachineScaleSets().Get(vmScaleSetName, cancellationToken);
         }
     }
 }

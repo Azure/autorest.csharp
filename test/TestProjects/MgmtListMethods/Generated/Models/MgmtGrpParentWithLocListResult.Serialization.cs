@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static MgmtGrpParentWithLocListResult DeserializeMgmtGrpParentWithLocListResult(JsonElement element)
         {
-            IReadOnlyList<MgmtGrpParentWithLocResourceData> value = default;
+            IReadOnlyList<MgmtGrpParentWithLocData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<MgmtGrpParentWithLocResourceData> array = new List<MgmtGrpParentWithLocResourceData>();
+                    List<MgmtGrpParentWithLocData> array = new List<MgmtGrpParentWithLocData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGrpParentWithLocResourceData.DeserializeMgmtGrpParentWithLocResourceData(item));
+                        array.Add(MgmtGrpParentWithLocData.DeserializeMgmtGrpParentWithLocData(item));
                     }
                     value = array;
                     continue;

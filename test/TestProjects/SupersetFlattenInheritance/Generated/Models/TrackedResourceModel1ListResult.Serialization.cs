@@ -16,7 +16,7 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static TrackedResourceModel1ListResult DeserializeTrackedResourceModel1ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<TrackedResourceModel1ResourceData>> value = default;
+            Optional<IReadOnlyList<TrackedResourceModel1Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace SupersetFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<TrackedResourceModel1ResourceData> array = new List<TrackedResourceModel1ResourceData>();
+                    List<TrackedResourceModel1Data> array = new List<TrackedResourceModel1Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TrackedResourceModel1ResourceData.DeserializeTrackedResourceModel1ResourceData(item));
+                        array.Add(TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(item));
                     }
                     value = array;
                     continue;

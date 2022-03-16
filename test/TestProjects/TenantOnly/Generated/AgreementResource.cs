@@ -28,9 +28,9 @@ namespace TenantOnly
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _agreementResourceAgreementsClientDiagnostics;
-        private readonly AgreementsRestOperations _agreementResourceAgreementsRestClient;
-        private readonly AgreementResourceData _data;
+        private readonly ClientDiagnostics _agreementClientDiagnostics;
+        private readonly AgreementsRestOperations _agreementRestClient;
+        private readonly AgreementData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AgreementResource"/> class for mocking. </summary>
         protected AgreementResource()
@@ -40,7 +40,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "AgreementResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AgreementResource(ArmClient client, AgreementResourceData data) : this(client, data.Id)
+        internal AgreementResource(ArmClient client, AgreementData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -51,9 +51,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AgreementResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _agreementResourceAgreementsClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string agreementResourceAgreementsApiVersion);
-            _agreementResourceAgreementsRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementResourceAgreementsApiVersion);
+            _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string agreementApiVersion);
+            _agreementRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,7 +67,7 @@ namespace TenantOnly
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AgreementResourceData Data
+        public virtual AgreementData Data
         {
             get
             {
@@ -92,11 +92,11 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AgreementResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.Get");
             scope.Start();
             try
             {
-                var response = await _agreementResourceAgreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
@@ -117,11 +117,11 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AgreementResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.Get");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.Get");
             scope.Start();
             try
             {
-                var response = _agreementResourceAgreementsRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _agreementRestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
@@ -147,14 +147,14 @@ namespace TenantOnly
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.AddTag");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _agreementResourceAgreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -178,14 +178,14 @@ namespace TenantOnly
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.AddTag");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _agreementResourceAgreementsRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -207,7 +207,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.SetTags");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.SetTags");
             scope.Start();
             try
             {
@@ -215,7 +215,7 @@ namespace TenantOnly
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _agreementResourceAgreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -237,7 +237,7 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.SetTags");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.SetTags");
             scope.Start();
             try
             {
@@ -245,7 +245,7 @@ namespace TenantOnly
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _agreementResourceAgreementsRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -267,14 +267,14 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.RemoveTag");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _agreementResourceAgreementsRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -296,14 +296,14 @@ namespace TenantOnly
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _agreementResourceAgreementsClientDiagnostics.CreateScope("AgreementResource.RemoveTag");
+            using var scope = _agreementClientDiagnostics.CreateScope("AgreementResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _agreementResourceAgreementsRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
+                var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AgreementResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

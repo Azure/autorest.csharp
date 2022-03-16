@@ -28,9 +28,9 @@ namespace TenantOnly
         /// <summary> Gets a collection of BillingAccountResources in the BillingAccountResource. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
-        public static BillingAccountCollection GetBillingAccountResources(this Tenant tenant)
+        public static BillingAccountCollection GetBillingAccounts(this Tenant tenant)
         {
-            return GetExtensionClient(tenant).GetBillingAccountResources();
+            return GetExtensionClient(tenant).GetBillingAccounts();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public static async Task<Response<BillingAccountResource>> GetBillingAccountResourceAsync(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<BillingAccountResource>> GetBillingAccountAsync(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetBillingAccountResources().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
+            return await tenant.GetBillingAccounts().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public static Response<BillingAccountResource> GetBillingAccountResource(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<BillingAccountResource> GetBillingAccount(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenant.GetBillingAccountResources().Get(billingAccountName, expand, cancellationToken);
+            return tenant.GetBillingAccounts().Get(billingAccountName, expand, cancellationToken);
         }
     }
 }

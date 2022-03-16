@@ -34,16 +34,16 @@ namespace MgmtResourceName
 
         /// <summary> Gets a collection of MachineResources in the MachineResource. </summary>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
-        public virtual MachineCollection GetMachineResources()
+        public virtual MachineCollection GetMachines()
         {
             return GetCachedClient(Client => new MachineCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of DiskResources in the DiskResource. </summary>
         /// <returns> An object representing collection of DiskResources and their operations over a DiskResource. </returns>
-        public virtual DiskCollection GetDiskResources()
+        public virtual DiskResourceCollection GetDiskResources()
         {
-            return GetCachedClient(Client => new DiskCollection(Client, Id));
+            return GetCachedClient(Client => new DiskResourceCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of MemoryResources in the MemoryResource. </summary>
@@ -55,7 +55,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
-        public virtual NetworkCollection GetNetworkResources()
+        public virtual NetworkCollection GetNetworks()
         {
             return GetCachedClient(Client => new NetworkCollection(Client, Id));
         }

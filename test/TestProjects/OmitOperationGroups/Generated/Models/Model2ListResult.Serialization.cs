@@ -16,7 +16,7 @@ namespace OmitOperationGroups.Models
     {
         internal static Model2ListResult DeserializeModel2ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<Model2ResourceData>> value = default;
+            Optional<IReadOnlyList<Model2Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace OmitOperationGroups.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Model2ResourceData> array = new List<Model2ResourceData>();
+                    List<Model2Data> array = new List<Model2Data>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Model2ResourceData.DeserializeModel2ResourceData(item));
+                        array.Add(Model2Data.DeserializeModel2Data(item));
                     }
                     value = array;
                     continue;

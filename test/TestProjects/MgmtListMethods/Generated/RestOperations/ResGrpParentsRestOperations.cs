@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,7 +69,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ResGrpParentResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ResGrpParentData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -82,9 +82,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        ResGrpParentResourceData value = default;
+                        ResGrpParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResGrpParentResourceData.DeserializeResGrpParentResourceData(document.RootElement);
+                        value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -100,7 +100,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ResGrpParentResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<ResGrpParentData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -113,9 +113,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        ResGrpParentResourceData value = default;
+                        ResGrpParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResGrpParentResourceData.DeserializeResGrpParentResourceData(document.RootElement);
+                        value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -150,7 +150,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ResGrpParentResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
+        public async Task<Response<ResGrpParentData>> GetAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -162,13 +162,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        ResGrpParentResourceData value = default;
+                        ResGrpParentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResGrpParentResourceData.DeserializeResGrpParentResourceData(document.RootElement);
+                        value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResGrpParentResourceData)null, message.Response);
+                    return Response.FromValue((ResGrpParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -181,7 +181,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ResGrpParentResourceData> Get(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
+        public Response<ResGrpParentData> Get(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -193,13 +193,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        ResGrpParentResourceData value = default;
+                        ResGrpParentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResGrpParentResourceData.DeserializeResGrpParentResourceData(document.RootElement);
+                        value = ResGrpParentData.DeserializeResGrpParentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResGrpParentResourceData)null, message.Response);
+                    return Response.FromValue((ResGrpParentData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

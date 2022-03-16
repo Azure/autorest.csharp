@@ -29,9 +29,9 @@ namespace MgmtOperations
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _availabilitySetResourceAvailabilitySetsClientDiagnostics;
-        private readonly AvailabilitySetsRestOperations _availabilitySetResourceAvailabilitySetsRestClient;
-        private readonly AvailabilitySetResourceData _data;
+        private readonly ClientDiagnostics _availabilitySetClientDiagnostics;
+        private readonly AvailabilitySetsRestOperations _availabilitySetRestClient;
+        private readonly AvailabilitySetData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class for mocking. </summary>
         protected AvailabilitySetResource()
@@ -41,7 +41,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetResource(ArmClient client, AvailabilitySetResourceData data) : this(client, data.Id)
+        internal AvailabilitySetResource(ArmClient client, AvailabilitySetData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AvailabilitySetResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _availabilitySetResourceAvailabilitySetsClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string availabilitySetResourceAvailabilitySetsApiVersion);
-            _availabilitySetResourceAvailabilitySetsRestClient = new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetResourceAvailabilitySetsApiVersion);
+            _availabilitySetClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string availabilitySetApiVersion);
+            _availabilitySetRestClient = new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace MgmtOperations
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetResourceData Data
+        public virtual AvailabilitySetData Data
         {
             get
             {
@@ -86,7 +86,7 @@ namespace MgmtOperations
 
         /// <summary> Gets a collection of AvailabilitySetChildResources in the AvailabilitySetChildResource. </summary>
         /// <returns> An object representing collection of AvailabilitySetChildResources and their operations over a AvailabilitySetChildResource. </returns>
-        public virtual AvailabilitySetChildCollection GetAvailabilitySetChildResources()
+        public virtual AvailabilitySetChildCollection GetAvailabilitySetChildren()
         {
             return GetCachedClient(Client => new AvailabilitySetChildCollection(Client, Id));
         }
@@ -100,9 +100,9 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
-        public virtual async Task<Response<AvailabilitySetChildResource>> GetAvailabilitySetChildResourceAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AvailabilitySetChildResource>> GetAvailabilitySetChildAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            return await GetAvailabilitySetChildResources().GetAsync(availabilitySetChildName, cancellationToken).ConfigureAwait(false);
+            return await GetAvailabilitySetChildren().GetAsync(availabilitySetChildName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -114,9 +114,9 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
-        public virtual Response<AvailabilitySetChildResource> GetAvailabilitySetChildResource(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public virtual Response<AvailabilitySetChildResource> GetAvailabilitySetChild(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            return GetAvailabilitySetChildResources().Get(availabilitySetChildName, cancellationToken);
+            return GetAvailabilitySetChildren().Get(availabilitySetChildName, cancellationToken);
         }
 
         /// <summary>
@@ -128,11 +128,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AvailabilitySetResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
@@ -153,11 +153,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AvailabilitySetResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Get");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
@@ -178,11 +178,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtOperationsArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -204,11 +204,11 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Delete");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _availabilitySetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtOperationsArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -233,11 +233,11 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -259,11 +259,11 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.Update");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _availabilitySetRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -286,12 +286,12 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
             scope.Start();
             try
             {
-                var response = await _availabilitySetResourceAvailabilitySetsRestClient.TestSetSharedKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeyOperationSource(), _availabilitySetResourceAvailabilitySetsClientDiagnostics, Pipeline, _availabilitySetResourceAvailabilitySetsRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _availabilitySetRestClient.TestSetSharedKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeyOperationSource(), _availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -316,12 +316,12 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.TestSetSharedKey");
             scope.Start();
             try
             {
-                var response = _availabilitySetResourceAvailabilitySetsRestClient.TestSetSharedKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeyOperationSource(), _availabilitySetResourceAvailabilitySetsClientDiagnostics, Pipeline, _availabilitySetResourceAvailabilitySetsRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _availabilitySetRestClient.TestSetSharedKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var operation = new MgmtOperationsArmOperation<ConnectionSharedKey>(new ConnectionSharedKeyOperationSource(), _availabilitySetClientDiagnostics, Pipeline, _availabilitySetRestClient.CreateTestSetSharedKeyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -347,14 +347,14 @@ namespace MgmtOperations
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -378,14 +378,14 @@ namespace MgmtOperations
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -407,7 +407,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
             try
             {
@@ -415,7 +415,7 @@ namespace MgmtOperations
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -437,7 +437,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.SetTags");
             scope.Start();
             try
             {
@@ -445,7 +445,7 @@ namespace MgmtOperations
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -467,14 +467,14 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _availabilitySetResourceAvailabilitySetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -496,14 +496,14 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _availabilitySetResourceAvailabilitySetsClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
+            using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySetResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _availabilitySetResourceAvailabilitySetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

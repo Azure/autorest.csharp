@@ -116,7 +116,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName, BlobServiceResourceData parameters)
+        internal HttpMessage CreateSetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName, BlobServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BlobServiceResourceData>> SetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> SetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -163,9 +163,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceResourceData value = default;
+                        BlobServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobServiceResourceData.DeserializeBlobServiceResourceData(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -181,7 +181,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BlobServiceResourceData> SetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> SetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -194,9 +194,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceResourceData value = default;
+                        BlobServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobServiceResourceData.DeserializeBlobServiceResourceData(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -233,7 +233,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BlobServiceResourceData>> GetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> GetServicePropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -245,13 +245,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceResourceData value = default;
+                        BlobServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobServiceResourceData.DeserializeBlobServiceResourceData(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BlobServiceResourceData)null, message.Response);
+                    return Response.FromValue((BlobServiceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -264,7 +264,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BlobServiceResourceData> GetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> GetServiceProperties(string subscriptionId, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -276,13 +276,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceResourceData value = default;
+                        BlobServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobServiceResourceData.DeserializeBlobServiceResourceData(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((BlobServiceResourceData)null, message.Response);
+                    return Response.FromValue((BlobServiceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

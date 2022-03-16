@@ -17,20 +17,20 @@ namespace NoTypeReplacement.Models
         /// <summary> Initializes a new instance of NoTypeReplacementModel3ListResult. </summary>
         internal NoTypeReplacementModel3ListResult()
         {
-            Value = new ChangeTrackingList<NoTypeReplacementModel3ResourceData>();
+            Value = new ChangeTrackingList<NoTypeReplacementModel3Data>();
         }
 
         /// <summary> Initializes a new instance of NoTypeReplacementModel3ListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal NoTypeReplacementModel3ListResult(IReadOnlyList<NoTypeReplacementModel3ResourceData> value, string nextLink)
+        internal NoTypeReplacementModel3ListResult(IReadOnlyList<NoTypeReplacementModel3Data> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<NoTypeReplacementModel3ResourceData> Value { get; }
+        public IReadOnlyList<NoTypeReplacementModel3Data> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

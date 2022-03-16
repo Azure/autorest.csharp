@@ -34,7 +34,7 @@ namespace MgmtPropertyChooser
 
         /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
-        public virtual VirtualMachineCollection GetVirtualMachineResources()
+        public virtual VirtualMachineCollection GetVirtualMachines()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }

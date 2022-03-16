@@ -29,9 +29,9 @@ namespace Azure.ResourceManager.Sample
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _virtualMachineResourceVirtualMachinesClientDiagnostics;
-        private readonly VirtualMachinesRestOperations _virtualMachineResourceVirtualMachinesRestClient;
-        private readonly VirtualMachineResourceData _data;
+        private readonly ClientDiagnostics _virtualMachineClientDiagnostics;
+        private readonly VirtualMachinesRestOperations _virtualMachineRestClient;
+        private readonly VirtualMachineData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineResource"/> class for mocking. </summary>
         protected VirtualMachineResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineResource(ArmClient client, VirtualMachineResourceData data) : this(client, data.Id)
+        internal VirtualMachineResource(ArmClient client, VirtualMachineData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineResourceVirtualMachinesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string virtualMachineResourceVirtualMachinesApiVersion);
-            _virtualMachineResourceVirtualMachinesRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineResourceVirtualMachinesApiVersion);
+            _virtualMachineClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string virtualMachineApiVersion);
+            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineResourceData Data
+        public virtual VirtualMachineData Data
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineExtensionResources in the VirtualMachineExtensionResource. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensionResources and their operations over a VirtualMachineExtensionResource. </returns>
-        public virtual VirtualMachineExtensionCollection GetVirtualMachineExtensionResources()
+        public virtual VirtualMachineExtensionCollection GetVirtualMachineExtensions()
         {
             return GetCachedClient(Client => new VirtualMachineExtensionCollection(Client, Id));
         }
@@ -101,9 +101,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineExtensionResource>> GetVirtualMachineExtensionResourceAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineExtensionResource>> GetVirtualMachineExtensionAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await GetVirtualMachineExtensionResources().GetAsync(vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetVirtualMachineExtensions().GetAsync(vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
-        public virtual Response<VirtualMachineExtensionResource> GetVirtualMachineExtensionResource(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionResource> GetVirtualMachineExtension(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineExtensionResources().Get(vmExtensionName, expand, cancellationToken);
+            return GetVirtualMachineExtensions().Get(vmExtensionName, expand, cancellationToken);
         }
 
         /// <summary>
@@ -129,11 +129,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -153,11 +153,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Get");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
@@ -179,12 +179,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -206,12 +206,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Delete");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -236,12 +236,12 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Update");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Update");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -266,12 +266,12 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Update");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Update");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new SampleArmOperation<VirtualMachineResource>(new VirtualMachineResourceOperationSource(Client), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new SampleArmOperation<VirtualMachineResource>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -296,12 +296,12 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Capture");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Capture");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.CaptureAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.CaptureAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -326,12 +326,12 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Capture");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Capture");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Capture(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new SampleArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Capture(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var operation = new SampleArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -351,11 +351,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineInstanceView>> InstanceViewAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.InstanceView");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.InstanceView");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.InstanceViewAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.InstanceViewAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -373,11 +373,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineInstanceView> InstanceView(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.InstanceView");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.InstanceView");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.InstanceView(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _virtualMachineRestClient.InstanceView(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -396,12 +396,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> ConvertToManagedDisksAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.ConvertToManagedDisks");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.ConvertToManagedDisks");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.ConvertToManagedDisksAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.ConvertToManagedDisksAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -422,12 +422,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation ConvertToManagedDisks(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.ConvertToManagedDisks");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.ConvertToManagedDisks");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.ConvertToManagedDisks(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.ConvertToManagedDisks(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -448,12 +448,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeallocateAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Deallocate");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Deallocate");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -474,12 +474,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Deallocate(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Deallocate");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Deallocate");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -499,11 +499,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GeneralizeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Generalize");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Generalize");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.GeneralizeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GeneralizeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -521,11 +521,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Generalize(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Generalize");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Generalize");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Generalize(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _virtualMachineRestClient.Generalize(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -546,11 +546,11 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.GetAvailableSizes");
+                using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.GetAvailableSizes");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineResourceVirtualMachinesRestClient.ListAvailableSizesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _virtualMachineRestClient.ListAvailableSizesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -573,11 +573,11 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.GetAvailableSizes");
+                using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.GetAvailableSizes");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineResourceVirtualMachinesRestClient.ListAvailableSizes(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _virtualMachineRestClient.ListAvailableSizes(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -599,12 +599,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> PowerOffAsync(WaitUntil waitUntil, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.PowerOff");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.PowerOff");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.PowerOffAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.PowerOffAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -626,12 +626,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation PowerOff(WaitUntil waitUntil, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.PowerOff");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.PowerOff");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.PowerOff(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.PowerOff(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -652,12 +652,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> ReapplyAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Reapply");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Reapply");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.ReapplyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.ReapplyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -678,12 +678,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Reapply(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Reapply");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Reapply");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Reapply(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Reapply(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -704,12 +704,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> RestartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Restart");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Restart");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.RestartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.RestartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -730,12 +730,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Restart(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Restart");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Restart");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Restart(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Restart(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -756,12 +756,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> StartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Start");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Start");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.StartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.StartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -782,12 +782,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Start(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Start");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Start");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Start(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Start(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -808,12 +808,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> RedeployAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Redeploy");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Redeploy");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.RedeployAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.RedeployAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -834,12 +834,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Redeploy(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Redeploy");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Redeploy");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Redeploy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Redeploy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -861,12 +861,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> ReimageAsync(WaitUntil waitUntil, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Reimage");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Reimage");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -888,12 +888,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Reimage(WaitUntil waitUntil, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.Reimage");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.Reimage");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -914,11 +914,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RetrieveBootDiagnosticsDataResult>> RetrieveBootDiagnosticsDataAsync(int? sasUriExpirationTimeInMinutes = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RetrieveBootDiagnosticsData");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RetrieveBootDiagnosticsData");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.RetrieveBootDiagnosticsDataAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sasUriExpirationTimeInMinutes, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.RetrieveBootDiagnosticsDataAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sasUriExpirationTimeInMinutes, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -937,11 +937,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RetrieveBootDiagnosticsDataResult> RetrieveBootDiagnosticsData(int? sasUriExpirationTimeInMinutes = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RetrieveBootDiagnosticsData");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RetrieveBootDiagnosticsData");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.RetrieveBootDiagnosticsData(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sasUriExpirationTimeInMinutes, cancellationToken);
+                var response = _virtualMachineRestClient.RetrieveBootDiagnosticsData(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sasUriExpirationTimeInMinutes, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -960,12 +960,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> PerformMaintenanceAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.PerformMaintenance");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.PerformMaintenance");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.PerformMaintenanceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.PerformMaintenanceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -986,12 +986,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation PerformMaintenance(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.PerformMaintenance");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.PerformMaintenance");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.PerformMaintenance(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.PerformMaintenance(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -1011,11 +1011,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SimulateEvictionAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SimulateEviction");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SimulateEviction");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.SimulateEvictionAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.SimulateEvictionAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1033,11 +1033,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SimulateEviction(CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SimulateEviction");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SimulateEviction");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.SimulateEviction(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _virtualMachineRestClient.SimulateEviction(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -1056,12 +1056,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<VirtualMachineAssessPatchesResult>> AssessPatchesAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AssessPatches");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AssessPatches");
             scope.Start();
             try
             {
-                var response = await _virtualMachineResourceVirtualMachinesRestClient.AssessPatchesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineRestClient.AssessPatchesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1082,12 +1082,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<VirtualMachineAssessPatchesResult> AssessPatches(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AssessPatches");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AssessPatches");
             scope.Start();
             try
             {
-                var response = _virtualMachineResourceVirtualMachinesRestClient.AssessPatches(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new SampleArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineResourceVirtualMachinesClientDiagnostics, Pipeline, _virtualMachineResourceVirtualMachinesRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineRestClient.AssessPatches(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new SampleArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -1113,14 +1113,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -1144,14 +1144,14 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -1173,7 +1173,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
             scope.Start();
             try
             {
@@ -1181,7 +1181,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -1203,7 +1203,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.SetTags");
             scope.Start();
             try
             {
@@ -1211,7 +1211,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -1233,14 +1233,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _virtualMachineResourceVirtualMachinesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -1262,14 +1262,14 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _virtualMachineResourceVirtualMachinesClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
+            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _virtualMachineResourceVirtualMachinesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)

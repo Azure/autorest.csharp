@@ -65,11 +65,5 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         internal bool ShouldSetResourceIdentifier => TypeOfId == null;
-
-        protected override string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
-        {
-            var name = objectSchema.CSharpName();
-            return isResourceType ? name.AddResourceSuffixToResourceName() + "Data" : name;
-        }
     }
 }

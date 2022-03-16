@@ -17,17 +17,17 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
         internal DeliveryRuleListResult()
         {
-            Value = new ChangeTrackingList<DeliveryRuleResourceData>();
+            Value = new ChangeTrackingList<DeliveryRuleData>();
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
         /// <param name="value"> The values. </param>
-        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleResourceData> value)
+        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value)
         {
             Value = value;
         }
 
         /// <summary> The values. </summary>
-        public IReadOnlyList<DeliveryRuleResourceData> Value { get; }
+        public IReadOnlyList<DeliveryRuleData> Value { get; }
     }
 }

@@ -27,9 +27,9 @@ namespace SingletonResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _ignitionResourceIgnitionsClientDiagnostics;
-        private readonly IgnitionsRestOperations _ignitionResourceIgnitionsRestClient;
-        private readonly IgnitionResourceData _data;
+        private readonly ClientDiagnostics _ignitionClientDiagnostics;
+        private readonly IgnitionsRestOperations _ignitionRestClient;
+        private readonly IgnitionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="IgnitionResource"/> class for mocking. </summary>
         protected IgnitionResource()
@@ -39,7 +39,7 @@ namespace SingletonResource
         /// <summary> Initializes a new instance of the <see cref = "IgnitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal IgnitionResource(ArmClient client, IgnitionResourceData data) : this(client, data.Id)
+        internal IgnitionResource(ArmClient client, IgnitionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal IgnitionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _ignitionResourceIgnitionsClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string ignitionResourceIgnitionsApiVersion);
-            _ignitionResourceIgnitionsRestClient = new IgnitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionResourceIgnitionsApiVersion);
+            _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string ignitionApiVersion);
+            _ignitionRestClient = new IgnitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace SingletonResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual IgnitionResourceData Data
+        public virtual IgnitionData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IgnitionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _ignitionResourceIgnitionsClientDiagnostics.CreateScope("IgnitionResource.Get");
+            using var scope = _ignitionClientDiagnostics.CreateScope("IgnitionResource.Get");
             scope.Start();
             try
             {
-                var response = await _ignitionResourceIgnitionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _ignitionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new IgnitionResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IgnitionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _ignitionResourceIgnitionsClientDiagnostics.CreateScope("IgnitionResource.Get");
+            using var scope = _ignitionClientDiagnostics.CreateScope("IgnitionResource.Get");
             scope.Start();
             try
             {
-                var response = _ignitionResourceIgnitionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var response = _ignitionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new IgnitionResource(Client, response.Value), response.GetRawResponse());

@@ -24,8 +24,8 @@ namespace MgmtDiscriminator
     /// <summary> A class representing collection of DeliveryRule and their operations over its parent. </summary>
     public partial class DeliveryRuleCollection : ArmCollection, IEnumerable<DeliveryRuleResource>, IAsyncEnumerable<DeliveryRuleResource>
     {
-        private readonly ClientDiagnostics _deliveryRuleResourceDeliveryRulesClientDiagnostics;
-        private readonly DeliveryRulesRestOperations _deliveryRuleResourceDeliveryRulesRestClient;
+        private readonly ClientDiagnostics _deliveryRuleClientDiagnostics;
+        private readonly DeliveryRulesRestOperations _deliveryRuleRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeliveryRuleCollection"/> class for mocking. </summary>
         protected DeliveryRuleCollection()
@@ -37,9 +37,9 @@ namespace MgmtDiscriminator
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeliveryRuleCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deliveryRuleResourceDeliveryRulesClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", DeliveryRuleResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DeliveryRuleResource.ResourceType, out string deliveryRuleResourceDeliveryRulesApiVersion);
-            _deliveryRuleResourceDeliveryRulesRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleResourceDeliveryRulesApiVersion);
+            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", DeliveryRuleResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeliveryRuleResource.ResourceType, out string deliveryRuleApiVersion);
+            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<DeliveryRuleResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, DeliveryRuleResourceData body, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<DeliveryRuleResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.CreateOrUpdate");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _deliveryRuleResourceDeliveryRulesRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleResourceOperationSource(Client), _deliveryRuleResourceDeliveryRulesClientDiagnostics, Pipeline, _deliveryRuleResourceDeliveryRulesRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
+                var response = await _deliveryRuleRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<DeliveryRuleResource> CreateOrUpdate(WaitUntil waitUntil, string name, DeliveryRuleResourceData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<DeliveryRuleResource> CreateOrUpdate(WaitUntil waitUntil, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.CreateOrUpdate");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _deliveryRuleResourceDeliveryRulesRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleResourceOperationSource(Client), _deliveryRuleResourceDeliveryRulesClientDiagnostics, Pipeline, _deliveryRuleResourceDeliveryRulesRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
+                var response = _deliveryRuleRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRuleResource>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -130,11 +130,11 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.Get");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deliveryRuleResourceDeliveryRulesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _deliveryRuleRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.Get");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.Get");
             scope.Start();
             try
             {
-                var response = _deliveryRuleResourceDeliveryRulesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _deliveryRuleRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtDiscriminator
         {
             async Task<Page<DeliveryRuleResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
+                using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _deliveryRuleResourceDeliveryRulesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _deliveryRuleRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeliveryRuleResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -213,11 +213,11 @@ namespace MgmtDiscriminator
         {
             Page<DeliveryRuleResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
+                using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _deliveryRuleResourceDeliveryRulesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _deliveryRuleRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeliveryRuleResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,7 +242,7 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.Exists");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.Exists");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.Exists");
             scope.Start();
             try
             {
@@ -296,11 +296,11 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.GetIfExists");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _deliveryRuleResourceDeliveryRulesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _deliveryRuleRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<DeliveryRuleResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());
@@ -325,11 +325,11 @@ namespace MgmtDiscriminator
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _deliveryRuleResourceDeliveryRulesClientDiagnostics.CreateScope("DeliveryRuleCollection.GetIfExists");
+            using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRuleCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _deliveryRuleResourceDeliveryRulesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _deliveryRuleRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<DeliveryRuleResource>(null, response.GetRawResponse());
                 return Response.FromValue(new DeliveryRuleResource(Client, response.Value), response.GetRawResponse());

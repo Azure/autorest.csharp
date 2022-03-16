@@ -16,16 +16,16 @@ namespace MgmtLRO.Models
     {
         internal static BarListResult DeserializeBarListResult(JsonElement element)
         {
-            IReadOnlyList<BarResourceData> value = default;
+            IReadOnlyList<BarData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<BarResourceData> array = new List<BarResourceData>();
+                    List<BarData> array = new List<BarData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BarResourceData.DeserializeBarResourceData(item));
+                        array.Add(BarData.DeserializeBarData(item));
                     }
                     value = array;
                     continue;

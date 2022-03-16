@@ -19,9 +19,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(object), typeof(CustomModel1))]
         [TestCase(typeof(object), typeof(CustomModel2))]
-        [TestCase(typeof(ResourceData), typeof(ResourceModel1ResourceData))]
+        [TestCase(typeof(ResourceData), typeof(ResourceModel1Data))]
         [TestCase(typeof(ResourceData), typeof(ResourceModel2))]
-        [TestCase(typeof(TrackedResourceData), typeof(TrackedResourceModel1ResourceData))]
+        [TestCase(typeof(TrackedResourceData), typeof(TrackedResourceModel1Data))]
         [TestCase(typeof(TrackedResourceData), typeof(TrackedResourceModel2))]
         [TestCase(typeof(object), typeof(NonResourceModel1))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
@@ -37,7 +37,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(CustomModel1), typeof(SubResourceModel2))]
         [TestCase(typeof(CustomModel1), typeof(WritableSubResourceModel2))]
         [TestCase(typeof(SubResourceModel1), typeof(ResourceModel2))]
-        [TestCase(typeof(ResourceModel1ResourceData), typeof(TrackedResourceModel2))]
+        [TestCase(typeof(ResourceModel1Data), typeof(TrackedResourceModel2))]
         [TestCase(typeof(CustomModel1), typeof(NonResourceModel1))]
         public void ValidateFlattenType(Type sourceType, Type targetType)
         {
@@ -56,9 +56,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SubResourceModel2), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(WritableSubResourceModel1), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(WritableSubResourceModel2), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
-        [TestCase(typeof(ResourceModel1ResourceData), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
-        [TestCase(typeof(ResourceModel1ResourceData), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
-        [TestCase(typeof(TrackedResourceModel1ResourceData), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
+        [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
+        [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
+        [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(TrackedResourceModel2), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(NonResourceModel1), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);

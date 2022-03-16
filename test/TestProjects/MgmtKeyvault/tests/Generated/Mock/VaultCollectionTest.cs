@@ -37,7 +37,7 @@ namespace MgmtKeyvault.Tests.Mock
                 EnabledForTemplateDeployment = true,
             });
 
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaultResources();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, parameters);
         }
 
@@ -58,7 +58,7 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             });
 
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaultResources();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, parameters);
         }
 
@@ -68,7 +68,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Retrieve a vault
             string vaultName = "sample-vault";
 
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaultResources();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
             await collection.GetAsync(vaultName);
         }
 
@@ -78,7 +78,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: List vaults in the specified resource group
             int? top = 1;
 
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group")).GetVaultResources();
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group")).GetVaults();
             await foreach (var _ in collection.GetAllAsync(top))
             {
             }

@@ -34,7 +34,7 @@ namespace TenantOnly
 
         /// <summary> Gets a collection of BillingAccountResources in the BillingAccountResource. </summary>
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
-        public virtual BillingAccountCollection GetBillingAccountResources()
+        public virtual BillingAccountCollection GetBillingAccounts()
         {
             return GetCachedClient(Client => new BillingAccountCollection(Client, Id));
         }

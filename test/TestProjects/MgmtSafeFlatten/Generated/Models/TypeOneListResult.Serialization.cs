@@ -16,16 +16,16 @@ namespace MgmtSafeFlatten.Models
     {
         internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element)
         {
-            IReadOnlyList<TypeOneResourceData> value = default;
+            IReadOnlyList<TypeOneData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<TypeOneResourceData> array = new List<TypeOneResourceData>();
+                    List<TypeOneData> array = new List<TypeOneData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TypeOneResourceData.DeserializeTypeOneResourceData(item));
+                        array.Add(TypeOneData.DeserializeTypeOneData(item));
                     }
                     value = array;
                     continue;

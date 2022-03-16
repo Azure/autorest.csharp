@@ -27,9 +27,9 @@ namespace Pagination
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _pageSizeInt64ModelResourcePageSizeInt64ModelsClientDiagnostics;
-        private readonly PageSizeInt64ModelsRestOperations _pageSizeInt64ModelResourcePageSizeInt64ModelsRestClient;
-        private readonly PageSizeInt64ModelResourceData _data;
+        private readonly ClientDiagnostics _pageSizeInt64ModelClientDiagnostics;
+        private readonly PageSizeInt64ModelsRestOperations _pageSizeInt64ModelRestClient;
+        private readonly PageSizeInt64ModelData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeInt64ModelResource"/> class for mocking. </summary>
         protected PageSizeInt64ModelResource()
@@ -39,7 +39,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64ModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeInt64ModelResource(ArmClient client, PageSizeInt64ModelResourceData data) : this(client, new ResourceIdentifier(data.Id))
+        internal PageSizeInt64ModelResource(ArmClient client, PageSizeInt64ModelData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -50,9 +50,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeInt64ModelResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeInt64ModelResourcePageSizeInt64ModelsClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string pageSizeInt64ModelResourcePageSizeInt64ModelsApiVersion);
-            _pageSizeInt64ModelResourcePageSizeInt64ModelsRestClient = new PageSizeInt64ModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeInt64ModelResourcePageSizeInt64ModelsApiVersion);
+            _pageSizeInt64ModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string pageSizeInt64ModelApiVersion);
+            _pageSizeInt64ModelRestClient = new PageSizeInt64ModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeInt64ModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace Pagination
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PageSizeInt64ModelResourceData Data
+        public virtual PageSizeInt64ModelData Data
         {
             get
             {
@@ -89,11 +89,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PageSizeInt64ModelResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeInt64ModelResourcePageSizeInt64ModelsClientDiagnostics.CreateScope("PageSizeInt64ModelResource.Get");
+            using var scope = _pageSizeInt64ModelClientDiagnostics.CreateScope("PageSizeInt64ModelResource.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeInt64ModelResourcePageSizeInt64ModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeInt64ModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeInt64ModelResource(Client, response.Value), response.GetRawResponse());
@@ -112,11 +112,11 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeInt64ModelResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _pageSizeInt64ModelResourcePageSizeInt64ModelsClientDiagnostics.CreateScope("PageSizeInt64ModelResource.Get");
+            using var scope = _pageSizeInt64ModelClientDiagnostics.CreateScope("PageSizeInt64ModelResource.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeInt64ModelResourcePageSizeInt64ModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _pageSizeInt64ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeInt64ModelResource(Client, response.Value), response.GetRawResponse());

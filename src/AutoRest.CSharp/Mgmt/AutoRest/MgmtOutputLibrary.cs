@@ -522,13 +522,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var originalResourceName = GetOriginalResourceName(candidateName, requestPath);
-            return originalResourceName.TrimResourceSuffixFromResourceName();
-        }
-
-        private string GetOriginalResourceName(string candidateName, RequestPath requestPath)
-        {
-            var resourceType = requestPath.GetResourceType();
             var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
             var resourcesWithSameType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())

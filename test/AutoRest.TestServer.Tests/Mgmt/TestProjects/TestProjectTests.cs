@@ -414,7 +414,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 ResourceIdentifier resourceIdentifier = new ResourceIdentifier("/subscriptions/0c2f6471-1bf0-4dda-aec3-cb9272f09575/resourceGroups/myRg");
                 if (IsParent(type, resourceIdentifier))
                 {
-                    var getCollectionMethod = resourceExtensions.GetMethod($"Get{resourceName.AddResourceSuffixToResourceName()}".ToPlural());
+                    var getCollectionMethod = resourceExtensions.GetMethod($"Get{resourceName}".ToPlural());
                     Assert.NotNull(getCollectionMethod);
                     Assert.AreEqual(1, getCollectionMethod.GetParameters().Length);
                     var param = TypeAsserts.HasParameter(getCollectionMethod, "resourceGroup");
@@ -545,7 +545,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type type in FindAllCollections())
             {
-                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection")).AddResourceSuffixToResourceName();
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Collection"));
                 ResourceIdentifier resourceIdentifier = new ResourceIdentifier("/subscriptions/0c2f6471-1bf0-4dda-aec3-cb9272f09575");
                 if (IsParent(type, resourceIdentifier))
                 {
@@ -584,7 +584,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                 if (IsParent(type, resourceIdentifier) && listAllMethod.Any())
                 {
-                    var listMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.AddResourceSuffixToResourceName().ResourceNameToPlural()}" && m.GetParameters().Length >= 2);
+                    var listMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listMethodInfo = listMethodInfos.First();
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
@@ -592,7 +592,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listParam2.ParameterType);
 
-                    var listAsyncMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.AddResourceSuffixToResourceName().ResourceNameToPlural()}Async" && m.GetParameters().Length >= 2);
+                    var listAsyncMethodInfos = subscriptionExtension.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}Async" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listAsyncMethodInfo = listAsyncMethodInfos.First();
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
@@ -652,7 +652,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     if (IsParent(collection, resourceIdentifier))
                     {
                         var resourceName = collection.Name.Remove(collection.Name.LastIndexOf("Collection"));
-                        var method = operation.GetMethod($"Get{resourceName.AddResourceSuffixToResourceName().ToPlural()}");
+                        var method = operation.GetMethod($"Get{resourceName.ToPlural()}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(collection.Namespace + "." + collection.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

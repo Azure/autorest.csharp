@@ -16,16 +16,16 @@ namespace MgmtParamOrdering.Models
     {
         internal static WorkspaceListResult DeserializeWorkspaceListResult(JsonElement element)
         {
-            IReadOnlyList<WorkspaceResourceData> value = default;
+            IReadOnlyList<WorkspaceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<WorkspaceResourceData> array = new List<WorkspaceResourceData>();
+                    List<WorkspaceData> array = new List<WorkspaceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(WorkspaceResourceData.DeserializeWorkspaceResourceData(item));
+                        array.Add(WorkspaceData.DeserializeWorkspaceData(item));
                     }
                     value = array;
                     continue;

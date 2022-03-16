@@ -24,8 +24,8 @@ namespace MgmtParamOrdering
     /// <summary> A class representing collection of Workspace and their operations over its parent. </summary>
     public partial class WorkspaceCollection : ArmCollection, IEnumerable<WorkspaceResource>, IAsyncEnumerable<WorkspaceResource>
     {
-        private readonly ClientDiagnostics _workspaceResourceWorkspacesClientDiagnostics;
-        private readonly WorkspacesRestOperations _workspaceResourceWorkspacesRestClient;
+        private readonly ClientDiagnostics _workspaceClientDiagnostics;
+        private readonly WorkspacesRestOperations _workspaceRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="WorkspaceCollection"/> class for mocking. </summary>
         protected WorkspaceCollection()
@@ -37,9 +37,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal WorkspaceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _workspaceResourceWorkspacesClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", WorkspaceResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(WorkspaceResource.ResourceType, out string workspaceResourceWorkspacesApiVersion);
-            _workspaceResourceWorkspacesRestClient = new WorkspacesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceResourceWorkspacesApiVersion);
+            _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", WorkspaceResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(WorkspaceResource.ResourceType, out string workspaceApiVersion);
+            _workspaceRestClient = new WorkspacesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<WorkspaceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string workspaceName, WorkspaceResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<WorkspaceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _workspaceResourceWorkspacesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation<WorkspaceResource>(new WorkspaceResourceOperationSource(Client), _workspaceResourceWorkspacesClientDiagnostics, Pipeline, _workspaceResourceWorkspacesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _workspaceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation<WorkspaceResource>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<WorkspaceResource> CreateOrUpdate(WaitUntil waitUntil, string workspaceName, WorkspaceResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<WorkspaceResource> CreateOrUpdate(WaitUntil waitUntil, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _workspaceResourceWorkspacesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation<WorkspaceResource>(new WorkspaceResourceOperationSource(Client), _workspaceResourceWorkspacesClientDiagnostics, Pipeline, _workspaceResourceWorkspacesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation<WorkspaceResource>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -130,11 +130,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.Get");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Get");
             scope.Start();
             try
             {
-                var response = await _workspaceResourceWorkspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
+                var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());
@@ -159,11 +159,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.Get");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Get");
             scope.Start();
             try
             {
-                var response = _workspaceResourceWorkspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
+                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());
@@ -186,11 +186,11 @@ namespace MgmtParamOrdering
         {
             async Task<Page<WorkspaceResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _workspaceResourceWorkspacesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _workspaceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new WorkspaceResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -213,11 +213,11 @@ namespace MgmtParamOrdering
         {
             Page<WorkspaceResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _workspaceResourceWorkspacesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    var response = _workspaceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new WorkspaceResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -242,7 +242,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
             scope.Start();
             try
             {
@@ -296,11 +296,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _workspaceResourceWorkspacesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<WorkspaceResource>(null, response.GetRawResponse());
                 return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());
@@ -325,11 +325,11 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceResourceWorkspacesClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _workspaceResourceWorkspacesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
+                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<WorkspaceResource>(null, response.GetRawResponse());
                 return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());

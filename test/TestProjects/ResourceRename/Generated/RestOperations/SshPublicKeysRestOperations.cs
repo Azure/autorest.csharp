@@ -127,7 +127,7 @@ namespace ResourceRename
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new SshPublicKeyInfoResourceData()
+            var model = new SshPublicKeyInfoData()
             {
                 Properties = properties
             };
@@ -146,7 +146,7 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SshPublicKeyInfoResourceData>> CreateAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyInfoData>> CreateAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -159,9 +159,9 @@ namespace ResourceRename
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyInfoResourceData value = default;
+                        SshPublicKeyInfoData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyInfoResourceData.DeserializeSshPublicKeyInfoResourceData(document.RootElement);
+                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -177,7 +177,7 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SshPublicKeyInfoResourceData> Create(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyInfoData> Create(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -190,9 +190,9 @@ namespace ResourceRename
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyInfoResourceData value = default;
+                        SshPublicKeyInfoData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyInfoResourceData.DeserializeSshPublicKeyInfoResourceData(document.RootElement);
+                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -296,7 +296,7 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SshPublicKeyInfoResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyInfoData>> GetAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -308,13 +308,13 @@ namespace ResourceRename
             {
                 case 200:
                     {
-                        SshPublicKeyInfoResourceData value = default;
+                        SshPublicKeyInfoData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyInfoResourceData.DeserializeSshPublicKeyInfoResourceData(document.RootElement);
+                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SshPublicKeyInfoResourceData)null, message.Response);
+                    return Response.FromValue((SshPublicKeyInfoData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -327,7 +327,7 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SshPublicKeyInfoResourceData> Get(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyInfoData> Get(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -339,13 +339,13 @@ namespace ResourceRename
             {
                 case 200:
                     {
-                        SshPublicKeyInfoResourceData value = default;
+                        SshPublicKeyInfoData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyInfoResourceData.DeserializeSshPublicKeyInfoResourceData(document.RootElement);
+                        value = SshPublicKeyInfoData.DeserializeSshPublicKeyInfoData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SshPublicKeyInfoResourceData)null, message.Response);
+                    return Response.FromValue((SshPublicKeyInfoData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
