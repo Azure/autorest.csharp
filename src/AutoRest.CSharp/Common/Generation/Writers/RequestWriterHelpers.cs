@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, Parameter[]? clientParameters = null)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -41,7 +41,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
-                    writer.Line($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I});");
+                    writer.Append($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I}");
+                    if (responseClassifierType != default)
+                    {
+                        writer.Append($", {responseClassifierType}");
+                    }
+                    writer.Line($");");
                 }
                 else
                 {
@@ -208,12 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (writeSDKUserAgent)
                 {
-                    writer.Line($"{message}.SetProperty(\"SDKUserAgent\", _userAgent);");
-                }
-
-                if (responseClassifierType != default)
-                {
-                    writer.Line($"{message}.{nameof(HttpMessage.ResponseClassifier)} = {responseClassifierType}.Instance;");
+                    writer.Line($"_userAgent.Apply({message});");
                 }
 
                 writer.Line($"return {message};");
@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, Parameter[]? parameters)
+        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, IReadOnlyList<Parameter>? parameters)
         {
             string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
             bool explode = queryParameter.Explode;

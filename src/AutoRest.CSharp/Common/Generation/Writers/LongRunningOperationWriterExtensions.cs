@@ -47,7 +47,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         operation.ResultSerialization,
                         async: async,
                         (w, v) => w.Line($"firstPageResult = {v};"),
-                        responseVariable);
+                        responseVariable,
+                        pagingResponse.ItemProperty.ValueType);
 
                     writer.Line($"{pagingResponse.PageType} firstPage = {typeof(Page)}.FromValues(firstPageResult.{itemPropertyName}, firstPageResult.{nextLinkPropertyName}, {responseVariable});");
                     writer.Line();
@@ -60,7 +61,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         operation.ResultSerialization,
                         async: async,
                         valueCallback,
-                        responseVariable);
+                        responseVariable,
+                        operation.ResultType);
                 }
             }
             else

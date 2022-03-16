@@ -103,7 +103,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                 operation.ResultSerialization,
                                 async: true,
                                 (w, v) => w.Line($"nextPageResult = {v};"),
-                                responseVariable);
+                                responseVariable,
+                                pagingResponse.ResponseType);
 
                             writer.Line($"return {typeof(Page)}.FromValues(nextPageResult.{itemPropertyName}, nextPageResult.{nextLinkPropertyName}, {responseVariable});");
                         }
@@ -181,15 +182,22 @@ namespace AutoRest.CSharp.Generation.Writers
         protected virtual void WriteWaitForCompletionVariants(CodeWriter writer, LongRunningOperation operation)
         {
             var valueTaskType = GetValueTaskType(operation);
-            var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
-            var waitForCompleteMethodName = operation.ResultType != null ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
+            var waitForCompletionMethodName = operation.ResultType != null ? "WaitForCompletion" : "WaitForCompletionResponse";
+
+            WriteWaitForCompletionMethods(writer, valueTaskType, waitForCompletionMethodName, false);
+            WriteWaitForCompletionMethods(writer, valueTaskType, waitForCompletionMethodName, true);
+        }
+
+        private void WriteWaitForCompletionMethods(CodeWriter writer, CSharpType valueTaskType, string waitForCompletionMethodName, bool async)
+        {
+            var waitForCompletionType = async ? new CSharpType(typeof(ValueTask<>), valueTaskType) : valueTaskType;
 
             writer.WriteXmlDocumentationInheritDoc();
-            writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(cancellationToken);");
+            writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(cancellationToken);");
             writer.Line();
 
             writer.WriteXmlDocumentationInheritDoc();
-            writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken);");
+            writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(pollingInterval, cancellationToken);");
             writer.Line();
         }
     }

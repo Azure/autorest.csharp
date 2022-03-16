@@ -13,7 +13,7 @@ using MgmtListMethods;
 namespace MgmtListMethods.Models
 {
     /// <summary> The List operation response. </summary>
-    public partial class ResGrpParentListResult
+    internal partial class ResGrpParentListResult
     {
         /// <summary> Initializes a new instance of ResGrpParentListResult. </summary>
         /// <param name="value"> List. </param>

@@ -159,47 +159,42 @@ namespace HeadAsBooleanTrue_LowLevel
 
         internal HttpMessage CreateHead200Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead204Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead404Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/404", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200To300400To500 : ResponseClassifier
+        private sealed class ResponseClassifier200To300400To500Override : ResponseClassifier
         {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200To300400To500();
             public override bool IsErrorResponse(HttpMessage message)
             {
                 return message.Response.Status switch
@@ -210,5 +205,8 @@ namespace HeadAsBooleanTrue_LowLevel
                 };
             }
         }
+
+        private static ResponseClassifier _responseClassifier200To300400To500;
+        private static ResponseClassifier ResponseClassifier200To300400To500 => _responseClassifier200To300400To500 ??= new ResponseClassifier200To300400To500Override();
     }
 }

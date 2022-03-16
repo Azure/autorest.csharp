@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class VirtualMachineScaleSetVM : IUtf8JsonSerializable
+    internal partial class VirtualMachineScaleSetVM : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

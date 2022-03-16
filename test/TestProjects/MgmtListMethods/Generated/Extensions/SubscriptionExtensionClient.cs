@@ -53,23 +53,23 @@ namespace MgmtListMethods
         }
 
         private ClientDiagnostics FakeParentWithAncestorWithNonResChWithLocClientDiagnostics => _fakeParentWithAncestorWithNonResChWithLocClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
-        private FakeParentWithAncestorWithNonResChWithLocsRestOperations FakeParentWithAncestorWithNonResChWithLocRestClient => _fakeParentWithAncestorWithNonResChWithLocRestClient ??= new FakeParentWithAncestorWithNonResChWithLocsRestOperations(FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithNonResChWithLoc.ResourceType));
+        private FakeParentWithAncestorWithNonResChWithLocsRestOperations FakeParentWithAncestorWithNonResChWithLocRestClient => _fakeParentWithAncestorWithNonResChWithLocRestClient ??= new FakeParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithNonResChWithLoc.ResourceType));
         private ClientDiagnostics FakeParentWithAncestorWithNonResChClientDiagnostics => _fakeParentWithAncestorWithNonResChClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-        private FakeParentWithAncestorWithNonResChesRestOperations FakeParentWithAncestorWithNonResChRestClient => _fakeParentWithAncestorWithNonResChRestClient ??= new FakeParentWithAncestorWithNonResChesRestOperations(FakeParentWithAncestorWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithNonResCh.ResourceType));
+        private FakeParentWithAncestorWithNonResChesRestOperations FakeParentWithAncestorWithNonResChRestClient => _fakeParentWithAncestorWithNonResChRestClient ??= new FakeParentWithAncestorWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithNonResCh.ResourceType));
         private ClientDiagnostics FakeParentWithAncestorWithLocClientDiagnostics => _fakeParentWithAncestorWithLocClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorWithLoc.ResourceType.Namespace, DiagnosticOptions);
-        private FakeParentWithAncestorWithLocsRestOperations FakeParentWithAncestorWithLocRestClient => _fakeParentWithAncestorWithLocRestClient ??= new FakeParentWithAncestorWithLocsRestOperations(FakeParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithLoc.ResourceType));
+        private FakeParentWithAncestorWithLocsRestOperations FakeParentWithAncestorWithLocRestClient => _fakeParentWithAncestorWithLocRestClient ??= new FakeParentWithAncestorWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestorWithLoc.ResourceType));
         private ClientDiagnostics FakeParentWithAncestorClientDiagnostics => _fakeParentWithAncestorClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestor.ResourceType.Namespace, DiagnosticOptions);
-        private FakeParentWithAncestorsRestOperations FakeParentWithAncestorRestClient => _fakeParentWithAncestorRestClient ??= new FakeParentWithAncestorsRestOperations(FakeParentWithAncestorClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestor.ResourceType));
+        private FakeParentWithAncestorsRestOperations FakeParentWithAncestorRestClient => _fakeParentWithAncestorRestClient ??= new FakeParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(FakeParentWithAncestor.ResourceType));
         private ClientDiagnostics ResGrpParentWithAncestorWithNonResChWithLocClientDiagnostics => _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
-        private ResGrpParentWithAncestorWithNonResChWithLocsRestOperations ResGrpParentWithAncestorWithNonResChWithLocRestClient => _resGrpParentWithAncestorWithNonResChWithLocRestClient ??= new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(ResGrpParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType));
+        private ResGrpParentWithAncestorWithNonResChWithLocsRestOperations ResGrpParentWithAncestorWithNonResChWithLocRestClient => _resGrpParentWithAncestorWithNonResChWithLocRestClient ??= new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType));
         private ClientDiagnostics ResGrpParentWithAncestorWithNonResChClientDiagnostics => _resGrpParentWithAncestorWithNonResChClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-        private ResGrpParentWithAncestorWithNonResChesRestOperations ResGrpParentWithAncestorWithNonResChRestClient => _resGrpParentWithAncestorWithNonResChRestClient ??= new ResGrpParentWithAncestorWithNonResChesRestOperations(ResGrpParentWithAncestorWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithNonResCh.ResourceType));
+        private ResGrpParentWithAncestorWithNonResChesRestOperations ResGrpParentWithAncestorWithNonResChRestClient => _resGrpParentWithAncestorWithNonResChRestClient ??= new ResGrpParentWithAncestorWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithNonResCh.ResourceType));
         private ClientDiagnostics ResGrpParentWithAncestorWithLocClientDiagnostics => _resGrpParentWithAncestorWithLocClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithLoc.ResourceType.Namespace, DiagnosticOptions);
-        private ResGrpParentWithAncestorWithLocsRestOperations ResGrpParentWithAncestorWithLocRestClient => _resGrpParentWithAncestorWithLocRestClient ??= new ResGrpParentWithAncestorWithLocsRestOperations(ResGrpParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithLoc.ResourceType));
+        private ResGrpParentWithAncestorWithLocsRestOperations ResGrpParentWithAncestorWithLocRestClient => _resGrpParentWithAncestorWithLocRestClient ??= new ResGrpParentWithAncestorWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestorWithLoc.ResourceType));
         private ClientDiagnostics ResGrpParentWithAncestorClientDiagnostics => _resGrpParentWithAncestorClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestor.ResourceType.Namespace, DiagnosticOptions);
-        private ResGrpParentWithAncestorsRestOperations ResGrpParentWithAncestorRestClient => _resGrpParentWithAncestorRestClient ??= new ResGrpParentWithAncestorsRestOperations(ResGrpParentWithAncestorClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestor.ResourceType));
+        private ResGrpParentWithAncestorsRestOperations ResGrpParentWithAncestorRestClient => _resGrpParentWithAncestorRestClient ??= new ResGrpParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ResGrpParentWithAncestor.ResourceType));
         private ClientDiagnostics QuotasClientDiagnostics => _quotasClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private QuotasRestOperations QuotasRestClient => _quotasRestClient ??= new QuotasRestOperations(QuotasClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private QuotasRestOperations QuotasRestClient => _quotasRestClient ??= new QuotasRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -81,35 +81,35 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return new FakeCollection(Client, Id);
+            return GetCachedClient(Client => new FakeCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChWithLocs in the SubParentWithNonResChWithLoc. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChWithLocs and their operations over a SubParentWithNonResChWithLoc. </returns>
         public virtual SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs()
         {
-            return new SubParentWithNonResChWithLocCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithNonResChWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChes in the SubParentWithNonResCh. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChes and their operations over a SubParentWithNonResCh. </returns>
         public virtual SubParentWithNonResChCollection GetSubParentWithNonResChes()
         {
-            return new SubParentWithNonResChCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithNonResChCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithLocs in the SubParentWithLoc. </summary>
         /// <returns> An object representing collection of SubParentWithLocs and their operations over a SubParentWithLoc. </returns>
         public virtual SubParentWithLocCollection GetSubParentWithLocs()
         {
-            return new SubParentWithLocCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParents in the SubParent. </summary>
         /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return new SubParentCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentCollection(Client, Id));
         }
 
         /// <summary>

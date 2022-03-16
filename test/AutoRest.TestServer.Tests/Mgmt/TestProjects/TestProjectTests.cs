@@ -45,6 +45,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void VerifyNoSingleWordsThatShouldBeReplaced()
+        {
+            var singlesToReplace = typeof(CommonSingleWordModels).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;
+            foreach (var type in MyTypes())
+            {
+                Assert.IsFalse(singlesToReplace.Contains(type.Name));
+            }
+        }
+
+        [Test]
         public void PropertiesEndingInUriShouldBeUriType()
         {
             foreach (var type in MyTypes())

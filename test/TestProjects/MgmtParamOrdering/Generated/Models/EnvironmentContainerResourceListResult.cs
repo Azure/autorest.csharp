@@ -13,7 +13,7 @@ using MgmtParamOrdering;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The list dedicated host operation response. </summary>
-    public partial class EnvironmentContainerResourceListResult
+    internal partial class EnvironmentContainerResourceListResult
     {
         /// <summary> Initializes a new instance of EnvironmentContainerResourceListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>

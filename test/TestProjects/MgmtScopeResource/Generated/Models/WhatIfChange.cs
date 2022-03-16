@@ -33,7 +33,7 @@ namespace MgmtScopeResource.Models
         /// <param name="unsupportedReason"> The explanation about why the resource is unsupported by What-If. </param>
         /// <param name="before"> The snapshot of the resource before the deployment is executed. </param>
         /// <param name="after"> The predicted snapshot of the resource after the deployment is executed. </param>
-        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, object before, object after)
+        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, BinaryData before, BinaryData after)
         {
             ResourceId = resourceId;
             ChangeType = changeType;
@@ -49,8 +49,8 @@ namespace MgmtScopeResource.Models
         /// <summary> The explanation about why the resource is unsupported by What-If. </summary>
         public string UnsupportedReason { get; }
         /// <summary> The snapshot of the resource before the deployment is executed. </summary>
-        public object Before { get; }
+        public BinaryData Before { get; }
         /// <summary> The predicted snapshot of the resource after the deployment is executed. </summary>
-        public object After { get; }
+        public BinaryData After { get; }
     }
 }

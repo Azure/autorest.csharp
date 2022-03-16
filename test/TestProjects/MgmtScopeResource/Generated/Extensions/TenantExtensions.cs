@@ -35,6 +35,36 @@ namespace MgmtScopeResource
             return GetExtensionClient(tenant).GetDeploymentExtendeds();
         }
 
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return await tenant.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static Response<DeploymentExtended> GetDeploymentExtended(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return tenant.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -48,6 +78,34 @@ namespace MgmtScopeResource
         }
 
         /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        public static async Task<Response<ResourceLink>> GetResourceLinkAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        {
+            return await GetResourceLinks(tenant, scope).GetAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        public static Response<ResourceLink> GetResourceLink(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        {
+            return GetResourceLinks(tenant, scope).Get(cancellationToken);
+        }
+
+        /// <summary>
         /// Calculate the hash of the given template.
         /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
         /// Operation Id: Deployments_CalculateTemplateHash
@@ -56,7 +114,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public async static Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
@@ -72,7 +130,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 

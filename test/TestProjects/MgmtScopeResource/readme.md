@@ -45,7 +45,12 @@ operation-positions:
   /{scope}/providers/Microsoft.Resources/links: collection
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
-  - remove-operation: PolicyAssignments_DeleteById
-  - remove-operation: PolicyAssignments_CreateById
-  - remove-operation: PolicyAssignments_GetById
+  - remove-operation: FakePolicyAssignments_DeleteById
+  - remove-operation: FakePolicyAssignments_CreateById
+  - remove-operation: FakePolicyAssignments_GetById
+  - from: Links.json
+    where: $.definitions.ResourceLink.properties.type
+    transform: >
+       $["x-ms-client-name"] = "ResourceType";
+       $["type"] = "string";
 ```

@@ -12,7 +12,7 @@ using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class DedicatedHostGroupListResult
+    internal partial class DedicatedHostGroupListResult
     {
         internal static DedicatedHostGroupListResult DeserializeDedicatedHostGroupListResult(JsonElement element)
         {

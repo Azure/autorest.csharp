@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> List of private endpoint connection associated with the specified storage account. </summary>
     [TypeReferenceType]
-    internal partial class PrivateEndpointConnectionList
+    public partial class PrivateEndpointConnectionList
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
         [InitializationConstructor]

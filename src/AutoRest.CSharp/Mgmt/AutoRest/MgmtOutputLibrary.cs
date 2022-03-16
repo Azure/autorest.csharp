@@ -105,9 +105,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            _allSchemas.UpdateFrameworkTypes();
-
-            SinglePropertyHider.HideModels(_allSchemas);
+            MgmtContext.CodeModel.UpdatePatchOperations();
+            _allSchemas.VerifyAndUpdateFrameworkTypes();
+            _allSchemas.UpdateSealChoiceTypes();
+            CommonSingleWordModels.Update(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -178,8 +179,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
-                            bodyParam.Language.Default.Name = "options";
+                            bodyParam.Schema.Language.Default.Name = $"Patchable{name}Data";
+                            bodyParam.Language.Default.Name = "data";
                         }
                     }
                 }
@@ -325,10 +326,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionClient? _managementGroupExtensionClient;
         private MgmtExtensionClient? _subscriptionExtensionClient;
         private MgmtExtensionClient? _resourceGroupExtensionClient;
+        private MgmtExtensionClient? _armResourceExtensionClient;
         public MgmtExtensionClient SubscriptionExtensionsClient => _subscriptionExtensionClient ??= EnsureExtensionsClient(SubscriptionExtensions);
         public MgmtExtensionClient ResourceGroupExtensionsClient => _resourceGroupExtensionClient ??= EnsureExtensionsClient(ResourceGroupExtensions);
         public MgmtExtensionClient TenantExtensionsClient => _tenantExtensionClient ??= EnsureExtensionsClient(TenantExtensions);
         public MgmtExtensionClient ManagementGroupExtensionsClient => _managementGroupExtensionClient ??= EnsureExtensionsClient(ManagementGroupExtensions);
+        public MgmtExtensionClient ArmResourceExtensionsClient => _armResourceExtensionClient ??= EnsureExtensionsClient(ArmResourceExtensions);
 
         private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
             new MgmtExtensionClient(publicExtension);
@@ -452,7 +455,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
-                var restClient = new MgmtRestClient(operationGroup);
+                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))

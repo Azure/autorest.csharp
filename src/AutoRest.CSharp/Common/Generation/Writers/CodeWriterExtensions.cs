@@ -94,6 +94,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");
         }
 
+        public static CodeWriter WriteFieldDeclarations(this CodeWriter writer, IEnumerable<FieldDeclaration> fields)
+        {
+            foreach (var field in fields)
+            {
+                writer.WriteFieldDeclaration(field);
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
@@ -111,10 +121,9 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodBase is MethodSignature method)
             {
                 writer
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && Configuration.AzureArm)
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !Configuration.AzureArm);
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
                 if (method.ReturnType != null)
                 {
@@ -221,7 +230,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {
@@ -425,12 +434,12 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable)
+            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable);
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable, type is not null && type.Equals(typeof(BinaryData)));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, valueCallback, responseVariable);

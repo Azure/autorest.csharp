@@ -50,9 +50,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Car", "GetIgnition", true)]
         [TestCase("Car", "GetIgnitions", false)]
         [TestCase("ResourceGroupExtensions", "GetCars", true)]
-        [TestCase("ResourceGroupExtensions", "GetCar", false)]
+        [TestCase("ResourceGroupExtensions", "GetCar", true)]
         [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResource", false)]
+        [TestCase("ResourceGroupExtensions", "GetParentResource", true)]
+        [TestCase("ResourceGroupExtensions", "GetParentResourc", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())

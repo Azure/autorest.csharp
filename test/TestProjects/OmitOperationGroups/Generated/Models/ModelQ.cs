@@ -21,10 +21,10 @@ namespace OmitOperationGroups.Models
         /// <summary> Initializes a new instance of ModelQ. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="m"></param>
-        internal ModelQ(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string m) : base(id, name, type, systemData)
+        internal ModelQ(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string m) : base(id, name, resourceType, systemData)
         {
             M = m;
         }

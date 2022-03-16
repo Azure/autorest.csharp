@@ -20,14 +20,14 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="resourceType"></param>
         /// <param name="new"></param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
-        internal SupersetModel7Data(string id, string name, string type, string @new, SupersetModel7SystemData systemData)
+        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData)
         {
             Id = id;
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
             New = @new;
             SystemData = systemData;
         }
@@ -36,8 +36,8 @@ namespace SupersetInheritance
         public string Id { get; }
         /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> Gets the type. </summary>
-        public string Type { get; }
+        /// <summary> Gets the resource type. </summary>
+        public string ResourceType { get; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
         /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>

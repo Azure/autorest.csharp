@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary> Contains the data disk images information. </summary>
-    public partial class DataDiskImage
+    internal partial class DataDiskImage
     {
         /// <summary> Initializes a new instance of DataDiskImage. </summary>
         public DataDiskImage()
