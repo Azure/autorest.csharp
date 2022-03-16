@@ -259,6 +259,52 @@ namespace media_types_LowLevel
             }
         }
 
+        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response> PutTextAndJsonBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutTextAndJsonBodyRequest(content, contentType, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Body that&apos;s either text/plain or application/json. </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response PutTextAndJsonBody(RequestContent content, ContentType contentType, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreatePutTextAndJsonBodyRequest(content, contentType, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateAnalyzeBodyRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -326,6 +372,21 @@ namespace media_types_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
+            request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreatePutTextAndJsonBodyRequest(RequestContent content, ContentType contentType, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/textAndJson", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", contentType.ToString());

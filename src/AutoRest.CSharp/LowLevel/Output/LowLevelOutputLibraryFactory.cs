@@ -185,24 +185,27 @@ namespace AutoRest.CSharp.Output.Models
 
                         selectedRequest ??= operation!.Requests.FirstOrDefault(r => r.Parameters.Any(p => p.In == HttpParameterIn.Header && p.Origin == "modelerfour:synthesized/content-type"));
                         var selectedParameter = selectedRequest.Parameters.First(p => p.Origin == "modelerfour:synthesized/content-type");
-                        var choiceSchema = new SealedChoiceSchema(){
-                            Language = new Languages(){
-                                Default = new Language(){
-                                    Name = "ContentType",
-                                    Description = "Content type for upload"
-                                },
-                            }
-                        };
-                        foreach (var schema in constantSchemas)
+                        if (constantSchemas.Count > 1)
                         {
-                            choiceSchema?.Choices.Add(new ChoiceValue()
+                            var choiceSchema = new SealedChoiceSchema(){
+                                Language = new Languages(){
+                                    Default = new Language(){
+                                        Name = "ContentType",
+                                        Description = "Content type for upload"
+                                    },
+                                }
+                            };
+                            foreach (var schema in constantSchemas)
                             {
-                                Language = schema!.Language,
-                                Value = schema!.Value.Value.ToString(),
-                                Extensions = schema.Extensions
-                            });
+                                choiceSchema?.Choices.Add(new ChoiceValue()
+                                {
+                                    Language = schema!.Language,
+                                    Value = schema!.Value.Value.ToString(),
+                                    Extensions = schema.Extensions
+                                });
+                            }
+                            selectedParameter.Schema = choiceSchema;
                         }
-                        selectedParameter.Schema = choiceSchema;
 
                         SetRequestToClient(clientInfo, selectedRequest!, operation!);
                         continue;
