@@ -161,6 +161,33 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var operation in clientInfo.Operations)
                 {
+                    if (operation.Requests.All(r => operation?.RequestMediaTypes?.Values.Contains(r) == true))
+                    {
+                        var requestWithMultipleContentTypes = operation.Requests.FirstOrDefault(r => r.Parameters.Any(p => p.In == HttpParameterIn.Header && p.Origin == "modelerfour:synthesized/content-type" && p.Schema is not ConstantSchema));
+                        var constantSchemas = operation.Requests.SelectMany(r => r.Parameters).Where(p => p.In == HttpParameterIn.Header && p.Origin == "modelerfour:synthesized/content-type" && p.Schema is ConstantSchema).Select(p => p.Schema as ConstantSchema).ToHashSet();
+                        if (requestWithMultipleContentTypes != null && requestWithMultipleContentTypes.Protocol.Http is HttpBinaryRequest binaryRequest)
+                        {
+                            binaryRequest.MediaTypes = operation!.RequestMediaTypes!.Keys.ToList();
+                            var sealedChoiceSchema = requestWithMultipleContentTypes.Parameters.First(p => p.Origin == "modelerfour:synthesized/content-type").Schema as SealedChoiceSchema;
+                            foreach (var schema in constantSchemas)
+                            {
+                                if (sealedChoiceSchema?.Choices.Any(c => c.Value.Equals(schema!.Value.Value.ToString(), StringComparison.Ordinal)) == false)
+                                {
+                                    sealedChoiceSchema?.Choices.Add(new ChoiceValue()
+                                    {
+                                        Language = schema!.Language,
+                                        Value = schema!.Value.Value.ToString(),
+                                        Extensions = schema.Extensions
+                                    });
+                                }
+                            }
+                        }
+
+                        requestWithMultipleContentTypes ??= operation!.Requests.FirstOrDefault(r => r.Parameters.Any(p => p.In == HttpParameterIn.Header && p.Origin == "modelerfour:synthesized/content-type"));
+                        // TODO: convert multiple requests with all constant schema to one request with a choice schema
+                        SetRequestToClient(clientInfo, requestWithMultipleContentTypes!, operation!);
+                        continue;
+                    }
                     foreach (var request in operation.Requests)
                     {
                         SetRequestToClient(clientInfo, request, operation);
