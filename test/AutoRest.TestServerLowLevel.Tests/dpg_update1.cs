@@ -16,10 +16,7 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         [Description("Test for v2 client HEAD request that adds an optional query parameter from v1 which has no query parameters")]
-        public Task DpgAddOptionalInput_NoParams_V2() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_NoParams(host);
-        });
+        public Task DpgAddOptionalInput_NoParams_V2() => Test(async (host) => await DpgAddOptionalInput_NoParams(host));
 
         internal override async Task DpgAddOptionalInput_NoParams(Uri host)
         {
@@ -40,10 +37,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v2 client GET request that adds an optional query parameter from v1 which has one required query parameter")]
-        public Task DpgAddOptionalInput_V2() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput(host);
-        });
+        public Task DpgAddOptionalInput_V2() => Test(async (host) => await DpgAddOptionalInput(host));
 
         internal override async Task DpgAddOptionalInput(Uri host)
         {
@@ -66,10 +60,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v2 client PUT request that adds an optional query parameter from v1 which has one required query parameter and one optional parameter")]
-        public Task DpgAddOptionalInput_RequiredOptionalParam_V2() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_RequiredOptionalParam(host);
-        });
+        public Task DpgAddOptionalInput_RequiredOptionalParam_V2() => Test(async (host) => await DpgAddOptionalInput_RequiredOptionalParam(host));
 
         internal override async Task DpgAddOptionalInput_RequiredOptionalParam(Uri host)
         {
@@ -96,10 +87,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v2 client GET request that adds an optional query parameter from v1 which has one optional query parameter")]
-        public Task DpgAddOptionalInput_OptionalParam_V2() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_OptionalParam(host);
-        });
+        public Task DpgAddOptionalInput_OptionalParam_V2() => Test(async (host) => await DpgAddOptionalInput_OptionalParam(host));
 
         internal override async Task DpgAddOptionalInput_OptionalParam(Uri host)
         {
@@ -126,10 +114,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v2 client POST request that supports the application/json content type existing since v1 and the image/jpeg content type added newly")]
-        public Task DpgNewBodyType_V2() => Test(async (host) =>
-        {
-            await DpgNewBodyType(host);
-        });
+        public Task DpgNewBodyType_V2() => Test(async (host) => await DpgNewBodyType(host));
 
         internal override async Task DpgNewBodyType(Uri host)
         {
@@ -141,15 +126,15 @@ namespace AutoRest.TestServer.Tests
             {
                 url = "http://example.org/myimage.jpeg"
             };
-            var result3 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), ContentType.ApplicationJson);
-            Assert.AreEqual(200, result3.Status);
-
-            var result4 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), ContentType.ApplicationJson, default);
+            var result4 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), ContentType.ApplicationJson);
             Assert.AreEqual(200, result4.Status);
 
+            var result5 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), ContentType.ApplicationJson, default);
+            Assert.AreEqual(200, result5.Status);
+
             await using var jpegValue = new MemoryStream(Encoding.UTF8.GetBytes("JPEG"));
-            var result = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(jpegValue), new ContentType("image/jpeg"));
-            Assert.AreEqual(200, result.Status);
+            var result6 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(jpegValue), new ContentType("image/jpeg"));
+            Assert.AreEqual(200, result6.Status);
         }
 
         [Test]

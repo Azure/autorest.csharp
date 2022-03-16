@@ -15,10 +15,7 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         [Description("Test for v1 client HEAD request that initially has no query parameters")]
-        public Task DpgAddOptionalInput_NoParams_V1() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_NoParams(host);
-        });
+        public Task DpgAddOptionalInput_NoParams_V1() => Test(async (host) => await DpgAddOptionalInput_NoParams(host));
 
         internal virtual async Task DpgAddOptionalInput_NoParams(Uri host)
         {
@@ -40,10 +37,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v1 client GET request that initially has one required query parameter")]
-        public Task DpgAddOptionalInput_V1() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput(host);
-        });
+        public Task DpgAddOptionalInput_V1() => Test(async (host) => await DpgAddOptionalInput(host));
 
         internal virtual async Task DpgAddOptionalInput(Uri host)
         {
@@ -62,10 +56,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v1 client PUT request that initially has one required query parameter and one optional parameter")]
-        public Task DpgAddOptionalInput_RequiredOptionalParam_V1() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_RequiredOptionalParam(host);
-        });
+        public Task DpgAddOptionalInput_RequiredOptionalParam_V1() => Test(async (host) => await DpgAddOptionalInput_RequiredOptionalParam(host));
 
         internal virtual async Task DpgAddOptionalInput_RequiredOptionalParam(Uri host)
         {
@@ -89,10 +80,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v1 client GET request that initially has one optional query parameter")]
-        public Task DpgAddOptionalInput_OptionalParam_V1() => Test(async (host) =>
-        {
-            await DpgAddOptionalInput_OptionalParam(host);
-        });
+        public Task DpgAddOptionalInput_OptionalParam_V1() => Test(async (host) => await DpgAddOptionalInput_OptionalParam(host));
 
         internal virtual async Task DpgAddOptionalInput_OptionalParam(Uri host)
         {
@@ -115,10 +103,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Description("Test for v1 client POST request that initially has one application/json content type")]
-        public Task DpgNewBodyType_V1() => Test(async (host) =>
-        {
-            await DpgNewBodyType(host);
-        });
+        public Task DpgNewBodyType_V1() => Test(async (host) => await DpgNewBodyType(host));
 
         internal virtual async Task DpgNewBodyType(Uri host)
         {
@@ -131,6 +116,9 @@ namespace AutoRest.TestServer.Tests
 
             var result2 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), default);
             Assert.AreEqual(200, result2.Status);
+
+            var result3 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), context: ErrorOptions.Default);
+            Assert.AreEqual(200, result3.Status);
         }
     }
 }
