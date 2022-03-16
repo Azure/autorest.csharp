@@ -556,7 +556,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (frameworkType == typeof(BinaryData))
             {
-                writer.Append($"{typeof(BinaryData)}.FromString(property.Value.GetRawText())");
+                writer.Append($"{typeof(BinaryData)}.FromString({element}.GetRawText())");
                 return;
             }
             else
