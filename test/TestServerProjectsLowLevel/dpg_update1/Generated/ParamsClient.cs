@@ -189,6 +189,7 @@ namespace dpg_update1_LowLevel
 
         /// <summary> POST a JSON or a JPEG. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -199,7 +200,7 @@ namespace dpg_update1_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> PostParametersAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -207,7 +208,7 @@ namespace dpg_update1_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostParametersRequest(content, context);
+                using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -219,6 +220,7 @@ namespace dpg_update1_LowLevel
 
         /// <summary> POST a JSON or a JPEG. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -229,7 +231,7 @@ namespace dpg_update1_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        public virtual Response PostParameters(RequestContent content, RequestContext context = null)
+        public virtual Response PostParameters(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -237,51 +239,7 @@ namespace dpg_update1_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePostParametersRequest(content, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> POST a JSON or a JPEG. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePostParametersRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> POST a JSON or a JPEG. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response PostParameters(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePostParametersRequest(content, context);
+                using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -478,7 +436,7 @@ namespace dpg_update1_LowLevel
             return message;
         }
 
-        internal HttpMessage CreatePostParametersRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreatePostParametersRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -488,22 +446,7 @@ namespace dpg_update1_LowLevel
             uri.AppendPath("/serviceDriven/parameters", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreatePostParametersRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "image/jpeg");
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }
