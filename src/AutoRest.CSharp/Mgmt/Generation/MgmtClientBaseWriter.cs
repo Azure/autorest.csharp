@@ -46,15 +46,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string FileName { get; }
 
-        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider) : this(writer, provider, provider.Type.Name)
-        {
-        }
-
-        internal protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, string filename)
+        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider)
         {
             _writer = writer;
             This = provider;
-            FileName = filename;
+            FileName = This.Type.Name;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
         }

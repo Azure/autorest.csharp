@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
-            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions";
+            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
             DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
             Description = Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
