@@ -121,6 +121,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
+            if (isArmCore)
+            {
+
+            }
+            else
+            {
+
+            }
+
             if (!isArmCore)
             {
                 // we will write the ResourceGroupExtensions and SubscriptionExtensions classes even if it does not contain anything
@@ -157,7 +166,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //}
 
             // write extension class
-            if (MgmtContext.Library.ExtensionWrapper.Extensions.All(extension => !extension.IsEmpty))
+            if (MgmtContext.Library.ExtensionWrapper.Extensions.Any(extension => !extension.IsEmpty))
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
