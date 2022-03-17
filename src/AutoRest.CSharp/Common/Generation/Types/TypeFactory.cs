@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => typeof(object),
+            AllSchemaTypes.Any => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
             AllSchemaTypes.AnyObject => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
