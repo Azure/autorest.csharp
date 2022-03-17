@@ -459,13 +459,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
-                return $"{typeof(ResourceGroup)}.ResourceType";
+                return $"{typeof(ResourceGroupResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Subscription)
-                return $"{typeof(Subscription)}.ResourceType";
+                return $"{typeof(SubscriptionResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Tenant)
-                return $"{typeof(Tenant)}.ResourceType";
+                return $"{typeof(TenantResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.ManagementGroup)
-                return $"{typeof(ManagementGroup)}.ResourceType";
+                return $"{typeof(ManagementGroupResource)}.ResourceType";
 
             if (!resourceType.IsConstant)
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
