@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (writeSDKUserAgent)
                 {
-                    writer.Line($"{message}.SetProperty(\"SDKUserAgent\", _userAgent);");
+                    writer.Line($"_userAgent.Apply({message});");
                 }
 
                 writer.Line($"return {message};");

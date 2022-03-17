@@ -18,7 +18,7 @@ namespace MgmtKeyvault.Models
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type");
-            writer.WriteStringValue(Type);
+            writer.WriteStringValue(ResourceType);
             writer.WriteEndObject();
         }
     }

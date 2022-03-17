@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Property prop = new Property();
                 prop.Nullable = false;
                 prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
-                prop.SerializedName = ToCamelCase(property.Name);
+                prop.SerializedName = GetSerializedName(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
                 prop.Required = true;
                 prop.Language.Default.Name = property.Name;
@@ -138,6 +138,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
+        }
+
+        private string GetSerializedName(string name)
+        {
+            if (name.Equals("ResourceType", StringComparison.Ordinal))
+                return "type";
+            return ToCamelCase(name);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

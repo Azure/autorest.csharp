@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using MgmtScopeResource;
 using System;
+using MgmtScopeResource.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -55,5 +56,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
 
+        [Test]
+        public void ValidateBinaryData()
+        {
+            var valueProperty = typeof(ParameterValuesValue).GetProperty("Value");
+            Assert.IsNotNull(valueProperty);
+            Assert.AreEqual(typeof(BinaryData), valueProperty.PropertyType);
+        }
     }
 }

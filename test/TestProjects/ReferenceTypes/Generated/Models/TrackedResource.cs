@@ -27,11 +27,11 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
-        /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        /// <param name="resourceType"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [SerializationConstructor]
-        protected TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location) : base(id, name, type)
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location) : base(id, name, resourceType)
         {
             Tags = tags;
             Location = location;
