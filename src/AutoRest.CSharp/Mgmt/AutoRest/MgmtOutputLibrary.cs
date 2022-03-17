@@ -114,6 +114,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ReorderOperationParameters();
         }
 
+        public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
+
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
@@ -330,7 +332,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (_extensionsWrapper != null)
                 return _extensionsWrapper;
 
-            _extensionsWrapper = new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
+            _extensionsWrapper = IsArmCore ?
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
             return _extensionsWrapper;
         }
 

@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<MgmtExtensions> Extensions { get; }
 
+        public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
+
         public MgmtExtensionsWrapper(IEnumerable<MgmtExtensions> extensions) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
         {
             DefaultName = $"{ResourceName}Extensions";
