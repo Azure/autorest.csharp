@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage.Models;
@@ -35,14 +36,46 @@ namespace Azure.Management.Storage
         }
 
         /// <summary>
+        /// Get properties of specified deleted account resource.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the deleted storage account. </param>
+        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public static async Task<Response<DeletedAccount>> GetDeletedAccountAsync(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetDeletedAccounts().GetAsync(location, deletedAccountName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get properties of specified deleted account resource.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the deleted storage account. </param>
+        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public static Response<DeletedAccount> GetDeletedAccount(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetDeletedAccounts().Get(location, deletedAccountName, cancellationToken);
+        }
+
+        /// <summary>
         /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
         /// Operation Id: Skus_List
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<SkuInformation> GetSkusAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<StorageSkuInformation> GetSkusAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetSkusAsync(cancellationToken);
         }
@@ -54,8 +87,8 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<SkuInformation> GetSkus(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<StorageSkuInformation> GetSkus(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetSkus(cancellationToken);
         }
@@ -96,8 +129,8 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Usage> GetUsagesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<StorageUsage> GetUsagesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
@@ -114,8 +147,8 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Usage> GetUsagesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<StorageUsage> GetUsagesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 

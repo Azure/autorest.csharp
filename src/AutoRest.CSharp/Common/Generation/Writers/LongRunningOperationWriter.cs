@@ -103,7 +103,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                 operation.ResultSerialization,
                                 async: true,
                                 (w, v) => w.Line($"nextPageResult = {v};"),
-                                responseVariable);
+                                responseVariable,
+                                pagingResponse.ResponseType);
 
                             writer.Line($"return {typeof(Page)}.FromValues(nextPageResult.{itemPropertyName}, nextPageResult.{nextLinkPropertyName}, {responseVariable});");
                         }

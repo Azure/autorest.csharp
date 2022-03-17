@@ -12,7 +12,7 @@ using SupersetFlattenInheritance;
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class TrackedResourceModel1ListResult
+    internal partial class TrackedResourceModel1ListResult
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1ListResult. </summary>
         internal TrackedResourceModel1ListResult()

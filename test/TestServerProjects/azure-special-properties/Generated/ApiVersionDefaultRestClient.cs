@@ -28,13 +28,13 @@ namespace azure_special_properties
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         public ApiVersionDefaultRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetMethodGlobalValidRequest()

@@ -39,9 +39,9 @@ namespace MgmtExpandResourceTypes
         }
 
         private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
-        private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(ZoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
+        private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
         private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private DnsResourceReferenceRestOperations DnsResourceReferenceRestClient => _dnsResourceReferenceRestClient ??= new DnsResourceReferenceRestOperations(DnsResourceReferenceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private DnsResourceReferenceRestOperations DnsResourceReferenceRestClient => _dnsResourceReferenceRestClient ??= new DnsResourceReferenceRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -142,7 +142,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();

@@ -196,6 +196,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
     },
+    "dpg_initial-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_initial\\Generated"
+    },
+    "dpg_update1-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_update1\\Generated"
+    },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"
@@ -283,6 +291,10 @@
     "MgmtCollectionParent": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
+    },
+    "MgmtDiscriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtDiscriminator\\Generated"
     },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",

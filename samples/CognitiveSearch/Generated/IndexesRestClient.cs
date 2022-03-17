@@ -30,16 +30,16 @@ namespace CognitiveSearch
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public IndexesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateRequest(Models.Index index, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateCreateRequest(Models.Index index, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -62,7 +62,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="index"/> is null. </exception>
-        public async Task<Response<Models.Index>> CreateAsync(Models.Index index, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> CreateAsync(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -90,7 +90,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="index"/> is null. </exception>
-        public Response<Models.Index> Create(Models.Index index, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<Models.Index> Create(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -113,7 +113,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateListRequest(string select, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateListRequest(string select, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -135,7 +135,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ListIndexesResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -157,7 +157,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ListIndexesResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<ListIndexesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             _pipeline.Send(message, cancellationToken);
@@ -175,7 +175,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateCreateOrUpdateRequest(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -217,7 +217,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="index"/> is null. </exception>
-        public async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -254,7 +254,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="index"/> is null. </exception>
-        public Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response<Models.Index> CreateOrUpdate(string indexName, Enum0 prefer, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -282,7 +282,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string indexName, Models.RequestOptions requestOptions, AccessCondition accessCondition)
+        internal HttpMessage CreateDeleteRequest(string indexName, RequestOptions requestOptions, AccessCondition accessCondition)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -312,7 +312,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -337,7 +337,7 @@ namespace CognitiveSearch
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public Response Delete(string indexName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public Response Delete(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -356,7 +356,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetRequest(string indexName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetRequest(string indexName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -377,7 +377,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public async Task<Response<Models.Index>> GetAsync(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -405,7 +405,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public Response<Models.Index> Get(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<Models.Index> Get(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -428,7 +428,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateGetStatisticsRequest(string indexName, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetStatisticsRequest(string indexName, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -449,7 +449,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -477,7 +477,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> is null. </exception>
-        public Response<GetIndexStatisticsResult> GetStatistics(string indexName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<GetIndexStatisticsResult> GetStatistics(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -500,7 +500,7 @@ namespace CognitiveSearch
             }
         }
 
-        internal HttpMessage CreateAnalyzeRequest(string indexName, AnalyzeRequest request, Models.RequestOptions requestOptions)
+        internal HttpMessage CreateAnalyzeRequest(string indexName, AnalyzeRequest request, RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request0 = message.Request;
@@ -526,7 +526,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="request"/> is null. </exception>
-        public async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -559,7 +559,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexName"/> or <paramref name="request"/> is null. </exception>
-        public Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {

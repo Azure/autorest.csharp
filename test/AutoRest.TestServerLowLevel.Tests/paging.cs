@@ -339,7 +339,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PagingMultipleLRO() => Test(async (endpoint) =>
         {
-            var lro = await new PagingClient(Key, endpoint).GetMultiplePagesLROAsync(false, "id");
+            var lro = await new PagingClient(Key, endpoint).GetMultiplePagesLROAsync(WaitUntil.Started, "id");
 
             AsyncPageable<BinaryData> pageable = await lro.WaitForCompletionAsync();
 

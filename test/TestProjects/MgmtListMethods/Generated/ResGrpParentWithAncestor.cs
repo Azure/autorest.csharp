@@ -53,7 +53,7 @@ namespace MgmtListMethods
         {
             _resGrpParentWithAncestorClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorApiVersion);
-            _resGrpParentWithAncestorRestClient = new ResGrpParentWithAncestorsRestOperations(_resGrpParentWithAncestorClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorApiVersion);
+            _resGrpParentWithAncestorRestClient = new ResGrpParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -89,7 +89,7 @@ namespace MgmtListMethods
         /// Operation Id: ResGrpParentWithAncestors_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResGrpParentWithAncestor>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestor>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _resGrpParentWithAncestorClientDiagnostics.CreateScope("ResGrpParentWithAncestor.Get");
             scope.Start();
@@ -97,7 +97,7 @@ namespace MgmtListMethods
             {
                 var response = await _resGrpParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _resGrpParentWithAncestorClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -121,7 +121,7 @@ namespace MgmtListMethods
             {
                 var response = _resGrpParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _resGrpParentWithAncestorClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace MgmtListMethods
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<ResGrpParentWithAncestor>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestor>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
@@ -151,7 +151,7 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -182,7 +182,7 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -201,7 +201,7 @@ namespace MgmtListMethods
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<ResGrpParentWithAncestor>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestor>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
@@ -209,10 +209,10 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -239,10 +239,10 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -261,7 +261,7 @@ namespace MgmtListMethods
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<ResGrpParentWithAncestor>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestor>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
@@ -271,7 +271,7 @@ namespace MgmtListMethods
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -300,7 +300,7 @@ namespace MgmtListMethods
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestor(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

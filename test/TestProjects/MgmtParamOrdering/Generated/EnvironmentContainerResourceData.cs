@@ -33,12 +33,12 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
-        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties) : base(id, name, type, systemData, tags, location)
+        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties) : base(id, name, resourceType, systemData, tags, location)
         {
             Properties = properties;
         }

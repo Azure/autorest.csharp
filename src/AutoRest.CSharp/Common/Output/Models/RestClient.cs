@@ -7,52 +7,41 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
-using Request = AutoRest.CSharp.Output.Models.Requests.Request;
-using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClient : TypeProvider
+    internal abstract class RestClient : TypeProvider
     {
         private readonly CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
         private readonly CachedDictionary<ServiceRequest, RestClientMethod> _nextPageRequestMethods;
         private RestClientMethod[]? _allMethods;
+        private ConstructorSignature? _constructor;
 
-        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName)
-            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), new RestClientBuilder(operationGroup.Operations, context)) { }
+        internal OperationGroup OperationGroup { get; }
+        public IReadOnlyList<Parameter> Parameters { get; }
+        public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
+        public ConstructorSignature Constructor => _constructor ??= new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", MethodSignatureModifiers.Public, Parameters.ToArray());
 
-        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName, RestClientBuilder clientBuilder)
-            : this(operationGroup, null, context, ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context), "Rest" + ClientBuilder.GetClientSuffix(context), clientBuilder) { }
+        public string ClientPrefix { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility => "internal";
 
-        protected RestClient(OperationGroup operationGroup, IEnumerable<RequestParameter>? clientParameters, BuildContext context, string clientPrefix, string defaultClientSuffix, RestClientBuilder clientBuilder) : base(context)
+        protected RestClient(OperationGroup operationGroup, BuildContext context, string? clientName, IReadOnlyList<Parameter> parameters) : base(context)
         {
             OperationGroup = operationGroup;
-            Builder = clientBuilder;
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
-            Parameters = Builder.GetOrderedParametersByRequired();
-            Fields = new ClientFields(Parameters);
+            Parameters = parameters;
 
+            var clientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
             ClientPrefix = clientPrefix;
-            DefaultName = clientPrefix + defaultClientSuffix;
+            DefaultName = clientPrefix + "Rest" + ClientBuilder.GetClientSuffix(context);
         }
-
-        protected RestClientBuilder Builder;
-        internal OperationGroup OperationGroup { get; }
-        public Parameter[] Parameters { get; }
-        public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
-        public string ClientPrefix { get; }
-        protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; } = "internal";
-        public ClientFields Fields { get; }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {
@@ -79,30 +68,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        protected virtual Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
-        {
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-
-            foreach (var operation in OperationGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing
-                    if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
-                    {
-                        continue;
-                    }
-                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
-                }
-            }
-
-            return requestMethods;
-        }
-
-        protected virtual Func<string?, bool> ShouldReturnNullOn404(Operation operation)
-        {
-            return (responseBodyType) => false;
-        }
+        protected abstract Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods();
 
         protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
         {

@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             XmlInstanceData xmlInstanceData = XmlInstanceData.DeserializeXmlInstanceData(xElement);
             Assert.AreEqual(id, xmlInstanceData.Id.ToString());
             Assert.AreEqual(name, xmlInstanceData.Name);
-            Assert.AreEqual(type, xmlInstanceData.Type.ToString());
+            Assert.AreEqual(type, xmlInstanceData.ResourceType.ToString());
         }
 
         [Test]

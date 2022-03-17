@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         {
             _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
-            _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -60,7 +60,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BuiltInPolicyDefinition>> GetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
             {
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -99,7 +99,7 @@ namespace MgmtExtensionResource
             {
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
-                    throw _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -206,7 +206,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
@@ -260,7 +260,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async virtual Task<Response<BuiltInPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BuiltInPolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 

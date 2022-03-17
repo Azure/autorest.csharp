@@ -12,7 +12,7 @@ using TenantOnly;
 namespace TenantOnly.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class BillingAccountListResult
+    internal partial class BillingAccountListResult
     {
         /// <summary> Initializes a new instance of BillingAccountListResult. </summary>
         internal BillingAccountListResult()

@@ -38,13 +38,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
 
-        internal static readonly Parameter CancellationTokenParameter = new Parameter(
-            "cancellationToken",
-            "The cancellation token to use.",
-            typeof(CancellationToken),
-            Constant.NewInstanceOf(typeof(CancellationToken)),
-            false);
-
         private MgmtTypeProvider This { get; }
 
         protected virtual string ArmClientReference { get; } = "Client";
@@ -187,10 +180,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
-            _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({CancellationTokenParameter.Type:I} {CancellationTokenParameter.Name})");
+            _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({CancellationTokenParameter.Name}: {CancellationTokenParameter.Name}).GetAsyncEnumerator({CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
@@ -218,7 +211,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
                 apiVersionText = $", {apiVersionVariable}";
             }
-            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
+            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
         }
 
         protected virtual void WriteChildResourceEntries()
@@ -228,35 +221,95 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
                 if (resource.IsSingleton)
                 {
-                    var signature = new MethodSignature(
-                        $"Get{resource.Type.Name}",
-                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
-                        GetMethodModifiers(),
-                        resource.Type,
-                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
-                        GetParametersForSingletonEntry());
-                    using (WriteCommonMethod(signature, null, false))
-                    {
-                        WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
-                    }
+                    WriteSingletonResourceGetMethod(resource);
                 }
                 else if (resource.ResourceCollection is not null)
                 {
-                    var collection = resource.ResourceCollection;
-                    var signature = new MethodSignature(
-                        $"Get{resource.Type.Name.ResourceNameToPlural()}",
-                        $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
-                        GetMethodModifiers(),
-                        collection.Type,
-                        $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-                        GetParametersForCollectionEntry(collection));
-                    using (WriteCommonMethod(signature, null, false))
+                    WriteResourceCollectionGetMethod(resource);
+
+                    if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
                     {
-                        WriteResourceCollectionEntry(resource.ResourceCollection, signature);
+                        WriteChildResourceGetMethod(resource.ResourceCollection, true);
+                        WriteChildResourceGetMethod(resource.ResourceCollection, false);
                     }
                 }
             }
             _writer.Line();
+        }
+
+        private void WriteSingletonResourceGetMethod(Resource resource)
+        {
+            var signature = new MethodSignature(
+                $"Get{resource.Type.Name}",
+                $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
+                GetMethodModifiers(),
+                resource.Type,
+                $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                GetParametersForSingletonEntry());
+            using (WriteCommonMethod(signature, null, false))
+            {
+                WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
+            }
+        }
+
+        private void WriteResourceCollectionGetMethod(Resource resource)
+        {
+            var resourceCollection = resource.ResourceCollection!;
+            var signature = new MethodSignature(
+                $"{GetResourceCollectionMethodName(resourceCollection)}",
+                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
+                GetMethodModifiers(),
+                resourceCollection.Type,
+                $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+                GetParametersForCollectionEntry(resourceCollection));
+            using (WriteCommonMethod(signature, null, false))
+            {
+                WriteResourceCollectionEntry(resourceCollection, signature);
+            }
+        }
+
+        private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        {
+            //TODO we need to figure out why Tenant is a child of Tenant, this shouldn't happen but this work around
+            //will keep us from trying to make a call to [Resource]Collection inside [Resource]
+            if (resourceCollection.ResourceName == This.ResourceName)
+                return;
+
+            var getOperation = resourceCollection.GetOperation;
+            // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
+            var methodSignature = getOperation.MethodSignature with
+            {
+                // name after `Get{ResourceType}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.Type.Name}",
+                Modifiers = GetMethodModifiers(),
+                // There could be parameters to get resource collection
+                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+            };
+
+            _writer.Line();
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync))
+            {
+                WriteResourceEntry(resourceCollection, isAsync);
+            }
+        }
+
+        protected virtual void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        {
+            var operation = resourceCollection.GetOperation;
+            string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
+            string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+            var arguments = string.Join(", ", operation.MethodSignature.Parameters.Select(p => p.Name));
+            _writer.Line($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}({arguments}){configureAwait};");
+        }
+
+        protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
+        {
+            return $"Get{resourceCollection.Resource.Type.Name.ResourceNameToPlural()}";
+        }
+
+        protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
+        {
+            return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
         }
 
         protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
@@ -275,15 +328,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return resourceCollection.ExtraConstructorParameters.ToArray();
         }
 
+        protected Parameter[] GetParametersForResourceEntry(ResourceCollection resourceCollection)
+        {
+            return resourceCollection.GetOperation.MethodSignature.Parameters.ToArray();
+        }
+
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
         {
-            _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
-            foreach (var parameter in resourceCollection.ExtraConstructorParameters)
+            // TODO: can we cache collection with extra constructor parameters
+            if (resourceCollection.ExtraConstructorParameters.Count() > 0)
             {
-                _writer.Append($"{parameter.Name}, ");
+                _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
+                foreach (var parameter in resourceCollection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
+            else
+            {
+                // for collections without extra constructor parameter, we can return a cached instance
+                _writer.Line($"return GetCachedClient({ArmClientReference} => new {resourceCollection.Type.Name}({ArmClientReference}, Id));");
+            }
         }
 
         protected void WriteStaticValidate(FormattableString validResourceType, CodeWriter writer)
@@ -331,15 +398,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
-        protected string GetRestConstructorString(
-            MgmtRestClient restClient,
-            string clientDiagVariable,
-            string apiVersionVariable)
+        protected string GetRestConstructorString(MgmtRestClient restClient, string apiVersionVariable)
         {
             string subIdVariable = ", Id.SubscriptionId";
             if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
                 subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({clientDiagVariable}, {PipelineProperty}, {DiagnosticOptionsProperty}.ApplicationId{subIdVariable}, {BaseUriProperty}{apiVersionVariable})";
+            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticOptionsProperty}.ApplicationId{subIdVariable}, {BaseUriProperty}{apiVersionVariable})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
@@ -457,6 +521,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
+            var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync);
+            if (This.Accessibility == "public")
+                _writer.WriteParametersValidation(signature.Parameters);
+
+            return scope;
+        }
+
+        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
@@ -469,11 +542,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnDesc is not null)
                 _writer.WriteXmlDocumentationReturns(returnDesc);
 
-            var scope = _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
-            if (This.Accessibility == "public")
-                _writer.WriteParametersValidation(signature.Parameters);
-
-            return scope;
+            return _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
         #region PagingMethod
@@ -607,7 +676,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Length).First();
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Count).First();
             var cache = new List<ParameterMapping>(parameterMappings);
 
             var parameterInvocations = new List<FormattableString>();
@@ -618,7 +687,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 parameterInvocations.Add(match.IsPassThru ? $"{match.Parameter.Name}" : match.ValueExpression);
             }
 
-            if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Length)
+            if (parameterInvocations.Count < methodWithLeastParameters.Parameters.Count)
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
@@ -668,8 +737,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (operation.ThrowIfNull)
                     {
-                        _writer.Line($"if ({response}.Value == null)");
-                        _writer.Line($"throw {GetAwait(async)} {GetDiagnosticName(operation)}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
+                        _writer
+                            .Line($"if ({response}.Value == null)")
+                            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
                     }
 
                     if (resource.ResourceData.ShouldSetResourceIdentifier)
@@ -791,7 +861,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
-            _writer.Line($"if (waitForCompletion)");
+            _writer.Line($"if (waitUntil == {typeof(WaitUntil)}.Completed)");
             _writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
             _writer.Line($"return operation;");
         }

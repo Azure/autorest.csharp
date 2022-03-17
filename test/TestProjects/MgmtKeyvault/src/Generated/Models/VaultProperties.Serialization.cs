@@ -92,7 +92,7 @@ namespace MgmtKeyvault.Models
         internal static VaultProperties DeserializeVaultProperties(JsonElement element)
         {
             Guid tenantId = default;
-            Sku sku = default;
+            MgmtKeyvaultSku sku = default;
             Optional<IList<AccessPolicyEntry>> accessPolicies = default;
             Optional<Uri> vaultUri = default;
             Optional<string> hsmPoolResourceId = default;
@@ -116,7 +116,7 @@ namespace MgmtKeyvault.Models
                 }
                 if (property.NameEquals("sku"))
                 {
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = MgmtKeyvaultSku.DeserializeMgmtKeyvaultSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("accessPolicies"))

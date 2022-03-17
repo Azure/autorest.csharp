@@ -36,7 +36,7 @@ namespace MgmtScopeResource
         }
 
         private ClientDiagnostics DeploymentExtendedDeploymentsClientDiagnostics => _deploymentExtendedDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtended.ResourceType.Namespace, DiagnosticOptions);
-        private DeploymentsRestOperations DeploymentExtendedDeploymentsRestClient => _deploymentExtendedDeploymentsRestClient ??= new DeploymentsRestOperations(DeploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtended.ResourceType));
+        private DeploymentsRestOperations DeploymentExtendedDeploymentsRestClient => _deploymentExtendedDeploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DeploymentExtended.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
-            return new DeploymentExtendedCollection(Client, Id);
+            return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
@@ -66,7 +66,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(object template, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
             using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope0.Start();
@@ -89,7 +89,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(object template, CancellationToken cancellationToken = default)
+        public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
             using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantExtensionClient.CalculateTemplateHashDeployment");
             scope0.Start();

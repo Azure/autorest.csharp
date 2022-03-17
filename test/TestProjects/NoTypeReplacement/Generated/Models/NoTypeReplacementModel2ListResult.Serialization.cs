@@ -12,7 +12,7 @@ using NoTypeReplacement;
 
 namespace NoTypeReplacement.Models
 {
-    public partial class NoTypeReplacementModel2ListResult
+    internal partial class NoTypeReplacementModel2ListResult
     {
         internal static NoTypeReplacementModel2ListResult DeserializeNoTypeReplacementModel2ListResult(JsonElement element)
         {

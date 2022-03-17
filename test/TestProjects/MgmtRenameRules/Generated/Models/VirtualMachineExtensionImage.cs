@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Extension Image. </summary>
-    public partial class VirtualMachineExtensionImage : TrackedResourceData
+    internal partial class VirtualMachineExtensionImage : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
         /// <param name="location"> The location. </param>
@@ -23,7 +23,7 @@ namespace MgmtRenameRules.Models
         /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Models
         /// <param name="handlerSchema"> The schema defined by publisher, where extension consumers should provide settings in a matching schema. </param>
         /// <param name="vmScaleSetEnabled"> Whether the extension can be used on xRP VMScaleSets. By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS. </param>
         /// <param name="supportsMultipleExtensions"> Whether the handler can support multiple extensions. </param>
-        internal VirtualMachineExtensionImage(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string operatingSystem, string computeRole, string handlerSchema, bool? vmScaleSetEnabled, bool? supportsMultipleExtensions) : base(id, name, type, systemData, tags, location)
+        internal VirtualMachineExtensionImage(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string operatingSystem, string computeRole, string handlerSchema, bool? vmScaleSetEnabled, bool? supportsMultipleExtensions) : base(id, name, resourceType, systemData, tags, location)
         {
             OperatingSystem = operatingSystem;
             ComputeRole = computeRole;

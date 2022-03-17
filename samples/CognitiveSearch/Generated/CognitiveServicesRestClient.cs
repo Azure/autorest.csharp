@@ -30,16 +30,16 @@ namespace CognitiveSearch
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public CognitiveServicesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetServiceStatisticsRequest(Models.RequestOptions requestOptions)
+        internal HttpMessage CreateGetServiceStatisticsRequest(RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -56,7 +56,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetServiceStatisticsRequest(requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -77,7 +77,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ServiceStatistics> GetServiceStatistics(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetServiceStatisticsRequest(requestOptions);
             _pipeline.Send(message, cancellationToken);

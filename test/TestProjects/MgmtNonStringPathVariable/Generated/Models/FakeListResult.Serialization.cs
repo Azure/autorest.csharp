@@ -12,7 +12,7 @@ using MgmtNonStringPathVariable;
 
 namespace MgmtNonStringPathVariable.Models
 {
-    public partial class FakeListResult
+    internal partial class FakeListResult
     {
         internal static FakeListResult DeserializeFakeListResult(JsonElement element)
         {

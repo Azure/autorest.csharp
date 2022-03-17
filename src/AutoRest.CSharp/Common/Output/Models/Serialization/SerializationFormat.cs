@@ -11,6 +11,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         DateTime_Unix,
         Date_ISO8601,
         Duration_ISO8601,
+        Duration_Constant,
         Time_ISO8601,
         Bytes_Base64Url,
         Bytes_Base64

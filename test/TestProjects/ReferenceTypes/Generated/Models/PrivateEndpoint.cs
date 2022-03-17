@@ -12,7 +12,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The Private Endpoint resource. </summary>
     [TypeReferenceType]
-    internal partial class PrivateEndpoint
+    public partial class PrivateEndpoint
     {
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
         [InitializationConstructor]
