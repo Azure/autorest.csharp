@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema 
       type: string
       apiVersions:
         - !ApiVersion 
@@ -54,13 +54,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_4
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -70,15 +71,14 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_4
-                schema: *ref_3
+              - !Parameter &ref_3
+                schema: *ref_0
                 implementation: Method
-                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -86,21 +86,24 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
             signatureParameters:
-              - *ref_4
+              - *ref_3
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /Operation/
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_4
         signatureParameters: []
         responses:
           - !Response 
@@ -118,13 +121,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: OperationInternal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_6
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -134,15 +138,14 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_5
-                schema: *ref_3
+                schema: *ref_0
                 implementation: Method
-                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -150,7 +153,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
             signatureParameters:
               - *ref_5
             language: !Languages 
@@ -158,13 +161,16 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /OperationInternal/
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_6
         signatureParameters: []
         responses:
           - !Response 

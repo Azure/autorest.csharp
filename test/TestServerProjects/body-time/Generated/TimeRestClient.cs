@@ -88,7 +88,7 @@ namespace body_time
             }
         }
 
-        internal HttpMessage CreatePutRequest(TimeSpan timeBody)
+        internal HttpMessage CreatePutRequest(string timeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -99,17 +99,21 @@ namespace body_time
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(timeBody, "T");
-            request.Content = content;
+            request.Content = new StringRequestContent(timeBody);
             return message;
         }
 
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
         /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="timeBody"/> is null. </exception>
+        public async Task<Response<string>> PutAsync(string timeBody, CancellationToken cancellationToken = default)
         {
+            if (timeBody == null)
+            {
+                throw new ArgumentNullException(nameof(timeBody));
+            }
+
             using var message = CreatePutRequest(timeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -129,8 +133,14 @@ namespace body_time
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
         /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> Put(TimeSpan timeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="timeBody"/> is null. </exception>
+        public Response<string> Put(string timeBody, CancellationToken cancellationToken = default)
         {
+            if (timeBody == null)
+            {
+                throw new ArgumentNullException(nameof(timeBody));
+            }
+
             using var message = CreatePutRequest(timeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

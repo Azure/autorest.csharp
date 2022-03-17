@@ -154,6 +154,7 @@ operationGroups:
     $key: queries
     operations:
       - !Operation 
+        operationId: queries_ArrayStringMultiNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -226,18 +227,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            queries_ArrayStringMultiNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ArrayStringMultiNull
             description: Get a null array of string using the multi-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringMultiEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -308,19 +304,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            queries_ArrayStringMultiEmpty:
-              parameters:
-                arrayQuery: ''
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ArrayStringMultiEmpty
             description: Get an empty array [] of string using the multi-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringMultiValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -391,13 +381,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            queries_ArrayStringMultiValid:
-              parameters:
-                arrayQuery: ArrayQuery1,begin!*'();:@ &=+$,/?#[]end,,
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ArrayStringMultiValid

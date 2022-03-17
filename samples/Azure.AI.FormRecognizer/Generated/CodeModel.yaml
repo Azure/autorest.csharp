@@ -20,7 +20,7 @@ schemas: !Schemas
           name: Boolean
           description: Use label file for training a model.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_124
+    - !BooleanSchema &ref_125
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -359,7 +359,7 @@ schemas: !Schemas
           name: TrainSourceFilterPrefix
           description: A case-sensitive prefix string to filter documents in the source path for training. For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for training.
       protocol: !Protocols {}
-    - !StringSchema &ref_121
+    - !StringSchema &ref_122
       type: string
       apiVersions:
         - !ApiVersion 
@@ -431,7 +431,7 @@ schemas: !Schemas
           name: SourcePathSource
           description: File source path.
       protocol: !Protocols {}
-    - !StringSchema &ref_137
+    - !StringSchema &ref_140
       type: string
       apiVersions:
         - !ApiVersion 
@@ -599,7 +599,7 @@ schemas: !Schemas
           name: CopyAuthorizationResultAccessToken
           description: Token claim used to authorize the request.
       protocol: !Protocols {}
-    - !StringSchema &ref_144
+    - !StringSchema &ref_148
       type: string
       apiVersions:
         - !ApiVersion 
@@ -610,7 +610,7 @@ schemas: !Schemas
           description: ''
           header: Operation-Location
       protocol: !Protocols {}
-    - !StringSchema &ref_148
+    - !StringSchema &ref_152
       type: string
       apiVersions:
         - !ApiVersion 
@@ -621,7 +621,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_154
+    - !StringSchema &ref_160
       type: string
       apiVersions:
         - !ApiVersion 
@@ -632,7 +632,7 @@ schemas: !Schemas
           description: ''
           header: Operation-Location
       protocol: !Protocols {}
-    - !StringSchema &ref_160
+    - !StringSchema &ref_168
       type: string
       apiVersions:
         - !ApiVersion 
@@ -688,7 +688,7 @@ schemas: !Schemas
           name: Language
           description: Language code
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_162
+    - !ChoiceSchema &ref_170
       choices:
         - !ChoiceValue 
           value: full
@@ -703,7 +703,7 @@ schemas: !Schemas
           name: Enum1
           description: ''
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_165
+    - !ChoiceSchema &ref_173
       choices:
         - !ChoiceValue 
           value: summary
@@ -779,7 +779,7 @@ schemas: !Schemas
           name: TrainStatus
           description: Status of the training operation.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_129
+    - !SealedChoiceSchema &ref_132
       choices:
         - !ChoiceValue 
           value: application/pdf
@@ -1191,35 +1191,26 @@ schemas: !Schemas
           description: Dictionary of named field values.
       protocol: !Protocols {}
   binaries:
-    - !BinarySchema &ref_130
+    - !BinarySchema &ref_133
       type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 2.0-preview
       language: !Languages 
         default:
           name: binary
-          description: Uri or local path to source data.
+          description: ''
       protocol: !Protocols {}
-    - !BinarySchema &ref_149
+    - !BinarySchema &ref_154
       type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 2.0-preview
       language: !Languages 
         default:
           name: binary
-          description: Uri or local path to source data.
+          description: ''
       protocol: !Protocols {}
-    - !BinarySchema &ref_156
+    - !BinarySchema &ref_163
       type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 2.0-preview
       language: !Languages 
         default:
           name: binary
-          description: Uri or local path to source data.
+          description: ''
       protocol: !Protocols {}
   dateTimes:
     - !DateTimeSchema &ref_26
@@ -1304,7 +1295,7 @@ schemas: !Schemas
   times:
     - *ref_15
   uuids:
-    - !UuidSchema &ref_123
+    - !UuidSchema &ref_124
       type: uuid
       apiVersions:
         - !ApiVersion 
@@ -1411,7 +1402,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_20
-    - !ObjectSchema &ref_122
+    - !ObjectSchema &ref_123
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1471,7 +1462,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_23
-    - !ObjectSchema &ref_127
+    - !ObjectSchema &ref_128
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1777,7 +1768,7 @@ schemas: !Schemas
     - *ref_37
     - *ref_38
     - *ref_39
-    - !ObjectSchema &ref_133
+    - !ObjectSchema &ref_130
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1801,7 +1792,7 @@ schemas: !Schemas
           description: Uri or local path to source data.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_140
+    - !ObjectSchema &ref_143
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2577,7 +2568,7 @@ schemas: !Schemas
     - *ref_78
     - *ref_79
     - *ref_7
-    - !ObjectSchema &ref_141
+    - !ObjectSchema &ref_144
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2666,7 +2657,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_85
-    - !ObjectSchema &ref_147
+    - !ObjectSchema &ref_151
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2765,7 +2756,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_89
-    - !ObjectSchema &ref_164
+    - !ObjectSchema &ref_172
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2912,13 +2903,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: TrainCustomModelAsync
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_121
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -2972,6 +2964,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
+        requests:
+          - *ref_121
         signatureParameters: []
         responses:
           - !Response 
@@ -2983,7 +2977,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_121
+                    schema: *ref_122
                     header: Location
                     language:
                       default:
@@ -2993,7 +2987,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3005,36 +2999,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Train custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                trainRequest:
-                  source: /input/data1
-              responses:
-                '201':
-                  headers:
-                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
-            Train custom model with subfolder filter options:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                trainRequest:
-                  source: /input/data1
-                  sourceFilter:
-                    includeSubFolders: false
-                    prefix: ''
-                  useLabelFile: false
-              responses:
-                '201':
-                  headers:
-                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
         language: !Languages 
           default:
             name: TrainCustomModelAsync
@@ -3046,13 +3010,14 @@ operationGroups:
             summary: Train Custom Model
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetCustomModel
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_125
-            schema: *ref_123
+          - !Parameter &ref_126
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3063,8 +3028,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_126
-            schema: *ref_124
+          - !Parameter &ref_127
+            schema: *ref_125
             implementation: Method
             extensions:
               x-nullable: false
@@ -3103,11 +3068,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_125
           - *ref_126
+          - *ref_127
         responses:
           - !SchemaResponse 
-            schema: *ref_127
+            schema: *ref_128
             language: !Languages 
               default:
                 name: ''
@@ -3121,7 +3086,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3133,36 +3098,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{Model Id}'
-              responses:
-                '200':
-                  body:
-                    keys:
-                      clusters:
-                        '0':
-                          - Invoice
-                          - '123112313'
-                        '1':
-                          - 'Please remit payment to:'
-                          - Microsoft
-                    modelInfo:
-                      createdDateTime: '2019-05-01T10:53:21Z'
-                      lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                      modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
-                      status: ready
-                    trainResult:
-                      averageModelAccuracy: 0
-                      errors: []
-                      fields: []
-                      trainingDocuments: []
         language: !Languages 
           default:
             name: GetCustomModel
@@ -3170,13 +3105,14 @@ operationGroups:
             summary: Get Custom Model
         protocol: !Protocols {}
       - !Operation 
+        operationId: DeleteCustomModel
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_128
-            schema: *ref_123
+          - !Parameter &ref_129
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3214,7 +3150,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_128
+          - *ref_129
         responses:
           - !Response 
             language: !Languages 
@@ -3227,7 +3163,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3239,17 +3175,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Delete custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{Model Id}'
-              responses:
-                '204': {}
         language: !Languages 
           default:
             name: DeleteCustomModel
@@ -3257,13 +3182,14 @@ operationGroups:
             summary: Delete Custom Model
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnalyzeWithCustomModel
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_135
-            schema: *ref_123
+          - !Parameter &ref_138
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3274,8 +3200,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_136
-            schema: *ref_124
+          - !Parameter &ref_139
+            schema: *ref_125
             implementation: Method
             extensions:
               x-nullable: false
@@ -3287,66 +3213,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter &ref_131
-                schema: *ref_129
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_132
-                schema: *ref_130
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: fileStream
-                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_119
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_131
-              - *ref_132
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /custom/models/{modelId}/analyze
-                method: post
-                binary: true
-                knownMediaType: binary
-                mediaTypes:
-                  - application/pdf
-                  - image/jpeg
-                  - image/png
-                  - image/tiff
-                uri: '{endpoint}/formrecognizer/v2.0-preview'
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_137
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3361,8 +3229,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_134
-                schema: *ref_133
+              - !Parameter &ref_131
+                schema: *ref_130
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -3387,7 +3255,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_134
+              - *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -3400,9 +3268,73 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
-        signatureParameters:
-          - *ref_135
+          application/pdf: !Request &ref_136
+            parameters:
+              - !Parameter &ref_134
+                schema: *ref_132
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_135
+                schema: *ref_133
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: fileStream
+                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_119
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_134
+              - *ref_135
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /custom/models/{modelId}/analyze
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                  - image/tiff
+                uri: '{endpoint}/formrecognizer/v2.0-preview'
+          image/jpeg: *ref_136
+          image/png: *ref_136
+          image/tiff: *ref_136
+        requests:
           - *ref_136
+          - *ref_137
+        signatureParameters:
+          - *ref_138
+          - *ref_139
         responses:
           - !Response 
             language: !Languages 
@@ -3413,7 +3345,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_137
+                    schema: *ref_140
                     header: Operation-Location
                     language:
                       default:
@@ -3423,7 +3355,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3436,18 +3368,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Analyze form with custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{Model Id}'
-              responses:
-                '202':
-                  headers:
-                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -3458,13 +3378,14 @@ operationGroups:
             summary: Analyze Form
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetAnalyzeFormResult
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_138
-            schema: *ref_123
+          - !Parameter &ref_141
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3475,8 +3396,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_139
-            schema: *ref_123
+          - !Parameter &ref_142
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3514,11 +3435,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_138
-          - *ref_139
+          - *ref_141
+          - *ref_142
         responses:
           - !SchemaResponse 
-            schema: *ref_140
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -3532,7 +3453,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3544,28 +3465,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get analyze form result:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{model Id}'
-                resultId: '{result Id}'
-              responses:
-                '200':
-                  body:
-                    analyzeResult:
-                      documentResults: []
-                      errors: []
-                      pageResults: []
-                      readResults: []
-                      version: v2.0
-                    createdDateTime: '2019-05-01T10:53:21Z'
-                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                    status: running
         language: !Languages 
           default:
             name: GetAnalyzeFormResult
@@ -3573,13 +3472,14 @@ operationGroups:
             summary: Get Analyze Form Result
         protocol: !Protocols {}
       - !Operation 
+        operationId: CopyCustomModel
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_143
-            schema: *ref_123
+          - !Parameter &ref_147
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3590,8 +3490,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_146
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3606,8 +3506,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_142
-                schema: *ref_141
+              - !Parameter &ref_145
+                schema: *ref_144
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3632,7 +3532,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_142
+              - *ref_145
             language: !Languages 
               default:
                 name: ''
@@ -3645,8 +3545,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
+        requests:
+          - *ref_146
         signatureParameters:
-          - *ref_143
+          - *ref_147
         responses:
           - !Response 
             language: !Languages 
@@ -3657,7 +3559,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_144
+                    schema: *ref_148
                     header: Operation-Location
                     language:
                       default:
@@ -3667,7 +3569,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3680,25 +3582,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Copy custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                copyRequest:
-                  copyAuthorization:
-                    accessToken: '{accessToken}'
-                    expirationDateTimeTicks: 637190189980000000
-                    modelId: '{modelId}'
-                  targetResourceId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}
-                  targetResourceRegion: westus2
-                endpoint: '{endpoint}'
-                modelId: '{modelId}'
-              responses:
-                '202':
-                  headers:
-                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -3707,13 +3590,14 @@ operationGroups:
             summary: Copy Custom Model
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetCustomModelCopyResult
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_145
-            schema: *ref_123
+          - !Parameter &ref_149
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3724,8 +3608,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_146
-            schema: *ref_123
+          - !Parameter &ref_150
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -3763,11 +3647,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_145
-          - *ref_146
+          - *ref_149
+          - *ref_150
         responses:
           - !SchemaResponse 
-            schema: *ref_147
+            schema: *ref_151
             language: !Languages 
               default:
                 name: ''
@@ -3781,7 +3665,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3793,44 +3677,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get copy custom model result:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{modelId}'
-                resultId: '{resultId}'
-              responses:
-                '200':
-                  body:
-                    copyResult:
-                      errors: []
-                      modelId: '{modelId}'
-                    createdDateTime: '2020-01-01T00:00:00Z'
-                    lastUpdatedDateTime: '2020-01-01T00:01:00Z'
-                    status: succeeded
-            Get copy custom model result with failures:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{modelId}'
-                resultId: '{resultId}'
-              responses:
-                '200':
-                  body:
-                    copyResult:
-                      errors:
-                        - code: ResourceResolverError
-                          message: '{ErrorMessage}'
-                      modelId: '{modelId}'
-                    createdDateTime: '2020-01-01T00:00:00Z'
-                    lastUpdatedDateTime: '2020-01-01T00:01:00Z'
-                    status: failed
         language: !Languages 
           default:
             name: GetCustomModelCopyResult
@@ -3838,6 +3684,7 @@ operationGroups:
             summary: Get Custom Model Copy Result
         protocol: !Protocols {}
       - !Operation 
+        operationId: GenerateModelCopyAuthorization
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
@@ -3881,7 +3728,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_148
+                    schema: *ref_152
                     header: Location
                     language:
                       default:
@@ -3894,7 +3741,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3906,22 +3753,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Copy custom model:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-              responses:
-                '201':
-                  body:
-                    accessToken: '{accessToken}'
-                    expirationDateTimeTicks: 637190189980000000
-                    modelId: '{modelId}'
-                  headers:
-                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
         language: !Languages 
           default:
             name: GenerateModelCopyAuthorization
@@ -3929,13 +3760,14 @@ operationGroups:
             summary: Generate Copy Authorization
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnalyzeReceiptAsync
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_153
-            schema: *ref_124
+          - !Parameter &ref_159
+            schema: *ref_125
             implementation: Method
             extensions:
               x-nullable: false
@@ -3947,66 +3779,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter &ref_150
-                schema: *ref_129
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_151
-                schema: *ref_149
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: fileStream
-                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_119
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_150
-              - *ref_151
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /prebuilt/receipt/analyze
-                method: post
-                binary: true
-                knownMediaType: binary
-                mediaTypes:
-                  - application/pdf
-                  - image/jpeg
-                  - image/png
-                  - image/tiff
-                uri: '{endpoint}/formrecognizer/v2.0-preview'
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_158
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -4021,8 +3795,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_152
-                schema: *ref_133
+              - !Parameter &ref_153
+                schema: *ref_130
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4047,7 +3821,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_152
+              - *ref_153
             language: !Languages 
               default:
                 name: ''
@@ -4060,8 +3834,72 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
+          application/pdf: !Request &ref_157
+            parameters:
+              - !Parameter &ref_155
+                schema: *ref_132
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_156
+                schema: *ref_154
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: fileStream
+                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_119
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_155
+              - *ref_156
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /prebuilt/receipt/analyze
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                  - image/tiff
+                uri: '{endpoint}/formrecognizer/v2.0-preview'
+          image/jpeg: *ref_157
+          image/png: *ref_157
+          image/tiff: *ref_157
+        requests:
+          - *ref_157
+          - *ref_158
         signatureParameters:
-          - *ref_153
+          - *ref_159
         responses:
           - !Response 
             language: !Languages 
@@ -4072,7 +3910,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_154
+                    schema: *ref_160
                     header: Operation-Location
                     language:
                       default:
@@ -4082,7 +3920,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4095,17 +3933,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Analyze receipt:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-              responses:
-                '202':
-                  headers:
-                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/prebuilt/receipt/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -4116,13 +3943,14 @@ operationGroups:
             summary: Analyze Receipt
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetAnalyzeReceiptResult
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_155
-            schema: *ref_123
+          - !Parameter &ref_161
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -4160,10 +3988,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_155
+          - *ref_161
         responses:
           - !SchemaResponse 
-            schema: *ref_140
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -4177,7 +4005,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4189,28 +4017,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get analyze receipt result:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{model Id}'
-                resultId: '{result Id}'
-              responses:
-                '200':
-                  body:
-                    analyzeResult:
-                      documentResults: []
-                      errors: []
-                      pageResults: []
-                      readResults: []
-                      version: v2.0
-                    createdDateTime: '2019-05-01T10:53:21Z'
-                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                    status: running
         language: !Languages 
           default:
             name: GetAnalyzeReceiptResult
@@ -4218,71 +4024,14 @@ operationGroups:
             summary: Get Analyze Receipt Result
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnalyzeLayoutAsync
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter &ref_157
-                schema: *ref_129
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_158
-                schema: *ref_156
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: fileStream
-                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_119
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_157
-              - *ref_158
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /layout/analyze
-                method: post
-                binary: true
-                knownMediaType: binary
-                mediaTypes:
-                  - application/pdf
-                  - image/jpeg
-                  - image/png
-                  - image/tiff
-                uri: '{endpoint}/formrecognizer/v2.0-preview'
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_167
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -4297,8 +4046,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_159
-                schema: *ref_133
+              - !Parameter &ref_162
+                schema: *ref_130
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4323,7 +4072,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_159
+              - *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -4336,6 +4085,70 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
+          application/pdf: !Request &ref_166
+            parameters:
+              - !Parameter &ref_164
+                schema: *ref_132
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_165
+                schema: *ref_163
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: fileStream
+                    description: .json, .pdf, .jpg, .png or .tiff type file stream.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+              - !Parameter 
+                schema: *ref_119
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_164
+              - *ref_165
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /layout/analyze
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                  - image/tiff
+                uri: '{endpoint}/formrecognizer/v2.0-preview'
+          image/jpeg: *ref_166
+          image/png: *ref_166
+          image/tiff: *ref_166
+        requests:
+          - *ref_166
+          - *ref_167
         signatureParameters: []
         responses:
           - !Response 
@@ -4347,7 +4160,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_160
+                    schema: *ref_168
                     header: Operation-Location
                     language:
                       default:
@@ -4357,7 +4170,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4370,18 +4183,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Analyze layout:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                language: en
-              responses:
-                '202':
-                  headers:
-                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/layout/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -4392,13 +4193,14 @@ operationGroups:
             summary: Analyze Layout
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetAnalyzeLayoutResult
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_161
-            schema: *ref_123
+          - !Parameter &ref_169
+            schema: *ref_124
             implementation: Method
             required: true
             language: !Languages 
@@ -4436,10 +4238,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_161
+          - *ref_169
         responses:
           - !SchemaResponse 
-            schema: *ref_140
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -4453,7 +4255,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4465,26 +4267,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get analyze layout result:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                modelId: '{model Id}'
-                resultId: '{result Id}'
-              responses:
-                '200':
-                  body:
-                    analyzeResult:
-                      pageResults: []
-                      readResults: []
-                      version: v2.0
-                    createdDateTime: '2019-05-01T10:53:21Z'
-                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                    status: succeeded
         language: !Languages 
           default:
             name: GetAnalyzeLayoutResult
@@ -4492,13 +4274,14 @@ operationGroups:
             summary: Get Analyze Layout Result
         protocol: !Protocols {}
       - !Operation 
+        operationId: ListCustomModels
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_163
-            schema: *ref_162
+          - !Parameter &ref_171
+            schema: *ref_170
             implementation: Method
             required: true
             language: !Languages 
@@ -4536,10 +4319,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_163
+          - *ref_171
         responses:
           - !SchemaResponse 
-            schema: *ref_164
+            schema: *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4553,7 +4336,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4566,27 +4349,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List custom models:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                op: full
-              responses:
-                '200':
-                  body:
-                    modelList:
-                      - createdDateTime: '2019-05-01T10:53:21Z'
-                        lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                        modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
-                        status: ready
-                      - createdDateTime: '2019-05-01T10:53:21Z'
-                        lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                        modelId: f973e3c1-0001-43bb-bea8-49d0603ab3a8
-                        status: ready
-                    nextLink: ''
           x-ms-pageable:
             itemName: modelList
             nextLinkName: nextLink
@@ -4600,13 +4362,14 @@ operationGroups:
             summary: List Custom Models
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetCustomModels
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_116
-          - !Parameter &ref_166
-            schema: *ref_165
+          - !Parameter &ref_174
+            schema: *ref_173
             implementation: Method
             required: true
             language: !Languages 
@@ -4644,10 +4407,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_166
+          - *ref_174
         responses:
           - !SchemaResponse 
-            schema: *ref_164
+            schema: *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4661,7 +4424,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -4673,22 +4436,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get models summary:
-              parameters:
-                Content-Type: application/json
-                Ocp-Apim-Subscription-Key: '{API key}'
-                body: {}
-                endpoint: '{endpoint}'
-                op: summary
-              responses:
-                '200':
-                  body:
-                    summary:
-                      count: 5
-                      lastUpdatedDateTime: '2019-05-01T10:53:21Z'
-                      limit: 5000
         language: !Languages 
           default:
             name: GetCustomModels

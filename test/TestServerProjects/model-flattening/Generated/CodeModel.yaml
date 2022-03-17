@@ -300,7 +300,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_49
+    - !DictionarySchema &ref_51
       type: dictionary
       elementType: !ObjectSchema &ref_2
         type: object
@@ -438,7 +438,7 @@ schemas: !Schemas
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_51
+    - !DictionarySchema &ref_54
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -461,7 +461,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_62
+            - !Parameter &ref_68
               schema: *ref_1
               groupedBy: !Parameter &ref_22
                 schema: *ref_13
@@ -625,7 +625,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_15
           originalParameter:
-            - !VirtualParameter &ref_63
+            - !VirtualParameter &ref_69
               schema: *ref_15
               groupedBy: *ref_22
               implementation: Method
@@ -649,7 +649,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_16
           originalParameter:
-            - !VirtualParameter &ref_64
+            - !VirtualParameter &ref_70
               schema: *ref_16
               groupedBy: *ref_22
               implementation: Method
@@ -673,7 +673,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_18
           originalParameter:
-            - !VirtualParameter &ref_65
+            - !VirtualParameter &ref_71
               schema: *ref_18
               groupedBy: *ref_22
               implementation: Method
@@ -695,7 +695,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_19
           originalParameter:
-            - !VirtualParameter &ref_66
+            - !VirtualParameter &ref_72
               schema: *ref_19
               groupedBy: *ref_22
               implementation: Method
@@ -717,7 +717,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_20
           originalParameter:
-            - !VirtualParameter &ref_67
+            - !VirtualParameter &ref_73
               schema: *ref_20
               groupedBy: *ref_22
               implementation: Method
@@ -739,7 +739,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_21
           originalParameter:
-            - !VirtualParameter &ref_68
+            - !VirtualParameter &ref_74
               schema: *ref_21
               groupedBy: *ref_22
               implementation: Method
@@ -862,7 +862,7 @@ schemas: !Schemas
           description: The wrapped produc.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_52
+    - !ObjectSchema &ref_55
       type: object
       apiVersions:
         - !ApiVersion 
@@ -989,7 +989,7 @@ schemas: !Schemas
           name: ArrayOfResource
           description: Array of Resource
       protocol: !Protocols {}
-    - !ArraySchema &ref_45
+    - !ArraySchema &ref_46
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1000,7 +1000,7 @@ schemas: !Schemas
           name: ArrayOfFlattenedProduct
           description: Array of FlattenedProduct
       protocol: !Protocols {}
-    - !ArraySchema &ref_46
+    - !ArraySchema &ref_47
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1011,7 +1011,7 @@ schemas: !Schemas
           name: ArrayOfWrappedProduct
           description: Array of WrappedProduct
       protocol: !Protocols {}
-    - !ArraySchema &ref_48
+    - !ArraySchema &ref_50
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1045,13 +1045,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: putArray
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_45
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1105,6 +1106,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_45
         signatureParameters: []
         responses:
           - !Response 
@@ -1136,6 +1139,7 @@ operationGroups:
             description: Put External Resource as an Array
         protocol: !Protocols {}
       - !Operation 
+        operationId: getArray
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1170,7 +1174,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -1202,13 +1206,14 @@ operationGroups:
             description: Get External Resource as an Array
         protocol: !Protocols {}
       - !Operation 
+        operationId: putWrappedArray
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_49
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1223,8 +1228,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_47
-                schema: *ref_46
+              - !Parameter &ref_48
+                schema: *ref_47
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1249,7 +1254,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_47
+              - *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -1262,6 +1267,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_49
         signatureParameters: []
         responses:
           - !Response 
@@ -1293,6 +1300,7 @@ operationGroups:
             description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
         protocol: !Protocols {}
       - !Operation 
+        operationId: getWrappedArray
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1327,7 +1335,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1359,13 +1367,14 @@ operationGroups:
             description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
         protocol: !Protocols {}
       - !Operation 
+        operationId: putDictionary
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_53
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1380,8 +1389,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
-                schema: *ref_49
+              - !Parameter &ref_52
+                schema: *ref_51
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1406,7 +1415,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1419,6 +1428,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_53
         signatureParameters: []
         responses:
           - !Response 
@@ -1450,6 +1461,7 @@ operationGroups:
             description: Put External Resource as a Dictionary
         protocol: !Protocols {}
       - !Operation 
+        operationId: getDictionary
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1484,7 +1496,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1516,13 +1528,14 @@ operationGroups:
             description: Get External Resource as a Dictionary
         protocol: !Protocols {}
       - !Operation 
+        operationId: putResourceCollection
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_57
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1537,8 +1550,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_53
-                schema: *ref_52
+              - !Parameter &ref_56
+                schema: *ref_55
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1563,7 +1576,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_53
+              - *ref_56
             language: !Languages 
               default:
                 name: ''
@@ -1576,6 +1589,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_57
         signatureParameters: []
         responses:
           - !Response 
@@ -1607,6 +1622,7 @@ operationGroups:
             description: Put External Resource as a ResourceCollection
         protocol: !Protocols {}
       - !Operation 
+        operationId: getResourceCollection
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1641,7 +1657,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_52
+            schema: *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -1673,13 +1689,14 @@ operationGroups:
             description: Get External Resource as a ResourceCollection
         protocol: !Protocols {}
       - !Operation 
+        operationId: putSimpleProduct
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_59
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1694,7 +1711,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_58
                 schema: *ref_14
                 implementation: Method
                 required: false
@@ -1720,7 +1737,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -1733,6 +1750,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_59
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -1768,13 +1787,14 @@ operationGroups:
             description: Put Simple Product with client flattening true on the model
         protocol: !Protocols {}
       - !Operation 
+        operationId: postFlattenedSimpleProduct
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_67
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1789,7 +1809,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
+              - !Parameter &ref_60
                 schema: *ref_14
                 flattened: true
                 implementation: Method
@@ -1817,10 +1837,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_56
+              - !VirtualParameter &ref_61
                 schema: *ref_15
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 required: true
                 targetProperty: *ref_24
@@ -1829,10 +1849,10 @@ operationGroups:
                     name: productId
                     description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_57
+              - !VirtualParameter &ref_62
                 schema: *ref_16
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 required: false
                 targetProperty: *ref_25
@@ -1841,10 +1861,10 @@ operationGroups:
                     name: description
                     description: Description of product.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_58
+              - !VirtualParameter &ref_63
                 schema: *ref_18
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 targetProperty: *ref_26
                 language: !Languages 
@@ -1852,10 +1872,10 @@ operationGroups:
                     name: maxProductDisplayName
                     description: Display name of product.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_59
+              - !VirtualParameter &ref_64
                 schema: *ref_19
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 targetProperty: *ref_27
                 language: !Languages 
@@ -1863,10 +1883,10 @@ operationGroups:
                     name: capacity
                     description: Capacity of product. For example, 4 people.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_60
+              - !VirtualParameter &ref_65
                 schema: *ref_20
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 targetProperty: *ref_28
                 language: !Languages 
@@ -1874,10 +1894,10 @@ operationGroups:
                     name: genericValue
                     description: Generic URL value.
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_61
+              - !VirtualParameter &ref_66
                 schema: *ref_21
                 implementation: Method
-                originalParameter: *ref_55
+                originalParameter: *ref_60
                 pathToProperty: []
                 targetProperty: *ref_29
                 language: !Languages 
@@ -1886,12 +1906,12 @@ operationGroups:
                     description: URL value.
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_56
-              - *ref_57
-              - *ref_58
-              - *ref_59
-              - *ref_60
               - *ref_61
+              - *ref_62
+              - *ref_63
+              - *ref_64
+              - *ref_65
+              - *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -1904,6 +1924,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_67
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -1939,14 +1961,15 @@ operationGroups:
             description: Put Flattened Simple Product with client flattening true on the parameter
         protocol: !Protocols {}
       - !Operation 
+        operationId: putSimpleProductWithGrouping
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_40
-          - *ref_62
-        requests:
-          - !Request 
+          - *ref_68
+        requestMediaTypes:
+          application/json: !Request &ref_75
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1975,12 +1998,12 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_63
-              - *ref_64
-              - *ref_65
-              - *ref_66
-              - *ref_67
-              - *ref_68
+              - *ref_69
+              - *ref_70
+              - *ref_71
+              - *ref_72
+              - *ref_73
+              - *ref_74
               - *ref_22
             signatureParameters:
               - *ref_22
@@ -1996,6 +2019,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_75
         signatureParameters: []
         responses:
           - !SchemaResponse 

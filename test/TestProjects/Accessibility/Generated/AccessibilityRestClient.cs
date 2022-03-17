@@ -46,9 +46,7 @@ namespace Accessibility
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(body);
-                request.Content = content;
+                request.Content = new StringRequestContent(body);
             }
             return message;
         }
@@ -95,9 +93,7 @@ namespace Accessibility
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(body);
-                request.Content = content;
+                request.Content = new StringRequestContent(body);
             }
             return message;
         }

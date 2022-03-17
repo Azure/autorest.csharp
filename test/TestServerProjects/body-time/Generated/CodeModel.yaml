@@ -33,7 +33,7 @@ schemas: !Schemas
           name: ErrorMessage
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -130,6 +130,7 @@ operationGroups:
     $key: time
     operations:
       - !Operation 
+        operationId: time_get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -190,26 +191,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            time_get:
-              parameters: {}
-              responses:
-                '200':
-                  body: '11:34:56'
         language: !Languages 
           default:
             name: Get
             description: Get time value "11:34:56"
         protocol: !Protocols {}
       - !Operation 
+        operationId: time_put
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -219,13 +214,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_5
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -235,7 +230,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -256,17 +251,20 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /time/put
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -292,13 +290,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            time_put:
-              parameters:
-                timeBody: '08:07:56'
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: Put

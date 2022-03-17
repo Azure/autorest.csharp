@@ -959,7 +959,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_3
-    - !ObjectSchema &ref_72
+    - !ObjectSchema &ref_73
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1551,7 +1551,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_49
-    - !ObjectSchema &ref_83
+    - !ObjectSchema &ref_85
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1597,7 +1597,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_23
     - *ref_50
-    - !ObjectSchema &ref_102
+    - !ObjectSchema &ref_106
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1643,7 +1643,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_24
     - *ref_51
-    - !ObjectSchema &ref_116
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1689,7 +1689,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_25
     - *ref_52
-    - !ObjectSchema &ref_135
+    - !ObjectSchema &ref_143
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1788,12 +1788,13 @@ operationGroups:
     $key: AnotherParents
     operations:
       - !Operation 
+        operationId: AnotherParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_70
+          - !Parameter &ref_71
             schema: *ref_1
             implementation: Method
             required: true
@@ -1805,7 +1806,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_71
+          - !Parameter &ref_72
             schema: *ref_1
             implementation: Method
             required: true
@@ -1819,8 +1820,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_70
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -1875,9 +1876,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
-        signatureParameters:
+          text/json: *ref_70
+        requests:
           - *ref_70
+        signatureParameters:
           - *ref_71
+          - *ref_72
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1909,7 +1913,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -1930,12 +1934,13 @@ operationGroups:
             description: The operation to create or update the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherParents_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_74
+          - !Parameter &ref_76
             schema: *ref_1
             implementation: Method
             required: true
@@ -1947,7 +1952,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -1961,8 +1966,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_75
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -1977,7 +1982,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_73
+              - !Parameter &ref_74
                 schema: *ref_48
                 implementation: Method
                 required: true
@@ -2003,7 +2008,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_73
+              - *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -2017,9 +2022,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_74
+          text/json: *ref_75
+        requests:
           - *ref_75
+        signatureParameters:
+          - *ref_76
+          - *ref_77
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -2037,7 +2045,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2058,12 +2066,13 @@ operationGroups:
             description: The operation to update the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherParents_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_76
+          - !Parameter &ref_78
             schema: *ref_1
             implementation: Method
             required: true
@@ -2075,7 +2084,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_77
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
@@ -2116,8 +2125,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_76
-          - *ref_77
+          - *ref_78
+          - *ref_79
         responses:
           - !Response 
             language: !Languages 
@@ -2148,7 +2157,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2169,12 +2178,13 @@ operationGroups:
             description: The operation to delete the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_78
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -2186,7 +2196,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -2195,102 +2205,6 @@ operationGroups:
                 name: anotherName
                 description: The name of the virtual machine containing the run command.
                 serializedName: anotherName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_80
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: expand
-                description: The expand expression to apply on the operation.
-                serializedName: $expand
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_65
-          - *ref_66
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_68
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_78
-          - *ref_79
-          - *ref_80
-        responses:
-          - !SchemaResponse 
-            schema: *ref_2
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Get
-            description: The operation to get the run command.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-03-01'
-        parameters:
-          - *ref_64
-          - !Parameter &ref_81
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2330,15 +2244,16 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_80
           - *ref_81
           - *ref_82
         responses:
           - !SchemaResponse 
-            schema: *ref_83
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -2353,7 +2268,103 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: The operation to get the run command.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AnotherParents_List
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-03-01'
+        parameters:
+          - *ref_64
+          - !Parameter &ref_83
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_84
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: expand
+                description: The expand expression to apply on the operation.
+                serializedName: $expand
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_65
+          - *ref_66
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_68
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_83
+          - *ref_84
+        responses:
+          - !SchemaResponse 
+            schema: *ref_85
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2385,12 +2396,13 @@ operationGroups:
     $key: AnotherChildren
     operations:
       - !Operation 
+        operationId: AnotherChildren_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_85
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -2402,7 +2414,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_86
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -2414,7 +2426,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_87
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -2428,8 +2440,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_87
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -2444,7 +2456,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_84
+              - !Parameter &ref_86
                 schema: *ref_23
                 implementation: Method
                 required: true
@@ -2470,7 +2482,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_84
+              - *ref_86
             language: !Languages 
               default:
                 name: ''
@@ -2484,10 +2496,13 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_85
-          - *ref_86
+          text/json: *ref_87
+        requests:
           - *ref_87
+        signatureParameters:
+          - *ref_88
+          - *ref_89
+          - *ref_90
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -2519,7 +2534,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2540,12 +2555,13 @@ operationGroups:
             description: The operation to create or update the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherChildren_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_89
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -2557,7 +2573,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -2569,7 +2585,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_91
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2583,8 +2599,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_92
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -2599,7 +2615,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_88
+              - !Parameter &ref_91
                 schema: *ref_50
                 implementation: Method
                 required: true
@@ -2625,7 +2641,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_88
+              - *ref_91
             language: !Languages 
               default:
                 name: ''
@@ -2639,10 +2655,13 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
+          text/json: *ref_92
+        requests:
+          - *ref_92
         signatureParameters:
-          - *ref_89
-          - *ref_90
-          - *ref_91
+          - *ref_93
+          - *ref_94
+          - *ref_95
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -2660,7 +2679,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2681,12 +2700,13 @@ operationGroups:
             description: The operation to update the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherChildren_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_92
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2698,7 +2718,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2710,7 +2730,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2751,9 +2771,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_92
-          - *ref_93
-          - *ref_94
+          - *ref_96
+          - *ref_97
+          - *ref_98
         responses:
           - !Response 
             language: !Languages 
@@ -2784,7 +2804,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2805,12 +2825,13 @@ operationGroups:
             description: The operation to delete the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherChildren_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_95
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -2822,7 +2843,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_96
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -2834,7 +2855,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2846,7 +2867,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_98
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2886,10 +2907,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_95
-          - *ref_96
-          - *ref_97
-          - *ref_98
+          - *ref_99
+          - *ref_100
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -2907,7 +2928,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2926,12 +2947,13 @@ operationGroups:
             description: The operation to get the run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnotherChildren_List
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_99
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2943,7 +2965,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_100
+          - !Parameter &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -2955,7 +2977,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2995,12 +3017,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_99
-          - *ref_100
-          - *ref_101
+          - *ref_103
+          - *ref_104
+          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_102
+            schema: *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -3015,7 +3037,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3047,12 +3069,13 @@ operationGroups:
     $key: TheParents
     operations:
       - !Operation 
+        operationId: TheParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_104
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -3064,7 +3087,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_105
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -3078,8 +3101,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_108
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -3094,7 +3117,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_103
+              - !Parameter &ref_107
                 schema: *ref_24
                 implementation: Method
                 required: true
@@ -3120,7 +3143,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_103
+              - *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -3134,9 +3157,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
+          text/json: *ref_108
+        requests:
+          - *ref_108
         signatureParameters:
-          - *ref_104
-          - *ref_105
+          - *ref_109
+          - *ref_110
         responses:
           - !SchemaResponse 
             schema: *ref_24
@@ -3168,7 +3194,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3189,12 +3215,13 @@ operationGroups:
             description: The operation to create or update the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TheParents_Update
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_107
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -3206,7 +3233,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -3220,8 +3247,8 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_112
             parameters:
               - !Parameter 
                 schema: *ref_67
@@ -3236,7 +3263,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_106
+              - !Parameter &ref_111
                 schema: *ref_51
                 implementation: Method
                 required: true
@@ -3262,7 +3289,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_106
+              - *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -3276,9 +3303,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{$host}'
+          text/json: *ref_112
+        requests:
+          - *ref_112
         signatureParameters:
-          - *ref_107
-          - *ref_108
+          - *ref_113
+          - *ref_114
         responses:
           - !SchemaResponse 
             schema: *ref_24
@@ -3296,7 +3326,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3317,12 +3347,13 @@ operationGroups:
             description: The operation to update the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TheParents_Delete
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_109
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -3334,7 +3365,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_110
+          - !Parameter &ref_116
             schema: *ref_1
             implementation: Method
             required: true
@@ -3375,8 +3406,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
-          - *ref_110
+          - *ref_115
+          - *ref_116
         responses:
           - !Response 
             language: !Languages 
@@ -3407,7 +3438,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3428,12 +3459,13 @@ operationGroups:
             description: The operation to delete the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TheParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_111
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -3445,7 +3477,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_112
+          - !Parameter &ref_118
             schema: *ref_1
             implementation: Method
             required: true
@@ -3457,7 +3489,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_113
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3497,9 +3529,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_111
-          - *ref_112
-          - *ref_113
+          - *ref_117
+          - *ref_118
+          - *ref_119
         responses:
           - !SchemaResponse 
             schema: *ref_24
@@ -3517,7 +3549,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3536,12 +3568,13 @@ operationGroups:
             description: The operation to get the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TheParents_List
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_114
+          - !Parameter &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -3553,7 +3586,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_115
+          - !Parameter &ref_121
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3593,11 +3626,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_114
-          - *ref_115
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -3612,7 +3645,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -3644,302 +3677,7 @@ operationGroups:
     $key: SubParents
     operations:
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-03-01'
-        parameters:
-          - *ref_64
-          - !Parameter &ref_118
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_119
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: theParentName
-                description: The name of the VM scale set.
-                serializedName: theParentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_120
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_65
-          - *ref_66
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_67
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_117
-                schema: *ref_25
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: subBody
-                    description: Parameters supplied to the Create Virtual Machine RunCommand operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_68
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_117
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_118
-          - *ref_119
-          - *ref_120
-        responses:
-          - !SchemaResponse 
-            schema: *ref_25
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-          - !SchemaResponse 
-            schema: *ref_25
-            language: !Languages 
-              default:
-                name: ''
-                description: Created
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: CreateOrUpdate
-            description: The operation to create or update the VMSS VM run command.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-03-01'
-        parameters:
-          - *ref_64
-          - !Parameter &ref_122
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_123
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: theParentName
-                description: The name of the VM scale set.
-                serializedName: theParentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_124
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_65
-          - *ref_66
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_67
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_121
-                schema: *ref_52
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: subBody
-                    description: Parameters supplied to the Update Virtual Machine RunCommand operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_68
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_121
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_122
-          - *ref_123
-          - *ref_124
-        responses:
-          - !SchemaResponse 
-            schema: *ref_25
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Update
-            description: The operation to update the VMSS VM run command.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: SubParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
@@ -3983,6 +3721,310 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
+        requestMediaTypes:
+          application/json: !Request &ref_124
+            parameters:
+              - !Parameter 
+                schema: *ref_67
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_123
+                schema: *ref_25
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: subBody
+                    description: Parameters supplied to the Create Virtual Machine RunCommand operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_68
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_123
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                uri: '{$host}'
+          text/json: *ref_124
+        requests:
+          - *ref_124
+        signatureParameters:
+          - *ref_125
+          - *ref_126
+          - *ref_127
+        responses:
+          - !SchemaResponse 
+            schema: *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_73
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: The operation to create or update the VMSS VM run command.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: SubParents_Update
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-03-01'
+        parameters:
+          - *ref_64
+          - !Parameter &ref_130
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_131
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: theParentName
+                description: The name of the VM scale set.
+                serializedName: theParentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_132
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_65
+          - *ref_66
+        requestMediaTypes:
+          application/json: !Request &ref_129
+            parameters:
+              - !Parameter 
+                schema: *ref_67
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_128
+                schema: *ref_52
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: subBody
+                    description: Parameters supplied to the Update Virtual Machine RunCommand operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_68
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_128
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                uri: '{$host}'
+          text/json: *ref_129
+        requests:
+          - *ref_129
+        signatureParameters:
+          - *ref_130
+          - *ref_131
+          - *ref_132
+        responses:
+          - !SchemaResponse 
+            schema: *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_73
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Update
+            description: The operation to update the VMSS VM run command.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: SubParents_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-03-01'
+        parameters:
+          - *ref_64
+          - !Parameter &ref_133
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_134
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: theParentName
+                description: The name of the VM scale set.
+                serializedName: theParentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_135
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_65
+          - *ref_66
         requests:
           - !Request 
             parameters:
@@ -4010,9 +4052,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_125
-          - *ref_126
-          - *ref_127
+          - *ref_133
+          - *ref_134
+          - *ref_135
         responses:
           - !Response 
             language: !Languages 
@@ -4043,7 +4085,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -4064,12 +4106,13 @@ operationGroups:
             description: The operation to delete the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_128
+          - !Parameter &ref_136
             schema: *ref_1
             implementation: Method
             required: true
@@ -4081,7 +4124,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_129
+          - !Parameter &ref_137
             schema: *ref_1
             implementation: Method
             required: true
@@ -4093,7 +4136,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_130
+          - !Parameter &ref_138
             schema: *ref_1
             implementation: Method
             required: true
@@ -4105,7 +4148,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_131
+          - !Parameter &ref_139
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4145,10 +4188,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_128
-          - *ref_129
-          - *ref_130
-          - *ref_131
+          - *ref_136
+          - *ref_137
+          - *ref_138
+          - *ref_139
         responses:
           - !SchemaResponse 
             schema: *ref_25
@@ -4166,7 +4209,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -4185,12 +4228,13 @@ operationGroups:
             description: The operation to get the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParents_List
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_132
+          - !Parameter &ref_140
             schema: *ref_1
             implementation: Method
             required: true
@@ -4202,7 +4246,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_133
+          - !Parameter &ref_141
             schema: *ref_1
             implementation: Method
             required: true
@@ -4214,7 +4258,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_134
+          - !Parameter &ref_142
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4254,12 +4298,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_132
-          - *ref_133
-          - *ref_134
+          - *ref_140
+          - *ref_141
+          - *ref_142
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -4274,7 +4318,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -4306,328 +4350,7 @@ operationGroups:
     $key: Children
     operations:
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-03-01'
-        parameters:
-          - *ref_64
-          - !Parameter &ref_137
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_138
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: theParentName
-                description: The name of the VM scale set.
-                serializedName: theParentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_139
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_140
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: childName
-                description: The name of the virtual machine run command.
-                serializedName: childName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_65
-          - *ref_66
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_67
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_136
-                schema: *ref_23
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: childBody
-                    description: Parameters supplied to the Create Virtual Machine RunCommand operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_68
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_136
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_137
-          - *ref_138
-          - *ref_139
-          - *ref_140
-        responses:
-          - !SchemaResponse 
-            schema: *ref_23
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-          - !SchemaResponse 
-            schema: *ref_23
-            language: !Languages 
-              default:
-                name: ''
-                description: Created
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: CreateOrUpdate
-            description: The operation to create or update the VMSS VM run command.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-03-01'
-        parameters:
-          - *ref_64
-          - !Parameter &ref_142
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_143
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: theParentName
-                description: The name of the VM scale set.
-                serializedName: theParentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_144
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instanceId
-                description: The instance ID of the virtual machine.
-                serializedName: instanceId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_145
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: childName
-                description: The name of the virtual machine run command.
-                serializedName: childName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_65
-          - *ref_66
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_67
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_141
-                schema: *ref_50
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: childBody
-                    description: Parameters supplied to the Update Virtual Machine RunCommand operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_68
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_141
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_142
-          - *ref_143
-          - *ref_144
-          - *ref_145
-        responses:
-          - !SchemaResponse 
-            schema: *ref_23
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Update
-            description: The operation to update the VMSS VM run command.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: Children_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
@@ -4683,6 +4406,336 @@ operationGroups:
                 in: path
           - *ref_65
           - *ref_66
+        requestMediaTypes:
+          application/json: !Request &ref_145
+            parameters:
+              - !Parameter 
+                schema: *ref_67
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_144
+                schema: *ref_23
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: childBody
+                    description: Parameters supplied to the Create Virtual Machine RunCommand operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_68
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_144
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                uri: '{$host}'
+          text/json: *ref_145
+        requests:
+          - *ref_145
+        signatureParameters:
+          - *ref_146
+          - *ref_147
+          - *ref_148
+          - *ref_149
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_73
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: The operation to create or update the VMSS VM run command.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Children_Update
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-03-01'
+        parameters:
+          - *ref_64
+          - !Parameter &ref_152
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_153
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: theParentName
+                description: The name of the VM scale set.
+                serializedName: theParentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_154
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_155
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: childName
+                description: The name of the virtual machine run command.
+                serializedName: childName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_65
+          - *ref_66
+        requestMediaTypes:
+          application/json: !Request &ref_151
+            parameters:
+              - !Parameter 
+                schema: *ref_67
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_150
+                schema: *ref_50
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: childBody
+                    description: Parameters supplied to the Update Virtual Machine RunCommand operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_68
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_150
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                uri: '{$host}'
+          text/json: *ref_151
+        requests:
+          - *ref_151
+        signatureParameters:
+          - *ref_152
+          - *ref_153
+          - *ref_154
+          - *ref_155
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_73
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                  - text/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Update
+            description: The operation to update the VMSS VM run command.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Children_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-03-01'
+        parameters:
+          - *ref_64
+          - !Parameter &ref_156
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_157
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: theParentName
+                description: The name of the VM scale set.
+                serializedName: theParentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_158
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: instanceId
+                description: The instance ID of the virtual machine.
+                serializedName: instanceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_159
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: childName
+                description: The name of the virtual machine run command.
+                serializedName: childName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_65
+          - *ref_66
         requests:
           - !Request 
             parameters:
@@ -4710,10 +4763,10 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_146
-          - *ref_147
-          - *ref_148
-          - *ref_149
+          - *ref_156
+          - *ref_157
+          - *ref_158
+          - *ref_159
         responses:
           - !Response 
             language: !Languages 
@@ -4744,7 +4797,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -4765,12 +4818,13 @@ operationGroups:
             description: The operation to delete the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Children_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_150
+          - !Parameter &ref_160
             schema: *ref_1
             implementation: Method
             required: true
@@ -4782,7 +4836,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_151
+          - !Parameter &ref_161
             schema: *ref_1
             implementation: Method
             required: true
@@ -4794,7 +4848,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_152
+          - !Parameter &ref_162
             schema: *ref_1
             implementation: Method
             required: true
@@ -4806,7 +4860,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_153
+          - !Parameter &ref_163
             schema: *ref_1
             implementation: Method
             required: true
@@ -4818,7 +4872,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_154
+          - !Parameter &ref_164
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4858,11 +4912,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_150
-          - *ref_151
-          - *ref_152
-          - *ref_153
-          - *ref_154
+          - *ref_160
+          - *ref_161
+          - *ref_162
+          - *ref_163
+          - *ref_164
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -4880,7 +4934,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -4899,12 +4953,13 @@ operationGroups:
             description: The operation to get the VMSS VM run command.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Children_List
         apiVersions:
           - !ApiVersion 
             version: '2021-03-01'
         parameters:
           - *ref_64
-          - !Parameter &ref_155
+          - !Parameter &ref_165
             schema: *ref_1
             implementation: Method
             required: true
@@ -4916,7 +4971,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_156
+          - !Parameter &ref_166
             schema: *ref_1
             implementation: Method
             required: true
@@ -4928,7 +4983,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_157
+          - !Parameter &ref_167
             schema: *ref_1
             implementation: Method
             required: true
@@ -4940,7 +4995,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_158
+          - !Parameter &ref_168
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4980,13 +5035,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_155
-          - *ref_156
-          - *ref_157
-          - *ref_158
+          - *ref_165
+          - *ref_166
+          - *ref_167
+          - *ref_168
         responses:
           - !SchemaResponse 
-            schema: *ref_102
+            schema: *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -5001,7 +5056,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''

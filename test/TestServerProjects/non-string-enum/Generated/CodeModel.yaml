@@ -34,7 +34,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -87,7 +87,7 @@ schemas: !Schemas
           name: IntEnum
           description: List of integer enums
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_9
+    - !ChoiceSchema &ref_10
       choices:
         - !ChoiceValue 
           value: 200.4
@@ -172,13 +172,14 @@ operationGroups:
     $key: Int
     operations:
       - !Operation 
+        operationId: Int_put
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_8
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -232,10 +233,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_8
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -247,20 +250,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            Int_put:
-              parameters:
-                input: 200
-              responses:
-                '200':
-                  body: Nice job posting an int enum
         language: !Languages 
           default:
             name: Put
             description: Put an int enum
         protocol: !Protocols {}
       - !Operation 
+        operationId: Int_get
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
@@ -307,13 +303,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            Int_get:
-              parameters: {}
-              responses:
-                '200':
-                  body: 429
         language: !Languages 
           default:
             name: Get
@@ -328,13 +317,14 @@ operationGroups:
     $key: Float
     operations:
       - !Operation 
+        operationId: Float_put
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_12
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -349,8 +339,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_10
-                schema: *ref_9
+              - !Parameter &ref_11
+                schema: *ref_10
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -375,7 +365,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_10
+              - *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -388,10 +378,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_12
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -403,20 +395,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            Float_put:
-              parameters:
-                input: 200.4
-              responses:
-                '200':
-                  body: Nice job posting a float enum
         language: !Languages 
           default:
             name: Put
             description: Put a float enum
         protocol: !Protocols {}
       - !Operation 
+        operationId: Float_Get
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
@@ -451,7 +436,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -463,13 +448,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            Float_Get:
-              parameters: {}
-              responses:
-                '200':
-                  body: 429.1
         language: !Languages 
           default:
             name: Get

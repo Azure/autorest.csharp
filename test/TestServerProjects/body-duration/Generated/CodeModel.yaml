@@ -120,6 +120,7 @@ operationGroups:
     $key: duration
     operations:
       - !Operation 
+        operationId: duration_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -181,26 +182,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            duration_getNull:
-              parameters: {}
-              responses:
-                '200':
-                  body: ''
         language: !Languages 
           default:
             name: GetNull
             description: Get null duration value
         protocol: !Protocols {}
       - !Operation 
+        operationId: duration_putPositiveDuration
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -210,13 +205,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_5
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -226,7 +221,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -247,13 +242,16 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /duration/positiveduration
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -279,19 +277,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            duration_putPositiveDuration:
-              parameters:
-                durationBody: P123DT22H14M12.011S
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutPositiveDuration
             description: Put a positive duration value
         protocol: !Protocols {}
       - !Operation 
+        operationId: duration_getPositiveDuration
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -358,6 +350,7 @@ operationGroups:
             description: Get a positive duration value
         protocol: !Protocols {}
       - !Operation 
+        operationId: duration_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

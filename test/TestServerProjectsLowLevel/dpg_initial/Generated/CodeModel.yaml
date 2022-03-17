@@ -108,6 +108,7 @@ operationGroups:
     $key: params
     operations:
       - !Operation 
+        operationId: params_headNoParams
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -162,6 +163,7 @@ operationGroups:
                Initially has no query parameters. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_getRequired
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -229,6 +231,7 @@ operationGroups:
                Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_putRequiredOptional
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -306,13 +309,14 @@ operationGroups:
             description: Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_postParameters
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_2
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_12
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -366,6 +370,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_12
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -387,12 +393,13 @@ operationGroups:
             description: POST a JSON
         protocol: !Protocols {}
       - !Operation 
+        operationId: params_getOptional
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_2
-          - !Parameter &ref_12
+          - !Parameter &ref_13
             schema: *ref_5
             implementation: Method
             language: !Languages 
@@ -430,7 +437,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_12
+          - *ref_13
         responses:
           - !SchemaResponse 
             schema: *ref_4

@@ -102,7 +102,7 @@ namespace body_duration
             }
         }
 
-        internal HttpMessage CreatePutPositiveDurationRequest(TimeSpan durationBody)
+        internal HttpMessage CreatePutPositiveDurationRequest(string durationBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -113,17 +113,21 @@ namespace body_duration
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(durationBody, "P");
-            request.Content = content;
+            request.Content = new StringRequestContent(durationBody);
             return message;
         }
 
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="durationBody"/> is null. </exception>
+        public async Task<Response> PutPositiveDurationAsync(string durationBody, CancellationToken cancellationToken = default)
         {
+            if (durationBody == null)
+            {
+                throw new ArgumentNullException(nameof(durationBody));
+            }
+
             using var message = CreatePutPositiveDurationRequest(durationBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -138,8 +142,14 @@ namespace body_duration
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="durationBody"/> is null. </exception>
+        public Response PutPositiveDuration(string durationBody, CancellationToken cancellationToken = default)
         {
+            if (durationBody == null)
+            {
+                throw new ArgumentNullException(nameof(durationBody));
+            }
+
             using var message = CreatePutPositiveDurationRequest(durationBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

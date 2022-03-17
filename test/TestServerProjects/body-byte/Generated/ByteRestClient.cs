@@ -194,7 +194,7 @@ namespace body_byte
             }
         }
 
-        internal HttpMessage CreatePutNonAsciiRequest(byte[] byteBody)
+        internal HttpMessage CreatePutNonAsciiRequest(string byteBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -205,9 +205,7 @@ namespace body_byte
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBase64StringValue(byteBody, "D");
-            request.Content = content;
+            request.Content = new StringRequestContent(byteBody);
             return message;
         }
 
@@ -215,7 +213,7 @@ namespace body_byte
         /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="byteBody"/> is null. </exception>
-        public async Task<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNonAsciiAsync(string byteBody, CancellationToken cancellationToken = default)
         {
             if (byteBody == null)
             {
@@ -237,7 +235,7 @@ namespace body_byte
         /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="byteBody"/> is null. </exception>
-        public Response PutNonAscii(byte[] byteBody, CancellationToken cancellationToken = default)
+        public Response PutNonAscii(string byteBody, CancellationToken cancellationToken = default)
         {
             if (byteBody == null)
             {

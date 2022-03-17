@@ -54,7 +54,7 @@ schemas: !Schemas
           description: Sample string.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_19
+    - !SealedChoiceSchema &ref_23
       choices:
         - !ChoiceValue 
           value: red color
@@ -118,13 +118,13 @@ schemas: !Schemas
           name: Constant3
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_11
+    - !ConstantSchema 
       type: constant
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       value: !ConstantValue 
-        value: ''
+        value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
       valueType: *ref_0
       language: !Languages 
         default:
@@ -137,50 +137,11 @@ schemas: !Schemas
         - !ApiVersion 
           version: 1.0.0
       value: !ConstantValue 
-        value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+        value: '    Now is the time for all good men to come to the aid of their country    '
       valueType: *ref_0
       language: !Languages 
         default:
           name: Constant5
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_12
-      type: constant
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      value: !ConstantValue 
-        value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant6
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema 
-      type: constant
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      value: !ConstantValue 
-        value: '    Now is the time for all good men to come to the aid of their country    '
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant7
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_13
-      type: constant
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      value: !ConstantValue 
-        value: '    Now is the time for all good men to come to the aid of their country    '
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant8
           description: ''
       protocol: !Protocols {}
     - !ConstantSchema &ref_3
@@ -196,8 +157,47 @@ schemas: !Schemas
           name: ColorConstant
           description: Referenced Color Constant Description.
       protocol: !Protocols {}
+    - !ConstantSchema 
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      value: !ConstantValue 
+        value: ''
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Constant7
+          description: ''
+      protocol: !Protocols {}
+    - !ConstantSchema 
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      value: !ConstantValue 
+        value: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Constant8
+          description: ''
+      protocol: !Protocols {}
+    - !ConstantSchema 
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      value: !ConstantValue 
+        value: '    Now is the time for all good men to come to the aid of their country    '
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Constant9
+          description: ''
+      protocol: !Protocols {}
   byteArrays:
-    - !ByteArraySchema &ref_14
+    - !ByteArraySchema &ref_18
       type: byte-array
       format: byte
       apiVersions:
@@ -208,7 +208,7 @@ schemas: !Schemas
           name: ByteArray
           description: ''
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_15
+    - !ByteArraySchema &ref_19
       type: byte-array
       format: base64url
       apiVersions:
@@ -219,7 +219,7 @@ schemas: !Schemas
           name: ByteArray
           description: ''
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_16
+    - !ByteArraySchema &ref_22
       type: byte-array
       format: base64url
       apiVersions:
@@ -230,7 +230,7 @@ schemas: !Schemas
           name: ByteArray
           description: ''
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_18
+    - !ByteArraySchema 
       type: byte-array
       format: base64url
       apiVersions:
@@ -274,7 +274,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_22
+    - !ObjectSchema &ref_28
       type: object
       apiVersions:
         - !ApiVersion 
@@ -331,6 +331,7 @@ operationGroups:
     $key: string
     operations:
       - !Operation 
+        operationId: string_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -392,25 +393,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_getNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetNull
             description: Get null string value value
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_putNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -420,16 +416,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_10
-                schema: *ref_7
+                schema: *ref_0
                 implementation: Method
                 nullable: true
-                required: false
                 language: !Languages 
                   default:
                     name: stringBody
@@ -437,7 +432,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -458,13 +453,16 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/null
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -490,18 +488,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutNull
             description: Set string value null
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -562,26 +555,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_getEmpty:
-              parameters: {}
-              responses:
-                '200':
-                  body: ''
         language: !Languages 
           default:
             name: GetEmpty
             description: Get empty string value value ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_putEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_13
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -591,13 +578,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter 
-                schema: *ref_11
+              - !Parameter &ref_12
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -607,7 +594,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -621,19 +608,23 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-            signatureParameters: []
+            signatureParameters:
+              - *ref_12
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/empty
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_13
         signatureParameters: []
         responses:
           - !Response 
@@ -659,19 +650,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putEmpty:
-              parameters:
-                stringBody: ''
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutEmpty
             description: Set string value empty ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getMbcs
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -732,26 +717,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_getMbcs:
-              parameters: {}
-              responses:
-                '200':
-                  body: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
         language: !Languages 
           default:
             name: GetMbcs
             description: Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_putMbcs
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_15
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -761,13 +740,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter 
-                schema: *ref_12
+              - !Parameter &ref_14
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -777,7 +756,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -791,19 +770,23 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-            signatureParameters: []
+            signatureParameters:
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/mbcs
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_15
         signatureParameters: []
         responses:
           - !Response 
@@ -829,19 +812,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putMbcs:
-              parameters:
-                stringBody: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutMbcs
             description: Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getWhitespace
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -902,26 +879,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_getWhitespace:
-              parameters: {}
-              responses:
-                '200':
-                  body: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
         language: !Languages 
           default:
             name: GetWhitespace
             description: Get string value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_putWhitespace
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_17
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -931,13 +902,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter 
-                schema: *ref_13
+              - !Parameter &ref_16
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -947,7 +918,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -961,19 +932,23 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-            signatureParameters: []
+            signatureParameters:
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/whitespace
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_17
         signatureParameters: []
         responses:
           - !Response 
@@ -999,19 +974,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putWhitespace:
-              parameters:
-                stringBody: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutWhitespace
             description: Set String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getNotProvided
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1072,18 +1041,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_getNotProvided:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetNotProvided
             description: Get String value when no string value is sent in response payload
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getBase64Encoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1118,7 +1082,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_14
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -1150,6 +1114,7 @@ operationGroups:
             description: Get value that is base64 encoded
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getBase64UrlEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1184,7 +1149,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_15
+            schema: *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -1216,13 +1181,14 @@ operationGroups:
             description: Get value that is base64url encoded
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_putBase64UrlEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_21
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1232,13 +1198,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_17
-                schema: *ref_16
+              - !Parameter &ref_20
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1248,7 +1214,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -1263,19 +1229,22 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_17
+              - *ref_20
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/base64UrlEncoding
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_21
         signatureParameters: []
         responses:
           - !Response 
@@ -1307,6 +1276,7 @@ operationGroups:
             description: Put value that is base64url encoded
         protocol: !Protocols {}
       - !Operation 
+        operationId: string_getNullBase64UrlEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1341,7 +1311,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_18
+            schema: *ref_22
             nullable: true
             language: !Languages 
               default:
@@ -1382,6 +1352,7 @@ operationGroups:
     $key: enum
     operations:
       - !Operation 
+        operationId: enum_getNotExpandable
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1416,7 +1387,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -1442,26 +1413,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_getNotExpandable:
-              parameters: {}
-              responses:
-                '200':
-                  body: red color
         language: !Languages 
           default:
             name: GetNotExpandable
             description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         protocol: !Protocols {}
       - !Operation 
+        operationId: enum_putNotExpandable
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_25
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1471,13 +1436,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_20
-                schema: *ref_19
+              - !Parameter &ref_24
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1487,7 +1452,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -1502,19 +1467,22 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_20
+              - *ref_24
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/enum/notExpandable
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_25
         signatureParameters: []
         responses:
           - !Response 
@@ -1540,19 +1508,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_putNotExpandable:
-              parameters:
-                stringBody: red color
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutNotExpandable
             description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         protocol: !Protocols {}
       - !Operation 
+        operationId: enum_getReferenced
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1587,7 +1549,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_23
             language: !Languages 
               default:
                 name: ''
@@ -1613,26 +1575,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_getReferenced:
-              parameters: {}
-              responses:
-                '200':
-                  body: red color
         language: !Languages 
           default:
             name: GetReferenced
             description: Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
         protocol: !Protocols {}
       - !Operation 
+        operationId: enum_putReferenced
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_27
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1642,13 +1598,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_21
-                schema: *ref_19
+              - !Parameter &ref_26
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1658,7 +1614,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -1673,19 +1629,22 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_21
+              - *ref_26
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /string/enum/Referenced
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_27
         signatureParameters: []
         responses:
           - !Response 
@@ -1711,19 +1670,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_putReferenced:
-              parameters:
-                enumStringBody: red color
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutReferenced
             description: Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'
         protocol: !Protocols {}
       - !Operation 
+        operationId: enum_getReferencedConstant
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1758,7 +1711,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -1784,26 +1737,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_getReferencedConstant:
-              parameters: {}
-              responses:
-                '200':
-                  body: green-color
         language: !Languages 
           default:
             name: GetReferencedConstant
             description: Get value 'green-color' from the constant.
         protocol: !Protocols {}
       - !Operation 
+        operationId: enum_putReferencedConstant
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_30
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1818,8 +1765,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_23
-                schema: *ref_22
+              - !Parameter &ref_29
+                schema: *ref_28
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1844,7 +1791,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_23
+              - *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -1857,6 +1804,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_30
         signatureParameters: []
         responses:
           - !Response 
@@ -1882,13 +1831,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            enum_putReferencedConstant:
-              parameters:
-                enumStringBody: green-color
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutReferencedConstant

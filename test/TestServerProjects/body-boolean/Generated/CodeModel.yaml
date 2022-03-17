@@ -11,7 +11,7 @@ schemas: !Schemas
           name: Bool
           description: simple boolean
       protocol: !Protocols {}
-    - !BooleanSchema &ref_10
+    - !BooleanSchema &ref_12
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -111,7 +111,7 @@ schemas: !Schemas
           name: Constant4
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_9
+    - !ConstantSchema &ref_10
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -179,6 +179,7 @@ operationGroups:
     $key: bool
     operations:
       - !Operation 
+        operationId: bool_getTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -239,26 +240,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            bool_getTrue:
-              parameters: {}
-              responses:
-                '200':
-                  body: true
         language: !Languages 
           default:
             name: GetTrue
             description: Get true Boolean value
         protocol: !Protocols {}
       - !Operation 
+        operationId: bool_putTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -311,6 +306,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -336,19 +333,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            bool_putTrue:
-              parameters:
-                boolBody: true
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutTrue
             description: Set Boolean value true
         protocol: !Protocols {}
       - !Operation 
+        operationId: bool_getFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -409,26 +400,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            bool_getFalse:
-              parameters: {}
-              responses:
-                '200':
-                  body: false
         language: !Languages 
           default:
             name: GetFalse
             description: Get false Boolean value
         protocol: !Protocols {}
       - !Operation 
+        operationId: bool_putFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -444,7 +429,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_9
+                schema: *ref_10
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -481,6 +466,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -506,19 +493,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            bool_putFalse:
-              parameters:
-                boolBody: false
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutFalse
             description: Set Boolean value false
         protocol: !Protocols {}
       - !Operation 
+        operationId: bool_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -553,7 +534,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_12
             nullable: true
             language: !Languages 
               default:
@@ -580,18 +561,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            bool_getNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetNull
             description: Get null Boolean value
         protocol: !Protocols {}
       - !Operation 
+        operationId: bool_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -626,7 +602,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''

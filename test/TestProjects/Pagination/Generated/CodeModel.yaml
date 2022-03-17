@@ -14,7 +14,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_65
+    - !NumberSchema &ref_66
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -25,7 +25,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_82
+    - !NumberSchema &ref_85
       type: number
       apiVersions:
         - !ApiVersion 
@@ -36,7 +36,7 @@ schemas: !Schemas
           name: Number
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_99
+    - !NumberSchema &ref_104
       type: number
       apiVersions:
         - !ApiVersion 
@@ -47,7 +47,7 @@ schemas: !Schemas
           name: Number
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_108
+    - !NumberSchema &ref_114
       type: number
       apiVersions:
         - !ApiVersion 
@@ -518,7 +518,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_5
-    - !ObjectSchema &ref_68
+    - !ObjectSchema &ref_69
       type: object
       apiVersions:
         - !ApiVersion 
@@ -608,7 +608,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_10
-    - !ObjectSchema &ref_76
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
@@ -698,7 +698,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_15
-    - !ObjectSchema &ref_85
+    - !ObjectSchema &ref_88
       type: object
       apiVersions:
         - !ApiVersion 
@@ -788,7 +788,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_20
-    - !ObjectSchema &ref_93
+    - !ObjectSchema &ref_97
       type: object
       apiVersions:
         - !ApiVersion 
@@ -878,7 +878,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_25
-    - !ObjectSchema &ref_102
+    - !ObjectSchema &ref_107
       type: object
       apiVersions:
         - !ApiVersion 
@@ -968,7 +968,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_30
-    - !ObjectSchema &ref_111
+    - !ObjectSchema &ref_117
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1058,7 +1058,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_35
-    - !ObjectSchema &ref_119
+    - !ObjectSchema &ref_126
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1206,6 +1206,7 @@ operationGroups:
     $key: PageSizeIntegerModels
     operations:
       - !Operation 
+        operationId: PageSizeIntegerModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1290,12 +1291,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeIntegerModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_61
+          - !Parameter &ref_62
             schema: *ref_49
             implementation: Method
             required: true
@@ -1307,7 +1309,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_62
+          - !Parameter &ref_63
             schema: *ref_49
             implementation: Method
             required: true
@@ -1321,8 +1323,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_61
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -1376,9 +1378,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_61
+        signatureParameters:
           - *ref_62
+          - *ref_63
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1399,12 +1403,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeIntegerModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_63
+          - !Parameter &ref_64
             schema: *ref_49
             implementation: Method
             required: true
@@ -1416,7 +1421,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_64
+          - !Parameter &ref_65
             schema: *ref_49
             implementation: Method
             required: true
@@ -1457,8 +1462,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
           - *ref_64
+          - *ref_65
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1487,12 +1492,13 @@ operationGroups:
     $key: PageSizeInt64Models
     operations:
       - !Operation 
+        operationId: PageSizeInt64Models_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_66
+          - !Parameter &ref_67
             schema: *ref_49
             implementation: Method
             required: true
@@ -1504,8 +1510,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_67
-            schema: *ref_65
+          - !Parameter &ref_68
+            schema: *ref_66
             implementation: Method
             language: !Languages 
               default:
@@ -1544,11 +1550,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_66
           - *ref_67
+          - *ref_68
         responses:
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -1571,12 +1577,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeInt64Models_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_70
+          - !Parameter &ref_72
             schema: *ref_49
             implementation: Method
             required: true
@@ -1588,7 +1595,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_71
+          - !Parameter &ref_73
             schema: *ref_49
             implementation: Method
             required: true
@@ -1602,8 +1609,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_71
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -1618,7 +1625,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_69
+              - !Parameter &ref_70
                 schema: *ref_10
                 implementation: Method
                 required: true
@@ -1644,7 +1651,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_69
+              - *ref_70
             language: !Languages 
               default:
                 name: ''
@@ -1657,9 +1664,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_70
+        requests:
           - *ref_71
+        signatureParameters:
+          - *ref_72
+          - *ref_73
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -1680,12 +1689,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeInt64Models_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_72
+          - !Parameter &ref_74
             schema: *ref_49
             implementation: Method
             required: true
@@ -1697,7 +1707,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_73
+          - !Parameter &ref_75
             schema: *ref_49
             implementation: Method
             required: true
@@ -1738,8 +1748,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_72
-          - *ref_73
+          - *ref_74
+          - *ref_75
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -1768,12 +1778,13 @@ operationGroups:
     $key: PageSizeInt32Models
     operations:
       - !Operation 
+        operationId: PageSizeInt32Models_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_74
+          - !Parameter &ref_76
             schema: *ref_49
             implementation: Method
             required: true
@@ -1785,7 +1796,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_77
             schema: *ref_52
             implementation: Method
             language: !Languages 
@@ -1825,11 +1836,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_74
-          - *ref_75
+          - *ref_76
+          - *ref_77
         responses:
           - !SchemaResponse 
-            schema: *ref_76
+            schema: *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -1852,12 +1863,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeInt32Models_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_78
+          - !Parameter &ref_81
             schema: *ref_49
             implementation: Method
             required: true
@@ -1869,7 +1881,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_82
             schema: *ref_49
             implementation: Method
             required: true
@@ -1883,8 +1895,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_80
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -1899,7 +1911,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_77
+              - !Parameter &ref_79
                 schema: *ref_15
                 implementation: Method
                 required: true
@@ -1925,7 +1937,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_77
+              - *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -1938,9 +1950,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_80
         signatureParameters:
-          - *ref_78
-          - *ref_79
+          - *ref_81
+          - *ref_82
         responses:
           - !SchemaResponse 
             schema: *ref_15
@@ -1961,12 +1975,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeInt32Models_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_80
+          - !Parameter &ref_83
             schema: *ref_49
             implementation: Method
             required: true
@@ -1978,7 +1993,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_81
+          - !Parameter &ref_84
             schema: *ref_49
             implementation: Method
             required: true
@@ -2019,8 +2034,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_80
-          - *ref_81
+          - *ref_83
+          - *ref_84
         responses:
           - !SchemaResponse 
             schema: *ref_15
@@ -2049,12 +2064,13 @@ operationGroups:
     $key: PageSizeNumericModels
     operations:
       - !Operation 
+        operationId: PageSizeNumericModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_83
+          - !Parameter &ref_86
             schema: *ref_49
             implementation: Method
             required: true
@@ -2066,8 +2082,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_84
-            schema: *ref_82
+          - !Parameter &ref_87
+            schema: *ref_85
             implementation: Method
             language: !Languages 
               default:
@@ -2106,11 +2122,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_83
-          - *ref_84
+          - *ref_86
+          - *ref_87
         responses:
           - !SchemaResponse 
-            schema: *ref_85
+            schema: *ref_88
             language: !Languages 
               default:
                 name: ''
@@ -2133,12 +2149,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeNumericModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_87
+          - !Parameter &ref_91
             schema: *ref_49
             implementation: Method
             required: true
@@ -2150,7 +2167,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_88
+          - !Parameter &ref_92
             schema: *ref_49
             implementation: Method
             required: true
@@ -2164,8 +2181,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_90
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -2180,7 +2197,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_86
+              - !Parameter &ref_89
                 schema: *ref_20
                 implementation: Method
                 required: true
@@ -2206,7 +2223,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_86
+              - *ref_89
             language: !Languages 
               default:
                 name: ''
@@ -2219,9 +2236,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_90
         signatureParameters:
-          - *ref_87
-          - *ref_88
+          - *ref_91
+          - *ref_92
         responses:
           - !SchemaResponse 
             schema: *ref_20
@@ -2242,12 +2261,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeNumericModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_89
+          - !Parameter &ref_93
             schema: *ref_49
             implementation: Method
             required: true
@@ -2259,7 +2279,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_94
             schema: *ref_49
             implementation: Method
             required: true
@@ -2300,8 +2320,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_89
-          - *ref_90
+          - *ref_93
+          - *ref_94
         responses:
           - !SchemaResponse 
             schema: *ref_20
@@ -2330,12 +2350,13 @@ operationGroups:
     $key: PageSizeFloatModels
     operations:
       - !Operation 
+        operationId: PageSizeFloatModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_91
+          - !Parameter &ref_95
             schema: *ref_49
             implementation: Method
             required: true
@@ -2347,8 +2368,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
-            schema: *ref_82
+          - !Parameter &ref_96
+            schema: *ref_85
             implementation: Method
             language: !Languages 
               default:
@@ -2387,11 +2408,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_91
-          - *ref_92
+          - *ref_95
+          - *ref_96
         responses:
           - !SchemaResponse 
-            schema: *ref_93
+            schema: *ref_97
             language: !Languages 
               default:
                 name: ''
@@ -2414,12 +2435,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeFloatModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_95
+          - !Parameter &ref_100
             schema: *ref_49
             implementation: Method
             required: true
@@ -2431,7 +2453,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_96
+          - !Parameter &ref_101
             schema: *ref_49
             implementation: Method
             required: true
@@ -2445,8 +2467,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_99
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -2461,7 +2483,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_94
+              - !Parameter &ref_98
                 schema: *ref_25
                 implementation: Method
                 required: true
@@ -2487,7 +2509,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_94
+              - *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2500,9 +2522,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_99
         signatureParameters:
-          - *ref_95
-          - *ref_96
+          - *ref_100
+          - *ref_101
         responses:
           - !SchemaResponse 
             schema: *ref_25
@@ -2523,12 +2547,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeFloatModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_97
+          - !Parameter &ref_102
             schema: *ref_49
             implementation: Method
             required: true
@@ -2540,7 +2565,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_98
+          - !Parameter &ref_103
             schema: *ref_49
             implementation: Method
             required: true
@@ -2581,8 +2606,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_97
-          - *ref_98
+          - *ref_102
+          - *ref_103
         responses:
           - !SchemaResponse 
             schema: *ref_25
@@ -2611,12 +2636,13 @@ operationGroups:
     $key: PageSizeDoubleModels
     operations:
       - !Operation 
+        operationId: PageSizeDoubleModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_100
+          - !Parameter &ref_105
             schema: *ref_49
             implementation: Method
             required: true
@@ -2628,8 +2654,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
-            schema: *ref_99
+          - !Parameter &ref_106
+            schema: *ref_104
             implementation: Method
             language: !Languages 
               default:
@@ -2668,11 +2694,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_100
-          - *ref_101
+          - *ref_105
+          - *ref_106
         responses:
           - !SchemaResponse 
-            schema: *ref_102
+            schema: *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -2695,12 +2721,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeDoubleModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_104
+          - !Parameter &ref_110
             schema: *ref_49
             implementation: Method
             required: true
@@ -2712,7 +2739,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_105
+          - !Parameter &ref_111
             schema: *ref_49
             implementation: Method
             required: true
@@ -2726,8 +2753,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_109
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -2742,7 +2769,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_103
+              - !Parameter &ref_108
                 schema: *ref_30
                 implementation: Method
                 required: true
@@ -2768,7 +2795,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_103
+              - *ref_108
             language: !Languages 
               default:
                 name: ''
@@ -2781,9 +2808,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_109
         signatureParameters:
-          - *ref_104
-          - *ref_105
+          - *ref_110
+          - *ref_111
         responses:
           - !SchemaResponse 
             schema: *ref_30
@@ -2804,12 +2833,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeDoubleModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_106
+          - !Parameter &ref_112
             schema: *ref_49
             implementation: Method
             required: true
@@ -2821,7 +2851,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_107
+          - !Parameter &ref_113
             schema: *ref_49
             implementation: Method
             required: true
@@ -2862,8 +2892,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_106
-          - *ref_107
+          - *ref_112
+          - *ref_113
         responses:
           - !SchemaResponse 
             schema: *ref_30
@@ -2892,12 +2922,13 @@ operationGroups:
     $key: PageSizeDecimalModels
     operations:
       - !Operation 
+        operationId: PageSizeDecimalModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_109
+          - !Parameter &ref_115
             schema: *ref_49
             implementation: Method
             required: true
@@ -2909,8 +2940,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_110
-            schema: *ref_108
+          - !Parameter &ref_116
+            schema: *ref_114
             implementation: Method
             language: !Languages 
               default:
@@ -2949,11 +2980,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
-          - *ref_110
+          - *ref_115
+          - *ref_116
         responses:
           - !SchemaResponse 
-            schema: *ref_111
+            schema: *ref_117
             language: !Languages 
               default:
                 name: ''
@@ -2976,12 +3007,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeDecimalModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_113
+          - !Parameter &ref_120
             schema: *ref_49
             implementation: Method
             required: true
@@ -2993,7 +3025,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_114
+          - !Parameter &ref_121
             schema: *ref_49
             implementation: Method
             required: true
@@ -3007,8 +3039,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_119
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -3023,7 +3055,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_112
+              - !Parameter &ref_118
                 schema: *ref_35
                 implementation: Method
                 required: true
@@ -3049,7 +3081,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_112
+              - *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -3062,9 +3094,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_119
         signatureParameters:
-          - *ref_113
-          - *ref_114
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -3085,12 +3119,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeDecimalModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_115
+          - !Parameter &ref_122
             schema: *ref_49
             implementation: Method
             required: true
@@ -3102,7 +3137,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_116
+          - !Parameter &ref_123
             schema: *ref_49
             implementation: Method
             required: true
@@ -3143,8 +3178,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_115
-          - *ref_116
+          - *ref_122
+          - *ref_123
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -3173,12 +3208,13 @@ operationGroups:
     $key: PageSizeStringModels
     operations:
       - !Operation 
+        operationId: PageSizeStringModels_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_117
+          - !Parameter &ref_124
             schema: *ref_49
             implementation: Method
             required: true
@@ -3190,7 +3226,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_118
+          - !Parameter &ref_125
             schema: *ref_49
             implementation: Method
             language: !Languages 
@@ -3230,11 +3266,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_117
-          - *ref_118
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
-            schema: *ref_119
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -3257,12 +3293,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeStringModels_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_121
+          - !Parameter &ref_129
             schema: *ref_49
             implementation: Method
             required: true
@@ -3274,7 +3311,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_122
+          - !Parameter &ref_130
             schema: *ref_49
             implementation: Method
             required: true
@@ -3288,8 +3325,8 @@ operationGroups:
                 in: path
           - *ref_53
           - *ref_54
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_128
             parameters:
               - !Parameter 
                 schema: *ref_59
@@ -3304,7 +3341,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_120
+              - !Parameter &ref_127
                 schema: *ref_40
                 implementation: Method
                 required: true
@@ -3330,7 +3367,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_120
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3343,9 +3380,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_128
         signatureParameters:
-          - *ref_121
-          - *ref_122
+          - *ref_129
+          - *ref_130
         responses:
           - !SchemaResponse 
             schema: *ref_40
@@ -3366,12 +3405,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: PageSizeStringModels_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_51
-          - !Parameter &ref_123
+          - !Parameter &ref_131
             schema: *ref_49
             implementation: Method
             required: true
@@ -3383,7 +3423,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_124
+          - !Parameter &ref_132
             schema: *ref_49
             implementation: Method
             required: true
@@ -3424,8 +3464,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_123
-          - *ref_124
+          - *ref_131
+          - *ref_132
         responses:
           - !SchemaResponse 
             schema: *ref_40

@@ -99,6 +99,7 @@ operationGroups:
     $key: files
     operations:
       - !Operation 
+        operationId: files_GetFile
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -168,6 +169,7 @@ operationGroups:
             description: Get file
         protocol: !Protocols {}
       - !Operation 
+        operationId: files_GetFileLarge
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -237,6 +239,7 @@ operationGroups:
             description: Get a large file
         protocol: !Protocols {}
       - !Operation 
+        operationId: files_GetEmptyFile
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

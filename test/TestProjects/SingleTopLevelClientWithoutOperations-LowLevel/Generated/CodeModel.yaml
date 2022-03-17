@@ -53,6 +53,7 @@ operationGroups:
     $key: Client5
     operations:
       - !Operation 
+        operationId: Client5_Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -113,6 +114,7 @@ operationGroups:
     $key: Client6
     operations:
       - !Operation 
+        operationId: Client6_Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -173,6 +175,7 @@ operationGroups:
     $key: Client7
     operations:
       - !Operation 
+        operationId: Client7_Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'

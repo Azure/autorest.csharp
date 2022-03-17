@@ -130,6 +130,7 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: NoRequestBodyResponseBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -240,13 +241,14 @@ operationGroups:
             description: No RequestBody and ResponseBody
         protocol: !Protocols {}
       - !Operation 
+        operationId: RequestBodyResponseBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_14
             parameters:
               - !Parameter 
                 schema: *ref_11
@@ -300,6 +302,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_14
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -321,12 +325,13 @@ operationGroups:
             description: RequestBody and ResponseBody
         protocol: !Protocols {}
       - !Operation 
+        operationId: DeleteNoRequestBodyResponseBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_14
+          - !Parameter &ref_15
             schema: *ref_5
             implementation: Method
             required: true
@@ -365,7 +370,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_14
+          - *ref_15
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -386,6 +391,7 @@ operationGroups:
             description: Delete
         protocol: !Protocols {}
       - !Operation 
+        operationId: NoRequestBodyNoResponseBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -419,13 +425,14 @@ operationGroups:
             description: No RequestBody and No ResponseBody
         protocol: !Protocols {}
       - !Operation 
+        operationId: RequestBodyNoResponseBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_17
             parameters:
               - !Parameter 
                 schema: *ref_11
@@ -435,16 +442,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_15
-                schema: *ref_5
+              - !Parameter &ref_16
+                schema: *ref_0
                 implementation: Method
                 nullable: true
-                required: false
                 language: !Languages 
                   default:
                     name: stringBody
@@ -452,21 +458,24 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
             signatureParameters:
-              - *ref_15
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /test2
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_17
         signatureParameters: []
         responses:
           - !Response 

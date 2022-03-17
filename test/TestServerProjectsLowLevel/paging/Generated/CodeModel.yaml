@@ -489,6 +489,7 @@ operationGroups:
     $key: Paging
     operations:
       - !Operation 
+        operationId: Paging_getNoItemNamePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -556,6 +557,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getNullNextLinkNamePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -625,6 +627,7 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getSinglePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -694,6 +697,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_firstResponseEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -761,6 +765,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -872,6 +877,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getWithQueryParams
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -968,6 +974,7 @@ operationGroups:
               member: NextOperationWithQueryParams
               nextLinkName: nextLink
               nextLinkOperation: !Operation &ref_28
+                operationId: Paging_nextOperationWithQueryParams
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
@@ -1050,6 +1057,7 @@ operationGroups:
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_duplicateParams
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1132,6 +1140,7 @@ operationGroups:
         protocol: !Protocols {}
       - *ref_28
       - !Operation 
+        operationId: Paging_getOdataMultiplePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1243,6 +1252,7 @@ operationGroups:
               nextLinkName: odata.nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesWithOffset
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1370,6 +1380,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesRetryFirst
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1439,6 +1450,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesRetrySecond
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1508,6 +1520,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getSinglePagesFailure
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1577,6 +1590,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesFailure
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1646,6 +1660,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesFailureUri
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1715,6 +1730,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesFragmentNextLink
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1812,6 +1828,7 @@ operationGroups:
               member: NextFragment
               nextLinkName: odata.nextLink
               nextLinkOperation: !Operation &ref_42
+                operationId: Paging_nextFragment
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
@@ -1927,6 +1944,7 @@ operationGroups:
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_getMultiplePagesFragmentWithGroupingNextLink
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2030,6 +2048,7 @@ operationGroups:
               member: NextFragmentWithGrouping
               nextLinkName: odata.nextLink
               nextLinkOperation: !Operation &ref_48
+                operationId: Paging_nextFragmentWithGrouping
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
@@ -2151,6 +2170,7 @@ operationGroups:
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
+        operationId: Paging_GetMultiplePagesLRO
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2265,6 +2285,7 @@ operationGroups:
       - *ref_42
       - *ref_48
       - !Operation 
+        operationId: Paging_getPagingModelWithItemNameWithXMSClientName
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

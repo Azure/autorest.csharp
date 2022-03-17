@@ -20,7 +20,7 @@ schemas: !Schemas
           name: Boolean
           description: Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_107
+    - !BooleanSchema &ref_109
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -1747,7 +1747,7 @@ schemas: !Schemas
     - *ref_65
     - *ref_66
     - *ref_67
-    - !ObjectSchema &ref_103
+    - !ObjectSchema &ref_104
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2177,6 +2177,7 @@ operationGroups:
     $key: VirtualMachines
     operations:
       - !Operation 
+        operationId: VirtualMachines_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -2255,12 +2256,13 @@ operationGroups:
             description: Retrieves information about the model view or the instance view of a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_92
-          - !Parameter &ref_101
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2272,7 +2274,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_102
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2286,8 +2288,8 @@ operationGroups:
                 in: path
           - *ref_94
           - *ref_95
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_101
             parameters:
               - !Parameter 
                 schema: *ref_99
@@ -2341,9 +2343,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_101
+        signatureParameters:
           - *ref_102
+          - *ref_103
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -2373,7 +2377,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_103
+            schema: *ref_104
             language: !Languages 
               default:
                 name: ''
@@ -2393,12 +2397,13 @@ operationGroups:
             description: The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_92
-          - !Parameter &ref_105
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -2410,7 +2415,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_106
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -2424,8 +2429,8 @@ operationGroups:
                 in: path
           - *ref_94
           - *ref_95
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_106
             parameters:
               - !Parameter 
                 schema: *ref_99
@@ -2440,7 +2445,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_104
+              - !Parameter &ref_105
                 schema: *ref_78
                 implementation: Method
                 required: true
@@ -2466,7 +2471,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_104
+              - *ref_105
             language: !Languages 
               default:
                 name: ''
@@ -2479,9 +2484,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_105
+        requests:
           - *ref_106
+        signatureParameters:
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -2517,12 +2524,13 @@ operationGroups:
             description: The operation to update a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_92
-          - !Parameter &ref_108
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -2534,7 +2542,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_109
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -2546,8 +2554,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_110
-            schema: *ref_107
+          - !Parameter &ref_112
+            schema: *ref_109
             implementation: Method
             language: !Languages 
               default:
@@ -2571,9 +2579,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_108
-          - *ref_109
           - *ref_110
+          - *ref_111
+          - *ref_112
         responses:
           - !Response 
             language: !Languages 
@@ -2610,12 +2618,13 @@ operationGroups:
             description: The operation to delete a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_92
-          - !Parameter &ref_111
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -2627,7 +2636,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_112
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -2679,8 +2688,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_111
-          - *ref_112
+          - *ref_113
+          - *ref_114
         responses:
           - !SchemaResponse 
             schema: *ref_17

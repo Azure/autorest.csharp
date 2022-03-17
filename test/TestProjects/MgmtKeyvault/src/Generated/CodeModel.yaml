@@ -165,7 +165,7 @@ schemas: !Schemas
           name: VaultPatchPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_249
+    - !NumberSchema &ref_252
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -177,7 +177,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_272
+    - !NumberSchema &ref_277
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -201,7 +201,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_291
+    - !NumberSchema &ref_298
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -213,7 +213,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_315
+    - !NumberSchema &ref_323
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -615,7 +615,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Azure location of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_273
+    - !StringSchema &ref_278
       type: string
       apiVersions:
         - !ApiVersion 
@@ -901,7 +901,7 @@ schemas: !Schemas
           name: DeletedManagedHsmListResultNextLink
           description: The URL to get the next set of deleted managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_311
+    - !StringSchema &ref_319
       type: string
       apiVersions:
         - !ApiVersion 
@@ -912,7 +912,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_316
+    - !StringSchema &ref_324
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1934,7 +1934,7 @@ schemas: !Schemas
           name: CreateMode
           description: The vault's create mode to indicate whether the vault need to be recovered or not.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_243
+    - !SealedChoiceSchema &ref_245
       choices:
         - !ChoiceValue 
           value: add
@@ -3076,7 +3076,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_58
-    - !ObjectSchema &ref_234
+    - !ObjectSchema &ref_235
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3136,7 +3136,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_61
-    - !ObjectSchema &ref_235
+    - !ObjectSchema &ref_236
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3297,7 +3297,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_67
-    - !ObjectSchema &ref_244
+    - !ObjectSchema &ref_246
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3401,7 +3401,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_72
-    - !ObjectSchema &ref_252
+    - !ObjectSchema &ref_255
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3443,7 +3443,7 @@ schemas: !Schemas
           description: List of vaults
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_254
+    - !ObjectSchema &ref_257
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3606,7 +3606,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_85
     - *ref_86
-    - !ObjectSchema &ref_259
+    - !ObjectSchema &ref_262
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3640,7 +3640,7 @@ schemas: !Schemas
           description: The parameters used to check the availability of the vault name.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_261
+    - !ObjectSchema &ref_265
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3895,7 +3895,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_93
-    - !ObjectSchema &ref_276
+    - !ObjectSchema &ref_281
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3937,7 +3937,7 @@ schemas: !Schemas
           description: List of private endpoint connections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_279
+    - !ObjectSchema &ref_284
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4657,7 +4657,7 @@ schemas: !Schemas
     - *ref_133
     - *ref_106
     - *ref_141
-    - !ObjectSchema &ref_283
+    - !ObjectSchema &ref_289
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4725,7 +4725,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_144
-    - !ObjectSchema &ref_294
+    - !ObjectSchema &ref_301
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4767,7 +4767,7 @@ schemas: !Schemas
           description: List of managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_303
+    - !ObjectSchema &ref_310
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4810,7 +4810,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_113
-    - !ObjectSchema &ref_296
+    - !ObjectSchema &ref_303
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4973,7 +4973,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_157
     - *ref_158
-    - !ObjectSchema &ref_319
+    - !ObjectSchema &ref_327
       type: object
       apiVersions:
         - !ApiVersion 
@@ -5008,7 +5008,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_114
-    - !ObjectSchema &ref_320
+    - !ObjectSchema &ref_328
       type: object
       apiVersions:
         - !ApiVersion 
@@ -5547,12 +5547,13 @@ operationGroups:
     $key: Vaults
     operations:
       - !Operation 
+        operationId: Vaults_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_232
+          - !Parameter &ref_233
             schema: *ref_1
             implementation: Method
             required: true
@@ -5564,7 +5565,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_233
+          - !Parameter &ref_234
             schema: *ref_225
             implementation: Method
             required: true
@@ -5578,8 +5579,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_232
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -5633,9 +5634,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_232
+        signatureParameters:
           - *ref_233
+          - *ref_234
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -5665,7 +5668,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -5678,316 +5681,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Create a new vault or update an existing vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                parameters:
-                  location: westus
-                  properties:
-                    accessPolicies:
-                      - objectId: 00000000-0000-0000-0000-000000000000
-                        permissions:
-                          certificates:
-                            - get
-                            - list
-                            - delete
-                            - create
-                            - import
-                            - update
-                            - managecontacts
-                            - getissuers
-                            - listissuers
-                            - setissuers
-                            - deleteissuers
-                            - manageissuers
-                            - recover
-                            - purge
-                          keys:
-                            - encrypt
-                            - decrypt
-                            - wrapKey
-                            - unwrapKey
-                            - sign
-                            - verify
-                            - get
-                            - list
-                            - create
-                            - update
-                            - import
-                            - delete
-                            - backup
-                            - restore
-                            - recover
-                            - purge
-                          secrets:
-                            - get
-                            - list
-                            - set
-                            - delete
-                            - backup
-                            - restore
-                            - recover
-                            - purge
-                        tenantId: 00000000-0000-0000-0000-000000000000
-                    enabledForDeployment: true
-                    enabledForDiskEncryption: true
-                    enabledForTemplateDeployment: true
-                    sku:
-                      name: standard
-                      family: A
-                    tenantId: 00000000-0000-0000-0000-000000000000
-                resourceGroupName: sample-resource-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                              - list
-                              - delete
-                              - create
-                              - import
-                              - update
-                              - managecontacts
-                              - getissuers
-                              - listissuers
-                              - setissuers
-                              - deleteissuers
-                              - manageissuers
-                              - recover
-                              - purge
-                            keys:
-                              - encrypt
-                              - decrypt
-                              - wrapKey
-                              - unwrapKey
-                              - sign
-                              - verify
-                              - get
-                              - list
-                              - create
-                              - update
-                              - import
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                            secrets:
-                              - get
-                              - list
-                              - set
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      networkAcls:
-                        bypass: AzureServices
-                        defaultAction: Deny
-                        ipRules:
-                          - value: ''
-                        virtualNetworkRules:
-                          - id: ''
-                            ignoreMissingVnetServiceEndpoint: false
-                      privateEndpointConnections:
-                        - etag: ''
-                          id: ''
-                          properties:
-                            privateEndpoint:
-                              id: ''
-                            privateLinkServiceConnectionState:
-                              actionsRequired: None
-                              status: Approved
-                            provisioningState: Succeeded
-                      provisioningState: Succeeded
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
-                '201':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                              - list
-                              - delete
-                              - create
-                              - import
-                              - update
-                              - managecontacts
-                              - getissuers
-                              - listissuers
-                              - setissuers
-                              - deleteissuers
-                              - manageissuers
-                              - recover
-                              - purge
-                            keys:
-                              - encrypt
-                              - decrypt
-                              - wrapKey
-                              - unwrapKey
-                              - sign
-                              - verify
-                              - get
-                              - list
-                              - create
-                              - update
-                              - import
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                            secrets:
-                              - get
-                              - list
-                              - set
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
-            Create or update a vault with network acls:
-              parameters:
-                api-version: 2021-04-01-preview
-                parameters:
-                  location: westus
-                  properties:
-                    enabledForDeployment: true
-                    enabledForDiskEncryption: true
-                    enabledForTemplateDeployment: true
-                    networkAcls:
-                      bypass: AzureServices
-                      defaultAction: Deny
-                      ipRules:
-                        - value: 124.56.78.91
-                        - value: '''10.91.4.0/24'''
-                      virtualNetworkRules:
-                        - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1
-                    sku:
-                      name: standard
-                      family: A
-                    tenantId: 00000000-0000-0000-0000-000000000000
-                resourceGroupName: sample-resource-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      networkAcls:
-                        bypass: AzureServices
-                        defaultAction: Deny
-                        ipRules:
-                          - value: 124.56.78.91/32
-                          - value: '''10.91.4.0/24'''
-                        virtualNetworkRules:
-                          - id: /subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
-                '201':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      networkAcls:
-                        bypass: AzureServices
-                        defaultAction: Deny
-                        ipRules:
-                          - value: 124.56.78.91/32
-                          - value: '''10.91.4.0/24'''
-                        virtualNetworkRules:
-                          - id: /subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -5995,12 +5688,13 @@ operationGroups:
             description: Create or update a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Update
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_237
+          - !Parameter &ref_239
             schema: *ref_1
             implementation: Method
             required: true
@@ -6012,7 +5706,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_238
+          - !Parameter &ref_240
             schema: *ref_225
             implementation: Method
             required: true
@@ -6026,8 +5720,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_238
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -6042,8 +5736,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_236
-                schema: *ref_235
+              - !Parameter &ref_237
+                schema: *ref_236
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6068,7 +5762,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_236
+              - *ref_237
             language: !Languages 
               default:
                 name: ''
@@ -6081,9 +5775,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_237
+        requests:
           - *ref_238
+        signatureParameters:
+          - *ref_239
+          - *ref_240
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -6113,7 +5809,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6125,238 +5821,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Update an existing vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                parameters:
-                  properties:
-                    accessPolicies:
-                      - objectId: 00000000-0000-0000-0000-000000000000
-                        permissions:
-                          certificates:
-                            - get
-                            - list
-                            - delete
-                            - create
-                            - import
-                            - update
-                            - managecontacts
-                            - getissuers
-                            - listissuers
-                            - setissuers
-                            - deleteissuers
-                            - manageissuers
-                            - recover
-                            - purge
-                          keys:
-                            - encrypt
-                            - decrypt
-                            - wrapKey
-                            - unwrapKey
-                            - sign
-                            - verify
-                            - get
-                            - list
-                            - create
-                            - update
-                            - import
-                            - delete
-                            - backup
-                            - restore
-                            - recover
-                            - purge
-                          secrets:
-                            - get
-                            - list
-                            - set
-                            - delete
-                            - backup
-                            - restore
-                            - recover
-                            - purge
-                        tenantId: 00000000-0000-0000-0000-000000000000
-                    enabledForDeployment: true
-                    enabledForDiskEncryption: true
-                    enabledForTemplateDeployment: true
-                    sku:
-                      name: standard
-                      family: A
-                    tenantId: 00000000-0000-0000-0000-000000000000
-                resourceGroupName: sample-resource-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                              - list
-                              - delete
-                              - create
-                              - import
-                              - update
-                              - managecontacts
-                              - getissuers
-                              - listissuers
-                              - setissuers
-                              - deleteissuers
-                              - manageissuers
-                              - recover
-                              - purge
-                            keys:
-                              - encrypt
-                              - decrypt
-                              - wrapKey
-                              - unwrapKey
-                              - sign
-                              - verify
-                              - get
-                              - list
-                              - create
-                              - update
-                              - import
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                            secrets:
-                              - get
-                              - list
-                              - set
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      networkAcls:
-                        bypass: AzureServices
-                        defaultAction: Deny
-                        ipRules:
-                          - value: ''
-                        virtualNetworkRules:
-                          - id: ''
-                            ignoreMissingVnetServiceEndpoint: false
-                      privateEndpointConnections:
-                        - id: ''
-                          properties:
-                            privateEndpoint:
-                              id: ''
-                            privateLinkServiceConnectionState:
-                              actionsRequired: None
-                              status: Approved
-                            provisioningState: Succeeded
-                      provisioningState: Succeeded
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
-                '201':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                              - list
-                              - delete
-                              - create
-                              - import
-                              - update
-                              - managecontacts
-                              - getissuers
-                              - listissuers
-                              - setissuers
-                              - deleteissuers
-                              - manageissuers
-                              - recover
-                              - purge
-                            keys:
-                              - encrypt
-                              - decrypt
-                              - wrapKey
-                              - unwrapKey
-                              - sign
-                              - verify
-                              - get
-                              - list
-                              - create
-                              - update
-                              - import
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                            secrets:
-                              - get
-                              - list
-                              - set
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
         language: !Languages 
           default:
             name: Update
             description: Update a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_239
+          - !Parameter &ref_241
             schema: *ref_1
             implementation: Method
             required: true
@@ -6368,7 +5845,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_240
+          - !Parameter &ref_242
             schema: *ref_1
             implementation: Method
             required: true
@@ -6409,8 +5886,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_239
-          - *ref_240
+          - *ref_241
+          - *ref_242
         responses:
           - !Response 
             language: !Languages 
@@ -6432,7 +5909,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6444,31 +5921,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Delete a vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-resource-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  headers: {}
-                '204':
-                  headers: {}
         language: !Languages 
           default:
             name: Delete
             description: Deletes the specified Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_241
+          - !Parameter &ref_243
             schema: *ref_1
             implementation: Method
             required: true
@@ -6480,7 +5945,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_242
+          - !Parameter &ref_244
             schema: *ref_1
             implementation: Method
             required: true
@@ -6521,8 +5986,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_241
-          - *ref_242
+          - *ref_243
+          - *ref_244
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -6539,7 +6004,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6551,97 +6016,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Retrieve a vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-resource-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/vaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                    location: westus
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                              - list
-                              - delete
-                              - create
-                              - import
-                              - update
-                              - managecontacts
-                              - getissuers
-                              - listissuers
-                              - setissuers
-                              - deleteissuers
-                              - manageissuers
-                              - recover
-                              - purge
-                            keys:
-                              - encrypt
-                              - decrypt
-                              - wrapKey
-                              - unwrapKey
-                              - sign
-                              - verify
-                              - get
-                              - list
-                              - create
-                              - update
-                              - import
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                            secrets:
-                              - get
-                              - list
-                              - set
-                              - delete
-                              - backup
-                              - restore
-                              - recover
-                              - purge
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      enabledForDeployment: true
-                      enabledForDiskEncryption: true
-                      enabledForTemplateDeployment: true
-                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      sku:
-                        name: standard
-                        family: A
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                      vaultUri: https://sample-vault.vault.azure.net
-                    systemData:
-                      createdAt: '2020-01-01T12:00:00.0000000Z'
-                      createdBy: keyVaultUser1
-                      createdByType: User
-                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                      lastModifiedBy: keyVaultUser2
-                      lastModifiedByType: User
-                    tags: {}
         language: !Languages 
           default:
             name: Get
             description: Gets the specified Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_UpdateAccessPolicy
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_246
+          - !Parameter &ref_249
             schema: *ref_1
             implementation: Method
             required: true
@@ -6653,7 +6040,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_247
+          - !Parameter &ref_250
             schema: *ref_225
             implementation: Method
             required: true
@@ -6665,8 +6052,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_248
-            schema: *ref_243
+          - !Parameter &ref_251
+            schema: *ref_245
             implementation: Method
             required: true
             language: !Languages 
@@ -6679,8 +6066,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_248
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -6695,8 +6082,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_245
-                schema: *ref_244
+              - !Parameter &ref_247
+                schema: *ref_246
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6721,7 +6108,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_245
+              - *ref_247
             language: !Languages 
               default:
                 name: ''
@@ -6734,13 +6121,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_246
-          - *ref_247
+        requests:
           - *ref_248
+        signatureParameters:
+          - *ref_249
+          - *ref_250
+          - *ref_251
         responses:
           - !SchemaResponse 
-            schema: *ref_244
+            schema: *ref_246
             language: !Languages 
               default:
                 name: ''
@@ -6753,7 +6142,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_244
+            schema: *ref_246
             language: !Languages 
               default:
                 name: ''
@@ -6767,7 +6156,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -6782,7 +6171,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6794,76 +6183,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Add an access policy, or update an access policy with new permissions:
-              parameters:
-                api-version: 2021-04-01-preview
-                operationKind: add
-                parameters:
-                  properties:
-                    accessPolicies:
-                      - objectId: 00000000-0000-0000-0000-000000000000
-                        permissions:
-                          certificates:
-                            - get
-                          keys:
-                            - encrypt
-                          secrets:
-                            - get
-                        tenantId: 00000000-0000-0000-0000-000000000000
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    type: Microsoft.KeyVault/vaults/accessPolicies
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                            keys:
-                              - encrypt
-                            secrets:
-                              - get
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                '201':
-                  body:
-                    type: Microsoft.KeyVault/vaults/accessPolicies
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/accessPolicies/
-                    properties:
-                      accessPolicies:
-                        - objectId: 00000000-0000-0000-0000-000000000000
-                          permissions:
-                            certificates:
-                              - get
-                            keys:
-                              - encrypt
-                            secrets:
-                              - get
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                '404':
-                  body:
-                    error:
-                      code: ''
-                      message: ''
-                  headers: {}
         language: !Languages 
           default:
             name: UpdateAccessPolicy
             description: Update access policies in a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_250
+          - !Parameter &ref_253
             schema: *ref_1
             implementation: Method
             required: true
@@ -6875,8 +6207,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_251
-            schema: *ref_249
+          - !Parameter &ref_254
+            schema: *ref_252
             implementation: Method
             language: !Languages 
               default:
@@ -6915,11 +6247,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_250
-          - *ref_251
+          - *ref_253
+          - *ref_254
         responses:
           - !SchemaResponse 
-            schema: *ref_252
+            schema: *ref_255
             language: !Languages 
               default:
                 name: ''
@@ -6933,7 +6265,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6946,87 +6278,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List vaults in the specified resource group:
-              parameters:
-                $top: 1
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults?api-version=2021-04-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                    value:
-                      - name: sample-vault
-                        type: Microsoft.KeyVault/vaults
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                        location: westus
-                        properties:
-                          accessPolicies:
-                            - objectId: 00000000-0000-0000-0000-000000000000
-                              permissions:
-                                certificates:
-                                  - get
-                                  - list
-                                  - delete
-                                  - create
-                                  - import
-                                  - update
-                                  - managecontacts
-                                  - getissuers
-                                  - listissuers
-                                  - setissuers
-                                  - deleteissuers
-                                  - manageissuers
-                                  - recover
-                                  - purge
-                                keys:
-                                  - encrypt
-                                  - decrypt
-                                  - wrapKey
-                                  - unwrapKey
-                                  - sign
-                                  - verify
-                                  - get
-                                  - list
-                                  - create
-                                  - update
-                                  - import
-                                  - delete
-                                  - backup
-                                  - restore
-                                  - recover
-                                  - purge
-                                secrets:
-                                  - get
-                                  - list
-                                  - set
-                                  - delete
-                                  - backup
-                                  - restore
-                                  - recover
-                                  - purge
-                              tenantId: 00000000-0000-0000-0000-000000000000
-                          enableSoftDelete: true
-                          enabledForDeployment: true
-                          enabledForDiskEncryption: true
-                          enabledForTemplateDeployment: true
-                          hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          sku:
-                            name: premium
-                            family: A
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                          vaultUri: https://sample-vault.vault.azure.net/
-                        systemData:
-                          createdAt: '2020-01-01T12:00:00.0000000Z'
-                          createdBy: keyVaultUser1
-                          createdByType: User
-                          lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                          lastModifiedBy: keyVaultUser2
-                          lastModifiedByType: User
-                        tags: {}
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -7037,13 +6288,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_253
-            schema: *ref_249
+          - !Parameter &ref_256
+            schema: *ref_252
             implementation: Method
             language: !Languages 
               default:
@@ -7082,10 +6334,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_253
+          - *ref_256
         responses:
           - !SchemaResponse 
-            schema: *ref_252
+            schema: *ref_255
             language: !Languages 
               default:
                 name: ''
@@ -7099,7 +6351,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7112,86 +6364,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List vaults in the specified subscription:
-              parameters:
-                $top: 1
-                api-version: 2021-04-01-preview
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resources?api-version=22021-04-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                    value:
-                      - name: sample-vault
-                        type: Microsoft.KeyVault/vaults
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                        location: westus
-                        properties:
-                          accessPolicies:
-                            - objectId: 00000000-0000-0000-0000-000000000000
-                              permissions:
-                                certificates:
-                                  - get
-                                  - list
-                                  - delete
-                                  - create
-                                  - import
-                                  - update
-                                  - managecontacts
-                                  - getissuers
-                                  - listissuers
-                                  - setissuers
-                                  - deleteissuers
-                                  - manageissuers
-                                  - recover
-                                  - purge
-                                keys:
-                                  - encrypt
-                                  - decrypt
-                                  - wrapKey
-                                  - unwrapKey
-                                  - sign
-                                  - verify
-                                  - get
-                                  - list
-                                  - create
-                                  - update
-                                  - import
-                                  - delete
-                                  - backup
-                                  - restore
-                                  - recover
-                                  - purge
-                                secrets:
-                                  - get
-                                  - list
-                                  - set
-                                  - delete
-                                  - backup
-                                  - restore
-                                  - recover
-                                  - purge
-                              tenantId: 00000000-0000-0000-0000-000000000000
-                          enableSoftDelete: true
-                          enabledForDeployment: true
-                          enabledForDiskEncryption: true
-                          enabledForTemplateDeployment: true
-                          hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          sku:
-                            name: premium
-                            family: A
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                          vaultUri: https://sample-vault.vault.azure.net/
-                        systemData:
-                          createdAt: '2020-01-01T12:00:00.0000000Z'
-                          createdBy: keyVaultUser1
-                          createdByType: User
-                          lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
-                          lastModifiedBy: keyVaultUser2
-                          lastModifiedByType: User
-                        tags: {}
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -7202,6 +6374,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7238,7 +6411,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_254
+            schema: *ref_257
             language: !Languages 
               default:
                 name: ''
@@ -7252,7 +6425,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7265,28 +6438,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List deleted vaults in the specified subscription:
-              parameters:
-                $top: 1
-                api-version: 2021-04-01-preview
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: >-
-                      https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/deletedVaults?api-version=2021-04-01-preview&%24skiptoken=HY3RaoMwAEX%2fRcbeYhJrnRXKYNWOuqpME0sfNcYui0Yxade19N8ne7hcDlzOvVuKX81eKKmt4G4dooLQwgqsL2NGHUDYV6o68Z4rY1e388RtNvRQn2vNJjEaMSgNvcbneMUcsKg8BFwft8DndQ0w9hu2QOiFLRs4TsNFNHzSMBFsGvTQGvuD%2f5bVuTOw4R03vPkH%2fVqNAlzm5SxfOwh7ACOA8POTlvPjILlaU1ke8jImOc23JCppQVfZnna0DXc4ISc3vSVuRo5zJE6%2bj25C3vwk2v2kEV2mMn7PyOc1DbtNGkonnzuLym1G400uI5QRZj0efw%3d%3d
-                    value:
-                      - name: vault-agile-drawer-6404
-                        type: Microsoft.KeyVault/deletedVaults
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedVaults/sample-vault
-                        properties:
-                          deletionDate: '2017-01-01T00:00:59Z'
-                          location: westus
-                          purgeProtectionEnabled: true
-                          scheduledPurgeDate: '2017-04-01T00:00:59Z'
-                          tags: {}
-                          vaultId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -7297,12 +6448,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_GetDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_255
+          - !Parameter &ref_258
             schema: *ref_1
             implementation: Method
             required: true
@@ -7314,7 +6466,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_256
+          - !Parameter &ref_259
             schema: *ref_1
             implementation: Method
             required: true
@@ -7355,8 +6507,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_255
-          - *ref_256
+          - *ref_258
+          - *ref_259
         responses:
           - !SchemaResponse 
             schema: *ref_85
@@ -7373,7 +6525,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7385,40 +6537,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Retrieve a deleted vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                location: westus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-vault
-                    type: Microsoft.KeyVault/deletedVaults
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedVaults/sample-vault
-                    properties:
-                      deletionDate: '2017-01-01T00:00:59Z'
-                      location: westus
-                      purgeProtectionEnabled: true
-                      scheduledPurgeDate: '2017-04-01T00:00:59Z'
-                      tags: {}
-                      vaultId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                  headers: {}
         language: !Languages 
           default:
             name: GetDeleted
             description: Gets the deleted Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_PurgeDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_257
+          - !Parameter &ref_260
             schema: *ref_1
             implementation: Method
             required: true
@@ -7430,7 +6561,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_258
+          - !Parameter &ref_261
             schema: *ref_1
             implementation: Method
             required: true
@@ -7471,8 +6602,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_257
-          - *ref_258
+          - *ref_260
+          - *ref_261
         responses:
           - !Response 
             language: !Languages 
@@ -7494,7 +6625,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -7509,7 +6640,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7522,24 +6653,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Purge a deleted vault:
-              parameters:
-                api-version: 2021-04-01-preview
-                location: westus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  headers: {}
-                '202':
-                  headers: {}
-                '404':
-                  body:
-                    error:
-                      code: ''
-                      message: ''
-                  headers: {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -7547,6 +6660,7 @@ operationGroups:
             description: Permanently deletes the specified vault. aka Purges the deleted Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_CheckNameAvailability
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7554,8 +6668,8 @@ operationGroups:
           - *ref_224
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_264
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -7570,8 +6684,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_260
-                schema: *ref_259
+              - !Parameter &ref_263
+                schema: *ref_262
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7596,7 +6710,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_260
+              - *ref_263
             language: !Languages 
               default:
                 name: ''
@@ -7609,10 +6723,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_264
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_261
+            schema: *ref_265
             language: !Languages 
               default:
                 name: ''
@@ -7626,7 +6742,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7638,19 +6754,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Validate a vault name:
-              parameters:
-                api-version: 2021-04-01-preview
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName:
-                  name: sample-vault
-                  type: Microsoft.KeyVault/vaults
-              responses:
-                '200':
-                  body:
-                    nameAvailable: true
         language: !Languages 
           default:
             name: CheckNameAvailability
@@ -7665,148 +6768,7 @@ operationGroups:
     $key: PrivateEndpointConnections
     operations:
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 2021-04-01-preview
-        parameters:
-          - *ref_224
-          - *ref_227
-          - !Parameter &ref_262
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: Name of the resource group that contains the key vault.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_263
-            schema: *ref_225
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vaultName
-                description: The name of the key vault.
-                serializedName: vaultName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_264
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: privateEndpointConnectionName
-                description: Name of the private endpoint connection associated with the key vault.
-                serializedName: privateEndpointConnectionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_226
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_230
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_262
-          - *ref_263
-          - *ref_264
-        responses:
-          - !SchemaResponse 
-            schema: *ref_92
-            language: !Languages 
-              default:
-                name: ''
-                description: Private endpoint connection successfully returned.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: The private endpoint connection does not exist.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '204'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_234
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            KeyVaultGetPrivateEndpointConnection:
-              parameters:
-                api-version: '2018-02-14'
-                privateEndpointConnectionName: sample-pec
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                    etag: ''
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                      privateLinkServiceConnectionState:
-                        description: This was automatically approved by user1234@contoso.com
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
-                '204':
-                  headers: {}
-        language: !Languages 
-          default:
-            name: Get
-            description: Gets the specified private endpoint connection associated with the key vault.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: PrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7854,6 +6816,123 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
+                schema: *ref_230
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_266
+          - *ref_267
+          - *ref_268
+        responses:
+          - !SchemaResponse 
+            schema: *ref_92
+            language: !Languages 
+              default:
+                name: ''
+                description: Private endpoint connection successfully returned.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The private endpoint connection does not exist.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_235
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: Gets the specified private endpoint connection associated with the key vault.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: PrivateEndpointConnections_Put
+        apiVersions:
+          - !ApiVersion 
+            version: 2021-04-01-preview
+        parameters:
+          - *ref_224
+          - *ref_227
+          - !Parameter &ref_271
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group that contains the key vault.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_272
+            schema: *ref_225
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vaultName
+                description: The name of the key vault.
+                serializedName: vaultName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_273
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: privateEndpointConnectionName
+                description: Name of the private endpoint connection associated with the key vault.
+                serializedName: privateEndpointConnectionName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_226
+        requestMediaTypes:
+          application/json: !Request &ref_270
+            parameters:
+              - !Parameter 
                 schema: *ref_228
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
@@ -7866,7 +6945,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_265
+              - !Parameter &ref_269
                 schema: *ref_92
                 implementation: Method
                 required: true
@@ -7892,7 +6971,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_265
+              - *ref_269
             language: !Languages 
               default:
                 name: ''
@@ -7905,10 +6984,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_270
         signatureParameters:
-          - *ref_266
-          - *ref_267
-          - *ref_268
+          - *ref_271
+          - *ref_272
+          - *ref_273
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -7920,7 +7001,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_249
+                    schema: *ref_252
                     header: Retry-After
                     language:
                       default:
@@ -7940,7 +7021,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7952,49 +7033,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            KeyVaultPutPrivateEndpointConnection:
-              parameters:
-                api-version: '2018-02-14'
-                privateEndpointConnectionName: sample-pec
-                properties:
-                  etag: ''
-                  properties:
-                    privateLinkServiceConnectionState:
-                      description: My name is Joe and I'm approving this.
-                      status: Approved
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                    etag: ''
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                      privateLinkServiceConnectionState:
-                        description: My name is Joe and I'm approving this.
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Put
             description: Updates the specified private endpoint connection associated with the key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_269
+          - !Parameter &ref_274
             schema: *ref_1
             implementation: Method
             required: true
@@ -8006,7 +7058,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_270
+          - !Parameter &ref_275
             schema: *ref_225
             implementation: Method
             required: true
@@ -8018,7 +7070,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_271
+          - !Parameter &ref_276
             schema: *ref_1
             implementation: Method
             required: true
@@ -8058,9 +7110,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_269
-          - *ref_270
-          - *ref_271
+          - *ref_274
+          - *ref_275
+          - *ref_276
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -8084,14 +7136,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_272
+                    schema: *ref_277
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_273
+                    schema: *ref_278
                     header: Location
                     language:
                       default:
@@ -8110,7 +7162,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8123,27 +7175,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            KeyVaultDeletePrivateEndpointConnection:
-              parameters:
-                api-version: '2018-02-14'
-                privateEndpointConnectionName: sample-pec
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                    properties:
-                      provisioningState: Disconnected
-                '202':
-                  headers:
-                    Location: https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec?operationid=25334578
-                    Retry-After: '60'
-                '204': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -8151,13 +7182,14 @@ operationGroups:
             description: Deletes the specified private endpoint connection associated with the key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_ListByResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_274
+          - !Parameter &ref_279
             schema: *ref_1
             implementation: Method
             required: true
@@ -8169,7 +7201,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_275
+          - !Parameter &ref_280
             schema: *ref_225
             implementation: Method
             required: true
@@ -8209,11 +7241,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_274
-          - *ref_275
+          - *ref_279
+          - *ref_280
         responses:
           - !SchemaResponse 
-            schema: *ref_276
+            schema: *ref_281
             language: !Languages 
               default:
                 name: ''
@@ -8227,7 +7259,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8240,42 +7272,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            KeyVaultListPrivateEndpointConnection:
-              parameters:
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    nextLink: null
-                    value:
-                      - name: sample-pec
-                        type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                        etag: ''
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                        properties:
-                          privateEndpoint:
-                            id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          privateLinkServiceConnectionState:
-                            description: This was automatically approved by user1234@contoso.com
-                            actionsRequired: None
-                            status: Approved
-                          provisioningState: Succeeded
-                      - name: sample-pec
-                        type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                        etag: ''
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                        properties:
-                          privateEndpoint:
-                            id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          privateLinkServiceConnectionState:
-                            description: This was automatically approved by user1234@contoso.com
-                            actionsRequired: None
-                            status: Approved
-                          provisioningState: Succeeded
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -8294,13 +7290,14 @@ operationGroups:
     $key: PrivateLinkResources
     operations:
       - !Operation 
+        operationId: PrivateLinkResources_ListByVault
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_277
+          - !Parameter &ref_282
             schema: *ref_1
             implementation: Method
             required: true
@@ -8312,7 +7309,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_278
+          - !Parameter &ref_283
             schema: *ref_225
             implementation: Method
             required: true
@@ -8352,11 +7349,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_277
-          - *ref_278
+          - *ref_282
+          - *ref_283
         responses:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_284
             language: !Languages 
               default:
                 name: ''
@@ -8370,7 +7367,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8382,27 +7379,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            KeyVaultListPrivateLinkResources:
-              parameters:
-                api-version: '2018-02-14'
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: vault
-                        type: Microsoft.KeyVault/vaults/privateLinkResources
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateLinkResources/vault
-                        properties:
-                          groupId: vault
-                          requiredMembers:
-                            - default
-                          requiredZoneNames:
-                            - privatelink.vaultcore.azure.net
         language: !Languages 
           default:
             name: ListByVault
@@ -8417,12 +7393,13 @@ operationGroups:
     $key: ManagedHsms
     operations:
       - !Operation 
+        operationId: ManagedHsms_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_281
+          - !Parameter &ref_287
             schema: *ref_2
             implementation: Method
             required: true
@@ -8434,7 +7411,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_282
+          - !Parameter &ref_288
             schema: *ref_2
             implementation: Method
             required: true
@@ -8448,8 +7425,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_286
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -8464,7 +7441,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_280
+              - !Parameter &ref_285
                 schema: *ref_105
                 implementation: Method
                 required: true
@@ -8490,7 +7467,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_280
+              - *ref_285
             language: !Languages 
               default:
                 name: ''
@@ -8503,9 +7480,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_286
         signatureParameters:
-          - *ref_281
-          - *ref_282
+          - *ref_287
+          - *ref_288
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -8535,7 +7514,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8548,73 +7527,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Create a new managed HSM Pool or update an existing managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                parameters:
-                  location: westus
-                  properties:
-                    enablePurgeProtection: true
-                    enableSoftDelete: true
-                    initialAdminObjectIds:
-                      - 00000000-0000-0000-0000-000000000000
-                    softDeleteRetentionInDays: 90
-                    tenantId: 00000000-0000-0000-0000-000000000000
-                  sku:
-                    name: Standard_B1
-                    family: B
-                  tags:
-                    Dept: hsm
-                    Environment: dogfood
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: https://westus.hsm1.managedhsm.azure.net
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
-                      statusMessage: ManagedHsm is functional.
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
-                '202':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: null
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Provisioning
-                      softDeleteRetentionInDays: 90
-                      statusMessage: Allocating hardware
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -8622,12 +7534,13 @@ operationGroups:
             description: Create or update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Update
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_285
+          - !Parameter &ref_292
             schema: *ref_2
             implementation: Method
             required: true
@@ -8639,7 +7552,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_286
+          - !Parameter &ref_293
             schema: *ref_2
             implementation: Method
             required: true
@@ -8653,8 +7566,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_291
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -8669,7 +7582,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_284
+              - !Parameter &ref_290
                 schema: *ref_105
                 implementation: Method
                 required: true
@@ -8695,7 +7608,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_284
+              - *ref_290
             language: !Languages 
               default:
                 name: ''
@@ -8708,9 +7621,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_291
         signatureParameters:
-          - *ref_285
-          - *ref_286
+          - *ref_292
+          - *ref_293
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -8740,7 +7655,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8753,65 +7668,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Update an existing managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                parameters:
-                  tags:
-                    Dept: hsm
-                    Environment: dogfood
-                    Slice: A
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: https://westus.hsm1.managedhsm.azure.net
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
-                      statusMessage: ManagedHsm is functional.
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
-                      Slice: A
-                '202':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: https://westus.hsm1.managedhsm.azure.net
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Updating
-                      softDeleteRetentionInDays: 90
-                      statusMessage: ManagedHsm is updating.
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
-                      Slice: A
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -8819,12 +7675,13 @@ operationGroups:
             description: Update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_287
+          - !Parameter &ref_294
             schema: *ref_2
             implementation: Method
             required: true
@@ -8836,7 +7693,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_288
+          - !Parameter &ref_295
             schema: *ref_2
             implementation: Method
             required: true
@@ -8877,8 +7734,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_287
-          - *ref_288
+          - *ref_294
+          - *ref_295
         responses:
           - !Response 
             language: !Languages 
@@ -8909,7 +7766,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8922,17 +7779,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Delete a managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200': {}
-                '202': {}
-                '204': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -8940,12 +7786,13 @@ operationGroups:
             description: Deletes the specified managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_289
+          - !Parameter &ref_296
             schema: *ref_2
             implementation: Method
             required: true
@@ -8957,7 +7804,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_290
+          - !Parameter &ref_297
             schema: *ref_2
             implementation: Method
             required: true
@@ -8998,8 +7845,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_289
-          - *ref_290
+          - *ref_296
+          - *ref_297
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -9034,7 +7881,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9046,55 +7893,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Retrieve a managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: https://westus.hsm1.managedhsm.azure.net
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
-                      statusMessage: ManagedHsm is functional.
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
-                '202':
-                  headers:
-                    Location: >-
-                      https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1?api-version=2021-04-01-preview&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9
-                    Retry-After: '60'
-                '204': {}
         language: !Languages 
           default:
             name: Get
             description: Gets the specified managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_292
+          - !Parameter &ref_299
             schema: *ref_2
             implementation: Method
             required: true
@@ -9106,8 +7917,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_293
-            schema: *ref_291
+          - !Parameter &ref_300
+            schema: *ref_298
             implementation: Method
             language: !Languages 
               default:
@@ -9146,11 +7957,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_292
-          - *ref_293
+          - *ref_299
+          - *ref_300
         responses:
           - !SchemaResponse 
-            schema: *ref_294
+            schema: *ref_301
             language: !Languages 
               default:
                 name: ''
@@ -9164,7 +7975,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9177,58 +7988,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List managed HSM Pools in a resource group:
-              parameters:
-                api-version: 2021-04-01-preview
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: >-
-                      https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-04-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                    value:
-                      - name: hsm1
-                        type: Microsoft.KeyVault/managedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                        location: westus
-                        properties:
-                          enablePurgeProtection: true
-                          enableSoftDelete: true
-                          hsmUri: https://westus.hsm1.managedhsm.azure.net
-                          initialAdminObjectIds:
-                            - 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
-                          statusMessage: ManagedHsm is functional.
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                        sku:
-                          name: Standard_B1
-                          family: B
-                        tags:
-                          Dept: hsm
-                          Environment: dogfood
-                      - name: hsm2
-                        type: Microsoft.KeyVault/managedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                        location: westus
-                        properties:
-                          enablePurgeProtection: true
-                          enableSoftDelete: true
-                          hsmUri: https://westus.hsm2.managedhsm.azure.net
-                          initialAdminObjectIds:
-                            - 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
-                          statusMessage: ManagedHsm is functional.
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                        sku:
-                          name: Standard_B1
-                          family: B
-                        tags:
-                          Dept: hsm
-                          Environment: production
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9239,13 +7998,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_295
-            schema: *ref_291
+          - !Parameter &ref_302
+            schema: *ref_298
             implementation: Method
             language: !Languages 
               default:
@@ -9284,10 +8044,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_295
+          - *ref_302
         responses:
           - !SchemaResponse 
-            schema: *ref_294
+            schema: *ref_301
             language: !Languages 
               default:
                 name: ''
@@ -9301,7 +8061,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9314,56 +8074,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List managed HSM Pools in a subscription:
-              parameters:
-                api-version: 2021-04-01-preview
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/managedHSMs?api-version=2021-04-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                    value:
-                      - name: hsm1
-                        type: Microsoft.KeyVault/managedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                        location: westus
-                        properties:
-                          enablePurgeProtection: true
-                          enableSoftDelete: true
-                          hsmUri: https://westus.hsm1.managedhsm.azure.net
-                          initialAdminObjectIds:
-                            - 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
-                          statusMessage: ManagedHsm is functional.
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                        sku:
-                          name: Standard_B1
-                          family: B
-                        tags:
-                          Dept: hsm
-                          Environment: dogfood
-                      - name: hsm2
-                        type: Microsoft.KeyVault/managedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                        location: westus
-                        properties:
-                          enablePurgeProtection: true
-                          enableSoftDelete: true
-                          hsmUri: https://westus.hsm2.managedhsm.azure.net
-                          initialAdminObjectIds:
-                            - 00000000-0000-0000-0000-000000000000
-                          provisioningState: Succeeded
-                          softDeleteRetentionInDays: 90
-                          statusMessage: ManagedHsm is functional.
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                        sku:
-                          name: Standard_B1
-                          family: B
-                        tags:
-                          Dept: hsm
-                          Environment: production
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9374,6 +8084,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -9410,7 +8121,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_296
+            schema: *ref_303
             language: !Languages 
               default:
                 name: ''
@@ -9424,7 +8135,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9437,40 +8148,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List deleted managed HSMs in the specified subscription:
-              parameters:
-                api-version: 2021-04-01-preview
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/deletedManagedHSMs?api-version=2021-04-01-preview&$skiptoken=dmF1bHQtcGVza3ktanVyeS03MzA3Ng==
-                    value:
-                      - name: vault-agile-drawer-6404
-                        type: Microsoft.KeyVault/deletedManagedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1
-                        properties:
-                          deletionDate: '2021-04-01T00:00:59Z'
-                          location: westus
-                          mhsmId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                          purgeProtectionEnabled: true
-                          scheduledPurgeDate: '2021-04-01T00:00:59Z'
-                          tags:
-                            Dept: hsm
-                            Environment: production
-                      - name: vault-agile-drawer-6404
-                        type: Microsoft.KeyVault/deletedManagedHSMs
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm2
-                        properties:
-                          deletionDate: '2021-04-01T00:00:59Z'
-                          location: westus
-                          mhsmId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm2
-                          purgeProtectionEnabled: true
-                          scheduledPurgeDate: '2021-04-01T00:00:59Z'
-                          tags:
-                            Dept: hsm
-                            Environment: production
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9481,12 +8158,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_GetDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_297
+          - !Parameter &ref_304
             schema: *ref_2
             implementation: Method
             required: true
@@ -9498,7 +8176,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_298
+          - !Parameter &ref_305
             schema: *ref_2
             implementation: Method
             required: true
@@ -9539,8 +8217,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_297
-          - *ref_298
+          - *ref_304
+          - *ref_305
         responses:
           - !SchemaResponse 
             schema: *ref_157
@@ -9557,7 +8235,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9569,41 +8247,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Retrieve a deleted managed HSM:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                location: westus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: vault-agile-drawer-6404
-                    type: Microsoft.KeyVault/deletedManagedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KeyVault/locations/westus/deletedManagedHSMs/hsm1
-                    properties:
-                      deletionDate: '2021-04-01T00:00:59Z'
-                      location: westus
-                      mhsmId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                      purgeProtectionEnabled: true
-                      scheduledPurgeDate: '2021-04-01T00:00:59Z'
-                      tags:
-                        Dept: hsm
-                        Environment: production
         language: !Languages 
           default:
             name: GetDeleted
             description: Gets the specified deleted managed HSM.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_PurgeDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_299
+          - !Parameter &ref_306
             schema: *ref_2
             implementation: Method
             required: true
@@ -9615,7 +8271,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_300
+          - !Parameter &ref_307
             schema: *ref_2
             implementation: Method
             required: true
@@ -9656,8 +8312,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_299
-          - *ref_300
+          - *ref_306
+          - *ref_307
         responses:
           - !Response 
             language: !Languages 
@@ -9670,7 +8326,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9683,15 +8339,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Purge a managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                location: westus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '202': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -9707,6 +8354,7 @@ operationGroups:
     $key: MHSMPrivateEndpointConnections
     operations:
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_ListByResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -9714,7 +8362,7 @@ operationGroups:
           - *ref_224
           - *ref_226
           - *ref_227
-          - !Parameter &ref_301
+          - !Parameter &ref_308
             schema: *ref_2
             implementation: Method
             required: true
@@ -9726,7 +8374,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_302
+          - !Parameter &ref_309
             schema: *ref_2
             implementation: Method
             required: true
@@ -9765,11 +8413,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_301
-          - *ref_302
+          - *ref_308
+          - *ref_309
         responses:
           - !SchemaResponse 
-            schema: *ref_303
+            schema: *ref_310
             language: !Languages 
               default:
                 name: ''
@@ -9783,7 +8431,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9796,42 +8444,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List managed HSM Pools in a subscription:
-              parameters:
-                name: sample-mhsm
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    nextLink: null
-                    value:
-                      - name: sample-pec1
-                        type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                        etag: ''
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec1
-                        properties:
-                          privateEndpoint:
-                            id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe1
-                          privateLinkServiceConnectionState:
-                            description: This was automatically approved by user1234@contoso.com
-                            actionsRequired: None
-                            status: Approved
-                          provisioningState: Succeeded
-                      - name: sample-pec2
-                        type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                        etag: ''
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec2
-                        properties:
-                          privateEndpoint:
-                            id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe2
-                          privateLinkServiceConnectionState:
-                            description: This was automatically approved by user1234@contoso.com
-                            actionsRequired: None
-                            status: Approved
-                          provisioningState: Succeeded
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9842,13 +8454,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_304
+          - !Parameter &ref_311
             schema: *ref_2
             implementation: Method
             required: true
@@ -9860,7 +8473,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_305
+          - !Parameter &ref_312
             schema: *ref_2
             implementation: Method
             required: true
@@ -9872,7 +8485,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_306
+          - !Parameter &ref_313
             schema: *ref_2
             implementation: Method
             required: true
@@ -9912,9 +8525,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_304
-          - *ref_305
-          - *ref_306
+          - *ref_311
+          - *ref_312
+          - *ref_313
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -9931,7 +8544,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9943,43 +8556,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            ManagedHsmGetPrivateEndpointConnection:
-              parameters:
-                name: sample-mhsm
-                api-version: 2021-04-01-preview
-                privateEndpointConnectionName: sample-pec
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                    etag: ''
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                      privateLinkServiceConnectionState:
-                        description: This was automatically approved by user1234@contoso.com
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Get
             description: Gets the specified private endpoint connection associated with the managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Put
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_308
+          - !Parameter &ref_316
             schema: *ref_2
             implementation: Method
             required: true
@@ -9991,7 +8581,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_309
+          - !Parameter &ref_317
             schema: *ref_2
             implementation: Method
             required: true
@@ -10003,7 +8593,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_310
+          - !Parameter &ref_318
             schema: *ref_2
             implementation: Method
             required: true
@@ -10016,8 +8606,8 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_226
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_315
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -10032,7 +8622,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_307
+              - !Parameter &ref_314
                 schema: *ref_113
                 implementation: Method
                 required: true
@@ -10058,7 +8648,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_307
+              - *ref_314
             language: !Languages 
               default:
                 name: ''
@@ -10071,10 +8661,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_315
         signatureParameters:
-          - *ref_308
-          - *ref_309
-          - *ref_310
+          - *ref_316
+          - *ref_317
+          - *ref_318
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -10086,7 +8678,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_291
+                    schema: *ref_298
                     header: Retry-After
                     language:
                       default:
@@ -10106,7 +8698,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10118,47 +8710,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            ManagedHsmPutPrivateEndpointConnection:
-              parameters:
-                name: sample-mhsm
-                api-version: 2021-04-01-preview
-                privateEndpointConnectionName: sample-pec
-                properties:
-                  properties:
-                    privateLinkServiceConnectionState:
-                      description: My name is Joe and I'm approving this.
-                      status: Approved
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                      privateLinkServiceConnectionState:
-                        description: My name is Joe and I'm approving this.
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Put
             description: Updates the specified private endpoint connection associated with the managed hsm pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_312
+          - !Parameter &ref_320
             schema: *ref_2
             implementation: Method
             required: true
@@ -10170,8 +8735,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_313
-            schema: *ref_311
+          - !Parameter &ref_321
+            schema: *ref_319
             implementation: Method
             required: true
             language: !Languages 
@@ -10182,7 +8747,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_314
+          - !Parameter &ref_322
             schema: *ref_2
             implementation: Method
             required: true
@@ -10222,9 +8787,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_312
-          - *ref_313
-          - *ref_314
+          - *ref_320
+          - *ref_321
+          - *ref_322
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -10248,14 +8813,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_315
+                    schema: *ref_323
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_311
+                    schema: *ref_319
                     header: Location
                     language:
                       default:
@@ -10274,7 +8839,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10287,27 +8852,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            ManagedHsmDeletePrivateEndpointConnection:
-              parameters:
-                name: sample-mhsm
-                api-version: 2021-04-01-preview
-                privateEndpointConnectionName: sample-pec
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/managedhsms/privateEndpointConnections
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-vault/privateEndpointConnections/sample-pec
-                    properties:
-                      provisioningState: Disconnected
-                '202':
-                  headers:
-                    Location: https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec?operationid=25334578
-                    Retry-After: '60'
-                '204': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -10323,13 +8867,14 @@ operationGroups:
     $key: MHSMPrivateLinkResources
     operations:
       - !Operation 
+        operationId: MHSMPrivateLinkResources_ListByMHSMResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_317
+          - !Parameter &ref_325
             schema: *ref_2
             implementation: Method
             required: true
@@ -10341,8 +8886,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_318
-            schema: *ref_316
+          - !Parameter &ref_326
+            schema: *ref_324
             implementation: Method
             required: true
             language: !Languages 
@@ -10381,11 +8926,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_317
-          - *ref_318
+          - *ref_325
+          - *ref_326
         responses:
           - !SchemaResponse 
-            schema: *ref_319
+            schema: *ref_327
             language: !Languages 
               default:
                 name: ''
@@ -10399,7 +8944,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10411,27 +8956,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            KeyVaultListPrivateLinkResources:
-              parameters:
-                name: sample-mhsm
-                api-version: 2021-04-01-preview
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: managedhsm
-                        type: Microsoft.KeyVault/managedhsms/privateLinkResources
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateLinkResources/managedhsm
-                        properties:
-                          groupId: managedhsms
-                          requiredMembers:
-                            - default
-                          requiredZoneNames:
-                            - privatelink.managedhsm.azure.net
         language: !Languages 
           default:
             name: ListByMhsmResource
@@ -10446,6 +8970,7 @@ operationGroups:
     $key: Operations
     operations:
       - !Operation 
+        operationId: Operations_List
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -10481,7 +9006,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_320
+            schema: *ref_328
             language: !Languages 
               default:
                 name: ''
@@ -10495,7 +9020,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10508,236 +9033,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Lists available Rest API operations.:
-              parameters:
-                api-version: 2021-04-01-preview
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: Microsoft.KeyVault/vaults/read
-                        display:
-                          description: View the properties of a key vault
-                          operation: View Key Vault
-                          provider: Microsoft Key Vault
-                          resource: Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/write
-                        display:
-                          description: Create a new key vault or update the properties of an existing key vault
-                          operation: Update Key Vault
-                          provider: Microsoft Key Vault
-                          resource: Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/delete
-                        display:
-                          description: Delete a key vault
-                          operation: Delete Key Vault
-                          provider: Microsoft Key Vault
-                          resource: Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/deploy/action
-                        display:
-                          description: Enables access to secrets in a key vault when deploying Azure resources
-                          operation: Use Vault for Azure Deployments
-                          provider: Microsoft Key Vault
-                          resource: Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/secrets/read
-                        display:
-                          description: View the properties of a secret, but not its value
-                          operation: View Secret Properties
-                          provider: Microsoft Key Vault
-                          resource: Secret
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/secrets/write
-                        display:
-                          description: Create a new secret or update the value of an existing secret
-                          operation: Update Secret
-                          provider: Microsoft Key Vault
-                          resource: Secret
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/accessPolicies/write
-                        display:
-                          description: Update an existing access policy by merging or replacing, or add a new access policy to a vault.
-                          operation: Update Access Policy
-                          provider: Microsoft Key Vault
-                          resource: Access Policy
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/logDefinitions/read
-                        display:
-                          description: Gets the available logs for a key vault
-                          operation: Read log definition
-                          provider: Microsoft Key Vault
-                          resource: Key Vault Log Definition
-                        isDataAction: false
-                        origin: system
-                        properties:
-                          serviceSpecification:
-                            logSpecifications:
-                              - name: AuditEvent
-                                blobDuration: PT1H
-                                displayName: Audit Logs
-                            metricSpecifications:
-                              - name: ServiceApiHit
-                                aggregationType: ''
-                                dimensions:
-                                  - name: ActivityType
-                                    displayName: ''
-                                    toBeExportedForShoebox: true
-                                  - name: ActivityName
-                                    displayName: ''
-                                    toBeExportedForShoebox: true
-                                displayDescription: ''
-                                displayName: ''
-                                fillGapWithZero: false
-                                internalMetricName: AuditEvent
-                                lockAggregationType: ''
-                                supportedAggregationTypes:
-                                  - ''
-                                supportedTimeGrainTypes:
-                                  - ''
-                                unit: ''
-                      - name: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Read
-                        display:
-                          description: Gets the diagnostic setting for the resource
-                          operation: Read diagnostic setting
-                          provider: Microsoft Key Vault
-                          resource: Key Vault Diagnostic Settings
-                        isDataAction: false
-                        origin: system
-                      - name: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/diagnosticSettings/Write
-                        display:
-                          description: Creates or updates the diagnostic setting for the resource
-                          operation: Write diagnostic setting
-                          provider: Microsoft Key Vault
-                          resource: Key Vault Diagnostic Settings
-                        isDataAction: false
-                        origin: system
-                      - name: Microsoft.KeyVault/register/action
-                        display:
-                          description: Registers a subscription
-                          operation: Register Subscription
-                          provider: Microsoft Key Vault
-                          resource: Subscription
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/unregister/action
-                        display:
-                          description: Unregisters a subscription
-                          operation: Unregister Subscription
-                          provider: Microsoft Key Vault
-                          resource: Subscription
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/operations/read
-                        display:
-                          description: Lists operations available on Microsoft.KeyVault resource provider
-                          operation: Available Key Vault Operations
-                          provider: Microsoft Key Vault
-                          resource: Operations
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/checkNameAvailability/read
-                        display:
-                          description: Checks that a key vault name is valid and is not in use
-                          operation: Check Name Availability
-                          provider: Microsoft Key Vault
-                          resource: Name Availability
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/deletedVaults/read
-                        display:
-                          description: View the properties of soft deleted key vaults
-                          operation: View Soft Deleted Vaults
-                          provider: Microsoft Key Vault
-                          resource: Soft Deleted Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/locations/deletedVaults/read
-                        display:
-                          description: View the properties of a soft deleted key vault
-                          operation: View Soft Deleted Key Vault
-                          provider: Microsoft Key Vault
-                          resource: Soft Deleted Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/locations/deletedVaults/purge/action
-                        display:
-                          description: Purge a soft deleted key vault
-                          operation: Purge Soft Deleted Key Vault
-                          provider: Microsoft Key Vault
-                          resource: Soft Deleted Key Vault
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/locations/operationResults/read
-                        display:
-                          description: Check the result of a long run operation
-                          operation: Check Operation Result
-                          provider: Microsoft Key Vault
-                          resource: Long Run Operation Result
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/hsmPools/read
-                        display:
-                          description: View the properties of an HSM pool
-                          operation: View HSM pool
-                          provider: Microsoft Key Vault
-                          resource: HSM pool
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/hsmPools/write
-                        display:
-                          description: Create a new HSM pool of update the properties of an existing HSM pool
-                          operation: Create or Update HSM pool
-                          provider: Microsoft Key Vault
-                          resource: HSM pool
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/hsmPools/delete
-                        display:
-                          description: Delete an HSM pool
-                          operation: Delete HSM pool
-                          provider: Microsoft Key Vault
-                          resource: HSM pool
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/hsmPools/joinVault/action
-                        display:
-                          description: Join a key vault to an HSM pool
-                          operation: Join KeyVault to HSM pool
-                          provider: Microsoft Key Vault
-                          resource: HSM pool
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/managedHSMs/read
-                        display:
-                          description: View the properties of a Managed HSM
-                          operation: View Managed HSM
-                          provider: Microsoft Key Vault
-                          resource: Managed HSM
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/managedHSMs/write
-                        display:
-                          description: Create a new Managed HSM of update the properties of an existing Managed HSM
-                          operation: Create or Update Managed HSM
-                          provider: Microsoft Key Vault
-                          resource: Managed HSM
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/managedHSMs/delete
-                        display:
-                          description: Delete a Managed HSM
-                          operation: Delete Managed HSM
-                          provider: Microsoft Key Vault
-                          resource: Managed HSM
-                        isDataAction: false
-                      - name: Microsoft.KeyVault/vaults/providers/Microsoft.Insights/metricDefinitions/read
-                        display:
-                          description: Gets the available metrics for a key vault
-                          operation: Read metric definition
-                          provider: Microsoft Key Vault
-                          resource: Key Vault Metric Definition
-                        isDataAction: false
-                        origin: system
-                        properties:
-                          serviceSpecification: {}
-                      - name: Microsoft.KeyVault/locations/deleteVirtualNetworkOrSubnets/action
-                        display:
-                          description: Notifies Microsoft.KeyVault that a virtual network or subnet is being deleted
-                          operation: 'Modify Network ACLs containing the deleted Vitual Network or Subnet '
-                          provider: Microsoft Key Vault
-                          resource: Location
-                        isDataAction: false
-                        origin: system
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 

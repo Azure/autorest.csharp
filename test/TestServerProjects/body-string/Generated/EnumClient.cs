@@ -75,7 +75,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNotExpandableAsync(string stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -93,7 +93,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutNotExpandable(string stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -145,7 +145,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutReferencedAsync(string enumStringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -163,7 +163,7 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutReferenced(string enumStringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();

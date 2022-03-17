@@ -134,6 +134,7 @@ operationGroups:
     $key: datetimerfc1123
     operations:
       - !Operation 
+        operationId: datetimerfc1123_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -195,19 +196,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            datetimerfc1123_getNull:
-              parameters: {}
-              responses:
-                '200':
-                  body: ''
         language: !Languages 
           default:
             name: GetNull
             description: Get null datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -274,6 +269,7 @@ operationGroups:
             description: Get invalid datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getOverflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -340,6 +336,7 @@ operationGroups:
             description: Get overflow datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getUnderflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -406,13 +403,14 @@ operationGroups:
             description: Get underflow datetime value
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_putUtcMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -422,13 +420,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_1
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -438,7 +436,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -459,13 +457,16 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /datetimerfc1123/max
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -497,6 +498,7 @@ operationGroups:
             description: Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getUtcLowercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -563,6 +565,7 @@ operationGroups:
             description: Get max datetime value fri, 31 dec 9999 23:59:59 gmt
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getUtcUppercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -629,13 +632,14 @@ operationGroups:
             description: Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_putUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -645,13 +649,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_9
-                schema: *ref_1
+              - !Parameter &ref_10
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -661,7 +665,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -676,19 +680,22 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_9
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /datetimerfc1123/min
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -720,6 +727,7 @@ operationGroups:
             description: Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
         protocol: !Protocols {}
       - !Operation 
+        operationId: datetimerfc1123_getUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

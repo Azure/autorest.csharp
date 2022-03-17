@@ -146,13 +146,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation1
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_8
             parameters:
               - !Parameter 
                 schema: *ref_5
@@ -193,6 +194,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: https://{source}.fakeendpoint.azure.com
+        requests:
+          - *ref_8
         signatureParameters: []
         responses:
           - !Response 
@@ -210,13 +213,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: Operation2
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_10
             parameters:
               - !Parameter 
                 schema: *ref_5
@@ -231,7 +235,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_8
+              - !Parameter &ref_9
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -244,7 +248,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_8
+              - *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -257,6 +261,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: https://{source}.fakeendpoint.azure.com
+        requests:
+          - *ref_10
         signatureParameters: []
         responses:
           - !Response 

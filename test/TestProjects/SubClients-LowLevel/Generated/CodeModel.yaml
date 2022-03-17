@@ -67,6 +67,7 @@ operationGroups:
     $key: Root
     operations:
       - !Operation 
+        operationId: Root_GetCachedParameter
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -128,6 +129,7 @@ operationGroups:
     $key: Parameter
     operations:
       - !Operation 
+        operationId: Parameter_GetSubParameter
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'

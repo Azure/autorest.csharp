@@ -31,7 +31,7 @@ schemas: !Schemas
           name: ResourceId
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -118,13 +118,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Create
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_8
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -178,6 +179,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_8
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -199,13 +202,14 @@ operationGroups:
             description: Create or update resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Delete
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_9
-            schema: *ref_8
+          - !Parameter &ref_10
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -228,7 +232,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_9
+          - *ref_10
         responses:
           - !Response 
             language: !Languages 
@@ -245,13 +249,14 @@ operationGroups:
             description: Delete resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_10
-            schema: *ref_8
+          - !Parameter &ref_11
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -289,7 +294,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_10
+          - *ref_11
         responses:
           - !SchemaResponse 
             schema: *ref_5

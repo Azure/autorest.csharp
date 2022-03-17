@@ -2362,7 +2362,7 @@ schemas: !Schemas
           description: The account properties that can be updated through data plane.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_169
+    - !ObjectSchema &ref_170
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2394,7 +2394,7 @@ schemas: !Schemas
           description: The Account access keys.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_170
+    - !ObjectSchema &ref_171
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2521,7 +2521,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_70
     - *ref_38
-    - !ObjectSchema &ref_177
+    - !ObjectSchema &ref_180
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2574,7 +2574,7 @@ schemas: !Schemas
           description: Paged list of collections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_179
+    - !ObjectSchema &ref_182
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2661,7 +2661,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_78
-    - !ObjectSchema &ref_180
+    - !ObjectSchema &ref_183
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3554,7 +3554,7 @@ schemas: !Schemas
     - *ref_138
     - *ref_139
     - *ref_140
-    - !ObjectSchema &ref_173
+    - !ObjectSchema &ref_175
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3644,7 +3644,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_174
+  - !Parameter &ref_176
     schema: *ref_1
     implementation: Client
     required: true
@@ -3677,6 +3677,7 @@ operationGroups:
     $key: Accounts
     operations:
       - !Operation 
+        operationId: Accounts_GetAccountProperties
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -3738,75 +3739,21 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Accounts_GetAccountProperties:
-              parameters:
-                api-version: 2018-12-01-preview
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    name: account1
-                    type: Microsoft.ProjectBabylon/accounts
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.ProjectBabylon/accounts/account1
-                    location: West US 2
-                    properties:
-                      createdAt: '2019-11-22T18:39:58.6929344Z'
-                      createdBy: client-name
-                      createdByObjectId: client-objectId
-                      endpoints:
-                        catalog: https://account1.catalog.babylon.azure-test.com
-                        guardian: https://account1.guardian.babylon.azure-test.com
-                        scan: https://account1.scan.babylon.azure-test.com
-                      friendlyName: friendly-account1
-                      managedResources:
-                        eventHubNamespace: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp
-                        resourceGroup: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl
-                        storageAccount: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr
-                      privateEndpointConnections:
-                        - name: peName-8536c337-7b36-4d67-a7ce-081655baf59e
-                          type: Microsoft.ProjectBabylon/accounts/privateEndpointConnections
-                          id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.ProjectBabylon/accounts/account1/privateEndpointConnections/peName-8536c337-7b36-4d67-a7ce-081655baf59e
-                          properties:
-                            privateEndpoint:
-                              id: /subscriptions/baca8a88-4527-4c35-a13e-b2775ce0d7fc/resourceGroups/nrpResourceGroupName/providers/Microsoft.Network/privateEndpoints/peName
-                            privateLinkServiceConnectionState:
-                              description: Please approve my connection, thanks.
-                              actionsRequired: None
-                              status: Pending
-                            provisioningState: Succeeded
-                      provisioningState: Succeeded
-                    sku:
-                      name: Standard
-                      capacity: 4
-                    systemData:
-                      createdAt: '2019-11-22T18:39:58.6929344Z'
-                      createdBy: client-name
-                      createdByType: User
-                      lastModifiedAt: '2021-03-16T23:24:34.3430059Z'
-                      lastModifiedBy: client-name
-                      lastModifiedByType: User
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-ratelimit-remaining-tenant-reads: '14999'
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: GetAccountProperties
             description: Get an account
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_UpdateAccountProperties
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_169
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -3860,6 +3807,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_169
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -3889,62 +3838,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Accounts_UpdateAccountProperties:
-              parameters:
-                accountName: account1
-                accountUpdateParameters:
-                  friendlyName: friendly-account1
-                api-version: 2018-12-01-preview
-                endpoint: '{endpoint}'
-                resourceGroupName: SampleResourceGroup
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-              responses:
-                '200':
-                  body:
-                    name: account1
-                    type: Microsoft.ProjectBabylon/accounts
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.ProjectBabylon/accounts/account1
-                    location: West US 2
-                    properties:
-                      createdAt: '2019-11-22T18:39:58.6929344Z'
-                      createdBy: client-name
-                      createdByObjectId: client-objectId
-                      endpoints:
-                        catalog: https://account2.catalog.babylon.azure-test.com
-                        guardian: https://account1.guardian.babylon.azure-test.com
-                        scan: https://account2.scan.babylon.azure-test.com
-                      friendlyName: friendly-account1
-                      managedResources:
-                        eventHubNamespace: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp
-                        resourceGroup: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl
-                        storageAccount: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr
-                      provisioningState: Succeeded
-                    sku:
-                      name: Standard
-                      capacity: 4
-                    systemData:
-                      createdAt: '2019-11-22T18:39:58.6929344Z'
-                      createdBy: client-name
-                      createdByType: User
-                      lastModifiedAt: '2021-03-16T23:24:34.3430059Z'
-                      lastModifiedBy: client-name
-                      lastModifiedByType: User
-                    tags:
-                      tag: tag value.
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-ratelimit-remaining-tenant-reads: '14999'
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: UpdateAccountProperties
             description: Updates an account
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_GetAccessKeys
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -3980,7 +3880,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_170
             language: !Languages 
               default:
                 name: ''
@@ -4006,37 +3906,21 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Accounts_GetAccessKeys:
-              parameters:
-                api-version: 2018-12-01-preview
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    atlasKafkaPrimaryEndpoint: Endpoint=sb://fake_objectId.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ASDASasdfmasdf123412341234=
-                    atlasKafkaSecondaryEndpoint: Endpoint=sb://fake_objectId.servicebus.windows.net/;SharedAccessKeyName=AlternateSharedAccessKey;SharedAccessKey=BSDASasdfmasdf123412341234=
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-ratelimit-remaining-tenant-reads: '14999'
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: GetAccessKeys
             description: List the authorization keys associated with this account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_RegenerateAccessKey
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_173
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -4051,8 +3935,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_171
-                schema: *ref_170
+              - !Parameter &ref_172
+                schema: *ref_171
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4077,7 +3961,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_171
+              - *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4090,10 +3974,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_173
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_170
             language: !Languages 
               default:
                 name: ''
@@ -4119,38 +4005,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Accounts_RegenerateKeys:
-              parameters:
-                api-version: 2018-12-01-preview
-                endpoint: '{endpoint}'
-                keyOptions:
-                  keyType: PrimaryKey
-              responses:
-                '200':
-                  body:
-                    atlasKafkaPrimaryEndpoint: Endpoint=sb://fake_objectId.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ASDASasdfmasdf123412341234=
-                    atlasKafkaSecondaryEndpoint: Endpoint=sb://fake_objectId.servicebus.windows.net/;SharedAccessKeyName=AlternateSharedAccessKey;SharedAccessKey=BSDASasdfmasdf123412341234=
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-ratelimit-remaining-tenant-reads: '14999'
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: RegenerateAccessKey
             description: Regenerate the authorization keys associated with this data catalog.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_GetResourceSetRules
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-          - !Parameter &ref_172
+          - !Parameter &ref_174
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4188,10 +4056,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_172
+          - *ref_174
         responses:
           - !SchemaResponse 
-            schema: *ref_173
+            schema: *ref_175
             language: !Languages 
               default:
                 name: ''
@@ -4218,203 +4086,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            ResourceSetRules_ListResourceSetRules:
-              parameters:
-                accountId: 11349e3d-b23d-47fe-aaf2-3d4c3d9a3f5b
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-                resourceSetRuleConfigName: myNewresourceSetRuleConfigName
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: myNewresourceSetRuleConfigName
-                        advancedResourceSet:
-                          modifiedAt: '2021-07-08T23:14:06.4084575Z'
-                          resourceSetProcessing: Default
-                        pathPatternConfig:
-                          acceptedPatterns: []
-                          complexReplacers:
-                            - name: SparkPath
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              typeName: Microsoft.DataMap.PathPattern.SparkPathReplacer
-                          createdBy: AzureDataCatalog
-                          enableDefaultPatterns: true
-                          lastUpdatedTimestamp: 1585257544
-                          modifiedBy: AzureDataCatalog
-                          regexReplacers:
-                            - name: Guid
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minHex: 32
-                                options: 9
-                                regexStr: ([0-9A-F]{32}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})
-                              replaceWith: '{GUID}'
-                            - name: Number
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 1
-                                options: 8
-                                regexStr: ^\d+$
-                              replaceWith: '{N}'
-                            - name: yyyy-mm-ddThh-MM-ss
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 12
-                                options: 8
-                                regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])([-\._@]?)([0-5][0-9])([-\._@]?)([0-5][0-9])(Z)?
-                              replaceWith: '{N}$2{N}$4{N}$6{N}$8{N}$10{N}$12'
-                            - name: yyyy-mm-ddThh
-                              description: null
-                              condition: ApplyToNonFileName
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 8
-                                options: 8
-                                regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])(Z)?
-                              replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                            - name: yyyy-mm-ddZ
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 6
-                                options: 8
-                                regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])(Z)
-                              replaceWith: '{N}$2{N}$4{N}$6'
-                            - name: yyyy-mm-dd-hhZ
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 8
-                                options: 8
-                                regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([-\._@]?)(2[0-3]|[01]?[0-9])(Z)
-                              replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                            - name: NumberBetweenDelimiter
-                              description: null
-                              condition: ApplyToFileNameOrNonVersionString
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              doNotReplaceRegex:
-                                minDigits: 1
-                                minLetters: 1
-                                options: 9
-                                regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 1
-                                options: 8
-                                regexStr: (?<=[-\._@])([\d]+)(?=[-\._@])|^(\d+)(?=[-\._@])|(?<=[-\._@])(\d+)$
-                              replaceWith: '{N}'
-                            - name: 4ByteHex
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              doNotReplaceRegex:
-                                minDigits: 1
-                                minLetters: 1
-                                options: 9
-                                regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigitsOrLetters: 8
-                                options: 9
-                                regexStr: (?<=[-\._@]|^)([0-9A-F]{8,16})(?=[-\._@]|$)
-                              replaceWith: '{HEX}'
-                            - name: NumberInFile
-                              description: null
-                              condition: ApplyToFileName
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              doNotReplaceRegex:
-                                minDigits: 1
-                                minLetters: 1
-                                options: 9
-                                regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDigits: 1
-                                options: 8
-                                regexStr: (\d+)
-                              replaceWith: '{N}'
-                            - name: Localization(DashSeparated)
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minDashes: 1
-                                minLetters: 4
-                                options: 9
-                                regexStr: >-
-                                  (?<=[-\._@]|^)(ar-eg|ar-sa|cy-gb|da-dk|de-at|de-ch|de-de|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-ph|en-sg|en-us|en-ww|en-xa|en-za|es-ar|es-cl|es-es|es-mx|es-us|es-xl|fi-fi|fr-be|fr-ca|fr-ch|fr-fr|gu-in|hi-in|id-id|it-it|ja-jp|nb-no|nl-nl|nl-be|pt-br|pt-pt|pl-pl|ru-ru|sv-se|ta-in|te-in|zh-cn|zh-hk|zh-tw|ko-kr|tr-tr)(?=[-\._@]|$)
-                              replaceWith: '{LOC}'
-                            - name: Localization(UnderscoreSeparated)
-                              description: null
-                              createdBy: AzureDataCatalog
-                              disableRecursiveReplacerApplication: false
-                              disabled: false
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                              regex:
-                                minLetters: 4
-                                minUnderscores: 1
-                                options: 9
-                                regexStr: >-
-                                  (?<=[-\._@]|^)(ar_eg|ar_sa|cy_gb|da_dk|de_at|de_ch|de_de|en_au|en_ca|en_gb|en_ie|en_in|en_my|en_nz|en_ph|en_sg|en_us|en_ww|en_xa|en_za|es_ar|es_cl|es_es|es_mx|es_us|es_xl|fi_fi|fr_be|fr_ca|fr_ch|fr_fr|gu_in|hi_in|id_id|it_it|ja_jp|nb_no|nl_nl|nl_be|pt_br|pt_pt|pl_pl|ru_ru|sv_se|ta_in|te_in|zh_cn|zh_hk|zh_tw|ko_kr|tr_tr)(?=[-\._@]|$)
-                              replaceWith: '{LOC}'
-                          rejectedPatterns:
-                            - name: OfficeDocuments
-                              path: ^.*\.(?i)(DOC|DOCM|DOCX|DOT|ODP|ODS|ODT|PDF|POT|PPS|PPSX|PPT|PPTM|PPTX|XLC|XLS|XLSB|XLSM|XLSX|XLT)(?-i)$
-                              createdBy: AzureDataCatalog
-                              filterType: Regex
-                              lastUpdatedTimestamp: 0
-                              modifiedBy: AzureDataCatalog
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -4433,12 +4104,13 @@ operationGroups:
     $key: Collections
     operations:
       - !Operation 
+        operationId: Collections_GetCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4495,42 +4167,22 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Collections_GetCollection:
-              parameters:
-                api-version: 2019-11-01-preview
-                collectionName: myCollection1
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    name: mycollection1
-                    collectionProvisioningState: Succeeded
-                    friendlyName: Finance
-                    parentCollection:
-                      type: CollectionReference
-                      referenceName: accountName
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: GetCollection
             description: Get a collection
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_CreateOrUpdateCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_178
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -4545,7 +4197,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_175
+              - !Parameter &ref_177
                 schema: *ref_73
                 implementation: Method
                 required: true
@@ -4571,7 +4223,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_175
+              - *ref_177
             language: !Languages 
               default:
                 name: ''
@@ -4584,6 +4236,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_178
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -4613,42 +4267,19 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Collections_CreateOrUpdateCollection:
-              parameters:
-                api-version: 2019-11-01-preview
-                collection:
-                  parentCollection:
-                    referenceName: myParentCollection1
-                collectionName: myCollection1
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    name: mycollection1
-                    collectionProvisioningState: Succeeded
-                    friendlyName: Finance
-                    parentCollection:
-                      type: CollectionReference
-                      referenceName: myParentCollection1
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: CreateOrUpdateCollection
             description: Creates or updates a collection entity.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_DeleteCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4701,33 +4332,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Collections_DeleteCollection:
-              parameters:
-                api-version: 2019-11-01-preview
-                collectionName: myCollection1
-                endpoint: '{endpoint}'
-              responses:
-                '204':
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: DeleteCollection
             description: Deletes a Collection entity.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_ListCollections
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-          - !Parameter &ref_176
+          - !Parameter &ref_179
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4765,10 +4383,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_176
+          - *ref_179
         responses:
           - !SchemaResponse 
-            schema: *ref_177
+            schema: *ref_180
             language: !Languages 
               default:
                 name: ''
@@ -4795,26 +4413,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Collections_ListCollections:
-              parameters:
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: mycollection1
-                        collectionProvisioningState: Succeeded
-                        friendlyName: Finance
-                        parentCollection:
-                          type: CollectionReference
-                          referenceName: accountName
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -4825,14 +4423,15 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_ListChildCollectionNames
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
-          - !Parameter &ref_178
+          - !Parameter &ref_181
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4870,10 +4469,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_178
+          - *ref_181
         responses:
           - !SchemaResponse 
-            schema: *ref_179
+            schema: *ref_182
             language: !Languages 
               default:
                 name: ''
@@ -4900,28 +4499,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Collections_ListChildCollectionNames:
-              parameters:
-                api-version: 2019-11-01-preview
-                collectionName: myCollection1
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    count: 3
-                    value:
-                      - name: mycollection1
-                        friendlyName: The first collection
-                      - name: mycollection2
-                        friendlyName: Some collection
-                      - name: parent2
-                        friendlyName: parent2
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -4932,12 +4509,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_GetCollectionPath
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4968,7 +4546,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_180
+            schema: *ref_183
             language: !Languages 
               default:
                 name: ''
@@ -4994,27 +4572,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Collections_GetCollectionPath:
-              parameters:
-                api-version: 2019-11-01-preview
-                collectionName: myCollection1
-                endpoint: '{endpoint}'
-              responses:
-                '200':
-                  body:
-                    parentFriendlyNameChain:
-                      - Test account  friendly name
-                      - parent1
-                    parentNameChain:
-                      - account1
-                      - parent1
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: GetCollectionPath
@@ -5029,6 +4586,7 @@ operationGroups:
     $key: ResourceSetRules
     operations:
       - !Operation 
+        operationId: ResourceSetRules_GetResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -5090,217 +4648,21 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            ResourceSetRules_GetResourceSetRule:
-              parameters:
-                accountId: 11349e3d-b23d-47fe-aaf2-3d4c3d9a3f5b
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-                resourceSetRuleConfigName: myNewresourceSetRuleConfigName
-              responses:
-                '200':
-                  body:
-                    name: myNewresourceSetRuleConfigName
-                    advancedResourceSet:
-                      modifiedAt: '2021-07-08T23:14:06.4084575Z'
-                      resourceSetProcessing: Advanced
-                    pathPatternConfig:
-                      acceptedPatterns: []
-                      complexReplacers:
-                        - name: SparkPath
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          typeName: Microsoft.DataMap.PathPattern.SparkPathReplacer
-                      createdBy: AzureDataCatalog
-                      enableDefaultPatterns: true
-                      lastUpdatedTimestamp: 1585257544
-                      modifiedBy: AzureDataCatalog
-                      regexReplacers:
-                        - name: Guid
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minHex: 32
-                            options: 9
-                            regexStr: ([0-9A-F]{32}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})
-                          replaceWith: '{GUID}'
-                        - name: Number
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: ^\d+$
-                          replaceWith: '{N}'
-                        - name: yyyy-mm-ddThh-MM-ss
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 12
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])([-\._@]?)([0-5][0-9])([-\._@]?)([0-5][0-9])(Z)?
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8{N}$10{N}$12'
-                        - name: yyyy-mm-ddThh
-                          description: null
-                          condition: ApplyToNonFileName
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 8
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])(Z)?
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                        - name: yyyy-mm-ddZ
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 6
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])(Z)
-                          replaceWith: '{N}$2{N}$4{N}$6'
-                        - name: yyyy-mm-dd-hhZ
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 8
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([-\._@]?)(2[0-3]|[01]?[0-9])(Z)
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                        - name: NumberBetweenDelimiter
-                          description: null
-                          condition: ApplyToFileNameOrNonVersionString
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: (?<=[-\._@])([\d]+)(?=[-\._@])|^(\d+)(?=[-\._@])|(?<=[-\._@])(\d+)$
-                          replaceWith: '{N}'
-                        - name: 4ByteHex
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigitsOrLetters: 8
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)([0-9A-F]{8,16})(?=[-\._@]|$)
-                          replaceWith: '{HEX}'
-                        - name: NumberInFile
-                          description: null
-                          condition: ApplyToFileName
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: (\d+)
-                          replaceWith: '{N}'
-                        - name: Localization(DashSeparated)
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDashes: 1
-                            minLetters: 4
-                            options: 9
-                            regexStr: >-
-                              (?<=[-\._@]|^)(ar-eg|ar-sa|cy-gb|da-dk|de-at|de-ch|de-de|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-ph|en-sg|en-us|en-ww|en-xa|en-za|es-ar|es-cl|es-es|es-mx|es-us|es-xl|fi-fi|fr-be|fr-ca|fr-ch|fr-fr|gu-in|hi-in|id-id|it-it|ja-jp|nb-no|nl-nl|nl-be|pt-br|pt-pt|pl-pl|ru-ru|sv-se|ta-in|te-in|zh-cn|zh-hk|zh-tw|ko-kr|tr-tr)(?=[-\._@]|$)
-                          replaceWith: '{LOC}'
-                        - name: Localization(UnderscoreSeparated)
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minLetters: 4
-                            minUnderscores: 1
-                            options: 9
-                            regexStr: >-
-                              (?<=[-\._@]|^)(ar_eg|ar_sa|cy_gb|da_dk|de_at|de_ch|de_de|en_au|en_ca|en_gb|en_ie|en_in|en_my|en_nz|en_ph|en_sg|en_us|en_ww|en_xa|en_za|es_ar|es_cl|es_es|es_mx|es_us|es_xl|fi_fi|fr_be|fr_ca|fr_ch|fr_fr|gu_in|hi_in|id_id|it_it|ja_jp|nb_no|nl_nl|nl_be|pt_br|pt_pt|pl_pl|ru_ru|sv_se|ta_in|te_in|zh_cn|zh_hk|zh_tw|ko_kr|tr_tr)(?=[-\._@]|$)
-                          replaceWith: '{LOC}'
-                      rejectedPatterns:
-                        - name: OfficeDocuments
-                          path: ^.*\.(?i)(DOC|DOCM|DOCX|DOT|ODP|ODS|ODT|PDF|POT|PPS|PPSX|PPT|PPTM|PPTX|XLC|XLS|XLSB|XLSM|XLSX|XLT)(?-i)$
-                          createdBy: AzureDataCatalog
-                          filterType: Regex
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: GetResourceSetRule
             description: Get a resource set config service model.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceSetRules_CreateOrUpdateResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_185
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -5315,7 +4677,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_181
+              - !Parameter &ref_184
                 schema: *ref_143
                 implementation: Method
                 required: true
@@ -5341,7 +4703,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_181
+              - *ref_184
             language: !Languages 
               default:
                 name: ''
@@ -5354,6 +4716,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_185
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -5383,377 +4747,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            ResourceSetRules_CreateOrUpdateResourceSetRule:
-              parameters:
-                accountId: 11349e3d-b23d-47fe-aaf2-3d4c3d9a3f5b
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-                resourceSetRuleConfig:
-                  advancedResourceSet:
-                    resourceSetProcessing: Default
-                  pathPatternConfig:
-                    acceptedPatterns: []
-                    complexReplacers:
-                      - name: SparkPath
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        typeName: Microsoft.DataMap.PathPattern.SparkPathReplacer
-                    createdBy: AzureDataCatalog
-                    enableDefaultPatterns: true
-                    lastUpdatedTimestamp: 0
-                    modifiedBy: AzureDataCatalog
-                    regexReplacers:
-                      - name: Guid
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minHex: 32
-                          options: 9
-                          regexStr: ([0-9A-F]{32}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})
-                        replaceWith: '{GUID}'
-                      - name: Number
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 1
-                          options: 8
-                          regexStr: ^\d+$
-                        replaceWith: '{N}'
-                      - name: yyyy-mm-ddThh-MM-ss
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 12
-                          options: 8
-                          regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])([-\._@]?)([0-5][0-9])([-\._@]?)([0-5][0-9])(Z)?
-                        replaceWith: '{N}$2{N}$4{N}$6{N}$8{N}$10{N}$12'
-                      - name: yyyy-mm-ddThh
-                        description: null
-                        condition: ApplyToNonFileName
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 8
-                          options: 8
-                          regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])(Z)?
-                        replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                      - name: yyyy-mm-ddZ
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 6
-                          options: 8
-                          regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])(Z)
-                        replaceWith: '{N}$2{N}$4{N}$6'
-                      - name: yyyy-mm-dd-hhZ
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 8
-                          options: 8
-                          regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([-\._@]?)(2[0-3]|[01]?[0-9])(Z)
-                        replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                      - name: NumberBetweenDelimiter
-                        description: null
-                        condition: ApplyToFileNameOrNonVersionString
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        doNotReplaceRegex:
-                          minDigits: 1
-                          minLetters: 1
-                          options: 9
-                          regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 1
-                          options: 8
-                          regexStr: (?<=[-\._@])([\d]+)(?=[-\._@])|^(\d+)(?=[-\._@])|(?<=[-\._@])(\d+)$
-                        replaceWith: '{N}'
-                      - name: 4ByteHex
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        doNotReplaceRegex:
-                          minDigits: 1
-                          minLetters: 1
-                          options: 9
-                          regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigitsOrLetters: 8
-                          options: 9
-                          regexStr: (?<=[-\._@]|^)([0-9A-F]{8,16})(?=[-\._@]|$)
-                        replaceWith: '{HEX}'
-                      - name: NumberInFile
-                        description: null
-                        condition: ApplyToFileName
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        doNotReplaceRegex:
-                          minDigits: 1
-                          minLetters: 1
-                          options: 9
-                          regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDigits: 1
-                          options: 8
-                          regexStr: (\d+)
-                        replaceWith: '{N}'
-                      - name: Localization(DashSeparated)
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minDashes: 1
-                          minLetters: 4
-                          options: 9
-                          regexStr: >-
-                            (?<=[-\._@]|^)(ar-eg|ar-sa|cy-gb|da-dk|de-at|de-ch|de-de|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-ph|en-sg|en-us|en-ww|en-xa|en-za|es-ar|es-cl|es-es|es-mx|es-us|es-xl|fi-fi|fr-be|fr-ca|fr-ch|fr-fr|gu-in|hi-in|id-id|it-it|ja-jp|nb-no|nl-nl|nl-be|pt-br|pt-pt|pl-pl|ru-ru|sv-se|ta-in|te-in|zh-cn|zh-hk|zh-tw|ko-kr|tr-tr)(?=[-\._@]|$)
-                        replaceWith: '{LOC}'
-                      - name: Localization(UnderscoreSeparated)
-                        description: null
-                        createdBy: AzureDataCatalog
-                        disabled: false
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                        regex:
-                          minLetters: 4
-                          minUnderscores: 1
-                          options: 9
-                          regexStr: >-
-                            (?<=[-\._@]|^)(ar_eg|ar_sa|cy_gb|da_dk|de_at|de_ch|de_de|en_au|en_ca|en_gb|en_ie|en_in|en_my|en_nz|en_ph|en_sg|en_us|en_ww|en_xa|en_za|es_ar|es_cl|es_es|es_mx|es_us|es_xl|fi_fi|fr_be|fr_ca|fr_ch|fr_fr|gu_in|hi_in|id_id|it_it|ja_jp|nb_no|nl_nl|nl_be|pt_br|pt_pt|pl_pl|ru_ru|sv_se|ta_in|te_in|zh_cn|zh_hk|zh_tw|ko_kr|tr_tr)(?=[-\._@]|$)
-                        replaceWith: '{LOC}'
-                    rejectedPatterns:
-                      - name: OfficeDocuments
-                        path: ^.*\.(?i)(DOC|DOCM|DOCX|DOT|ODP|ODS|ODT|PDF|POT|PPS|PPSX|PPT|PPTM|PPTX|XLC|XLS|XLSB|XLSM|XLSX|XLT)(?-i)$
-                        createdBy: AzureDataCatalog
-                        filterType: Regex
-                        lastUpdatedTimestamp: 0
-                        modifiedBy: AzureDataCatalog
-                resourceSetRuleConfigName: myNewresourceSetRuleConfigName
-              responses:
-                '200':
-                  body:
-                    name: myNewresourceSetRuleConfigName
-                    advancedResourceSet:
-                      modifiedAt: '2021-07-08T23:14:06.4084575Z'
-                      resourceSetProcessing: Default
-                    pathPatternConfig:
-                      acceptedPatterns: []
-                      complexReplacers:
-                        - name: SparkPath
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          typeName: Microsoft.DataMap.PathPattern.SparkPathReplacer
-                      createdBy: AzureDataCatalog
-                      enableDefaultPatterns: true
-                      lastUpdatedTimestamp: 1585257544
-                      modifiedBy: AzureDataCatalog
-                      regexReplacers:
-                        - name: Guid
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minHex: 32
-                            options: 9
-                            regexStr: ([0-9A-F]{32}|[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})
-                          replaceWith: '{GUID}'
-                        - name: Number
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: ^\d+$
-                          replaceWith: '{N}'
-                        - name: yyyy-mm-ddThh-MM-ss
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 12
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])([-\._@]?)([0-5][0-9])([-\._@]?)([0-5][0-9])(Z)?
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8{N}$10{N}$12'
-                        - name: yyyy-mm-ddThh
-                          description: null
-                          condition: ApplyToNonFileName
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 8
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([T])(2[0-3]|[01]?[0-9])(Z)?
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                        - name: yyyy-mm-ddZ
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 6
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])(Z)
-                          replaceWith: '{N}$2{N}$4{N}$6'
-                        - name: yyyy-mm-dd-hhZ
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 8
-                            options: 8
-                            regexStr: (20)[1-9][0-9]([-\._@]?)(0[1-9]|1[012])([-\._@]?)(0[1-9]|[12][0-9]|3[01])([-\._@]?)(2[0-3]|[01]?[0-9])(Z)
-                          replaceWith: '{N}$2{N}$4{N}$6{N}$8'
-                        - name: NumberBetweenDelimiter
-                          description: null
-                          condition: ApplyToFileNameOrNonVersionString
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: (?<=[-\._@])([\d]+)(?=[-\._@])|^(\d+)(?=[-\._@])|(?<=[-\._@])(\d+)$
-                          replaceWith: '{N}'
-                        - name: 4ByteHex
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigitsOrLetters: 8
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)([0-9A-F]{8,16})(?=[-\._@]|$)
-                          replaceWith: '{HEX}'
-                        - name: NumberInFile
-                          description: null
-                          condition: ApplyToFileName
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          doNotReplaceRegex:
-                            minDigits: 1
-                            minLetters: 1
-                            options: 9
-                            regexStr: (?<=[-\._@]|^)[v](\d+)[\.](\d+)[\.]?(\d+)?(?=[-\._@]|$)
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDigits: 1
-                            options: 8
-                            regexStr: (\d+)
-                          replaceWith: '{N}'
-                        - name: Localization(DashSeparated)
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minDashes: 1
-                            minLetters: 4
-                            options: 9
-                            regexStr: >-
-                              (?<=[-\._@]|^)(ar-eg|ar-sa|cy-gb|da-dk|de-at|de-ch|de-de|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-ph|en-sg|en-us|en-ww|en-xa|en-za|es-ar|es-cl|es-es|es-mx|es-us|es-xl|fi-fi|fr-be|fr-ca|fr-ch|fr-fr|gu-in|hi-in|id-id|it-it|ja-jp|nb-no|nl-nl|nl-be|pt-br|pt-pt|pl-pl|ru-ru|sv-se|ta-in|te-in|zh-cn|zh-hk|zh-tw|ko-kr|tr-tr)(?=[-\._@]|$)
-                          replaceWith: '{LOC}'
-                        - name: Localization(UnderscoreSeparated)
-                          description: null
-                          createdBy: AzureDataCatalog
-                          disableRecursiveReplacerApplication: false
-                          disabled: false
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                          regex:
-                            minLetters: 4
-                            minUnderscores: 1
-                            options: 9
-                            regexStr: >-
-                              (?<=[-\._@]|^)(ar_eg|ar_sa|cy_gb|da_dk|de_at|de_ch|de_de|en_au|en_ca|en_gb|en_ie|en_in|en_my|en_nz|en_ph|en_sg|en_us|en_ww|en_xa|en_za|es_ar|es_cl|es_es|es_mx|es_us|es_xl|fi_fi|fr_be|fr_ca|fr_ch|fr_fr|gu_in|hi_in|id_id|it_it|ja_jp|nb_no|nl_nl|nl_be|pt_br|pt_pt|pl_pl|ru_ru|sv_se|ta_in|te_in|zh_cn|zh_hk|zh_tw|ko_kr|tr_tr)(?=[-\._@]|$)
-                          replaceWith: '{LOC}'
-                      rejectedPatterns:
-                        - name: OfficeDocuments
-                          path: ^.*\.(?i)(DOC|DOCM|DOCX|DOT|ODP|ODS|ODT|PDF|POT|PPS|PPSX|PPT|PPTM|PPTX|XLC|XLS|XLSB|XLSM|XLSX|XLT)(?-i)$
-                          createdBy: AzureDataCatalog
-                          filterType: Regex
-                          lastUpdatedTimestamp: 0
-                          modifiedBy: AzureDataCatalog
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: CreateOrUpdateResourceSetRule
             description: Creates or updates an resource set config.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceSetRules_DeleteResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -5820,27 +4820,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            ResourceSetRules_DeleteResourceSetRule:
-              parameters:
-                accountId: 11349e3d-b23d-47fe-aaf2-3d4c3d9a3f5b
-                api-version: 2019-11-01-preview
-                endpoint: '{endpoint}'
-                resourceSetRuleConfigName: myNewresourceSetRuleConfigName
-              responses:
-                '200':
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
-                '204':
-                  headers:
-                    Date: Wed, 13 Sep 2017 18:04:32 GMT
-                    X-Content-Type-Options: nosniff
-                    x-ms-correlation-request-id: 25c78f97-0b0a-4fe9-ad39-883a482265cd
-                    x-ms-request-id: d5496da4-9c52-402f-b067-83cc9ddea888
         language: !Languages 
           default:
             name: DeleteResourceSetRule

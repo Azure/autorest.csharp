@@ -261,7 +261,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutUtcMaxDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -272,17 +272,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutUtcMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -297,8 +301,14 @@ namespace body_datetime
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutUtcMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -310,7 +320,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutUtcMaxDateTime7DigitsRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutUtcMaxDateTime7DigitsRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -321,17 +331,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutUtcMaxDateTime7DigitsAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -346,8 +360,14 @@ namespace body_datetime
         /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutUtcMaxDateTime7Digits(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -518,7 +538,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutLocalPositiveOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutLocalPositiveOffsetMaxDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -529,17 +549,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutLocalPositiveOffsetMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -554,8 +578,14 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutLocalPositiveOffsetMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -673,7 +703,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutLocalNegativeOffsetMaxDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutLocalNegativeOffsetMaxDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -684,17 +714,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutLocalNegativeOffsetMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -709,8 +743,14 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutLocalNegativeOffsetMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -828,7 +868,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutUtcMinDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -839,17 +879,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutUtcMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -864,8 +908,14 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutUtcMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -930,7 +980,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutLocalPositiveOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutLocalPositiveOffsetMinDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -941,17 +991,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutLocalPositiveOffsetMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -966,8 +1020,14 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutLocalPositiveOffsetMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -1032,7 +1092,7 @@ namespace body_datetime
             }
         }
 
-        internal HttpMessage CreatePutLocalNegativeOffsetMinDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutLocalNegativeOffsetMinDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1043,17 +1103,21 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "O");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutLocalNegativeOffsetMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -1068,8 +1132,14 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutLocalNegativeOffsetMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

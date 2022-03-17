@@ -643,6 +643,7 @@ operationGroups:
     $key: paths
     operations:
       - !Operation 
+        operationId: paths_getBooleanTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -717,6 +718,7 @@ operationGroups:
             description: Get true Boolean value on path
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_getBooleanFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -791,6 +793,7 @@ operationGroups:
             description: Get false Boolean value on path
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_getIntOneMillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -865,6 +868,7 @@ operationGroups:
             description: Get '1000000' integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_getIntNegativeOneMillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -939,6 +943,7 @@ operationGroups:
             description: Get '-1000000' integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_getTenBillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1013,6 +1018,7 @@ operationGroups:
             description: Get '10000000000' 64 bit integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_getNegativeTenBillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1087,6 +1093,7 @@ operationGroups:
             description: Get '-10000000000' 64 bit integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_floatScientificPositive
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1161,6 +1168,7 @@ operationGroups:
             description: Get '1.034E+20' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_floatScientificNegative
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1235,6 +1243,7 @@ operationGroups:
             description: Get '-1.034E-20' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_doubleDecimalPositive
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1309,6 +1318,7 @@ operationGroups:
             description: Get '9999999.999' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_doubleDecimalNegative
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1383,6 +1393,7 @@ operationGroups:
             description: Get '-9999999.999' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_stringUnicode
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1457,6 +1468,7 @@ operationGroups:
             description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_stringUrlEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1531,6 +1543,7 @@ operationGroups:
             description: Get 'begin!*'();:@ &=+$,/?#[]end
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_stringUrlNonEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1608,6 +1621,7 @@ operationGroups:
             summary: Get 'begin!*'();:@&=+$,end
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_stringEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1682,6 +1696,7 @@ operationGroups:
             description: Get ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_stringNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1757,6 +1772,7 @@ operationGroups:
             description: Get null (should throw)
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_enumValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1832,6 +1848,7 @@ operationGroups:
             description: Get using uri with 'green color' in path parameter
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_enumNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1907,6 +1924,7 @@ operationGroups:
             description: Get null (should throw on the client before the request is sent on wire)
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_byteMultiByte
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1982,6 +2000,7 @@ operationGroups:
             description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_byteEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2056,6 +2075,7 @@ operationGroups:
             description: Get '' as byte array
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_byteNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2131,6 +2151,7 @@ operationGroups:
             description: Get null as byte array (should throw)
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_DateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2205,6 +2226,7 @@ operationGroups:
             description: Get '2012-01-01' as date
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_DateNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2280,6 +2302,7 @@ operationGroups:
             description: Get null as date - this should throw or be unusable on the client side, depending on date representation
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_DateTimeValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2354,6 +2377,7 @@ operationGroups:
             description: Get '2012-01-01T01:01:01Z' as date-time
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_DateTimeNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2429,6 +2453,7 @@ operationGroups:
             description: Get null as date-time, should be disallowed or throw depending on representation of date-time
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_base64Url
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2504,6 +2529,7 @@ operationGroups:
             description: Get 'lorem' encoded value as 'bG9yZW0' (base64url)
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_ArrayCsvInPath
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2580,6 +2606,7 @@ operationGroups:
             description: Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: paths_unixTimeUrl
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2663,6 +2690,7 @@ operationGroups:
     $key: queries
     operations:
       - !Operation 
+        operationId: queries_getBooleanTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2737,6 +2765,7 @@ operationGroups:
             description: Get true Boolean value on path
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getBooleanFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2811,6 +2840,7 @@ operationGroups:
             description: Get false Boolean value on path
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getBooleanNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2885,6 +2915,7 @@ operationGroups:
             description: Get null Boolean value on query (query string should be absent)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getIntOneMillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2959,6 +2990,7 @@ operationGroups:
             description: Get '1000000' integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getIntNegativeOneMillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3033,6 +3065,7 @@ operationGroups:
             description: Get '-1000000' integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getIntNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3107,6 +3140,7 @@ operationGroups:
             description: Get null integer value (no query parameter)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getTenBillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3181,6 +3215,7 @@ operationGroups:
             description: Get '10000000000' 64 bit integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getNegativeTenBillion
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3255,6 +3290,7 @@ operationGroups:
             description: Get '-10000000000' 64 bit integer value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_getLongNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3329,6 +3365,7 @@ operationGroups:
             description: Get 'null 64 bit integer value (no query param in uri)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_floatScientificPositive
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3403,6 +3440,7 @@ operationGroups:
             description: Get '1.034E+20' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_floatScientificNegative
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3477,6 +3515,7 @@ operationGroups:
             description: Get '-1.034E-20' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_floatNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3551,6 +3590,7 @@ operationGroups:
             description: Get null numeric value (no query parameter)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_doubleDecimalPositive
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3625,6 +3665,7 @@ operationGroups:
             description: Get '9999999.999' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_doubleDecimalNegative
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3699,6 +3740,7 @@ operationGroups:
             description: Get '-9999999.999' numeric value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_doubleNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3773,6 +3815,7 @@ operationGroups:
             description: Get null numeric value (no query parameter)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_stringUnicode
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3847,6 +3890,7 @@ operationGroups:
             description: Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_stringUrlEncoded
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3921,6 +3965,7 @@ operationGroups:
             description: Get 'begin!*'();:@ &=+$,/?#[]end
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_stringEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3995,6 +4040,7 @@ operationGroups:
             description: Get ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_stringNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4069,6 +4115,7 @@ operationGroups:
             description: Get null (no query parameter in url)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_enumValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4143,6 +4190,7 @@ operationGroups:
             description: Get using uri with query parameter 'green color'
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_enumNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4217,6 +4265,7 @@ operationGroups:
             description: Get null (no query parameter in url)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_byteMultiByte
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4291,6 +4340,7 @@ operationGroups:
             description: Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_byteEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4365,6 +4415,7 @@ operationGroups:
             description: Get '' as byte array
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_byteNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4439,6 +4490,7 @@ operationGroups:
             description: Get null as byte array (no query parameters in uri)
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_DateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4513,6 +4565,7 @@ operationGroups:
             description: Get '2012-01-01' as date
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_DateNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4587,6 +4640,7 @@ operationGroups:
             description: Get null as date - this should result in no query parameters in uri
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_DateTimeValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4661,6 +4715,7 @@ operationGroups:
             description: Get '2012-01-01T01:01:01Z' as date-time
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_DateTimeNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4735,6 +4790,7 @@ operationGroups:
             description: Get null as date-time, should result in no query parameters in uri
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringCsvValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4810,6 +4866,7 @@ operationGroups:
             description: Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringCsvNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4885,6 +4942,7 @@ operationGroups:
             description: Get a null array of string using the csv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringCsvEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4960,6 +5018,7 @@ operationGroups:
             description: Get an empty array [] of string using the csv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringNoCollectionFormatEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5035,6 +5094,7 @@ operationGroups:
             description: Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringSsvValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5110,6 +5170,7 @@ operationGroups:
             description: Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringTsvValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5185,6 +5246,7 @@ operationGroups:
             description: Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format
         protocol: !Protocols {}
       - !Operation 
+        operationId: queries_ArrayStringPipesValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5268,6 +5330,7 @@ operationGroups:
     $key: pathItems
     operations:
       - !Operation 
+        operationId: pathItems_getAllWithValues
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5384,6 +5447,7 @@ operationGroups:
               localStringQuery='localStringQuery'
         protocol: !Protocols {}
       - !Operation 
+        operationId: pathItems_getGlobalQueryNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5498,6 +5562,7 @@ operationGroups:
             description: send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'
         protocol: !Protocols {}
       - !Operation 
+        operationId: pathItems_getGlobalAndLocalQueryNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5612,6 +5677,7 @@ operationGroups:
             description: send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null
         protocol: !Protocols {}
       - !Operation 
+        operationId: pathItems_getLocalPathItemQueryNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

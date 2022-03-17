@@ -115,9 +115,7 @@ namespace body_string
             if (stringBody != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(stringBody);
-                request.Content = content;
+                request.Content = new StringRequestContent(stringBody);
             }
             return message;
         }
@@ -207,7 +205,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutEmptyRequest()
+        internal HttpMessage CreatePutEmptyRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -218,17 +216,22 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue("");
-            request.Content = content;
+            request.Content = new StringRequestContent(stringBody);
             return message;
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public async Task<Response> PutEmptyAsync(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutEmptyRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutEmptyRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -240,10 +243,17 @@ namespace body_string
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutEmpty(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public Response PutEmpty(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutEmptyRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutEmptyRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -307,7 +317,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutMbcsRequest()
+        internal HttpMessage CreatePutMbcsRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,17 +328,22 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
-            request.Content = content;
+            request.Content = new StringRequestContent(stringBody);
             return message;
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public async Task<Response> PutMbcsAsync(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutMbcsRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutMbcsRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -340,10 +355,17 @@ namespace body_string
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutMbcs(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public Response PutMbcs(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutMbcsRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutMbcsRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -407,7 +429,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutWhitespaceRequest()
+        internal HttpMessage CreatePutWhitespaceRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -418,17 +440,22 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
-            request.Content = content;
+            request.Content = new StringRequestContent(stringBody);
             return message;
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public async Task<Response> PutWhitespaceAsync(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutWhitespaceRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutWhitespaceRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -440,10 +467,17 @@ namespace body_string
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutWhitespace(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
+        public Response PutWhitespace(string stringBody, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutWhitespaceRequest();
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var message = CreatePutWhitespaceRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -613,7 +647,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutBase64UrlEncodedRequest(byte[] stringBody)
+        internal HttpMessage CreatePutBase64UrlEncodedRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -624,9 +658,7 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBase64StringValue(stringBody, "U");
-            request.Content = content;
+            request.Content = new StringRequestContent(stringBody);
             return message;
         }
 
@@ -634,7 +666,7 @@ namespace body_string
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public async Task<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBase64UrlEncodedAsync(string stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -656,7 +688,7 @@ namespace body_string
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)
+        public Response PutBase64UrlEncoded(string stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {

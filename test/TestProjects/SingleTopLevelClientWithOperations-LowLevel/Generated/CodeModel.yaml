@@ -68,6 +68,7 @@ operationGroups:
     $key: Client1
     operations:
       - !Operation 
+        operationId: Client1_Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -128,6 +129,7 @@ operationGroups:
     $key: Client2
     operations:
       - !Operation 
+        operationId: Client2_Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -188,6 +190,7 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -248,6 +251,7 @@ operationGroups:
     $key: Client4
     operations:
       - !Operation 
+        operationId: Client4_GetAll
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -318,6 +322,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Client4_Patch
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'

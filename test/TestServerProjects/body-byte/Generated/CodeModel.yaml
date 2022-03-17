@@ -88,17 +88,6 @@ schemas: !Schemas
           name: ByteArray
           description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_10
-      type: byte-array
-      format: byte
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: ByteArray
-          description: Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-      protocol: !Protocols {}
     - !ByteArraySchema &ref_12
       type: byte-array
       format: byte
@@ -109,6 +98,17 @@ schemas: !Schemas
         default:
           name: ByteArray
           description: The invalid byte value '::::SWAGGER::::'
+      protocol: !Protocols {}
+    - !ByteArraySchema 
+      type: byte-array
+      format: byte
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ByteArray
+          description: Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_6
@@ -165,6 +165,7 @@ operationGroups:
     $key: byte
     operations:
       - !Operation 
+        operationId: byte_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -225,18 +226,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            byte_getNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetNull
             description: Get null byte value
         protocol: !Protocols {}
       - !Operation 
+        operationId: byte_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -303,6 +299,7 @@ operationGroups:
             description: Get empty byte value ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: byte_getNonAscii
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -369,13 +366,14 @@ operationGroups:
             description: Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         protocol: !Protocols {}
       - !Operation 
+        operationId: byte_putNonAscii
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -385,13 +383,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
-                schema: *ref_10
+              - !Parameter &ref_10
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -401,7 +399,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -416,19 +414,22 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_11
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
+              http: !HttpBinaryRequest 
                 path: /byte/nonAscii
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: text
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -460,6 +461,7 @@ operationGroups:
             description: Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         protocol: !Protocols {}
       - !Operation 
+        operationId: byte_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

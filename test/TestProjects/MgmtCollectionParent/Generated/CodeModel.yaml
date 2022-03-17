@@ -920,6 +920,7 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: ListOrderAtSubscriptionLevel
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1005,6 +1006,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ListOrderAtResourceGroupLevel
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1103,6 +1105,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: GetOrderByName
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'

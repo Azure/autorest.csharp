@@ -641,6 +641,7 @@ operationGroups:
     $key: Common
     operations:
       - !Operation 
+        operationId: Common_ListTypeOnesBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -696,6 +697,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeTwosBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -751,6 +753,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeOnes
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -819,6 +822,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_ListTypeTwos
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -887,6 +891,7 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_GetTypeOne
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -968,12 +973,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_CreateOrUpdateTypeOne
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_38
+          - !Parameter &ref_39
             schema: *ref_1
             implementation: Method
             required: true
@@ -985,7 +991,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
@@ -999,8 +1005,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_38
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -1054,9 +1060,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_38
+        signatureParameters:
           - *ref_39
+          - *ref_40
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1078,12 +1086,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_GetTypeTwo
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_40
+          - !Parameter &ref_41
             schema: *ref_1
             implementation: Method
             required: true
@@ -1095,7 +1104,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_42
             schema: *ref_1
             implementation: Method
             required: true
@@ -1136,8 +1145,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_40
           - *ref_41
+          - *ref_42
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -1159,12 +1168,13 @@ operationGroups:
             summary: Validate information for a certificate order.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Common_CreateOrUpdateTypeTwo
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_43
+          - !Parameter &ref_45
             schema: *ref_1
             implementation: Method
             required: true
@@ -1176,7 +1186,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_44
+          - !Parameter &ref_46
             schema: *ref_1
             implementation: Method
             required: true
@@ -1190,8 +1200,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_44
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -1206,7 +1216,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_42
+              - !Parameter &ref_43
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -1232,7 +1242,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_42
+              - *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1245,9 +1255,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_43
+        requests:
           - *ref_44
+        signatureParameters:
+          - *ref_45
+          - *ref_46
         responses:
           - !SchemaResponse 
             schema: *ref_6

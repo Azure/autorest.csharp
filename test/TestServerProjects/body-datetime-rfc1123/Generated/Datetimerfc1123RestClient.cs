@@ -261,7 +261,7 @@ namespace body_datetime_rfc1123
             }
         }
 
-        internal HttpMessage CreatePutUtcMaxDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutUtcMaxDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -272,17 +272,21 @@ namespace body_datetime_rfc1123
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "R");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutUtcMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -297,8 +301,14 @@ namespace body_datetime_rfc1123
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutUtcMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -416,7 +426,7 @@ namespace body_datetime_rfc1123
             }
         }
 
-        internal HttpMessage CreatePutUtcMinDateTimeRequest(DateTimeOffset datetimeBody)
+        internal HttpMessage CreatePutUtcMinDateTimeRequest(string datetimeBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -427,17 +437,21 @@ namespace body_datetime_rfc1123
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "R");
-            request.Content = content;
+            request.Content = new StringRequestContent(datetimeBody);
             return message;
         }
 
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public async Task<Response> PutUtcMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -452,8 +466,14 @@ namespace body_datetime_rfc1123
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="datetimeBody"/> is null. </exception>
+        public Response PutUtcMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
         {
+            if (datetimeBody == null)
+            {
+                throw new ArgumentNullException(nameof(datetimeBody));
+            }
+
             using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

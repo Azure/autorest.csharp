@@ -1207,7 +1207,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_126
+    - !ConstantSchema &ref_128
       type: constant
       value: !ConstantValue 
         value: application/pdf
@@ -1218,11 +1218,8 @@ schemas: !Schemas
           description: Content Type 'application/pdf'
       protocol: !Protocols {}
   binaries:
-    - !BinarySchema &ref_127
+    - !BinarySchema &ref_129
       type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
       language: !Languages 
         default:
           name: binary
@@ -2145,7 +2142,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_3
-    - !ObjectSchema &ref_130
+    - !ObjectSchema &ref_133
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2170,7 +2167,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_132
+    - !ObjectSchema &ref_136
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2195,7 +2192,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_134
+    - !ObjectSchema &ref_139
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2242,12 +2239,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_115
-          - !Parameter &ref_120
+          - !Parameter &ref_121
             schema: *ref_116
             implementation: Method
             required: true
@@ -2259,7 +2257,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_121
+          - !Parameter &ref_122
             schema: *ref_116
             implementation: Method
             required: true
@@ -2271,7 +2269,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_122
+          - !Parameter &ref_123
             schema: *ref_116
             implementation: Method
             required: true
@@ -2283,7 +2281,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_123
+          - !Parameter &ref_124
             schema: *ref_116
             implementation: Method
             required: true
@@ -2295,7 +2293,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_124
+          - !Parameter &ref_125
             schema: *ref_116
             implementation: Method
             required: true
@@ -2307,7 +2305,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_125
+          - !Parameter &ref_126
             schema: *ref_116
             implementation: Method
             required: true
@@ -2319,8 +2317,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_120
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -2374,13 +2372,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_120
+        signatureParameters:
           - *ref_121
           - *ref_122
           - *ref_123
           - *ref_124
           - *ref_125
+          - *ref_126
         responses:
           - !SchemaResponse 
             schema: *ref_3
@@ -2401,16 +2401,17 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: AnalyzeBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_115
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_132
             parameters:
               - !Parameter 
-                schema: *ref_126
+                schema: *ref_117
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2422,8 +2423,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_128
-                schema: *ref_127
+              - !Parameter &ref_127
+                schema: *ref_0
                 implementation: Method
                 language: !Languages 
                   default:
@@ -2434,7 +2435,48 @@ operationGroups:
                     in: body
                     style: binary
             signatureParameters:
-              - *ref_128
+              - *ref_127
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /conflictingLROOverloads
+                method: post
+                binary: true
+                knownMediaType: text
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+          application/pdf: !Request &ref_131
+            parameters:
+              - !Parameter 
+                schema: *ref_128
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_130
+                schema: *ref_129
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: stringBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_130
             language: !Languages 
               default:
                 name: ''
@@ -2448,47 +2490,9 @@ operationGroups:
                 mediaTypes:
                   - application/pdf
                 uri: '{$host}'
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_117
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_129
-                schema: *ref_116
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: stringBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_129
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /conflictingLROOverloads
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
+        requests:
+          - *ref_131
+          - *ref_132
         signatureParameters: []
         responses:
           - !Response 
@@ -2508,13 +2512,14 @@ operationGroups:
             description: Analyze body, that could be different media types.
         protocol: !Protocols {}
       - !Operation 
+        operationId: HttpMessage
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_115
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_135
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -2529,8 +2534,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
-                schema: *ref_130
+              - !Parameter &ref_134
+                schema: *ref_133
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2555,7 +2560,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_131
+              - *ref_134
             language: !Languages 
               default:
                 name: ''
@@ -2568,10 +2573,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_135
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_130
+            schema: *ref_133
             language: !Languages 
               default:
                 name: ''
@@ -2589,13 +2596,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: Request
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_115
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_138
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -2610,8 +2618,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_133
-                schema: *ref_132
+              - !Parameter &ref_137
+                schema: *ref_136
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2636,7 +2644,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_133
+              - *ref_137
             language: !Languages 
               default:
                 name: ''
@@ -2649,10 +2657,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_138
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_132
+            schema: *ref_136
             language: !Languages 
               default:
                 name: ''
@@ -2670,13 +2680,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: Response
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_115
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_141
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -2691,8 +2702,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_135
-                schema: *ref_134
+              - !Parameter &ref_140
+                schema: *ref_139
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2717,7 +2728,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_135
+              - *ref_140
             language: !Languages 
               default:
                 name: ''
@@ -2730,10 +2741,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_141
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_134
+            schema: *ref_139
             language: !Languages 
               default:
                 name: ''
