@@ -62,7 +62,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
-            AsyncPageable<Product> allPages = new DPGClient(Key, host).GetPageValuesAsync("model");
+            AsyncPageable<Product> allPages = new DPGClient(Key, host).GetPagesValuesAsync("model");
             await foreach (Page<Product> page in allPages.AsPages())
             {
                 Assert.AreEqual("model", $"{page.Values.First().Received}");
