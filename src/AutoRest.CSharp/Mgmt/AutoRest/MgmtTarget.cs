@@ -124,32 +124,41 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!isArmCore)
             {
                 // we will write the ResourceGroupExtensions and SubscriptionExtensions classes even if it does not contain anything
-                WriteExtensionPair(project, MgmtContext.Library.ResourceGroupExtensionsClient);
-                WriteExtensionPair(project, MgmtContext.Library.SubscriptionExtensionsClient);
+                WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensionsClient);
+                WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensionsClient);
+                //WriteExtensionPair(project, MgmtContext.Library.ResourceGroupExtensionsClient);
+                //WriteExtensionPair(project, MgmtContext.Library.SubscriptionExtensionsClient);
             }
 
-            if (!MgmtContext.Library.ManagementGroupExtensions.IsEmpty)
+            if (!MgmtContext.Library.ManagementGroupExtensionsClient.IsEmpty)
             {
-                WriteExtensionPair(project, MgmtContext.Library.ManagementGroupExtensionsClient);
+                WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensionsClient);
+                //WriteExtensionPair(project, MgmtContext.Library.ManagementGroupExtensionsClient);
             }
 
-            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
+            if (!MgmtContext.Library.TenantExtensionsClient.IsEmpty)
             {
-                WriteExtensionPair(project, MgmtContext.Library.TenantExtensionsClient);
+                WriteExtensionClient(project, MgmtContext.Library.TenantExtensionsClient);
+                //WriteExtensionPair(project, MgmtContext.Library.TenantExtensionsClient);
             }
 
-            if (!MgmtContext.Library.ArmClientExtensions.IsEmpty)
+            if (!MgmtContext.Library.ArmResourceExtensionsClient.IsEmpty)
             {
-                var armClientExtension = MgmtContext.Library.ArmClientExtensions;
-                var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension);
-                armClientExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
+                WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensionsClient);
+                //WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
             }
 
-            if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
-            {
-                WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
-            }
+            //if (!MgmtContext.Library.ArmClientExtensions.IsEmpty)
+            //{
+            //    var armClientExtension = MgmtContext.Library.ArmClientExtensions;
+            //    var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension);
+            //    armClientExtensionsCodeWriter.Write();
+            //    AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
+            //}
+
+            // write extension class
+            if (MgmtContext.Library.ExtensionWrapper.Extensions.All(extension => !extension.IsEmpty))
+                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -173,6 +182,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
                 project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
             }
+        }
+
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        {
+            // TODO -- do we need to check IsArmCore here?
+            WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }
 
         private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
