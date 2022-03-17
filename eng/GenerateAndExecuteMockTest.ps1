@@ -223,8 +223,8 @@ function  MockTestInit {
 
         # Launch Mock-service-host
         # Warning: Only absolute paths can be used in ScriptBlock.
-        # $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
-        $task = { D:\a\_work\1\s\autorest.csharp\eng\Launch-MockServiceHost.ps1 }
+        & git config --system core.longpaths true
+        $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
         Start-Job -ScriptBlock $task
 
         # Generate Track2 SDK Template
@@ -310,6 +310,7 @@ function  MockTestInit {
             # run .sln test
             & cd $_
             $response = dotnet test --filter FullyQualifiedName~Mock
+            $log = @()
             $allResult = @()
             $flag = $false
         
@@ -328,6 +329,7 @@ function  MockTestInit {
                     $Total += $str.Substring($str.IndexOf("Total:")).Replace("Total:", "").Trim()
                     break
                 }
+                $log += $item
                 if ($item.Tostring().Contains("Error Message:")) {
                     $flag = $true
                     continue
@@ -343,6 +345,9 @@ function  MockTestInit {
                 $ErrorTypeStatic += $RPName + ":`t" + $item
             }
             Write-Host "[$RPName] has been recorded"
+            foreach ($item in $log){
+                Write-Host $item
+            }
         }
         return
     }
