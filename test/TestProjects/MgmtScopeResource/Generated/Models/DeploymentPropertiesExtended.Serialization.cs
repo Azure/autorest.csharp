@@ -19,8 +19,8 @@ namespace MgmtScopeResource.Models
             Optional<string> correlationId = default;
             Optional<DateTimeOffset> timestamp = default;
             Optional<TimeSpan> duration = default;
-            Optional<object> outputs = default;
-            Optional<object> parameters = default;
+            Optional<BinaryData> outputs = default;
+            Optional<BinaryData> parameters = default;
             Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -66,7 +66,7 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    outputs = property.Value.GetObject();
+                    outputs = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("parameters"))
@@ -76,7 +76,7 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    parameters = property.Value.GetObject();
+                    parameters = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("errorResponse"))

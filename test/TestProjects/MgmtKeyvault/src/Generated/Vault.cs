@@ -92,7 +92,7 @@ namespace MgmtKeyvault
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a PrivateEndpointConnection. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
-            return new PrivateEndpointConnectionCollection(Client, Id);
+            return GetCachedClient(Client => new PrivateEndpointConnectionCollection(Client, Id));
         }
 
         /// <summary>
