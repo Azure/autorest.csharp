@@ -316,6 +316,7 @@ function  MockTestInit {
         
             # record each error cases
             foreach ($item in $response) {
+                $log += $item
                 if ($item.Tostring().Contains("Failed!  - Failed:") -or ($item.Tostring().Contains("Passed!  - Failed:"))) {
                     $FinalStatics += @{ $RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
                     if ($item.Tostring().Contains("Passed!  - Failed:")) {
@@ -329,7 +330,6 @@ function  MockTestInit {
                     $Total += $str.Substring($str.IndexOf("Total:")).Replace("Total:", "").Trim()
                     break
                 }
-                $log += $item
                 if ($item.Tostring().Contains("Error Message:")) {
                     $flag = $true
                     continue
@@ -344,6 +344,7 @@ function  MockTestInit {
             foreach ($item in $allResult) {
                 $ErrorTypeStatic += $RPName + ":`t" + $item
             }
+            Write-Host "`n`n"
             Write-Host "[$RPName] has been recorded"
             foreach ($item in $log){
                 Write-Host $item
@@ -410,7 +411,7 @@ function  MockTestInit {
 
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $false
+$GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
