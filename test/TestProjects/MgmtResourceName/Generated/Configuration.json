@@ -10,7 +10,8 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "RequestPathToResourceName": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}": "MemoryResource"
-  }
+  "NoResourceSuffix": [
+    "Disk",
+    "Memory"
+  ]
 }

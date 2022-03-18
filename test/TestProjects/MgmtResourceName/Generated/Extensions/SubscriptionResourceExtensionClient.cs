@@ -11,18 +11,18 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class to add extension methods to Subscription. </summary>
-    internal partial class SubscriptionExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 

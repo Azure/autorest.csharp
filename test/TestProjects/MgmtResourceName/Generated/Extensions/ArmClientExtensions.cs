@@ -29,33 +29,33 @@ namespace MgmtResourceName
         }
         #endregion
 
-        #region DiskResource
-        /// <summary> Gets an object representing a DiskResource along with the instance operations that can be performed on it but with no data. </summary>
+        #region Disk
+        /// <summary> Gets an object representing a Disk along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DiskResource" /> object. </returns>
-        public static DiskResource GetDiskResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="Disk" /> object. </returns>
+        public static Disk GetDisk(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                DiskResource.ValidateResourceId(id);
-                return new DiskResource(client, id);
+                Disk.ValidateResourceId(id);
+                return new Disk(client, id);
             }
             );
         }
         #endregion
 
-        #region MemoryResource
-        /// <summary> Gets an object representing a MemoryResource along with the instance operations that can be performed on it but with no data. </summary>
+        #region Memory
+        /// <summary> Gets an object representing a Memory along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MemoryResource" /> object. </returns>
-        public static MemoryResource GetMemoryResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="Memory" /> object. </returns>
+        public static Memory GetMemory(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MemoryResource.ValidateResourceId(id);
-                return new MemoryResource(client, id);
+                Memory.ValidateResourceId(id);
+                return new Memory(client, id);
             }
             );
         }
@@ -72,6 +72,22 @@ namespace MgmtResourceName
             {
                 NetworkResource.ValidateResourceId(id);
                 return new NetworkResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region DisplayResource
+        /// <summary> Gets an object representing a DisplayResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="DisplayResource" /> object. </returns>
+        public static DisplayResource GetDisplayResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetClient(() =>
+            {
+                DisplayResource.ValidateResourceId(id);
+                return new DisplayResource(client, id);
             }
             );
         }

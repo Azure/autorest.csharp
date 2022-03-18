@@ -21,25 +21,25 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing collection of MemoryResource and their operations over its parent. </summary>
-    public partial class MemoryResourceCollection : ArmCollection, IEnumerable<MemoryResource>, IAsyncEnumerable<MemoryResource>
+    /// <summary> A class representing collection of Memory and their operations over its parent. </summary>
+    public partial class MemoryCollection : ArmCollection, IEnumerable<Memory>, IAsyncEnumerable<Memory>
     {
-        private readonly ClientDiagnostics _memoryResourceClientDiagnostics;
-        private readonly MemoryResourcesRestOperations _memoryResourceRestClient;
+        private readonly ClientDiagnostics _memoryMemoryResourcesClientDiagnostics;
+        private readonly MemoryResourcesRestOperations _memoryMemoryResourcesRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="MemoryResourceCollection"/> class for mocking. </summary>
-        protected MemoryResourceCollection()
+        /// <summary> Initializes a new instance of the <see cref="MemoryCollection"/> class for mocking. </summary>
+        protected MemoryCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="MemoryResourceCollection"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MemoryCollection"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        internal MemoryResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal MemoryCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _memoryResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", MemoryResource.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(MemoryResource.ResourceType, out string memoryResourceApiVersion);
-            _memoryResourceRestClient = new MemoryResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, memoryResourceApiVersion);
+            _memoryMemoryResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", Memory.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(Memory.ResourceType, out string memoryMemoryResourcesApiVersion);
+            _memoryMemoryResourcesRestClient = new MemoryResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, memoryMemoryResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -57,21 +57,21 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
-        /// <param name="parameters"> The MemoryResource to use. </param>
+        /// <param name="parameters"> The Memory to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<MemoryResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string memoryResourceName, MemoryResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Memory>> CreateOrUpdateAsync(WaitUntil waitUntil, string memoryResourceName, MemoryData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.CreateOrUpdate");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _memoryResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtResourceNameArmOperation<MemoryResource>(Response.FromValue(new MemoryResource(Client, response), response.GetRawResponse()));
+                var response = await _memoryMemoryResourcesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -89,21 +89,21 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
-        /// <param name="parameters"> The MemoryResource to use. </param>
+        /// <param name="parameters"> The Memory to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<MemoryResource> CreateOrUpdate(WaitUntil waitUntil, string memoryResourceName, MemoryResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Memory> CreateOrUpdate(WaitUntil waitUntil, string memoryResourceName, MemoryData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.CreateOrUpdate");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _memoryResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, parameters, cancellationToken);
-                var operation = new MgmtResourceNameArmOperation<MemoryResource>(Response.FromValue(new MemoryResource(Client, response), response.GetRawResponse()));
+                var response = _memoryMemoryResourcesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, parameters, cancellationToken);
+                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -123,18 +123,18 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public virtual async Task<Response<MemoryResource>> GetAsync(string memoryResourceName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Memory>> GetAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.Get");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Get");
             scope.Start();
             try
             {
-                var response = await _memoryResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken).ConfigureAwait(false);
+                var response = await _memoryMemoryResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,18 +151,18 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public virtual Response<MemoryResource> Get(string memoryResourceName, CancellationToken cancellationToken = default)
+        public virtual Response<Memory> Get(string memoryResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.Get");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Get");
             scope.Start();
             try
             {
-                var response = _memoryResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken);
+                var response = _memoryMemoryResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,17 +176,17 @@ namespace MgmtResourceName
         /// Operation Id: MemoryResources_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MemoryResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<MemoryResource> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Memory> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<MemoryResource>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<Memory>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.GetAll");
+                using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _memoryResourceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MemoryResource(Client, value)), null, response.GetRawResponse());
+                    var response = await _memoryMemoryResourcesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Memory(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -202,17 +202,17 @@ namespace MgmtResourceName
         /// Operation Id: MemoryResources_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MemoryResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<MemoryResource> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Memory> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<MemoryResource> FirstPageFunc(int? pageSizeHint)
+            Page<Memory> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.GetAll");
+                using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _memoryResourceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MemoryResource(Client, value)), null, response.GetRawResponse());
+                    var response = _memoryMemoryResourcesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Memory(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -236,7 +236,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.Exists");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace MgmtResourceName
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.Exists");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.Exists");
             scope.Start();
             try
             {
@@ -286,18 +286,18 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public virtual async Task<Response<MemoryResource>> GetIfExistsAsync(string memoryResourceName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Memory>> GetIfExistsAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.GetIfExists");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _memoryResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _memoryMemoryResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<MemoryResource>(null, response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<Memory>(null, response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -315,18 +315,18 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public virtual Response<MemoryResource> GetIfExists(string memoryResourceName, CancellationToken cancellationToken = default)
+        public virtual Response<Memory> GetIfExists(string memoryResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(memoryResourceName, nameof(memoryResourceName));
 
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResourceCollection.GetIfExists");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("MemoryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _memoryResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken: cancellationToken);
+                var response = _memoryMemoryResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<MemoryResource>(null, response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<Memory>(null, response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -335,7 +335,7 @@ namespace MgmtResourceName
             }
         }
 
-        IEnumerator<MemoryResource> IEnumerable<MemoryResource>.GetEnumerator()
+        IEnumerator<Memory> IEnumerable<Memory>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -345,7 +345,7 @@ namespace MgmtResourceName
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<MemoryResource> IAsyncEnumerable<MemoryResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<Memory> IAsyncEnumerable<Memory>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

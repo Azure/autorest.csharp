@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public virtual Resource GetResource() => this;
 
         // name after `{ResourceName}Resource`, unless the `ResourceName` already ends with `Resource`
-        protected override string DefaultName => ResourceName.AddResourceSuffixToResourceName();
+        protected override string DefaultName => Configuration.MgmtConfiguration.NoResourceSuffix.Contains(ResourceName) ? ResourceName : ResourceName.AddResourceSuffixToResourceName();
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 

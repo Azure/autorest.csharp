@@ -17,42 +17,42 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtResourceName
 {
-    /// <summary> A Class representing a DiskResource along with the instance operations that can be performed on it. </summary>
-    public partial class DiskResource : ArmResource
+    /// <summary> A Class representing a Disk along with the instance operations that can be performed on it. </summary>
+    public partial class Disk : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="DiskResource"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="Disk"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string diskResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}";
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _diskResourceClientDiagnostics;
-        private readonly DiskResourcesRestOperations _diskResourceRestClient;
-        private readonly DiskResourceData _data;
+        private readonly ClientDiagnostics _diskClientDiagnostics;
+        private readonly DisksRestOperations _diskRestClient;
+        private readonly DiskData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="DiskResource"/> class for mocking. </summary>
-        protected DiskResource()
+        /// <summary> Initializes a new instance of the <see cref="Disk"/> class for mocking. </summary>
+        protected Disk()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DiskResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "Disk"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DiskResource(ArmClient client, DiskResourceData data) : this(client, data.Id)
+        internal Disk(ArmClient client, DiskData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="DiskResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Disk"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DiskResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal Disk(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _diskResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string diskResourceApiVersion);
-            _diskResourceRestClient = new DiskResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, diskResourceApiVersion);
+            _diskClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string diskApiVersion);
+            _diskRestClient = new DisksRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, diskApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DiskResourceData Data
+        public virtual DiskData Data
         {
             get
             {
@@ -84,19 +84,19 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}
-        /// Operation Id: DiskResources_Get
+        /// Operation Id: Disks_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DiskResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Disk>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _diskResourceClientDiagnostics.CreateScope("DiskResource.Get");
+            using var scope = _diskClientDiagnostics.CreateScope("Disk.Get");
             scope.Start();
             try
             {
-                var response = await _diskResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _diskRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DiskResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -107,19 +107,19 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}
-        /// Operation Id: DiskResources_Get
+        /// Operation Id: Disks_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DiskResource> Get(CancellationToken cancellationToken = default)
+        public virtual Response<Disk> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _diskResourceClientDiagnostics.CreateScope("DiskResource.Get");
+            using var scope = _diskClientDiagnostics.CreateScope("Disk.Get");
             scope.Start();
             try
             {
-                var response = _diskResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _diskRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DiskResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -17,42 +17,42 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtResourceName
 {
-    /// <summary> A Class representing a MemoryResource along with the instance operations that can be performed on it. </summary>
-    public partial class MemoryResource : ArmResource
+    /// <summary> A Class representing a Memory along with the instance operations that can be performed on it. </summary>
+    public partial class Memory : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="MemoryResource"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="Memory"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string memoryResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}";
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _memoryResourceClientDiagnostics;
-        private readonly MemoryResourcesRestOperations _memoryResourceRestClient;
-        private readonly MemoryResourceData _data;
+        private readonly ClientDiagnostics _memoryMemoryResourcesClientDiagnostics;
+        private readonly MemoryResourcesRestOperations _memoryMemoryResourcesRestClient;
+        private readonly MemoryData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="MemoryResource"/> class for mocking. </summary>
-        protected MemoryResource()
+        /// <summary> Initializes a new instance of the <see cref="Memory"/> class for mocking. </summary>
+        protected Memory()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "MemoryResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "Memory"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MemoryResource(ArmClient client, MemoryResourceData data) : this(client, data.Id)
+        internal Memory(ArmClient client, MemoryData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="MemoryResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Memory"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MemoryResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal Memory(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _memoryResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResourceType, out string memoryResourceApiVersion);
-            _memoryResourceRestClient = new MemoryResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, memoryResourceApiVersion);
+            _memoryMemoryResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string memoryMemoryResourcesApiVersion);
+            _memoryMemoryResourcesRestClient = new MemoryResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, memoryMemoryResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,7 +66,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual MemoryResourceData Data
+        public virtual MemoryData Data
         {
             get
             {
@@ -87,16 +87,16 @@ namespace MgmtResourceName
         /// Operation Id: MemoryResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<MemoryResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Memory>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResource.Get");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("Memory.Get");
             scope.Start();
             try
             {
-                var response = await _memoryResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _memoryMemoryResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -110,16 +110,16 @@ namespace MgmtResourceName
         /// Operation Id: MemoryResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<MemoryResource> Get(CancellationToken cancellationToken = default)
+        public virtual Response<Memory> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _memoryResourceClientDiagnostics.CreateScope("MemoryResource.Get");
+            using var scope = _memoryMemoryResourcesClientDiagnostics.CreateScope("Memory.Get");
             scope.Start();
             try
             {
-                var response = _memoryResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _memoryMemoryResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MemoryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

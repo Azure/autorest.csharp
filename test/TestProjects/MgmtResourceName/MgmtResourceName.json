@@ -146,9 +146,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/": {
             "get": {
                 "tags": [
-                    "DiskResources"
+                    "Disks"
                 ],
-                "operationId": "DiskResources_List",
+                "operationId": "Disks_List",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -168,7 +168,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/DiskResourceListResult"
+                            "$ref": "#/definitions/DiskListResult"
                         }
                     }
                 }
@@ -177,9 +177,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}": {
             "put": {
                 "tags": [
-                    "DiskResources"
+                    "Disks"
                 ],
-                "operationId": "DiskResources_Put",
+                "operationId": "Disks_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -198,7 +198,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/DiskResource"
+                            "$ref": "#/definitions/Disk"
                         }
                     },
                     {
@@ -212,16 +212,16 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/DiskResource"
+                            "$ref": "#/definitions/Disk"
                         }
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "DiskResources"
+                    "Disks"
                 ],
-                "operationId": "DiskResources_Get",
+                "operationId": "Disks_Get",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -247,7 +247,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/DiskResource"
+                            "$ref": "#/definitions/Disk"
                         }
                     }
                 }
@@ -472,6 +472,116 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/": {
+            "get": {
+                "tags": [
+                    "DisplayResources"
+                ],
+                "operationId": "DisplayResources_List",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DisplayResourceListResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}": {
+            "put": {
+                "tags": [
+                    "DisplayResources"
+                ],
+                "operationId": "DisplayResources_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "displayResourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DisplayResource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DisplayResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "displayResources"
+                ],
+                "operationId": "displayResources_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "displayResourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DisplayResource"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -506,13 +616,13 @@
                 }
             ]
         },
-        "DiskResourceListResult": {
+        "DiskListResult": {
             "properties": {
                 "value": {
                     "readOnly": true,
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/DiskResource"
+                        "$ref": "#/definitions/Disk"
                     },
                     "description": "Gets the list of storage accounts and their properties."
                 },
@@ -524,7 +634,7 @@
             },
             "description": "The response from the List Storage Accounts operation."
         },
-        "DiskResource": {
+        "Disk": {
             "type": "object",
             "properties": {
                 "new": {
@@ -587,6 +697,37 @@
             "description": "The response from the List Storage Accounts operation."
         },
         "NetworkResource": {
+            "type": "object",
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
+        },
+        "DisplayResourceListResult": {
+            "properties": {
+                "value": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DisplayResource"
+                    },
+                    "description": "Gets the list of storage accounts and their properties."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.",
+                    "readOnly": true
+                }
+            },
+            "description": "The response from the List Storage Accounts operation."
+        },
+        "DisplayResource": {
             "type": "object",
             "properties": {
                 "new": {

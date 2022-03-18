@@ -12,17 +12,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtResourceNameTests() : base("MgmtResourceName") { }
 
         [TestCase("MachineResource", true)]
-        [TestCase("DiskResource", true)]
-        [TestCase("MemoryResource", true)]
+        [TestCase("Disk", true)]
+        [TestCase("Memory", true)]
         [TestCase("NetworkResource", true)]
+        [TestCase("DisplayResource", true)]
         [TestCase("Machine", false)]
-        [TestCase("Disk", false)]
-        [TestCase("Memory", false)]
+        [TestCase("DiskResource", false)]
+        [TestCase("MemoryResource", false)]
         [TestCase("Network", false)]
+        [TestCase("Display", false)]
         [TestCase("MachineResourceResource", false)]
         [TestCase("DiskResourceResource", false)]
         [TestCase("MemoryResourceResource", false)]
         [TestCase("NetworkResourceResource", false)]
+        [TestCase("DisplayResourceResource", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
@@ -30,7 +33,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void ValidateResourceMethods([Values("MachineResource", "DiskResource", "MemoryResource", "NetworkResource")]string resourceName,
+        public void ValidateResourceMethods([Values("MachineResource", "Disk", "Memory", "NetworkResource", "DisplayResource")]string resourceName,
             [Values("Get", "GetAsync")]string methodName)
         {
             var resource = FindAllResources().FirstOrDefault(r => r.Name == resourceName);
@@ -40,17 +43,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("MachineData", true)]
-        [TestCase("DiskResourceData", true)]
-        [TestCase("MemoryResourceData", true)]
+        [TestCase("DiskData", true)]
+        [TestCase("MemoryData", true)]
         [TestCase("NetworkData", true)]
+        [TestCase("DisplayResourceData", true)]
         [TestCase("Machine", false)]
         [TestCase("Disk", false)]
         [TestCase("Memory", false)]
         [TestCase("Network", false)]
+        [TestCase("Display", false)]
         [TestCase("MachineResourceData", false)]
-        [TestCase("DiskData", false)]
-        [TestCase("MemoryData", false)]
+        [TestCase("DiskResourceData", false)]
+        [TestCase("MemoryResourceData", false)]
         [TestCase("NetworkResourceData", false)]
+        [TestCase("DisplayData", false)]
         public void ValidateResourceData(string resourceData, bool isExists)
         {
             var resourceTypeExists = FindAllResourceData().Any(o => o.Name == resourceData);
@@ -58,20 +64,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("MachineCollection", true)]
-        [TestCase("DiskResourceCollection", true)]
-        [TestCase("MemoryResourceCollection", true)]
+        [TestCase("DiskCollection", true)]
+        [TestCase("MemoryCollection", true)]
         [TestCase("NetworkCollection", true)]
+        [TestCase("DisplayResourceCollection", true)]
         [TestCase("MachineResourceCollection", false)]
-        [TestCase("DiskCollection", false)]
-        [TestCase("MemoryCollection", false)]
+        [TestCase("DiskResourceCollection", false)]
+        [TestCase("MemoryResourceCollection", false)]
         [TestCase("NetworkResourceCollection", false)]
+        [TestCase("DisplayCollection", false)]
         public void ValidateCollections(string collectionName, bool isExists)
         {
             var collectionTypeExists = FindAllCollections().Any(o => o.Name == collectionName);
             Assert.AreEqual(isExists, collectionTypeExists);
         }
 
-        public void ValidateCollectionMethods([Values("MachineCollection", "DiskResourceCollection", "MemoryResourceCollection", "NetworkCollection")]string collectionName,
+        public void ValidateCollectionMethods([Values("MachineCollection", "DiskCollection", "MemoryCollection", "NetworkCollection", "DisplayResourceCollection")]string collectionName,
             [Values("Get", "GetAsync", "CreateOrUpdate", "CreateOrUpdateAsync", "GetAll", "GetAllAsync", "Exists", "ExistsAsync", "GetIfExists", "GetIfExistsAsync")]string methodName)
         {
             var resourceCollection = FindAllCollections().FirstOrDefault(o => o.Name == collectionName);

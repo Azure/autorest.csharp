@@ -39,18 +39,18 @@ namespace MgmtResourceName
             return GetCachedClient(Client => new MachineCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DiskResources in the DiskResource. </summary>
-        /// <returns> An object representing collection of DiskResources and their operations over a DiskResource. </returns>
-        public virtual DiskResourceCollection GetDiskResources()
+        /// <summary> Gets a collection of Disks in the Disk. </summary>
+        /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
+        public virtual DiskCollection GetDisks()
         {
-            return GetCachedClient(Client => new DiskResourceCollection(Client, Id));
+            return GetCachedClient(Client => new DiskCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of MemoryResources in the MemoryResource. </summary>
-        /// <returns> An object representing collection of MemoryResources and their operations over a MemoryResource. </returns>
-        public virtual MemoryResourceCollection GetMemoryResources()
+        /// <summary> Gets a collection of Memories in the Memory. </summary>
+        /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
+        public virtual MemoryCollection GetMemories()
         {
-            return GetCachedClient(Client => new MemoryResourceCollection(Client, Id));
+            return GetCachedClient(Client => new MemoryCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
@@ -58,6 +58,13 @@ namespace MgmtResourceName
         public virtual NetworkCollection GetNetworks()
         {
             return GetCachedClient(Client => new NetworkCollection(Client, Id));
+        }
+
+        /// <summary> Gets a collection of DisplayResources in the DisplayResource. </summary>
+        /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
+        public virtual DisplayResourceCollection GetDisplayResources()
+        {
+            return GetCachedClient(Client => new DisplayResourceCollection(Client, Id));
         }
     }
 }

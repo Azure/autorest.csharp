@@ -16,20 +16,20 @@ using MgmtResourceName.Models;
 
 namespace MgmtResourceName
 {
-    internal partial class DiskResourcesRestOperations
+    internal partial class DisksRestOperations
     {
         private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> Initializes a new instance of DiskResourcesRestOperations. </summary>
+        /// <summary> Initializes a new instance of DisksRestOperations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
-        public DiskResourcesRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        public DisksRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
@@ -61,7 +61,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DiskResourceListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<DiskListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -72,9 +72,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceListResult value = default;
+                        DiskListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DiskResourceListResult.DeserializeDiskResourceListResult(document.RootElement);
+                        value = DiskListResult.DeserializeDiskListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -87,7 +87,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DiskResourceListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<DiskListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -98,9 +98,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceListResult value = default;
+                        DiskListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DiskResourceListResult.DeserializeDiskResourceListResult(document.RootElement);
+                        value = DiskListResult.DeserializeDiskListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -108,7 +108,7 @@ namespace MgmtResourceName
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string diskResourceName, DiskResourceData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string diskResourceName, DiskData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -135,11 +135,11 @@ namespace MgmtResourceName
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="diskResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DiskResource to use. </param>
+        /// <param name="parameters"> The Disk to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="diskResourceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DiskResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string diskResourceName, DiskResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<DiskData>> PutAsync(string subscriptionId, string resourceGroupName, string diskResourceName, DiskData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceData value = default;
+                        DiskData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DiskResourceData.DeserializeDiskResourceData(document.RootElement);
+                        value = DiskData.DeserializeDiskData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -165,11 +165,11 @@ namespace MgmtResourceName
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="diskResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DiskResource to use. </param>
+        /// <param name="parameters"> The Disk to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="diskResourceName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DiskResourceData> Put(string subscriptionId, string resourceGroupName, string diskResourceName, DiskResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<DiskData> Put(string subscriptionId, string resourceGroupName, string diskResourceName, DiskData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceData value = default;
+                        DiskData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DiskResourceData.DeserializeDiskResourceData(document.RootElement);
+                        value = DiskData.DeserializeDiskData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DiskResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string diskResourceName, CancellationToken cancellationToken = default)
+        public async Task<Response<DiskData>> GetAsync(string subscriptionId, string resourceGroupName, string diskResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceData value = default;
+                        DiskData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DiskResourceData.DeserializeDiskResourceData(document.RootElement);
+                        value = DiskData.DeserializeDiskData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DiskResourceData)null, message.Response);
+                    return Response.FromValue((DiskData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DiskResourceData> Get(string subscriptionId, string resourceGroupName, string diskResourceName, CancellationToken cancellationToken = default)
+        public Response<DiskData> Get(string subscriptionId, string resourceGroupName, string diskResourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        DiskResourceData value = default;
+                        DiskData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DiskResourceData.DeserializeDiskResourceData(document.RootElement);
+                        value = DiskData.DeserializeDiskData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DiskResourceData)null, message.Response);
+                    return Response.FromValue((DiskData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

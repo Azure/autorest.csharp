@@ -10,21 +10,21 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing the DiskResource data model. </summary>
-    public partial class DiskResourceData : ResourceData
+    /// <summary> A class representing the Disk data model. </summary>
+    public partial class DiskData : ResourceData
     {
-        /// <summary> Initializes a new instance of DiskResourceData. </summary>
-        public DiskResourceData()
+        /// <summary> Initializes a new instance of DiskData. </summary>
+        public DiskData()
         {
         }
 
-        /// <summary> Initializes a new instance of DiskResourceData. </summary>
+        /// <summary> Initializes a new instance of DiskData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal DiskResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
+        internal DiskData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
         {
             New = @new;
         }

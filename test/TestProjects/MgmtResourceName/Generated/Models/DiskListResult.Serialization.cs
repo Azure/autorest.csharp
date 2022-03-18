@@ -12,11 +12,11 @@ using MgmtResourceName;
 
 namespace MgmtResourceName.Models
 {
-    internal partial class MemoryResourceListResult
+    internal partial class DiskListResult
     {
-        internal static MemoryResourceListResult DeserializeMemoryResourceListResult(JsonElement element)
+        internal static DiskListResult DeserializeDiskListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<MemoryData>> value = default;
+            Optional<IReadOnlyList<DiskData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtResourceName.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<MemoryData> array = new List<MemoryData>();
+                    List<DiskData> array = new List<DiskData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MemoryData.DeserializeMemoryData(item));
+                        array.Add(DiskData.DeserializeDiskData(item));
                     }
                     value = array;
                     continue;
@@ -41,7 +41,7 @@ namespace MgmtResourceName.Models
                     continue;
                 }
             }
-            return new MemoryResourceListResult(Optional.ToList(value), nextLink.Value);
+            return new DiskListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

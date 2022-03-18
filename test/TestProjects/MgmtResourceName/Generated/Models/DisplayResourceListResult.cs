@@ -12,25 +12,25 @@ using MgmtResourceName;
 namespace MgmtResourceName.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    internal partial class MemoryResourceListResult
+    internal partial class DisplayResourceListResult
     {
-        /// <summary> Initializes a new instance of MemoryResourceListResult. </summary>
-        internal MemoryResourceListResult()
+        /// <summary> Initializes a new instance of DisplayResourceListResult. </summary>
+        internal DisplayResourceListResult()
         {
-            Value = new ChangeTrackingList<MemoryData>();
+            Value = new ChangeTrackingList<DisplayResourceData>();
         }
 
-        /// <summary> Initializes a new instance of MemoryResourceListResult. </summary>
+        /// <summary> Initializes a new instance of DisplayResourceListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal MemoryResourceListResult(IReadOnlyList<MemoryData> value, string nextLink)
+        internal DisplayResourceListResult(IReadOnlyList<DisplayResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<MemoryData> Value { get; }
+        public IReadOnlyList<DisplayResourceData> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

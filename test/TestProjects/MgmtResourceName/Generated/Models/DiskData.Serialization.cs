@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtResourceName
 {
-    public partial class MemoryResourceData : IUtf8JsonSerializable
+    public partial class DiskData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -24,7 +24,7 @@ namespace MgmtResourceName
             writer.WriteEndObject();
         }
 
-        internal static MemoryResourceData DeserializeMemoryResourceData(JsonElement element)
+        internal static DiskData DeserializeDiskData(JsonElement element)
         {
             Optional<string> @new = default;
             ResourceIdentifier id = default;
@@ -59,7 +59,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new MemoryResourceData(id, name, type, systemData, @new.Value);
+            return new DiskData(id, name, type, systemData, @new.Value);
         }
     }
 }

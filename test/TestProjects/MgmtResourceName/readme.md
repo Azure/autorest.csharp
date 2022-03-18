@@ -11,13 +11,16 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtResourceName.json
 namespace: MgmtResourceName
+no-resource-suffix:
+  - Disk
+  - Memory
 
-
-request-path-to-resource-name:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}: MemoryResource
 
 directive:
   - rename-model:
       from: NetworkResource
       to: Network
+  - rename-model:
+      from: MemoryResource
+      to: Memory
 ```

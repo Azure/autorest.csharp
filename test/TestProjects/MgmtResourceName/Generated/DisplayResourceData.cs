@@ -10,21 +10,21 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing the MemoryResource data model. </summary>
-    public partial class MemoryResourceData : ResourceData
+    /// <summary> A class representing the DisplayResource data model. </summary>
+    public partial class DisplayResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of MemoryResourceData. </summary>
-        public MemoryResourceData()
+        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        public DisplayResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of MemoryResourceData. </summary>
+        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal MemoryResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
+        internal DisplayResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
         {
             New = @new;
         }
