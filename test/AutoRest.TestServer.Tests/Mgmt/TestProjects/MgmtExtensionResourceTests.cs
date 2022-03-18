@@ -8,10 +8,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtExtensionResourceTests() : base("MgmtExtensionResource") { }
 
-        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitionResources", false)]
-        [TestCase("ManagementGroupExtensions", "GetManagementGroupPolicyDefinitions", true)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitionResources", false)]
-        [TestCase("SubscriptionExtensions", "GetSubscriptionPolicyDefinitions", true)]
+        [TestCase("ManagementGroupResourceExtensions", "GetManagementGroupPolicyDefinitionResources", false)]
+        [TestCase("ManagementGroupResourceExtensions", "GetManagementGroupPolicyDefinitions", true)]
+        [TestCase("SubscriptionResourceExtensions", "GetSubscriptionPolicyDefinitionResources", false)]
+        [TestCase("SubscriptionResourceExtensions", "GetSubscriptionPolicyDefinitions", true)]
         [TestCase("ResourceGroupExtensions", "GetPolicyDefinitionResources", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyDefinitions", false)]
         [TestCase("ManagementGroupPolicyDefinitionCollection", "CreateOrUpdate", true)]
@@ -26,8 +26,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ManagementGroupPolicyDefinitionResource", "DeleteAtManagementGroup", false)]
         public void ValidateExtensionResourceMethods(string className, string methodName, bool exist)
         {
-            var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.ManagementGroupExtensions");
-            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.SubscriptionExtensions");
+            var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.ManagementGroupResourceExtensions");
+            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.SubscriptionResourceExtensions");
             var resourceGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtExtensionResource.ResourceGroupExtensions");
             var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(managementGroupExtensions).Append(subscriptionExtensions).Append(resourceGroupExtensions);
             var classToCheck = classesToCheck.First(t => t.Name == className);

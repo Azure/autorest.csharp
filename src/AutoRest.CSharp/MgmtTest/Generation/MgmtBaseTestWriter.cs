@@ -656,7 +656,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             int maxSegment = 0;
             if (tp is MgmtExtensions extension)
             {
-                if (extension.ArmCoreType == typeof(ResourceGroupResource))
+                if (extension.ArmCoreType == typeof(ResourceGroup))
                 {
                     maxSegment = 5;
                 }

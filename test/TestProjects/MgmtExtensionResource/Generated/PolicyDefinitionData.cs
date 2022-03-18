@@ -14,15 +14,15 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing the PolicyDefinition data model. </summary>
-    public partial class PolicyDefinitionResourceData : ResourceData
+    public partial class PolicyDefinitionData : ResourceData
     {
-        /// <summary> Initializes a new instance of PolicyDefinitionResourceData. </summary>
-        public PolicyDefinitionResourceData()
+        /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
+        public PolicyDefinitionData()
         {
             Parameters = new ChangeTrackingDictionary<string, ParameterDefinitionsValue>();
         }
 
-        /// <summary> Initializes a new instance of PolicyDefinitionResourceData. </summary>
+        /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

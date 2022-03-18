@@ -13,15 +13,15 @@ using MgmtRenameRules.Models;
 namespace MgmtRenameRules
 {
     /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
-    public partial class VirtualMachineScaleSetExtensionResourceData : SubResourceReadOnly
+    public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionResourceData. </summary>
-        public VirtualMachineScaleSetExtensionResourceData()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
+        public VirtualMachineScaleSetExtensionData()
         {
             ProvisionAfterExtensions = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionResourceData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the extension. </param>
         /// <param name="resourceType"> Resource type. </param>

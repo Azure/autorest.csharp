@@ -15,17 +15,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocResource", "GetAll", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocResource", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, false)]
+        [TestCase("SubscriptionResourceExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChResource", "GetAll", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChResource", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithNonResChesAsync", true, false)]
+        [TestCase("SubscriptionResourceExtensions", "GetResGrpParentWithAncestorWithNonResChesAsync", true, false)]
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithLocResource", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithLocs", true, false)]
+        [TestCase("SubscriptionResourceExtensions", "GetResGrpParentWithAncestorWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorResource", "GetAll", false, false)]
@@ -50,21 +50,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentWithAncestorWithNonResChWithLocResource", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocResource", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionResourceExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithNonResChResource", "GetAll", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false, false)]
         [TestCase("FakeParentWithAncestorWithNonResChResource", "GetNonResourceChild", true, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithNonResChes", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionResourceExtensions", "GetFakeParentWithAncestorWithNonResChes", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorWithLocResource", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestorWithLocs", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionResourceExtensions", "GetFakeParentWithAncestorWithLocs", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithAncestorResource", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetFakeParentWithAncestors", true, false)] // TODO -- fix this name
+        [TestCase("SubscriptionResourceExtensions", "GetFakeParentWithAncestors", true, false)] // TODO -- fix this name
 
         [TestCase("FakeParentWithNonResChCollection", "GetAll", true, false)]
         [TestCase("FakeParentWithNonResChResource", "GetAll", false, false)]
@@ -74,7 +74,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentCollection", "GetAll", true, false)]
         [TestCase("FakeParentResource", "GetAll", false, false)]
 
-        [TestCase("SubscriptionExtensions", "UpdateQuotas", true, false)]
+        [TestCase("SubscriptionResourceExtensions", "UpdateQuotas", true, false)]
         public void ValidateFakesResourceAsAParentListMethods(string className, string methodName, bool exist, bool haveOverload)
         {
             ValidateListMethods(className, methodName, exist, haveOverload);
@@ -145,7 +145,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         public void ValidateListMethods(string className, string methodName, bool exist, bool haveOverload)
         {
-            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtListMethods.SubscriptionExtensions");
+            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtListMethods.SubscriptionResourceExtensions");
             var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(subscriptionExtensions);
             var classToCheck = classesToCheck.First(t => t.Name == className);
             if (haveOverload)

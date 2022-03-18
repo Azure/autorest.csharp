@@ -369,7 +369,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
+                else if (Id.Parent.ResourceType == ManagementGroupResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -377,7 +377,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == Subscription.ResourceType)
+                else if (Id.Parent.ResourceType == SubscriptionResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -385,7 +385,7 @@ namespace MgmtScopeResource
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == Tenant.ResourceType)
+                else if (Id.Parent.ResourceType == TenantResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScopeAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -436,7 +436,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == ManagementGroup.ResourceType)
+                else if (Id.Parent.ResourceType == ManagementGroupResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -444,7 +444,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == Subscription.ResourceType)
+                else if (Id.Parent.ResourceType == SubscriptionResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -452,7 +452,7 @@ namespace MgmtScopeResource
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
-                else if (Id.Parent.ResourceType == Tenant.ResourceType)
+                else if (Id.Parent.ResourceType == TenantResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScope(Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response, OperationFinalStateVia.Location);

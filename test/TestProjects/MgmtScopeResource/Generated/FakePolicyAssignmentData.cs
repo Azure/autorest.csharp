@@ -14,17 +14,17 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the FakePolicyAssignment data model. </summary>
-    public partial class FakePolicyAssignmentResourceData : ResourceData
+    public partial class FakePolicyAssignmentData : ResourceData
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentResourceData. </summary>
-        public FakePolicyAssignmentResourceData()
+        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        public FakePolicyAssignmentData()
         {
             NotScopes = new ChangeTrackingList<string>();
             Parameters = new ChangeTrackingDictionary<string, ParameterValuesValue>();
             NonComplianceMessages = new ChangeTrackingList<NonComplianceMessage>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentResourceData. </summary>
+        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

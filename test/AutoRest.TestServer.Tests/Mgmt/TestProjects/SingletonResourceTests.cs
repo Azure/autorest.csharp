@@ -60,7 +60,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
-                .Append(FindResourceGroupExtensions()).Append(FindSubscriptionExtensions());
+                .Append(FindResourceGroupExtensions()).Append(FindSubscriptionResourceExtensions());
             var type = possibleTypesToFind.FirstOrDefault(r => r.Name == parent);
             Assert.IsNotNull(type, $"Cannot find parent {parent}");
             var method = type.GetMethod(methodName);

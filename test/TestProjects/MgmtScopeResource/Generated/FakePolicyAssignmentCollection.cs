@@ -217,7 +217,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == ManagementGroup.ResourceType)
+            else if (Id.ResourceType == ManagementGroupResource.ResourceType)
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -251,7 +251,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == Subscription.ResourceType)
+            else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -372,7 +372,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == ManagementGroup.ResourceType)
+            else if (Id.ResourceType == ManagementGroupResource.ResourceType)
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {
@@ -406,7 +406,7 @@ namespace MgmtScopeResource
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
-            else if (Id.ResourceType == Subscription.ResourceType)
+            else if (Id.ResourceType == SubscriptionResource.ResourceType)
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {

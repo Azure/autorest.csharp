@@ -14,13 +14,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
 
-        [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
+        [TestCase("ManagementGroupResourceExtensions", "GetPolicyAssignments", false)]
+        [TestCase("SubscriptionResourceExtensions", "GetPolicyAssignments", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("ManagementGroupExtensions", "GetDeploymentExtendedResources", false)]
-        [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
-        [TestCase("SubscriptionExtensions", "GetDeploymentExtendedResources", false)]
-        [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ManagementGroupResourceExtensions", "GetDeploymentExtendedResources", false)]
+        [TestCase("ManagementGroupResourceExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("SubscriptionResourceExtensions", "GetDeploymentExtendedResources", false)]
+        [TestCase("SubscriptionResourceExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendedResources", false)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ArmResourceExtensions", "GetFakePolicyAssignmentResources", false)]
@@ -51,8 +51,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResourceLinkResource", "Delete", true)]
         public void ValidateScopeResourceMethods(string className, string methodName, bool exist)
         {
-            var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupExtensions");
-            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.SubscriptionExtensions");
+            var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupResourceExtensions");
+            var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.SubscriptionResourceExtensions");
             var resourceGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ResourceGroupExtensions");
             var armResourceExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ArmResourceExtensions");
             var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(managementGroupExtensions).Append(subscriptionExtensions).Append(resourceGroupExtensions).Append(armResourceExtensions);

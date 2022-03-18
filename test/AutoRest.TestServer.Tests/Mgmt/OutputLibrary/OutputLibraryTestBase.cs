@@ -150,10 +150,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
                     Assert.GreaterOrEqual(method.GetParameters().Length, 2);
-                    var param1 = TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name);
-                    Assert.AreEqual(typeof(WaitUntil), param1.ParameterType);
-                    var param2 = TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name);
-                    Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
+                    TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name, typeof(WaitUntil));
+                    TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name, typeof(CancellationToken));
                 }
             }
         }
