@@ -8,7 +8,6 @@ using Azure.Core;
 using AutoRest.TestServer.Tests.Infrastructure;
 using dpg_initial_LowLevel;
 using NUnit.Framework;
-using dpg_update1_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {
