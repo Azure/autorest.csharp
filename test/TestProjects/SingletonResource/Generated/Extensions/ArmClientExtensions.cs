@@ -20,7 +20,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Car" /> object. </returns>
         public static Car GetCar(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Car.ValidateResourceId(id);
                 return new Car(client, id);
@@ -36,7 +36,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
         public static Ignition GetIgnition(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Ignition.ValidateResourceId(id);
                 return new Ignition(client, id);
@@ -52,7 +52,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SingletonResource.ValidateResourceId(id);
                 return new SingletonResource(client, id);
@@ -68,7 +68,7 @@ namespace SingletonResource
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
         public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ParentResource.ValidateResourceId(id);
                 return new ParentResource(client, id);

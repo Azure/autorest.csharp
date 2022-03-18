@@ -20,7 +20,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetA" /> object. </returns>
         public static RecordSetA GetRecordSetA(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetA.ValidateResourceId(id);
                 return new RecordSetA(client, id);
@@ -36,7 +36,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAaaa" /> object. </returns>
         public static RecordSetAaaa GetRecordSetAaaa(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetAaaa.ValidateResourceId(id);
                 return new RecordSetAaaa(client, id);
@@ -52,7 +52,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCaa" /> object. </returns>
         public static RecordSetCaa GetRecordSetCaa(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetCaa.ValidateResourceId(id);
                 return new RecordSetCaa(client, id);
@@ -68,7 +68,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCName" /> object. </returns>
         public static RecordSetCName GetRecordSetCName(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetCName.ValidateResourceId(id);
                 return new RecordSetCName(client, id);
@@ -84,7 +84,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetMx" /> object. </returns>
         public static RecordSetMx GetRecordSetMx(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetMx.ValidateResourceId(id);
                 return new RecordSetMx(client, id);
@@ -100,7 +100,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetNs" /> object. </returns>
         public static RecordSetNs GetRecordSetNs(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetNs.ValidateResourceId(id);
                 return new RecordSetNs(client, id);
@@ -116,7 +116,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetPtr" /> object. </returns>
         public static RecordSetPtr GetRecordSetPtr(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetPtr.ValidateResourceId(id);
                 return new RecordSetPtr(client, id);
@@ -132,7 +132,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSoa" /> object. </returns>
         public static RecordSetSoa GetRecordSetSoa(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetSoa.ValidateResourceId(id);
                 return new RecordSetSoa(client, id);
@@ -148,7 +148,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSrv" /> object. </returns>
         public static RecordSetSrv GetRecordSetSrv(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetSrv.ValidateResourceId(id);
                 return new RecordSetSrv(client, id);
@@ -164,7 +164,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetTxt" /> object. </returns>
         public static RecordSetTxt GetRecordSetTxt(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 RecordSetTxt.ValidateResourceId(id);
                 return new RecordSetTxt(client, id);
@@ -180,7 +180,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="Zone" /> object. </returns>
         public static Zone GetZone(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Zone.ValidateResourceId(id);
                 return new Zone(client, id);
