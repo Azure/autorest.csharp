@@ -47,6 +47,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
 
+        [TestCase("Id", "ExactMatchModel3", typeof(ResourceIdentifier))]
+        [TestCase("Id", "ExactMatchModel8", typeof(ResourceIdentifier))]
+        [TestCase("ResourceType", "ExactMatchModel11", typeof(ResourceType?))]
+        [TestCase("ID", "ExactMatchModel7", typeof(string))]
+        [TestCase("ExactMatchModel7Type", "ExactMatchModel7", typeof(string))]
+        [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
+        [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
+        public void ValidatePropertyType(string propertyName, string className, Type expectedType)
+        {
+            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
+            Assert.NotNull(type, $"Type {className} should exist");
+            var property = type.GetProperty(propertyName);
+            Assert.AreEqual(property.PropertyType, expectedType);
+        }
+
         [TestCase(true, "ResourceType", "ExactMatchModel1Data")]
         [TestCase(false, "Type", "ExactMatchModel1Data")]
         [TestCase(true, "ResourceType", "ExactMatchModel5Data")]
