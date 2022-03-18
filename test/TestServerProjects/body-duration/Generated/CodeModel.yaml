@@ -182,6 +182,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            duration_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetNull
@@ -205,13 +212,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_0
+                schema: *ref_5
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -221,7 +228,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -242,11 +249,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /duration/positiveduration
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -277,6 +283,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            duration_putPositiveDuration:
+              parameters:
+                durationBody: P123DT22H14M12.011S
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutPositiveDuration

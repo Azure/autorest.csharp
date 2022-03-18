@@ -927,9 +927,6 @@ schemas: !Schemas
                     usage:
                       - output
                       - input
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: SupersetModel6SystemData
@@ -1076,9 +1073,6 @@ schemas: !Schemas
                     usage:
                       - output
                       - input
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: SupersetModel7SystemData
@@ -2668,8 +2662,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

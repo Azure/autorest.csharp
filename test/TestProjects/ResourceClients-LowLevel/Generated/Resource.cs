@@ -16,8 +16,6 @@ namespace ResourceClients_LowLevel
     /// <summary> The Resource service client. </summary>
     public partial class Resource
     {
-        private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -41,15 +39,13 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="itemId"> Item identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint)
+        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string groupId, string itemId, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
             GroupId = groupId;
             ItemId = itemId;
             _endpoint = endpoint;

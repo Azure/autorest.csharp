@@ -88,18 +88,7 @@ schemas: !Schemas
           name: ByteArray
           description: Non-ascii base-64 encoded byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_12
-      type: byte-array
-      format: byte
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: ByteArray
-          description: The invalid byte value '::::SWAGGER::::'
-      protocol: !Protocols {}
-    - !ByteArraySchema 
+    - !ByteArraySchema &ref_10
       type: byte-array
       format: byte
       apiVersions:
@@ -109,6 +98,17 @@ schemas: !Schemas
         default:
           name: ByteArray
           description: Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+      protocol: !Protocols {}
+    - !ByteArraySchema &ref_13
+      type: byte-array
+      format: byte
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ByteArray
+          description: The invalid byte value '::::SWAGGER::::'
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_6
@@ -226,6 +226,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            byte_getNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: GetNull
@@ -373,7 +379,7 @@ operationGroups:
         parameters:
           - *ref_3
         requestMediaTypes:
-          application/json: !Request &ref_11
+          application/json: !Request &ref_12
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -383,13 +389,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_10
-                schema: *ref_0
+              - !Parameter &ref_11
+                schema: *ref_10
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -399,7 +405,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -414,22 +420,21 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_10
+              - *ref_11
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /byte/nonAscii
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_11
+          - *ref_12
         signatureParameters: []
         responses:
           - !Response 
@@ -496,7 +501,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''

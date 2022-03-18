@@ -2224,9 +2224,6 @@ schemas: !Schemas
                     name: message
                     description: The detailed arror message
                 protocol: !Protocols {}
-            extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
             language: !Languages 
               default:
                 name: OperationResultError

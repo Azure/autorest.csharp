@@ -647,7 +647,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutBase64UrlEncodedRequest(string stringBody)
+        internal HttpMessage CreatePutBase64UrlEncodedRequest(byte[] stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -658,7 +658,9 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(stringBody);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBase64StringValue(stringBody, "U");
+            request.Content = content;
             return message;
         }
 
@@ -666,7 +668,7 @@ namespace body_string
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public async Task<Response> PutBase64UrlEncodedAsync(string stringBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -688,7 +690,7 @@ namespace body_string
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public Response PutBase64UrlEncoded(string stringBody, CancellationToken cancellationToken = default)
+        public Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {

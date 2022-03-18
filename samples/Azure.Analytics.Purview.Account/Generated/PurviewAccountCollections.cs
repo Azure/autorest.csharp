@@ -19,8 +19,6 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The PurviewAccountCollections service client. </summary>
     public partial class PurviewAccountCollections
     {
-        private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
-        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -42,15 +40,13 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Initializes a new instance of PurviewAccountCollections. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="collectionName"> The String to use. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion)
+        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string collectionName, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _tokenCredential = tokenCredential;
             _endpoint = endpoint;
             CollectionName = collectionName;
             _apiVersion = apiVersion;

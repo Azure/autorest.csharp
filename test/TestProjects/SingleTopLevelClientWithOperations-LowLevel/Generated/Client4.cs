@@ -16,8 +16,6 @@ namespace SingleTopLevelClientWithOperations_LowLevel
     /// <summary> The Client4 service client. </summary>
     public partial class Client4
     {
-        private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -38,14 +36,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of Client4. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="clientParameter"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string clientParameter, Uri endpoint)
+        internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string clientParameter, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _keyCredential = keyCredential;
             ClientParameter = clientParameter;
             _endpoint = endpoint;
         }

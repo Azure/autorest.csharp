@@ -176,7 +176,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUtcMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
@@ -194,7 +194,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutUtcMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
             scope.Start();
@@ -280,7 +280,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUtcMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();
@@ -298,7 +298,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutUtcMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
             scope.Start();

@@ -19,8 +19,6 @@ namespace ResourceClients_LowLevel
     /// <summary> The ResourceService service client. </summary>
     public partial class ResourceServiceClient
     {
-        private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -36,19 +34,15 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ResourceServiceClient(AzureKeyCredential credential, Uri endpoint = null, ResourceServiceClientOptions options = null)
+        public ResourceServiceClient(Uri endpoint = null, ResourceServiceClientOptions options = null)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ResourceServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -170,7 +164,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, groupId, _endpoint);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)

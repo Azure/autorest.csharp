@@ -176,7 +176,7 @@ namespace body_datetime
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUtcMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
             scope.Start();
@@ -194,7 +194,7 @@ namespace body_datetime
         /// <summary> Put max datetime value 9999-12-31T23:59:59.999Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutUtcMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
             scope.Start();
@@ -212,7 +212,7 @@ namespace body_datetime
         /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUtcMaxDateTime7DigitsAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
             scope.Start();
@@ -230,7 +230,7 @@ namespace body_datetime
         /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutUtcMaxDateTime7Digits(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
             scope.Start();
@@ -350,7 +350,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutLocalPositiveOffsetMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
@@ -368,7 +368,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutLocalPositiveOffsetMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
             scope.Start();
@@ -454,7 +454,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutLocalNegativeOffsetMaxDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
@@ -472,7 +472,7 @@ namespace body_datetime
         /// <summary> Put max datetime value with positive numoffset 9999-12-31t23:59:59.999-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutLocalNegativeOffsetMaxDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
             scope.Start();
@@ -558,7 +558,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutUtcMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
             scope.Start();
@@ -576,7 +576,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00Z. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutUtcMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
             scope.Start();
@@ -628,7 +628,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutLocalPositiveOffsetMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
@@ -646,7 +646,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00+14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutLocalPositiveOffsetMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
             scope.Start();
@@ -698,7 +698,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutLocalNegativeOffsetMinDateTimeAsync(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
             scope.Start();
@@ -716,7 +716,7 @@ namespace body_datetime
         /// <summary> Put min datetime value 0001-01-01T00:00:00-14:00. </summary>
         /// <param name="datetimeBody"> datetime body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutLocalNegativeOffsetMinDateTime(string datetimeBody, CancellationToken cancellationToken = default)
+        public virtual Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
             scope.Start();

@@ -2037,8 +2037,6 @@ schemas: !Schemas
               - input
               - output
             extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
               x-ms-client-flatten: true
             language: !Languages 
               default:
@@ -2207,8 +2205,6 @@ schemas: !Schemas
               - input
               - output
             extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
               x-ms-client-flatten: true
             language: !Languages 
               default:
@@ -2274,9 +2270,6 @@ schemas: !Schemas
                     name: message
                     description: The detailed arror message
                 protocol: !Protocols {}
-            extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
             language: !Languages 
               default:
                 name: OperationResultError
@@ -10761,9 +10754,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AutoRestLongRunningOperationTestService

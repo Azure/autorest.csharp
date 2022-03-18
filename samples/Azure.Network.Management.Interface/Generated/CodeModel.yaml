@@ -2527,6 +2527,8 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
+          extensions:
+            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -3465,6 +3467,8 @@ schemas: !Schemas
                                                   - properties
                                                   - natGateway
                                                 serializedName: natGateway
+                                                extensions:
+                                                  x-ms-azure-resource: true
                                                 language: !Languages 
                                                   default:
                                                     name: natGateway
@@ -4491,6 +4495,8 @@ schemas: !Schemas
                                                     - !Property 
                                                       schema: *ref_11
                                                       serializedName: ddosCustomPolicy
+                                                      extensions:
+                                                        x-ms-azure-resource: true
                                                       language: !Languages 
                                                         default:
                                                           name: ddosCustomPolicy
@@ -4604,6 +4610,8 @@ schemas: !Schemas
                                                   - properties
                                                   - publicIPPrefix
                                                 serializedName: publicIPPrefix
+                                                extensions:
+                                                  x-ms-azure-resource: true
                                                 language: !Languages 
                                                   default:
                                                     name: publicIPPrefix
@@ -5095,6 +5103,8 @@ schemas: !Schemas
                                                                 - outboundRule
                                                               readOnly: true
                                                               serializedName: outboundRule
+                                                              extensions:
+                                                                x-ms-azure-resource: true
                                                               language: !Languages 
                                                                 default:
                                                                   name: outboundRule
@@ -5208,6 +5218,8 @@ schemas: !Schemas
                                                                 - properties
                                                                 - frontendIPConfiguration
                                                               serializedName: frontendIPConfiguration
+                                                              extensions:
+                                                                x-ms-azure-resource: true
                                                               language: !Languages 
                                                                 default:
                                                                   name: frontendIPConfiguration
@@ -5723,6 +5735,8 @@ schemas: !Schemas
                                                         - properties
                                                         - publicIPPrefix
                                                       serializedName: publicIPPrefix
+                                                      extensions:
+                                                        x-ms-azure-resource: true
                                                       language: !Languages 
                                                         default:
                                                           name: publicIPPrefix
@@ -5862,6 +5876,8 @@ schemas: !Schemas
                                             - properties
                                             - frontendIPConfiguration
                                           serializedName: frontendIPConfiguration
+                                          extensions:
+                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: frontendIPConfiguration
@@ -5873,6 +5889,8 @@ schemas: !Schemas
                                             - properties
                                             - backendAddressPool
                                           serializedName: backendAddressPool
+                                          extensions:
+                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: backendAddressPool
@@ -5884,6 +5902,8 @@ schemas: !Schemas
                                             - properties
                                             - probe
                                           serializedName: probe
+                                          extensions:
+                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: probe
@@ -6188,6 +6208,8 @@ schemas: !Schemas
                                             - properties
                                             - frontendIPConfiguration
                                           serializedName: frontendIPConfiguration
+                                          extensions:
+                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: frontendIPConfiguration
@@ -6370,6 +6392,8 @@ schemas: !Schemas
                                             - properties
                                             - backendAddressPool
                                           serializedName: backendAddressPool
+                                          extensions:
+                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: backendAddressPool
@@ -6955,6 +6979,8 @@ schemas: !Schemas
             - virtualMachine
           readOnly: true
           serializedName: virtualMachine
+          extensions:
+            x-ms-azure-resource: true
           language: !Languages 
             default:
               name: virtualMachine
@@ -7480,6 +7506,8 @@ schemas: !Schemas
                 - !Property 
                   schema: *ref_11
                   serializedName: networkSecurityGroup
+                  extensions:
+                    x-ms-azure-resource: true
                   language: !Languages 
                     default:
                       name: networkSecurityGroup
@@ -7495,6 +7523,8 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_11
                         serializedName: subnet
+                        extensions:
+                          x-ms-azure-resource: true
                         language: !Languages 
                           default:
                             name: subnet
@@ -7503,6 +7533,8 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_11
                         serializedName: networkInterface
+                        extensions:
+                          x-ms-azure-resource: true
                         language: !Languages 
                           default:
                             name: networkInterface
@@ -8168,6 +8200,17 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Delete network interface:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: test-nic
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200': {}
+                '202': {}
+                '204': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -8278,6 +8321,48 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get network interface:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: test-nic
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    name: test-nic
+                    type: Microsoft.Network/networkInterfaces
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                    location: eastus
+                    properties:
+                      dnsSettings:
+                        appliedDnsServers: []
+                        dnsServers: []
+                        internalDomainNameSuffix: test.bx.internal.cloudapp.net
+                      enableAcceleratedNetworking: true
+                      enableIPForwarding: false
+                      ipConfigurations:
+                        - name: ipconfig1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                          properties:
+                            primary: true
+                            privateIPAddress: 172.20.2.4
+                            privateIPAddressVersion: IPv4
+                            privateIPAllocationMethod: Dynamic
+                            provisioningState: Succeeded
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                      macAddress: 00-0D-3A-1B-C7-21
+                      networkSecurityGroup:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg
+                      primary: true
+                      provisioningState: Succeeded
+                      virtualMachine:
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
         language: !Languages 
           default:
             name: Get
@@ -8418,6 +8503,77 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Create network interface:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: test-nic
+                parameters:
+                  location: eastus
+                  properties:
+                    enableAcceleratedNetworking: true
+                    ipConfigurations:
+                      - name: ipconfig1
+                        properties:
+                          publicIPAddress:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                          subnet:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    name: test-nic
+                    type: Microsoft.Network/networkInterfaces
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                    location: eastus
+                    properties:
+                      dnsSettings:
+                        appliedDnsServers: []
+                        dnsServers: []
+                      enableAcceleratedNetworking: true
+                      enableIPForwarding: false
+                      ipConfigurations:
+                        - name: ipconfig1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                          properties:
+                            primary: true
+                            privateIPAddress: 172.20.2.4
+                            privateIPAddressVersion: IPv4
+                            privateIPAllocationMethod: Dynamic
+                            provisioningState: Succeeded
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                      provisioningState: Succeeded
+                '201':
+                  body:
+                    name: test-nic
+                    type: Microsoft.Network/networkInterfaces
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                    location: eastus
+                    properties:
+                      dnsSettings:
+                        appliedDnsServers: []
+                        dnsServers: []
+                      enableAcceleratedNetworking: true
+                      enableIPForwarding: false
+                      ipConfigurations:
+                        - name: ipconfig1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                          properties:
+                            primary: true
+                            privateIPAddress: 172.20.2.4
+                            privateIPAddressVersion: IPv4
+                            privateIPAllocationMethod: Dynamic
+                            provisioningState: Succeeded
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                      provisioningState: Succeeded
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: azure-async-operation
@@ -8547,6 +8703,48 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Update network interface tags:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: test-nic
+                parameters:
+                  tags:
+                    tag1: value1
+                    tag2: value2
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    name: test-nic
+                    type: Microsoft.Network/networkInterfaces
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                    location: eastus
+                    properties:
+                      dnsSettings:
+                        appliedDnsServers: []
+                        dnsServers: []
+                      enableAcceleratedNetworking: true
+                      enableIPForwarding: false
+                      ipConfigurations:
+                        - name: ipconfig1
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                          properties:
+                            primary: true
+                            privateIPAddress: 172.20.2.4
+                            privateIPAddressVersion: IPv4
+                            privateIPAllocationMethod: Dynamic
+                            provisioningState: Succeeded
+                            publicIPAddress:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                            subnet:
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                      provisioningState: Succeeded
+                    tags:
+                      tag1: value1
+                      tag2: value2
         language: !Languages 
           default:
             name: UpdateTags
@@ -8617,6 +8815,70 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List all network interfaces:
+              parameters:
+                api-version: '2019-11-01'
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: test-nic
+                        type: Microsoft.Network/networkInterfaces
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                        location: eastus
+                        properties:
+                          dnsSettings:
+                            appliedDnsServers: []
+                            dnsServers: []
+                            internalDomainNameSuffix: test.bx.internal.cloudapp.net
+                          enableAcceleratedNetworking: true
+                          enableIPForwarding: false
+                          ipConfigurations:
+                            - name: ipconfig1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                              properties:
+                                primary: true
+                                privateIPAddress: 172.20.2.4
+                                privateIPAddressVersion: IPv4
+                                privateIPAllocationMethod: Dynamic
+                                provisioningState: Succeeded
+                                publicIPAddress:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                                subnet:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                          macAddress: 00-0D-3A-1B-C7-21
+                          networkSecurityGroup:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg
+                          primary: true
+                          provisioningState: Succeeded
+                          virtualMachine:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
+                      - name: test-nic2
+                        type: Microsoft.Network/networkInterfaces
+                        id: /subscriptions/subid/resourceGroups/rgnew/providers/Microsoft.Network/networkInterfaces/test-nic2
+                        location: eastus
+                        properties:
+                          dnsSettings:
+                            appliedDnsServers: []
+                            dnsServers: []
+                          enableAcceleratedNetworking: true
+                          enableIPForwarding: false
+                          ipConfigurations:
+                            - name: ipconfig1
+                              id: /subscriptions/subid/resourceGroups/rgnew/providers/Microsoft.Network/networkInterfaces/test-nic2/ipConfigurations/ipconfig1
+                              properties:
+                                primary: true
+                                privateIPAddress: 172.20.2.4
+                                privateIPAddressVersion: IPv4
+                                privateIPAllocationMethod: Dynamic
+                                provisioningState: Succeeded
+                                publicIPAddress:
+                                  id: /subscriptions/subid/resourceGroups/rgnew/providers/Microsoft.Network/publicIPAddresses/test-ip2
+                                subnet:
+                                  id: /subscriptions/subid/resourceGroups/rgnew/providers/Microsoft.Network/virtualNetworks/rgnew-vnet2/subnets/default
+                          provisioningState: Succeeded
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -8704,6 +8966,71 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List network interfaces in resource group:
+              parameters:
+                api-version: '2019-11-01'
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: test-nic
+                        type: Microsoft.Network/networkInterfaces
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic
+                        location: eastus
+                        properties:
+                          dnsSettings:
+                            appliedDnsServers: []
+                            dnsServers: []
+                            internalDomainNameSuffix: test.bx.internal.cloudapp.net
+                          enableAcceleratedNetworking: true
+                          enableIPForwarding: false
+                          ipConfigurations:
+                            - name: ipconfig1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1
+                              properties:
+                                primary: true
+                                privateIPAddress: 172.20.2.4
+                                privateIPAddressVersion: IPv4
+                                privateIPAllocationMethod: Dynamic
+                                provisioningState: Succeeded
+                                publicIPAddress:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
+                                subnet:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                          macAddress: 00-0D-3A-1B-C7-21
+                          networkSecurityGroup:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg
+                          primary: true
+                          provisioningState: Succeeded
+                          virtualMachine:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1
+                      - name: test-nic2
+                        type: Microsoft.Network/networkInterfaces
+                        id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic2
+                        location: eastus
+                        properties:
+                          dnsSettings:
+                            appliedDnsServers: []
+                            dnsServers: []
+                          enableAcceleratedNetworking: true
+                          enableIPForwarding: false
+                          ipConfigurations:
+                            - name: ipconfig1
+                              id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic2/ipConfigurations/ipconfig1
+                              properties:
+                                primary: true
+                                privateIPAddress: 172.20.2.4
+                                privateIPAddressVersion: IPv4
+                                privateIPAllocationMethod: Dynamic
+                                provisioningState: Succeeded
+                                publicIPAddress:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip2
+                                subnet:
+                                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet2/subnets/default
+                          provisioningState: Succeeded
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -8813,6 +9140,54 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Show network interface effective route tables:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: nic1
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - addressPrefix:
+                          - 172.20.2.0/24
+                        nextHopIpAddress: []
+                        nextHopType: VnetLocal
+                        source: Default
+                        state: Active
+                      - addressPrefix:
+                          - 0.0.0.0/0
+                        nextHopIpAddress: []
+                        nextHopType: Internet
+                        source: Default
+                        state: Active
+                      - addressPrefix:
+                          - 10.0.0.0/8
+                        nextHopIpAddress: []
+                        nextHopType: None
+                        source: Default
+                        state: Active
+                      - addressPrefix:
+                          - 100.64.0.0/10
+                        nextHopIpAddress: []
+                        nextHopType: None
+                        source: Default
+                        state: Active
+                      - addressPrefix:
+                          - 172.16.0.0/12
+                        nextHopIpAddress: []
+                        nextHopType: None
+                        source: Default
+                        state: Active
+                      - addressPrefix:
+                          - 192.168.0.0/16
+                        nextHopIpAddress: []
+                        nextHopType: None
+                        source: Default
+                        state: Active
+                '202': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -8921,6 +9296,58 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List network interface effective network security groups:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: nic1
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - association:
+                          networkInterface:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/nic1
+                          subnet:
+                            id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default
+                        effectiveSecurityRules:
+                          - name: securityRules/rule1
+                            access: Allow
+                            destinationAddressPrefix: 0.0.0.0/32
+                            destinationPortRange: 6579-6579
+                            direction: Inbound
+                            priority: 234
+                            sourceAddressPrefix: 0.0.0.0/32
+                            sourcePortRange: 456-456
+                            protocol: Tcp
+                          - name: securityRules/default-allow-rdp
+                            access: Allow
+                            destinationAddressPrefix: 0.0.0.0/0
+                            destinationPortRange: 3389-3389
+                            direction: Inbound
+                            priority: 1000
+                            sourceAddressPrefix: 1.1.1.1/32
+                            sourcePortRange: 0-65535
+                            protocol: Tcp
+                          - name: defaultSecurityRules/AllowInternetOutBound
+                            access: Allow
+                            destinationAddressPrefix: Internet
+                            destinationPortRange: 0-65535
+                            direction: Outbound
+                            expandedDestinationAddressPrefix:
+                              - 32.0.0.0/3
+                              - 4.0.0.0/6
+                              - 2.0.0.0/7
+                              - 1.0.0.0/8
+                            priority: 65001
+                            sourceAddressPrefix: 0.0.0.0/0
+                            sourcePortRange: 0-65535
+                            protocol: All
+                        networkSecurityGroup:
+                          id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/test-nsg
+                '202': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -9028,6 +9455,28 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            NetworkInterfaceIPConfigurationList:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: nic1
+                resourceGroupName: testrg
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: ipconfig1
+                        etag: W/\"00000000-0000-0000-0000-000000000000\"
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1
+                        properties:
+                          primary: true
+                          privateIPAddress: 10.0.0.4
+                          privateIPAddressVersion: IPv4
+                          privateIPAllocationMethod: Dynamic
+                          provisioningState: Succeeded
+                          subnet:
+                            id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet12/subnets/subnet12
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9140,6 +9589,35 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            NetworkInterfaceIPConfigurationGet:
+              parameters:
+                api-version: '2019-11-01'
+                ipConfigurationName: ipconfig1
+                networkInterfaceName: mynic
+                resourceGroupName: testrg
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    name: ipconfig1
+                    etag: W/\"00000000-0000-0000-0000-000000000000\"
+                    id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/ipConfigurations/ipconfig1
+                    properties:
+                      loadBalancerBackendAddressPools:
+                        - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/backendAddressPools/bepool1
+                      loadBalancerInboundNatRules:
+                        - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/inboundNatRules/inbound1
+                      privateIPAddress: 10.0.1.4
+                      privateIPAddressVersion: IPv4
+                      privateIPAllocationMethod: Dynamic
+                      provisioningState: Succeeded
+                      subnet:
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/frontendSubnet
+                      virtualNetworkTaps:
+                        - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/vTAP1
+                        - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/vTAP2
         language: !Languages 
           default:
             name: Get
@@ -9244,6 +9722,96 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            NetworkInterfaceLoadBalancerList:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: nic1
+                resourceGroupName: testrg
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: lbname1
+                        type: Microsoft.Network/loadBalancers
+                        etag: W/\"00000000-0000-0000-0000-000000000000\"
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1
+                        location: westus
+                        properties:
+                          backendAddressPools:
+                            - name: bepool1
+                              etag: W/\"00000000-0000-0000-0000-000000000000\"
+                              id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/backendAddressPools/bepool1
+                              properties:
+                                backendIPConfigurations:
+                                  - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1
+                                loadBalancingRules:
+                                  - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/loadBalancingRules/rule1
+                                provisioningState: Succeeded
+                          frontendIPConfigurations:
+                            - name: lbfrontend
+                              etag: W/\"00000000-0000-0000-0000-000000000000\"
+                              id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/frontendIPConfigurations/lbfrontend
+                              properties:
+                                inboundNatRules:
+                                  - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/inboundNatRules/inbound1
+                                loadBalancingRules:
+                                  - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/loadBalancingRules/rule1
+                                privateIPAllocationMethod: Dynamic
+                                provisioningState: Succeeded
+                                publicIPAddress:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/publicIPAddresses/myDynamicPublicIP
+                          inboundNatPools: []
+                          inboundNatRules:
+                            - name: inbound1
+                              etag: W/\"00000000-0000-0000-0000-000000000000\"
+                              id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/inboundNatRules/inbound1
+                              properties:
+                                backendIPConfiguration:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1
+                                backendPort: 3389
+                                enableFloatingIP: false
+                                frontendIPConfiguration:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/frontendIPConfigurations/lbfrontend
+                                frontendPort: 3389
+                                idleTimeoutInMinutes: 15
+                                provisioningState: Succeeded
+                                protocol: Tcp
+                          loadBalancingRules:
+                            - name: rule1
+                              etag: W/\"00000000-0000-0000-0000-000000000000\"
+                              id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/loadBalancingRules/rule1
+                              properties:
+                                backendAddressPool:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/backendAddressPools/bepool1
+                                backendPort: 80
+                                enableFloatingIP: false
+                                frontendIPConfiguration:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/frontendIPConfigurations/lbfrontend
+                                frontendPort: 80
+                                idleTimeoutInMinutes: 15
+                                loadDistribution: Default
+                                probe:
+                                  id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/probes/probe1
+                                provisioningState: Succeeded
+                                protocol: Tcp
+                          outboundRules: []
+                          probes:
+                            - name: probe1
+                              etag: W/\"00000000-0000-0000-0000-000000000000\"
+                              id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/probes/probe1
+                              properties:
+                                intervalInSeconds: 15
+                                loadBalancingRules:
+                                  - id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lbname1/loadBalancingRules/rule1
+                                numberOfProbes: 2
+                                port: 80
+                                provisioningState: Succeeded
+                                requestPath: healthcheck.aspx
+                                protocol: Http
+                          provisioningState: Succeeded
+                          resourceGuid: 00000000-0000-0000-0000-000000000000
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9379,6 +9947,18 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Delete tap configuration:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: test-networkinterface
+                resourceGroupName: rg1
+                subscriptionId: subid
+                tapConfigurationName: test-tapconfiguration
+              responses:
+                '200': {}
+                '202': {}
+                '204': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -9490,6 +10070,26 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get Network Interface Tap Configurations:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: mynic
+                resourceGroupName: testrg
+                subscriptionId: subid
+                tapConfigurationName: tapconfiguration1
+              responses:
+                '200':
+                  body:
+                    name: tapConfiguration1
+                    type: Microsoft.Network/networkInterfaces/tapConfigurations
+                    etag: etag
+                    id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1
+                    properties:
+                      provisioningState: Succeded
+                      virtualNetworkTap:
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
         language: !Languages 
           default:
             name: Get
@@ -9643,6 +10243,39 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Create Network Interface Tap Configurations:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: mynic
+                resourceGroupName: testrg
+                subscriptionId: subid
+                tapConfigurationName: tapconfiguration1
+                tapConfigurationParameters:
+                  properties:
+                    virtualNetworkTap:
+                      id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
+              responses:
+                '200':
+                  body:
+                    name: tapConfiguration1
+                    type: Microsoft.Network/networkInterfaces/tapConfigurations
+                    etag: etag
+                    id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1
+                    properties:
+                      provisioningState: Succeded
+                      virtualNetworkTap:
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
+                '201':
+                  body:
+                    name: tapConfiguration1
+                    type: Microsoft.Network/networkInterfaces/tapConfigurations
+                    etag: etag
+                    id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1
+                    properties:
+                      provisioningState: Succeded
+                      virtualNetworkTap:
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: azure-async-operation
@@ -9742,6 +10375,25 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List virtual network tap configurations:
+              parameters:
+                api-version: '2019-11-01'
+                networkInterfaceName: mynic
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: tapConfiguration1
+                        type: Microsoft.Network/networkInterfaces/tapConfigurations
+                        etag: etag
+                        id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1
+                        properties:
+                          provisioningState: Succeded
+                          virtualNetworkTap:
+                            id: /subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -9758,7 +10410,11 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
-  schemes: []
+  schemes:
+    - !OAuth2SecurityScheme 
+      type: OAuth2
+      scopes:
+        - user_impersonation
 language: !Languages 
   default:
     name: AzureNetworkManagementInterface

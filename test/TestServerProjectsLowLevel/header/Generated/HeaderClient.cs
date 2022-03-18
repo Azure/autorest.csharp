@@ -16,8 +16,6 @@ namespace header_LowLevel
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {
-        private const string AuthorizationHeader = "Fake-Subscription-Key";
-        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -33,19 +31,15 @@ namespace header_LowLevel
         }
 
         /// <summary> Initializes a new instance of HeaderClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential, Uri endpoint = null, HeaderClientOptions options = null)
+        public HeaderClient(Uri endpoint = null, HeaderClientOptions options = null)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new HeaderClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
         }
 

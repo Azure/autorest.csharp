@@ -2047,6 +2047,86 @@ operationGroups:
                 statusCodes:
                   - '503'
         extensions:
+          x-ms-examples:
+            Batch Submit:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                body:
+                  inputs:
+                    - source:
+                        filter:
+                          prefix: pre
+                          suffix: .txt
+                        sourceUrl: https://myblob.blob.core.windows.net/sourceContainer
+                        storageSource: AzureBlob
+                        language: en
+                      storageType: Folder
+                      targets:
+                        - category: general
+                          glossaries:
+                            - format: XLIFF
+                              glossaryUrl: https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf
+                              storageSource: AzureBlob
+                          storageSource: AzureBlob
+                          targetUrl: https://myblob.blob.core.windows.net/destinationContainer1
+                          language: fr
+                        - category: general
+                          storageSource: AzureBlob
+                          targetUrl: https://myblob.blob.core.windows.net/destinationContainer2
+                          language: es
+                endpoint: '{endpoint}'
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '202':
+                  headers:
+                    Operation-Location: https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55
+                '400':
+                  body:
+                    error:
+                      code: InvalidRequest
+                      innerError:
+                        code: SASTokenInvalid
+                        message: SAS token for storage is invalid
+                      message: Some argument is incorrect
+                  headers: {}
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                  headers: {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -2295,6 +2375,93 @@ operationGroups:
                 statusCodes:
                   - '503'
         extensions:
+          x-ms-examples:
+            Get status for batch operations:
+              parameters:
+                $maxpagesize: 10
+                $orderBy: CreatedDateTime asc
+                $skip: 0
+                $top: 1
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                createdDateTimeUtcEnd: '2021-03-25T07:03:38.0136316Z'
+                createdDateTimeUtcStart: '2021-03-23T07:03:38.0136316Z'
+                endpoint: '{endpoint}'
+                ids:
+                  - 273622bd-835c-4946-9798-fd8f19f6bbf2
+                resourceGroupName: TestResourceGroup
+                statuses:
+                  - Succeeded
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    value:
+                      - createdDateTimeUtc: '2021-03-23T07:03:30.013631Z'
+                        id: 273622bd-835c-4946-9798-fd8f19f6bbf2
+                        lastActionDateTimeUtc: '2021-03-26T01:00:00Z'
+                        status: Succeeded
+                        summary:
+                          cancelled: 0
+                          failed: 1
+                          inProgress: 0
+                          notYetStarted: 0
+                          success: 9
+                          total: 10
+                          totalCharacterCharged: 1000
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '400':
+                  body:
+                    error:
+                      code: InvalidRequest
+                      innerError:
+                        code: SASTokenInvalid
+                        message: SAS token for storage is invalid
+                      message: Some argument is incorrect
+                      target: Operation
+                  headers: {}
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                      target: Operation
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                      target: Operation
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                      target: Operation
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                      target: Operation
+                  headers: {}
           x-ms-pageable:
             nextLinkName: '@nextLink'
         language: !Languages 
@@ -2470,6 +2637,82 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Get Document Status:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                documentId: 199800
+                endpoint: '{endpoint}'
+                id: 727BF148-F327-47A0-9481-ABAE6362F11E
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    path: https://myblob.blob.core.windows.net/destinationContainer/fr/mydoc.txt
+                    characterCharged: 0
+                    createdDateTimeUtc: '2020-03-26T00:00:00Z'
+                    id: 273622bd-835c-4946-9798-fd8f19f6bbf2
+                    lastActionDateTimeUtc: '2020-03-26T01:00:00Z'
+                    progress: 0.1
+                    sourcePath: https://myblob.blob.core.windows.net/sourceContainer/fr/mydoc.txt
+                    status: Running
+                    to: fr
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                      target: Document
+                  headers: {}
+                '404':
+                  body:
+                    error:
+                      code: ResourceNotFound
+                      innerError:
+                        code: ResourceNotFound
+                        message: Resource requested is not found
+                      message: id not found
+                      target: Document
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                      target: Document
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                      target: Document
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                      target: Document
+                  headers: {}
         language: !Languages 
           default:
             name: GetDocumentStatus
@@ -2628,6 +2871,84 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Get Batch Operation Status:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                endpoint: '{endpoint}'
+                id: 727BF148-F327-47A0-9481-ABAE6362F11E
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    createdDateTimeUtc: '2020-03-26T00:00:00Z'
+                    id: 727bf148-f327-47a0-9481-abae6362f11e
+                    lastActionDateTimeUtc: '2020-03-26T01:00:00Z'
+                    status: Succeeded
+                    summary:
+                      cancelled: 0
+                      failed: 1
+                      inProgress: 0
+                      notYetStarted: 0
+                      success: 9
+                      total: 10
+                      totalCharacterCharged: 0
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                      target: Operation
+                  headers: {}
+                '404':
+                  body:
+                    error:
+                      code: ResourceNotFound
+                      innerError:
+                        code: ResourceNotFound
+                        message: Resource requested is not found
+                      message: id not found
+                      target: Operation
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                      target: Operation
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                      target: Operation
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                      target: Operation
+                  headers: {}
         language: !Languages 
           default:
             name: GetTranslationStatus
@@ -2771,6 +3092,82 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Cancel a batch operation example:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                endpoint: '{endpoint}'
+                id: 727BF148-F327-47A0-9481-ABAE6362F11E
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    createdDateTimeUtc: '2020-03-26T00:00:00Z'
+                    id: 727bf148-f327-47a0-9481-abae6362f11e
+                    lastActionDateTimeUtc: '2020-03-26T01:00:00Z'
+                    status: Succeeded
+                    summary:
+                      cancelled: 0
+                      failed: 1
+                      inProgress: 0
+                      notYetStarted: 0
+                      success: 9
+                      total: 10
+                      totalCharacterCharged: 0
+                  headers: {}
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                      target: Operation
+                  headers: {}
+                '404':
+                  body:
+                    error:
+                      code: ResourceNotFound
+                      innerError:
+                        code: ResourceNotFound
+                        message: Resource requested is not found
+                      message: id not found
+                      target: Operation
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                      target: Operation
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                      target: Operation
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                      target: Operation
+                  headers: {}
         language: !Languages 
           default:
             name: CancelTranslation
@@ -3044,6 +3441,104 @@ operationGroups:
                 statusCodes:
                   - '503'
         extensions:
+          x-ms-examples:
+            Get Documents Status for the operation batch id:
+              parameters:
+                $maxpagesize: 1
+                $orderBy: CreatedDateTimeUtc asc
+                $skip: 0
+                $top: 2
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                createdDateTimeUtcEnd: '2021-03-25T07:03:38.0136316Z'
+                createdDateTimeUtcStart: '2021-03-23T07:03:38.0136316Z'
+                endpoint: '{endpoint}'
+                id: 727BF148-F327-47A0-9481-ABAE6362F11E
+                ids:
+                  - 273622bd-835c-4946-9798-fd8f19f6bbf2
+                  - 511b6a66-a6f8-4640-83e1-48c325e9fa29
+                resourceGroupName: TestResourceGroup
+                statuses:
+                  - Succeeded
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    '@nextLink': >-
+                      https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55/documents?$top=1&$skip=1&$maxpagesize=1&$orderBy=CreatedDateTimeUtc%20asc&createdDateTimeUtcStart=2021-03-23T00:03:38.0136316Z&createdDateTimeUtcEnd=2021-03-25T00:03:38.0136316&statuses=Succeeded&ids=273622BD-835C-4946-9798-FD8F19F6BBF2,511B6A66-A6F8-4640-83E1-48C325E9FA29
+                    value:
+                      - path: https://myblob.blob.core.windows.net/destinationContainer/fr/mydoc.txt
+                        characterCharged: 0
+                        createdDateTimeUtc: '2021-03-23T07:03:39.013631Z'
+                        id: 273622bd-835c-4946-9798-fd8f19f6bbf2
+                        lastActionDateTimeUtc: '2021-03-23T07:03:41.012452Z'
+                        progress: 0.1
+                        sourcePath: https://myblob.blob.core.windows.net/sourceContainer/fr/mydoc.txt
+                        status: Running
+                        to: fr
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '400':
+                  body:
+                    error:
+                      code: InvalidRequest
+                      innerError:
+                        code: SASTokenInvalid
+                        message: SAS token for storage is invalid
+                      message: Some argument is incorrect
+                      target: Document
+                  headers: {}
+                '401':
+                  body:
+                    error:
+                      code: Unauthorized
+                      innerError:
+                        code: Unauthorized
+                        message: Operation is not authorized
+                      message: User is not authorized
+                      target: Document
+                  headers: {}
+                '404':
+                  body:
+                    error:
+                      code: ResourceNotFound
+                      innerError:
+                        code: ResourceNotFound
+                        message: Resource requested is not found
+                      message: id not found
+                      target: Document
+                  headers: {}
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                      target: Document
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                      target: Document
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                      target: Document
+                  headers: {}
           x-ms-pageable:
             nextLinkName: '@nextLink'
         language: !Languages 
@@ -3156,6 +3651,80 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Get Document Formats:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                endpoint: '{endpoint}'
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    value:
+                      - format: PlainText
+                        contentTypes:
+                          - text/plain
+                        fileExtensions:
+                          - .txt
+                      - format: PortableDocumentFormat
+                        contentTypes:
+                          - application/pdf
+                        fileExtensions:
+                          - .pdf
+                      - format: OpenXmlWord
+                        contentTypes:
+                          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                        fileExtensions:
+                          - .docx
+                      - format: OpenXmlPresentation
+                        contentTypes:
+                          - application/vnd.openxmlformats-officedocument.presentationml.presentation
+                        fileExtensions:
+                          - .pptx
+                      - format: OpenXmlSpreadsheet
+                        contentTypes:
+                          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                        fileExtensions:
+                          - .xlsx
+                      - format: HtmlFile
+                        contentTypes:
+                          - text/html
+                        fileExtensions:
+                          - .html
+                          - .htm
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                  headers: {}
         language: !Languages 
           default:
             name: GetSupportedDocumentFormats
@@ -3264,6 +3833,69 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Get Glossary Formats:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                endpoint: '{endpoint}'
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    value:
+                      - format: XLIFF
+                        contentTypes:
+                          - application/xliff+xml
+                        defaultVersion: '1.2'
+                        fileExtensions:
+                          - .xlf
+                        versions:
+                          - '1.0'
+                          - '1.1'
+                          - '1.2'
+                      - format: TMX
+                        contentTypes: []
+                        fileExtensions:
+                          - .tmx
+                        versions:
+                          - '1.0'
+                          - '1.1'
+                          - '1.2'
+                          - '1.3'
+                          - '1.4'
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                  headers: {}
         language: !Languages 
           default:
             name: GetSupportedGlossaryFormats
@@ -3372,6 +4004,50 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '503'
+        extensions:
+          x-ms-examples:
+            Get Document Storage Sources:
+              parameters:
+                Ocp-Apim-Subscription-Key: '{API key}'
+                api-version: v1.0-preview.1
+                endpoint: '{endpoint}'
+                resourceGroupName: TestResourceGroup
+                subscriptionId: EA19050C-51FC-4B55-84E5-9EA7283601DA
+              responses:
+                '200':
+                  body:
+                    value:
+                      - AzureBlob
+                  headers:
+                    ETag: 686897696a7c876b7e
+                    retry-after: '30'
+                '429':
+                  body:
+                    error:
+                      code: RequestRateTooHigh
+                      innerError:
+                        code: RateTooHigh
+                        message: Request rate is too high
+                      message: User's request rate is too high
+                  headers: {}
+                '500':
+                  body:
+                    error:
+                      code: InternalServerError
+                      innerError:
+                        code: InternalServerError
+                        message: Unexpected internal server error has occurred
+                      message: Internal Server Error
+                  headers: {}
+                '503':
+                  body:
+                    error:
+                      code: ServiceUnavailable
+                      innerError:
+                        code: ServiceTemporaryUnavailable
+                        message: Service is currently unavailable.  Please try again later
+                      message: Service is temporary unavailable
+                  headers: {}
         language: !Languages 
           default:
             name: GetSupportedStorageSources
@@ -3386,9 +4062,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Ocp-Apim-Subscription-Key
+    - !KeySecurityScheme 
+      name: Ocp-Apim-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AzureAIDocumentTranslation

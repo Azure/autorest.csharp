@@ -261,7 +261,7 @@ namespace body_date
             }
         }
 
-        internal HttpMessage CreatePutMaxDateRequest(string dateBody)
+        internal HttpMessage CreatePutMaxDateRequest(DateTimeOffset dateBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -272,21 +272,17 @@ namespace body_date
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(dateBody);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(dateBody, "D");
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dateBody"/> is null. </exception>
-        public async Task<Response> PutMaxDateAsync(string dateBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (dateBody == null)
-            {
-                throw new ArgumentNullException(nameof(dateBody));
-            }
-
             using var message = CreatePutMaxDateRequest(dateBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -301,14 +297,8 @@ namespace body_date
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dateBody"/> is null. </exception>
-        public Response PutMaxDate(string dateBody, CancellationToken cancellationToken = default)
+        public Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (dateBody == null)
-            {
-                throw new ArgumentNullException(nameof(dateBody));
-            }
-
             using var message = CreatePutMaxDateRequest(dateBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -373,7 +363,7 @@ namespace body_date
             }
         }
 
-        internal HttpMessage CreatePutMinDateRequest(string dateBody)
+        internal HttpMessage CreatePutMinDateRequest(DateTimeOffset dateBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -384,21 +374,17 @@ namespace body_date
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(dateBody);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(dateBody, "D");
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dateBody"/> is null. </exception>
-        public async Task<Response> PutMinDateAsync(string dateBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (dateBody == null)
-            {
-                throw new ArgumentNullException(nameof(dateBody));
-            }
-
             using var message = CreatePutMinDateRequest(dateBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -413,14 +399,8 @@ namespace body_date
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="dateBody"/> is null. </exception>
-        public Response PutMinDate(string dateBody, CancellationToken cancellationToken = default)
+        public Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            if (dateBody == null)
-            {
-                throw new ArgumentNullException(nameof(dateBody));
-            }
-
             using var message = CreatePutMinDateRequest(dateBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

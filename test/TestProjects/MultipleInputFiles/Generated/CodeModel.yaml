@@ -287,20 +287,22 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://fakeendpoint.azure.com/.default
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: subscription-key
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !KeySecurityScheme 
+      name: subscription-key
+      type: Key
+      in: header
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://fakeendpoint.azure.com/.default
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: subscription-key
+    - !KeySecurityScheme 
+      name: subscription-key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: MultipleInputFiles

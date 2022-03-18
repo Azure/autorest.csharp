@@ -176,7 +176,7 @@ namespace body_date
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMaxDateAsync(string dateBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
@@ -194,7 +194,7 @@ namespace body_date
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutMaxDate(string dateBody, CancellationToken cancellationToken = default)
+        public virtual Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.PutMaxDate");
             scope.Start();
@@ -246,7 +246,7 @@ namespace body_date
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMinDateAsync(string dateBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();
@@ -264,7 +264,7 @@ namespace body_date
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> date body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutMinDate(string dateBody, CancellationToken cancellationToken = default)
+        public virtual Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.PutMinDate");
             scope.Start();

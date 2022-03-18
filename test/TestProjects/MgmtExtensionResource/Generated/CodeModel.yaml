@@ -443,9 +443,6 @@ schemas: !Schemas
               usage:
                 - input
                 - output
-              extensions:
-                x-internal-autorest-anonymous-schema:
-                  anonymous: true
               language: !Languages 
                 default:
                   name: ParameterDefinitionsValueMetadata
@@ -2228,8 +2225,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

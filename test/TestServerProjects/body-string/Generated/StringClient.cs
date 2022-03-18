@@ -422,7 +422,7 @@ namespace body_string
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutBase64UrlEncodedAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
@@ -440,7 +440,7 @@ namespace body_string
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutBase64UrlEncoded(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();

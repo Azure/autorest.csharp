@@ -74,7 +74,7 @@ namespace body_duration
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutPositiveDurationAsync(string durationBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DurationClient.PutPositiveDuration");
             scope.Start();
@@ -92,7 +92,7 @@ namespace body_duration
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutPositiveDuration(string durationBody, CancellationToken cancellationToken = default)
+        public virtual Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DurationClient.PutPositiveDuration");
             scope.Start();

@@ -2803,9 +2803,6 @@ schemas: !Schemas
               - json
             usage:
               - output
-            extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
             language: !Languages 
               default:
                 name: ModelsSummary
@@ -2999,6 +2996,36 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Train custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                trainRequest:
+                  source: /input/data1
+              responses:
+                '201':
+                  headers:
+                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
+            Train custom model with subfolder filter options:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                trainRequest:
+                  source: /input/data1
+                  sourceFilter:
+                    includeSubFolders: false
+                    prefix: ''
+                  useLabelFile: false
+              responses:
+                '201':
+                  headers:
+                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
         language: !Languages 
           default:
             name: TrainCustomModelAsync
@@ -3098,6 +3125,36 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{Model Id}'
+              responses:
+                '200':
+                  body:
+                    keys:
+                      clusters:
+                        '0':
+                          - Invoice
+                          - '123112313'
+                        '1':
+                          - 'Please remit payment to:'
+                          - Microsoft
+                    modelInfo:
+                      createdDateTime: '2019-05-01T10:53:21Z'
+                      lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                      modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
+                      status: ready
+                    trainResult:
+                      averageModelAccuracy: 0
+                      errors: []
+                      fields: []
+                      trainingDocuments: []
         language: !Languages 
           default:
             name: GetCustomModel
@@ -3175,6 +3232,17 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Delete custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{Model Id}'
+              responses:
+                '204': {}
         language: !Languages 
           default:
             name: DeleteCustomModel
@@ -3368,6 +3436,18 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Analyze form with custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{Model Id}'
+              responses:
+                '202':
+                  headers:
+                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -3465,6 +3545,28 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get analyze form result:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{model Id}'
+                resultId: '{result Id}'
+              responses:
+                '200':
+                  body:
+                    analyzeResult:
+                      documentResults: []
+                      errors: []
+                      pageResults: []
+                      readResults: []
+                      version: v2.0
+                    createdDateTime: '2019-05-01T10:53:21Z'
+                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                    status: running
         language: !Languages 
           default:
             name: GetAnalyzeFormResult
@@ -3582,6 +3684,25 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Copy custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                copyRequest:
+                  copyAuthorization:
+                    accessToken: '{accessToken}'
+                    expirationDateTimeTicks: 637190189980000000
+                    modelId: '{modelId}'
+                  targetResourceId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}
+                  targetResourceRegion: westus2
+                endpoint: '{endpoint}'
+                modelId: '{modelId}'
+              responses:
+                '202':
+                  headers:
+                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -3677,6 +3798,44 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get copy custom model result:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{modelId}'
+                resultId: '{resultId}'
+              responses:
+                '200':
+                  body:
+                    copyResult:
+                      errors: []
+                      modelId: '{modelId}'
+                    createdDateTime: '2020-01-01T00:00:00Z'
+                    lastUpdatedDateTime: '2020-01-01T00:01:00Z'
+                    status: succeeded
+            Get copy custom model result with failures:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{modelId}'
+                resultId: '{resultId}'
+              responses:
+                '200':
+                  body:
+                    copyResult:
+                      errors:
+                        - code: ResourceResolverError
+                          message: '{ErrorMessage}'
+                      modelId: '{modelId}'
+                    createdDateTime: '2020-01-01T00:00:00Z'
+                    lastUpdatedDateTime: '2020-01-01T00:01:00Z'
+                    status: failed
         language: !Languages 
           default:
             name: GetCustomModelCopyResult
@@ -3753,6 +3912,22 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Copy custom model:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+              responses:
+                '201':
+                  body:
+                    accessToken: '{accessToken}'
+                    expirationDateTimeTicks: 637190189980000000
+                    modelId: '{modelId}'
+                  headers:
+                    Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}'
         language: !Languages 
           default:
             name: GenerateModelCopyAuthorization
@@ -3933,6 +4108,17 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Analyze receipt:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+              responses:
+                '202':
+                  headers:
+                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/prebuilt/receipt/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -4017,6 +4203,28 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get analyze receipt result:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{model Id}'
+                resultId: '{result Id}'
+              responses:
+                '200':
+                  body:
+                    analyzeResult:
+                      documentResults: []
+                      errors: []
+                      pageResults: []
+                      readResults: []
+                      version: v2.0
+                    createdDateTime: '2019-05-01T10:53:21Z'
+                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                    status: running
         language: !Languages 
           default:
             name: GetAnalyzeReceiptResult
@@ -4183,6 +4391,18 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Analyze layout:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                language: en
+              responses:
+                '202':
+                  headers:
+                    Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/layout/analyzeResults/{resultId}'
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -4267,6 +4487,26 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get analyze layout result:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                modelId: '{model Id}'
+                resultId: '{result Id}'
+              responses:
+                '200':
+                  body:
+                    analyzeResult:
+                      pageResults: []
+                      readResults: []
+                      version: v2.0
+                    createdDateTime: '2019-05-01T10:53:21Z'
+                    lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                    status: succeeded
         language: !Languages 
           default:
             name: GetAnalyzeLayoutResult
@@ -4349,6 +4589,27 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List custom models:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                op: full
+              responses:
+                '200':
+                  body:
+                    modelList:
+                      - createdDateTime: '2019-05-01T10:53:21Z'
+                        lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                        modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
+                        status: ready
+                      - createdDateTime: '2019-05-01T10:53:21Z'
+                        lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                        modelId: f973e3c1-0001-43bb-bea8-49d0603ab3a8
+                        status: ready
+                    nextLink: ''
           x-ms-pageable:
             itemName: modelList
             nextLinkName: nextLink
@@ -4436,6 +4697,22 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get models summary:
+              parameters:
+                Content-Type: application/json
+                Ocp-Apim-Subscription-Key: '{API key}'
+                body: {}
+                endpoint: '{endpoint}'
+                op: summary
+              responses:
+                '200':
+                  body:
+                    summary:
+                      count: 5
+                      lastUpdatedDateTime: '2019-05-01T10:53:21Z'
+                      limit: 5000
         language: !Languages 
           default:
             name: GetCustomModels
@@ -4449,7 +4726,11 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
-  schemes: []
+  schemes:
+    - !KeySecurityScheme 
+      name: Ocp-Apim-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AzureAIFormRecognizer

@@ -1088,7 +1088,7 @@ namespace Azure.Service.Models
 
 ```yaml
 # autorest-core version
-version: 3.8.0-dev.1
+version: "https://tinyurl.com/ybl5v27y"
 modelerfour:
   lenient-model-deduplication: true
 save-inputs: true

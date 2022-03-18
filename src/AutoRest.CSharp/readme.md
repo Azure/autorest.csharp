@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.23.0-dev.3"
+  "@autorest/modelerfour": "https://tinyurl.com/yafjnged"
 modelerfour:
   always-create-content-type-parameter: true
 pipeline:

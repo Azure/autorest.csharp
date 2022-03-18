@@ -1675,7 +1675,7 @@ namespace AutoRest.CSharp.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class AADTokenSecurityScheme : SecurityScheme
+    internal partial class OAuth2SecurityScheme : SecurityScheme
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "scopes")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -1683,11 +1683,15 @@ namespace AutoRest.CSharp.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class AzureKeySecurityScheme : SecurityScheme
+    internal partial class KeySecurityScheme : SecurityScheme
     {
-        [YamlDotNet.Serialization.YamlMember(Alias = "headerName")]
+        [YamlDotNet.Serialization.YamlMember(Alias = "in")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string HeaderName { get; set; }
+        public KeySecuritySchemeIn In { get; set; }
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "name")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1711,6 +1715,22 @@ namespace AutoRest.CSharp.Input
         /// <summary>an URI</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "externalValue")]
         public string? ExternalValue { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class AADTokenSecurityScheme : SecurityScheme
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "scopes")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<string> Scopes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class AzureKeySecurityScheme : SecurityScheme
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "headerName")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string HeaderName { get; set; }
     }
 
     /// <summary>standard HTTP protocol methods</summary>
@@ -1897,25 +1917,6 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "type")]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public NonBearerHTTPSecuritySchemeType Type { get; set; }
-
-        /// <summary>additional metadata extensions dictionary</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
-        public RecordOfStringAndAny? Extensions { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class OAuth2SecurityScheme
-    {
-        [YamlDotNet.Serialization.YamlMember(Alias = "type")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public OAuth2SecuritySchemeType Type { get; set; }
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "flows")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public OAuthFlows Flows { get; set; } = new OAuthFlows();
-
-        [YamlDotNet.Serialization.YamlMember(Alias = "description")]
-        public string? Description { get; set; }
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
@@ -2615,6 +2616,13 @@ namespace AutoRest.CSharp.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal enum KeySecuritySchemeIn
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"header")]
+        Header = 0,
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal enum BearerHTTPSecuritySchemeScheme
     {
         [System.Runtime.Serialization.EnumMember(Value = @"bearer")]
@@ -2633,13 +2641,6 @@ namespace AutoRest.CSharp.Input
     {
         [System.Runtime.Serialization.EnumMember(Value = @"http")]
         Http = 0,
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum OAuth2SecuritySchemeType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"oauth2")]
-        Oauth2 = 0,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]

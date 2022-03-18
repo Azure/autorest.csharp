@@ -54,7 +54,7 @@ schemas: !Schemas
           description: Sample string.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_23
+    - !SealedChoiceSchema &ref_24
       choices:
         - !ChoiceValue 
           value: red color
@@ -219,7 +219,7 @@ schemas: !Schemas
           name: ByteArray
           description: ''
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_22
+    - !ByteArraySchema &ref_20
       type: byte-array
       format: base64url
       apiVersions:
@@ -230,7 +230,7 @@ schemas: !Schemas
           name: ByteArray
           description: ''
       protocol: !Protocols {}
-    - !ByteArraySchema 
+    - !ByteArraySchema &ref_23
       type: byte-array
       format: base64url
       apiVersions:
@@ -274,7 +274,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_28
+    - !ObjectSchema &ref_29
       type: object
       apiVersions:
         - !ApiVersion 
@@ -393,6 +393,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: GetNull
@@ -488,6 +494,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutNull
@@ -555,6 +567,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getEmpty:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetEmpty
@@ -650,6 +669,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putEmpty:
+              parameters:
+                stringBody: ''
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutEmpty
@@ -717,6 +743,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getMbcs:
+              parameters: {}
+              responses:
+                '200':
+                  body: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
         language: !Languages 
           default:
             name: GetMbcs
@@ -812,6 +845,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putMbcs:
+              parameters:
+                stringBody: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMbcs
@@ -879,6 +919,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getWhitespace:
+              parameters: {}
+              responses:
+                '200':
+                  body: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
         language: !Languages 
           default:
             name: GetWhitespace
@@ -974,6 +1021,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putWhitespace:
+              parameters:
+                stringBody: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutWhitespace
@@ -1041,6 +1095,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getNotProvided:
+              parameters: {}
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: GetNotProvided
@@ -1188,7 +1248,7 @@ operationGroups:
         parameters:
           - *ref_5
         requestMediaTypes:
-          application/json: !Request &ref_21
+          application/json: !Request &ref_22
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1198,13 +1258,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_20
-                schema: *ref_0
+              - !Parameter &ref_21
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1214,7 +1274,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -1229,22 +1289,21 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_20
+              - *ref_21
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /string/base64UrlEncoding
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_21
+          - *ref_22
         signatureParameters: []
         responses:
           - !Response 
@@ -1311,7 +1370,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_23
             nullable: true
             language: !Languages 
               default:
@@ -1387,7 +1446,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -1413,6 +1472,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getNotExpandable:
+              parameters: {}
+              responses:
+                '200':
+                  body: red color
         language: !Languages 
           default:
             name: GetNotExpandable
@@ -1426,7 +1492,7 @@ operationGroups:
         parameters:
           - *ref_5
         requestMediaTypes:
-          application/json: !Request &ref_25
+          application/json: !Request &ref_26
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1441,7 +1507,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
+              - !Parameter &ref_25
                 schema: *ref_0
                 implementation: Method
                 required: true
@@ -1467,7 +1533,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_24
+              - *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -1482,7 +1548,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_25
+          - *ref_26
         signatureParameters: []
         responses:
           - !Response 
@@ -1508,6 +1574,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putNotExpandable:
+              parameters:
+                stringBody: red color
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutNotExpandable
@@ -1549,7 +1622,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -1575,6 +1648,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getReferenced:
+              parameters: {}
+              responses:
+                '200':
+                  body: red color
         language: !Languages 
           default:
             name: GetReferenced
@@ -1588,7 +1668,7 @@ operationGroups:
         parameters:
           - *ref_5
         requestMediaTypes:
-          application/json: !Request &ref_27
+          application/json: !Request &ref_28
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1603,7 +1683,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_26
+              - !Parameter &ref_27
                 schema: *ref_0
                 implementation: Method
                 required: true
@@ -1629,7 +1709,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_26
+              - *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -1644,7 +1724,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_27
+          - *ref_28
         signatureParameters: []
         responses:
           - !Response 
@@ -1670,6 +1750,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putReferenced:
+              parameters:
+                enumStringBody: red color
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutReferenced
@@ -1711,7 +1798,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_28
+            schema: *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -1737,6 +1824,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getReferencedConstant:
+              parameters: {}
+              responses:
+                '200':
+                  body: green-color
         language: !Languages 
           default:
             name: GetReferencedConstant
@@ -1750,7 +1844,7 @@ operationGroups:
         parameters:
           - *ref_5
         requestMediaTypes:
-          application/json: !Request &ref_30
+          application/json: !Request &ref_31
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1765,8 +1859,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_29
-                schema: *ref_28
+              - !Parameter &ref_30
+                schema: *ref_29
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1791,7 +1885,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_29
+              - *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -1805,7 +1899,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_30
+          - *ref_31
         signatureParameters: []
         responses:
           - !Response 
@@ -1831,6 +1925,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putReferencedConstant:
+              parameters:
+                enumStringBody: green-color
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutReferencedConstant

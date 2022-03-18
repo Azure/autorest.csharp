@@ -204,6 +204,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetNull
@@ -633,6 +640,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_putMax32:
+              parameters:
+                intBody: 2147483647
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMax32
@@ -727,6 +741,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_putMax64:
+              parameters:
+                intBody: 9223372036854776000
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMax64
@@ -821,6 +842,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_putMin32:
+              parameters:
+                intBody: -2147483648
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMin32
@@ -915,6 +943,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_putMin64:
+              parameters:
+                intBody: -9223372036854776000
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMin64
@@ -982,6 +1017,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_getUnixTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: 1460505600
         language: !Languages 
           default:
             name: GetUnixTime
@@ -1211,6 +1253,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            int_getNullUnixTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetNullUnixTime

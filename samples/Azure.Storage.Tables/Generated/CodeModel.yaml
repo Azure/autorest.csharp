@@ -2409,6 +2409,23 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            TableGet:
+              parameters:
+                $top: 1
+                DataServiceVersion: '3.0'
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '200':
+                  body:
+                    odata.metadata: https://myaccount.table.core.windows.net/$metadata#Tables
+                    value:
+                      - TableName: mytable
+                        odata.editLink: Tables('mytable')
+                        odata.id: https://myaccount.table.core.windows.net/Tables('mytable')
+                        odata.type: myaccount.Tables
         language: !Languages 
           default:
             name: Query
@@ -2611,6 +2628,24 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableCreate:
+              parameters:
+                DataServiceVersion: '3.0'
+                tableProperties:
+                  TableName: mytable
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '201':
+                  body:
+                    TableName: mytable
+                    odata.editLink: Tables('mytable')
+                    odata.id: https://myaccount.table.core.windows.net/Tables('mytable')
+                    odata.metadata: https://myaccount.table.core.windows.net/$metadata#Tables/@Element
+                    odata.type: ' myaccount.Tables'
+                '204': {}
         language: !Languages 
           default:
             name: Create
@@ -2737,6 +2772,15 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableDelete:
+              parameters:
+                table: mytable
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '204': {}
         language: !Languages 
           default:
             name: Delete
@@ -2914,6 +2958,30 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableQueryEntities:
+              parameters:
+                $top: 1
+                DataServiceVersion: '3.0'
+                table: Customer
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '200':
+                  body:
+                    odata.metadata: ' https://myaccount.table.core.windows.net/metadata#Customers'
+                    value:
+                      - CustomerSince: '2008-10-01T15:25:05.2852025Z'
+                        CustomerSince@odata.type: Edm.DateTime
+                        PartitionKey: Customer
+                        RowKey: Name
+                        Timestamp: '2013-08-22T00:20:16.3134645Z'
+                        Timestamp@odata.type: Edm.DateTime
+                        odata.editLink: Customers(PartitionKey=Customer',RowKey='Name')
+                        odata.etag: W/"0x5B168C7B6E589D2"
+                        odata.id: https://myaccount.table.core.windows.net/Customers(PartitionKey=Customer',RowKey='Name')
+                        odata.type: myaccount.Customers
         language: !Languages 
           default:
             name: QueryEntities
@@ -3116,6 +3184,31 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableQueryEntitiesWithPartitionAndRowKey:
+              parameters:
+                DataServiceVersion: '3.0'
+                partitionKey: Customer
+                rowKey: Name
+                table: Customers
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '200':
+                  body:
+                    odata.metadata: ' https://myaccount.table.core.windows.net/metadata#Customers'
+                    value:
+                      - CustomerSince: '2008-10-01T15:25:05.2852025Z'
+                        CustomerSince@odata.type: Edm.DateTime
+                        PartitionKey: Customer
+                        RowKey: Name
+                        Timestamp: '2013-08-22T00:20:16.3134645Z'
+                        Timestamp@odata.type: Edm.DateTime
+                        odata.editLink: Customers(PartitionKey=Customer',RowKey='Name')
+                        odata.etag: W/"0x5B168C7B6E589D2"
+                        odata.id: https://myaccount.table.core.windows.net/Customers(PartitionKey=Customer',RowKey='Name')
+                        odata.type: myaccount.Customers
         language: !Languages 
           default:
             name: QueryEntitiesWithPartitionAndRowKey
@@ -3329,6 +3422,31 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableUpdateEntity:
+              parameters:
+                DataServiceVersion: '3.0'
+                partitionKey: mypartitionkey
+                rowKey: myrowkey
+                table: Customers
+                tableEntityProperties:
+                  Address: Santa Clara
+                  Age: 23
+                  AmountDue: 200.23
+                  CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+                  CustomerCode@odata.type: Edm.Guid
+                  CustomerSince: '2008-07-10T00:00:00'
+                  CustomerSince@odata.type: Edm.DateTime
+                  IsActive: false
+                  NumberOfOrders: '255'
+                  NumberOfOrders@odata.type: Edm.Int64
+                  PartitionKey: mypartitionkey
+                  RowKey: myrowkey
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '204': {}
         language: !Languages 
           default:
             name: UpdateEntity
@@ -3511,6 +3629,18 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableDeleteEntity:
+              parameters:
+                DataServiceVersion: '3.0'
+                partitionKey: mypartitionkey
+                rowKey: myrowkey
+                table: Customers
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '204': {}
         language: !Languages 
           default:
             name: DeleteEntity
@@ -3702,6 +3832,49 @@ operationGroups:
                   - application/json;odata=nometadata
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            TableInsertEntity:
+              parameters:
+                DataServiceVersion: '3.0'
+                table: Customer
+                tableEntityProperties:
+                  Address: Mountain View
+                  Age: 23
+                  AmountDue: 200.23
+                  CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+                  CustomerCode@odata.type: Edm.Guid
+                  CustomerSince: '2008-07-10T00:00:00'
+                  CustomerSince@odata.type: Edm.DateTime
+                  IsActive: true
+                  NumberOfOrders: '255'
+                  NumberOfOrders@odata.type: Edm.Int64
+                  PartitionKey: mypartitionkey
+                  RowKey: myrowkey
+                url: myaccount.table.core.windows.net
+                x-ms-version: '2018-10-10'
+              responses:
+                '201':
+                  body:
+                    Address: Mountain View
+                    Age: 23
+                    AmountDue: 200.23
+                    CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+                    CustomerCode@odata.type: Edm.Guid
+                    CustomerSince: '2008-07-10T00:00:00'
+                    CustomerSince@odata.type: Edm.DateTime
+                    IsActive: true
+                    NumberOfOrders: '255'
+                    NumberOfOrders@odata.type: Edm.Int64
+                    PartitionKey: mypartitionkey
+                    RowKey: myrowkey
+                    Timestamp: '2013-08-22T01:12:06.2608595Z'
+                    Timestamp@odata.type: Edm.DateTime
+                    odata.editLink: Customers(PartitionKey='mypartitionkey',RowKey='myrowkey')
+                    odata.etag: W/"0x5B168C7B6E589D2"
+                    odata.id: ' https://myaccount.table.core.windows.net/Customers(PartitionKey=''mypartitionkey'',RowKey=''myrowkey'')'
+                    odata.metadata: https://myaccount.table.core.windows.net/Customer/$metadata#Customers/@Element
+                    odata.type: myaccount.Customers
         language: !Languages 
           default:
             name: InsertEntity

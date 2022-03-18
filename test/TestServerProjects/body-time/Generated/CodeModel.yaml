@@ -191,6 +191,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            time_get:
+              parameters: {}
+              responses:
+                '200':
+                  body: '11:34:56'
         language: !Languages 
           default:
             name: Get
@@ -214,13 +221,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_0
+                schema: *ref_5
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -230,7 +237,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_4
                 implementation: Method
@@ -251,11 +258,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /time/put
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -290,6 +296,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            time_put:
+              parameters:
+                timeBody: '08:07:56'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: Put

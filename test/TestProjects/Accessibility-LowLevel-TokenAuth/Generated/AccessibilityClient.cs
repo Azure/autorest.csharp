@@ -16,8 +16,6 @@ namespace Accessibility_LowLevel_TokenAuth
     /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {
-        private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };
-        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -33,19 +31,15 @@ namespace Accessibility_LowLevel_TokenAuth
         }
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public AccessibilityClient(TokenCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
+        public AccessibilityClient(Uri endpoint = null, AccessibilityClientOptions options = null)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
         }
 

@@ -195,6 +195,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            date_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetNull
@@ -419,13 +426,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -435,7 +442,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -456,11 +463,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /date/max
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -491,6 +497,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            date_putMaxDate:
+              parameters:
+                dateBody: '9999-12-31'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMaxDate
@@ -558,6 +571,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            date_getMaxDate:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31'
         language: !Languages 
           default:
             name: GetMaxDate
@@ -581,13 +601,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_10
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -597,7 +617,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -618,11 +638,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /date/min
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -653,6 +672,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            date_putMinDate:
+              parameters:
+                dateBody: '0001-01-01'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutMinDate
@@ -720,6 +746,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            date_getMinDate:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01'
         language: !Languages 
           default:
             name: GetMinDate

@@ -260,9 +260,6 @@ schemas: !Schemas
                       - json
                     usage:
                       - output
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: ProductProperties
@@ -415,7 +412,7 @@ schemas: !Schemas
             elementType: *ref_5
             language: !Languages 
               default:
-                name: ProductResultValueWithXMSClientNameValues
+                name: Indexes
                 description: Array of Product
             protocol: !Protocols {}
           serializedName: values
@@ -2362,9 +2359,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AutoRestPagingTestService

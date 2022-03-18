@@ -222,6 +222,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !Languages 
           default:
             name: GetNull
@@ -446,13 +453,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_8
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -462,7 +469,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -483,11 +490,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/max/utc
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -518,6 +524,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putUtcMaxDateTime:
+              parameters:
+                datetimeBody: '9999-12-31T23:59:59.999Z'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutUtcMaxDateTime
@@ -541,13 +554,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_10
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -557,7 +570,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -578,11 +591,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/max/utc7ms
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -681,6 +693,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcLowercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: 9999-12-31t23:59:59.999z
         language: !Languages 
           default:
             name: GetUtcLowercaseMaxDateTime
@@ -748,6 +767,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcUppercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31T23:59:59.999Z'
         language: !Languages 
           default:
             name: GetUtcUppercaseMaxDateTime
@@ -839,13 +865,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_12
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -855,7 +881,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -876,11 +902,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/max/localpositiveoffset
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -911,6 +936,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putLocalPositiveOffsetMaxDateTime:
+              parameters:
+                datetimeBody: '9999-12-31T23:59:59.999+14:00'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutLocalPositiveOffsetMaxDateTime
@@ -978,6 +1010,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalPositiveOffsetLowercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31t23:59:59.999+14:00'
         language: !Languages 
           default:
             name: GetLocalPositiveOffsetLowercaseMaxDateTime
@@ -1045,6 +1084,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalPositiveOffsetUppercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31T23:59:59.999+14:00'
         language: !Languages 
           default:
             name: GetLocalPositiveOffsetUppercaseMaxDateTime
@@ -1068,13 +1114,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_14
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1084,7 +1130,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -1105,11 +1151,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/max/localnegativeoffset
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1297,13 +1342,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_16
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1313,7 +1358,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -1334,11 +1379,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/min/utc
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1369,6 +1413,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putUtcMinDateTime:
+              parameters:
+                datetimeBody: '0001-01-01T00:00:00Z'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutUtcMinDateTime
@@ -1436,6 +1487,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00Z'
         language: !Languages 
           default:
             name: GetUtcMinDateTime
@@ -1459,13 +1517,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_18
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1475,7 +1533,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -1496,11 +1554,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/min/localpositiveoffset
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1621,13 +1678,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_20
-                schema: *ref_0
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1637,7 +1694,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_5
                 implementation: Method
@@ -1658,11 +1715,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /datetime/min/localnegativeoffset
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1693,6 +1749,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putLocalNegativeOffsetMinDateTime:
+              parameters:
+                datetimeBody: '0001-01-01T00:00:00-14:00'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutLocalNegativeOffsetMinDateTime
@@ -1760,6 +1823,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalNegativeOffsetMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00-14:00'
         language: !Languages 
           default:
             name: GetLocalNegativeOffsetMinDateTime
@@ -1827,6 +1897,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalNoOffsetMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00'
         language: !Languages 
           default:
             name: GetLocalNoOffsetMinDateTime

@@ -74,7 +74,7 @@ namespace body_time
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
         /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> PutAsync(string timeBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TimeClient.Put");
             scope.Start();
@@ -92,7 +92,7 @@ namespace body_time
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
         /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> Put(string timeBody, CancellationToken cancellationToken = default)
+        public virtual Response<string> Put(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TimeClient.Put");
             scope.Start();

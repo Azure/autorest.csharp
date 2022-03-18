@@ -846,7 +846,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesAaaaRecords
+                name: AaaaRecords
                 description: The list of AAAA records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -899,7 +899,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesMXRecords
+                name: MxRecords
                 description: The list of MX records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -944,7 +944,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesNSRecords
+                name: NsRecords
                 description: The list of NS records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -989,7 +989,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesPTRRecords
+                name: PtrRecords
                 description: The list of PTR records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -1058,7 +1058,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesSRVRecords
+                name: SrvRecords
                 description: The list of SRV records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -1113,7 +1113,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesTXTRecords
+                name: TxtRecords
                 description: The list of TXT records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -1292,7 +1292,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: RecordSetPropertiesCaaRecords
+                name: CaaRecords
                 description: The list of CAA records in the record set.
             protocol: !Protocols {}
           flattenedNames:
@@ -1396,6 +1396,8 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
+          extensions:
+            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -1866,6 +1868,8 @@ schemas: !Schemas
         - !Property 
           schema: *ref_48
           serializedName: RecordSet
+          extensions:
+            x-ms-azure-resource: true
           language: !Languages 
             default:
               name: recordSet
@@ -3777,8 +3781,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

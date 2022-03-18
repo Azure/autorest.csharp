@@ -265,6 +265,17 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Pet_GetByPetId:
+              parameters:
+                petId: tommy
+              responses:
+                '200':
+                  body:
+                    name: Retriever
+                    DaysOfWeek: Monday
+                    IntEnum: '1'
         language: !Languages 
           default:
             name: GetByPetId
@@ -349,6 +360,16 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Pet_AddPet:
+              parameters:
+                petParam:
+                  name: Retriever
+                  DaysOfWeek: Monday
+                  IntEnum: '1'
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: AddPet

@@ -1138,6 +1138,8 @@ schemas: !Schemas
                                               protocol: !Protocols {}
                                             required: true
                                             serializedName: originGroup
+                                            extensions:
+                                              x-ms-azure-resource: true
                                             language: !Languages 
                                               default:
                                                 name: originGroup
@@ -1585,6 +1587,8 @@ schemas: !Schemas
                                                 - !Property 
                                                   schema: *ref_36
                                                   serializedName: originGroup
+                                                  extensions:
+                                                    x-ms-azure-resource: true
                                                   language: !Languages 
                                                     default:
                                                       name: originGroup
@@ -1723,9 +1727,6 @@ schemas: !Schemas
                     usage:
                       - output
                       - input
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: DeliveryRuleProperties
@@ -2451,8 +2452,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

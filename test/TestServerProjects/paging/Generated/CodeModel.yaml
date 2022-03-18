@@ -632,9 +632,6 @@ schemas: !Schemas
                       - json
                     usage:
                       - output
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: ProductProperties
@@ -787,7 +784,7 @@ schemas: !Schemas
             elementType: *ref_19
             language: !Languages 
               default:
-                name: ProductResultValueWithXMSClientNameValues
+                name: Indexes
                 description: Array of Product
             protocol: !Protocols {}
           serializedName: values

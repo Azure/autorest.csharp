@@ -1481,6 +1481,19 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            GetKeys:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  body:
+                    items:
+                      - name: MaxRequests
+                      - name: RequestTimeout
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.keyset+json
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
@@ -1578,6 +1591,16 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            CheckKeys:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.keyset+json
         language: !Languages 
           default:
             name: CheckKeys
@@ -1722,6 +1745,49 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            GetKeyValues:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  body:
+                    items:
+                      - content_type: null
+                        etag: CTgHR5UrDKNj2nsoGWDOipST9Pv
+                        key: Background
+                        label: Asset1
+                        last_modified: '2019-03-04T17:12:23+00:00'
+                        locked: false
+                        tags: {}
+                        value: blue
+                      - content_type: null
+                        etag: UTSN1zePHbBQ0npbRB6elGRRuH7
+                        key: MaxLogFiles
+                        label: Asset1
+                        last_modified: '2019-03-04T17:12:23+00:00'
+                        locked: false
+                        tags: {}
+                        value: '50'
+                      - content_type: null
+                        etag: 7XpB48ET4VAlB9068ft6fKMyA3m
+                        key: Message
+                        label: null
+                        last_modified: '2019-06-20T16:52:23+00:00'
+                        locked: false
+                        tags: {}
+                        value: Hello World
+                      - content_type: null
+                        etag: fAFm4jkGNB1hsIr4o0S5hnhCCvY
+                        key: WebDemo:Settings:BackgroundColor
+                        label: null
+                        last_modified: '2019-06-20T15:48:01+00:00'
+                        locked: false
+                        tags: {}
+                        value: blue
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kvset+json
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
@@ -1844,6 +1910,16 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            CheckKeyValues:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kvset+json
         language: !Languages 
           default:
             name: CheckKeyValues
@@ -2014,6 +2090,73 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            GetKeyValue:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: 7XpB48ET4VAlB9068ft6fKMyA3m
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            GetKeyValue_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV5
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            GetKeyValue_IfNoneMatch:
+              parameters:
+                If-None-Match: L10qpBghN693OaxydgTkLmrBbV5
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: 7XpB48ET4VAlB9068ft6fKMyA3m
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
         language: !Languages 
           default:
             name: GetKeyValue
@@ -2193,6 +2336,51 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            PutKeyValue:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: tnIHBkDYQwtdNMLoWtr5aybkKwL
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"tnIHBkDYQwtdNMLoWtr5aybkKwL"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            PutKeyValue_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV5
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
         language: !Languages 
           default:
             name: PutKeyValue
@@ -2336,6 +2524,53 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            DeleteKeyValue:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: 7XpB48ET4VAlB9068ft6fKMyA3m
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+                '204': {}
+            DeleteKeyValue_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV5
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+                '204': {}
         language: !Languages 
           default:
             name: DeleteKeyValue
@@ -2479,6 +2714,46 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            CheckKeyValue:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            CheckKeyValue_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            CheckKeyValue_IfNoneMatch:
+              parameters:
+                If-None-Match: L10qpBghN693OaxydgTkLmrBbV5
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
         language: !Languages 
           default:
             name: CheckKeyValue
@@ -2611,6 +2886,22 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            GetLabels:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  body:
+                    items:
+                      - name: null
+                      - name: Asset1
+                      - name: Asset1/devCi
+                      - name: Asset1/devCi/branch1
+                      - name: WestUs
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.labelset+json
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
@@ -2721,6 +3012,16 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            CheckLabels:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.labelset+json
         language: !Languages 
           default:
             name: CheckLabels
@@ -2859,6 +3160,51 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            PutLock:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV4
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: true
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV4"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            PutLock_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV5
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: true
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
         language: !Languages 
           default:
             name: PutLock
@@ -2997,6 +3343,51 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            DeleteLock:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: 0BGYCoQ6iNdp5NtQ7N8shrobo6s
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"0BGYCoQ6iNdp5NtQ7N8shrobo6s"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
+            DeleteLock_IfMatch:
+              parameters:
+                If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+                key: Message
+              responses:
+                '200':
+                  body:
+                    content_type: null
+                    etag: L10qpBghN693OaxydgTkLmrBbV5
+                    key: Message
+                    label: null
+                    last_modified: '2019-08-27T16:52:32+00:00'
+                    locked: false
+                    tags: {}
+                    value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kv+json
+                    ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
+                    Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
         language: !Languages 
           default:
             name: DeleteLock
@@ -3141,6 +3532,41 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            GetRevisions:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  body:
+                    items:
+                      - content_type: null
+                        etag: 0BGYCoQ6iNdp5NtQ7N8shrobo6s
+                        key: Message
+                        label: null
+                        last_modified: '2019-08-27T16:52:32+00:00'
+                        locked: false
+                        tags: {}
+                        value: Hello World!
+                      - content_type: null
+                        etag: L10qpBghN693OaxydgTkLmrBbV4
+                        key: Message
+                        label: null
+                        last_modified: '2019-08-27T16:52:20+00:00'
+                        locked: false
+                        tags: {}
+                        value: A new message.
+                      - content_type: null
+                        etag: tnIHBkDYQwtdNMLoWtr5aybkKwL
+                        key: Message
+                        label: null
+                        last_modified: '2019-08-27T16:50:47+00:00'
+                        locked: false
+                        tags: {}
+                        value: Hello World!
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kvset+json
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
@@ -3263,6 +3689,16 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            CheckRevisions:
+              parameters:
+                api-version: '1.0'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
+              responses:
+                '200':
+                  headers:
+                    Content-Type: application/vnd.microsoft.appconfig.kvset+json
         language: !Languages 
           default:
             name: CheckRevisions

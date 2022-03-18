@@ -240,6 +240,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            bool_getTrue:
+              parameters: {}
+              responses:
+                '200':
+                  body: true
         language: !Languages 
           default:
             name: GetTrue
@@ -333,6 +340,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            bool_putTrue:
+              parameters:
+                boolBody: true
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutTrue
@@ -400,6 +414,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            bool_getFalse:
+              parameters: {}
+              responses:
+                '200':
+                  body: false
         language: !Languages 
           default:
             name: GetFalse
@@ -493,6 +514,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            bool_putFalse:
+              parameters:
+                boolBody: false
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: PutFalse
@@ -561,6 +589,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            bool_getNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !Languages 
           default:
             name: GetNull

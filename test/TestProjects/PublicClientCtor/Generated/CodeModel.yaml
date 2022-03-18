@@ -257,11 +257,12 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: fake-key
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !KeySecurityScheme 
+      name: fake-key
+      type: Key
+      in: header
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://fakeendpoint.azure.com/.default
         - https://dummyendpoint.azure.com/.default
