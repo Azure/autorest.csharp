@@ -95,11 +95,22 @@ function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
 function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     $count = $path.IndexOf("ResourceManager.")
     $RPName = $path.Substring($count, $path.Length - $count).Replace("ResourceManager.", "")
-    $srcFolder = $path + "/src"
-    $mocktestsFolder = $path + "/mocktests"
-    $mockMd = $mocktestsFolder + "/autorest.tests.md"
+    $srcFolder = Join-Path $path  "src"
+    $mocktestsFolder = Join-Path  $path  "mocktests"
+    $mockMd = Join-Path $mocktestsFolder + "autorest.tests.md"
     $csproj = ($mocktestsFolder + "/Azure.ResourceManager.Template.Tests.csproj").Replace("Template", $RPName)
     Write-Host "`n`nStart Generate $RPName"
+
+    # Remove the [Generated] and [Custom] folders in src.
+    $generatedFolder = Join-Path $srcFolder "Generated"
+    $customFolder = Join-Path $srcFolder "custom"
+    if (Test-Path $generatedFolder) {
+        & rm -r $generatedFolder
+    }
+    if (Test-Path $customFolder) {
+        & rm -r $customFolder
+    }
+
     # Create [mocktests] folder if it not exist
     if (!(Test-Path $mockMd) -or !(Test-Path $csproj)) {
         # please check [azmocktests] template has been imported
@@ -346,7 +357,7 @@ function  MockTestInit {
             }
             Write-Host "`n`n"
             Write-Host "[$RPName] has been recorded"
-            foreach ($item in $log){
+            foreach ($item in $log) {
                 Write-Host $item
             }
         }

@@ -135,7 +135,7 @@ stages:
               DOTNET_MULTILEVEL_LOOKUP: 0
           - script: |
               pwsh ./eng/GenerateAndExecuteMockTest.ps1
-            displayName: "Generate All SDK"
+            displayName: "GenerateAndExecuteMockTest"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:
