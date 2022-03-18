@@ -15,5 +15,4 @@ protocol-method-list:
   - firstTemplate_Create
   - firstTemplate_Get
   - secondTemplate_Get
-
 ```
