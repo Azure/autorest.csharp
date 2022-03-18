@@ -36,7 +36,7 @@ namespace OmitOperationGroups
         }
 
         private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Model5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -48,7 +48,7 @@ namespace OmitOperationGroups
         /// <returns> An object representing collection of Model2s and their operations over a Model2. </returns>
         public virtual Model2Collection GetModel2s()
         {
-            return new Model2Collection(Client, Id);
+            return GetCachedClient(Client => new Model2Collection(Client, Id));
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
             scope.Start();
@@ -155,7 +155,7 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();

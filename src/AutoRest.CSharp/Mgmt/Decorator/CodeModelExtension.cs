@@ -4,14 +4,61 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-        public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
+        private static readonly List<string> EnumValuesShouldBePrompted = new()
+        {
+            "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
+        };
+
+        public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
+        {
+            var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not SealedChoiceSchema choiceSchema)
+                    continue;
+
+                // rearrange the sequence in the choices
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices, wordCandidates);
+            }
+        }
+
+        internal static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
+        {
+            return originalValues.OrderBy(choice =>
+            {
+                var name = choice.CSharpName();
+                var index = wordCandidates.IndexOf(name);
+                return index >= 0 ? index : wordCandidates.Count;
+            }).ToList();
+        }
+
+        public static void UpdatePatchOperations(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.GetHttpMethod() == HttpMethod.Patch)
+                    {
+                        var bodyParameter = operation.GetBodyParameter();
+                        if (bodyParameter != null)
+                            bodyParameter.Required = true;
+                    }
+                }
+            }
+        }
+
+        public static void VerifyAndUpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
             {
@@ -20,9 +67,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.Language.Default.Name.EndsWith("Uri", StringComparison.Ordinal) ||
-                        property.Language.Default.Name.Equals("uri", StringComparison.Ordinal))
+                    if (property.CSharpName().EndsWith("Uri", StringComparison.Ordinal))
                         property.Schema.Type = AllSchemaTypes.Uri;
+                    if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String && property.Schema.Extensions?.Format == null)
+                        throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add \"x-ms-format\": \"{XMsFormat.DurationConstant}\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
+                    // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
+                    if (property.CSharpName().Equals("Type", StringComparison.Ordinal))
+                    {
+                        if (objSchema.IsResourceData() || objSchema.CSharpName().Contains("NameAvailability", StringComparison.Ordinal))
+                        {
+                            property.Language.Default.Name = "resourceType";
+                        }
+                        else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
+                        {
+                            property.Language.Default.Name = property.Schema.Name;
+                        }
+                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
+                        {
+                            property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"{objSchema.Name} has a property named \"Type\" which is not allowed. Please use \"x-ms-client-name\" to rename the property for the client.");
+                        }
+                    }
                 }
             }
         }
@@ -36,13 +104,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var p in op.Parameters)
                     {
-                        //updater the first subscriptionId to be 'method'
+                        // update the first subscriptionId parameter to be 'method' parameter
                         if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
                             setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
                         }
-                        //updater the first subscriptionId to be 'method'
+                        // update the apiVersion parameter to be 'client' method
                         if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
                         {
                             p.Implementation = ImplementationLocation.Client;
@@ -86,9 +154,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             TransformLanguage(operation.Language, transformer, wordCache);
+            // this iteration only applies to path and query parameter (maybe headers?) but not to body parameter
             foreach (var parameter in operation.Parameters)
             {
                 TransformLanguage(parameter.Language, transformer, wordCache);
+            }
+
+            // we need to iterate over the parameters in each request (actually only one request) to ensure the name of body parameters are also taken care of
+            foreach (var request in operation.Requests)
+            {
+                foreach (var parameter in request.Parameters)
+                {
+                    TransformLanguage(parameter.Language, transformer, wordCache);
+                }
             }
         }
 

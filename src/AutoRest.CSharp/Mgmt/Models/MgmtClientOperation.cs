@@ -16,7 +16,9 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -31,14 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        internal static readonly Parameter WaitForCompletionParameter = new Parameter(
-            "waitForCompletion",
-            "Waits for the completion of the long running operations.",
-            typeof(bool),
-            null,
-            false);
-
-
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
         {
             if (operations.Count > 0)
@@ -65,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter);
         }
 
-        private IReadOnlyList<MgmtRestOperation> _operations;
+        private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
         private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter)
         {
@@ -76,7 +70,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         public MgmtRestOperation this[int index] => _operations[index];
 
         private MethodSignature? _methodSignature;
-        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(Name, Description, Accessibility, ReturnType, null, MethodParameters.ToArray(), IsPagingOperation);
+        public MethodSignature MethodSignature => _methodSignature ??= new MethodSignature(
+            Name,
+            Description,
+            Accessibility == Public
+                ? _extensionParameter != null
+                    ? Public | Static | Extension
+                    : Public | Virtual
+                : Accessibility,
+            IsPagingOperation
+                ? new CSharpType(typeof(Pageable<>), ReturnType)
+                : ReturnType, null, MethodParameters.ToArray());
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
@@ -99,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public CSharpType ReturnType => _operations.First().ReturnType;
 
-        public string Accessibility => _operations.First().Accessibility;
+        public MethodSignatureModifiers Accessibility => _operations.First().Accessibility;
 
         public int Count => _operations.Count;
 
@@ -152,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (_extensionParameter is not null)
                 parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
-                parameters.Add(WaitForCompletionParameter);
+                parameters.Add(KnownParameters.WaitForCompletion);
             var overrideParameters = OperationMappings.Values.First().OverrideParameters;
             if (overrideParameters.Length > 0)
             {
@@ -162,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
             }
-            parameters.Add(MgmtClientBaseWriter.CancellationTokenParameter);
+            parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;
         }
     }

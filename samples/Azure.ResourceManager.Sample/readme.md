@@ -14,6 +14,7 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
+keep-orphaned-models: AvailabilitySetSkuTypes
 
 directive:
   - rename-model:

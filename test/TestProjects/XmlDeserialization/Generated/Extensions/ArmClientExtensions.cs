@@ -20,7 +20,7 @@ namespace XmlDeserialization
         /// <returns> Returns a <see cref="XmlInstance" /> object. </returns>
         public static XmlInstance GetXmlInstance(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 XmlInstance.ValidateResourceId(id);
                 return new XmlInstance(client, id);

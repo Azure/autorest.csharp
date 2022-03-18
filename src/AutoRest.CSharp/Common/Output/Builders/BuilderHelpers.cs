@@ -62,9 +62,13 @@ namespace AutoRest.CSharp.Output.Builders
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => SerializationFormat.Duration_ISO8601,
+            DurationSchema _ => schema.Extensions?.Format?.Equals(XMsFormat.DurationConstant) == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
-            _ => SerializationFormat.Default
+            _ => schema.Extensions?.Format switch
+                {
+                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                    _ => SerializationFormat.Default
+                }
         };
 
         public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;

@@ -1,40 +1,94 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Requests;
+using Azure;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class MgmtRestClientWriter : RestClientWriter
+    internal class MgmtRestClientWriter
     {
         private const string UserAgentVariable = "userAgent";
         private const string UserAgentField = "_" + UserAgentVariable;
-        private const string ApplicationIdVariable = "applicationId";
 
-        protected override void WriteAdditionalFields(CodeWriter writer)
+        public void WriteClient(CodeWriter writer, MgmtRestClient restClient)
         {
-            writer.Line($"private readonly {typeof(string)} {UserAgentField};");
+            using (writer.Namespace(restClient.Type.Namespace))
+            {
+                using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
+                {
+                    WriteClientFields(writer, restClient);
+                    WriteClientCtor(writer, restClient);
+
+                    foreach (var method in restClient.Methods)
+                    {
+                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
+                        WriteOperation(writer, restClient, method, true);
+                        WriteOperation(writer, restClient, method, false);
+                    }
+                }
+            }
         }
 
-        protected override void WriteAdditionalParameters(CodeWriter writer)
+        protected void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
         {
-            writer.Append($"{typeof(string)} {ApplicationIdVariable},");
+            writer.Line($"private readonly {typeof(TelemetryDetails)} {UserAgentField};");
+            writer.WriteFieldDeclarations(restClient.Fields);
         }
 
-        protected override bool UseSDKUserAgent()
+        private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)
         {
-            return true;
+            var constructorParameters = restClient.Parameters;
+            var constructor = new ConstructorSignature(restClient.Type.Name, $"Initializes a new instance of {restClient.Type.Name}", MethodSignatureModifiers.Public, restClient.Parameters);
+
+            writer.WriteMethodDocumentation(constructor);
+            using (writer.WriteMethodDeclaration(constructor))
+            {
+                foreach (Parameter clientParameter in constructorParameters)
+                {
+                    var field = restClient.Fields.GetFieldByParameter(clientParameter);
+                    if (field != null)
+                    {
+                        writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
+                    }
+                }
+                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {MgmtRestClient.ApplicationIdParameter.Name});");
+            }
+            writer.Line();
         }
 
-        protected override void WriteAdditionalCtorBody(CodeWriter writer)
+        private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
         {
-            writer.Line($"_userAgent = {typeof(HttpMessageUtilities)}.GetUserAgentName(this, {ApplicationIdVariable});");
-        }
+            var returnType = operation.ReturnType != null
+                ? new CSharpType(typeof(Response<>), operation.ReturnType)
+                : new CSharpType(typeof(Response));
 
-        protected override void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)
-        {
-            writer.WriteXmlDocumentationParameter(ApplicationIdVariable, $"The application id to use for user agent.");
+            var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
+            var method = new MethodSignature(operation.Name, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
+
+            writer.WriteMethodDocumentation(method);
+            using (writer.WriteMethodDeclaration(method))
+            {
+                writer.WriteParametersValidation(parameters);
+                var messageVariable = new CodeWriterDeclaration("message");
+                var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
+
+                writer
+                    .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
+                    .WriteMethodCall(async, $"{restClient.Fields.PipelineField.Name}.SendAsync", $"{restClient.Fields.PipelineField.Name}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
+
+                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, null);
+            }
+            writer.Line();
         }
     }
 }

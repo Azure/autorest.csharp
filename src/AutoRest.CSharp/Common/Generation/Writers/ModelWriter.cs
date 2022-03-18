@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -172,8 +173,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var ctor in objType.Constructors)
             {
-                if (ctor.Signature.Modifiers.Contains("public", StringComparison.Ordinal) &&
-                    ctor.Signature.Parameters.Length == 1)
+                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                    ctor.Signature.Parameters.Count == 1)
                 {
                     var paramType = ctor.Signature.Parameters[0].Type;
                     var propertyType = innerProperty.Declaration.Type;
@@ -199,7 +200,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var ctor in objType.Constructors)
             {
-                if (ctor.Signature.Modifiers.Contains("public", StringComparison.Ordinal) && ctor.Signature.Parameters.Length == 0)
+                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) && !ctor.Signature.Parameters.Any())
                     return true;
             }
 

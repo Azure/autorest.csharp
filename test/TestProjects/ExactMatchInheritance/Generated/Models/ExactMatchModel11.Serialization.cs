@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel11 : IUtf8JsonSerializable
+    internal partial class ExactMatchModel11 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace ExactMatchInheritance.Models
         internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -31,11 +31,16 @@ namespace ExactMatchInheritance.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
             }
-            return new ExactMatchModel11(name.Value, type.Value);
+            return new ExactMatchModel11(name.Value, Optional.ToNullable(type));
         }
     }
 }

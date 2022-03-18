@@ -27,6 +27,12 @@ namespace Azure.Core.Tests
             new object[] { "R", new DateTimeOffset(2020, 05, 04, 03, 02, 01, 0, new TimeSpan(1, 0, 0)), "Mon, 04 May 2020 02:02:01 GMT" },
         };
 
+        public static object[] TimeSpanCases =
+        {
+            new object[] { "P", new TimeSpan(1, 2, 59, 59), "P1DT2H59M59S" },
+            new object[] { "c", new TimeSpan(1, 2, 59, 59, 500), "1.02:59:59.5000000" }
+        };
+
         [TestCaseSource(nameof(DateTimeOffsetCases))]
         public void FormatsDatesAsString(string format, DateTimeOffset date, string expected)
         {
@@ -75,6 +81,20 @@ namespace Azure.Core.Tests
                 var utcDate = DateTimeOffset.Parse(formatted);
                 Assert.AreEqual(originalTimeMillis, utcDate.ToUnixTimeMilliseconds());
             }
+        }
+
+        [TestCaseSource(nameof(TimeSpanCases))]
+        public void FormatsTimeSpanAsJson(string format, TimeSpan duration, string expected)
+        {
+            using MemoryStream memoryStream = new MemoryStream();
+            using (var writer = new Utf8JsonWriter(memoryStream))
+            {
+                writer.WriteStringValue(duration, format);
+            }
+
+            var formatted = JsonDocument.Parse(memoryStream.ToArray()).RootElement;
+            Assert.AreEqual(expected, formatted.ToString());
+            Assert.AreEqual(duration, formatted.GetTimeSpan(format));
         }
     }
 }

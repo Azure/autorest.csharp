@@ -11,9 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -104,17 +102,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
             }
 
-            string modifiers = GetModifiers(ctor);
+            var modifiers = ctor.IsFamily ? Protected : Public;
 
             return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
-        }
-
-        private string GetModifiers(ConstructorInfo ctor)
-        {
-            if (ctor.IsFamily)
-                return "protected";
-
-            return "public";
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));
@@ -132,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Property prop = new Property();
                 prop.Nullable = false;
                 prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
-                prop.SerializedName = ToCamelCase(property.Name);
+                prop.SerializedName = GetSerializedName(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
                 prop.Required = true;
                 prop.Language.Default.Name = property.Name;
@@ -148,6 +138,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
+        }
+
+        private string GetSerializedName(string name)
+        {
+            if (name.Equals("ResourceType", StringComparison.Ordinal))
+                return "type";
+            return ToCamelCase(name);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

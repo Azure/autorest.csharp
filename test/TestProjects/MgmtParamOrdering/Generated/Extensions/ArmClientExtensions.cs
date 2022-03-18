@@ -20,7 +20,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AvailabilitySet.ValidateResourceId(id);
                 return new AvailabilitySet(client, id);
@@ -36,7 +36,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DedicatedHostGroup.ValidateResourceId(id);
                 return new DedicatedHostGroup(client, id);
@@ -52,7 +52,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DedicatedHost.ValidateResourceId(id);
                 return new DedicatedHost(client, id);
@@ -68,7 +68,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineExtensionImage.ValidateResourceId(id);
                 return new VirtualMachineExtensionImage(client, id);
@@ -84,7 +84,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 EnvironmentContainerResource.ValidateResourceId(id);
                 return new EnvironmentContainerResource(client, id);
@@ -100,7 +100,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="Workspace" /> object. </returns>
         public static Workspace GetWorkspace(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Workspace.ValidateResourceId(id);
                 return new Workspace(client, id);
@@ -116,7 +116,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
         public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineScaleSet.ValidateResourceId(id);
                 return new VirtualMachineScaleSet(client, id);

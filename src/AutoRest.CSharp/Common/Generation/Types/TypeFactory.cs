@@ -12,8 +12,10 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
+using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -41,7 +43,7 @@ namespace AutoRest.CSharp.Generation.Types
                 new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
+            _ when ToFrameworkType(schema) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
@@ -159,9 +161,23 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsIEnumerableType(CSharpType type)
             => type.IsFrameworkType &&
             (type.FrameworkType == typeof(IEnumerable) ||
-            (type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>)));
+            type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
-        private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
+        internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
+
+        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
+
+        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
+
+        internal static bool IsOperationOfAsyncPageable(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsAsyncPageable(type.Arguments[0]);
+
+        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
+
+        internal static bool IsOperationOfPageable(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
+
+        private static Type? ToFrameworkType(Schema schema) => schema.Type switch
         {
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
@@ -170,13 +186,19 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.String => typeof(string),
+            AllSchemaTypes.String => schema.Extensions?.Format switch
+            {
+                XMsFormat.ArmId => typeof(ResourceIdentifier),
+                XMsFormat.ResourceType => typeof(ResourceType),
+                XMsFormat.DurationConstant => typeof(TimeSpan),
+                _ => typeof(string)
+            },
             AllSchemaTypes.Time => typeof(TimeSpan),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
-            AllSchemaTypes.Any => typeof(object),
-            AllSchemaTypes.AnyObject => typeof(object),
+            AllSchemaTypes.Any => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
+            AllSchemaTypes.AnyObject => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
@@ -17,8 +18,8 @@ namespace MgmtScopeResource.Models
             string resourceId = default;
             ChangeType changeType = default;
             Optional<string> unsupportedReason = default;
-            Optional<object> before = default;
-            Optional<object> after = default;
+            Optional<BinaryData> before = default;
+            Optional<BinaryData> after = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("resourceId"))
@@ -43,7 +44,7 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    before = property.Value.GetObject();
+                    before = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("after"))
@@ -53,7 +54,7 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    after = property.Value.GetObject();
+                    after = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
             }

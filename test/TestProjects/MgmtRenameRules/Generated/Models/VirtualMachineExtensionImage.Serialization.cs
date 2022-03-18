@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
+    internal partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

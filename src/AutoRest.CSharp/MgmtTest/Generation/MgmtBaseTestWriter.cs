@@ -17,8 +17,10 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -184,13 +186,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var constructor = sot.Constructors[0];
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
+                if (c.Signature.Parameters.Count < constructor.Signature.Parameters.Count)
                     constructor = c;
             }
 
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Modifiers != "public" && !(c.Signature.Modifiers == "internal" && sot is SchemaObjectType))
+                if (!c.Signature.Modifiers.HasFlag(Public) && !(c.Signature.Modifiers.HasFlag(Internal) && sot is SchemaObjectType))
                     continue;
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)
@@ -212,7 +214,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (!missAnyRequiredParameter)
                 {
-                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                    if (c.Signature.Parameters.Count > constructor.Signature.Parameters.Count)
                         constructor = c;
                 }
             }
@@ -578,8 +580,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
-                if (passThruParameter.Name == MgmtClientOperation.WaitForCompletionParameter.Name ||
-                    passThruParameter.Name == MgmtClientBaseWriter.CancellationTokenParameter.Name)
+                if (passThruParameter.Name == KnownParameters.WaitForCompletion.Name ||
+                    passThruParameter.Name == KnownParameters.CancellationTokenParameter.Name)
                     continue;
                 FormattableString? paramName = null;
                 foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
@@ -741,7 +743,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Append($"{GetAwait(async)}");
             if (isLroOperation || clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation) {
-                paramNames = new List<FormattableString>().Append<FormattableString>($"true").Concat(paramNames);   // assign  waitForCompletion = true
+                paramNames = new List<FormattableString>().Append<FormattableString>($"{typeof(WaitUntil)}.Completed").Concat(paramNames);   // assign  waitUntil = WaitUntil.Completed
             }
 
             if (clientOperation.IsPagingOperation)

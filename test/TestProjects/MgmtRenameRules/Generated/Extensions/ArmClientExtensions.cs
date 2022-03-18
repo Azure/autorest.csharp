@@ -20,7 +20,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
         public static VirtualMachine GetVirtualMachine(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachine.ValidateResourceId(id);
                 return new VirtualMachine(client, id);
@@ -36,7 +36,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="Image" /> object. </returns>
         public static Image GetImage(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Image.ValidateResourceId(id);
                 return new Image(client, id);
@@ -52,7 +52,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
         public static VirtualMachineScaleSet GetVirtualMachineScaleSet(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineScaleSet.ValidateResourceId(id);
                 return new VirtualMachineScaleSet(client, id);
@@ -68,7 +68,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtension" /> object. </returns>
         public static VirtualMachineScaleSetExtension GetVirtualMachineScaleSetExtension(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineScaleSetExtension.ValidateResourceId(id);
                 return new VirtualMachineScaleSetExtension(client, id);
@@ -84,7 +84,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
         public static VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineScaleSetRollingUpgrade.ValidateResourceId(id);
                 return new VirtualMachineScaleSetRollingUpgrade(client, id);
@@ -100,7 +100,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVm" /> object. </returns>
         public static VirtualMachineScaleSetVm GetVirtualMachineScaleSetVm(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineScaleSetVm.ValidateResourceId(id);
                 return new VirtualMachineScaleSetVm(client, id);

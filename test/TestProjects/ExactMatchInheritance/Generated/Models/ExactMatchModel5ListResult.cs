@@ -12,7 +12,7 @@ using ExactMatchInheritance;
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class ExactMatchModel5ListResult
+    internal partial class ExactMatchModel5ListResult
     {
         /// <summary> Initializes a new instance of ExactMatchModel5ListResult. </summary>
         internal ExactMatchModel5ListResult()

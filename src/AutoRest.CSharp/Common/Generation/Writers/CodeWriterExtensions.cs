@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -16,7 +17,10 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
+using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -90,13 +94,37 @@ namespace AutoRest.CSharp.Generation.Writers
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");
         }
 
+        public static CodeWriter WriteFieldDeclarations(this CodeWriter writer, IEnumerable<FieldDeclaration> fields)
+        {
+            foreach (var field in fields)
+            {
+                writer.WriteFieldDeclaration(field);
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            WriteDisableWarnings(writer, disabledWarnings);
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning disable {disabledWarning}");
+            }
 
-            writer.Append($"{methodBase.Modifiers} ");
+            writer
+                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
+                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
+                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
+
+
             if (methodBase is MethodSignature method)
             {
+                writer
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
+
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -107,59 +135,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodBase.Name);
-        }
-
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
-        {
-            WriteDisableWarnings(writer, disabledWarnings);
-
-            writer.Append($"{methodBase.Modifiers} ");
-            if (methodBase is MethodSignature method)
-            {
-                if (isAsync && !method.IsPageable)
-                    writer.Append($"async ");
-
-                var firstParam = method.Parameters.FirstOrDefault();
-                bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
-
-                if (method.Modifiers.Contains("public") && !isExtensionMethod)
-                    writer.Append($"virtual ");
-
-                if (isExtensionMethod)
-                    writer.Append($"static ");
-
-                if (method.ReturnType != null)
-                {
-                    var finalType = method.IsPageable ? method.ReturnType.WrapPageable(isAsync) : method.ReturnType.WrapAsync(isAsync);
-                    writer.Append($"{finalType} ");
-                }
-                else
-                {
-                    writer.AppendRaw("void ");
-                }
-            }
-
-            string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
-            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodName);
-        }
-
-        private static void WriteDisableWarnings(CodeWriter writer, string[] disabledWarnings)
-        {
-            foreach (var disabledWarning in disabledWarnings)
-            {
-                writer.Line($"#pragma warning disable {disabledWarning}");
-            }
-        }
-
-        private static CodeWriter.CodeWriterScope WriteMethodDeclarationParameters(CodeWriter writer, MethodSignatureBase methodBase, string[] disabledWarnings, string methodName)
-        {
-            writer.Append($"{methodName}(");
+            writer
+                .Append($"{methodBase.Name}(")
+                .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
             foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
             }
+
             writer.RemoveTrailingComma();
             writer.Append($")");
 
@@ -215,8 +199,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
-            if (clientParameter.IsExtensionParameter)
-                writer.Append($"this ");
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
@@ -248,7 +230,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {
@@ -293,6 +275,41 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+            return writer;
+        }
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionHeaderNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "If-Match" },
+            {RequestConditionHeaders.IfNoneMatch, "If-None-Match" },
+            {RequestConditionHeaders.IfModifiedSince, "If-Modified-Since" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "If-Unmodified-Since" }
+        };
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionFieldNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "IfMatch" },
+            {RequestConditionHeaders.IfNoneMatch, "IfNoneMatch" },
+            {RequestConditionHeaders.IfModifiedSince, "IfModifiedSince" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
+        };
+        public static CodeWriter WriteRequestConditionParameterChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters, RequestConditionHeaders requestConditionFlag)
+        {
+            foreach (Parameter parameter in parameters)
+            {
+                if (parameter.Type.Equals(typeof(RequestConditions)))
+                {
+#pragma warning disable CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
+#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    {
+                        if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
+                        {
+                            writer.Line($"Argument.AssertNull({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                        }
+                    }
+                }
+            }
             return writer;
         }
 
@@ -417,12 +434,12 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable)
+            Action<CodeWriter, CodeWriterDelegate> valueCallback, string responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable);
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable, type is not null && type.Equals(typeof(BinaryData)));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, valueCallback, responseVariable);

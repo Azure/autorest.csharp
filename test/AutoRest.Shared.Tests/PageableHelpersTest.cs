@@ -155,8 +155,74 @@ namespace Azure.Core.Tests
             }
         }
 
+        [Test]
+        public void SelectWithCancellationAsync()
+        {
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerable(string? nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                yield return Page<BinaryData>.FromValues(new[] { BinaryData.FromString("1"), BinaryData.FromString("2"), BinaryData.FromString("3") }, null, new MockResponse(new[] { 1, 2, 3 }));
+                await Task.Yield();
+                cancellationToken.ThrowIfCancellationRequested();
+                yield return Page<BinaryData>.FromValues(new[] { BinaryData.FromString("4"), BinaryData.FromString("5"), BinaryData.FromString("6") }, null, new MockResponse(new[] { 4, 5, 6 }));
+            }
+
+            var asyncPageable = PageableHelpers.CreateAsyncPageable(CreateEnumerable, new ClientDiagnostics(new MockClientOptions()), "IterateOverValues");
+            var selectPageable = PageableHelpers.Select(asyncPageable, r => ((MockResponse)r).Values);
+            var cts = new CancellationTokenSource();
+            var values = new List<int>();
+
+            Assert.CatchAsync<OperationCanceledException>(async () =>
+            {
+                await foreach (var value in selectPageable.WithCancellation(cts.Token))
+                {
+                    values.Add(value);
+                    if (value == 3)
+                    {
+                        cts.Cancel();
+                    }
+                }
+            });
+
+            CollectionAssert.AreEqual(new[] { 1, 2, 3 }, values);
+        }
+
+        [Test]
+        public async Task SelectWithCancellationAfterCheckAsync()
+        {
+            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerable(string? nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            {
+                yield return Page<BinaryData>.FromValues(new[] { BinaryData.FromString("1"), BinaryData.FromString("2"), BinaryData.FromString("3") }, null, new MockResponse(new[] { 1, 2, 3 }));
+                await Task.Yield();
+                cancellationToken.ThrowIfCancellationRequested();
+                yield return Page<BinaryData>.FromValues(new[] { BinaryData.FromString("4"), BinaryData.FromString("5"), BinaryData.FromString("6") }, null, new MockResponse(new[] { 4, 5, 6 }));
+            }
+
+            var asyncPageable = PageableHelpers.CreateAsyncPageable(CreateEnumerable, new ClientDiagnostics(new MockClientOptions()), "IterateOverValues");
+            var selectPageable = PageableHelpers.Select(asyncPageable, r => ((MockResponse)r).Values);
+            var cts = new CancellationTokenSource();
+            var values = new List<int>();
+
+            await foreach (var value in selectPageable.WithCancellation(cts.Token))
+            {
+                values.Add(value);
+                if (value == 4)
+                {
+                    cts.Cancel();
+                }
+            }
+
+            CollectionAssert.AreEqual(new[] { 1,2,3,4,5,6 }, values);
+        }
+
         private class MockResponse : Response
         {
+            public MockResponse() {}
+
+            public MockResponse(IReadOnlyList<int> values)
+            {
+                Values = values;
+            }
+
             public override void Dispose()
             {
                 throw new System.NotImplementedException();
@@ -186,6 +252,7 @@ namespace Azure.Core.Tests
             public override string ReasonPhrase { get; }
             public override Stream? ContentStream { get; set; }
             public override string ClientRequestId { get; set; }
+            public IReadOnlyList<int> Values { get; }
         }
 
         private class MockClientOptions : ClientOptions

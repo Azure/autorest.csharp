@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
-            var schemes = context.CodeModel.Security.Schemes.Distinct(SecuritySchemesComparer.Instance);
+            var schemes = context.CodeModel.Security.Schemes.OfType<SecurityScheme>().Distinct(SecuritySchemesComparer.Instance);
             var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             foreach (var scheme in schemes)
             {
@@ -167,16 +167,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                         writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                         writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{azureKeySecurityScheme.HeaderName}\"));");
-                        writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+                        writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                         foreach (var parameter in client.RestClient.Parameters)
                         {
-                            if (!parameter.IsApiVersionParameter)
+                            if (parameter.IsApiVersionParameter)
                             {
-                                writer.Append($"{parameter.Name}, ");
+                                writer.Append($"{OptionsVariable}.Version, ");
+                            }
+                            else if (parameter == KnownParameters.ClientDiagnostics)
+                            {
+                                writer.Append($"{ClientDiagnosticsField}, ");
+                            }
+                            else if (parameter == KnownParameters.Pipeline)
+                            {
+                                writer.Append($"{PipelineField}, ");
                             }
                             else
                             {
-                                writer.Append($"{OptionsVariable}.Version, ");
+                                writer.Append($"{parameter.Name}, ");
                             }
                         }
                         writer.RemoveTrailingComma();
@@ -219,16 +227,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"}};");
 
                         writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
-                        writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+                        writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                         foreach (var parameter in client.RestClient.Parameters)
                         {
-                            if (!parameter.IsApiVersionParameter)
+                            if (parameter.IsApiVersionParameter)
                             {
-                                writer.Append($"{parameter.Name}, ");
+                                writer.Append($"{OptionsVariable}.Version, ");
+                            }
+                            else if (parameter == KnownParameters.ClientDiagnostics)
+                            {
+                                writer.Append($"{ClientDiagnosticsField}, ");
+                            }
+                            else if (parameter == KnownParameters.Pipeline)
+                            {
+                                writer.Append($"{PipelineField}, ");
                             }
                             else
                             {
-                                writer.Append($"{OptionsVariable}.Version, ");
+                                writer.Append($"{parameter.Name}, ");
                             }
                         }
                         writer.RemoveTrailingComma();
@@ -238,34 +254,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, $"The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter(PipelineVariable, $"The HTTP pipeline for sending and receiving REST requests and responses.");
-            foreach (Parameter parameter in client.RestClient.Parameters)
+            var internalConstructor = BuildInternalConstructor(client);
+            writer.WriteMethodDocumentation(internalConstructor);
+            using (writer.WriteMethodDeclaration(internalConstructor))
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-
-            writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
-            foreach (Parameter parameter in client.RestClient.Parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-            using (writer.Scope())
-            {
-                writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsVariable}, {PipelineVariable}, ");
-                foreach (var parameter in client.RestClient.Parameters)
-                {
-                    writer.Append($"{parameter.Name}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-
-                writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
-                writer.Line($"{PipelineField} = {PipelineVariable};");
+                writer
+                    .Line($"this.RestClient = new {client.RestClient.Type}({client.RestClient.Parameters.GetIdentifiersFormattable()});")
+                    .Line($"{ClientDiagnosticsField} = {KnownParameters.ClientDiagnostics.Name:I};")
+                    .Line($"{PipelineField} = {KnownParameters.Pipeline.Name:I};");
             }
             writer.Line();
         }
@@ -470,6 +466,34 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 return hashCode.ToHashCode();
             }
+        }
+
+        //private IEnumerable<ConstructorSignature> BuildPublicConstructors(DataPlaneRestClient restClient)
+        //{
+        //    if (restClient.Fields.CredentialFields.Count == 0)
+        //    {
+        //        yield return BuildPublicConstructor(restClient, null);
+        //    }
+        //    else
+        //    {
+        //        foreach (var credentialField in restClient.Fields.CredentialFields)
+        //        {
+        //            yield return BuildPublicConstructor(restClient, credentialField);
+        //        }
+        //    }
+        //}
+
+        //private ConstructorSignature BuildPublicConstructor(DataPlaneRestClient restClient, FieldDeclaration? credentialField)
+        //{
+        //    var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
+        //    return new ConstructorSignature(restClient.Declaration.Name, $"Initializes a new instance of {restClient.Declaration.Name}", MethodSignatureModifiers.Public, constructorParameters);
+        //}
+
+        private static ConstructorSignature BuildInternalConstructor(DataPlaneClient client)
+        {
+            var constructorParameters = new[]{KnownParameters.ClientDiagnostics, KnownParameters.Pipeline}.Union(client.RestClient.Parameters).ToArray();
+            var name = client.Declaration.Name;
+            return new ConstructorSignature(name, $"Initializes a new instance of {name}", MethodSignatureModifiers.Internal, constructorParameters);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Toaster" /> object. </returns>
         public static Toaster GetToaster(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Toaster.ValidateResourceId(id);
                 return new Toaster(client, id);
@@ -36,7 +36,7 @@ namespace SubscriptionExtensions
         /// <returns> Returns a <see cref="Oven" /> object. </returns>
         public static Oven GetOven(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Oven.ValidateResourceId(id);
                 return new Oven(client, id);

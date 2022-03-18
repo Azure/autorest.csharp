@@ -11,7 +11,7 @@ using Azure.Core;
 namespace OmitOperationGroups.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class Model5ListResult
+    internal partial class Model5ListResult
     {
         /// <summary> Initializes a new instance of Model5ListResult. </summary>
         internal Model5ListResult()

@@ -458,6 +458,10 @@
                     "$ref": "#/definitions/IdentityWithNoSystemIdentity",
                     "description": "The identity of the virtual machine, if configured."
                 },
+                "identityV3": {
+                    "$ref": "#/definitions/IdentityV3",
+                    "description": "The identity of the virtual machine, if configured."
+                },
                 "zones": {
                     "type": "array",
                     "items": {
@@ -554,6 +558,10 @@
                 "promotionCode": {
                     "type": "string",
                     "description": "The promotion code."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "The version."
                 }
             },
             "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
@@ -824,6 +832,54 @@
                     "x-ms-enum": {
                         "name": "ResourceIdentityType",
                         "modelAsString": false
+                    }
+                },
+                "userAssignedIdentities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "principalId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The principal id of user assigned identity."
+                            },
+                            "clientId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The client id of user assigned identity."
+                            }
+                        }
+                    },
+                    "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+                }
+            },
+            "description": "Identity for the virtual machine."
+        },
+        "IdentityV3": {
+            "properties": {
+                "principalId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
+                },
+                "tenantId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "SystemAssigned,UserAssigned",
+                        "None"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ResourceIdentityV3Type",
+                        "modelAsString": true
                     }
                 },
                 "userAssignedIdentities": {

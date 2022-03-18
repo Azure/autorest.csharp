@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using MgmtScopeResource;
 using System;
+using MgmtScopeResource.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -16,20 +17,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
         [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("ArmResourceExtensions", "GetPolicyAssignments", true)]
         [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ArmResourceExtensions", "GetFakePolicyAssignments", true)]
         [TestCase("ArmResourceExtensions", "GetDeploymentExtendeds", false)]
-        [TestCase("PolicyAssignmentCollection", "CreateOrUpdate", true)]
-        [TestCase("PolicyAssignmentCollection", "Get", true)]
-        [TestCase("PolicyAssignmentCollection", "GetAll", true)]
-        [TestCase("PolicyAssignmentCollection", "GetForResourceGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForResource", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForManagementGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetAllAsGenericResources", false)]
-        [TestCase("PolicyAssignment", "Get", true)]
-        [TestCase("PolicyAssignment", "Delete", true)]
+        [TestCase("FakePolicyAssignmentCollection", "CreateOrUpdate", true)]
+        [TestCase("FakePolicyAssignmentCollection", "Get", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAll", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResourceGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResource", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForManagementGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAllAsGenericResources", false)]
+        [TestCase("FakePolicyAssignment", "Get", true)]
+        [TestCase("FakePolicyAssignment", "Delete", true)]
         [TestCase("DeploymentExtendedCollection", "CreateOrUpdate", true)]
         [TestCase("DeploymentExtendedCollection", "Get", true)]
         [TestCase("DeploymentExtendedCollection", "GetAll", true)]
@@ -55,5 +56,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
 
+        [Test]
+        public void ValidateBinaryData()
+        {
+            var valueProperty = typeof(ParameterValuesValue).GetProperty("Value");
+            Assert.IsNotNull(valueProperty);
+            Assert.AreEqual(typeof(BinaryData), valueProperty.PropertyType);
+        }
     }
 }
