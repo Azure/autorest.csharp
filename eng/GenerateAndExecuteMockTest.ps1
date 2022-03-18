@@ -97,7 +97,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     $RPName = $path.Substring($count, $path.Length - $count).Replace("ResourceManager.", "")
     $srcFolder = Join-Path $path  "src"
     $mocktestsFolder = Join-Path  $path  "mocktests"
-    $mockMd = Join-Path $mocktestsFolder + "autorest.tests.md"
+    $mockMd = $mocktestsFolder + "/autorest.tests.md"
     $csproj = ($mocktestsFolder + "/Azure.ResourceManager.Template.Tests.csproj").Replace("Template", $RPName)
     Write-Host "`n`nStart Generate $RPName"
 
