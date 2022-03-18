@@ -18,8 +18,8 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class to add extension methods to Subscription. </summary>
-    internal partial class SubscriptionExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _skusClientDiagnostics;
         private SkusRestOperations _skusRestClient;
@@ -28,15 +28,15 @@ namespace Azure.Management.Storage
         private ClientDiagnostics _usagesClientDiagnostics;
         private UsagesRestOperations _usagesRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -71,7 +71,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageSkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageSkuInformation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
+                using var scope = SkusClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkus");
                 scope.Start();
                 try
                 {
@@ -125,7 +125,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageAccountResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetStorageAccounts");
                 scope.Start();
                 try
                 {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
             }
             async Task<Page<StorageAccountResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetStorageAccounts");
                 scope.Start();
                 try
                 {
@@ -167,7 +167,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageAccountResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetStorageAccounts");
                 scope.Start();
                 try
                 {
@@ -182,7 +182,7 @@ namespace Azure.Management.Storage
             }
             Page<StorageAccountResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetStorageAccounts");
                 scope.Start();
                 try
                 {
@@ -210,7 +210,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageUsage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsagesByLocation");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsagesByLocation");
                 scope.Start();
                 try
                 {
@@ -238,7 +238,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageUsage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsagesByLocation");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsagesByLocation");
                 scope.Start();
                 try
                 {

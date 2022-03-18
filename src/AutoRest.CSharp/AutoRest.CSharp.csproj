@@ -16,10 +16,11 @@
     <NoDefaultExcludes>true</NoDefaultExcludes>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.23.0-alpha.20220318.1" />
+    <PackageReference Include="Azure.Core" Version="1.23.0-alpha.20220318.3" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220317.7" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220318.3" />
     <PackageReference Include="Humanizer.Core" Version="2.13.14" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />

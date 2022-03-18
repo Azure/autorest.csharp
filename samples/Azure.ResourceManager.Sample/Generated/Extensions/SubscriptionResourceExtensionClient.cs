@@ -18,8 +18,8 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class to add extension methods to Subscription. </summary>
-    internal partial class SubscriptionExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _availabilitySetClientDiagnostics;
         private AvailabilitySetsRestOperations _availabilitySetRestClient;
@@ -44,15 +44,15 @@ namespace Azure.ResourceManager.Sample
         private ClientDiagnostics _logAnalyticsClientDiagnostics;
         private LogAnalyticsRestOperations _logAnalyticsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<AvailabilitySetResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<AvailabilitySetResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<AvailabilitySetResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
@@ -164,7 +164,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<AvailabilitySetResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetAvailabilitySets");
+                using var scope = AvailabilitySetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetAvailabilitySets");
                 scope.Start();
                 try
                 {
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<ProximityPlacementGroupResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
@@ -206,7 +206,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<ProximityPlacementGroupResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
@@ -233,7 +233,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<ProximityPlacementGroupResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
@@ -248,7 +248,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<ProximityPlacementGroupResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetProximityPlacementGroups");
+                using var scope = ProximityPlacementGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetProximityPlacementGroups");
                 scope.Start();
                 try
                 {
@@ -275,7 +275,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<DedicatedHostGroupResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<DedicatedHostGroupResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
@@ -317,7 +317,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<DedicatedHostGroupResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
@@ -332,7 +332,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<DedicatedHostGroupResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetDedicatedHostGroups");
+                using var scope = DedicatedHostGroupClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetDedicatedHostGroups");
                 scope.Start();
                 try
                 {
@@ -359,7 +359,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<SshPublicKeyResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
@@ -374,7 +374,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<SshPublicKeyResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
@@ -401,7 +401,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<SshPublicKeyResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
@@ -416,7 +416,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<SshPublicKeyResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSshPublicKeys");
+                using var scope = SshPublicKeyClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSshPublicKeys");
                 scope.Start();
                 try
                 {
@@ -445,7 +445,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImage");
+            using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineImage");
             scope.Start();
             try
             {
@@ -472,7 +472,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<VirtualMachineImage> GetVirtualMachineImage(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImage");
+            using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineImage");
             scope.Start();
             try
             {
@@ -504,7 +504,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -538,7 +538,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -567,7 +567,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOffersVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOffersVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -596,7 +596,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOffersVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetOffersVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -624,7 +624,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetPublishersVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetPublishersVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -652,7 +652,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetPublishersVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetPublishersVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -682,7 +682,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkusVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkusVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -712,7 +712,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkusVirtualMachineImages");
+                using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSkusVirtualMachineImages");
                 scope.Start();
                 try
                 {
@@ -740,7 +740,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<SampleUsage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -755,7 +755,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<SampleUsage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -783,7 +783,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<SampleUsage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -798,7 +798,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<SampleUsage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -826,7 +826,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
@@ -841,7 +841,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachineResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
@@ -869,7 +869,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
@@ -884,7 +884,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachineResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachinesByLocation");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachinesByLocation");
                 scope.Start();
                 try
                 {
@@ -912,7 +912,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
@@ -927,7 +927,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachineResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
@@ -955,7 +955,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
@@ -970,7 +970,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachineResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachines");
+                using var scope = VirtualMachineClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachines");
                 scope.Start();
                 try
                 {
@@ -998,7 +998,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineSizesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineSizes");
+                using var scope = VirtualMachineSizesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineSizes");
                 scope.Start();
                 try
                 {
@@ -1026,7 +1026,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineSizesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineSizes");
+                using var scope = VirtualMachineSizesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineSizes");
                 scope.Start();
                 try
                 {
@@ -1053,7 +1053,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<ImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
@@ -1068,7 +1068,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<ImageResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
@@ -1095,7 +1095,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<ImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
@@ -1110,7 +1110,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<ImageResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetImages");
+                using var scope = ImageClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetImages");
                 scope.Start();
                 try
                 {
@@ -1137,7 +1137,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<VirtualMachineScaleSetResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
@@ -1152,7 +1152,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<VirtualMachineScaleSetResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
@@ -1179,7 +1179,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<VirtualMachineScaleSetResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
@@ -1194,7 +1194,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<VirtualMachineScaleSetResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineScaleSets");
+                using var scope = VirtualMachineScaleSetClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetVirtualMachineScaleSets");
                 scope.Start();
                 try
                 {
@@ -1221,7 +1221,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(WaitUntil waitUntil, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic");
+            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
             try
             {
@@ -1249,7 +1249,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(WaitUntil waitUntil, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic");
+            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
             try
             {
@@ -1277,7 +1277,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(WaitUntil waitUntil, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic");
+            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ExportThrottledRequestsLogAnalytic");
             scope.Start();
             try
             {
@@ -1305,7 +1305,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(WaitUntil waitUntil, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic");
+            using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.ExportThrottledRequestsLogAnalytic");
             scope.Start();
             try
             {
