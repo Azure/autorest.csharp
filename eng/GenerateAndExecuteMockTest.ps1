@@ -104,11 +104,15 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     # Remove the [Generated] and [Custom] folders in src.
     $generatedFolder = Join-Path $srcFolder "Generated"
     $customFolder = Join-Path $srcFolder "custom"
+    Write-Host $generatedFolder
+    Write-Host $customFolder
     if (Test-Path $generatedFolder) {
         & rm -r $generatedFolder
+        Write-Host $generatedFolder "has been removed"
     }
     if (Test-Path $customFolder) {
         & rm -r $customFolder
+        Write-Host $customFolder "has been removed"
     }
 
     # Create [mocktests] folder if it not exist
