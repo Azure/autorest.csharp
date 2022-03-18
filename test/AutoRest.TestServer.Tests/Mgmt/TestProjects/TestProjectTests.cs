@@ -714,5 +714,58 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.Greater(methods.Count(), 0, $"The {i + 1}nd parameter of {fullClassName}.{methodName}() is not of type {argTypes[i]}!");
             }
         }
+
+        [Test]
+        public void ValidateExtensionMethods()
+        {
+            // CLR does not have a concept of "static class". CLR will treat static class as both abstract and sealed.
+            // therefore using this to find all the static class (which are the extension classes)
+            var extensionTypes = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic);
+            // get all the public methods on the static class (we do not have to add the static flag because it must be all static
+            var publicMethodsOfExtensionTypes = extensionTypes.SelectMany(
+                type => type.GetMethods(BindingFlags.Public | BindingFlags.Static));
+            var publicMethodNamesOfExtensionTypes = publicMethodsOfExtensionTypes.Select(m => m.Name).ToArray();
+            // now we find all the extension clients
+            var extensionClientTypes = MyTypes().Where(type => extensionClientNames.Contains(type.Name));
+            // get all the public methods on the extension client class
+            var publicMethodsOfExtensionClientTypes = extensionClientTypes.SelectMany(
+                type => GetMethodDefinedByMyself(type));
+
+            // validate the extension class should have everything defined in the extension client class
+            foreach (var method in publicMethodsOfExtensionClientTypes)
+            {
+                // validate we have this method
+                var candidates = publicMethodsOfExtensionTypes.Where(m => m.Name.Equals(method.Name));
+                Assert.IsTrue(candidates.Any(), $"Method {method.Name} is defined in extension client class {method.DeclaringType} but not found in extension class");
+                var expectedParameters = method.GetParameters();
+                bool matches = false;
+                foreach (var candidate in candidates)
+                {
+                    var parameters = candidate.GetParameters().Skip(1).ToArray(); // skip the first since it is the instance we are extending on
+                    matches |= ValidateParameters(expectedParameters, parameters);
+                }
+                Assert.IsTrue(matches, $"Method {method.Name} is defined in extension client class {method.DeclaringType} but not found in extension class with all the same parameters");
+            }
+        }
+
+        private static IEnumerable<MethodInfo> GetMethodDefinedByMyself(Type type)
+        {
+            return type.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.DeclaringType == type);
+        }
+
+        private static bool ValidateParameters(ParameterInfo[] expected, ParameterInfo[] parameters)
+        {
+            if (expected.Length != parameters.Length)
+                return false;
+            for (int i = 0; i < expected.Length; i++)
+            {
+                if (expected[i].Name != parameters[i].Name || expected[i].ParameterType != parameters[i].ParameterType)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static readonly string[] extensionClientNames = new[] { "SubscriptionExtensionClient", "ResourceGroupExtensionClient", "ManagementGroupExtensionClient", "TenantExtensionClient", "ArmResourceExtensionClient" };
     }
 }
