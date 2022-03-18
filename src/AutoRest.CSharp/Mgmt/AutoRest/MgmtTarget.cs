@@ -168,13 +168,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }
 
-        private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
-        {
-            WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!Configuration.MgmtConfiguration.IsArmCore)
-                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
-        }
-
         private static void WriteExtensionPiece(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
         {
             extensionWriter.Write();
