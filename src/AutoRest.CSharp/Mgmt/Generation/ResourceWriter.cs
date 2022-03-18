@@ -41,7 +41,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteCreateResourceIdentifierMethods()
         {
             var requestPath = This.RequestPath;
-            _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{This.Type}\"/> instance.");
             var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
             using (_writer.Scope($"public static {typeof(Azure.Core.ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
@@ -51,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
                 // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
                 // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
-                _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, requestPath.First().IsConstant)}\";");
+                _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, !requestPath.Any() || requestPath.First().IsConstant)}\";");
                 _writer.Line($"return new {typeof(Azure.Core.ResourceIdentifier)}(resourceId);");
             }
         }
