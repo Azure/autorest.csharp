@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (!IsArmCore)
                 {
-                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
+                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetResourceClient<{resource.Type}>(() =>"))
                     {
                         WriteGetter(resource, $"{ArmClientReference.ToVariableName()}");
                     }
