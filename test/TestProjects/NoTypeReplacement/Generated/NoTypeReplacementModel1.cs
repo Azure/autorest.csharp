@@ -83,7 +83,7 @@ namespace NoTypeReplacement
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1sName}
         /// Operation Id: NoTypeReplacementModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -106,7 +106,7 @@ namespace NoTypeReplacement
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1sName}
         /// Operation Id: NoTypeReplacementModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

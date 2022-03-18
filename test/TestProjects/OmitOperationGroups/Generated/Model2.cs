@@ -88,7 +88,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// Operation Id: Model2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -111,7 +111,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// Operation Id: Model2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -134,7 +134,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
         /// Operation Id: Model4s_GetDefault
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -155,7 +155,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
         /// Operation Id: Model4s_GetDefault
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
