@@ -9,12 +9,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtLRO
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    public static partial class ResourceGroupExtensions
+    /// <summary> A class to add extension methods to MgmtLRO. </summary>
+    public static partial class MgmtLROExtensions
     {
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
@@ -102,5 +104,37 @@ namespace MgmtLRO
         {
             return resourceGroup.GetBars().Get(barName, cancellationToken);
         }
+
+        #region Fake
+        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="Fake" /> object. </returns>
+        public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                Fake.ValidateResourceId(id);
+                return new Fake(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region Bar
+        /// <summary> Gets an object representing a Bar along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="Bar" /> object. </returns>
+        public static Bar GetBar(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                Bar.ValidateResourceId(id);
+                return new Bar(client, id);
+            }
+            );
+        }
+        #endregion
     }
 }

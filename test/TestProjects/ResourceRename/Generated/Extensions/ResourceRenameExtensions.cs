@@ -72,7 +72,7 @@ namespace ResourceRename
         /// <returns> Returns a <see cref="SshPublicKeyInfo" /> object. </returns>
         public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SshPublicKeyInfo.ValidateResourceId(id);
                 return new SshPublicKeyInfo(client, id);

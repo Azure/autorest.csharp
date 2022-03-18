@@ -111,7 +111,7 @@ namespace MgmtCollectionParent
         /// <returns> Returns a <see cref="OrderResource" /> object. </returns>
         public static OrderResource GetOrderResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 OrderResource.ValidateResourceId(id);
                 return new OrderResource(client, id);

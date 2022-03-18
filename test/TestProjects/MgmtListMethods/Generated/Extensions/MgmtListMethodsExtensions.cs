@@ -1035,7 +1035,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
         public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Fake.ValidateResourceId(id);
                 return new Fake(client, id);
@@ -1051,7 +1051,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> object. </returns>
         public static FakeParentWithAncestorWithNonResChWithLoc GetFakeParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
                 return new FakeParentWithAncestorWithNonResChWithLoc(client, id);
@@ -1067,7 +1067,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResCh" /> object. </returns>
         public static FakeParentWithAncestorWithNonResCh GetFakeParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParentWithAncestorWithNonResCh.ValidateResourceId(id);
                 return new FakeParentWithAncestorWithNonResCh(client, id);
@@ -1083,7 +1083,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithLoc" /> object. </returns>
         public static FakeParentWithAncestorWithLoc GetFakeParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParentWithAncestorWithLoc.ValidateResourceId(id);
                 return new FakeParentWithAncestorWithLoc(client, id);
@@ -1099,7 +1099,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestor" /> object. </returns>
         public static FakeParentWithAncestor GetFakeParentWithAncestor(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParentWithAncestor.ValidateResourceId(id);
                 return new FakeParentWithAncestor(client, id);
@@ -1115,7 +1115,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithNonResCh" /> object. </returns>
         public static FakeParentWithNonResCh GetFakeParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParentWithNonResCh.ValidateResourceId(id);
                 return new FakeParentWithNonResCh(client, id);
@@ -1131,7 +1131,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParent" /> object. </returns>
         public static FakeParent GetFakeParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakeParent.ValidateResourceId(id);
                 return new FakeParent(client, id);
@@ -1147,7 +1147,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> object. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLoc GetResGrpParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
                 return new ResGrpParentWithAncestorWithNonResChWithLoc(client, id);
@@ -1163,7 +1163,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResCh" /> object. </returns>
         public static ResGrpParentWithAncestorWithNonResCh GetResGrpParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParentWithAncestorWithNonResCh.ValidateResourceId(id);
                 return new ResGrpParentWithAncestorWithNonResCh(client, id);
@@ -1179,7 +1179,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLoc" /> object. </returns>
         public static ResGrpParentWithAncestorWithLoc GetResGrpParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParentWithAncestorWithLoc.ValidateResourceId(id);
                 return new ResGrpParentWithAncestorWithLoc(client, id);
@@ -1195,7 +1195,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestor" /> object. </returns>
         public static ResGrpParentWithAncestor GetResGrpParentWithAncestor(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParentWithAncestor.ValidateResourceId(id);
                 return new ResGrpParentWithAncestor(client, id);
@@ -1211,7 +1211,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithNonResCh" /> object. </returns>
         public static ResGrpParentWithNonResCh GetResGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParentWithNonResCh.ValidateResourceId(id);
                 return new ResGrpParentWithNonResCh(client, id);
@@ -1227,7 +1227,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParent" /> object. </returns>
         public static ResGrpParent GetResGrpParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResGrpParent.ValidateResourceId(id);
                 return new ResGrpParent(client, id);
@@ -1243,7 +1243,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithNonResChWithLoc" /> object. </returns>
         public static SubParentWithNonResChWithLoc GetSubParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubParentWithNonResChWithLoc.ValidateResourceId(id);
                 return new SubParentWithNonResChWithLoc(client, id);
@@ -1259,7 +1259,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithNonResCh" /> object. </returns>
         public static SubParentWithNonResCh GetSubParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubParentWithNonResCh.ValidateResourceId(id);
                 return new SubParentWithNonResCh(client, id);
@@ -1275,7 +1275,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithLoc" /> object. </returns>
         public static SubParentWithLoc GetSubParentWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubParentWithLoc.ValidateResourceId(id);
                 return new SubParentWithLoc(client, id);
@@ -1291,7 +1291,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParent" /> object. </returns>
         public static SubParent GetSubParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubParent.ValidateResourceId(id);
                 return new SubParent(client, id);
@@ -1307,7 +1307,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLoc" /> object. </returns>
         public static MgmtGrpParentWithNonResChWithLoc GetMgmtGrpParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 MgmtGrpParentWithNonResChWithLoc.ValidateResourceId(id);
                 return new MgmtGrpParentWithNonResChWithLoc(client, id);
@@ -1323,7 +1323,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResCh" /> object. </returns>
         public static MgmtGrpParentWithNonResCh GetMgmtGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 MgmtGrpParentWithNonResCh.ValidateResourceId(id);
                 return new MgmtGrpParentWithNonResCh(client, id);
@@ -1339,7 +1339,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithLoc" /> object. </returns>
         public static MgmtGrpParentWithLoc GetMgmtGrpParentWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 MgmtGrpParentWithLoc.ValidateResourceId(id);
                 return new MgmtGrpParentWithLoc(client, id);
@@ -1355,7 +1355,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGroupParent" /> object. </returns>
         public static MgmtGroupParent GetMgmtGroupParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 MgmtGroupParent.ValidateResourceId(id);
                 return new MgmtGroupParent(client, id);
@@ -1371,7 +1371,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantTest" /> object. </returns>
         public static TenantTest GetTenantTest(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TenantTest.ValidateResourceId(id);
                 return new TenantTest(client, id);
@@ -1387,7 +1387,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithNonResChWithLoc" /> object. </returns>
         public static TenantParentWithNonResChWithLoc GetTenantParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TenantParentWithNonResChWithLoc.ValidateResourceId(id);
                 return new TenantParentWithNonResChWithLoc(client, id);
@@ -1403,7 +1403,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithNonResCh" /> object. </returns>
         public static TenantParentWithNonResCh GetTenantParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TenantParentWithNonResCh.ValidateResourceId(id);
                 return new TenantParentWithNonResCh(client, id);
@@ -1419,7 +1419,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithLoc" /> object. </returns>
         public static TenantParentWithLoc GetTenantParentWithLoc(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TenantParentWithLoc.ValidateResourceId(id);
                 return new TenantParentWithLoc(client, id);
@@ -1435,7 +1435,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParent" /> object. </returns>
         public static TenantParent GetTenantParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TenantParent.ValidateResourceId(id);
                 return new TenantParent(client, id);

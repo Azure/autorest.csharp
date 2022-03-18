@@ -198,7 +198,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AvailabilitySet.ValidateResourceId(id);
                 return new AvailabilitySet(client, id);
@@ -214,7 +214,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
         public static DedicatedHostGroup GetDedicatedHostGroup(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DedicatedHostGroup.ValidateResourceId(id);
                 return new DedicatedHostGroup(client, id);
@@ -230,7 +230,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
         public static DedicatedHost GetDedicatedHost(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DedicatedHost.ValidateResourceId(id);
                 return new DedicatedHost(client, id);
@@ -246,7 +246,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
         public static VirtualMachineExtensionImage GetVirtualMachineExtensionImage(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 VirtualMachineExtensionImage.ValidateResourceId(id);
                 return new VirtualMachineExtensionImage(client, id);

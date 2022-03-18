@@ -72,7 +72,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> Returns a <see cref="SBSubscription" /> object. </returns>
         public static SBSubscription GetSBSubscription(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SBSubscription.ValidateResourceId(id);
                 return new SBSubscription(client, id);

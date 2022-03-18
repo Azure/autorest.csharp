@@ -149,7 +149,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
         public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AvailabilitySet.ValidateResourceId(id);
                 return new AvailabilitySet(client, id);
@@ -165,7 +165,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
         public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AvailabilitySetChild.ValidateResourceId(id);
                 return new AvailabilitySetChild(client, id);
@@ -181,7 +181,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
         public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AvailabilitySetGrandChild.ValidateResourceId(id);
                 return new AvailabilitySetGrandChild(client, id);
@@ -197,7 +197,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
         public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 UnpatchableResource.ValidateResourceId(id);
                 return new UnpatchableResource(client, id);

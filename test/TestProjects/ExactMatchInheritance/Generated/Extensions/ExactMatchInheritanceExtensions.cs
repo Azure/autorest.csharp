@@ -271,7 +271,7 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel1" /> object. </returns>
         public static ExactMatchModel1 GetExactMatchModel1(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ExactMatchModel1.ValidateResourceId(id);
                 return new ExactMatchModel1(client, id);
@@ -287,7 +287,7 @@ namespace ExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel5" /> object. </returns>
         public static ExactMatchModel5 GetExactMatchModel5(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ExactMatchModel5.ValidateResourceId(id);
                 return new ExactMatchModel5(client, id);

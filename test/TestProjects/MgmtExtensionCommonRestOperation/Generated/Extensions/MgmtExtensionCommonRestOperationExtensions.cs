@@ -171,7 +171,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeOne" /> object. </returns>
         public static TypeOne GetTypeOne(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TypeOne.ValidateResourceId(id);
                 return new TypeOne(client, id);
@@ -187,7 +187,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeTwo" /> object. </returns>
         public static TypeTwo GetTypeTwo(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TypeTwo.ValidateResourceId(id);
                 return new TypeTwo(client, id);

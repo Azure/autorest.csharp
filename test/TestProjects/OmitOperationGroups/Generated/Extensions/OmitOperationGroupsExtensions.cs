@@ -163,7 +163,7 @@ namespace OmitOperationGroups
         /// <returns> Returns a <see cref="Model2" /> object. </returns>
         public static Model2 GetModel2(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Model2.ValidateResourceId(id);
                 return new Model2(client, id);

@@ -539,7 +539,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1" /> object. </returns>
         public static AzureResourceFlattenModel1 GetAzureResourceFlattenModel1(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AzureResourceFlattenModel1.ValidateResourceId(id);
                 return new AzureResourceFlattenModel1(client, id);
@@ -555,7 +555,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel2" /> object. </returns>
         public static CustomModel2 GetCustomModel2(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 CustomModel2.ValidateResourceId(id);
                 return new CustomModel2(client, id);
@@ -571,7 +571,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel3" /> object. </returns>
         public static CustomModel3 GetCustomModel3(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 CustomModel3.ValidateResourceId(id);
                 return new CustomModel3(client, id);

@@ -315,7 +315,7 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel1" /> object. </returns>
         public static SupersetModel1 GetSupersetModel1(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SupersetModel1.ValidateResourceId(id);
                 return new SupersetModel1(client, id);
@@ -331,7 +331,7 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel4" /> object. </returns>
         public static SupersetModel4 GetSupersetModel4(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SupersetModel4.ValidateResourceId(id);
                 return new SupersetModel4(client, id);
@@ -347,7 +347,7 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel6" /> object. </returns>
         public static SupersetModel6 GetSupersetModel6(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SupersetModel6.ValidateResourceId(id);
                 return new SupersetModel6(client, id);
@@ -363,7 +363,7 @@ namespace SupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel7" /> object. </returns>
         public static SupersetModel7 GetSupersetModel7(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SupersetModel7.ValidateResourceId(id);
                 return new SupersetModel7(client, id);

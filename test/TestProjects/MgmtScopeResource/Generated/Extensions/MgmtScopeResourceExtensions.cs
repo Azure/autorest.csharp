@@ -363,7 +363,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="FakePolicyAssignment" /> object. </returns>
         public static FakePolicyAssignment GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 FakePolicyAssignment.ValidateResourceId(id);
                 return new FakePolicyAssignment(client, id);
@@ -379,7 +379,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
         public static DeploymentExtended GetDeploymentExtended(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DeploymentExtended.ValidateResourceId(id);
                 return new DeploymentExtended(client, id);
@@ -395,7 +395,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
         public static ResourceLink GetResourceLink(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ResourceLink.ValidateResourceId(id);
                 return new ResourceLink(client, id);

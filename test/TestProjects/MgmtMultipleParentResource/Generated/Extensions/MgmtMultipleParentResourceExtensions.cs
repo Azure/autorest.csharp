@@ -114,7 +114,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParent" /> object. </returns>
         public static AnotherParent GetAnotherParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AnotherParent.ValidateResourceId(id);
                 return new AnotherParent(client, id);
@@ -130,7 +130,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentChild" /> object. </returns>
         public static AnotherParentChild GetAnotherParentChild(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 AnotherParentChild.ValidateResourceId(id);
                 return new AnotherParentChild(client, id);
@@ -146,7 +146,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentSubParentChild" /> object. </returns>
         public static TheParentSubParentChild GetTheParentSubParentChild(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TheParentSubParentChild.ValidateResourceId(id);
                 return new TheParentSubParentChild(client, id);
@@ -162,7 +162,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParent" /> object. </returns>
         public static TheParent GetTheParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 TheParent.ValidateResourceId(id);
                 return new TheParent(client, id);
@@ -178,7 +178,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="SubParent" /> object. </returns>
         public static SubParent GetSubParent(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubParent.ValidateResourceId(id);
                 return new SubParent(client, id);

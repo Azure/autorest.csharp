@@ -74,7 +74,7 @@ namespace TenantOnly
         /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
         public static BillingAccount GetBillingAccount(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 BillingAccount.ValidateResourceId(id);
                 return new BillingAccount(client, id);
@@ -90,7 +90,7 @@ namespace TenantOnly
         /// <returns> Returns a <see cref="Agreement" /> object. </returns>
         public static Agreement GetAgreement(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 Agreement.ValidateResourceId(id);
                 return new Agreement(client, id);
