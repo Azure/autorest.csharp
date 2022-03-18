@@ -259,7 +259,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary> Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up. </summary>
-        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
@@ -272,7 +272,7 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<BinaryData>> LroAsync(bool waitForCompletion, string mode, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> LroAsync(WaitUntil waitUntil, string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -281,7 +281,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -291,7 +291,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary> Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up. </summary>
-        /// <param name="waitForCompletion"> true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
@@ -304,7 +304,7 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<BinaryData> Lro(bool waitForCompletion, string mode, RequestContext context = null)
+        public virtual Operation<BinaryData> Lro(WaitUntil waitUntil, string mode, RequestContext context = null)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -313,7 +313,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -324,7 +324,7 @@ namespace dpg_customization_LowLevel
 
         internal HttpMessage CreateGetModelRequest(string mode, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -333,13 +333,12 @@ namespace dpg_customization_LowLevel
             uri.AppendPath(mode, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreatePostModelRequest(string mode, RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -350,13 +349,12 @@ namespace dpg_customization_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagesRequest(string mode, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -365,13 +363,12 @@ namespace dpg_customization_LowLevel
             uri.AppendPath(mode, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateLroRequest(string mode, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -380,13 +377,12 @@ namespace dpg_customization_LowLevel
             uri.AppendPath(mode, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetPagesNextPageRequest(string nextLink, string mode, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -394,22 +390,10 @@ namespace dpg_customization_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }
