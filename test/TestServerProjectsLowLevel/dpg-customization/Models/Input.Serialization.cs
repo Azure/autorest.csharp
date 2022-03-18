@@ -17,5 +17,12 @@ namespace dpg_customization_LowLevel.Models
             writer.WriteStringValue(Hello);
             writer.WriteEndObject();
         }
+
+        internal static RequestContent ToRequestContent(Input input)
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(input);
+            return content;
+        }
     }
 }

@@ -53,10 +53,7 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-
-            Response response = await PostModelAsync("model", content, requestContext);
+            Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
             return Response.FromValue((Product)response, response);
         }
 
@@ -72,10 +69,7 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-
-            Response result = PostModel("model", content, requestContext);
+            Response result = PostModel("model", Input.ToRequestContent(input), requestContext);
             return Response.FromValue((Product)result, result);
         }
 
