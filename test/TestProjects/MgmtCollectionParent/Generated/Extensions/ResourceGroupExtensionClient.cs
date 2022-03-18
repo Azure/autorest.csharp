@@ -36,7 +36,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public virtual OrderResourceCollection GetOrderResources()
         {
-            return new OrderResourceCollection(Client, Id);
+            return GetCachedClient(Client => new OrderResourceCollection(Client, Id));
         }
     }
 }

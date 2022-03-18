@@ -36,7 +36,7 @@ namespace MgmtDiscriminator
         /// <returns> An object representing collection of DeliveryRules and their operations over a DeliveryRule. </returns>
         public virtual DeliveryRuleCollection GetDeliveryRules()
         {
-            return new DeliveryRuleCollection(Client, Id);
+            return GetCachedClient(Client => new DeliveryRuleCollection(Client, Id));
         }
     }
 }

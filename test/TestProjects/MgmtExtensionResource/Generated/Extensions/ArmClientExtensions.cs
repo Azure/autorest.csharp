@@ -20,7 +20,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
         public static SubSingleton GetSubSingleton(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubSingleton.ValidateResourceId(id);
                 return new SubSingleton(client, id);
@@ -36,7 +36,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinition" /> object. </returns>
         public static SubscriptionPolicyDefinition GetSubscriptionPolicyDefinition(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 SubscriptionPolicyDefinition.ValidateResourceId(id);
                 return new SubscriptionPolicyDefinition(client, id);
@@ -52,7 +52,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="BuiltInPolicyDefinition" /> object. </returns>
         public static BuiltInPolicyDefinition GetBuiltInPolicyDefinition(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 BuiltInPolicyDefinition.ValidateResourceId(id);
                 return new BuiltInPolicyDefinition(client, id);
@@ -68,7 +68,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinition" /> object. </returns>
         public static ManagementGroupPolicyDefinition GetManagementGroupPolicyDefinition(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 ManagementGroupPolicyDefinition.ValidateResourceId(id);
                 return new ManagementGroupPolicyDefinition(client, id);

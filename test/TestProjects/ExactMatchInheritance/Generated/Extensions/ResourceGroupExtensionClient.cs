@@ -56,14 +56,14 @@ namespace ExactMatchInheritance
         /// <returns> An object representing collection of ExactMatchModel1s and their operations over a ExactMatchModel1. </returns>
         public virtual ExactMatchModel1Collection GetExactMatchModel1s()
         {
-            return new ExactMatchModel1Collection(Client, Id);
+            return GetCachedClient(Client => new ExactMatchModel1Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of ExactMatchModel5s in the ExactMatchModel5. </summary>
         /// <returns> An object representing collection of ExactMatchModel5s and their operations over a ExactMatchModel5. </returns>
         public virtual ExactMatchModel5Collection GetExactMatchModel5s()
         {
-            return new ExactMatchModel5Collection(Client, Id);
+            return GetCachedClient(Client => new ExactMatchModel5Collection(Client, Id));
         }
 
         /// <summary>

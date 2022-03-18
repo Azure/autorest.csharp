@@ -23,12 +23,20 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(Template))
             {
                 writer.WritePropertyName("template");
-                writer.WriteObjectValue(Template);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Template);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Template.ToString()).RootElement);
+#endif
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters");
-                writer.WriteObjectValue(Parameters);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Parameters);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Parameters.ToString()).RootElement);
+#endif
             }
             writer.WritePropertyName("mode");
             writer.WriteStringValue(Mode.ToSerialString());
