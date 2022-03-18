@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<Schema, TypeProvider> _models;
         private Lazy<ModelFactoryTypeProvider?> _modelFactory;
         private BuildContext<DataPlaneOutputLibrary> _context;
+        public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
         private CodeModel _codeModel;
 
         public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
@@ -31,12 +33,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
             _codeModel = codeModel;
 
-            _restClients = new CachedDictionary<OperationGroup, DataPlaneRestClient> (EnsureRestClients);
+            _restClients = new CachedDictionary<OperationGroup, DataPlaneRestClient>(EnsureRestClients);
             _clients = new CachedDictionary<OperationGroup, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<Operation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<Operation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
+            _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
@@ -46,6 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal CachedDictionary<Schema, TypeProvider> SchemaMap => _models;
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
         public IDictionary<string, LowLevelOutputLibraryFactory.ClientInfo> DPGClientInfosByName => GetDPGClientInfosByName();
+        public IDictionary<string, List<string>> ProtocolMethodsDictionary => _protocolMethodsDictionary;
 
         public override CSharpType FindTypeForSchema(Schema schema)
         {
@@ -207,17 +211,70 @@ namespace AutoRest.CSharp.Output.Models.Types
             return restClients;
         }
 
-        private static IEnumerable<LowLevelClientMethod> GetProtocolMethods(OperationGroup operationGroup, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+        // Get a Dictionary<operationGroupName, List<methodNames>> based on the "protocol-method-list" config
+        private Dictionary<string, List<string>> GetProtocolMethodsDictionary()
         {
-            // At least one protocol methods is found in the config
-            if (operationGroup.Operations.Where(IsProtocolMethodExists).Any())
+            Dictionary<string, List<string>> protocolMethodsDictionary = new();
+            foreach (var operationId in Configuration.ProtocolMethodList)
+            {
+                var operationGroupKeyAndIdArr = operationId.Split('_');
+
+                // If "operationGroup_operationId" passed in the config
+                if (operationGroupKeyAndIdArr.Length > 1)
+                {
+                    var operationGroupKey = operationGroupKeyAndIdArr[0];
+                    var methodName = operationGroupKeyAndIdArr[1];
+                    AddToProtocolMethodsDictionary(protocolMethodsDictionary, operationGroupKey, methodName);
+                }
+                // If operationGroup is not present, only operationId is passed in the config
+                else
+                {
+                    // when operationGroup is not present use the default name which is used to create client name
+                    var defaultClientName = ClientBuilder.GetClientPrefix(string.Empty, _context);
+                    AddToProtocolMethodsDictionary(protocolMethodsDictionary, defaultClientName, operationId);
+                }
+            }
+
+            return protocolMethodsDictionary;
+        }
+
+        private void AddToProtocolMethodsDictionary(Dictionary<string, List<string>> protocolMethodsDictionary, string operationGroupKey, string methodName)
+        {
+            if (!protocolMethodsDictionary.ContainsKey(operationGroupKey))
+            {
+                List<string> methodList = new();
+                methodList.Add(methodName);
+                protocolMethodsDictionary.Add(operationGroupKey, methodList);
+            }
+            else
+            {
+                var methodList = protocolMethodsDictionary[operationGroupKey];
+                methodList.Add(methodName);
+            }
+        }
+
+        private IEnumerable<string>? GetProtocolMethodsByOperationGroup(OperationGroup operationGroup)
+        {
+            _protocolMethodsDictionary.TryGetValue(operationGroup.Key, out var methodList);
+            if (methodList == null)
+            {
+                var defaultClientName = ClientBuilder.GetClientPrefix(string.Empty, _context);
+                _protocolMethodsDictionary.TryGetValue(defaultClientName, out methodList);
+            }
+            return methodList;
+        }
+
+        private IEnumerable<LowLevelClientMethod> GetProtocolMethods(OperationGroup operationGroup, RestClientBuilder restClientBuilder, BuildContext<DataPlaneOutputLibrary> context)
+        {
+            // At least one protocol method is found in the config for this operationGroup
+            if (operationGroup.Operations.Where(operation => IsProtocolMethodExists(operation, operationGroup)).Any())
             {
                 var clientInfo = LowLevelOutputLibraryFactory.CreateClientInfo(operationGroup, context);
                 var clientInfoByName = context.Library.DPGClientInfosByName[clientInfo.Name];
 
-                // Filter protocol method requests based on the config
+                // Filter protocol method requests for this operationGroup based on the config
                 List<(ServiceRequest, Operation)> requests = new();
-                foreach ((ServiceRequest serviceRequest, Operation operation) in clientInfoByName.Requests.Where(IsProtocolMethodExists))
+                foreach ((ServiceRequest serviceRequest, Operation operation) in clientInfoByName.Requests.Where(request => IsProtocolMethodExists(request, operationGroup)))
                 {
                     requests.Add((serviceRequest, operation));
                 }
@@ -228,10 +285,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return Enumerable.Empty<LowLevelClientMethod>();
         }
 
-        private static bool IsProtocolMethodExists((ServiceRequest _, Operation Operation) tuple)
-            => IsProtocolMethodExists(tuple.Operation);
+        private bool IsProtocolMethodExists((ServiceRequest _, Operation Operation) tuple, OperationGroup operationGroup)
+            => IsProtocolMethodExists(tuple.Operation, operationGroup);
 
-        private static bool IsProtocolMethodExists(Operation operation)
-            => Configuration.ProtocolMethodList.Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase));
+        private bool IsProtocolMethodExists(Operation operation, OperationGroup operationGroup)
+            => GetProtocolMethodsByOperationGroup(operationGroup) != null ?
+            GetProtocolMethodsByOperationGroup(operationGroup).Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase)) :
+            false;
     }
 }

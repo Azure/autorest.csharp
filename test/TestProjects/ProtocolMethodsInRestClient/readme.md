@@ -12,4 +12,8 @@ security-header-name: Fake-Subscription-Key
 protocol-method-list:
   - Create
   - Delete
+  - firstTemplate_Create
+  - firstTemplate_Get
+  - secondTemplate_Get
+
 ```
