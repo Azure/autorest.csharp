@@ -20,7 +20,7 @@ namespace MgmtDiscriminator
         /// <returns> Returns a <see cref="DeliveryRule" /> object. </returns>
         public static DeliveryRule GetDeliveryRule(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetClient(() =>
+            return client.GetResourceClient(() =>
             {
                 DeliveryRule.ValidateResourceId(id);
                 return new DeliveryRule(client, id);

@@ -20,4 +20,8 @@ directive:
   - rename-model:
       from: SshPublicKeyResource
       to: SshPublicKeyInfo
+  - from: resourceRename.json
+    where: $.definitions.AnyObjectTests.properties.anyObjectDictionary
+    transform: >
+      delete $.additionalProperties
 ```

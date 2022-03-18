@@ -163,7 +163,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid))
+                                 frameworkType == typeof(Guid) ||
+                                 frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                                 frameworkType == typeof(Azure.Core.ResourceType))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -534,19 +536,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             bool includeFormat = false;
 
-            if (frameworkType == typeof(ETag))
+            if (frameworkType == typeof(ETag) ||
+                frameworkType == typeof(Uri) ||
+                frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                frameworkType == typeof(Azure.Core.ResourceType))
             {
-                writer.Append($"new {typeof(ETag)}({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(Uri))
-            {
-                writer.Append($"new {typeof(Uri)}({element}.GetString())");
-                return;
-            }
-            else if (frameworkType == typeof(Azure.Core.ResourceIdentifier))
-            {
-                writer.Append($"new {typeof(Azure.Core.ResourceIdentifier)}({element}.GetString())");
+                writer.Append($"new {frameworkType}({element}.GetString())");
                 return;
             }
             else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))
