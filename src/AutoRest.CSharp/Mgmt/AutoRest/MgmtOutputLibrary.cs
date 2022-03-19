@@ -114,6 +114,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ReorderOperationParameters();
         }
 
+        public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
+
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
@@ -154,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var request in operation.Requests)
                     {
-                        if (request.Protocol.Http is not HttpRequest {Method: HttpMethod.Patch})
+                        if (request.Protocol.Http is not HttpRequest { Method: HttpMethod.Patch })
                             continue;
 
                         var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
@@ -321,6 +323,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroup), RequestPath.ResourceGroup);
         public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
         public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
+
+        public MgmtExtensionsWrapper ExtensionWrapper => EnsureExtensionsWrapper();
+
+        private MgmtExtensionsWrapper? _extensionsWrapper;
+        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
+        {
+            if (_extensionsWrapper != null)
+                return _extensionsWrapper;
+
+            _extensionsWrapper = IsArmCore ?
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
+            return _extensionsWrapper;
+        }
 
         private MgmtExtensionClient? _tenantExtensionClient;
         private MgmtExtensionClient? _managementGroupExtensionClient;

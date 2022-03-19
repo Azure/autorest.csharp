@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
-            IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
+            IsStatic = !IsArmCore && BaseType is null && (this is MgmtExtensions extension || this is MgmtExtensionsWrapper);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
