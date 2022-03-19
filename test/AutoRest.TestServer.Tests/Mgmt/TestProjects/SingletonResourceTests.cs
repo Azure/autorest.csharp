@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Linq;
 using System.Reflection;
+using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -49,19 +51,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ParentResource", "GetSingletonResources", false)]
         [TestCase("Car", "GetIgnition", true)]
         [TestCase("Car", "GetIgnitions", false)]
-        [TestCase("ResourceGroupExtensions", "GetCars", true)]
-        [TestCase("ResourceGroupExtensions", "GetCar", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResource", true)]
-        [TestCase("ResourceGroupExtensions", "GetParentResourc", false)]
-        public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool isExist)
+        [TestCase("SingletonResourceExtensions", "GetCars", false, typeof(Subscription))]
+        [TestCase("SingletonResourceExtensions", "GetCars", true, typeof(ResourceGroup))]
+        [TestCase("SingletonResourceExtensions", "GetCar", false, typeof(Subscription))]
+        [TestCase("SingletonResourceExtensions", "GetCar", true, typeof(ResourceGroup))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", false, typeof(Subscription))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroup))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", false, typeof(Subscription))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroup))]
+        [TestCase("SingletonResourceExtensions", "GetParentResourc", false)]
+        public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool exist, params Type[] parameterTypes)
         {
             var possibleTypesToFind = FindAllCollections().Concat(FindAllResources())
-                .Append(FindResourceGroupExtensions()).Append(FindSubscriptionExtensions());
+                .Append(FindExtensionClass());
             var type = possibleTypesToFind.FirstOrDefault(r => r.Name == parent);
             Assert.IsNotNull(type, $"Cannot find parent {parent}");
-            var method = type.GetMethod(methodName);
-            Assert.AreEqual(isExist, method != null);
+            var method = type.GetMethods().Where(m => m.Name == methodName).Where(m => ParameterMatch(m.GetParameters(), parameterTypes));
+            Assert.AreEqual(exist, method.Any());
         }
     }
 }

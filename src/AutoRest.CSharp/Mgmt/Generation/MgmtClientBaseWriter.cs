@@ -62,30 +62,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClassDeclaration();
                 using (_writer.Scope())
                 {
-                    WriteStaticMethods();
-
-                    WriteFields(_writer);
-
-                    WriteCtors();
-
-                    WriteProperties();
-
-                    WritePrivateHelpers();
-
-                    WriteChildResourceEntries();
-
-                    // Write other orphan operations with the parent of ResourceGroup
-                    foreach (var clientOperation in This.AllOperations)
-                    {
-                        WriteMethod(clientOperation, true);
-                        WriteMethod(clientOperation, false);
-                    }
-
-                    if (This.EnumerableInterfaces.Any())
-                        WriteEnumerables();
+                    WriteImplementations();
                 }
             }
         }
+
+        protected internal virtual void WriteImplementations()
+        {
+            WriteStaticMethods();
+
+            WriteFields();
+
+            WriteCtors();
+
+            WriteProperties();
+
+            WritePrivateHelpers();
+
+            WriteChildResourceEntries();
+
+            // Write other orphan operations with the parent of ResourceGroup
+            foreach (var clientOperation in This.AllOperations)
+            {
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
+            }
+
+            if (This.EnumerableInterfaces.Any())
+                WriteEnumerables();
+        }
+
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
@@ -153,7 +159,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteRestClientConstructorPair(set.RestClient, set.Resource);
                     }
                     if (This.CanValidateResourceType)
-                        WriteDebugValidate(_writer);
+                        WriteDebugValidate();
                 }
             }
             _writer.Line();
@@ -353,29 +359,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStaticValidate(FormattableString validResourceType, CodeWriter writer)
+        protected void WriteStaticValidate(FormattableString validResourceType)
         {
-            using (writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
+            using (_writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
-                writer.Line($"if (id.ResourceType != {validResourceType})");
-                writer.Line($"throw new {typeof(ArgumentException)}(string.Format({typeof(CultureInfo)}.CurrentCulture, \"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}), nameof(id));");
+                _writer.Line($"if (id.ResourceType != {validResourceType})");
+                _writer.Line($"throw new {typeof(ArgumentException)}(string.Format({typeof(CultureInfo)}.CurrentCulture, \"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}), nameof(id));");
             }
         }
 
-        protected void WriteDebugValidate(CodeWriter writer)
+        protected void WriteDebugValidate()
         {
-            writer.Line($"#if DEBUG");
-            writer.Line($"\t\t\tValidateResourceId(Id);");
-            writer.Line($"#endif");
+            _writer.Line($"#if DEBUG");
+            _writer.Line($"\t\t\tValidateResourceId(Id);");
+            _writer.Line($"#endif");
         }
 
-        protected void WriteFields(CodeWriter writer)
+        protected void WriteFields()
         {
             foreach (var field in This.Fields)
             {
-                writer.WriteFieldDeclaration(field);
+                _writer.WriteFieldDeclaration(field);
             }
-            writer.Line();
+            _writer.Line();
         }
 
         protected FormattableString GetProviderNamespaceFromReturnType(string? returnType)

@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.Line();
-            WriteStaticValidate($"ResourceType", _writer);
+            WriteStaticValidate($"ResourceType");
         }
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
