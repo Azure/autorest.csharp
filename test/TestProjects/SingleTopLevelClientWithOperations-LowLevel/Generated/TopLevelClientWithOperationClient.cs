@@ -19,6 +19,8 @@ namespace SingleTopLevelClientWithOperations_LowLevel
     /// <summary> The TopLevelClientWithOperation service client. </summary>
     public partial class TopLevelClientWithOperationClient
     {
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
@@ -34,15 +36,19 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public TopLevelClientWithOperationClient(Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
         {
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new TopLevelClientWithOperationClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -132,13 +138,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
         {
-            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClient1;
+            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient1;
         }
 
         /// <summary> Initializes a new instance of Client2. </summary>
         public virtual Client2 GetClient2Client()
         {
-            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedClient2;
+            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
@@ -148,7 +154,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
-            return new Client4(ClientDiagnostics, _pipeline, clientParameter, _endpoint);
+            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)

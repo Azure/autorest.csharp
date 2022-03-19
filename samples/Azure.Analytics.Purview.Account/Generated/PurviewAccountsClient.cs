@@ -19,6 +19,8 @@ namespace Azure.Analytics.Purview.Account
     /// <summary> The PurviewAccounts service client. </summary>
     public partial class PurviewAccountsClient
     {
+        private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
+        private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -36,15 +38,18 @@ namespace Azure.Analytics.Purview.Account
 
         /// <summary> Initializes a new instance of PurviewAccountsClient. </summary>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public PurviewAccountsClient(Uri endpoint, PurviewAccountsClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public PurviewAccountsClient(Uri endpoint, TokenCredential credential, PurviewAccountsClientOptions options = null)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PurviewAccountsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _tokenCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
             _apiVersion = options.Version;
         }
@@ -1099,13 +1104,13 @@ namespace Azure.Analytics.Purview.Account
         {
             Argument.AssertNotNullOrEmpty(collectionName, nameof(collectionName));
 
-            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _endpoint, collectionName, _apiVersion);
+            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
         }
 
         /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
         public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
         {
-            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
+            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest(RequestContext context)

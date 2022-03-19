@@ -18,6 +18,8 @@ namespace custom_baseUrl_paging_LowLevel
     /// <summary> The Paging service client. </summary>
     public partial class PagingClient
     {
+        private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly string _host;
 
@@ -33,16 +35,19 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
-        public PagingClient(string host = "host", PagingClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential, string host = "host", PagingClientOptions options = null)
         {
+            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(host, nameof(host));
             options ??= new PagingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _keyCredential = credential;
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
         }
 
