@@ -573,8 +573,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var methodInfos = resourceExtensions.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.ReturnType.Name == type.Name);
                     Assert.AreEqual(methodInfos.Count(), 1);
-                    var param = TypeAsserts.HasParameter(methodInfos.First(), "subscription");
-                    Assert.AreEqual(typeof(Subscription), param.ParameterType);
+                    var param = TypeAsserts.HasParameter(methodInfos.First(), "subscriptionResource", typeof(SubscriptionResource));
                 }
             }
         }

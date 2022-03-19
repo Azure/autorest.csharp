@@ -15,15 +15,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
 
-        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.Tenant))]
-        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.Subscription))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.TenantResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.SubscriptionResource))]
         [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Resources.ResourceGroup))]
-        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Management.ManagementGroup))]
+        [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", false, typeof(Azure.ResourceManager.Management.ManagementGroupResource))]
         [TestCase("MgmtScopeResourceExtensions", "GetFakePolicyAssignments", true, typeof(ArmResource))]
-        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.Tenant))]
-        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.Subscription))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.TenantResource))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.SubscriptionResource))]
         [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Resources.ResourceGroup))]
-        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Management.ManagementGroup))]
+        [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", true, typeof(Azure.ResourceManager.Management.ManagementGroupResource))]
         [TestCase("MgmtScopeResourceExtensions", "GetDeploymentExtendeds", false, typeof(ArmResource))]
         [TestCase("FakePolicyAssignmentCollection", "CreateOrUpdate", true)]
         [TestCase("FakePolicyAssignmentCollection", "Get", true)]
@@ -46,8 +46,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResourceLinkCollection", "Get", true)]
         //[TestCase("ResourceLinkCollection", "GetAll", true)] // TODO -- restore this when this is fixed
         [TestCase("ResourceLinkCollection", "GetAllAsGenericResources", false)]
-        [TestCase("ResourceLink", "Get", true)]
-        [TestCase("ResourceLink", "Delete", true)]
+        [TestCase("ResourceLinkResource", "Get", true)]
+        [TestCase("ResourceLinkResource", "Delete", true)]
         public void ValidateScopeResourceMethods(string className, string methodName, bool exist, params Type[] parameterTypes)
         {
             var classesToCheck = FindAllCollections().Concat(FindAllResources()).Append(FindExtensionClass());

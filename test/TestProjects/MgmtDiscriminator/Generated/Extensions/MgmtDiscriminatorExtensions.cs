@@ -65,17 +65,17 @@ namespace MgmtDiscriminator
             return resourceGroup.GetDeliveryRules().Get(name, cancellationToken);
         }
 
-        #region DeliveryRule
-        /// <summary> Gets an object representing a DeliveryRule along with the instance operations that can be performed on it but with no data. </summary>
+        #region DeliveryRuleResource
+        /// <summary> Gets an object representing a DeliveryRuleResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeliveryRule" /> object. </returns>
-        public static DeliveryRule GetDeliveryRule(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
+        public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                DeliveryRule.ValidateResourceId(id);
-                return new DeliveryRule(client, id);
+                DeliveryRuleResource.ValidateResourceId(id);
+                return new DeliveryRuleResource(client, id);
             }
             );
         }

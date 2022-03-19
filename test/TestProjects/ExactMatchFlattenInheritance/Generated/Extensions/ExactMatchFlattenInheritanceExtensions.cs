@@ -532,49 +532,49 @@ namespace ExactMatchFlattenInheritance
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel5(name, cancellationToken);
         }
 
-        #region AzureResourceFlattenModel1
-        /// <summary> Gets an object representing a AzureResourceFlattenModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        #region AzureResourceFlattenModel1Resource
+        /// <summary> Gets an object representing a AzureResourceFlattenModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AzureResourceFlattenModel1" /> object. </returns>
-        public static AzureResourceFlattenModel1 GetAzureResourceFlattenModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
+        public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AzureResourceFlattenModel1.ValidateResourceId(id);
-                return new AzureResourceFlattenModel1(client, id);
+                AzureResourceFlattenModel1Resource.ValidateResourceId(id);
+                return new AzureResourceFlattenModel1Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region CustomModel2
-        /// <summary> Gets an object representing a CustomModel2 along with the instance operations that can be performed on it but with no data. </summary>
+        #region CustomModel2Resource
+        /// <summary> Gets an object representing a CustomModel2Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel2" /> object. </returns>
-        public static CustomModel2 GetCustomModel2(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
+        public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                CustomModel2.ValidateResourceId(id);
-                return new CustomModel2(client, id);
+                CustomModel2Resource.ValidateResourceId(id);
+                return new CustomModel2Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region CustomModel3
-        /// <summary> Gets an object representing a CustomModel3 along with the instance operations that can be performed on it but with no data. </summary>
+        #region CustomModel3Resource
+        /// <summary> Gets an object representing a CustomModel3Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel3" /> object. </returns>
-        public static CustomModel3 GetCustomModel3(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
+        public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                CustomModel3.ValidateResourceId(id);
-                return new CustomModel3(client, id);
+                CustomModel3Resource.ValidateResourceId(id);
+                return new CustomModel3Resource(client, id);
             }
             );
         }

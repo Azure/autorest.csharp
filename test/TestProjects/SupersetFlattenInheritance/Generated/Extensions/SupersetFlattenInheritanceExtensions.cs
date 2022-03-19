@@ -904,33 +904,33 @@ namespace SupersetFlattenInheritance
             return GetExtensionClient(resourceGroup).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
 
-        #region ResourceModel1
-        /// <summary> Gets an object representing a ResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResourceModel1Resource
+        /// <summary> Gets an object representing a ResourceModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceModel1" /> object. </returns>
-        public static ResourceModel1 GetResourceModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
+        public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResourceModel1.ValidateResourceId(id);
-                return new ResourceModel1(client, id);
+                ResourceModel1Resource.ValidateResourceId(id);
+                return new ResourceModel1Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region TrackedResourceModel1
-        /// <summary> Gets an object representing a TrackedResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        #region TrackedResourceModel1Resource
+        /// <summary> Gets an object representing a TrackedResourceModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1" /> object. </returns>
-        public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
+        public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TrackedResourceModel1.ValidateResourceId(id);
-                return new TrackedResourceModel1(client, id);
+                TrackedResourceModel1Resource.ValidateResourceId(id);
+                return new TrackedResourceModel1Resource(client, id);
             }
             );
         }

@@ -18,11 +18,11 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
-            return subscription.GetCachedClient((client) =>
+            return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(client, subscription.Id);
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
@@ -32,13 +32,13 @@ namespace MgmtCollectionParent
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
         /// Operation Id: ListOrderAtSubscriptionLevel
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace MgmtCollectionParent
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
         /// Operation Id: ListOrderAtSubscriptionLevel
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<OrderResource> GetOrderResources(this Subscription subscription, string skipToken = null, CancellationToken cancellationToken = default)
+        public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetOrderResources(skipToken, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
 
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
