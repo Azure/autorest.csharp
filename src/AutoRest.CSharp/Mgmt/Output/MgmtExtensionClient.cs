@@ -66,6 +66,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtExtensions Extension { get; }
 
+        public bool IsEmpty => Extension.IsEmpty;
+
         public override IEnumerable<Resource> ChildResources => Extension.ChildResources;
 
         private string? _description;
