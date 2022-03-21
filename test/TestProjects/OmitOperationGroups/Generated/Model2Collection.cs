@@ -36,9 +36,9 @@ namespace OmitOperationGroups
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal Model2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, DiagnosticOptions);
+            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
-            _model2RestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
+            _model2RestClient = new Model2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, model2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

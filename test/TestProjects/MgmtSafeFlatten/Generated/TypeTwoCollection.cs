@@ -36,9 +36,9 @@ namespace MgmtSafeFlatten
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TypeTwoCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeTwo.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
-            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -35,9 +35,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal AgreementCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", Agreement.ResourceType.Namespace, DiagnosticOptions);
+            _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", Agreement.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Agreement.ResourceType, out string agreementApiVersion);
-            _agreementRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
+            _agreementRestClient = new AgreementsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

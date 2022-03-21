@@ -49,9 +49,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SupersetModel7(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
+            _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string supersetModel7ApiVersion);
-            _supersetModel7RestClient = new SupersetModel7SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel7ApiVersion);
+            _supersetModel7RestClient = new SupersetModel7SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, supersetModel7ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

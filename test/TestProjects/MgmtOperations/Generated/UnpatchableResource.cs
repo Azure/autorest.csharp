@@ -50,9 +50,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal UnpatchableResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
+            _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string unpatchableResourceApiVersion);
-            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
+            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, unpatchableResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

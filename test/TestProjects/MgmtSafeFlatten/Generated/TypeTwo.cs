@@ -50,9 +50,9 @@ namespace MgmtSafeFlatten
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TypeTwo(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", ResourceType.Namespace, DiagnosticOptions);
+            _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string typeTwoCommonApiVersion);
-            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

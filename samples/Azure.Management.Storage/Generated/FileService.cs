@@ -49,9 +49,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FileService(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fileServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            _fileServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string fileServiceApiVersion);
-            _fileServiceRestClient = new FileServicesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileServiceApiVersion);
+            _fileServiceRestClient = new FileServicesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fileServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

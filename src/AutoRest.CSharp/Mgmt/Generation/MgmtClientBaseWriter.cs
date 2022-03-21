@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
-        protected const string BaseUriProperty = "BaseUri";
+        protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
         {
             string? resourceName = resource?.Type.Name;
-            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticOptionsProperty);
+            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticsProperty);
             string diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
             string apiVersionText = string.Empty;
@@ -409,7 +409,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string subIdVariable = ", Id.SubscriptionId";
             if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
                 subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticOptionsProperty}.ApplicationId{subIdVariable}, {BaseUriProperty}{apiVersionVariable})";
+            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);

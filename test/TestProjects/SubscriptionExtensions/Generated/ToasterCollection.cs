@@ -36,9 +36,9 @@ namespace SubscriptionExtensions
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ToasterCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
+            _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
-            _toasterRestClient = new ToastersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
+            _toasterRestClient = new ToastersRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
