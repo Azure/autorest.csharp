@@ -50,9 +50,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FakeParentWithAncestor(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeParentWithAncestorClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            _fakeParentWithAncestorClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string fakeParentWithAncestorApiVersion);
-            _fakeParentWithAncestorRestClient = new FakeParentWithAncestorsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorApiVersion);
+            _fakeParentWithAncestorRestClient = new FakeParentWithAncestorsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fakeParentWithAncestorApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

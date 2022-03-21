@@ -50,9 +50,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ExactMatchModel5(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
+            _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string exactMatchModel5ApiVersion);
-            _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ApiVersion);
+            _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, exactMatchModel5ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -49,9 +49,9 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ResourceModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
+            _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);
-            _resourceModel1RestClient = new ResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
+            _resourceModel1RestClient = new ResourceModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

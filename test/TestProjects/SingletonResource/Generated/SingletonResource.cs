@@ -49,9 +49,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SingletonResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
-            _singletonResourceRestClient = new SingletonResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
+            _singletonResourceRestClient = new SingletonResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, singletonResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

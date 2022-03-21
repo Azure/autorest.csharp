@@ -36,9 +36,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SupersetModel6Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel6.ResourceType.Namespace, DiagnosticOptions);
+            _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel6.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(SupersetModel6.ResourceType, out string supersetModel6ApiVersion);
-            _supersetModel6RestClient = new SupersetModel6SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
+            _supersetModel6RestClient = new SupersetModel6SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, supersetModel6ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

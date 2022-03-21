@@ -36,9 +36,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal RecordSetNsCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetNsRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetNs.ResourceType.Namespace, DiagnosticOptions);
+            _recordSetNsRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetNs.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(RecordSetNs.ResourceType, out string recordSetNsRecordSetsApiVersion);
-            _recordSetNsRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetNsRecordSetsApiVersion);
+            _recordSetNsRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, recordSetNsRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

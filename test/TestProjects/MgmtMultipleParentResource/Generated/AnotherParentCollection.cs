@@ -36,9 +36,9 @@ namespace MgmtMultipleParentResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal AnotherParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _anotherParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", AnotherParent.ResourceType.Namespace, DiagnosticOptions);
+            _anotherParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", AnotherParent.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(AnotherParent.ResourceType, out string anotherParentApiVersion);
-            _anotherParentRestClient = new AnotherParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, anotherParentApiVersion);
+            _anotherParentRestClient = new AnotherParentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, anotherParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

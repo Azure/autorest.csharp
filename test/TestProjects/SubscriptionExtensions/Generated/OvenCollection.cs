@@ -36,9 +36,9 @@ namespace SubscriptionExtensions
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal OvenCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Oven.ResourceType.Namespace, DiagnosticOptions);
+            _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Oven.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Oven.ResourceType, out string ovenApiVersion);
-            _ovenRestClient = new OvensRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
+            _ovenRestClient = new OvensRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, ovenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

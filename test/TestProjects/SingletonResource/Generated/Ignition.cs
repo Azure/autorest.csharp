@@ -49,9 +49,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Ignition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string ignitionApiVersion);
-            _ignitionRestClient = new IgnitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
+            _ignitionRestClient = new IgnitionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

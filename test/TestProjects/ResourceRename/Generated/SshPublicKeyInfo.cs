@@ -49,9 +49,9 @@ namespace ResourceRename
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SshPublicKeyInfo(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", ResourceType.Namespace, DiagnosticOptions);
+            _sshPublicKeyInfoSshPublicKeysClientDiagnostics = new ClientDiagnostics("ResourceRename", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string sshPublicKeyInfoSshPublicKeysApiVersion);
-            _sshPublicKeyInfoSshPublicKeysRestClient = new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sshPublicKeyInfoSshPublicKeysApiVersion);
+            _sshPublicKeyInfoSshPublicKeysRestClient = new SshPublicKeysRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, sshPublicKeyInfoSshPublicKeysApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

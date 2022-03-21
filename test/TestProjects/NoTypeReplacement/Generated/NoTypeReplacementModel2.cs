@@ -49,9 +49,9 @@ namespace NoTypeReplacement
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal NoTypeReplacementModel2(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _noTypeReplacementModel2ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, DiagnosticOptions);
+            _noTypeReplacementModel2ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string noTypeReplacementModel2ApiVersion);
-            _noTypeReplacementModel2RestClient = new NoTypeReplacementModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel2ApiVersion);
+            _noTypeReplacementModel2RestClient = new NoTypeReplacementModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, noTypeReplacementModel2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

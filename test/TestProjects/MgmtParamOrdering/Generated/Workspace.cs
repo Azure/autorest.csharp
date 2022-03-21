@@ -50,9 +50,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Workspace(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
+            _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string workspaceApiVersion);
-            _workspaceRestClient = new WorkspacesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
+            _workspaceRestClient = new WorkspacesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

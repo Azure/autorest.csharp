@@ -49,9 +49,9 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SBSubscription(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
+            _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
-            _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, sbSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

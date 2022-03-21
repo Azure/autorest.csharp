@@ -50,9 +50,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineScaleSetRollingUpgrade(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineScaleSetRollingUpgradeClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
+            _virtualMachineScaleSetRollingUpgradeClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string virtualMachineScaleSetRollingUpgradeApiVersion);
-            _virtualMachineScaleSetRollingUpgradeRestClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetRollingUpgradeApiVersion);
+            _virtualMachineScaleSetRollingUpgradeRestClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineScaleSetRollingUpgradeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
