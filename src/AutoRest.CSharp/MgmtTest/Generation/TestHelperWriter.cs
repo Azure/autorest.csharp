@@ -4,6 +4,7 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -35,8 +36,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteReplaceWith()
         {
-            _writer.UseNamespace("System.Collections.Generic");
-            using (_writer.Scope($"public static IDictionary<string, string> ReplaceWith(this IDictionary<string, string> dest, IDictionary<string, string> src)"))
+            using (_writer.Scope($"public static {typeof(IDictionary<string, string>)} ReplaceWith(this IDictionary<string, string> dest, IDictionary<string, string> src)"))
             {
                 _writer.Line($"dest.Clear();");
                 using (_writer.Scope($"foreach (var kv in src)"))
