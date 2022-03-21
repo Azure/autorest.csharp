@@ -14,7 +14,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -96,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"TagHelper.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues[key] = value;");
                 WriteTaggableCommonMethod(async);
             }
@@ -111,13 +110,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Delete", async)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"TagHelper.{CreateMethodName("Delete", async)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Append($"var originalTags  = ");
                 if (async)
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"TagHelper.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues.ReplaceWith(tags);");
                 WriteTaggableCommonMethod(async);
             }
@@ -133,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"TagHelper.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues.Remove(key);");
                 WriteTaggableCommonMethod(async);
             }
@@ -142,7 +141,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} TagHelper.{CreateMethodName("CreateOrUpdate", async)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             MgmtClientOperation clientOperation = This.GetOperation!;
             // we need to write multiple branches for a normal method

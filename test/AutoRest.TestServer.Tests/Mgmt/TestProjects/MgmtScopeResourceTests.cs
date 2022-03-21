@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using MgmtScopeResource;
 using System;
 using MgmtScopeResource.Models;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

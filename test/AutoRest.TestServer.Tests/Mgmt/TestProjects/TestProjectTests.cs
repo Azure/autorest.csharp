@@ -10,7 +10,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
