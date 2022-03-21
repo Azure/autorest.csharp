@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource
             );
         }
 
-        /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
+        /// <summary> Gets a collection of SharedGalleries in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>

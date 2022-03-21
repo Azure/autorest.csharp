@@ -27,7 +27,7 @@ namespace MgmtPropertyChooser
             );
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
+        /// <summary> Gets a collection of VirtualMachines in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)

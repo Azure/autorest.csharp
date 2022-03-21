@@ -84,7 +84,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of SubParents in the SubParent. </summary>
+        /// <summary> Gets a collection of SubParents in the TheParent. </summary>
         /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
         public virtual SubParentCollection GetSubParents()
         {

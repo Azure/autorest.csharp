@@ -84,7 +84,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of DedicatedHosts in the DedicatedHost. </summary>
+        /// <summary> Gets a collection of DedicatedHosts in the DedicatedHostGroup. </summary>
         /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHost. </returns>
         public virtual DedicatedHostCollection GetDedicatedHosts()
         {

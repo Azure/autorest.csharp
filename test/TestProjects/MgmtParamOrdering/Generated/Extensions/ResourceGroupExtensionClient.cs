@@ -32,28 +32,28 @@ namespace MgmtParamOrdering
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <summary> Gets a collection of AvailabilitySets in the ResourceGroup. </summary>
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroups in the ResourceGroup. </summary>
         /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
             return GetCachedClient(Client => new DedicatedHostGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of Workspaces in the Workspace. </summary>
+        /// <summary> Gets a collection of Workspaces in the ResourceGroup. </summary>
         /// <returns> An object representing collection of Workspaces and their operations over a Workspace. </returns>
         public virtual WorkspaceCollection GetWorkspaces()
         {
             return GetCachedClient(Client => new WorkspaceCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the ResourceGroup. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {

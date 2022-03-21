@@ -88,7 +88,7 @@ namespace MgmtKeyvault
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of MhsmPrivateEndpointConnections in the MhsmPrivateEndpointConnection. </summary>
+        /// <summary> Gets a collection of MhsmPrivateEndpointConnections in the ManagedHsm. </summary>
         /// <returns> An object representing collection of MhsmPrivateEndpointConnections and their operations over a MhsmPrivateEndpointConnection. </returns>
         public virtual MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnections()
         {

@@ -32,7 +32,7 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of ManagementGroupPolicyDefinitions in the ManagementGroupPolicyDefinition. </summary>
+        /// <summary> Gets a collection of ManagementGroupPolicyDefinitions in the ManagementGroup. </summary>
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
         public virtual ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions()
         {

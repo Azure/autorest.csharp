@@ -32,14 +32,14 @@ namespace MgmtKeyvault
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Vaults in the Vault. </summary>
+        /// <summary> Gets a collection of Vaults in the ResourceGroup. </summary>
         /// <returns> An object representing collection of Vaults and their operations over a Vault. </returns>
         public virtual VaultCollection GetVaults()
         {
             return GetCachedClient(Client => new VaultCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ManagedHsms in the ManagedHsm. </summary>
+        /// <summary> Gets a collection of ManagedHsms in the ResourceGroup. </summary>
         /// <returns> An object representing collection of ManagedHsms and their operations over a ManagedHsm. </returns>
         public virtual ManagedHsmCollection GetManagedHsms()
         {

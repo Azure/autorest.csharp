@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImages in the SubscriptionExtensionClient. </summary>
+        /// <summary> Gets a collection of VirtualMachineExtensionImages in the Subscription. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <returns> An object representing collection of VirtualMachineExtensionImages and their operations over a VirtualMachineExtensionImage. </returns>

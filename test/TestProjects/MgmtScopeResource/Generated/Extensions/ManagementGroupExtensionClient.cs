@@ -32,7 +32,7 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the ManagementGroup. </summary>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {

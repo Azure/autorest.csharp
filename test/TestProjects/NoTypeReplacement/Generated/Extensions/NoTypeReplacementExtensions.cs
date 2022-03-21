@@ -27,7 +27,7 @@ namespace NoTypeReplacement
             );
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel1s in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
@@ -63,7 +63,7 @@ namespace NoTypeReplacement
             return resourceGroup.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel2s in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
@@ -99,7 +99,7 @@ namespace NoTypeReplacement
             return resourceGroup.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel3s in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)

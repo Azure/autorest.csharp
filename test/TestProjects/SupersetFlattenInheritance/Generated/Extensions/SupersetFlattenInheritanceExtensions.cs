@@ -28,7 +28,7 @@ namespace SupersetFlattenInheritance
             );
         }
 
-        /// <summary> Gets a collection of ResourceModel1s in the ResourceModel1. </summary>
+        /// <summary> Gets a collection of ResourceModel1s in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResourceModel1s and their operations over a ResourceModel1. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroup resourceGroup)
@@ -64,7 +64,7 @@ namespace SupersetFlattenInheritance
             return resourceGroup.GetResourceModel1s().Get(resourceModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
+        /// <summary> Gets a collection of TrackedResourceModel1s in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroup resourceGroup)

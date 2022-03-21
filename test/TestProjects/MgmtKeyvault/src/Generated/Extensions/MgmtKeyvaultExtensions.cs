@@ -28,7 +28,7 @@ namespace MgmtKeyvault
             );
         }
 
-        /// <summary> Gets a collection of DeletedVaults in the DeletedVault. </summary>
+        /// <summary> Gets a collection of DeletedVaults in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedVaults and their operations over a DeletedVault. </returns>
         public static DeletedVaultCollection GetDeletedVaults(this Subscription subscription)
@@ -68,7 +68,7 @@ namespace MgmtKeyvault
             return subscription.GetDeletedVaults().Get(location, vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedManagedHsms in the DeletedManagedHsm. </summary>
+        /// <summary> Gets a collection of DeletedManagedHsms in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedManagedHsms and their operations over a DeletedManagedHsm. </returns>
         public static DeletedManagedHsmCollection GetDeletedManagedHsms(this Subscription subscription)
@@ -257,7 +257,7 @@ namespace MgmtKeyvault
             );
         }
 
-        /// <summary> Gets a collection of Vaults in the Vault. </summary>
+        /// <summary> Gets a collection of Vaults in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Vaults and their operations over a Vault. </returns>
         public static VaultCollection GetVaults(this ResourceGroup resourceGroup)
@@ -295,7 +295,7 @@ namespace MgmtKeyvault
             return resourceGroup.GetVaults().Get(vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ManagedHsms in the ManagedHsm. </summary>
+        /// <summary> Gets a collection of ManagedHsms in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagedHsms and their operations over a ManagedHsm. </returns>
         public static ManagedHsmCollection GetManagedHsms(this ResourceGroup resourceGroup)

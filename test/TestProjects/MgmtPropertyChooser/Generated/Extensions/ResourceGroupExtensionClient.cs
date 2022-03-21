@@ -32,7 +32,7 @@ namespace MgmtPropertyChooser
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
+        /// <summary> Gets a collection of VirtualMachines in the ResourceGroup. </summary>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public virtual VirtualMachineCollection GetVirtualMachines()
         {

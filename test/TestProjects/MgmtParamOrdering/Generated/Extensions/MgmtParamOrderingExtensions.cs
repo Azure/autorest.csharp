@@ -28,7 +28,7 @@ namespace MgmtParamOrdering
             );
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImages in the VirtualMachineExtensionImage. </summary>
+        /// <summary> Gets a collection of VirtualMachineExtensionImages in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -116,7 +116,7 @@ namespace MgmtParamOrdering
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <summary> Gets a collection of AvailabilitySets in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
@@ -154,7 +154,7 @@ namespace MgmtParamOrdering
             return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroups in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
@@ -192,7 +192,7 @@ namespace MgmtParamOrdering
             return resourceGroup.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Workspaces in the Workspace. </summary>
+        /// <summary> Gets a collection of Workspaces in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Workspaces and their operations over a Workspace. </returns>
         public static WorkspaceCollection GetWorkspaces(this ResourceGroup resourceGroup)
@@ -230,7 +230,7 @@ namespace MgmtParamOrdering
             return resourceGroup.GetWorkspaces().Get(workspaceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)

@@ -32,7 +32,7 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the BuiltInPolicyDefinition. </summary>
+        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the Tenant. </summary>
         /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
         public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
         {

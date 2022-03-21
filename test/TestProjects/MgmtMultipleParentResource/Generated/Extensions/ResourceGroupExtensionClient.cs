@@ -32,14 +32,14 @@ namespace MgmtMultipleParentResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <summary> Gets a collection of AnotherParents in the ResourceGroup. </summary>
         /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
         public virtual AnotherParentCollection GetAnotherParents()
         {
             return GetCachedClient(Client => new AnotherParentCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <summary> Gets a collection of TheParents in the ResourceGroup. </summary>
         /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
         public virtual TheParentCollection GetTheParents()
         {

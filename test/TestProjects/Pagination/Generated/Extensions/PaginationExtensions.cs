@@ -27,7 +27,7 @@ namespace Pagination
             );
         }
 
-        /// <summary> Gets a collection of PageSizeIntegerModels in the PageSizeIntegerModel. </summary>
+        /// <summary> Gets a collection of PageSizeIntegerModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeIntegerModels and their operations over a PageSizeIntegerModel. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
@@ -63,7 +63,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeIntegerModels().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeInt64Models in the PageSizeInt64Model. </summary>
+        /// <summary> Gets a collection of PageSizeInt64Models in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeInt64Models and their operations over a PageSizeInt64Model. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroup resourceGroup)
@@ -99,7 +99,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeInt64Models().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeInt32Models in the PageSizeInt32Model. </summary>
+        /// <summary> Gets a collection of PageSizeInt32Models in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeInt32Models and their operations over a PageSizeInt32Model. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroup resourceGroup)
@@ -135,7 +135,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeInt32Models().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeNumericModels in the PageSizeNumericModel. </summary>
+        /// <summary> Gets a collection of PageSizeNumericModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeNumericModels and their operations over a PageSizeNumericModel. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroup resourceGroup)
@@ -171,7 +171,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeNumericModels().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeFloatModels in the PageSizeFloatModel. </summary>
+        /// <summary> Gets a collection of PageSizeFloatModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeFloatModels and their operations over a PageSizeFloatModel. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroup resourceGroup)
@@ -207,7 +207,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeFloatModels().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeDoubleModels in the PageSizeDoubleModel. </summary>
+        /// <summary> Gets a collection of PageSizeDoubleModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeDoubleModels and their operations over a PageSizeDoubleModel. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
@@ -243,7 +243,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeDoubleModels().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeDecimalModels in the PageSizeDecimalModel. </summary>
+        /// <summary> Gets a collection of PageSizeDecimalModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeDecimalModels and their operations over a PageSizeDecimalModel. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
@@ -279,7 +279,7 @@ namespace Pagination
             return resourceGroup.GetPageSizeDecimalModels().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PageSizeStringModels in the PageSizeStringModel. </summary>
+        /// <summary> Gets a collection of PageSizeStringModels in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of PageSizeStringModels and their operations over a PageSizeStringModel. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroup resourceGroup)

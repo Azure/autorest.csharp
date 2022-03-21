@@ -27,7 +27,7 @@ namespace MgmtNonStringPathVariable
             );
         }
 
-        /// <summary> Gets a collection of Fakes in the Fake. </summary>
+        /// <summary> Gets a collection of Fakes in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
         public static FakeCollection GetFakes(this ResourceGroup resourceGroup)
@@ -63,7 +63,7 @@ namespace MgmtNonStringPathVariable
             return resourceGroup.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Bars in the Bar. </summary>
+        /// <summary> Gets a collection of Bars in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Bars and their operations over a Bar. </returns>
         public static BarCollection GetBars(this ResourceGroup resourceGroup)

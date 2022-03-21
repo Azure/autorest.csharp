@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of StorageAccounts in the ResourceGroupExtensionClient. </summary>
+        /// <summary> Gets a collection of StorageAccounts in the ResourceGroup. </summary>
         /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
         public virtual StorageAccountCollection GetStorageAccounts()
         {

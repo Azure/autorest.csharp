@@ -30,7 +30,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the Tenant. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this Tenant tenant)
@@ -68,7 +68,7 @@ namespace MgmtScopeResource
             return tenant.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
+        /// <summary> Gets a collection of ResourceLinks in the Tenant. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
@@ -149,7 +149,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
@@ -224,7 +224,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
@@ -271,7 +271,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the ManagementGroup. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroup managementGroup)
@@ -318,7 +318,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignments in the FakePolicyAssignment. </summary>
+        /// <summary> Gets a collection of FakePolicyAssignments in the ArmResource. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
