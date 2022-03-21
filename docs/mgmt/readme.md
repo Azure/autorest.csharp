@@ -1,12 +1,57 @@
-# Management plane SDK and its corresponding configurations
+# Management plane SDK generator - how it works and its corresponding configurations
 
 ## Resource hierarchy in management plane SDK
 
 For the basic management plane SDK concepts, please refer the detailed document [here](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/README.md#key-concepts) first.
 
-The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how we identify the resource classes as well as the hierarchy.
+A resource is usually represented by three classes in the generated SDK: a `[Resource]Data` class, a `[Resource]Resource` class, and a `[Resource]Collection` class.
 
-### How does the generator identify a resource
+### `[Resource]Data` class
+
+This class represents the "model" of the resource, and it corresponds to a model definition in the swagger, usually with the same name by trimming the word `Data` off.
+
+### `[Resource]Resource` class
+
+This class represents the a full resource client object which contains a `Data` property exposing the details as a `[Resource]Data` type.
+
+### `[Resource]Collection` class
+
+This class represents the operations you can perform on a collection of resources belonging to a specific parent resource. This object provides most of the logical collection operations.
+
+| Collection Behavior | Collection Method |
+| :--- | :--- |
+| Iterate/List | GetAll() |
+| Index | Get(string name) |
+| Add | CreateOrUpdate(string name, [Resource]Data data) |
+| Contains | Exists(string name) |
+| TryGet | GetIfExists(string name) |
+
+The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [list exception](List-exception) section for details.
+
+The parent resource of this resource will carry all the methods to get its child resources by returning its corresponding collection. For instance, on the resource of `VirtualNetworkResource`, you will find a method `GetSubnets` which returns a `SubnetCollection` to represent a collection of `SubnetResource`:
+```csharp
+public partial class VirtualNetworkResource
+{
+    public virtual SubnetCollection GetSubnets()
+    {
+        /* ... */
+    }
+}
+```
+
+For the cases that the parent resource is not in the same RP, the "get child resource method" will be put in an extension class. For instance, the parent resource of `VirtualNetworkResource` is the resource group, and you will find an extension method of `ResourceGroupResource` in the `Azure.ResourceManager.Network` package returning `VirtualNetworkCollection` like this:
+```csharp
+public static partial class NetworkExtensions {
+    public static VirtualNetworkCollection GetVirtualNetworks(this ResourceGroupResource resourceGroup)
+    {
+        /* ... */
+    }
+}
+```
+
+## How does the generator identify a resource
+
+The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how the generator identifies the resource classes as well as the hierarchy.
 
 The management generator will first go through all the operations and categorize them by resources, then calculate hierarchical structures on them.
 
@@ -22,7 +67,7 @@ If all the above conditions are met, this operation set will be marked as a "res
 
 We have multiple ways to tweak the criteria of identifying resources, please see [changing resource](Changing-resource) section.
 
-### How does the generator build hierarchical structure of resources
+## How does the generator build hierarchical structure of resources
 
 After the management generator goes through all the resources, it is ready to build the hierarchy of resources.
 
@@ -57,6 +102,10 @@ In the design of .Net management SDK, one resource must only have one constant r
 For instance, if the above procedure is applied on this request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}`, it produces the resource type `Microsoft.Network/dnsZones/{recordType}` which contains a variable in it and is not a constant. If this happens, the generator will try to expand it into multiple constant resource types. This requires the variables in the resulted resource type to be an enum type, if this condition is not met, the generator will throw exceptions for you to resolve by adding configuration/directives.
 
 We have some ways to change the resource type of a resource, please see [changing the resource type](Changing-the-resource-type) section.
+
+### Singleton resources
+
+// TODO
 
 ## Management plane configurations
 
