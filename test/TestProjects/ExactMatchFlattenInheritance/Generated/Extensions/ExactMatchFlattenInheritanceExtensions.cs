@@ -533,7 +533,10 @@ namespace ExactMatchFlattenInheritance
         }
 
         #region AzureResourceFlattenModel1
-        /// <summary> Gets an object representing a AzureResourceFlattenModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AzureResourceFlattenModel1" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AzureResourceFlattenModel1.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1" /> object. </returns>
@@ -549,7 +552,10 @@ namespace ExactMatchFlattenInheritance
         #endregion
 
         #region CustomModel2
-        /// <summary> Gets an object representing a CustomModel2 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel2" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel2.CreateResourceIdentifier" /> to create a <see cref="CustomModel2" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="CustomModel2" /> object. </returns>
@@ -565,7 +571,10 @@ namespace ExactMatchFlattenInheritance
         #endregion
 
         #region CustomModel3
-        /// <summary> Gets an object representing a CustomModel3 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel3" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel3.CreateResourceIdentifier" /> to create a <see cref="CustomModel3" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="CustomModel3" /> object. </returns>

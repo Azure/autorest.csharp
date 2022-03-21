@@ -136,7 +136,10 @@ namespace MgmtExpandResourceTypes
         }
 
         #region RecordSetA
-        /// <summary> Gets an object representing a RecordSetA along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetA" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetA.CreateResourceIdentifier" /> to create a <see cref="RecordSetA" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetA" /> object. </returns>
@@ -152,7 +155,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetAaaa
-        /// <summary> Gets an object representing a RecordSetAaaa along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetAaaa" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetAaaa.CreateResourceIdentifier" /> to create a <see cref="RecordSetAaaa" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetAaaa" /> object. </returns>
@@ -168,7 +174,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetCaa
-        /// <summary> Gets an object representing a RecordSetCaa along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetCaa" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetCaa.CreateResourceIdentifier" /> to create a <see cref="RecordSetCaa" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetCaa" /> object. </returns>
@@ -184,7 +193,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetCName
-        /// <summary> Gets an object representing a RecordSetCName along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetCName" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetCName.CreateResourceIdentifier" /> to create a <see cref="RecordSetCName" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetCName" /> object. </returns>
@@ -200,7 +212,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetMx
-        /// <summary> Gets an object representing a RecordSetMx along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetMx" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetMx.CreateResourceIdentifier" /> to create a <see cref="RecordSetMx" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetMx" /> object. </returns>
@@ -216,7 +231,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetNs
-        /// <summary> Gets an object representing a RecordSetNs along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetNs" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetNs.CreateResourceIdentifier" /> to create a <see cref="RecordSetNs" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetNs" /> object. </returns>
@@ -232,7 +250,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetPtr
-        /// <summary> Gets an object representing a RecordSetPtr along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetPtr" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetPtr.CreateResourceIdentifier" /> to create a <see cref="RecordSetPtr" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetPtr" /> object. </returns>
@@ -248,7 +269,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetSoa
-        /// <summary> Gets an object representing a RecordSetSoa along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetSoa" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetSoa.CreateResourceIdentifier" /> to create a <see cref="RecordSetSoa" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetSoa" /> object. </returns>
@@ -264,7 +288,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetSrv
-        /// <summary> Gets an object representing a RecordSetSrv along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetSrv" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetSrv.CreateResourceIdentifier" /> to create a <see cref="RecordSetSrv" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetSrv" /> object. </returns>
@@ -280,7 +307,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region RecordSetTxt
-        /// <summary> Gets an object representing a RecordSetTxt along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="RecordSetTxt" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetTxt.CreateResourceIdentifier" /> to create a <see cref="RecordSetTxt" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="RecordSetTxt" /> object. </returns>
@@ -296,7 +326,10 @@ namespace MgmtExpandResourceTypes
         #endregion
 
         #region Zone
-        /// <summary> Gets an object representing a Zone along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Zone" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Zone.CreateResourceIdentifier" /> to create a <see cref="Zone" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Zone" /> object. </returns>

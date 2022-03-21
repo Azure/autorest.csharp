@@ -73,7 +73,10 @@ namespace MgmtHierarchicalNonResource
         }
 
         #region SharedGallery
-        /// <summary> Gets an object representing a SharedGallery along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SharedGallery" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SharedGallery.CreateResourceIdentifier" /> to create a <see cref="SharedGallery" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SharedGallery" /> object. </returns>

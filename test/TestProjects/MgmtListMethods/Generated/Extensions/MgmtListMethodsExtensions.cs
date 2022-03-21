@@ -1029,7 +1029,10 @@ namespace MgmtListMethods
         }
 
         #region Fake
-        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Fake" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Fake.CreateResourceIdentifier" /> to create a <see cref="Fake" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
@@ -1045,7 +1048,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResChWithLoc.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> object. </returns>
@@ -1061,7 +1067,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResCh" /> object. </returns>
@@ -1077,7 +1086,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithLoc.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithLoc" /> object. </returns>
@@ -1093,7 +1105,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParentWithAncestor
-        /// <summary> Gets an object representing a FakeParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestor" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestor.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestor" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParentWithAncestor" /> object. </returns>
@@ -1109,7 +1124,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParentWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParentWithNonResCh" /> object. </returns>
@@ -1125,7 +1143,10 @@ namespace MgmtListMethods
         #endregion
 
         #region FakeParent
-        /// <summary> Gets an object representing a FakeParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParent.CreateResourceIdentifier" /> to create a <see cref="FakeParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakeParent" /> object. </returns>
@@ -1141,7 +1162,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChWithLoc.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> object. </returns>
@@ -1157,7 +1181,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResCh" /> object. </returns>
@@ -1173,7 +1200,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithLoc.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLoc" /> object. </returns>
@@ -1189,7 +1219,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParentWithAncestor
-        /// <summary> Gets an object representing a ResGrpParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestor" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestor.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestor" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParentWithAncestor" /> object. </returns>
@@ -1205,7 +1238,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParentWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParentWithNonResCh" /> object. </returns>
@@ -1221,7 +1257,10 @@ namespace MgmtListMethods
         #endregion
 
         #region ResGrpParent
-        /// <summary> Gets an object representing a ResGrpParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParent.CreateResourceIdentifier" /> to create a <see cref="ResGrpParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResGrpParent" /> object. </returns>
@@ -1237,7 +1276,10 @@ namespace MgmtListMethods
         #endregion
 
         #region SubParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a SubParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithNonResChWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResChWithLoc.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubParentWithNonResChWithLoc" /> object. </returns>
@@ -1253,7 +1295,10 @@ namespace MgmtListMethods
         #endregion
 
         #region SubParentWithNonResCh
-        /// <summary> Gets an object representing a SubParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubParentWithNonResCh" /> object. </returns>
@@ -1269,7 +1314,10 @@ namespace MgmtListMethods
         #endregion
 
         #region SubParentWithLoc
-        /// <summary> Gets an object representing a SubParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithLoc.CreateResourceIdentifier" /> to create a <see cref="SubParentWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubParentWithLoc" /> object. </returns>
@@ -1285,7 +1333,10 @@ namespace MgmtListMethods
         #endregion
 
         #region SubParent
-        /// <summary> Gets an object representing a SubParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParent.CreateResourceIdentifier" /> to create a <see cref="SubParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubParent" /> object. </returns>
@@ -1301,7 +1352,10 @@ namespace MgmtListMethods
         #endregion
 
         #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResChWithLoc.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLoc" /> object. </returns>
@@ -1317,7 +1371,10 @@ namespace MgmtListMethods
         #endregion
 
         #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResCh" /> object. </returns>
@@ -1333,7 +1390,10 @@ namespace MgmtListMethods
         #endregion
 
         #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithLoc.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="MgmtGrpParentWithLoc" /> object. </returns>
@@ -1349,7 +1409,10 @@ namespace MgmtListMethods
         #endregion
 
         #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGroupParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGroupParent.CreateResourceIdentifier" /> to create a <see cref="MgmtGroupParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="MgmtGroupParent" /> object. </returns>
@@ -1365,7 +1428,10 @@ namespace MgmtListMethods
         #endregion
 
         #region TenantTest
-        /// <summary> Gets an object representing a TenantTest along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantTest" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantTest.CreateResourceIdentifier" /> to create a <see cref="TenantTest" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantTest" /> object. </returns>
@@ -1381,7 +1447,10 @@ namespace MgmtListMethods
         #endregion
 
         #region TenantParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a TenantParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithNonResChWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResChWithLoc.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantParentWithNonResChWithLoc" /> object. </returns>
@@ -1397,7 +1466,10 @@ namespace MgmtListMethods
         #endregion
 
         #region TenantParentWithNonResCh
-        /// <summary> Gets an object representing a TenantParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithNonResCh" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResCh.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResCh" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantParentWithNonResCh" /> object. </returns>
@@ -1413,7 +1485,10 @@ namespace MgmtListMethods
         #endregion
 
         #region TenantParentWithLoc
-        /// <summary> Gets an object representing a TenantParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithLoc" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithLoc.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithLoc" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantParentWithLoc" /> object. </returns>
@@ -1429,7 +1504,10 @@ namespace MgmtListMethods
         #endregion
 
         #region TenantParent
-        /// <summary> Gets an object representing a TenantParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParent.CreateResourceIdentifier" /> to create a <see cref="TenantParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TenantParent" /> object. </returns>
