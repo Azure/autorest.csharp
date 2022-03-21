@@ -15,6 +15,8 @@ using AutoRest.CSharp.Common.Generation.Writers;
 using Azure.Core;
 using Azure;
 using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.MgmtTest.TestCommon;
+using AutoRest.CSharp.MgmtTest.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {

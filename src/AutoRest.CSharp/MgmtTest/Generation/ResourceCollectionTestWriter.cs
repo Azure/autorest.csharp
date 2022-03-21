@@ -18,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Mgmt.Models;
 using System.Diagnostics.CodeAnalysis;
 using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.MgmtTest.TestCommon;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -220,14 +221,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteMethodTest(MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
-            Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
-                if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
+                if (exampleGroup is null || exampleGroup.Examples.Count == 0)
                     return;
                 var testMethodName = CreateMethodName(methodName, async);
 
@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     WriteTestDecorator();
-                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
+                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : string.Empty;
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {methodName}{testCaseSuffix}()");
                     using (_writer.Scope())
                     {

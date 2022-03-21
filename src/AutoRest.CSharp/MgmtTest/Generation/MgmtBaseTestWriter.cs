@@ -22,6 +22,8 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.MgmtTest.TestCommon;
+using AutoRest.CSharp.MgmtTest.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -169,7 +171,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var obj = (JsonSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
                 foreach (var exampleProperty in ev.Properties)
                 {
-                    var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList()! : new List<string> { exampleProperty.Key }, obj);
+                    var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList() : new List<string> { exampleProperty.Key }, obj);
                     if (property == targetProperty)
                     {
                         return exampleProperty.Value;

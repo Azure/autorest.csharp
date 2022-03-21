@@ -11,7 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-
+using AutoRest.CSharp.MgmtTest.TestCommon;
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
     /// <summary>
@@ -110,20 +110,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteTestMethod(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
-            Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
-                if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
+                if (exampleGroup is null || exampleGroup.Examples.Count == 0)
                     return;
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
                     WriteTestDecorator();
-                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
+                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : string.Empty;
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())

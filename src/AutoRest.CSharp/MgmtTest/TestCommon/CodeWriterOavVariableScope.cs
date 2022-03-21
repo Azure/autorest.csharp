@@ -8,7 +8,7 @@ using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 
-namespace AutoRest.CSharp.MgmtTest.Generation
+namespace AutoRest.CSharp.MgmtTest.TestCommon
 {
     internal class CodeWriterOavVariableScope : IDisposable
     {
