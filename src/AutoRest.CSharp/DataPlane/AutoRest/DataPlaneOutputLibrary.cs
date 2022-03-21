@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private BuildContext<DataPlaneOutputLibrary> _context;
         public CachedDictionary<string, List<string>> _protocolMethodsDictionary;
         private CodeModel _codeModel;
+        private string _defaultClientName;
 
         public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context)
         {
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
             _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
+            _defaultClientName = ClientBuilder.GetClientPrefix(string.Empty, _context);
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
@@ -230,15 +232,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 else
                 {
                     // when operationGroup is not present use the default name which is used to create client name
-                    var defaultClientName = ClientBuilder.GetClientPrefix(string.Empty, _context);
-                    AddToProtocolMethodsDictionary(protocolMethodsDictionary, defaultClientName, operationId);
+                    AddToProtocolMethodsDictionary(protocolMethodsDictionary, _defaultClientName, operationId);
                 }
             }
 
             return protocolMethodsDictionary;
         }
 
-        private void AddToProtocolMethodsDictionary(Dictionary<string, List<string>> protocolMethodsDictionary, string operationGroupKey, string methodName)
+        private static void AddToProtocolMethodsDictionary(Dictionary<string, List<string>> protocolMethodsDictionary, string operationGroupKey, string methodName)
         {
             if (!protocolMethodsDictionary.ContainsKey(operationGroupKey))
             {
@@ -258,8 +259,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _protocolMethodsDictionary.TryGetValue(operationGroup.Key, out var methodList);
             if (methodList == null)
             {
-                var defaultClientName = ClientBuilder.GetClientPrefix(string.Empty, _context);
-                _protocolMethodsDictionary.TryGetValue(defaultClientName, out methodList);
+                _protocolMethodsDictionary.TryGetValue(_defaultClientName, out methodList);
             }
             return methodList;
         }
