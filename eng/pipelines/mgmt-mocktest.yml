@@ -1,17 +1,13 @@
-trigger:
+trigger: none
+pr: none
+schedules:
+- cron: "0 20 * * *"
+  displayName: "4AM (UTC +8) daily mock test"
   branches:
     include:
-    - feature/*
-    - pipelinetest
-
-pr:
-  branches:
-    include:
-    - feature/*
-    - pipelinetest
+    - feature/v3
 
 variables:
-  BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
   NugetSecurityAnalysisWarningLevel: 'none'
 
@@ -33,8 +29,8 @@ resources:
 stages:
   - stage: 'Build_and_Test'
     jobs:
-      - job: MockInit
-        timeoutInMinutes: 180
+      - job: MockTest
+        timeoutInMinutes: 240
         pool:
           name: azsdk-pool-mms-win-2019-general
           vmImage: MMS2019
@@ -68,46 +64,29 @@ stages:
               pwsh ./eng/GenerateAndExecuteMockTest.ps1
             displayName: "GenerateAndExecuteMockTest"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-        parameters:
-          name: SmokeTest_S_Z
-          filter: "^[s-z]"
-  - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-    - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
-      parameters:
-        ShouldTag: false
-        ShouldSign: false
-        ShouldPublishSymbols: false
-    - stage: 'Update_azure_sdk_for_net'
-      dependsOn:
-        - Build_and_Test
-        - Release
-      jobs:
-        - job: Update
-          pool:
-            vmImage: ubuntu-20.04
-          variables:
-            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-          steps:
-            - checkout: self
-            - checkout: azure-sdk-for-net
-            - checkout: azure-sdk-tools
-            - task: UseDotNet@2
-              displayName: 'Use .NET Core SDK'
-              inputs:
-                useGlobalJson: true
-                performMultiLevelLookup: true
-            - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-              failOnStderr: false
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update generator version in Azure SDK repo'
-            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
-              parameters:
-                BaseBranchName: main
-                RepoName: azure-sdk-for-net
-                PRBranchName: auto-update-autorest
-                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRTitle:  Update AutoRest C# version
-                PushArgs: -f
-                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+          - task: PublishTestResults@2
+            condition: always()
+            displayName: "Publish Results"
+            inputs:
+              testResultsFiles: "**/*.trx"
+              testRunTitle: "Publish Results for build $(OfficialBuildId)"
+              testResultsFormat: "VSTest"
+              mergeTestResults: false
+          - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+            condition: succeededOrFailed()
+            displayName: Generate Code Coverage Reports
+            inputs:
+              reports: $(Build.SourcesDirectory)\**\coverage.cobertura.xml
+              targetdir: $(Build.ArtifactStagingDirectory)\coverage
+              reporttypes: Cobertura
+              filefilters: +$(Build.SourcesDirectory)\**
+              assemblyfilters: '+Azure.ResourceManager.*;-Azure.ResourceManager.*.Tests'
+              verbosity: Verbose
+              classfilters: '-Azure.Core.*'
+          - task: PublishCodeCoverageResults@1
+            condition: succeededOrFailed()
+            displayName: Publish Code Coverage Reports
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.xml
+
