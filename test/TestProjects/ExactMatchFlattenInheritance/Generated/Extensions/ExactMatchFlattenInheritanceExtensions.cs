@@ -28,7 +28,7 @@ namespace ExactMatchFlattenInheritance
             );
         }
 
-        /// <summary> Gets a collection of AzureResourceFlattenModel1s in the AzureResourceFlattenModel1. </summary>
+        /// <summary> Gets a collection of AzureResourceFlattenModel1s in the ResourceGroupExtensions. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AzureResourceFlattenModel1s and their operations over a AzureResourceFlattenModel1. </returns>
         public static AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s(this ResourceGroup resourceGroup)
@@ -66,7 +66,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.GetAzureResourceFlattenModel1s().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel2s in the CustomModel2. </summary>
+        /// <summary> Gets a collection of CustomModel2s in the ResourceGroupExtensions. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel2s and their operations over a CustomModel2. </returns>
         public static CustomModel2Collection GetCustomModel2s(this ResourceGroup resourceGroup)
@@ -104,7 +104,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroup.GetCustomModel2s().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel3s in the CustomModel3. </summary>
+        /// <summary> Gets a collection of CustomModel3s in the ResourceGroupExtensions. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel3s and their operations over a CustomModel3. </returns>
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroup resourceGroup)

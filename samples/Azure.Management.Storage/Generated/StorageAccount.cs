@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
             return new ManagementPolicy(Client, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
 
-        /// <summary> Gets a collection of BlobInventoryPolicies in the BlobInventoryPolicy. </summary>
+        /// <summary> Gets a collection of BlobInventoryPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicies and their operations over a BlobInventoryPolicy. </returns>
         public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
             return GetBlobInventoryPolicies().Get(blobInventoryPolicyName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PrivateEndpointConnections in the PrivateEndpointConnection. </summary>
+        /// <summary> Gets a collection of PrivateEndpointConnections in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a PrivateEndpointConnection. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
@@ -175,7 +175,7 @@ namespace Azure.Management.Storage
             return GetPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ObjectReplicationPolicies in the ObjectReplicationPolicy. </summary>
+        /// <summary> Gets a collection of ObjectReplicationPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a ObjectReplicationPolicy. </returns>
         public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
@@ -210,7 +210,7 @@ namespace Azure.Management.Storage
             return GetObjectReplicationPolicies().Get(objectReplicationPolicyId, cancellationToken);
         }
 
-        /// <summary> Gets a collection of EncryptionScopes in the EncryptionScope. </summary>
+        /// <summary> Gets a collection of EncryptionScopes in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a EncryptionScope. </returns>
         public virtual EncryptionScopeCollection GetEncryptionScopes()
         {

@@ -82,7 +82,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of BlobContainers in the BlobContainer. </summary>
+        /// <summary> Gets a collection of BlobContainers in the BlobService. </summary>
         /// <returns> An object representing collection of BlobContainers and their operations over a BlobContainer. </returns>
         public virtual BlobContainerCollection GetBlobContainers()
         {

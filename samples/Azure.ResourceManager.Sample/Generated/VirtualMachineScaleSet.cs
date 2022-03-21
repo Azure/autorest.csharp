@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetExtensions in the VirtualMachineScaleSetExtension. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSetExtension. </returns>
         public virtual VirtualMachineScaleSetExtensionCollection GetVirtualMachineScaleSetExtensions()
         {
@@ -133,7 +133,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetRollingUpgrade(Client, new ResourceIdentifier(Id.ToString() + "/rollingUpgrades/latest"));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetVMs in the VirtualMachineScaleSetVM. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetVMs in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSetVM. </returns>
         public virtual VirtualMachineScaleSetVMCollection GetVirtualMachineScaleSetVMs()
         {
