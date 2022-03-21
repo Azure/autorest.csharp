@@ -41,7 +41,7 @@ namespace ExactMatchInheritance.Models
         internal static ExactMatchModel3 DeserializeExactMatchModel3(JsonElement element)
         {
             Optional<string> @new = default;
-            Optional<string> id = default;
+            Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
             Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
@@ -53,7 +53,12 @@ namespace ExactMatchInheritance.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))

@@ -15,7 +15,7 @@ namespace MgmtRenameRules.Models
         internal static UpgradeOperationHistoricalStatusInfo DeserializeUpgradeOperationHistoricalStatusInfo(JsonElement element)
         {
             Optional<UpgradeOperationHistoricalStatusInfoProperties> properties = default;
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             Optional<string> location = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -31,7 +31,12 @@ namespace MgmtRenameRules.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -40,7 +45,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new UpgradeOperationHistoricalStatusInfo(properties.Value, type.Value, location.Value);
+            return new UpgradeOperationHistoricalStatusInfo(properties.Value, Optional.ToNullable(type), location.Value);
         }
     }
 }

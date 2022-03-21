@@ -503,6 +503,18 @@ schemas: !Schemas
           name: DeploymentOperationPropertiesProvisioningState
           description: The state of the provisioning.
       protocol: !Protocols {}
+    - !StringSchema &ref_58
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      extensions:
+        x-ms-format: duration-constant
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesAnotherDuration
+          description: Another duration of the operation.
+      protocol: !Protocols {}
     - !StringSchema &ref_59
       type: string
       apiVersions:
@@ -1246,18 +1258,6 @@ schemas: !Schemas
         default:
           name: DeploymentOperationPropertiesDuration
           description: The duration of the operation.
-      protocol: !Protocols {}
-    - !DurationSchema &ref_58
-      type: duration
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-04-01'
-      extensions:
-        x-ms-format: duration-constant
-      language: !Languages 
-        default:
-          name: DeploymentOperationPropertiesAnotherDuration
-          description: Another duration of the operation.
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_25
