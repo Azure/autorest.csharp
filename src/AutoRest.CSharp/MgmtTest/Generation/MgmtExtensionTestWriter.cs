@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.MgmtTest.TestCommon;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -53,9 +54,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteUsings(CodeWriter writer)
         {
-            writer.UseNamespace("System");
-            writer.UseNamespace("System.Threading.Tasks");
-            writer.UseNamespace("System.Collections.Generic");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }

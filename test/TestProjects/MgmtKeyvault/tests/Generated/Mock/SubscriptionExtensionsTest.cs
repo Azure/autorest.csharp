@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -26,7 +24,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetVaults()
+        public async System.Threading.Tasks.Task GetVaults()
         {
             // Example: List vaults in the specified subscription
             var subscriptionExtensions = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
@@ -38,7 +36,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetDeletedVaults()
+        public async System.Threading.Tasks.Task GetDeletedVaults()
         {
             // Example: List deleted vaults in the specified subscription
             var subscriptionExtensions = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
@@ -49,7 +47,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CheckNameAvailabilityVault()
+        public async System.Threading.Tasks.Task CheckNameAvailabilityVault()
         {
             // Example: Validate a vault name
             var subscriptionExtensions = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
@@ -59,7 +57,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetManagedHsms()
+        public async System.Threading.Tasks.Task GetManagedHsms()
         {
             // Example: List managed HSM Pools in a subscription
             var subscriptionExtensions = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
@@ -71,7 +69,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetDeletedManagedHsms()
+        public async System.Threading.Tasks.Task GetDeletedManagedHsms()
         {
             // Example: List deleted managed HSMs in the specified subscription
             var subscriptionExtensions = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
