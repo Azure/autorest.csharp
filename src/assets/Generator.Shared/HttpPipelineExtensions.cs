@@ -53,7 +53,7 @@ namespace Azure.Core
             throw new RequestFailedException(message.Response);
         }
 
-        public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
+        public static async ValueTask<Response<bool>> ProcessHeadAsBoolMessageAsync(this HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext)
         {
             var response = await pipeline.ProcessMessageAsync(message, requestContext).ConfigureAwait(false);
             switch (response.Status)
@@ -63,12 +63,12 @@ namespace Azure.Core
                 case >= 400 and < 500:
                     return Response.FromValue(false, response);
                 default:
-                    var exception = await clientDiagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false);
+                    var exception = new RequestFailedException(response);
                     return new ErrorResponse<bool>(response, exception);
             }
         }
 
-        public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext)
+        public static Response<bool> ProcessHeadAsBoolMessage(this HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext)
         {
             var response = pipeline.ProcessMessage(message, requestContext);
             switch (response.Status)
@@ -78,7 +78,7 @@ namespace Azure.Core
                 case >= 400 and < 500:
                     return Response.FromValue(false, response);
                 default:
-                    var exception = clientDiagnostics.CreateRequestFailedException(response);
+                    var exception = new RequestFailedException(response);
                     return new ErrorResponse<bool>(response, exception);
             }
         }
