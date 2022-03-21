@@ -97,7 +97,7 @@ namespace MgmtExpandResourceTypes
             );
         }
 
-        /// <summary> Gets a collection of Zones in the ResourceGroupExtensions. </summary>
+        /// <summary> Gets a collection of Zones in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
         public static ZoneCollection GetZones(this ResourceGroup resourceGroup)

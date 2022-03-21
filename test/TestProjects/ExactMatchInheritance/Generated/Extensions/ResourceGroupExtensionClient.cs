@@ -52,14 +52,14 @@ namespace ExactMatchInheritance
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of ExactMatchModel1s in the ResourceGroupExtensionClient. </summary>
+        /// <summary> Gets a collection of ExactMatchModel1s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of ExactMatchModel1s and their operations over a ExactMatchModel1. </returns>
         public virtual ExactMatchModel1Collection GetExactMatchModel1s()
         {
             return GetCachedClient(Client => new ExactMatchModel1Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ExactMatchModel5s in the ResourceGroupExtensionClient. </summary>
+        /// <summary> Gets a collection of ExactMatchModel5s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of ExactMatchModel5s and their operations over a ExactMatchModel5. </returns>
         public virtual ExactMatchModel5Collection GetExactMatchModel5s()
         {
