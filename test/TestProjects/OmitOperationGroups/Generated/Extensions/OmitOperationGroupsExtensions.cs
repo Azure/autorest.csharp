@@ -157,7 +157,10 @@ namespace OmitOperationGroups
         }
 
         #region Model2
-        /// <summary> Gets an object representing a Model2 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Model2" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Model2.CreateResourceIdentifier" /> to create a <see cref="Model2" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Model2" /> object. </returns>
