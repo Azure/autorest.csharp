@@ -9,8 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
+using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -21,6 +24,57 @@ namespace MgmtKeyvault.Tests.Mock
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
+        }
+
+        [RecordedTest]
+        public async Task Get()
+        {
+            // Example: Retrieve a managed HSM Pool
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
+
+            await managedHsm.GetAsync();
+        }
+
+        [RecordedTest]
+        public async Task Delete()
+        {
+            // Example: Delete a managed HSM Pool
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
+
+            await managedHsm.DeleteAsync(WaitUntil.Completed);
+        }
+
+        [RecordedTest]
+        public async Task Update()
+        {
+            // Example: Update an existing managed HSM Pool
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
+            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: AzureLocation.WestUS)
+            {
+            };
+            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            {
+                ["Dept"] = "hsm",
+                ["Environment"] = "dogfood",
+                ["Slice"] = "A",
+            });
+
+            await managedHsm.UpdateAsync(WaitUntil.Completed, parameters);
+        }
+
+        [RecordedTest]
+        public async Task GetMHSMPrivateLinkResourcesByMhsmResource()
+        {
+            // Example: KeyVaultListPrivateLinkResources
+            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
+
+            await foreach (var _ in managedHsm.GetMHSMPrivateLinkResourcesByMhsmResourceAsync())
+            {
+            }
         }
     }
 }

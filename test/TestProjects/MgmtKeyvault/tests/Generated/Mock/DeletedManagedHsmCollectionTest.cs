@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 
@@ -20,6 +21,17 @@ namespace MgmtKeyvault.Tests.Mock
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
+        }
+
+        [RecordedTest]
+        public async Task Get()
+        {
+            // Example: Retrieve a deleted managed HSM
+            string location = "westus";
+            string name = "hsm1";
+
+            var collection = GetArmClient().GetSubscription(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000")).GetDeletedManagedHsms();
+            await collection.GetAsync(location, name);
         }
     }
 }

@@ -89,7 +89,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutNotExpandableRequest(string stringBody)
+        internal HttpMessage CreatePutNotExpandableRequest(Colors stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -100,21 +100,17 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(stringBody);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
+            request.Content = content;
             return message;
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public async Task<Response> PutNotExpandableAsync(string stringBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var message = CreatePutNotExpandableRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -129,14 +125,8 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public Response PutNotExpandable(string stringBody, CancellationToken cancellationToken = default)
+        public Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var message = CreatePutNotExpandableRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -201,7 +191,7 @@ namespace body_string
             }
         }
 
-        internal HttpMessage CreatePutReferencedRequest(string enumStringBody)
+        internal HttpMessage CreatePutReferencedRequest(Colors enumStringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -212,21 +202,17 @@ namespace body_string
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(enumStringBody);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
+            request.Content = content;
             return message;
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
-        public async Task<Response> PutReferencedAsync(string enumStringBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            if (enumStringBody == null)
-            {
-                throw new ArgumentNullException(nameof(enumStringBody));
-            }
-
             using var message = CreatePutReferencedRequest(enumStringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -241,14 +227,8 @@ namespace body_string
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="enumStringBody"> enum string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
-        public Response PutReferenced(string enumStringBody, CancellationToken cancellationToken = default)
+        public Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            if (enumStringBody == null)
-            {
-                throw new ArgumentNullException(nameof(enumStringBody));
-            }
-
             using var message = CreatePutReferencedRequest(enumStringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
