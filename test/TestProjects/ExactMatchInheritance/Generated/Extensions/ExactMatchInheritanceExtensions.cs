@@ -265,7 +265,10 @@ namespace ExactMatchInheritance
         }
 
         #region ExactMatchModel1
-        /// <summary> Gets an object representing a ExactMatchModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="ExactMatchModel1" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel1.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ExactMatchModel1" /> object. </returns>
@@ -281,7 +284,10 @@ namespace ExactMatchInheritance
         #endregion
 
         #region ExactMatchModel5
-        /// <summary> Gets an object representing a ExactMatchModel5 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="ExactMatchModel5" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel5.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ExactMatchModel5" /> object. </returns>

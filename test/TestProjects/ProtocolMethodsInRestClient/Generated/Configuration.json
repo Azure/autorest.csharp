@@ -10,6 +10,9 @@
   "skip-csproj-packagereference": true,
   "ProtocolMethodList": [
     "Create",
-    "Delete"
+    "Delete",
+    "firstTemplate_Create",
+    "firstTemplate_Get",
+    "secondTemplate_Get"
   ]
 }

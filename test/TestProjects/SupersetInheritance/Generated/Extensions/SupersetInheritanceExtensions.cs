@@ -309,7 +309,10 @@ namespace SupersetInheritance
         }
 
         #region SupersetModel1
-        /// <summary> Gets an object representing a SupersetModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SupersetModel1" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel1.CreateResourceIdentifier" /> to create a <see cref="SupersetModel1" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SupersetModel1" /> object. </returns>
@@ -325,7 +328,10 @@ namespace SupersetInheritance
         #endregion
 
         #region SupersetModel4
-        /// <summary> Gets an object representing a SupersetModel4 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SupersetModel4" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel4.CreateResourceIdentifier" /> to create a <see cref="SupersetModel4" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SupersetModel4" /> object. </returns>
@@ -341,7 +347,10 @@ namespace SupersetInheritance
         #endregion
 
         #region SupersetModel6
-        /// <summary> Gets an object representing a SupersetModel6 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SupersetModel6" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel6.CreateResourceIdentifier" /> to create a <see cref="SupersetModel6" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SupersetModel6" /> object. </returns>
@@ -357,7 +366,10 @@ namespace SupersetInheritance
         #endregion
 
         #region SupersetModel7
-        /// <summary> Gets an object representing a SupersetModel7 along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SupersetModel7" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel7.CreateResourceIdentifier" /> to create a <see cref="SupersetModel7" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SupersetModel7" /> object. </returns>

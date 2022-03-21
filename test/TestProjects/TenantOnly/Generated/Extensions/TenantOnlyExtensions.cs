@@ -68,7 +68,10 @@ namespace TenantOnly
         }
 
         #region BillingAccount
-        /// <summary> Gets an object representing a BillingAccount along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="BillingAccount" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BillingAccount.CreateResourceIdentifier" /> to create a <see cref="BillingAccount" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
@@ -84,7 +87,10 @@ namespace TenantOnly
         #endregion
 
         #region Agreement
-        /// <summary> Gets an object representing a Agreement along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="Agreement" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Agreement.CreateResourceIdentifier" /> to create an <see cref="Agreement" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Agreement" /> object. </returns>

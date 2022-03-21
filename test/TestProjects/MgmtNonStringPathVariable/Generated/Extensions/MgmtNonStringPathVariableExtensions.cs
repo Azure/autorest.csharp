@@ -98,7 +98,10 @@ namespace MgmtNonStringPathVariable
         }
 
         #region Fake
-        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Fake" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Fake.CreateResourceIdentifier" /> to create a <see cref="Fake" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
@@ -114,7 +117,10 @@ namespace MgmtNonStringPathVariable
         #endregion
 
         #region Bar
-        /// <summary> Gets an object representing a Bar along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Bar" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Bar.CreateResourceIdentifier" /> to create a <see cref="Bar" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Bar" /> object. </returns>

@@ -109,7 +109,10 @@ namespace SubscriptionExtensions
         }
 
         #region Toaster
-        /// <summary> Gets an object representing a Toaster along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Toaster" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Toaster.CreateResourceIdentifier" /> to create a <see cref="Toaster" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Toaster" /> object. </returns>
@@ -125,7 +128,10 @@ namespace SubscriptionExtensions
         #endregion
 
         #region Oven
-        /// <summary> Gets an object representing a Oven along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="Oven" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Oven.CreateResourceIdentifier" /> to create an <see cref="Oven" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Oven" /> object. </returns>
