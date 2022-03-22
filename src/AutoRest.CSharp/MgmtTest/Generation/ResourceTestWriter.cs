@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (exampleGroup is null || exampleGroup.Examples.Count == 0)
                     return;
 
-                foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
+                foreach (var exampleModel in exampleGroup.Examples)
                 {
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : string.Empty;

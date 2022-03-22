@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     return;
                 var testMethodName = CreateMethodName(methodName, async);
 
-                foreach (var exampleModel in (exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>()))
+                foreach (var exampleModel in exampleGroup.Examples)
                 {
                     MgmtTypeProvider? parentTp = FindParentByRequestPath(operation.RequestPath.SerializedPath, exampleModel);
                     if (parentTp is null)

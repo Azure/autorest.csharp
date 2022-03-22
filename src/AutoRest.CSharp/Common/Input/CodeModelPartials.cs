@@ -287,13 +287,13 @@ namespace AutoRest.CSharp.Input
         public Dictionary<string, string> RequiredVariablesDefault { get; set; }
 
         [YamlMember(Alias = "secretVariables")]
-        public ICollection<string>? SecretVariables { get; set; }
+        public ICollection<string> SecretVariables { get; set; } = Array.Empty<string>();
 
         [YamlMember(Alias = "variables")]
         public Dictionary<string, object?> Variables { get; set; } = new Dictionary<string, object?>();
 
         [YamlMember(Alias = "outputVariables")]
-        public Dictionary<string, string>? OutputVariables { get; set; }
+        public Dictionary<string, string> OutputVariables { get; set; } = new Dictionary<string, string>();
 
         public HashSet<string> GetAllVariableNames()
         {
@@ -395,13 +395,13 @@ namespace AutoRest.CSharp.Input
         public string? Step { get; set; }
 
         [YamlMember(Alias = "requestUpdate")]
-        public ICollection<JsonPatchOp>? RequestUpdate { get; set; }
+        public ICollection<JsonPatchOp> RequestUpdate { get; set; } = Array.Empty<JsonPatchOp>();
 
         [YamlMember(Alias = "resourceUpdate")]
-        public ICollection<JsonPatchOp>? ResourceUpdate { get; set; }
+        public ICollection<JsonPatchOp> ResourceUpdate { get; set; } = Array.Empty<JsonPatchOp>();
 
         [YamlMember(Alias = "responseUpdate")]
-        public ICollection<JsonPatchOp>? ResponseUpdate { get; set; }
+        public ICollection<JsonPatchOp> ResponseUpdate { get; set; } = Array.Empty<JsonPatchOp>();
 
         [YamlMember(Alias = "statusCode")]
         public int? StatusCode { get; set; }
@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Input
         public ExampleModel? ExampleModel { get; set; }
 
         [YamlMember(Alias = "outputVariablesModel")]
-        public Dictionary<string, ICollection<OutputVariableModel>>? OutputVariablesModel { get; set; }
+        public Dictionary<string, ICollection<OutputVariableModel>> OutputVariablesModel { get; set; } = new Dictionary<string, ICollection<OutputVariableModel>>();
     };
 
     internal partial class OutputVariableModel
@@ -476,7 +476,7 @@ namespace AutoRest.CSharp.Input
         public TestDefinitionModel? ScenarioDef { get; set; }
 
         [YamlMember(Alias = "_resolvedSteps")]
-        public ICollection<TestStep>? ResolvedSteps { get; set; }
+        public ICollection<TestStep> ResolvedSteps { get; set; } = Array.Empty<TestStep>();
 
         [YamlMember(Alias = "shareScope")]
         public bool ShareScope { get; set; }
