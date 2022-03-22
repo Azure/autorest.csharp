@@ -28,7 +28,7 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Gets a collection of DeletedAccounts in the DeletedAccount. </summary>
+        /// <summary> Gets a collection of DeletedAccounts in the Subscription. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
         public static DeletedAccountCollection GetDeletedAccounts(this Subscription subscription)
@@ -165,7 +165,7 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Gets a collection of StorageAccounts in the StorageAccount. </summary>
+        /// <summary> Gets a collection of StorageAccounts in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
         public static StorageAccountCollection GetStorageAccounts(this ResourceGroup resourceGroup)

@@ -56,14 +56,14 @@ namespace MgmtKeyvault
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeletedVaults in the DeletedVault. </summary>
+        /// <summary> Gets a collection of DeletedVaults in the Subscription. </summary>
         /// <returns> An object representing collection of DeletedVaults and their operations over a DeletedVault. </returns>
         public virtual DeletedVaultCollection GetDeletedVaults()
         {
             return GetCachedClient(Client => new DeletedVaultCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DeletedManagedHsms in the DeletedManagedHsm. </summary>
+        /// <summary> Gets a collection of DeletedManagedHsms in the Subscription. </summary>
         /// <returns> An object representing collection of DeletedManagedHsms and their operations over a DeletedManagedHsm. </returns>
         public virtual DeletedManagedHsmCollection GetDeletedManagedHsms()
         {

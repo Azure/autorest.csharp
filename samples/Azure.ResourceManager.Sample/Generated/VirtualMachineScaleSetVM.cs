@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSetVirtualMachineExtension. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSetVM. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSetVirtualMachineExtension. </returns>
         public virtual VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
         {

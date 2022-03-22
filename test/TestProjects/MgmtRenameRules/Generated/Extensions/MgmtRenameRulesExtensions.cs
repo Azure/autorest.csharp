@@ -233,7 +233,7 @@ namespace MgmtRenameRules
             );
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
+        /// <summary> Gets a collection of VirtualMachines in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
@@ -271,7 +271,7 @@ namespace MgmtRenameRules
             return resourceGroup.GetVirtualMachines().Get(vmName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Images in the Image. </summary>
+        /// <summary> Gets a collection of Images in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Images and their operations over a Image. </returns>
         public static ImageCollection GetImages(this ResourceGroup resourceGroup)
@@ -311,7 +311,7 @@ namespace MgmtRenameRules
             return resourceGroup.GetImages().Get(imageName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)

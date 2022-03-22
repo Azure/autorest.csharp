@@ -82,7 +82,7 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocs in the FakeParentWithAncestorWithNonResChWithLoc. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a FakeParentWithAncestorWithNonResChWithLoc. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
@@ -117,7 +117,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithNonResChWithLocs().Get(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the FakeParentWithAncestorWithNonResCh. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a FakeParentWithAncestorWithNonResCh. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
@@ -152,7 +152,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithNonResChes().Get(fakeParentWithAncestorWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the FakeParentWithAncestorWithLoc. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a FakeParentWithAncestorWithLoc. </returns>
         public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
@@ -187,7 +187,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithLocs().Get(fakeParentWithAncestorWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestors in the FakeParentWithAncestor. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestors in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a FakeParentWithAncestor. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestors().Get(fakeParentWithAncestorName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithNonResChes in the FakeParentWithNonResCh. </summary>
+        /// <summary> Gets a collection of FakeParentWithNonResChes in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a FakeParentWithNonResCh. </returns>
         public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
@@ -257,7 +257,7 @@ namespace MgmtListMethods
             return GetFakeParentWithNonResChes().Get(fakeParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParents in the FakeParent. </summary>
+        /// <summary> Gets a collection of FakeParents in the Fake. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a FakeParent. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {

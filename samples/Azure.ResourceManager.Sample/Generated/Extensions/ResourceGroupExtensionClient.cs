@@ -31,49 +31,49 @@ namespace Azure.ResourceManager.Sample
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <summary> Gets a collection of AvailabilitySets in the ResourceGroup. </summary>
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
+        /// <summary> Gets a collection of ProximityPlacementGroups in the ResourceGroup. </summary>
         /// <returns> An object representing collection of ProximityPlacementGroups and their operations over a ProximityPlacementGroup. </returns>
         public virtual ProximityPlacementGroupCollection GetProximityPlacementGroups()
         {
             return GetCachedClient(Client => new ProximityPlacementGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroups in the ResourceGroup. </summary>
         /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
             return GetCachedClient(Client => new DedicatedHostGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
+        /// <summary> Gets a collection of SshPublicKeys in the ResourceGroup. </summary>
         /// <returns> An object representing collection of SshPublicKeys and their operations over a SshPublicKey. </returns>
         public virtual SshPublicKeyCollection GetSshPublicKeys()
         {
             return GetCachedClient(Client => new SshPublicKeyCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
+        /// <summary> Gets a collection of VirtualMachines in the ResourceGroup. </summary>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public virtual VirtualMachineCollection GetVirtualMachines()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of Images in the Image. </summary>
+        /// <summary> Gets a collection of Images in the ResourceGroup. </summary>
         /// <returns> An object representing collection of Images and their operations over a Image. </returns>
         public virtual ImageCollection GetImages()
         {
             return GetCachedClient(Client => new ImageCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the ResourceGroup. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {

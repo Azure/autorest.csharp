@@ -87,7 +87,7 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of RecordSetAs in the RecordSetA. </summary>
+        /// <summary> Gets a collection of RecordSetAs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAs and their operations over a RecordSetA. </returns>
         public virtual RecordSetACollection GetRecordSetAs()
         {
@@ -120,7 +120,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetAs().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetAaaas in the RecordSetAaaa. </summary>
+        /// <summary> Gets a collection of RecordSetAaaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a RecordSetAaaa. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
@@ -153,7 +153,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetAaaas().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetCaas in the RecordSetCaa. </summary>
+        /// <summary> Gets a collection of RecordSetCaas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCaas and their operations over a RecordSetCaa. </returns>
         public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
@@ -186,7 +186,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetCaas().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetCNames in the RecordSetCName. </summary>
+        /// <summary> Gets a collection of RecordSetCNames in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a RecordSetCName. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
@@ -219,7 +219,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetCNames().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetMxes in the RecordSetMx. </summary>
+        /// <summary> Gets a collection of RecordSetMxes in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetMxes and their operations over a RecordSetMx. </returns>
         public virtual RecordSetMxCollection GetRecordSetMxes()
         {
@@ -252,7 +252,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetMxes().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetNs in the RecordSetNs. </summary>
+        /// <summary> Gets a collection of RecordSetNs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a RecordSetNs. </returns>
         public virtual RecordSetNsCollection GetRecordSetNs()
         {
@@ -285,7 +285,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetNs().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetPtrs in the RecordSetPtr. </summary>
+        /// <summary> Gets a collection of RecordSetPtrs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a RecordSetPtr. </returns>
         public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
@@ -318,7 +318,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetPtrs().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetSoas in the RecordSetSoa. </summary>
+        /// <summary> Gets a collection of RecordSetSoas in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a RecordSetSoa. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
@@ -351,7 +351,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetSoas().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetSrvs in the RecordSetSrv. </summary>
+        /// <summary> Gets a collection of RecordSetSrvs in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a RecordSetSrv. </returns>
         public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
@@ -384,7 +384,7 @@ namespace MgmtExpandResourceTypes
             return GetRecordSetSrvs().Get(relativeRecordSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of RecordSetTxts in the RecordSetTxt. </summary>
+        /// <summary> Gets a collection of RecordSetTxts in the Zone. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a RecordSetTxt. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {

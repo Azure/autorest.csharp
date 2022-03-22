@@ -27,7 +27,7 @@ namespace XmlDeserialization
             );
         }
 
-        /// <summary> Gets a collection of XmlInstances in the XmlInstance. </summary>
+        /// <summary> Gets a collection of XmlInstances in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroup resourceGroup)

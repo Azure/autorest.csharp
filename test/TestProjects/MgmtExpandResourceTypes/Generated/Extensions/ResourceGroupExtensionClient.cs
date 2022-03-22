@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Zones in the Zone. </summary>
+        /// <summary> Gets a collection of Zones in the ResourceGroup. </summary>
         /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
         public virtual ZoneCollection GetZones()
         {

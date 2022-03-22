@@ -31,7 +31,7 @@ namespace MgmtDiscriminator
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeliveryRules in the DeliveryRule. </summary>
+        /// <summary> Gets a collection of DeliveryRules in the ResourceGroup. </summary>
         /// <returns> An object representing collection of DeliveryRules and their operations over a DeliveryRule. </returns>
         public virtual DeliveryRuleCollection GetDeliveryRules()
         {

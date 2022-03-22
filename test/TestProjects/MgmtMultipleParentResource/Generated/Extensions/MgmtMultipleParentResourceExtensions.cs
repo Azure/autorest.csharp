@@ -27,7 +27,7 @@ namespace MgmtMultipleParentResource
             );
         }
 
-        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <summary> Gets a collection of AnotherParents in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
@@ -67,7 +67,7 @@ namespace MgmtMultipleParentResource
             return resourceGroup.GetAnotherParents().Get(anotherName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <summary> Gets a collection of TheParents in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)

@@ -31,21 +31,21 @@ namespace NoTypeReplacement
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel1s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
         public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s()
         {
             return GetCachedClient(Client => new NoTypeReplacementModel1Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel2s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
         public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s()
         {
             return GetCachedClient(Client => new NoTypeReplacementModel2Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel3s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
         public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s()
         {

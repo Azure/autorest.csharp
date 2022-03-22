@@ -55,21 +55,21 @@ namespace ExactMatchFlattenInheritance
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AzureResourceFlattenModel1s in the AzureResourceFlattenModel1. </summary>
+        /// <summary> Gets a collection of AzureResourceFlattenModel1s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of AzureResourceFlattenModel1s and their operations over a AzureResourceFlattenModel1. </returns>
         public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s()
         {
             return GetCachedClient(Client => new AzureResourceFlattenModel1Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of CustomModel2s in the CustomModel2. </summary>
+        /// <summary> Gets a collection of CustomModel2s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of CustomModel2s and their operations over a CustomModel2. </returns>
         public virtual CustomModel2Collection GetCustomModel2s()
         {
             return GetCachedClient(Client => new CustomModel2Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of CustomModel3s in the CustomModel3. </summary>
+        /// <summary> Gets a collection of CustomModel3s in the ResourceGroup. </summary>
         /// <returns> An object representing collection of CustomModel3s and their operations over a CustomModel3. </returns>
         public virtual CustomModel3Collection GetCustomModel3s()
         {

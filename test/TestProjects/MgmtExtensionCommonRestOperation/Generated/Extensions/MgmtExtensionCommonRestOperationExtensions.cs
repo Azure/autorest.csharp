@@ -88,7 +88,7 @@ namespace MgmtExtensionCommonRestOperation
             );
         }
 
-        /// <summary> Gets a collection of TypeOnes in the TypeOne. </summary>
+        /// <summary> Gets a collection of TypeOnes in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroup resourceGroup)
@@ -126,7 +126,7 @@ namespace MgmtExtensionCommonRestOperation
             return resourceGroup.GetTypeOnes().Get(typeOneName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
+        /// <summary> Gets a collection of TypeTwos in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroup resourceGroup)

@@ -31,7 +31,7 @@ namespace XmlDeserialization
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of XmlInstances in the XmlInstance. </summary>
+        /// <summary> Gets a collection of XmlInstances in the ResourceGroup. </summary>
         /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
         public virtual XmlInstanceCollection GetXmlInstances()
         {

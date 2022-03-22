@@ -43,14 +43,14 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendeds in the Tenant. </summary>
         /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
         {
             return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
+        /// <summary> Gets a collection of ResourceLinks in the Tenant. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
         public virtual ResourceLinkCollection GetResourceLinks(string scope)

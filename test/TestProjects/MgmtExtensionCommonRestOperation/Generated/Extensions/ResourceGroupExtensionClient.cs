@@ -31,14 +31,14 @@ namespace MgmtExtensionCommonRestOperation
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of TypeOnes in the TypeOne. </summary>
+        /// <summary> Gets a collection of TypeOnes in the ResourceGroup. </summary>
         /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
         public virtual TypeOneCollection GetTypeOnes()
         {
             return GetCachedClient(Client => new TypeOneCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
+        /// <summary> Gets a collection of TypeTwos in the ResourceGroup. </summary>
         /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
         public virtual TypeTwoCollection GetTypeTwos()
         {
