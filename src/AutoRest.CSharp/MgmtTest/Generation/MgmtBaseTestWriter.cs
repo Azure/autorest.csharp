@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             if (restOperation is null)
                 return null;
-            foreach (var exampleGroup in MgmtContext.CodeModel.TestModel?.MockTest.ExampleGroups ?? Enumerable.Empty<ExampleGroup>())
+            foreach (var exampleGroup in MgmtContext.CodeModel.TestModel!.MockTest.ExampleGroups)
             {
                 if (exampleGroup.Examples.Count > 0 && exampleGroup.Examples.First().Operation == restOperation.Operation)
                 {
