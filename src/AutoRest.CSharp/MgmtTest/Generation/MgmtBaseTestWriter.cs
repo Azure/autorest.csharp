@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -53,6 +55,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
+        protected void WriteMockTestContext()
+        {
+            _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
+            _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
+        }
+
+        protected static string CreateTestMethodName(string methodName, int exampleIndex)
+        {
+            var testCaseSuffix = exampleIndex > 0 ? (exampleIndex + 1).ToString() : string.Empty;
+            return methodName + testCaseSuffix;
+        }
+
         public string FormatResourceId(string resourceId)
         {
             // Two purpose of this function:
@@ -86,9 +100,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return String.Join("/", elements);
         }
 
-        public static string GetTaskOrVoid(bool isAsync)
+        public static FormattableString GetTaskOrVoid(bool isAsync)
         {
-            return isAsync ? $"{typeof(Task)}" : "void";
+            return isAsync ? (FormattableString)$"{typeof(Task)}" : (FormattableString)$"void";
         }
 
         public static ExampleGroup? FindExampleGroup(MgmtRestOperation restOperation)
@@ -243,7 +257,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty)
         {
-            bool isSingleProperty = targetProperty.IsSinglePropertyObject(out var innerProperty);
+            bool isSingleProperty = targetProperty.IsSinglePropertyObject(out _);
             return isSingleProperty ? variableName : $"{variableName}.{targetProperty.Declaration.Name}";
         }
 
@@ -388,7 +402,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                                 AddTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                                 consumedProperties.Add(targetProperty);
                             }
-                            else if (!targetProperty.IsSinglePropertyObject(out var innerProperty))
+                            else if (!targetProperty.IsSinglePropertyObject(out _))
                             {
                                 writer.Append($"{targetProperty.Declaration.Name:D} = ");
                                 WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
@@ -436,64 +450,74 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
-            if (cst.IsFrameworkType && (cst.FrameworkType == typeof(IList<>) || cst.FrameworkType == typeof(IReadOnlyList<>)))
+            Debug.Assert(cst.IsFrameworkType);
+            if (exampleValue.RawValue is null) {
+                writer.Append($"null");
+                return;
+            }
+            switch (cst.Namespace, cst.Name)
             {
-                using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
-                {
-                    var idx = 0;
-                    foreach (var element in exampleValue.Elements)
+                case ("System.Collection.Generic", "IList"):
+                case ("System.Collection.Generic", "IReadonlyList"):
+                    using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
                     {
-                        WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
-                        writer.Append($",");
-                        idx++;
+                        var idx = 0;
+                        foreach (var element in exampleValue.Elements)
+                        {
+                            WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
+                            writer.Append($",");
+                            idx++;
+                        }
                     }
-                }
-                if (cst.FrameworkType == typeof(IReadOnlyList<>))
-                {
-                    writer.Append($"AsReadOnly()");
-                }
-            }
-            else if (cst.IsFrameworkType && cst.FrameworkType == typeof(IDictionary<,>))
-            {
-                using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
-                {
-                    foreach (var entry in exampleValue.Properties)
+                    if (cst.FrameworkType == typeof(IReadOnlyList<>))
                     {
-                        var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
-                        writer.Append($"[{k}] = ");
-                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
-                        writer.Append($",");
+                        writer.Append($".AsReadOnly()");
                     }
-                }
-            }
-            else if (cst.Name == "Object")
-            {
-                WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
-            }
-            else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
-            {
-                writer.Append($"new {cst}(${FormatResourceId(exampleValue.RawValue!.ToString()!).RefScenarioDefinedVariables(_scenarioVariables):L})");
-            }
-            else if (cst.Name == "DateTimeOffset" && exampleValue.RawValue is string dtValue)
-            {
-                writer.Append($"{typeof(DateTimeOffset)}.Parse({dtValue.RefScenarioDefinedVariables(_scenarioVariables)})");
-            }
-            else if (cst.Name == "Guid" && exampleValue.RawValue is string guidValue)
-            {
-                writer.Append($"System.Guid.Parse({guidValue.RefScenarioDefinedVariables(_scenarioVariables)})");
-            }
-            else if (cst.Name == "TimeSpan" && exampleValue.RawValue is string tsValue)
-            {
-                writer.Append($"System.TimeSpan.Parse({tsValue.RefScenarioDefinedVariables(_scenarioVariables)})");
-            }
-            else if (exampleValue.RawValue is not null && exampleValue.RawValue is string strValue)
-            {
-                if (new string[] { "String", "AzureLocation" }.Contains(cst.FrameworkType.Name))
-                {
-                    writer.Append($"{strValue.RefScenarioDefinedVariables(_scenarioVariables)}");
-                }
-                else
-                {
+                    break;
+                case ("System.Collection.Generic", "IDictionary"):
+                    using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
+                    {
+                        foreach (var entry in exampleValue.Properties)
+                        {
+                            var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
+                            writer.Append($"[{k}] = ");
+                            WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
+                            writer.Append($",");
+                        }
+                    }
+                    break;
+                case ("System", "Object"):
+                    WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
+                    break;
+                case ("Azure.Core", "ResourceIdentifier"):
+                case ("Azure.Core", "ResourceType"):
+                    writer.Append($"new {cst}(${FormatResourceId(exampleValue.RawValue!.ToString()!).RefScenarioDefinedVariables(_scenarioVariables):L})");
+                    break;
+                case ("System", "DateTimeOffset"):
+                    if (exampleValue.RawValue is string dtValue) {
+                        writer.Append($"{typeof(DateTimeOffset)}.Parse({dtValue.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    }
+                    break;
+                case ("System", "Guid"):
+                    if (exampleValue.RawValue is string guidValue)
+                    {
+                        writer.Append($"System.Guid.Parse({guidValue.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    }
+                    break;
+                case ("System", "TimeSpan"):
+                    if (exampleValue.RawValue is string tsValue)
+                    {
+                        writer.Append($"System.TimeSpan.Parse({tsValue.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    }
+                    break;
+                case ("System", "String"):
+                case ("Azure.Core", "AzureLocation"):
+                    if (exampleValue.RawValue is string strValue)
+                    {
+                        writer.Append($"{strValue.RefScenarioDefinedVariables(_scenarioVariables)}");
+                    }
+                    break;
+                default:
                     try
                     {
                         writer.Append($"{exampleValue.RawValue}");
@@ -502,11 +526,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         Console.WriteLine(e);
                     }
-                }
-            }
-            else
-            {
-                writer.Append($"null");
+                    break;
             }
         }
 
@@ -551,9 +571,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 case EnumType enumType:
                     WriteEnumTypeExampleValue(writer, enumType, exampleValue);
                     break;
-                default:
+                case null:
                     WriteFrameworkTypeExampleValue(writer, cst, exampleValue, variableName);
                     break;
+                default:
+                    throw new Exception($"TODO: handle example value for {cst}!");
             }
         }
 

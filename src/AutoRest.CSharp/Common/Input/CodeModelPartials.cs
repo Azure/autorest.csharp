@@ -298,18 +298,9 @@ namespace AutoRest.CSharp.Input
         public HashSet<string> GetAllVariableNames()
         {
             HashSet<string> variableNames = new HashSet<string>();
-            if (this.RequiredVariables is not null)
-            {
-                variableNames.UnionWith(this.RequiredVariables);
-            }
-            if (this.Variables is not null)
-            {
-                variableNames.UnionWith(this.Variables.Keys);
-            }
-            if (this.OutputVariables is not null)
-            {
-                variableNames.UnionWith(this.OutputVariables.Keys);
-            }
+            variableNames.UnionWith(this.RequiredVariables);
+            variableNames.UnionWith(this.Variables.Keys);
+            variableNames.UnionWith(this.OutputVariables.Keys);
             return variableNames;
         }
     }
@@ -455,7 +446,7 @@ namespace AutoRest.CSharp.Input
         public string? Key { get; set; }
 
         [YamlMember(Alias = "languages")]
-        public Languages? Languages { get; set; }
+        public Languages? Language { get; set; }
 
         [YamlMember(Alias = "type")]
         public string Type { get; set; }

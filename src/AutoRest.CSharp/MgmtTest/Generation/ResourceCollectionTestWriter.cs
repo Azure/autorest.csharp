@@ -81,8 +81,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
-                _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
-                _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
+                WriteMockTestContext();
             }
         }
 
@@ -228,7 +227,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count == 0)
-                    return;
+                    continue;
                 var testMethodName = CreateMethodName(methodName, async);
 
                 foreach (var exampleModel in exampleGroup.Examples)
@@ -240,12 +239,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     WriteTestDecorator();
-                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : string.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {methodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {CreateTestMethodName(methodName, exampleIdx)}()");
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        WriteOperationInvocation(This, clientOperation, operation, exampleModel, async, isLroOperation);
+                        WriteOperationInvocation(clientOperation, operation, exampleModel, async, isLroOperation);
                     }
                     _writer.Line();
                     exampleIdx++;
@@ -253,7 +251,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public bool WriteOperationInvocation(ResourceCollection collection, MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        public bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
         {
             MgmtTypeProvider? parentTp = FindParentByRequestPath(restOperation.RequestPath.SerializedPath, exampleModel);
             if (parentTp is null) {
