@@ -4,7 +4,6 @@
 using System;
 using System.Net;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -63,8 +62,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
-                _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
-                _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
+                WriteMockTestContext();
             }
         }
 
@@ -75,14 +73,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
-                if (exampleGroup?.Examples.Count == 0)
-                    return;
+                if (exampleGroup is null || exampleGroup.Examples.Count == 0)
+                    continue;
 
-                foreach (var exampleModel in exampleGroup!.Examples)
+                foreach (var exampleModel in exampleGroup.Examples)
                 {
                     WriteTestDecorator();
-                    var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : string.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {methodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {CreateTestMethodName(methodName, exampleIdx)}()");
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
@@ -100,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var resourceIdentifierParams = ComposeResourceIdentifierParams(restOperation.RequestPath, exampleModel);
             var subscriptionVariableName = new CodeWriterDeclaration(_extensions.Type.Name.FirstCharToLowerCase());
             var subscriptionRequestPath = GetSubscriptionRequestPath(restOperation.RequestPath, exampleModel);
-            _writer.Line($@"var {subscriptionVariableName:D} = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(subscriptionRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}));");
+            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(subscriptionRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}));");
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters.Skip(1), exampleModel);
 
             _writer.Line();
@@ -109,29 +106,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public string GetSubscriptionRequestPath(RequestPath requestPath, ExampleModel exampleModel)
         {
-            List<string> result = new List<string>();
-            var segements = requestPath.SerializedPath.Split('/');
-            int maxSegment = 3;
-            int i = 0;
-            foreach (string segment in segements)
+            var result = new List<Segment>();
+            // this might throw exceptions when there are less than 2 segments
+            foreach (var segment in requestPath.Take(2))
             {
-                if (segment.StartsWith("{") && segment.EndsWith("}"))
-                {
-                    var v = FindParameterValueByName(exampleModel, segment.Substring(1, segment.Length - 2));
-                    if (v is null)
-                    {
-                        return "/subscriptions/00000000-0000-0000-0000-000000000000";
-                    }
-                    result.Add(v);
-                }
-                else
-                {
-                    result.Add(segment);
-                }
-                if (++i >= maxSegment)
-                    break;
+            if (segment.IsConstant)
+            result.Add(segment);
+            else
+            {
+            var v = FindParameterValueByName(exampleModel, segment.ReferenceName) ?? "00000000-0000-0000-0000-000000000000";
+            result.Add(new Segment(v));
             }
-            return string.Join("/", result.ToArray());
+            }
+            return new RequestPath(result);
         }
     }
 }

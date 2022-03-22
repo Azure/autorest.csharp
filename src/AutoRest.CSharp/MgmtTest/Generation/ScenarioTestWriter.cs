@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     else if (step.ExampleModel.Operation.IsCollectionOperation(out ResourceCollection? collection, out clientOperation, out restOperation))
                     {
                         ResourceCollectionTestWriter testWriter = new ResourceCollectionTestWriter(_writer, collection!, scenarioDefinedVariables);
-                        testWriter.WriteOperationInvocation(collection!, clientOperation!, restOperation!, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
+                        testWriter.WriteOperationInvocation(clientOperation!, restOperation!, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
                     }
                     else if (step.ExampleModel.Operation.IsSubscriptionOperation(out clientOperation, out restOperation))
                     {
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
 
                     var outputs = new CodeWriterDeclaration("deployOutputs");
-                    using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is Dictionary<string, object> {outputs:D})"))
+                    using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is {typeof(Dictionary<string, object>)} {outputs:D})"))
                     {
                         var armTemplate = new JsonRawValue(step.ArmTemplatePayload);
                         if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("outputs", out object? variables))
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                                     if (!existedVariables.Contains(variableName))
                                         continue;
                                     var element = new CodeWriterDeclaration($"{variableName}Output");
-                                    using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
+                                    using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is {typeof(Dictionary<string, object>)} {element:D})"))
                                     {
                                         _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
                                     }
