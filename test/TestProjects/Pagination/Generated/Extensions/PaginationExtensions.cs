@@ -316,7 +316,10 @@ namespace Pagination
         }
 
         #region PageSizeIntegerModel
-        /// <summary> Gets an object representing a PageSizeIntegerModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeIntegerModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeIntegerModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeIntegerModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeIntegerModel" /> object. </returns>
@@ -332,7 +335,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeInt64Model
-        /// <summary> Gets an object representing a PageSizeInt64Model along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeInt64Model" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeInt64Model.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt64Model" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeInt64Model" /> object. </returns>
@@ -348,7 +354,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeInt32Model
-        /// <summary> Gets an object representing a PageSizeInt32Model along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeInt32Model" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeInt32Model.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt32Model" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeInt32Model" /> object. </returns>
@@ -364,7 +373,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeNumericModel
-        /// <summary> Gets an object representing a PageSizeNumericModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeNumericModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeNumericModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeNumericModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeNumericModel" /> object. </returns>
@@ -380,7 +392,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeFloatModel
-        /// <summary> Gets an object representing a PageSizeFloatModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeFloatModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeFloatModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeFloatModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeFloatModel" /> object. </returns>
@@ -396,7 +411,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeDoubleModel
-        /// <summary> Gets an object representing a PageSizeDoubleModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeDoubleModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeDoubleModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeDoubleModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeDoubleModel" /> object. </returns>
@@ -412,7 +430,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeDecimalModel
-        /// <summary> Gets an object representing a PageSizeDecimalModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeDecimalModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeDecimalModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeDecimalModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeDecimalModel" /> object. </returns>
@@ -428,7 +449,10 @@ namespace Pagination
         #endregion
 
         #region PageSizeStringModel
-        /// <summary> Gets an object representing a PageSizeStringModel along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeStringModel" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeStringModel.CreateResourceIdentifier" /> to create a <see cref="PageSizeStringModel" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PageSizeStringModel" /> object. </returns>

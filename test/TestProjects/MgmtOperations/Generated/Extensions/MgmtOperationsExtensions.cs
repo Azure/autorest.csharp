@@ -143,7 +143,10 @@ namespace MgmtOperations
         }
 
         #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySet along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySet" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySet.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySet" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
@@ -159,7 +162,10 @@ namespace MgmtOperations
         #endregion
 
         #region AvailabilitySetChild
-        /// <summary> Gets an object representing a AvailabilitySetChild along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetChild" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetChild.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
@@ -175,7 +181,10 @@ namespace MgmtOperations
         #endregion
 
         #region AvailabilitySetGrandChild
-        /// <summary> Gets an object representing a AvailabilitySetGrandChild along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetGrandChild" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetGrandChild.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
@@ -191,7 +200,10 @@ namespace MgmtOperations
         #endregion
 
         #region UnpatchableResource
-        /// <summary> Gets an object representing a UnpatchableResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="UnpatchableResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>

@@ -165,7 +165,10 @@ namespace MgmtSafeFlatten
         }
 
         #region TypeOne
-        /// <summary> Gets an object representing a TypeOne along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TypeOne" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeOne.CreateResourceIdentifier" /> to create a <see cref="TypeOne" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TypeOne" /> object. </returns>
@@ -181,7 +184,10 @@ namespace MgmtSafeFlatten
         #endregion
 
         #region TypeTwo
-        /// <summary> Gets an object representing a TypeTwo along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TypeTwo" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeTwo.CreateResourceIdentifier" /> to create a <see cref="TypeTwo" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TypeTwo" /> object. </returns>

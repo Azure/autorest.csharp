@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
@@ -37,9 +36,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal CarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, DiagnosticOptions);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Car.ResourceType, out string carApiVersion);
-            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
@@ -37,9 +36,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ParentResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ParentResource.ResourceType.Namespace, DiagnosticOptions);
+            _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ParentResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ParentResource.ResourceType, out string parentResourceApiVersion);
-            _parentResourceRestClient = new ParentResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
+            _parentResourceRestClient = new ParentResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

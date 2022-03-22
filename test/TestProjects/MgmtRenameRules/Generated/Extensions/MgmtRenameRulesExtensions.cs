@@ -350,7 +350,10 @@ namespace MgmtRenameRules
         }
 
         #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachine along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachine" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachine.CreateResourceIdentifier" /> to create a <see cref="VirtualMachine" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
@@ -366,7 +369,10 @@ namespace MgmtRenameRules
         #endregion
 
         #region Image
-        /// <summary> Gets an object representing a Image along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="Image" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Image.CreateResourceIdentifier" /> to create an <see cref="Image" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Image" /> object. </returns>
@@ -382,7 +388,10 @@ namespace MgmtRenameRules
         #endregion
 
         #region VirtualMachineScaleSet
-        /// <summary> Gets an object representing a VirtualMachineScaleSet along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSet" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSet.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSet" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
@@ -398,7 +407,10 @@ namespace MgmtRenameRules
         #endregion
 
         #region VirtualMachineScaleSetExtension
-        /// <summary> Gets an object representing a VirtualMachineScaleSetExtension along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetExtension" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetExtension.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtension" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtension" /> object. </returns>
@@ -414,7 +426,10 @@ namespace MgmtRenameRules
         #endregion
 
         #region VirtualMachineScaleSetRollingUpgrade
-        /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgrade" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetRollingUpgrade.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgrade" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
@@ -430,7 +445,10 @@ namespace MgmtRenameRules
         #endregion
 
         #region VirtualMachineScaleSetVm
-        /// <summary> Gets an object representing a VirtualMachineScaleSetVm along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVm" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVm.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVm" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVm" /> object. </returns>

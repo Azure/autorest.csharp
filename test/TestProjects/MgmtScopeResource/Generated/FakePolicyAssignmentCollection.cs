@@ -15,7 +15,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 
@@ -37,9 +36,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakePolicyAssignmentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignment.ResourceType.Namespace, DiagnosticOptions);
+            _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignment.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(FakePolicyAssignment.ResourceType, out string fakePolicyAssignmentApiVersion);
-            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
+            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fakePolicyAssignmentApiVersion);
         }
 
         /// <summary>

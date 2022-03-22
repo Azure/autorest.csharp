@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtLRO
@@ -37,9 +36,9 @@ namespace MgmtLRO
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeClientDiagnostics = new ClientDiagnostics("MgmtLRO", Fake.ResourceType.Namespace, DiagnosticOptions);
+            _fakeClientDiagnostics = new ClientDiagnostics("MgmtLRO", Fake.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
-            _fakeRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

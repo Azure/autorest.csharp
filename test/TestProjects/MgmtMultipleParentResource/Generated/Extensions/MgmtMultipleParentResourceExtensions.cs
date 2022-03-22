@@ -108,7 +108,10 @@ namespace MgmtMultipleParentResource
         }
 
         #region AnotherParent
-        /// <summary> Gets an object representing a AnotherParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AnotherParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParent.CreateResourceIdentifier" /> to create an <see cref="AnotherParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AnotherParent" /> object. </returns>
@@ -124,7 +127,10 @@ namespace MgmtMultipleParentResource
         #endregion
 
         #region AnotherParentChild
-        /// <summary> Gets an object representing a AnotherParentChild along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AnotherParentChild" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentChild.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AnotherParentChild" /> object. </returns>
@@ -140,7 +146,10 @@ namespace MgmtMultipleParentResource
         #endregion
 
         #region TheParentSubParentChild
-        /// <summary> Gets an object representing a TheParentSubParentChild along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TheParentSubParentChild" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentSubParentChild.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TheParentSubParentChild" /> object. </returns>
@@ -156,7 +165,10 @@ namespace MgmtMultipleParentResource
         #endregion
 
         #region TheParent
-        /// <summary> Gets an object representing a TheParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="TheParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParent.CreateResourceIdentifier" /> to create a <see cref="TheParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TheParent" /> object. </returns>
@@ -172,7 +184,10 @@ namespace MgmtMultipleParentResource
         #endregion
 
         #region SubParent
-        /// <summary> Gets an object representing a SubParent along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParent" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParent.CreateResourceIdentifier" /> to create a <see cref="SubParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubParent" /> object. </returns>

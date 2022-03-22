@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace ExactMatchFlattenInheritance
@@ -37,9 +36,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal AzureResourceFlattenModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _azureResourceFlattenModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", AzureResourceFlattenModel1.ResourceType.Namespace, DiagnosticOptions);
+            _azureResourceFlattenModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", AzureResourceFlattenModel1.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string azureResourceFlattenModel1ApiVersion);
-            _azureResourceFlattenModel1RestClient = new AzureResourceFlattenModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, azureResourceFlattenModel1ApiVersion);
+            _azureResourceFlattenModel1RestClient = new AzureResourceFlattenModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, azureResourceFlattenModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

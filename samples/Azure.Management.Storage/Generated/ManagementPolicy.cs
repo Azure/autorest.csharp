@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
@@ -51,9 +50,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ManagementPolicy(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managementPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
+            _managementPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string managementPolicyApiVersion);
-            _managementPolicyRestClient = new ManagementPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementPolicyApiVersion);
+            _managementPolicyRestClient = new ManagementPoliciesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, managementPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

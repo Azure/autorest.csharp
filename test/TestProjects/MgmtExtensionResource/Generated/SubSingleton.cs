@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace MgmtExtensionResource
 {
@@ -50,9 +49,9 @@ namespace MgmtExtensionResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubSingleton(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
+            _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
-            _subSingletonRestClient = new SubSingletonsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
+            _subSingletonRestClient = new SubSingletonsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, subSingletonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

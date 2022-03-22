@@ -66,7 +66,10 @@ namespace XmlDeserialization
         }
 
         #region XmlInstance
-        /// <summary> Gets an object representing a XmlInstance along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="XmlInstance" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="XmlInstance.CreateResourceIdentifier" /> to create a <see cref="XmlInstance" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="XmlInstance" /> object. </returns>

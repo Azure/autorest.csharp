@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtDiscriminator
@@ -37,9 +36,9 @@ namespace MgmtDiscriminator
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeliveryRuleCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", DeliveryRule.ResourceType.Namespace, DiagnosticOptions);
+            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", DeliveryRule.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(DeliveryRule.ResourceType, out string deliveryRuleApiVersion);
-            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
+            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, deliveryRuleApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

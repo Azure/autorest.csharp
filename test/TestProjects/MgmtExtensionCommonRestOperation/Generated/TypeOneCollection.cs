@@ -16,7 +16,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionCommonRestOperation
@@ -37,9 +36,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TypeOneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
+            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
-            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

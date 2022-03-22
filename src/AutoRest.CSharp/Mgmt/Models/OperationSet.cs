@@ -116,8 +116,23 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath NonHintRequestPath => _nonHintRequestPath ??= GetNonHintRequestPath();
         private RequestPath GetNonHintRequestPath()
         {
-            var operation = Operations.First();
+            var operation = FindBestOperation();
             return Models.RequestPath.FromOperation(operation, this[operation]);
+        }
+
+        private Operation FindBestOperation()
+        {
+            // first we try GET operation
+            var getOperation = FindOperation(HttpMethod.Get);
+            if (getOperation != null)
+                return getOperation;
+            // if no GET operation, we return PUT operation
+            var putOperation = FindOperation(HttpMethod.Put);
+            if (putOperation != null)
+                return putOperation;
+
+            // if no PUT or GET, we just return the first one
+            return Operations.First();
         }
 
         public Operation? FindOperation(HttpMethod method)

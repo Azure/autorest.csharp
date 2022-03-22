@@ -957,7 +957,10 @@ namespace Azure.ResourceManager.Sample
         }
 
         #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySet along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySet" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySet.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySet" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
@@ -973,7 +976,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region ProximityPlacementGroup
-        /// <summary> Gets an object representing a ProximityPlacementGroup along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ProximityPlacementGroup" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ProximityPlacementGroup.CreateResourceIdentifier" /> to create a <see cref="ProximityPlacementGroup" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ProximityPlacementGroup" /> object. </returns>
@@ -989,7 +995,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region DedicatedHostGroup
-        /// <summary> Gets an object representing a DedicatedHostGroup along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="DedicatedHostGroup" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHostGroup.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroup" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DedicatedHostGroup" /> object. </returns>
@@ -1005,7 +1014,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region DedicatedHost
-        /// <summary> Gets an object representing a DedicatedHost along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="DedicatedHost" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHost.CreateResourceIdentifier" /> to create a <see cref="DedicatedHost" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DedicatedHost" /> object. </returns>
@@ -1021,7 +1033,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region SshPublicKey
-        /// <summary> Gets an object representing a SshPublicKey along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SshPublicKey" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SshPublicKey.CreateResourceIdentifier" /> to create a <see cref="SshPublicKey" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SshPublicKey" /> object. </returns>
@@ -1037,7 +1052,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineExtensionImage
-        /// <summary> Gets an object representing a VirtualMachineExtensionImage along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineExtensionImage" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionImage.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImage" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineExtensionImage" /> object. </returns>
@@ -1053,7 +1071,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineExtension
-        /// <summary> Gets an object representing a VirtualMachineExtension along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineExtension" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtension.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtension" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineExtension" /> object. </returns>
@@ -1069,7 +1090,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSetVirtualMachineExtension
-        /// <summary> Gets an object representing a VirtualMachineScaleSetVirtualMachineExtension along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVirtualMachineExtension" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVirtualMachineExtension.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVirtualMachineExtension" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtension" /> object. </returns>
@@ -1085,7 +1109,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachine along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachine" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachine.CreateResourceIdentifier" /> to create a <see cref="VirtualMachine" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachine" /> object. </returns>
@@ -1101,7 +1128,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region Image
-        /// <summary> Gets an object representing a Image along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="Image" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Image.CreateResourceIdentifier" /> to create an <see cref="Image" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Image" /> object. </returns>
@@ -1117,7 +1147,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSet
-        /// <summary> Gets an object representing a VirtualMachineScaleSet along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSet" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSet.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSet" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSet" /> object. </returns>
@@ -1133,7 +1166,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSetExtension
-        /// <summary> Gets an object representing a VirtualMachineScaleSetExtension along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetExtension" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetExtension.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtension" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtension" /> object. </returns>
@@ -1149,7 +1185,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSetRollingUpgrade
-        /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgrade" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetRollingUpgrade.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgrade" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
@@ -1165,7 +1204,10 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSetVM
-        /// <summary> Gets an object representing a VirtualMachineScaleSetVM along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVM" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVM.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVM" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVM" /> object. </returns>

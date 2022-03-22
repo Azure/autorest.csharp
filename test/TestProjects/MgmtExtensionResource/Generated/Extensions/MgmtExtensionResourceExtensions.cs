@@ -240,7 +240,10 @@ namespace MgmtExtensionResource
         }
 
         #region SubSingleton
-        /// <summary> Gets an object representing a SubSingleton along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubSingleton" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubSingleton.CreateResourceIdentifier" /> to create a <see cref="SubSingleton" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
@@ -256,7 +259,10 @@ namespace MgmtExtensionResource
         #endregion
 
         #region SubscriptionPolicyDefinition
-        /// <summary> Gets an object representing a SubscriptionPolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SubscriptionPolicyDefinition" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubscriptionPolicyDefinition.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinition" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinition" /> object. </returns>
@@ -272,7 +278,10 @@ namespace MgmtExtensionResource
         #endregion
 
         #region BuiltInPolicyDefinition
-        /// <summary> Gets an object representing a BuiltInPolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="BuiltInPolicyDefinition" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BuiltInPolicyDefinition.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinition" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BuiltInPolicyDefinition" /> object. </returns>
@@ -288,7 +297,10 @@ namespace MgmtExtensionResource
         #endregion
 
         #region ManagementGroupPolicyDefinition
-        /// <summary> Gets an object representing a ManagementGroupPolicyDefinition along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ManagementGroupPolicyDefinition" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ManagementGroupPolicyDefinition.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinition" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinition" /> object. </returns>

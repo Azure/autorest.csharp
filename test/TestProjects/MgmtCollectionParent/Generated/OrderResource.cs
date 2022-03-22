@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace MgmtCollectionParent
 {
@@ -50,9 +49,9 @@ namespace MgmtCollectionParent
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal OrderResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, DiagnosticOptions);
+            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
-            _orderResourceRestClient = new ComputeManagementRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
+            _orderResourceRestClient = new ComputeManagementRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

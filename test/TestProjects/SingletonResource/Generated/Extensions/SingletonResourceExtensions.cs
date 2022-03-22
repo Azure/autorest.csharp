@@ -102,7 +102,10 @@ namespace SingletonResource
         }
 
         #region Car
-        /// <summary> Gets an object representing a Car along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Car" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Car.CreateResourceIdentifier" /> to create a <see cref="Car" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Car" /> object. </returns>
@@ -118,7 +121,10 @@ namespace SingletonResource
         #endregion
 
         #region Ignition
-        /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="Ignition" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Ignition.CreateResourceIdentifier" /> to create an <see cref="Ignition" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Ignition" /> object. </returns>
@@ -134,7 +140,10 @@ namespace SingletonResource
         #endregion
 
         #region SingletonResource
-        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SingletonResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SingletonResource.CreateResourceIdentifier" /> to create a <see cref="SingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
@@ -150,7 +159,10 @@ namespace SingletonResource
         #endregion
 
         #region ParentResource
-        /// <summary> Gets an object representing a ParentResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ParentResource.CreateResourceIdentifier" /> to create a <see cref="ParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>

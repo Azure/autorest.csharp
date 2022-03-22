@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtNonStringPathVariable
@@ -34,9 +33,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Bar.ResourceType.Namespace, DiagnosticOptions);
+            _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Bar.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
-            _barRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
+            _barRestClient = new BarsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

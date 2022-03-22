@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace SingletonResource
 {
@@ -50,9 +49,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Car(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string carApiVersion);
-            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
