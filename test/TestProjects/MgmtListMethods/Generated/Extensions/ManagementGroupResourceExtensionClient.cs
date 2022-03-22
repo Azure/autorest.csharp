@@ -31,28 +31,28 @@ namespace MgmtListMethods
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the MgmtGrpParentWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
         public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
         {
             return GetCachedClient(Client => new MgmtGrpParentWithNonResChWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the MgmtGrpParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
         public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
         {
             return GetCachedClient(Client => new MgmtGrpParentWithNonResChCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the MgmtGrpParentWithLocResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
         public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
         {
             return GetCachedClient(Client => new MgmtGrpParentWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of MgmtGroupParentResources in the MgmtGroupParentResource. </summary>
+        /// <summary> Gets a collection of MgmtGroupParentResources in the ManagementGroupResource. </summary>
         /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
         public virtual MgmtGroupParentCollection GetMgmtGroupParents()
         {

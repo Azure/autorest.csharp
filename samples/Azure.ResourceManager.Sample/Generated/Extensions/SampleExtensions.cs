@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the VirtualMachineExtensionImageResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
@@ -686,7 +686,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
@@ -724,7 +724,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetAvailabilitySets().Get(availabilitySetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ProximityPlacementGroupResources in the ProximityPlacementGroupResource. </summary>
+        /// <summary> Gets a collection of ProximityPlacementGroupResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ProximityPlacementGroupResources and their operations over a ProximityPlacementGroupResource. </returns>
         public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroupResource resourceGroupResource)
@@ -764,7 +764,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetProximityPlacementGroups().Get(proximityPlacementGroupName, includeColocationStatus, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroupResources in the DedicatedHostGroupResource. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
@@ -802,7 +802,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SshPublicKeyResources in the SshPublicKeyResource. </summary>
+        /// <summary> Gets a collection of SshPublicKeyResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SshPublicKeyResources and their operations over a SshPublicKeyResource. </returns>
         public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroupResource resourceGroupResource)
@@ -840,7 +840,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetSshPublicKeys().Get(sshPublicKeyName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
@@ -878,7 +878,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetVirtualMachines().Get(vmName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
+        /// <summary> Gets a collection of ImageResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
         public static ImageCollection GetImages(this ResourceGroupResource resourceGroupResource)
@@ -918,7 +918,7 @@ namespace Azure.ResourceManager.Sample
             return resourceGroupResource.GetImages().Get(imageName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)

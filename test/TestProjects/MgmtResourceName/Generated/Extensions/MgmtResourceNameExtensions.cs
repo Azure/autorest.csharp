@@ -27,7 +27,7 @@ namespace MgmtResourceName
             );
         }
 
-        /// <summary> Gets a collection of MachineResources in the MachineResource. </summary>
+        /// <summary> Gets a collection of MachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
@@ -63,7 +63,7 @@ namespace MgmtResourceName
             return resourceGroupResource.GetMachines().Get(machineName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Disks in the Disk. </summary>
+        /// <summary> Gets a collection of Disks in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
@@ -99,7 +99,7 @@ namespace MgmtResourceName
             return resourceGroupResource.GetDisks().Get(diskResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of Memories in the Memory. </summary>
+        /// <summary> Gets a collection of Memories in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
@@ -135,7 +135,7 @@ namespace MgmtResourceName
             return resourceGroupResource.GetMemories().Get(memoryResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
+        /// <summary> Gets a collection of NetworkResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
@@ -171,7 +171,7 @@ namespace MgmtResourceName
             return resourceGroupResource.GetNetworks().Get(networkResourceName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DisplayResources in the DisplayResource. </summary>
+        /// <summary> Gets a collection of DisplayResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)

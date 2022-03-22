@@ -47,14 +47,14 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
-        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResourceExtensionClient. </summary>
+        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public virtual SubSingletonResource GetSubSingleton()
         {
             return new SubSingletonResource(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Singleton/subSingletons/default"));
         }
 
-        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionPolicyDefinitionResource. </summary>
+        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public virtual SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions()
         {

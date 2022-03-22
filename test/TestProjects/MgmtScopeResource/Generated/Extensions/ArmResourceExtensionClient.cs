@@ -31,7 +31,7 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignmentResources in the FakePolicyAssignmentResource. </summary>
+        /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public virtual FakePolicyAssignmentCollection GetFakePolicyAssignments()
         {

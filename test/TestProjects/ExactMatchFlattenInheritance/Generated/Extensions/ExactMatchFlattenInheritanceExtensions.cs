@@ -28,7 +28,7 @@ namespace ExactMatchFlattenInheritance
             );
         }
 
-        /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the AzureResourceFlattenModel1Resource. </summary>
+        /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
         public static AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s(this ResourceGroupResource resourceGroupResource)
@@ -66,7 +66,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroupResource.GetAzureResourceFlattenModel1s().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel2Resources in the CustomModel2Resource. </summary>
+        /// <summary> Gets a collection of CustomModel2Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
         public static CustomModel2Collection GetCustomModel2s(this ResourceGroupResource resourceGroupResource)
@@ -104,7 +104,7 @@ namespace ExactMatchFlattenInheritance
             return resourceGroupResource.GetCustomModel2s().Get(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of CustomModel3Resources in the CustomModel3Resource. </summary>
+        /// <summary> Gets a collection of CustomModel3Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroupResource resourceGroupResource)

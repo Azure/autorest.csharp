@@ -27,7 +27,7 @@ namespace TenantOnly
             );
         }
 
-        /// <summary> Gets a collection of BillingAccountResources in the BillingAccountResource. </summary>
+        /// <summary> Gets a collection of BillingAccountResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
         public static BillingAccountCollection GetBillingAccounts(this TenantResource tenantResource)

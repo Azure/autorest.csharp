@@ -28,7 +28,7 @@ namespace SupersetInheritance
             );
         }
 
-        /// <summary> Gets a collection of SupersetModel1Resources in the SupersetModel1Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroupResource resourceGroupResource)
@@ -64,7 +64,7 @@ namespace SupersetInheritance
             return resourceGroupResource.GetSupersetModel1s().Get(supersetModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel4Resources in the SupersetModel4Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel4Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroupResource resourceGroupResource)
@@ -100,7 +100,7 @@ namespace SupersetInheritance
             return resourceGroupResource.GetSupersetModel4s().Get(supersetModel4SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel6Resources in the SupersetModel6Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel6Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroupResource resourceGroupResource)
@@ -136,7 +136,7 @@ namespace SupersetInheritance
             return resourceGroupResource.GetSupersetModel6s().Get(supersetModel6SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SupersetModel7Resources in the SupersetModel7Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel7Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroupResource resourceGroupResource)

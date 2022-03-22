@@ -27,7 +27,7 @@ namespace SingletonResource
             );
         }
 
-        /// <summary> Gets a collection of CarResources in the CarResource. </summary>
+        /// <summary> Gets a collection of CarResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
@@ -63,7 +63,7 @@ namespace SingletonResource
             return resourceGroupResource.GetCars().Get(carName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
+        /// <summary> Gets a collection of ParentResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)

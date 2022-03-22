@@ -82,7 +82,7 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of TenantParentWithNonResChWithLocResources in the TenantParentWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of TenantParentWithNonResChWithLocResources in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocResources and their operations over a TenantParentWithNonResChWithLocResource. </returns>
         public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
@@ -117,7 +117,7 @@ namespace MgmtListMethods
             return GetTenantParentWithNonResChWithLocs().Get(tenantParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TenantParentWithNonResChResources in the TenantParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of TenantParentWithNonResChResources in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChResources and their operations over a TenantParentWithNonResChResource. </returns>
         public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
@@ -152,7 +152,7 @@ namespace MgmtListMethods
             return GetTenantParentWithNonResChes().Get(tenantParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TenantParentWithLocResources in the TenantParentWithLocResource. </summary>
+        /// <summary> Gets a collection of TenantParentWithLocResources in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentWithLocResources and their operations over a TenantParentWithLocResource. </returns>
         public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
@@ -187,7 +187,7 @@ namespace MgmtListMethods
             return GetTenantParentWithLocs().Get(tenantParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TenantParentResources in the TenantParentResource. </summary>
+        /// <summary> Gets a collection of TenantParentResources in the TenantTest. </summary>
         /// <returns> An object representing collection of TenantParentResources and their operations over a TenantParentResource. </returns>
         public virtual TenantParentCollection GetTenantParents()
         {

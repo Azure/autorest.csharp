@@ -27,7 +27,7 @@ namespace NoTypeReplacement
             );
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the NoTypeReplacementModel1Resource. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
@@ -63,7 +63,7 @@ namespace NoTypeReplacement
             return resourceGroupResource.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the NoTypeReplacementModel2Resource. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
@@ -99,7 +99,7 @@ namespace NoTypeReplacement
             return resourceGroupResource.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the NoTypeReplacementModel3Resource. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)

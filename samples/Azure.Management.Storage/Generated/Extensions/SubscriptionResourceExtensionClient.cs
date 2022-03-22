@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeletedAccountResources in the DeletedAccountResource. </summary>
+        /// <summary> Gets a collection of DeletedAccountResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of DeletedAccountResources and their operations over a DeletedAccountResource. </returns>
         public virtual DeletedAccountCollection GetDeletedAccounts()
         {

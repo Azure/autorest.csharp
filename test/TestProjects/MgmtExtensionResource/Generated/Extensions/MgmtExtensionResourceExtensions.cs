@@ -29,7 +29,7 @@ namespace MgmtExtensionResource
             );
         }
 
-        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the BuiltInPolicyDefinitionResource. </summary>
+        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
@@ -76,7 +76,7 @@ namespace MgmtExtensionResource
             );
         }
 
-        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResourceExtensions. </summary>
+        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
@@ -84,7 +84,7 @@ namespace MgmtExtensionResource
             return GetExtensionClient(subscriptionResource).GetSubSingleton();
         }
 
-        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionPolicyDefinitionResource. </summary>
+        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this SubscriptionResource subscriptionResource)
@@ -201,7 +201,7 @@ namespace MgmtExtensionResource
             );
         }
 
-        /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupPolicyDefinitionResource. </summary>
+        /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroupResource managementGroupResource)

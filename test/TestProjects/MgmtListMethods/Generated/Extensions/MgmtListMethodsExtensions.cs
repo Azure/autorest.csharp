@@ -29,7 +29,7 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of TenantTestResources in the TenantTestResource. </summary>
+        /// <summary> Gets a collection of TenantTestResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
         public static TenantTestCollection GetTenantTests(this TenantResource tenantResource)
@@ -78,7 +78,7 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
+        /// <summary> Gets a collection of FakeResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this SubscriptionResource subscriptionResource)
@@ -118,7 +118,7 @@ namespace MgmtListMethods
             return subscriptionResource.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubParentWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this SubscriptionResource subscriptionResource)
@@ -156,7 +156,7 @@ namespace MgmtListMethods
             return subscriptionResource.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this SubscriptionResource subscriptionResource)
@@ -194,7 +194,7 @@ namespace MgmtListMethods
             return subscriptionResource.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithLocResources in the SubParentWithLocResource. </summary>
+        /// <summary> Gets a collection of SubParentWithLocResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public static SubParentWithLocCollection GetSubParentWithLocs(this SubscriptionResource subscriptionResource)
@@ -232,7 +232,7 @@ namespace MgmtListMethods
             return subscriptionResource.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentResources in the SubParentResource. </summary>
+        /// <summary> Gets a collection of SubParentResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public static SubParentCollection GetSubParents(this SubscriptionResource subscriptionResource)
@@ -639,7 +639,7 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResGrpParentWithAncestorWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
@@ -677,7 +677,7 @@ namespace MgmtListMethods
             return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResGrpParentWithAncestorWithNonResChResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
@@ -715,7 +715,7 @@ namespace MgmtListMethods
             return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResGrpParentWithAncestorWithLocResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
@@ -753,7 +753,7 @@ namespace MgmtListMethods
             return resourceGroupResource.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResGrpParentWithAncestorResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
@@ -791,7 +791,7 @@ namespace MgmtListMethods
             return resourceGroupResource.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResGrpParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
@@ -829,7 +829,7 @@ namespace MgmtListMethods
             return resourceGroupResource.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentResources in the ResGrpParentResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
@@ -876,7 +876,7 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the MgmtGrpParentWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
         public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroupResource managementGroupResource)
@@ -914,7 +914,7 @@ namespace MgmtListMethods
             return managementGroupResource.GetMgmtGrpParentWithNonResChWithLocs().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the MgmtGrpParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
         public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroupResource managementGroupResource)
@@ -952,7 +952,7 @@ namespace MgmtListMethods
             return managementGroupResource.GetMgmtGrpParentWithNonResChes().Get(mgmtGrpParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the MgmtGrpParentWithLocResource. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
         public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroupResource managementGroupResource)
@@ -990,7 +990,7 @@ namespace MgmtListMethods
             return managementGroupResource.GetMgmtGrpParentWithLocs().Get(mgmtGrpParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGroupParentResources in the MgmtGroupParentResource. </summary>
+        /// <summary> Gets a collection of MgmtGroupParentResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
         public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroupResource managementGroupResource)

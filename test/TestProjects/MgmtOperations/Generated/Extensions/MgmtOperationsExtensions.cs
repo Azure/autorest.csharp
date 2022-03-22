@@ -28,7 +28,7 @@ namespace MgmtOperations
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
@@ -68,7 +68,7 @@ namespace MgmtOperations
             return resourceGroupResource.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <summary> Gets a collection of UnpatchableResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)

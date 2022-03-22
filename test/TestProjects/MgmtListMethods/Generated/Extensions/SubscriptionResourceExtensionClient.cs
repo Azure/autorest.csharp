@@ -76,35 +76,35 @@ namespace MgmtListMethods
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
+        /// <summary> Gets a collection of FakeResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public virtual FakeCollection GetFakes()
         {
             return GetCachedClient(Client => new FakeCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubParentWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public virtual SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs()
         {
             return GetCachedClient(Client => new SubParentWithNonResChWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public virtual SubParentWithNonResChCollection GetSubParentWithNonResChes()
         {
             return GetCachedClient(Client => new SubParentWithNonResChCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SubParentWithLocResources in the SubParentWithLocResource. </summary>
+        /// <summary> Gets a collection of SubParentWithLocResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public virtual SubParentWithLocCollection GetSubParentWithLocs()
         {
             return GetCachedClient(Client => new SubParentWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SubParentResources in the SubParentResource. </summary>
+        /// <summary> Gets a collection of SubParentResources in the SubscriptionResource. </summary>
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public virtual SubParentCollection GetSubParents()
         {

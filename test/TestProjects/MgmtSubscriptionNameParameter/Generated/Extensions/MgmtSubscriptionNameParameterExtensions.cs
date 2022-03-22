@@ -27,7 +27,7 @@ namespace MgmtSubscriptionNameParameter
             );
         }
 
-        /// <summary> Gets a collection of SBSubscriptionResources in the SBSubscriptionResource. </summary>
+        /// <summary> Gets a collection of SBSubscriptionResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroupResource resourceGroupResource)

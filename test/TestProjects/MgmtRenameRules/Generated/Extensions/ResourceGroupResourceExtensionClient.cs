@@ -31,21 +31,21 @@ namespace MgmtRenameRules
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public virtual VirtualMachineCollection GetVirtualMachines()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
+        /// <summary> Gets a collection of ImageResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
         public virtual ImageCollection GetImages()
         {
             return GetCachedClient(Client => new ImageCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {

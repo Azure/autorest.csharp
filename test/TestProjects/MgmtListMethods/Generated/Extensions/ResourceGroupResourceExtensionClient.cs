@@ -31,42 +31,42 @@ namespace MgmtListMethods
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResGrpParentWithAncestorWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs()
         {
             return GetCachedClient(Client => new ResGrpParentWithAncestorWithNonResChWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResGrpParentWithAncestorWithNonResChResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes()
         {
             return GetCachedClient(Client => new ResGrpParentWithAncestorWithNonResChCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResGrpParentWithAncestorWithLocResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public virtual ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs()
         {
             return GetCachedClient(Client => new ResGrpParentWithAncestorWithLocCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResGrpParentWithAncestorResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public virtual ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors()
         {
             return GetCachedClient(Client => new ResGrpParentWithAncestorCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResGrpParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public virtual ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes()
         {
             return GetCachedClient(Client => new ResGrpParentWithNonResChCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ResGrpParentResources in the ResGrpParentResource. </summary>
+        /// <summary> Gets a collection of ResGrpParentResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public virtual ResGrpParentCollection GetResGrpParents()
         {

@@ -81,7 +81,7 @@ namespace SingletonResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets an object representing a IgnitionResource along with the instance operations that can be performed on it in the CarResource. </summary>
+        /// <summary> Gets an object representing a IgnitionResource along with the instance operations that can be performed on it in the Car. </summary>
         /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
         public virtual IgnitionResource GetIgnition()
         {

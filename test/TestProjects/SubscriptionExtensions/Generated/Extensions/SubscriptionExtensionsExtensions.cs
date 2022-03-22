@@ -27,7 +27,7 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Gets a collection of ToasterResources in the ToasterResource. </summary>
+        /// <summary> Gets a collection of ToasterResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
         public static ToasterCollection GetToasters(this SubscriptionResource subscriptionResource)
@@ -72,7 +72,7 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Gets a collection of OvenResources in the OvenResource. </summary>
+        /// <summary> Gets a collection of OvenResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
         public static OvenCollection GetOvens(this ResourceGroupResource resourceGroupResource)

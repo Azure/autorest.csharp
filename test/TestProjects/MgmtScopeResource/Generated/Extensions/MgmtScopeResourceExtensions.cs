@@ -29,7 +29,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
@@ -67,7 +67,7 @@ namespace MgmtScopeResource
             return tenantResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResourceLinkResources in the ResourceLinkResource. </summary>
+        /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
@@ -148,7 +148,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
@@ -223,7 +223,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
@@ -270,7 +270,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
@@ -317,7 +317,7 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignmentResources in the FakePolicyAssignmentResource. </summary>
+        /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)

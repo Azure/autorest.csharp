@@ -31,7 +31,7 @@ namespace MgmtCollectionParent
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of OrderResources in the OrderResource. </summary>
+        /// <summary> Gets a collection of OrderResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public virtual OrderResourceCollection GetOrderResources()
         {

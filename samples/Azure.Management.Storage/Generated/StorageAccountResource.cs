@@ -87,28 +87,28 @@ namespace Azure.Management.Storage
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets an object representing a BlobServiceResource along with the instance operations that can be performed on it in the StorageAccountResource. </summary>
+        /// <summary> Gets an object representing a BlobServiceResource along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="BlobServiceResource" /> object. </returns>
         public virtual BlobServiceResource GetBlobService()
         {
             return new BlobServiceResource(Client, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
         }
 
-        /// <summary> Gets an object representing a FileServiceResource along with the instance operations that can be performed on it in the StorageAccountResource. </summary>
+        /// <summary> Gets an object representing a FileServiceResource along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileServiceResource" /> object. </returns>
         public virtual FileServiceResource GetFileService()
         {
             return new FileServiceResource(Client, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
         }
 
-        /// <summary> Gets an object representing a ManagementPolicyResource along with the instance operations that can be performed on it in the StorageAccountResource. </summary>
+        /// <summary> Gets an object representing a ManagementPolicyResource along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="ManagementPolicyResource" /> object. </returns>
         public virtual ManagementPolicyResource GetManagementPolicy()
         {
             return new ManagementPolicyResource(Client, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
         }
 
-        /// <summary> Gets a collection of BlobInventoryPolicyResources in the BlobInventoryPolicyResource. </summary>
+        /// <summary> Gets a collection of BlobInventoryPolicyResources in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobInventoryPolicyResources and their operations over a BlobInventoryPolicyResource. </returns>
         public virtual BlobInventoryPolicyCollection GetBlobInventoryPolicies()
         {
@@ -139,7 +139,7 @@ namespace Azure.Management.Storage
             return GetBlobInventoryPolicies().Get(blobInventoryPolicyName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of PrivateEndpointConnectionResources in the PrivateEndpointConnectionResource. </summary>
+        /// <summary> Gets a collection of PrivateEndpointConnectionResources in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnectionResources and their operations over a PrivateEndpointConnectionResource. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
@@ -174,7 +174,7 @@ namespace Azure.Management.Storage
             return GetPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ObjectReplicationPolicyResources in the ObjectReplicationPolicyResource. </summary>
+        /// <summary> Gets a collection of ObjectReplicationPolicyResources in the StorageAccount. </summary>
         /// <returns> An object representing collection of ObjectReplicationPolicyResources and their operations over a ObjectReplicationPolicyResource. </returns>
         public virtual ObjectReplicationPolicyCollection GetObjectReplicationPolicies()
         {
@@ -209,7 +209,7 @@ namespace Azure.Management.Storage
             return GetObjectReplicationPolicies().Get(objectReplicationPolicyId, cancellationToken);
         }
 
-        /// <summary> Gets a collection of EncryptionScopeResources in the EncryptionScopeResource. </summary>
+        /// <summary> Gets a collection of EncryptionScopeResources in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopeResources and their operations over a EncryptionScopeResource. </returns>
         public virtual EncryptionScopeCollection GetEncryptionScopes()
         {

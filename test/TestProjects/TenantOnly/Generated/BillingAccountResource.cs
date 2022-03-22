@@ -82,7 +82,7 @@ namespace TenantOnly
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of AgreementResources in the AgreementResource. </summary>
+        /// <summary> Gets a collection of AgreementResources in the BillingAccount. </summary>
         /// <returns> An object representing collection of AgreementResources and their operations over a AgreementResource. </returns>
         public virtual AgreementCollection GetAgreements()
         {

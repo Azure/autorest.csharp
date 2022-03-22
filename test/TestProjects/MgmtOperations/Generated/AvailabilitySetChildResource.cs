@@ -82,7 +82,7 @@ namespace MgmtOperations
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of AvailabilitySetGrandChildResources in the AvailabilitySetGrandChildResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetGrandChildResources in the AvailabilitySetChild. </summary>
         /// <returns> An object representing collection of AvailabilitySetGrandChildResources and their operations over a AvailabilitySetGrandChildResource. </returns>
         public virtual AvailabilitySetGrandChildCollection GetAvailabilitySetGrandChildren()
         {

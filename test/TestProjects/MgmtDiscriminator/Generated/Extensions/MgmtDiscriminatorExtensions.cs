@@ -27,7 +27,7 @@ namespace MgmtDiscriminator
             );
         }
 
-        /// <summary> Gets a collection of DeliveryRuleResources in the DeliveryRuleResource. </summary>
+        /// <summary> Gets a collection of DeliveryRuleResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)

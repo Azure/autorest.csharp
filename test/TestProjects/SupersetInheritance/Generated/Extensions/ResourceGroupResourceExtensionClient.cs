@@ -47,28 +47,28 @@ namespace SupersetInheritance
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SupersetModel1Resources in the SupersetModel1Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel1Resources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public virtual SupersetModel1Collection GetSupersetModel1s()
         {
             return GetCachedClient(Client => new SupersetModel1Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SupersetModel4Resources in the SupersetModel4Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel4Resources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public virtual SupersetModel4Collection GetSupersetModel4s()
         {
             return GetCachedClient(Client => new SupersetModel4Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SupersetModel6Resources in the SupersetModel6Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel6Resources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public virtual SupersetModel6Collection GetSupersetModel6s()
         {
             return GetCachedClient(Client => new SupersetModel6Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SupersetModel7Resources in the SupersetModel7Resource. </summary>
+        /// <summary> Gets a collection of SupersetModel7Resources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public virtual SupersetModel7Collection GetSupersetModel7s()
         {

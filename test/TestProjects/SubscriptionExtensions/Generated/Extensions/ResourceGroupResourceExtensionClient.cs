@@ -31,7 +31,7 @@ namespace SubscriptionExtensions
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of OvenResources in the OvenResource. </summary>
+        /// <summary> Gets a collection of OvenResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
         public virtual OvenCollection GetOvens()
         {

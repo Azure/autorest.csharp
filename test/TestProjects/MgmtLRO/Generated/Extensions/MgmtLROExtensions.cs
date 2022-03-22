@@ -27,7 +27,7 @@ namespace MgmtLRO
             );
         }
 
-        /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
+        /// <summary> Gets a collection of FakeResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
@@ -67,7 +67,7 @@ namespace MgmtLRO
             return resourceGroupResource.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of BarResources in the BarResource. </summary>
+        /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)

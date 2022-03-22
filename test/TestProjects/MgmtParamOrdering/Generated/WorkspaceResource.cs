@@ -82,7 +82,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of EnvironmentContainerResources in the EnvironmentContainerResource. </summary>
+        /// <summary> Gets a collection of EnvironmentContainerResources in the Workspace. </summary>
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a EnvironmentContainerResource. </returns>
         public virtual EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {

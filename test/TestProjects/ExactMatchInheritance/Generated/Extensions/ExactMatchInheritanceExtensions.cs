@@ -28,7 +28,7 @@ namespace ExactMatchInheritance
             );
         }
 
-        /// <summary> Gets a collection of ExactMatchModel1Resources in the ExactMatchModel1Resource. </summary>
+        /// <summary> Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel1Resources and their operations over a ExactMatchModel1Resource. </returns>
         public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroupResource resourceGroupResource)
@@ -64,7 +64,7 @@ namespace ExactMatchInheritance
             return resourceGroupResource.GetExactMatchModel1s().Get(exactMatchModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ExactMatchModel5Resources in the ExactMatchModel5Resource. </summary>
+        /// <summary> Gets a collection of ExactMatchModel5Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ExactMatchModel5Resources and their operations over a ExactMatchModel5Resource. </returns>
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroupResource resourceGroupResource)

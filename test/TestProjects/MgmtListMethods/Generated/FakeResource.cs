@@ -82,7 +82,7 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocResources in the FakeParentWithAncestorWithNonResChWithLocResource. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChWithLocResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocResources and their operations over a FakeParentWithAncestorWithNonResChWithLocResource. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
@@ -117,7 +117,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithNonResChWithLocs().Get(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChResources in the FakeParentWithAncestorWithNonResChResource. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChResources and their operations over a FakeParentWithAncestorWithNonResChResource. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
@@ -152,7 +152,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithNonResChes().Get(fakeParentWithAncestorWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorWithLocResources in the FakeParentWithAncestorWithLocResource. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorWithLocResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocResources and their operations over a FakeParentWithAncestorWithLocResource. </returns>
         public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
@@ -187,7 +187,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestorWithLocs().Get(fakeParentWithAncestorWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithAncestorResources in the FakeParentWithAncestorResource. </summary>
+        /// <summary> Gets a collection of FakeParentWithAncestorResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorResources and their operations over a FakeParentWithAncestorResource. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
@@ -222,7 +222,7 @@ namespace MgmtListMethods
             return GetFakeParentWithAncestors().Get(fakeParentWithAncestorName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentWithNonResChResources in the FakeParentWithNonResChResource. </summary>
+        /// <summary> Gets a collection of FakeParentWithNonResChResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentWithNonResChResources and their operations over a FakeParentWithNonResChResource. </returns>
         public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
@@ -257,7 +257,7 @@ namespace MgmtListMethods
             return GetFakeParentWithNonResChes().Get(fakeParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FakeParentResources in the FakeParentResource. </summary>
+        /// <summary> Gets a collection of FakeParentResources in the Fake. </summary>
         /// <returns> An object representing collection of FakeParentResources and their operations over a FakeParentResource. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {

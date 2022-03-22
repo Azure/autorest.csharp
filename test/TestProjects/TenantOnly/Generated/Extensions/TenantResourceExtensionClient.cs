@@ -31,7 +31,7 @@ namespace TenantOnly
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of BillingAccountResources in the BillingAccountResource. </summary>
+        /// <summary> Gets a collection of BillingAccountResources in the TenantResource. </summary>
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
         public virtual BillingAccountCollection GetBillingAccounts()
         {

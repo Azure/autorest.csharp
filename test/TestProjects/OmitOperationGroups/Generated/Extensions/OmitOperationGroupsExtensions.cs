@@ -28,7 +28,7 @@ namespace OmitOperationGroups
             );
         }
 
-        /// <summary> Gets a collection of Model2Resources in the Model2Resource. </summary>
+        /// <summary> Gets a collection of Model2Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public static Model2Collection GetModel2s(this ResourceGroupResource resourceGroupResource)

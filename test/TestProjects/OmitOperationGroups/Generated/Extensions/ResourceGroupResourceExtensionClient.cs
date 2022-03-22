@@ -43,7 +43,7 @@ namespace OmitOperationGroups
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Model2Resources in the Model2Resource. </summary>
+        /// <summary> Gets a collection of Model2Resources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public virtual Model2Collection GetModel2s()
         {

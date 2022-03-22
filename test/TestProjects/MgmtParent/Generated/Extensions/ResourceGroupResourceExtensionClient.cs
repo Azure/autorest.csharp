@@ -31,14 +31,14 @@ namespace MgmtParent
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroupResources in the DedicatedHostGroupResource. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {

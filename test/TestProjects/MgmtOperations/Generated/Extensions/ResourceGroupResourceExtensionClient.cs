@@ -43,14 +43,14 @@ namespace MgmtOperations
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <summary> Gets a collection of UnpatchableResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public virtual UnpatchableResourceCollection GetUnpatchableResources()
         {

@@ -27,7 +27,7 @@ namespace ResourceRename
             );
         }
 
-        /// <summary> Gets a collection of SshPublicKeyInfoResources in the SshPublicKeyInfoResource. </summary>
+        /// <summary> Gets a collection of SshPublicKeyInfoResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SshPublicKeyInfoResources and their operations over a SshPublicKeyInfoResource. </returns>
         public static SshPublicKeyInfoCollection GetSshPublicKeyInfos(this ResourceGroupResource resourceGroupResource)

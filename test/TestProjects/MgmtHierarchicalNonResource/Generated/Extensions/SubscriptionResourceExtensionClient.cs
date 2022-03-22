@@ -31,7 +31,7 @@ namespace MgmtHierarchicalNonResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SharedGalleryResources in the SharedGalleryResource. </summary>
+        /// <summary> Gets a collection of SharedGalleryResources in the SubscriptionResource. </summary>
         /// <param name="location"> Resource location. </param>
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public virtual SharedGalleryCollection GetSharedGalleries(string location)

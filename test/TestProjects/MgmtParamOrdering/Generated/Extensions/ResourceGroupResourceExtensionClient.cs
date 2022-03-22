@@ -31,28 +31,28 @@ namespace MgmtParamOrdering
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroupResources in the DedicatedHostGroupResource. </summary>
+        /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
             return GetCachedClient(Client => new DedicatedHostGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of WorkspaceResources in the WorkspaceResource. </summary>
+        /// <summary> Gets a collection of WorkspaceResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
         public virtual WorkspaceCollection GetWorkspaces()
         {
             return GetCachedClient(Client => new WorkspaceCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
+        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
         {
