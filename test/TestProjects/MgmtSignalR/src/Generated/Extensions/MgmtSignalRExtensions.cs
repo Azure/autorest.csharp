@@ -135,7 +135,7 @@ namespace MgmtSignalR
             );
         }
 
-        /// <summary> Gets a collection of SignalRResources in the SignalRResource. </summary>
+        /// <summary> Gets a collection of SignalRResources in the ResourceGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SignalRResources and their operations over a SignalRResource. </returns>
         public static SignalRResourceCollection GetSignalRResources(this ResourceGroup resourceGroup)
@@ -174,7 +174,10 @@ namespace MgmtSignalR
         }
 
         #region SignalRResource
-        /// <summary> Gets an object representing a SignalRResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SignalRResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SignalRResource.CreateResourceIdentifier" /> to create a <see cref="SignalRResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SignalRResource" /> object. </returns>
@@ -190,7 +193,10 @@ namespace MgmtSignalR
         #endregion
 
         #region PrivateEndpointConnection
-        /// <summary> Gets an object representing a PrivateEndpointConnection along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="PrivateEndpointConnection" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PrivateEndpointConnection.CreateResourceIdentifier" /> to create a <see cref="PrivateEndpointConnection" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
