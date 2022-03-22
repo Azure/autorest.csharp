@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtLRO
 {
-    internal class FakeOperationSource : IOperationSource<Fake>
+    internal class FakeOperationSource : IOperationSource<FakeResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtLRO
             _client = client;
         }
 
-        Fake IOperationSource<Fake>.CreateResult(Response response, CancellationToken cancellationToken)
+        FakeResource IOperationSource<FakeResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new Fake(_client, data);
+            return new FakeResource(_client, data);
         }
 
-        async ValueTask<Fake> IOperationSource<Fake>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<FakeResource> IOperationSource<FakeResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new Fake(_client, data);
+            return new FakeResource(_client, data);
         }
     }
 }

@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     extraParamNames.Add($"default");
                 }
             }
-            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
+            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.ResourceName.ResourceNameToPlural()}", extraParamNames)};");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
@@ -191,21 +191,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var segments = requestPath.Split('/');
                 if (tp is MgmtExtensions extension)
                 {
-                    if (extension.ArmCoreType == typeof(ResourceGroup))
+                    if (extension.ArmCoreType == typeof(ResourceGroupResource))
                     {
                         if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
                         {
                             return tp;
                         }
                     }
-                    if (extension.ArmCoreType == typeof(Subscription))
+                    if (extension.ArmCoreType == typeof(SubscriptionResource))
                     {
                         if (segments.Length > 3 && segments[1].ToLower() == "subscriptions")
                         {
                             return tp;
                         }
                     }
-                    if (extension.ArmCoreType == typeof(Tenant))
+                    if (extension.ArmCoreType == typeof(TenantResource))
                     {
                         return tp;
                     }

@@ -8,6 +8,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class StringExtensions
     {
+        private const string ResourceSuffix = "Resource";
         private static HashSet<char> _vowels = new HashSet<char>(new char[] { 'a', 'e', 'i', 'o', 'u' });
 
         /// <summary>
@@ -22,6 +23,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return pluralResourceName != singularResourceName ?
                 pluralResourceName :
                 $"All{pluralResourceName}";
+        }
+
+        /// <summary>
+        /// Add `Resource` suffix to a resource name if that resource doesn't end with `Resource`.
+        /// </summary>
+        /// <param name="resourceName"></param>
+        /// <returns></returns>
+        public static string AddResourceSuffixToResourceName(this string resourceName)
+        {
+            return resourceName.EndsWith(ResourceSuffix) ? resourceName : resourceName + ResourceSuffix;
         }
 
         public static bool StartsWithVowel(this string resourceName)

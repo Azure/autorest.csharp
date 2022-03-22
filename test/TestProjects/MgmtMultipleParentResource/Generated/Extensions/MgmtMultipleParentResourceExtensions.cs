@@ -18,21 +18,21 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of AnotherParents in the ResourceGroup. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
-        public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of AnotherParentResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
+        public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetAnotherParents();
+            return GetExtensionClient(resourceGroupResource).GetAnotherParents();
         }
 
         /// <summary>
@@ -40,15 +40,15 @@ namespace MgmtMultipleParentResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// Operation Id: AnotherParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public static async Task<Response<AnotherParent>> GetAnotherParentAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AnotherParentResource>> GetAnotherParentAsync(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,39 +56,23 @@ namespace MgmtMultipleParentResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// Operation Id: AnotherParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public static Response<AnotherParent> GetAnotherParent(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<AnotherParentResource> GetAnotherParent(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetAnotherParents().Get(anotherName, expand, cancellationToken);
+            return resourceGroupResource.GetAnotherParents().Get(anotherName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TheParents in the ResourceGroup. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
-        public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of TheParentResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
+        public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetTheParents();
-        }
-
-        /// <summary>
-        /// The operation to get the VMSS VM run command.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
-        /// Operation Id: TheParents_Get
-        /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="theParentName"> The name of the VM scale set. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
-        public static async Task<Response<TheParent>> GetTheParentAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(resourceGroupResource).GetTheParents();
         }
 
         /// <summary>
@@ -96,107 +80,123 @@ namespace MgmtMultipleParentResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
         /// Operation Id: TheParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
-        public static Response<TheParent> GetTheParent(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TheParentResource>> GetTheParentAsync(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetTheParents().Get(theParentName, expand, cancellationToken);
+            return await resourceGroupResource.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }
 
-        #region AnotherParent
         /// <summary>
-        /// Gets an object representing an <see cref="AnotherParent" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParent.CreateResourceIdentifier" /> to create an <see cref="AnotherParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
+        /// Operation Id: TheParents_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
+        public static Response<TheParentResource> GetTheParent(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetTheParents().Get(theParentName, expand, cancellationToken);
+        }
+
+        #region AnotherParentResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParent" /> object. </returns>
-        public static AnotherParent GetAnotherParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
+        public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AnotherParent.ValidateResourceId(id);
-                return new AnotherParent(client, id);
+                AnotherParentResource.ValidateResourceId(id);
+                return new AnotherParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region AnotherParentChild
+        #region AnotherParentChildResource
         /// <summary>
-        /// Gets an object representing an <see cref="AnotherParentChild" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParentChild.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="AnotherParentChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentChild" /> object. </returns>
-        public static AnotherParentChild GetAnotherParentChild(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
+        public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AnotherParentChild.ValidateResourceId(id);
-                return new AnotherParentChild(client, id);
+                AnotherParentChildResource.ValidateResourceId(id);
+                return new AnotherParentChildResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TheParentSubParentChild
+        #region TheParentSubParentChildResource
         /// <summary>
-        /// Gets an object representing a <see cref="TheParentSubParentChild" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParentSubParentChild.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChild" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TheParentSubParentChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParentSubParentChild" /> object. </returns>
-        public static TheParentSubParentChild GetTheParentSubParentChild(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
+        public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TheParentSubParentChild.ValidateResourceId(id);
-                return new TheParentSubParentChild(client, id);
+                TheParentSubParentChildResource.ValidateResourceId(id);
+                return new TheParentSubParentChildResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TheParent
+        #region TheParentResource
         /// <summary>
-        /// Gets an object representing a <see cref="TheParent" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParent.CreateResourceIdentifier" /> to create a <see cref="TheParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TheParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParent" /> object. </returns>
-        public static TheParent GetTheParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
+        public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TheParent.ValidateResourceId(id);
-                return new TheParent(client, id);
+                TheParentResource.ValidateResourceId(id);
+                return new TheParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParent
+        #region SubParentResource
         /// <summary>
-        /// Gets an object representing a <see cref="SubParent" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParent.CreateResourceIdentifier" /> to create a <see cref="SubParent" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParent" /> object. </returns>
-        public static SubParent GetSubParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                SubParent.ValidateResourceId(id);
-                return new SubParent(client, id);
+                SubParentResource.ValidateResourceId(id);
+                return new SubParentResource(client, id);
             }
             );
         }

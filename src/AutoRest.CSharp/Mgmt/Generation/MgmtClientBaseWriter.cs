@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
-                $"Get{resource.Type.Name}",
+                $"Get{resource.ResourceName}",
                 $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resource.Type,
@@ -285,8 +285,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
             {
-                // name after `Get{ResourceType}`
-                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.Type.Name}",
+                // name after `Get{ResourceName}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
         {
-            return $"Get{resourceCollection.Resource.Type.Name.ResourceNameToPlural()}";
+            return $"Get{resourceCollection.Resource.ResourceName.ResourceNameToPlural()}";
         }
 
         protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
@@ -465,13 +465,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
-                return $"{typeof(ResourceGroup)}.ResourceType";
+                return $"{typeof(ResourceGroupResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Subscription)
-                return $"{typeof(Subscription)}.ResourceType";
+                return $"{typeof(SubscriptionResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Tenant)
-                return $"{typeof(Tenant)}.ResourceType";
+                return $"{typeof(TenantResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.ManagementGroup)
-                return $"{typeof(ManagementGroup)}.ResourceType";
+                return $"{typeof(ManagementGroupResource)}.ResourceType";
 
             if (!resourceType.IsConstant)
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");

@@ -31,8 +31,8 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignments in the ArmResource. </summary>
-        /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
+        /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
+        /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public virtual FakePolicyAssignmentCollection GetFakePolicyAssignments()
         {
             return GetCachedClient(Client => new FakePolicyAssignmentCollection(Client, Id));

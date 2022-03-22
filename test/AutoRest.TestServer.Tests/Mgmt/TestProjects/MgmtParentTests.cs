@@ -15,10 +15,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };
 
-        [TestCase("AvailabilitySet", true)]
-        [TestCase("DedicatedHostGroup", true)]
-        [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", true)]
+        [TestCase("AvailabilitySetResource", true)]
+        [TestCase("DedicatedHostGroupResource", true)]
+        [TestCase("DedicatedHostResource", true)]
+        [TestCase("VirtualMachineExtensionImageResource", true)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
