@@ -26,11 +26,11 @@ This class represents the operations you can perform on a collection of resource
 | Contains | Exists(string name) |
 | TryGet | GetIfExists(string name) |
 
-The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [list exception](List-exception) section for details.
+The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [list exception](#list-exception) section for details.
 
 The parent resource of this resource will carry all the methods to get its child resources by returning its corresponding collection. For instance, on the resource of `VirtualNetworkResource`, you will find a method `GetSubnets` which returns a `SubnetCollection` to represent a collection of `SubnetResource`:
 ```csharp
-public partial class VirtualNetworkResource
+public partial class VirtualNetworkResource : ArmResource
 {
     public virtual SubnetCollection GetSubnets()
     {
@@ -41,7 +41,8 @@ public partial class VirtualNetworkResource
 
 For the cases that the parent resource is not in the same RP, the "get child resource method" will be put in an extension class. For instance, the parent resource of `VirtualNetworkResource` is the resource group, and you will find an extension method of `ResourceGroupResource` in the `Azure.ResourceManager.Network` package returning `VirtualNetworkCollection` like this:
 ```csharp
-public static partial class NetworkExtensions {
+public static partial class NetworkExtensions
+{
     public static VirtualNetworkCollection GetVirtualNetworks(this ResourceGroupResource resourceGroup)
     {
         /* ... */
@@ -65,7 +66,11 @@ An operation set is marked as a resource, only when the following conditions mee
 
 If all the above conditions are met, this operation set will be marked as a "resource" by management generator, and the schema of the `200` response of the GET request will be its corresponding `ResourceData`.
 
-We have multiple ways to tweak the criteria of identifying resources, please see [changing resource](Changing-resource) section.
+We have multiple ways to tweak the criteria of identifying resources, please see [change resource data](#change-resource-data) section.
+
+The name of a resource usually is derived from the name of the resource data, but with some exceptions. Please see [change resource name](#change-resource-name) for more details.
+
+// TODO -- add more links here
 
 ## How does the generator build hierarchical structure of resources
 
@@ -105,31 +110,209 @@ We have some ways to change the resource type of a resource, please see [changin
 
 ### Singleton resources
 
-// TODO
+Some resources are recognized as singleton resources automatically by the generator, for instance, a request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` is a singleton resource with the name `default` and its parent is `StorageAccount`.
+
+The generator will mark a resource as a singleton, when its request path subtracted by the request path of its parent is a constant. For example, the resource with request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` has a parent of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}`, if you subtract them, you will get `blobServices/default` which is a constant, therefore the resource `BlobService` is a singleton resource.
+
+When a resource is marked as a singleton resource, it will not have its corresponding `[Resource]Collection` class, only have `[Resource]Resource` class and `[Resource]Data` class. The method to get a singleton resource on its parent will be called as `Get[Resource]` in singular form, like
+
+```csharp
+public partial class StorageAccount : ArmResource
+{
+    public virtual BlobServiceResource GetBlobService()
+    {
+        /* ... */
+    }
+}
+```
+
+If you want to change the behavior how the generator identifies singleton resources, please see [Singleton resources](Singleton-resources) section
 
 ## Management plane configurations
 
-### Changing resource
+### Change resource data
 
-// TODO
+The configuration `request-path-to-resource-data` is a dictionary, its key is a request path, and the corresponding value is a schema name.
 
-### Changing resource data
+This configuration has two functionalities:
+1. If the request path is not a resource, the generator will mark it as a resource.
+1. The corresponding resource data will be the schema specified by the value.
 
-In general, the code generator needs to determine which request path corresponds to a resource class first, and then generates the hierarchical structure based on that. By default, the generator will first check if the request path has even segments starting from the last `providers` segment (for instance, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` meets this requirement, but `/{scope}/providers/Microsoft.Authorization/policyAssignments` does not), then check if it has a `GET` request, and its response schema is compatible to ARM's resource definition - it must have `id`, `type` and `name`. If all these conditions are met, the request path is identified as a resource class path, and the response schema of the `GET` request will be the corresponding `ResourceData`.
+#### Change the resource data to another schema
 
-You can change this behavior by using the configuration `request-path-to-resource-data`, which is a dictionary from request paths to a name of schema, for instance
+<details>
 
+For instance, if we have this swagger:
+
+```json
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
+    "get": {
+        "operationId": "DatabaseAccounts_Get",
+        "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/accountNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "The database account properties were retrieved successfully.",
+                "schema": {
+                    "$ref": "#/definitions/DatabaseAccount"
+                }
+            }
+        }
+    },
+    "put": {
+        "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/accountNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+                "name": "createUpdateParameters",
+                "in": "body",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
+                },
+                "description": "The parameters to provide for the current database account."
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "The database account create or update operation will complete asynchronously.",
+                "schema": {
+                    "$ref": "#/definitions/DatabaseAccount"
+                }
+            }
+        }
+    },
+    "delete": {
+        "operationId": "DatabaseAccounts_Delete",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/accountNameParameter"
+            },
+            {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            }
+        ],
+        "responses": {
+            "202": {
+                "description": "The database account delete operation will complete asynchronously."
+            },
+            "204": {
+                "description": "The specified account does not exist in the subscription."
+            }
+        }
+    }
+}
+```
+
+The generated code will have a resource `DatabaseAccountResource`, `DatabaseAccountCollection`, and `DatabaseAccountData`. And if you want to assign another schema in these request as a resource data, you could add this configuration:
 ```
 request-path-to-resource-data:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}: DatabaseAccountCreateUpdateParameters
 ```
 
-This configuration will do two things:
+As a result, the resource will name after the new resource data, and now you will have `DatabaseAccountCreateUpdateParametersResource`, `DatabaseAccountCreateUpdateParametersCollection`, and `DatabaseAccountCreateUpdateParametersData`.
 
-1. It marks this request path as a resource class. This will let the generator to generate a class inheriting from `ArmResource` to include the operations under it.
-2. The schema with the name `Something` will become a resource data with the name `SomethingData`, and it will be the type of the `Data` property in the corresponding resource. 
+</details>
 
-### Changing resource name
+#### Change a non-resource data to be a resource
+
+<details>
+
+You can mark a non-resource request path as a resource, for instance, if we have this swagger:
+
+```json
+"/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}": {
+    "get": {
+    "operationId": "SharedGalleries_Get",
+    "description": "Get a shared gallery by subscription id or tenant id.",
+    "parameters": [
+        {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+            "$ref": "#/parameters/LocationNameParameter"
+        },
+        {
+            "name": "galleryUniqueName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique name of the Shared Gallery."
+        },
+        {
+            "$ref": "#/parameters/ApiVersionParameter"
+        }
+    ],
+    "responses": {
+        "200": {
+            "description": "OK",
+            "schema": {
+                "$ref": "#/definitions/SharedGallery"
+            }
+        },
+        "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+                "$ref": "#/definitions/CloudError"
+            }
+        }
+    }
+}
+```
+This request path looks like a resource, but unfortunately its corresponding schema `SharedGallery` does not have all the three properties required by a resource, `id`, `type` and `name`. Since this is a non-resource, this operation will be generated into the extension class, like this:
+```csharp
+public static partial class ComputeExtensions
+{
+    public static Response<SharedGallery> GetSharedGallery(this ResourceGroupResource resourceGroup, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+    {
+        /* ... */
+    }
+}
+```
+
+But we still could add the `request-path-to-resource-data` configuration:
+```
+request-path-to-resource-data:
+  /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}: SharedGallery
+```
+to mark it as a resource, and assign the schema `SharedGallery` as its resource data. In this way, we will get the `SharedGalleryResource`, `SharedGalleryCollection` and `SharedGalleryData` (which is the model generated from schema `SharedGallery`) like normal resources. In this way, the Id of this non-resource will be automatically constructed by the SDK using its own request path.
+
+</details>
+
+### Change resource name
+
+// TODO -- add details here
 
 We have multiple strategy to make sure that our generated code could compile, therefore we need to make sure the resource classes all have unique names. If there are no collisions, a resource class will have the same name as the schema name of its resource data. If there are collisions, like multiple resources are sharing the same resource data, the generator will generate the resource name from its resource types to make sure they are all unique. In this case, usually the auto-generated names are not ideal, but you can use the `request-path-to-resource-name` configuration to customize.
 
