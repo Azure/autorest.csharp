@@ -312,20 +312,20 @@ to mark it as a resource, and assign the schema `SharedGallery` as its resource 
 
 ### Change resource name
 
-// TODO -- add details here
+In most cases, a resource class will share the same name as the resource data class, and you will have the triplet of `[Resource]Resource`, `[Resource]Collection`, and `[Resource]Data`.
 
-We have multiple strategy to make sure that our generated code could compile, therefore we need to make sure the resource classes all have unique names. If there are no collisions, a resource class will have the same name as the schema name of its resource data. If there are collisions, like multiple resources are sharing the same resource data, the generator will generate the resource name from its resource types to make sure they are all unique. In this case, usually the auto-generated names are not ideal, but you can use the `request-path-to-resource-name` configuration to customize.
+But if the RP is complicated, there might be multiple resources sharing the same resource data schema. If this happens, the generator has multiple strategies to generate unique names for all those resources in order to make sure the generated code could properly compile. These auto-generated names might not be ideal, and you might need the `request-path-to-resource-name` configuration to customize the resource names.
 
-For instance
-
+For instance, we have a resource `AvailabilitySetResource`, `AvailabilitySetCollection` and `AvailabilitySetData`. If we add this configuration:
 ```
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
 ```
-
-Now the resource class generates from the request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` will be `Something` instead of `AvailabilitySet`.
+Now you will have `SomethingResource` instead of `AvailabilitySetResource`, `SomethingCollection` instead of `AvailabilitySetCollection`, but still have the original resource data `AvailabilitySetData` because this configuration only change the corresponding resource name and the collection name (if it has a collection).
 
 ### Changing the criteria of ARM resources
+
+// TODO -- need to revise this
 
 By default, we will only mark a request path as resource, if its schema meets ARM's resource criteria, the model must have `id`, `type` and `name`. You can use the `resource-model-requires-type` and `resource-model-requires-name` configuration to loose this criteria.
 
