@@ -82,7 +82,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
         /// Operation Id: SupersetModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -105,7 +105,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
         /// Operation Id: SupersetModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

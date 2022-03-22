@@ -82,7 +82,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -105,7 +105,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
