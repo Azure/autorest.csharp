@@ -52,11 +52,11 @@ namespace OmitOperationGroups
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Model2Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ResourceType.Namespace, DiagnosticOptions);
+            _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string model2ApiVersion);
-            _model2RestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
-            _model4sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _model4sRestClient = new Model4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _model2RestClient = new Model2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, model2ApiVersion);
+            _model4sClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+            _model4sRestClient = new Model4SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// Operation Id: Model2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -110,7 +110,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}
         /// Operation Id: Model2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -133,7 +133,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
         /// Operation Id: Model4s_GetDefault
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -154,7 +154,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}/model4s/default
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default
         /// Operation Id: Model4s_GetDefault
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

@@ -49,9 +49,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal MachineResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _machineClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            _machineClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string machineApiVersion);
-            _machineRestClient = new MachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, machineApiVersion);
+            _machineRestClient = new MachinesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, machineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -36,9 +36,9 @@ namespace TenantOnly
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BillingAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", BillingAccountResource.ResourceType.Namespace, DiagnosticOptions);
+            _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", BillingAccountResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(BillingAccountResource.ResourceType, out string billingAccountApiVersion);
-            _billingAccountRestClient = new BillingAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

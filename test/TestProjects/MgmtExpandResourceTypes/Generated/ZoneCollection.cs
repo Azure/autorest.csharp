@@ -36,9 +36,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ZoneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ZoneResource.ResourceType.Namespace, DiagnosticOptions);
+            _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ZoneResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ZoneResource.ResourceType, out string zoneApiVersion);
-            _zoneRestClient = new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
+            _zoneRestClient = new ZonesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, zoneApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

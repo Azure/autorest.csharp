@@ -50,9 +50,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ExactMatchModel5Resource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
+            _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string exactMatchModel5ApiVersion);
-            _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ApiVersion);
+            _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, exactMatchModel5ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -83,7 +83,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -106,7 +106,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,7 +130,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -161,7 +161,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Add a tag to the current resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -192,7 +192,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -222,7 +222,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Replace the tags on the resource with the given set.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
@@ -252,7 +252,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="key"> The key for the tag. </param>
@@ -281,7 +281,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Removes a tag by key from the resource.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Get
         /// </summary>
         /// <param name="key"> The key for the tag. </param>

@@ -208,7 +208,10 @@ namespace MgmtResourceName
         }
 
         #region MachineResource
-        /// <summary> Gets an object representing a MachineResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="MachineResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MachineResource.CreateResourceIdentifier" /> to create a <see cref="MachineResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="MachineResource" /> object. </returns>
@@ -224,7 +227,10 @@ namespace MgmtResourceName
         #endregion
 
         #region Disk
-        /// <summary> Gets an object representing a Disk along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Disk" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Disk.CreateResourceIdentifier" /> to create a <see cref="Disk" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Disk" /> object. </returns>
@@ -240,7 +246,10 @@ namespace MgmtResourceName
         #endregion
 
         #region Memory
-        /// <summary> Gets an object representing a Memory along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="Memory" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Memory.CreateResourceIdentifier" /> to create a <see cref="Memory" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Memory" /> object. </returns>
@@ -256,7 +265,10 @@ namespace MgmtResourceName
         #endregion
 
         #region NetworkResource
-        /// <summary> Gets an object representing a NetworkResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="NetworkResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NetworkResource.CreateResourceIdentifier" /> to create a <see cref="NetworkResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="NetworkResource" /> object. </returns>
@@ -272,7 +284,10 @@ namespace MgmtResourceName
         #endregion
 
         #region DisplayResource
-        /// <summary> Gets an object representing a DisplayResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="DisplayResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DisplayResource.CreateResourceIdentifier" /> to create a <see cref="DisplayResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DisplayResource" /> object. </returns>

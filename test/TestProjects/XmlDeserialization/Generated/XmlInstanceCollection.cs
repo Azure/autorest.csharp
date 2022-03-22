@@ -36,9 +36,9 @@ namespace XmlDeserialization
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal XmlInstanceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstanceResource.ResourceType.Namespace, DiagnosticOptions);
+            _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstanceResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(XmlInstanceResource.ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
-            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

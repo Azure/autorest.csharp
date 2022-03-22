@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 case Resource parentResource:
                     {
                         var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
-                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPath, exampleModel)});");
                         _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() != 0)
+                if (tp is Resource rt)
                 {
                     return tp;
                 }

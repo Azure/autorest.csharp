@@ -49,9 +49,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal PageSizeInt32ModelResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeInt32ModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
+            _pageSizeInt32ModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string pageSizeInt32ModelApiVersion);
-            _pageSizeInt32ModelRestClient = new PageSizeInt32ModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeInt32ModelApiVersion);
+            _pageSizeInt32ModelRestClient = new PageSizeInt32ModelsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, pageSizeInt32ModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

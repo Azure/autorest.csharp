@@ -533,7 +533,10 @@ namespace ExactMatchFlattenInheritance
         }
 
         #region AzureResourceFlattenModel1Resource
-        /// <summary> Gets an object representing a AzureResourceFlattenModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
@@ -549,7 +552,10 @@ namespace ExactMatchFlattenInheritance
         #endregion
 
         #region CustomModel2Resource
-        /// <summary> Gets an object representing a CustomModel2Resource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel2Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
@@ -565,7 +571,10 @@ namespace ExactMatchFlattenInheritance
         #endregion
 
         #region CustomModel3Resource
-        /// <summary> Gets an object representing a CustomModel3Resource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel3Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>

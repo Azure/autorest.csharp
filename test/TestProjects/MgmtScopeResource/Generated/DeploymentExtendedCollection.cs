@@ -35,9 +35,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeploymentExtendedCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, DiagnosticOptions);
+            _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(DeploymentExtendedResource.ResourceType, out string deploymentExtendedDeploymentsApiVersion);
-            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, deploymentExtendedDeploymentsApiVersion);
         }
 
         /// <summary>

@@ -36,10 +36,10 @@ namespace MgmtExtensionCommonRestOperation
         {
         }
 
-        private ClientDiagnostics TypeOneCommonClientDiagnostics => _typeOneCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOneResource.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeOneCommonRestClient => _typeOneCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeOneResource.ResourceType));
-        private ClientDiagnostics TypeTwoCommonClientDiagnostics => _typeTwoCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwoResource.ResourceType.Namespace, DiagnosticOptions);
-        private CommonRestOperations TypeTwoCommonRestClient => _typeTwoCommonRestClient ??= new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(TypeTwoResource.ResourceType));
+        private ClientDiagnostics TypeOneCommonClientDiagnostics => _typeOneCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOneResource.ResourceType.Namespace, Diagnostics);
+        private CommonRestOperations TypeOneCommonRestClient => _typeOneCommonRestClient ??= new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(TypeOneResource.ResourceType));
+        private ClientDiagnostics TypeTwoCommonClientDiagnostics => _typeTwoCommonClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwoResource.ResourceType.Namespace, Diagnostics);
+        private CommonRestOperations TypeTwoCommonRestClient => _typeTwoCommonRestClient ??= new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(TypeTwoResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

@@ -49,9 +49,9 @@ namespace MgmtDiscriminator
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DeliveryRuleResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", ResourceType.Namespace, DiagnosticOptions);
+            _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string deliveryRuleApiVersion);
-            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
+            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, deliveryRuleApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

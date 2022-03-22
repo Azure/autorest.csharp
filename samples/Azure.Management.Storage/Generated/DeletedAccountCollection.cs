@@ -36,9 +36,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DeletedAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccountResource.ResourceType.Namespace, DiagnosticOptions);
+            _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccountResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(DeletedAccountResource.ResourceType, out string deletedAccountApiVersion);
-            _deletedAccountRestClient = new DeletedAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountApiVersion);
+            _deletedAccountRestClient = new DeletedAccountsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, deletedAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

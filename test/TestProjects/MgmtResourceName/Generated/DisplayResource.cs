@@ -49,9 +49,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DisplayResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _displayResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            _displayResourceClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string displayResourceApiVersion);
-            _displayResourceRestClient = new DisplayResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, displayResourceApiVersion);
+            _displayResourceRestClient = new DisplayResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, displayResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

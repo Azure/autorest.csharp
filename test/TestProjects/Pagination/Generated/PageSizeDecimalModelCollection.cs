@@ -36,9 +36,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PageSizeDecimalModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDecimalModelResource.ResourceType.Namespace, DiagnosticOptions);
+            _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDecimalModelResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(PageSizeDecimalModelResource.ResourceType, out string pageSizeDecimalModelApiVersion);
-            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
+            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, pageSizeDecimalModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

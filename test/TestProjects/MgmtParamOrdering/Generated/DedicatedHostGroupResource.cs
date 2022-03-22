@@ -51,9 +51,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DedicatedHostGroupResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
+            _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string dedicatedHostGroupApiVersion);
-            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
+            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -51,9 +51,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ImageResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _imageClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
+            _imageClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string imageApiVersion);
-            _imageRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
+            _imageRestClient = new ImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, imageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

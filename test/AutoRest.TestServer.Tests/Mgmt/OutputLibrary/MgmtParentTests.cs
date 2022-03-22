@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         public MgmtParentTests() : base("MgmtParent") { }
 
         [TestCase("VirtualMachineExtensionImageResource", "SubscriptionResourceExtensions")]
-        [TestCase("AvailabilitySetResource", "ResourceGroupExtensions")]
+        [TestCase("AvailabilitySetResource", "ResourceGroupResourceExtensions")]
         [TestCase("DedicatedHostResource", "DedicatedHostGroupResource")]
         public void TestParent(string resourceName, string parentName)
         {

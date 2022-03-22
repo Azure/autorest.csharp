@@ -36,9 +36,9 @@ namespace MgmtCollectionParent
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal OrderResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
+            _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);
-            _orderResourceRestClient = new ComputeManagementRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
+            _orderResourceRestClient = new ComputeManagementRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

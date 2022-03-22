@@ -36,9 +36,9 @@ namespace MgmtScopeResource
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakePolicyAssignmentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignmentResource.ResourceType.Namespace, DiagnosticOptions);
+            _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", FakePolicyAssignmentResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(FakePolicyAssignmentResource.ResourceType, out string fakePolicyAssignmentApiVersion);
-            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
+            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fakePolicyAssignmentApiVersion);
         }
 
         /// <summary>

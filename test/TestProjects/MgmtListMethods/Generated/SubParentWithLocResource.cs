@@ -50,9 +50,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubParentWithLocResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string subParentWithLocApiVersion);
-            _subParentWithLocRestClient = new SubParentWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
+            _subParentWithLocRestClient = new SubParentWithLocsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, subParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

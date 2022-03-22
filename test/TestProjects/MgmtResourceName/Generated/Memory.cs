@@ -49,9 +49,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Memory(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _memoryMemoryResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, DiagnosticOptions);
+            _memoryMemoryResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string memoryMemoryResourcesApiVersion);
-            _memoryMemoryResourcesRestClient = new MemoryResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, memoryMemoryResourcesApiVersion);
+            _memoryMemoryResourcesRestClient = new MemoryResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, memoryMemoryResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

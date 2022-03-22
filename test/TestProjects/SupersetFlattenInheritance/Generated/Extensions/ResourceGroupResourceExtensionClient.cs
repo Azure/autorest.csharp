@@ -50,24 +50,24 @@ namespace SupersetFlattenInheritance
         {
         }
 
-        private ClientDiagnostics CustomModel1sClientDiagnostics => _customModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private CustomModel1SRestOperations CustomModel1sRestClient => _customModel1sRestClient ??= new CustomModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics CustomModel2sClientDiagnostics => _customModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private CustomModel2SRestOperations CustomModel2sRestClient => _customModel2sRestClient ??= new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics SubResourceModel1sClientDiagnostics => _subResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SubResourceModel1SRestOperations SubResourceModel1sRestClient => _subResourceModel1sRestClient ??= new SubResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics SubResourceModel2sClientDiagnostics => _subResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SubResourceModel2SRestOperations SubResourceModel2sRestClient => _subResourceModel2sRestClient ??= new SubResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics WritableSubResourceModel1sClientDiagnostics => _writableSubResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private WritableSubResourceModel1SRestOperations WritableSubResourceModel1sRestClient => _writableSubResourceModel1sRestClient ??= new WritableSubResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics WritableSubResourceModel2sClientDiagnostics => _writableSubResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private WritableSubResourceModel2SRestOperations WritableSubResourceModel2sRestClient => _writableSubResourceModel2sRestClient ??= new WritableSubResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics ResourceModel2sClientDiagnostics => _resourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private ResourceModel2SRestOperations ResourceModel2sRestClient => _resourceModel2sRestClient ??= new ResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics TrackedResourceModel2sClientDiagnostics => _trackedResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private TrackedResourceModel2SRestOperations TrackedResourceModel2sRestClient => _trackedResourceModel2sRestClient ??= new TrackedResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics NonResourceModel1sClientDiagnostics => _nonResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private NonResourceModel1SRestOperations NonResourceModel1sRestClient => _nonResourceModel1sRestClient ??= new NonResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ClientDiagnostics CustomModel1sClientDiagnostics => _customModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private CustomModel1SRestOperations CustomModel1sRestClient => _customModel1sRestClient ??= new CustomModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics CustomModel2sClientDiagnostics => _customModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private CustomModel2SRestOperations CustomModel2sRestClient => _customModel2sRestClient ??= new CustomModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics SubResourceModel1sClientDiagnostics => _subResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private SubResourceModel1SRestOperations SubResourceModel1sRestClient => _subResourceModel1sRestClient ??= new SubResourceModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics SubResourceModel2sClientDiagnostics => _subResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private SubResourceModel2SRestOperations SubResourceModel2sRestClient => _subResourceModel2sRestClient ??= new SubResourceModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics WritableSubResourceModel1sClientDiagnostics => _writableSubResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private WritableSubResourceModel1SRestOperations WritableSubResourceModel1sRestClient => _writableSubResourceModel1sRestClient ??= new WritableSubResourceModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics WritableSubResourceModel2sClientDiagnostics => _writableSubResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private WritableSubResourceModel2SRestOperations WritableSubResourceModel2sRestClient => _writableSubResourceModel2sRestClient ??= new WritableSubResourceModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics ResourceModel2sClientDiagnostics => _resourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ResourceModel2SRestOperations ResourceModel2sRestClient => _resourceModel2sRestClient ??= new ResourceModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics TrackedResourceModel2sClientDiagnostics => _trackedResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private TrackedResourceModel2SRestOperations TrackedResourceModel2sRestClient => _trackedResourceModel2sRestClient ??= new TrackedResourceModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics NonResourceModel1sClientDiagnostics => _nonResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private NonResourceModel1SRestOperations NonResourceModel1sRestClient => _nonResourceModel1sRestClient ??= new NonResourceModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

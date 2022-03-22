@@ -50,9 +50,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TenantParentResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _tenantParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
+            _tenantParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string tenantParentApiVersion);
-            _tenantParentRestClient = new TenantParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentApiVersion);
+            _tenantParentRestClient = new TenantParentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, tenantParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

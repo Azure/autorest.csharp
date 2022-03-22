@@ -44,9 +44,9 @@ namespace MgmtParamOrdering
         {
             _location = location;
             _publisherName = publisherName;
-            _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", VirtualMachineExtensionImageResource.ResourceType.Namespace, DiagnosticOptions);
+            _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", VirtualMachineExtensionImageResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(VirtualMachineExtensionImageResource.ResourceType, out string virtualMachineExtensionImageApiVersion);
-            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
+            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineExtensionImageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

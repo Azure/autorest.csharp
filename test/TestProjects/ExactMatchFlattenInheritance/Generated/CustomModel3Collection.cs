@@ -36,9 +36,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal CustomModel3Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3Resource.ResourceType.Namespace, DiagnosticOptions);
+            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3Resource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(CustomModel3Resource.ResourceType, out string customModel3ApiVersion);
-            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

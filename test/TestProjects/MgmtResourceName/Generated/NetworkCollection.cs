@@ -36,9 +36,9 @@ namespace MgmtResourceName
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal NetworkCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _networkNetworkResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", NetworkResource.ResourceType.Namespace, DiagnosticOptions);
+            _networkNetworkResourcesClientDiagnostics = new ClientDiagnostics("MgmtResourceName", NetworkResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(NetworkResource.ResourceType, out string networkNetworkResourcesApiVersion);
-            _networkNetworkResourcesRestClient = new NetworkResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, networkNetworkResourcesApiVersion);
+            _networkNetworkResourcesRestClient = new NetworkResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, networkNetworkResourcesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

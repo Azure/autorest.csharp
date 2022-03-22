@@ -66,7 +66,10 @@ namespace ResourceRename
         }
 
         #region SshPublicKeyInfoResource
-        /// <summary> Gets an object representing a SshPublicKeyInfoResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SshPublicKeyInfoResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SshPublicKeyInfoResource.CreateResourceIdentifier" /> to create a <see cref="SshPublicKeyInfoResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SshPublicKeyInfoResource" /> object. </returns>

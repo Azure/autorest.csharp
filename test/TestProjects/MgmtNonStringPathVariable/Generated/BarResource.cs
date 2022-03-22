@@ -51,9 +51,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BarResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", ResourceType.Namespace, DiagnosticOptions);
+            _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string barApiVersion);
-            _barRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
+            _barRestClient = new BarsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

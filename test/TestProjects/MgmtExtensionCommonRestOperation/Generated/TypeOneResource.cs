@@ -50,9 +50,9 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TypeOneResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
+            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string typeOneCommonApiVersion);
-            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

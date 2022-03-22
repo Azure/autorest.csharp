@@ -36,9 +36,9 @@ namespace SupersetInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SupersetModel7Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel7Resource.ResourceType.Namespace, DiagnosticOptions);
+            _supersetModel7ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel7Resource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(SupersetModel7Resource.ResourceType, out string supersetModel7ApiVersion);
-            _supersetModel7RestClient = new SupersetModel7SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel7ApiVersion);
+            _supersetModel7RestClient = new SupersetModel7SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, supersetModel7ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -51,7 +51,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -83,7 +83,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -115,7 +115,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -143,7 +143,7 @@ namespace SupersetInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -224,7 +224,7 @@ namespace SupersetInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -251,7 +251,7 @@ namespace SupersetInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -278,7 +278,7 @@ namespace SupersetInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
@@ -307,7 +307,7 @@ namespace SupersetInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>

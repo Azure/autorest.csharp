@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private string BuildDescription()
         {
-            var pathInformation = string.Join('\n', _operations.Select(operation => $"Request Path: {operation.RequestPath.SerializedPath}\nOperation Id: {operation.OperationId}"));
+            var pathInformation = string.Join('\n', _operations.Select(operation => $"Request Path: {operation.Operation.GetHttpPath()}\nOperation Id: {operation.OperationId}"));
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
                 return $"{descriptionOfOperation}\n{pathInformation}";

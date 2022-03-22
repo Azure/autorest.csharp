@@ -417,8 +417,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var getCollectionMethods = resourceExtensions.GetMethods()
                         .Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}")
-                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroup)}));
-                    Assert.AreEqual(1, getCollectionMethods.Count());
+                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroupResource)}));
+                    Assert.AreEqual(1, getCollectionMethods.Count(), $"Cannot find {resourceExtensions.Name}.Get{resourceName.ResourceNameToPlural()}");
                 }
             }
         }

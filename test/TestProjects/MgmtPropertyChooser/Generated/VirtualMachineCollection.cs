@@ -36,9 +36,9 @@ namespace MgmtPropertyChooser
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal VirtualMachineCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", VirtualMachineResource.ResourceType.Namespace, DiagnosticOptions);
+            _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtPropertyChooser", VirtualMachineResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(VirtualMachineResource.ResourceType, out string virtualMachineApiVersion);
-            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
+            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -19,19 +19,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChWithLocResource", "GetNonResourceChild", true)]
         [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChWithLocs", true, typeof(ResourceGroupResource))]
 
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetAll", true)]
         [TestCase("ResGrpParentWithAncestorWithNonResChResource", "GetAll", false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false)]
         [TestCase("ResGrpParentWithAncestorWithNonResChResource", "GetNonResourceChild", true)]
         [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChes", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChes", true, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithNonResChes", true, typeof(ResourceGroupResource))]
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true)]
         [TestCase("ResGrpParentWithAncestorWithLocResource", "GetAll", false)]
         [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithLocs", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithLocs", true, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetResGrpParentWithAncestorWithLocs", true, typeof(ResourceGroupResource))]
 
         [TestCase("ResGrpParentWithAncestorCollection", "GetAll", true)]
         [TestCase("ResGrpParentWithAncestorResource", "GetAll", false)]
@@ -57,24 +57,24 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentWithAncestorWithNonResChWithLocCollection", "GetNonResourceChild", false)]
         [TestCase("FakeParentWithAncestorWithNonResChWithLocResource", "GetNonResourceChild", true)]
         [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", false, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResourceChWithLoc", false, typeof(ResourceGroupResource))]
 
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetAll", true)]
         [TestCase("FakeParentWithAncestorWithNonResChResource", "GetAll", false)]
         [TestCase("FakeParentWithAncestorWithNonResChCollection", "GetNonResourceChild", false)]
         [TestCase("FakeParentWithAncestorWithNonResChResource", "GetNonResourceChild", true)]
         [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResChes", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResChes", false, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithNonResChes", false, typeof(ResourceGroupResource))]
 
         [TestCase("FakeParentWithAncestorWithLocCollection", "GetAll", true)]
         [TestCase("FakeParentWithAncestorWithLocResource", "GetAll", false)]
         [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithLocs", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithLocs", false, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestorWithLocs", false, typeof(ResourceGroupResource))]
 
         [TestCase("FakeParentWithAncestorCollection", "GetAll", true)]
         [TestCase("FakeParentWithAncestorResource", "GetAll", false)]
         [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestors", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestors", false, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "GetFakeParentWithAncestors", false, typeof(ResourceGroupResource))]
 
         [TestCase("FakeParentWithNonResChCollection", "GetAll", true)]
         [TestCase("FakeParentWithNonResChResource", "GetAll", false)]
@@ -85,7 +85,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("FakeParentResource", "GetAll", false)]
 
         [TestCase("MgmtListMethodsExtensions", "UpdateQuotas", true, typeof(SubscriptionResource))]
-        [TestCase("MgmtListMethodsExtensions", "UpdateQuotas", false, typeof(ResourceGroup))]
+        [TestCase("MgmtListMethodsExtensions", "UpdateQuotas", false, typeof(ResourceGroupResource))]
         public void ValidateFakesResourceAsAParentListMethods(string className, string methodName, bool exist, params Type[] parameterTypes)
         {
             ValidateListMethods(className, methodName, exist, parameterTypes);

@@ -66,7 +66,10 @@ namespace MgmtSubscriptionNameParameter
         }
 
         #region SBSubscriptionResource
-        /// <summary> Gets an object representing a SBSubscriptionResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SBSubscriptionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SBSubscriptionResource.CreateResourceIdentifier" /> to create a <see cref="SBSubscriptionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SBSubscriptionResource" /> object. </returns>

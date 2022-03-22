@@ -35,9 +35,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal AvailabilitySetChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChildResource.ResourceType.Namespace, DiagnosticOptions);
+            _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChildResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(AvailabilitySetChildResource.ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
-            _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
+            _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

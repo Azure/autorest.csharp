@@ -36,9 +36,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ManagedHsmResource.ResourceType.Namespace, DiagnosticOptions);
+            _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ManagedHsmResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ManagedHsmResource.ResourceType, out string managedHsmApiVersion);
-            _managedHsmRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
+            _managedHsmRestClient = new ManagedHsmsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, managedHsmApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

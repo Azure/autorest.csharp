@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
         [TestCase("FakePolicyAssignmentResource", "ArmResourceExtensions")]
         [TestCase("DeploymentExtendedResource", "SubscriptionResourceExtensions")]
-        [TestCase("DeploymentExtendedResource", "ResourceGroupExtensions")]
+        [TestCase("DeploymentExtendedResource", "ResourceGroupResourceExtensions")]
         [TestCase("DeploymentExtendedResource", "ManagementGroupResourceExtensions")]
         [TestCase("DeploymentExtendedResource", "TenantResourceExtensions")]
         [TestCase("ResourceLinkResource", "TenantResourceExtensions")]

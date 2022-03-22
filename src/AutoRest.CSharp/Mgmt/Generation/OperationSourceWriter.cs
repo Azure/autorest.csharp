@@ -78,10 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return data;");
                             _writer.Line();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
-                            var createIdMethods = resource.CreateResourceIdentifierMethodSignature();
-                            if (createIdMethods.Count != 1)
-                                throw new InvalidOperationException($"In order to write mappings we need to have exactly 1 CreateResourceIdentifierMethodSignature.  We found {createIdMethods.Count} for {resource.Type.Name}.");
-                            var createIdMethod = createIdMethods.Values.First();
+                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature();
                             foreach (var param in createIdMethod.Parameters)
                             {
                                 _writer.Line();

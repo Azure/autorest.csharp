@@ -356,7 +356,10 @@ namespace MgmtScopeResource
         }
 
         #region FakePolicyAssignmentResource
-        /// <summary> Gets an object representing a FakePolicyAssignmentResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="FakePolicyAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakePolicyAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="FakePolicyAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
@@ -372,7 +375,10 @@ namespace MgmtScopeResource
         #endregion
 
         #region DeploymentExtendedResource
-        /// <summary> Gets an object representing a DeploymentExtendedResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="DeploymentExtendedResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeploymentExtendedResource.CreateResourceIdentifier" /> to create a <see cref="DeploymentExtendedResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
@@ -388,7 +394,10 @@ namespace MgmtScopeResource
         #endregion
 
         #region ResourceLinkResource
-        /// <summary> Gets an object representing a ResourceLinkResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ResourceLinkResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResourceLinkResource.CreateResourceIdentifier" /> to create a <see cref="ResourceLinkResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
