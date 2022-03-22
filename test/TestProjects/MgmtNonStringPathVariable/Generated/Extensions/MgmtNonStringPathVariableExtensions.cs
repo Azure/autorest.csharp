@@ -18,21 +18,21 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
         /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
-        public static FakeCollection GetFakes(this ResourceGroup resourceGroup)
+        public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetFakes();
+            return GetExtensionClient(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -40,13 +40,13 @@ namespace MgmtNonStringPathVariable
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
         /// Operation Id: Fakes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroup resourceGroup, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -54,21 +54,21 @@ namespace MgmtNonStringPathVariable
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
         /// Operation Id: Fakes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<FakeResource> GetFake(this ResourceGroup resourceGroup, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetFakes().Get(fakeName, expand, cancellationToken);
+            return resourceGroupResource.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the BarResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
-        public static BarCollection GetBars(this ResourceGroup resourceGroup)
+        public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetBars();
+            return GetExtensionClient(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -76,12 +76,12 @@ namespace MgmtNonStringPathVariable
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroup resourceGroup, int barName, CancellationToken cancellationToken = default)
+        public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -89,12 +89,12 @@ namespace MgmtNonStringPathVariable
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<BarResource> GetBar(this ResourceGroup resourceGroup, int barName, CancellationToken cancellationToken = default)
+        public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetBars().Get(barName, cancellationToken);
+            return resourceGroupResource.GetBars().Get(barName, cancellationToken);
         }
 
         #region FakeResource

@@ -8,20 +8,20 @@
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace MgmtParamOrdering
+namespace MgmtParent
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    internal partial class ResourceGroupExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
+    internal partial class ResourceGroupResourceExtensionClient : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
-        protected ResourceGroupExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal ResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -43,20 +43,6 @@ namespace MgmtParamOrdering
         public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
         {
             return GetCachedClient(Client => new DedicatedHostGroupCollection(Client, Id));
-        }
-
-        /// <summary> Gets a collection of WorkspaceResources in the WorkspaceResource. </summary>
-        /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
-        public virtual WorkspaceCollection GetWorkspaces()
-        {
-            return GetCachedClient(Client => new WorkspaceCollection(Client, Id));
-        }
-
-        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
-        /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
-        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
-        {
-            return GetCachedClient(Client => new VirtualMachineScaleSetCollection(Client, Id));
         }
     }
 }

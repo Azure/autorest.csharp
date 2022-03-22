@@ -8,20 +8,20 @@
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace MgmtNonStringPathVariable
+namespace MgmtLRO
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    internal partial class ResourceGroupExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
+    internal partial class ResourceGroupResourceExtensionClient : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
-        protected ResourceGroupExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal ResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 

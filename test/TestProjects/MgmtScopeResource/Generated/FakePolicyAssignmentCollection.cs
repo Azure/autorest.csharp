@@ -182,7 +182,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakePolicyAssignmentResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == ResourceGroup.ResourceType)
+            if (Id.ResourceType == ResourceGroupResource.ResourceType)
             {
                 async Task<Page<FakePolicyAssignmentResource>> FirstPageFunc(int? pageSizeHint)
                 {
@@ -337,7 +337,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakePolicyAssignmentResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (Id.ResourceType == ResourceGroup.ResourceType)
+            if (Id.ResourceType == ResourceGroupResource.ResourceType)
             {
                 Page<FakePolicyAssignmentResource> FirstPageFunc(int? pageSizeHint)
                 {

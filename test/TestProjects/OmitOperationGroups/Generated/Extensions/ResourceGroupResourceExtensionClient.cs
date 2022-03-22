@@ -16,21 +16,21 @@ using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    internal partial class ResourceGroupExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
+    internal partial class ResourceGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _model5sClientDiagnostics;
         private Model5SRestOperations _model5sRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
-        protected ResourceGroupExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal ResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -60,7 +60,7 @@ namespace OmitOperationGroups
         {
             async Task<Page<Model5>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5s");
+                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5s");
                 scope.Start();
                 try
                 {
@@ -86,7 +86,7 @@ namespace OmitOperationGroups
         {
             Page<Model5> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5s");
+                using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5s");
                 scope.Start();
                 try
                 {
@@ -111,7 +111,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
+            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
+            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
             {
@@ -156,7 +156,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
-            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
+            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5");
             scope.Start();
             try
             {
@@ -178,7 +178,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
-            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
+            using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetModel5");
             scope.Start();
             try
             {

@@ -465,7 +465,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
-                return $"{typeof(ResourceGroup)}.ResourceType";
+                return $"{typeof(ResourceGroupResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Subscription)
                 return $"{typeof(SubscriptionResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Tenant)

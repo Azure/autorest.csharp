@@ -360,7 +360,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
+                if (Id.Parent.ResourceType == ResourceGroupResource.ResourceType)
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
@@ -427,7 +427,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                if (Id.Parent.ResourceType == ResourceGroup.ResourceType)
+                if (Id.Parent.ResourceType == ResourceGroupResource.ResourceType)
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);

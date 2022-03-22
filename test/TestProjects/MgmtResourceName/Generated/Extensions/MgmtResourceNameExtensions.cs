@@ -18,193 +18,193 @@ namespace MgmtResourceName
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
         /// <summary> Gets a collection of MachineResources in the MachineResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
-        public static MachineCollection GetMachines(this ResourceGroup resourceGroup)
+        public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetMachines();
+            return GetExtensionClient(resourceGroupResource).GetMachines();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/machines/{machineName}
         /// Operation Id: Machines_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="machineName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
-        public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetMachines().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetMachines().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/machines/{machineName}
         /// Operation Id: Machines_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="machineName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
-        public static Response<MachineResource> GetMachine(this ResourceGroup resourceGroup, string machineName, CancellationToken cancellationToken = default)
+        public static Response<MachineResource> GetMachine(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetMachines().Get(machineName, cancellationToken);
+            return resourceGroupResource.GetMachines().Get(machineName, cancellationToken);
         }
 
         /// <summary> Gets a collection of Disks in the Disk. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
-        public static DiskCollection GetDisks(this ResourceGroup resourceGroup)
+        public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetDisks();
+            return GetExtensionClient(resourceGroupResource).GetDisks();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}
         /// Operation Id: Disks_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
-        public static async Task<Response<Disk>> GetDiskAsync(this ResourceGroup resourceGroup, string diskResourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Disk>> GetDiskAsync(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDisks().GetAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDisks().GetAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskResources/{diskResourceName}
         /// Operation Id: Disks_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
-        public static Response<Disk> GetDisk(this ResourceGroup resourceGroup, string diskResourceName, CancellationToken cancellationToken = default)
+        public static Response<Disk> GetDisk(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDisks().Get(diskResourceName, cancellationToken);
+            return resourceGroupResource.GetDisks().Get(diskResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of Memories in the Memory. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
-        public static MemoryCollection GetMemories(this ResourceGroup resourceGroup)
+        public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetMemories();
+            return GetExtensionClient(resourceGroupResource).GetMemories();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}
         /// Operation Id: MemoryResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public static async Task<Response<Memory>> GetMemoryAsync(this ResourceGroup resourceGroup, string memoryResourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Memory>> GetMemoryAsync(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetMemories().GetAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetMemories().GetAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}
         /// Operation Id: MemoryResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="memoryResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
-        public static Response<Memory> GetMemory(this ResourceGroup resourceGroup, string memoryResourceName, CancellationToken cancellationToken = default)
+        public static Response<Memory> GetMemory(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetMemories().Get(memoryResourceName, cancellationToken);
+            return resourceGroupResource.GetMemories().Get(memoryResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
-        public static NetworkCollection GetNetworks(this ResourceGroup resourceGroup)
+        public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetNetworks();
+            return GetExtensionClient(resourceGroupResource).GetNetworks();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
         /// Operation Id: NetworkResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
-        public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetNetworks().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetNetworks().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
         /// Operation Id: NetworkResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
-        public static Response<NetworkResource> GetNetwork(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        public static Response<NetworkResource> GetNetwork(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetNetworks().Get(networkResourceName, cancellationToken);
+            return resourceGroupResource.GetNetworks().Get(networkResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DisplayResources in the DisplayResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
-        public static DisplayResourceCollection GetDisplayResources(this ResourceGroup resourceGroup)
+        public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetDisplayResources();
+            return GetExtensionClient(resourceGroupResource).GetDisplayResources();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
         /// Operation Id: DisplayResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
-        public static async Task<Response<DisplayResource>> GetDisplayResourceAsync(this ResourceGroup resourceGroup, string displayResourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DisplayResource>> GetDisplayResourceAsync(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDisplayResources().GetAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDisplayResources().GetAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
         /// Operation Id: DisplayResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
-        public static Response<DisplayResource> GetDisplayResource(this ResourceGroup resourceGroup, string displayResourceName, CancellationToken cancellationToken = default)
+        public static Response<DisplayResource> GetDisplayResource(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDisplayResources().Get(displayResourceName, cancellationToken);
+            return resourceGroupResource.GetDisplayResources().Get(displayResourceName, cancellationToken);
         }
 
         #region MachineResource

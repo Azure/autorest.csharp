@@ -16,8 +16,8 @@ using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    internal partial class ResourceGroupExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
+    internal partial class ResourceGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _exactMatchModel2sClientDiagnostics;
         private ExactMatchModel2SRestOperations _exactMatchModel2sRestClient;
@@ -26,15 +26,15 @@ namespace ExactMatchInheritance
         private ClientDiagnostics _exactMatchModel4sClientDiagnostics;
         private ExactMatchModel4SRestOperations _exactMatchModel4sRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
-        protected ResourceGroupExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal ResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -74,7 +74,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel2");
+            using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
             {
@@ -97,7 +97,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel2");
+            using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
             {
@@ -121,7 +121,7 @@ namespace ExactMatchInheritance
         {
             async Task<Page<ExactMatchModel3>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3s");
+                using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3s");
                 scope.Start();
                 try
                 {
@@ -147,7 +147,7 @@ namespace ExactMatchInheritance
         {
             Page<ExactMatchModel3> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3s");
+                using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3s");
                 scope.Start();
                 try
                 {
@@ -172,7 +172,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel3");
+            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
             {
@@ -195,7 +195,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel3");
+            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
             {
@@ -217,7 +217,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3");
+            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3");
             scope.Start();
             try
             {
@@ -239,7 +239,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel3> GetExactMatchModel3(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetExactMatchModel3");
+            using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3");
             scope.Start();
             try
             {
@@ -262,7 +262,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel4");
+            using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try
             {
@@ -285,7 +285,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutExactMatchModel4");
+            using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try
             {

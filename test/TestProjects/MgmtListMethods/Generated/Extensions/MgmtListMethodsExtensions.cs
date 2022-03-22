@@ -630,21 +630,21 @@ namespace MgmtListMethods
             return GetExtensionClient(subscriptionResource).UpdateQuotas(location, parameters, cancellationToken);
         }
 
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResGrpParentWithAncestorWithNonResChWithLocResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
-        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroup resourceGroup)
+        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChWithLocs();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -652,14 +652,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocResource>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocResource>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -667,22 +667,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLoc(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResGrpParentWithAncestorWithNonResChResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
-        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroup resourceGroup)
+        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChes();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
         }
 
         /// <summary>
@@ -690,14 +690,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -705,22 +705,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResCh(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResGrpParentWithAncestorWithLocResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
-        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroup resourceGroup)
+        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithLocs();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
         }
 
         /// <summary>
@@ -728,14 +728,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithLocResource>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithLocResource>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -743,22 +743,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLoc(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResGrpParentWithAncestorResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
-        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroup resourceGroup)
+        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestors();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestors();
         }
 
         /// <summary>
@@ -766,14 +766,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
         /// Operation Id: ResGrpParentWithAncestors_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorResource>> GetResGrpParentWithAncestorAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorResource>> GetResGrpParentWithAncestorAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -781,22 +781,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
         /// Operation Id: ResGrpParentWithAncestors_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestor(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestor(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResGrpParentWithNonResChResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
-        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroup resourceGroup)
+        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithNonResChes();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -804,14 +804,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
         /// Operation Id: ResGrpParentWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithNonResChResource>> GetResGrpParentWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithNonResChResource>> GetResGrpParentWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -819,22 +819,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
         /// Operation Id: ResGrpParentWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public static Response<ResGrpParentWithNonResChResource> GetResGrpParentWithNonResCh(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithNonResChResource> GetResGrpParentWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentResources in the ResGrpParentResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
-        public static ResGrpParentCollection GetResGrpParents(this ResourceGroup resourceGroup)
+        public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParents();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParents();
         }
 
         /// <summary>
@@ -842,14 +842,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
         /// Operation Id: ResGrpParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentResource>> GetResGrpParentAsync(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentResource>> GetResGrpParentAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -857,14 +857,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
         /// Operation Id: ResGrpParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public static Response<ResGrpParentResource> GetResGrpParent(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentResource> GetResGrpParent(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParents().Get(resGrpParentName, cancellationToken);
+            return resourceGroupResource.GetResGrpParents().Get(resGrpParentName, cancellationToken);
         }
 
         private static ManagementGroupResourceExtensionClient GetExtensionClient(ManagementGroupResource managementGroupResource)

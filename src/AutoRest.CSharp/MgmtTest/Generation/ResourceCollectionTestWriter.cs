@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var segments = requestPath.Split('/');
                 if (tp is MgmtExtensions extension)
                 {
-                    if (extension.ArmCoreType == typeof(ResourceGroup))
+                    if (extension.ArmCoreType == typeof(ResourceGroupResource))
                     {
                         if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
                         {
