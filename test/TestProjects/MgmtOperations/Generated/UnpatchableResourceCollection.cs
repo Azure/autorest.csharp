@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of UnpatchableResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="UnpatchableResource" /> and their operations.
+    /// Each <see cref="UnpatchableResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="UnpatchableResourceCollection" /> instance call the GetUnpatchableResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class UnpatchableResourceCollection : ArmCollection, IEnumerable<UnpatchableResource>, IAsyncEnumerable<UnpatchableResource>
     {
         private readonly ClientDiagnostics _unpatchableResourceClientDiagnostics;

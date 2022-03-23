@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a ResGrpParentWithAncestorWithNonResChWithLocResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a ResGrpParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetResGrpParentWithAncestorWithNonResChWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResGrpParentWithAncestorWithNonResChWithLoc method.
+    /// </summary>
     public partial class ResGrpParentWithAncestorWithNonResChWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> instance. </summary>
@@ -203,9 +209,9 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -234,9 +240,9 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -263,10 +269,10 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                await TagHelper.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -293,10 +299,10 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                TagHelper.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = TagHelper.Get(cancellationToken);
+                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -323,9 +329,9 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -352,9 +358,9 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

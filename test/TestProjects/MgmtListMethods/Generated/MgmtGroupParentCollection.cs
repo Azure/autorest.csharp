@@ -20,7 +20,11 @@ using Azure.ResourceManager.Management;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of MgmtGroupParent and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="MgmtGroupParentResource" /> and their operations.
+    /// Each <see cref="MgmtGroupParentResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
+    /// To get a <see cref="MgmtGroupParentCollection" /> instance call the GetMgmtGroupParents method from an instance of <see cref="ManagementGroupResource" />.
+    /// </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParentResource>, IAsyncEnumerable<MgmtGroupParentResource>
     {
         private readonly ClientDiagnostics _mgmtGroupParentClientDiagnostics;

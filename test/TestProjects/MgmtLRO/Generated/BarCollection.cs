@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtLRO
 {
-    /// <summary> A class representing collection of Bar and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="BarResource" /> and their operations.
+    /// Each <see cref="BarResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="BarCollection" /> instance call the GetBars method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class BarCollection : ArmCollection, IEnumerable<BarResource>, IAsyncEnumerable<BarResource>
     {
         private readonly ClientDiagnostics _barClientDiagnostics;

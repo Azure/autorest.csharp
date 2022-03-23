@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> A class representing collection of ResourceModel1 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ResourceModel1Resource" /> and their operations.
+    /// Each <see cref="ResourceModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="ResourceModel1Collection" /> instance call the GetResourceModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1Resource>, IAsyncEnumerable<ResourceModel1Resource>
     {
         private readonly ClientDiagnostics _resourceModel1ClientDiagnostics;

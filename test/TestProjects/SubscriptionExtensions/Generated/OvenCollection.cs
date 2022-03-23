@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Oven and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="OvenResource" /> and their operations.
+    /// Each <see cref="OvenResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="OvenCollection" /> instance call the GetOvens method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<OvenResource>, IAsyncEnumerable<OvenResource>
     {
         private readonly ClientDiagnostics _ovenClientDiagnostics;

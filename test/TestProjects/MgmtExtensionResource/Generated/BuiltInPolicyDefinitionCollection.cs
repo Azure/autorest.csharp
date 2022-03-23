@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> A class representing collection of BuiltInPolicyDefinition and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="BuiltInPolicyDefinitionResource" /> and their operations.
+    /// Each <see cref="BuiltInPolicyDefinitionResource" /> in the collection will belong to the same instance of <see cref="TenantResource" />.
+    /// To get a <see cref="BuiltInPolicyDefinitionCollection" /> instance call the GetBuiltInPolicyDefinitions method from an instance of <see cref="TenantResource" />.
+    /// </summary>
     public partial class BuiltInPolicyDefinitionCollection : ArmCollection, IEnumerable<BuiltInPolicyDefinitionResource>, IAsyncEnumerable<BuiltInPolicyDefinitionResource>
     {
         private readonly ClientDiagnostics _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics;

@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of AvailabilitySetChild and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="AvailabilitySetChildResource" /> and their operations.
+    /// Each <see cref="AvailabilitySetChildResource" /> in the collection will belong to the same instance of <see cref="AvailabilitySetResource" />.
+    /// To get an <see cref="AvailabilitySetChildCollection" /> instance call the GetAvailabilitySetChildren method from an instance of <see cref="AvailabilitySetResource" />.
+    /// </summary>
     public partial class AvailabilitySetChildCollection : ArmCollection, IEnumerable<AvailabilitySetChildResource>, IAsyncEnumerable<AvailabilitySetChildResource>
     {
         private readonly ClientDiagnostics _availabilitySetChildavailabilitySetChildClientDiagnostics;

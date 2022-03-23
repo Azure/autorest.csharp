@@ -70,8 +70,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override IEnumerable<Resource> ChildResources => Extension.ChildResources;
 
-        private string? _description;
-        public override string Description => _description ??= $"A class to add extension methods to {ResourceName}.";
+        private FormattableString? _description;
+        public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
         protected override string DefaultAccessibility => "internal";
 

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
 {
-    /// <summary> A class representing collection of ParentResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ParentResource" /> and their operations.
+    /// Each <see cref="ParentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="ParentResourceCollection" /> instance call the GetParentResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>
     {
         private readonly ClientDiagnostics _parentResourceClientDiagnostics;

@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         public bool IsStatic { get; }
 
-        public abstract string Description { get; }
+        public abstract FormattableString Description { get; }
 
         private HashSet<NameSetKey>? _uniqueSets;
         public HashSet<NameSetKey> UniqueSets => _uniqueSets ??= EnsureUniqueSets();

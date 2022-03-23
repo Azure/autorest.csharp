@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> A Class representing a BuiltInPolicyDefinitionResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a BuiltInPolicyDefinition along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="BuiltInPolicyDefinitionResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetBuiltInPolicyDefinitionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetBuiltInPolicyDefinition method.
+    /// </summary>
     public partial class BuiltInPolicyDefinitionResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="BuiltInPolicyDefinitionResource"/> instance. </summary>

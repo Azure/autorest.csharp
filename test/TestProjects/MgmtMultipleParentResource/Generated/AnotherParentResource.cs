@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A Class representing a AnotherParentResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an AnotherParent along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AnotherParentResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetAnotherParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAnotherParent method.
+    /// </summary>
     public partial class AnotherParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AnotherParentResource"/> instance. </summary>
@@ -300,9 +306,9 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -331,9 +337,9 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -360,10 +366,10 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                await TagHelper.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -390,10 +396,10 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                TagHelper.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = TagHelper.Get(cancellationToken);
+                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -420,9 +426,9 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _anotherParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -449,9 +455,9 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _anotherParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
