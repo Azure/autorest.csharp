@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
-            lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the colleciton will belong to the same instance of <see cref=\"{parentType}\" />.");
+            lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
             lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
 
             return FormattableStringHelpers.Join(lines, "\r\n");
