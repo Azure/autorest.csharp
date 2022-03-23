@@ -172,7 +172,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     WriteVariableInitializations(scenario, existedVariables);
                     _writer.Line($"resourceGroupName = Recording.GenerateAssetName(resourceGroupName);");
-                    _writer.Line($"resourceGroup = (await GetArmClient().GetSubscription(new {typeof(ResourceIdentifier)}($\"/subscriptions/{{subscriptionId}}\")).GetResourceGroups().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, resourceGroupName, new {typeof(ResourceGroupData)}(new {typeof(AzureLocation)}(location)))).Value;");
+                    _writer.Line($"resourceGroup = (await GetArmClient().GetSubscriptionResource(new {typeof(ResourceIdentifier)}($\"/subscriptions/{{subscriptionId}}\")).GetResourceGroups().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, resourceGroupName, new {typeof(ResourceGroupData)}(new {typeof(AzureLocation)}(location)))).Value;");
 
                     foreach (var step in scenario.Steps)
                     {
