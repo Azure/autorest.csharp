@@ -3,15 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.MgmtTest.TestCommon;
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
     /// <summary>
@@ -126,7 +123,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        WriteOperationInvocation(resource, clientOperation, operation, exampleModel, async, isLroOperation);
+                        WriteOperationInvocation(clientOperation, operation, exampleModel, async, isLroOperation, resource);
                     }
                     _writer.Line();
                     exampleIdx++;
@@ -134,7 +131,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteOperationInvocation(Resource resource, MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource resource)
         {
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPath, exampleModel);
@@ -142,6 +139,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
             _writer.Line();
             WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
+            return true;
         }
     }
 }
