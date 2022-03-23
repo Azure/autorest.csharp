@@ -8,8 +8,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Azure.Core;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR.Models;
 
@@ -28,7 +28,7 @@ namespace MgmtSignalR.Tests.Mock
         public async Task CheckNameAvailabilitySignalR()
         {
             // Example: SignalR_CheckNameAvailability
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
+            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
             string location = "eastus";
             MgmtSignalR.Models.NameAvailabilityParameters parameters = new MgmtSignalR.Models.NameAvailabilityParameters(resourceType: "Microsoft.SignalRService/SignalR", name: "my-signalr-service");
 
@@ -39,7 +39,7 @@ namespace MgmtSignalR.Tests.Mock
         public async Task GetSignalRResources()
         {
             // Example: SignalR_ListBySubscription
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
+            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
 
             await foreach (var _ in subscriptionResourceExtensions.GetSignalRResourcesAsync())
             {
@@ -50,7 +50,7 @@ namespace MgmtSignalR.Tests.Mock
         public async Task GetUsages()
         {
             // Example: Usages_List
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000"));
+            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
             string location = "eastus";
 
             await foreach (var _ in subscriptionResourceExtensions.GetUsagesAsync(location))

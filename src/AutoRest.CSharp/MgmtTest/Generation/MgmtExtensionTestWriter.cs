@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
@@ -11,6 +10,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.MgmtTest.TestCommon;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -91,34 +91,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource? resource=null)
         {
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             var resourceIdentifierParams = ComposeResourceIdentifierParams(restOperation.RequestPath, exampleModel);
             var subscriptionVariableName = new CodeWriterDeclaration(_extensions.Type.Name.FirstCharToLowerCase());
-            var subscriptionRequestPath = GetSubscriptionRequestPath(restOperation.RequestPath, exampleModel);
-            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscriptionResource(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(subscriptionRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}));");
+            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscriptionResource({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(restOperation.RequestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}));");
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters.Skip(1), exampleModel);
 
             _writer.Line();
             WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{subscriptionVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
-        }
-
-        public string GetSubscriptionRequestPath(RequestPath requestPath, ExampleModel exampleModel)
-        {
-            var result = new List<Segment>();
-            // this might throw exceptions when there are less than 2 segments
-            foreach (var segment in requestPath.Take(2))
-            {
-            if (segment.IsConstant)
-            result.Add(segment);
-            else
-            {
-            var v = FindParameterValueByName(exampleModel, segment.ReferenceName) ?? "00000000-0000-0000-0000-000000000000";
-            result.Add(new Segment(v));
-            }
-            }
-            return new RequestPath(result);
+            return true;
         }
     }
 }

@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -13,10 +11,8 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Mgmt.Models;
-using System.Diagnostics.CodeAnalysis;
 using Azure.ResourceManager.Resources;
 using AutoRest.CSharp.MgmtTest.TestCommon;
 
@@ -113,9 +109,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return isAsync ? "Async" : string.Empty;
         }
 
-        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel, List<KeyValuePair<string, FormattableString>> parameterValues)
+        public void WriteGetCollection(MgmtTypeProvider parentTp, RequestPath requestPath, ExampleModel exampleModel, List<KeyValuePair<string, FormattableString>> parameterValues)
         {
-            var realRequestPath = ParseRequestPath(parentTp, requestPath, exampleModel)!;
             switch (parentTp)
             {
                 case Resource parentResource:
@@ -131,8 +126,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             _writer.UseNamespace("System.Linq");
                             _writer.Append($"var collection = GetArmClient().GetTenants().First()");
                         }
+                        if (extension == MgmtContext.Library.ResourceGroupExtensions) {
+                             _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}({typeof(ResourceGroupResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}, {GetExampleValueFromRequestPath(requestPath, exampleModel, "resourcegroups").RefScenarioDefinedVariables(_scenarioVariables)}))");
+                        }
+                        else if  (extension == MgmtContext.Library.SubscriptionExtensions) {
+                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}))");
+                        }
                         else {
-                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(realRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}))");
+                            throw new Exception($"Unknown parent extension {extension}");
                         }
                         break;
                     }
@@ -251,7 +252,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
+        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource? resource=null)
         {
             MgmtTypeProvider? parentTp = FindParentByRequestPath(restOperation.RequestPath.SerializedPath, exampleModel);
             if (parentTp is null) {
@@ -261,7 +262,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
             _writer.Line();
-            WriteGetCollection(parentTp, restOperation.RequestPath.SerializedPath, exampleModel, parameterValues);
+            WriteGetCollection(parentTp, restOperation.RequestPath, exampleModel, parameterValues);
             WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
             return true;
         }
