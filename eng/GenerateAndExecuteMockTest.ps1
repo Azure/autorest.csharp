@@ -99,6 +99,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     $mocktestsFolder = Join-Path  $path  "mocktests"
     $mockMd = $mocktestsFolder + "/autorest.tests.md"
     $csproj = ($mocktestsFolder + "/Azure.ResourceManager.Template.Tests.csproj").Replace("Template", $RPName)
+    $Script:candidateRPs += $RPName
     Write-Host "`n`nStart Generate $RPName"
 
     # Remove the [Generated] and [Custom] folders in src.
@@ -198,6 +199,7 @@ function  MockTestInit {
         Write-Host "Mock Test Initialize Start."
         $Script:allTrack2Sdk = 0
         $Script:newGenerateSdk = 0
+        $Script:candidateRPs = @()
         $Script:srcGenerateSuccessedRps = @()
         $Script:srcBuildSuccessedRps = @()
         $Script:testGenerateSuccessedRps = @()
@@ -376,6 +378,8 @@ function  MockTestInit {
         Write-Host "================================================================================="
         Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
         Write-Host "New generated track2 RPs: $Script:newGenerateSdk" 
+        Write-Host "candidateRPs:   "$Script:candidateRPs.Count
+        Show-Result($Script:candidateRPs) 
         Write-Host "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
         Show-Result($Script:srcGenerateSuccessedRps) 
         Write-Host "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
