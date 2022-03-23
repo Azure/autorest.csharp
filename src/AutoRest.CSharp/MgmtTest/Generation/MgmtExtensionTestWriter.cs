@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var resourceIdentifierParams = ComposeResourceIdentifierParams(restOperation.RequestPath, exampleModel);
             var subscriptionVariableName = new CodeWriterDeclaration(_extensions.Type.Name.FirstCharToLowerCase());
             var subscriptionRequestPath = GetSubscriptionRequestPath(restOperation.RequestPath, exampleModel);
-            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(subscriptionRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}));");
+            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscriptionResource(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(subscriptionRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}));");
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters.Skip(1), exampleModel);
 
             _writer.Line();

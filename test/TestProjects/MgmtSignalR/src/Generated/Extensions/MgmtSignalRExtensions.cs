@@ -19,11 +19,11 @@ namespace MgmtSignalR
     /// <summary> A class to add extension methods to MgmtSignalR. </summary>
     public static partial class MgmtSignalRExtensions
     {
-        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
-            return subscription.GetCachedClient((client) =>
+            return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(client, subscription.Id);
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
@@ -33,17 +33,17 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the region. </param>
         /// <param name="parameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(this Subscription subscription, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return await GetExtensionClient(subscription).CheckNameAvailabilitySignalRAsync(location, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalRAsync(location, parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -51,17 +51,17 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the region. </param>
         /// <param name="parameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<NameAvailability> CheckNameAvailabilitySignalR(this Subscription subscription, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public static Response<NameAvailability> CheckNameAvailabilitySignalR(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).CheckNameAvailabilitySignalR(location, parameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalR(location, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/signalR
         /// Operation Id: SignalR_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SignalRResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<SignalRResource> GetSignalRResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<SignalRResource> GetSignalRResourcesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSignalRResourcesAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetSignalRResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -82,12 +82,12 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/signalR
         /// Operation Id: SignalR_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SignalRResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<SignalRResource> GetSignalRResources(this Subscription subscription, CancellationToken cancellationToken = default)
+        public static Pageable<SignalRResource> GetSignalRResources(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSignalRResources(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetSignalRResources(cancellationToken);
         }
 
         /// <summary>
@@ -95,17 +95,17 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages
         /// Operation Id: Usages_List
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the location like &quot;eastus&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="SignalRUsage" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<SignalRUsage> GetUsagesAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<SignalRUsage> GetUsagesAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetUsagesAsync(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetUsagesAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -113,34 +113,34 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages
         /// Operation Id: Usages_List
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the location like &quot;eastus&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="SignalRUsage" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<SignalRUsage> GetUsages(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<SignalRUsage> GetUsages(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetUsages(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetUsages(location, cancellationToken);
         }
 
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of SignalRResources in the ResourceGroup. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <summary> Gets a collection of SignalRResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of SignalRResources and their operations over a SignalRResource. </returns>
-        public static SignalRResourceCollection GetSignalRResources(this ResourceGroup resourceGroup)
+        public static SignalRResourceCollection GetSignalRResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetSignalRResources();
+            return GetExtensionClient(resourceGroupResource).GetSignalRResources();
         }
 
         /// <summary>
@@ -148,14 +148,14 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
         /// Operation Id: SignalR_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceName"> The name of the SignalR resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public static async Task<Response<SignalRResource>> GetSignalRResourceAsync(this ResourceGroup resourceGroup, string resourceName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SignalRResource>> GetSignalRResourceAsync(this ResourceGroupResource resourceGroupResource, string resourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetSignalRResources().GetAsync(resourceName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetSignalRResources().GetAsync(resourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -163,14 +163,14 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
         /// Operation Id: SignalR_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceName"> The name of the SignalR resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public static Response<SignalRResource> GetSignalRResource(this ResourceGroup resourceGroup, string resourceName, CancellationToken cancellationToken = default)
+        public static Response<SignalRResource> GetSignalRResource(this ResourceGroupResource resourceGroupResource, string resourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetSignalRResources().Get(resourceName, cancellationToken);
+            return resourceGroupResource.GetSignalRResources().Get(resourceName, cancellationToken);
         }
 
         #region SignalRResource
@@ -192,20 +192,20 @@ namespace MgmtSignalR
         }
         #endregion
 
-        #region PrivateEndpointConnection
+        #region PrivateEndpointConnectionResource
         /// <summary>
-        /// Gets an object representing a <see cref="PrivateEndpointConnection" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PrivateEndpointConnection.CreateResourceIdentifier" /> to create a <see cref="PrivateEndpointConnection" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="PrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="PrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
-        public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PrivateEndpointConnectionResource" /> object. </returns>
+        public static PrivateEndpointConnectionResource GetPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                PrivateEndpointConnection.ValidateResourceId(id);
-                return new PrivateEndpointConnection(client, id);
+                PrivateEndpointConnectionResource.ValidateResourceId(id);
+                return new PrivateEndpointConnectionResource(client, id);
             }
             );
         }
