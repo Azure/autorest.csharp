@@ -13,27 +13,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private MgmtExtensions This { get; }
 
-        public ArmClientExtensionsWriter(MgmtExtensions extensions)
-            : base(extensions)
+        public ArmClientExtensionsWriter(ArmClientExtensions extensions) : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public override void Write()
+        public ArmClientExtensionsWriter(CodeWriter writer, ArmClientExtensions extensions) : base(writer, extensions)
         {
-            using (_writer.Namespace(This.Namespace))
+            This = extensions;
+        }
+
+        protected internal override void WriteImplementations()
+        {
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                WriteClassDeclaration();
-                using (_writer.Scope())
-                {
-                    foreach (var resource in MgmtContext.Library.ArmResources)
-                    {
-                        _writer.Line($"#region {resource.Type.Name}");
-                        WriteGetResourceFromIdMethod(resource);
-                        _writer.LineRaw("#endregion");
-                        _writer.Line();
-                    }
-                }
+                _writer.Line($"#region {resource.Type.Name}");
+                WriteGetResourceFromIdMethod(resource);
+                _writer.LineRaw("#endregion");
+                _writer.Line();
             }
         }
 
@@ -52,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (!IsArmCore)
                 {
-                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetClient<{resource.Type}>(() =>"))
+                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetResourceClient<{resource.Type}>(() =>"))
                     {
                         WriteGetter(resource, $"{ArmClientReference.ToVariableName()}");
                     }

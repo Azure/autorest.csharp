@@ -11,7 +11,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {

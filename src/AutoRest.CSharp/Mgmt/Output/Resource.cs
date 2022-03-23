@@ -13,7 +13,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -403,7 +403,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, Validate: false);
+                            Type: typeof(Azure.ResourceManager.ArmResource), DefaultValue: null, Validate: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
                         Type: ResourceData.Type, DefaultValue: null, Validate: false);
     }

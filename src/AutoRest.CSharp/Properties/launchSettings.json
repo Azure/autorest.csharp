@@ -200,6 +200,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_update1\\Generated"
     },
+    "dpg-customization-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
+    },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"

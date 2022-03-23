@@ -9,10 +9,10 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Input;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -65,6 +65,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultName => _defaultName;
 
         public MgmtExtensions Extension { get; }
+
+        public bool IsEmpty => Extension.IsEmpty;
 
         public override IEnumerable<Resource> ChildResources => Extension.ChildResources;
 

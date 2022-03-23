@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using ProtocolMethodsInRestClient.Models;
 
@@ -24,6 +25,24 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Initializes a new instance of TestServiceClient for mocking. </summary>
         protected TestServiceClient()
         {
+        }
+
+        /// <summary> Initializes a new instance of TestServiceClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        public TestServiceClient(AzureKeyCredential credential, Uri endpoint = null, TestServiceClientOptions options = null)
+        {
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("http://localhost:3000");
+
+            options ??= new TestServiceClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "Fake-Subscription-Key"));
+            RestClient = new TestServiceRestClient(_clientDiagnostics, _pipeline, endpoint);
         }
 
         /// <summary> Initializes a new instance of TestServiceClient. </summary>

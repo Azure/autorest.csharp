@@ -14,7 +14,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {

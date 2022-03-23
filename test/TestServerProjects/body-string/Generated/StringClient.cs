@@ -142,15 +142,14 @@ namespace body_string
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutEmptyAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
-                return await RestClient.PutEmptyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutEmptyAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -160,15 +159,14 @@ namespace body_string
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutEmpty(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
             {
-                return RestClient.PutEmpty(stringBody, cancellationToken);
+                return RestClient.PutEmpty(cancellationToken);
             }
             catch (Exception e)
             {
@@ -212,15 +210,14 @@ namespace body_string
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMbcsAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
             {
-                return await RestClient.PutMbcsAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutMbcsAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -230,15 +227,14 @@ namespace body_string
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutMbcs(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutMbcs(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
             {
-                return RestClient.PutMbcs(stringBody, cancellationToken);
+                return RestClient.PutMbcs(cancellationToken);
             }
             catch (Exception e)
             {
@@ -282,15 +278,14 @@ namespace body_string
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutWhitespaceAsync(string stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
             {
-                return await RestClient.PutWhitespaceAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutWhitespaceAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -300,15 +295,14 @@ namespace body_string
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
-        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutWhitespace(string stringBody, CancellationToken cancellationToken = default)
+        public virtual Response PutWhitespace(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
             {
-                return RestClient.PutWhitespace(stringBody, cancellationToken);
+                return RestClient.PutWhitespace(cancellationToken);
             }
             catch (Exception e)
             {

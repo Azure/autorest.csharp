@@ -137,6 +137,13 @@ namespace AutoRest.CSharp.Input
     {
     }
 
+    internal static class XMsFormat
+    {
+        public const string ArmId = "arm-id";
+        public const string ResourceType = "resource-type";
+        public const string DurationConstant = "duration-constant";
+    }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
