@@ -18,21 +18,21 @@ namespace MgmtDiscriminator
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of DeliveryRules in the DeliveryRule. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeliveryRules and their operations over a DeliveryRule. </returns>
-        public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of DeliveryRuleResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
+        public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetDeliveryRules();
+            return GetExtensionClient(resourceGroupResource).GetDeliveryRules();
         }
 
         /// <summary>
@@ -40,14 +40,14 @@ namespace MgmtDiscriminator
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}
         /// Operation Id: DeliveryRules_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<DeliveryRule>> GetDeliveryRuleAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -55,30 +55,30 @@ namespace MgmtDiscriminator
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}
         /// Operation Id: DeliveryRules_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<DeliveryRule> GetDeliveryRule(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDeliveryRules().Get(name, cancellationToken);
+            return resourceGroupResource.GetDeliveryRules().Get(name, cancellationToken);
         }
 
-        #region DeliveryRule
+        #region DeliveryRuleResource
         /// <summary>
-        /// Gets an object representing a <see cref="DeliveryRule" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeliveryRule.CreateResourceIdentifier" /> to create a <see cref="DeliveryRule" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeliveryRule" /> object. </returns>
-        public static DeliveryRule GetDeliveryRule(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
+        public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                DeliveryRule.ValidateResourceId(id);
-                return new DeliveryRule(client, id);
+                DeliveryRuleResource.ValidateResourceId(id);
+                return new DeliveryRuleResource(client, id);
             }
             );
         }

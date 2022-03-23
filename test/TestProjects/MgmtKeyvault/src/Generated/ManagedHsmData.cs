@@ -13,7 +13,7 @@ using MgmtKeyvault.Models;
 namespace MgmtKeyvault
 {
     /// <summary> A class representing the ManagedHsm data model. </summary>
-    public partial class ManagedHsmData : ManagedHsmResource
+    public partial class ManagedHsmData : Models.ManagedHsmResource
     {
         /// <summary> Initializes a new instance of ManagedHsmData. </summary>
         /// <param name="location"> The location. </param>

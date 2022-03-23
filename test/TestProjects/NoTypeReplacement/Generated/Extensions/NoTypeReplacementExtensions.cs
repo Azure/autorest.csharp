@@ -18,175 +18,175 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to NoTypeReplacement. </summary>
     public static partial class NoTypeReplacementExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
-        public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
+        public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel1s();
+            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1sName}
         /// Operation Id: NoTypeReplacementModel1s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public static async Task<Response<NoTypeReplacementModel1>> GetNoTypeReplacementModel1Async(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1sName}
         /// Operation Id: NoTypeReplacementModel1s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public static Response<NoTypeReplacementModel1> GetNoTypeReplacementModel1(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public static Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
+            return resourceGroupResource.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
-        public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
+        public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel2s();
+            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2sName}
         /// Operation Id: NoTypeReplacementModel2s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public static async Task<Response<NoTypeReplacementModel2>> GetNoTypeReplacementModel2Async(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2sName}
         /// Operation Id: NoTypeReplacementModel2s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public static Response<NoTypeReplacementModel2> GetNoTypeReplacementModel2(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public static Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
+            return resourceGroupResource.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
-        public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
+        public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel3s();
+            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}
         /// Operation Id: NoTypeReplacementModel3s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
-        public static async Task<Response<NoTypeReplacementModel3>> GetNoTypeReplacementModel3Async(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}
         /// Operation Id: NoTypeReplacementModel3s_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
-        public static Response<NoTypeReplacementModel3> GetNoTypeReplacementModel3(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public static Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
+            return resourceGroupResource.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
         }
 
-        #region NoTypeReplacementModel1
+        #region NoTypeReplacementModel1Resource
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel1" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel1.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1" /> object. </returns>
-        public static NoTypeReplacementModel1 GetNoTypeReplacementModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                NoTypeReplacementModel1.ValidateResourceId(id);
-                return new NoTypeReplacementModel1(client, id);
+                NoTypeReplacementModel1Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel1Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region NoTypeReplacementModel2
+        #region NoTypeReplacementModel2Resource
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel2" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel2.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2" /> object. </returns>
-        public static NoTypeReplacementModel2 GetNoTypeReplacementModel2(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                NoTypeReplacementModel2.ValidateResourceId(id);
-                return new NoTypeReplacementModel2(client, id);
+                NoTypeReplacementModel2Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel2Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region NoTypeReplacementModel3
+        #region NoTypeReplacementModel3Resource
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel3" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel3.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3" /> object. </returns>
-        public static NoTypeReplacementModel3 GetNoTypeReplacementModel3(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                NoTypeReplacementModel3.ValidateResourceId(id);
-                return new NoTypeReplacementModel3(client, id);
+                NoTypeReplacementModel3Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel3Resource(client, id);
             }
             );
         }

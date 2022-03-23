@@ -21,7 +21,7 @@ using Azure.ResourceManager.Resources;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of TrackedResourceModel1 and their operations over its parent. </summary>
-    public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1>, IAsyncEnumerable<TrackedResourceModel1>
+    public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1Resource>, IAsyncEnumerable<TrackedResourceModel1Resource>
     {
         private readonly ClientDiagnostics _trackedResourceModel1ClientDiagnostics;
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1RestClient;
@@ -36,8 +36,8 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TrackedResourceModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", TrackedResourceModel1.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(TrackedResourceModel1.ResourceType, out string trackedResourceModel1ApiVersion);
+            _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", TrackedResourceModel1Resource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(TrackedResourceModel1Resource.ResourceType, out string trackedResourceModel1ApiVersion);
             _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, trackedResourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -46,12 +46,12 @@ namespace SupersetFlattenInheritance
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -60,7 +60,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<TrackedResourceModel1>> CreateOrUpdateAsync(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<TrackedResourceModel1Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -70,7 +70,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _trackedResourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetFlattenInheritanceArmOperation<TrackedResourceModel1>(Response.FromValue(new TrackedResourceModel1(Client, response), response.GetRawResponse()));
+                var operation = new SupersetFlattenInheritanceArmOperation<TrackedResourceModel1Resource>(Response.FromValue(new TrackedResourceModel1Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -83,7 +83,7 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -92,7 +92,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<TrackedResourceModel1> CreateOrUpdate(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TrackedResourceModel1Resource> CreateOrUpdate(WaitUntil waitUntil, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -102,7 +102,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _trackedResourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, parameters, cancellationToken);
-                var operation = new SupersetFlattenInheritanceArmOperation<TrackedResourceModel1>(Response.FromValue(new TrackedResourceModel1(Client, response), response.GetRawResponse()));
+                var operation = new SupersetFlattenInheritanceArmOperation<TrackedResourceModel1Resource>(Response.FromValue(new TrackedResourceModel1Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -115,14 +115,14 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual async Task<Response<TrackedResourceModel1>> GetAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TrackedResourceModel1Resource>> GetAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
@@ -133,7 +133,7 @@ namespace SupersetFlattenInheritance
                 var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,14 +143,14 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual Response<TrackedResourceModel1> Get(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel1Resource> Get(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
@@ -161,7 +161,7 @@ namespace SupersetFlattenInheritance
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,17 +175,17 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel1s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TrackedResourceModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TrackedResourceModel1> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TrackedResourceModel1>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<TrackedResourceModel1Resource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _trackedResourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -201,17 +201,17 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel1s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TrackedResourceModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TrackedResourceModel1> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TrackedResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TrackedResourceModel1> FirstPageFunc(int? pageSizeHint)
+            Page<TrackedResourceModel1Resource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _trackedResourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TrackedResourceModel1Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -224,7 +224,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
@@ -251,7 +251,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
@@ -278,14 +278,14 @@ namespace SupersetFlattenInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual async Task<Response<TrackedResourceModel1>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TrackedResourceModel1Resource>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
@@ -295,8 +295,8 @@ namespace SupersetFlattenInheritance
             {
                 var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<TrackedResourceModel1Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,14 +307,14 @@ namespace SupersetFlattenInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
         /// Operation Id: TrackedResourceModel1s_Get
         /// </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual Response<TrackedResourceModel1> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel1Resource> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
 
@@ -324,8 +324,8 @@ namespace SupersetFlattenInheritance
             {
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<TrackedResourceModel1Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -334,7 +334,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        IEnumerator<TrackedResourceModel1> IEnumerable<TrackedResourceModel1>.GetEnumerator()
+        IEnumerator<TrackedResourceModel1Resource> IEnumerable<TrackedResourceModel1Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -344,7 +344,7 @@ namespace SupersetFlattenInheritance
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<TrackedResourceModel1> IAsyncEnumerable<TrackedResourceModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<TrackedResourceModel1Resource> IAsyncEnumerable<TrackedResourceModel1Resource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

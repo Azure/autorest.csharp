@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtDiscriminator
 {
-    internal class DeliveryRuleOperationSource : IOperationSource<DeliveryRule>
+    internal class DeliveryRuleOperationSource : IOperationSource<DeliveryRuleResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtDiscriminator
             _client = client;
         }
 
-        DeliveryRule IOperationSource<DeliveryRule>.CreateResult(Response response, CancellationToken cancellationToken)
+        DeliveryRuleResource IOperationSource<DeliveryRuleResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRule(_client, data);
+            return new DeliveryRuleResource(_client, data);
         }
 
-        async ValueTask<DeliveryRule> IOperationSource<DeliveryRule>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRule(_client, data);
+            return new DeliveryRuleResource(_client, data);
         }
     }
 }

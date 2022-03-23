@@ -13,19 +13,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public SingletonResourceTests() : base("SingletonResource") { }
 
-        [TestCase("Car", true)]
-        [TestCase("Ignition", true)]
+        [TestCase("CarResource", true)]
+        [TestCase("IgnitionResource", true)]
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
-        [TestCase("SingletonResource2", false)]
+        [TestCase("SingletonResource2Resource", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
 
-        [TestCase("Ignition", "Get", true)]
-        [TestCase("Ignition", "GetAsync", true)]
+        [TestCase("IgnitionResource", "Get", true)]
+        [TestCase("IgnitionResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Get", true)]
         [TestCase("SingletonResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Delete", false)]
@@ -39,6 +39,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ParentResourceCollection", true)]
+        [TestCase("ParentCollection", false)]
         [TestCase("SingletonResourceCollection", false)]
         [TestCase("SingletonResource2Collection", false)]
         public void ValidateCollections(string collection, bool isExists)
@@ -48,17 +49,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
+        [TestCase("ParentResource", "GetSingleton", false)]
         [TestCase("ParentResource", "GetSingletonResources", false)]
-        [TestCase("Car", "GetIgnition", true)]
-        [TestCase("Car", "GetIgnitions", false)]
-        [TestCase("SingletonResourceExtensions", "GetCars", false, typeof(Subscription))]
-        [TestCase("SingletonResourceExtensions", "GetCars", true, typeof(ResourceGroup))]
-        [TestCase("SingletonResourceExtensions", "GetCar", false, typeof(Subscription))]
-        [TestCase("SingletonResourceExtensions", "GetCar", true, typeof(ResourceGroup))]
-        [TestCase("SingletonResourceExtensions", "GetParentResources", false, typeof(Subscription))]
-        [TestCase("SingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroup))]
-        [TestCase("SingletonResourceExtensions", "GetParentResource", false, typeof(Subscription))]
-        [TestCase("SingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroup))]
+        [TestCase("CarResource", "GetIgnition", true)]
+        [TestCase("CarResource", "GetIgnitions", false)]
+        [TestCase("SingletonResourceExtensions", "GetCars", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetCars", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetCar", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetCar", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResources", true, typeof(ResourceGroupResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", false, typeof(SubscriptionResource))]
+        [TestCase("SingletonResourceExtensions", "GetParentResource", true, typeof(ResourceGroupResource))]
         [TestCase("SingletonResourceExtensions", "GetParentResourc", false)]
         public void ValidateEntranceOfGettingSingleton(string parent, string methodName, bool exist, params Type[] parameterTypes)
         {

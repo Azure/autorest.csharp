@@ -116,9 +116,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     var extraLayers = GetExtraLayers(requestPath, resource);
                     if (!extraLayers.Any())
-                        return $"Get{resource.Type.Name.ResourceNameToPlural()}";
+                        return $"Get{resource.ResourceName.ResourceNameToPlural()}";
                     var suffix = string.Join("", extraLayers.Select(segment => segment.ConstantValue.FirstCharToUpperCase().LastWordToSingular()));
-                    return $"Get{resource.Type.Name.ResourceNameToPlural()}By{suffix}";
+                    return $"Get{resource.ResourceName.ResourceNameToPlural()}By{suffix}";
                 }
             }
 

@@ -11,11 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220321.7" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220321.13" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.23.0-alpha.20220321.7" />
+    <PackageReference Include="Azure.Core" Version="1.23.0" />
   </ItemGroup>
 
 </Project>
