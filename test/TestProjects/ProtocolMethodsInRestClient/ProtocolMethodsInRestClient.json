@@ -210,6 +210,71 @@
           }
         }
       }
+    },
+    "/thirdTemplate/resources/{resourceId}": {
+      "delete": {
+        "operationId": "thirdTemplate_Delete",
+        "description": "Delete resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "operationId": "thirdTemplate_Get",
+        "description": "Retrieves information about the resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/thirdTemplate/resources": {
+      "put": {
+        "operationId": "thirdTemplate_Create",
+        "description": "Create or update resource.",
+        "parameters": [
+          {
+            "name": "resource",
+            "description": "Information about the resource",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
