@@ -187,7 +187,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.AreEqual(new[]
             {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
-                DateTimeOffset.Parse("1980-01-02 00:11:35+00:00"),
+                DateTimeOffset.Parse("1980-01-01 23:11:35+00:00"),
                 DateTimeOffset.Parse("1492-10-12 10:15:01+00:00"),
             }, result.Value);
         });
