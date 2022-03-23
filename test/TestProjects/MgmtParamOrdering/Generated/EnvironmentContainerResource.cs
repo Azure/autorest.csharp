@@ -17,7 +17,12 @@ using Azure.ResourceManager;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A Class representing a EnvironmentContainerResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an EnvironmentContainerResource along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="EnvironmentContainerResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetEnvironmentContainerResource method.
+    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource" /> using the GetEnvironmentContainerResource method.
+    /// </summary>
     public partial class EnvironmentContainerResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="EnvironmentContainerResource"/> instance. </summary>

@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of TheParentSubParentChild and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TheParentSubParentChildResource" /> and their operations.
+    /// Each <see cref="TheParentSubParentChildResource" /> in the colleciton will belong to the same instance of <see cref="SubParentResource" />.
+    /// To get a <see cref="TheParentSubParentChildCollection" /> instance call the GetTheParentSubParentChildren method from an instance of <see cref="SubParentResource" />.
+    /// </summary>
     public partial class TheParentSubParentChildCollection : ArmCollection, IEnumerable<TheParentSubParentChildResource>, IAsyncEnumerable<TheParentSubParentChildResource>
     {
         private readonly ClientDiagnostics _theParentSubParentChildChildrenClientDiagnostics;

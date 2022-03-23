@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a ImageResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an Image along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="ImageResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetImageResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetImage method.
+    /// </summary>
     public partial class ImageResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ImageResource"/> instance. </summary>

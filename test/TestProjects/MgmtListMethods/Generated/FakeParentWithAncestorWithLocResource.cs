@@ -17,7 +17,12 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a FakeParentWithAncestorWithLocResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a FakeParentWithAncestorWithLoc along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentWithAncestorWithLocResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentWithAncestorWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParentWithAncestorWithLoc method.
+    /// </summary>
     public partial class FakeParentWithAncestorWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithAncestorWithLocResource"/> instance. </summary>

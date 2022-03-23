@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
 {
-    /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a ParentResource along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ParentResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetParentResource method.
+    /// </summary>
     public partial class ParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ParentResource"/> instance. </summary>

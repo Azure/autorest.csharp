@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A Class representing a TheParentResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a TheParent along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TheParentResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetTheParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetTheParent method.
+    /// </summary>
     public partial class TheParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TheParentResource"/> instance. </summary>

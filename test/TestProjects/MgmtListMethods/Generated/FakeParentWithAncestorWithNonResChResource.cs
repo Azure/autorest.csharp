@@ -18,7 +18,12 @@ using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a FakeParentWithAncestorWithNonResChResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a FakeParentWithAncestorWithNonResCh along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentWithAncestorWithNonResChResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentWithAncestorWithNonResChResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParentWithAncestorWithNonResCh method.
+    /// </summary>
     public partial class FakeParentWithAncestorWithNonResChResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithAncestorWithNonResChResource"/> instance. </summary>

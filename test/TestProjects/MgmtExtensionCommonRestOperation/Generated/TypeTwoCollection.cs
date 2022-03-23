@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    /// <summary> A class representing collection of TypeTwo and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TypeTwoResource" /> and their operations.
+    /// Each <see cref="TypeTwoResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="TypeTwoCollection" /> instance call the GetTypeTwos method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class TypeTwoCollection : ArmCollection, IEnumerable<TypeTwoResource>, IAsyncEnumerable<TypeTwoResource>
     {
         private readonly ClientDiagnostics _typeTwoCommonClientDiagnostics;

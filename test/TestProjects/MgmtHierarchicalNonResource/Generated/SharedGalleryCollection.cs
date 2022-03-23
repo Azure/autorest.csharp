@@ -21,7 +21,11 @@ using MgmtHierarchicalNonResource.Models;
 
 namespace MgmtHierarchicalNonResource
 {
-    /// <summary> A class representing collection of SharedGallery and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SharedGalleryResource" /> and their operations.
+    /// Each <see cref="SharedGalleryResource" /> in the colleciton will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// To get a <see cref="SharedGalleryCollection" /> instance call the GetSharedGalleries method from an instance of <see cref="SubscriptionResource" />.
+    /// </summary>
     public partial class SharedGalleryCollection : ArmCollection, IEnumerable<SharedGalleryResource>, IAsyncEnumerable<SharedGalleryResource>
     {
         private readonly ClientDiagnostics _sharedGalleryClientDiagnostics;

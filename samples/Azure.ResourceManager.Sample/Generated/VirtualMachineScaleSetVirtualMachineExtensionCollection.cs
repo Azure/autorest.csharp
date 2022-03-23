@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineScaleSetVirtualMachineExtension and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> and their operations.
+    /// Each <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> in the colleciton will belong to the same instance of <see cref="VirtualMachineScaleSetVMResource" />.
+    /// To get a <see cref="VirtualMachineScaleSetVirtualMachineExtensionCollection" /> instance call the GetVirtualMachineScaleSetVirtualMachineExtensions method from an instance of <see cref="VirtualMachineScaleSetVMResource" />.
+    /// </summary>
     public partial class VirtualMachineScaleSetVirtualMachineExtensionCollection : ArmCollection, IEnumerable<VirtualMachineScaleSetVirtualMachineExtensionResource>, IAsyncEnumerable<VirtualMachineScaleSetVirtualMachineExtensionResource>
     {
         private readonly ClientDiagnostics _virtualMachineScaleSetVirtualMachineExtensionVirtualMachineScaleSetVMExtensionsClientDiagnostics;

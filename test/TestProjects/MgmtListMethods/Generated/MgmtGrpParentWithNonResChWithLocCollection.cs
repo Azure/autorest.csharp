@@ -20,7 +20,11 @@ using Azure.ResourceManager.Management;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of MgmtGrpParentWithNonResChWithLoc and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="MgmtGrpParentWithNonResChWithLocResource" /> and their operations.
+    /// Each <see cref="MgmtGrpParentWithNonResChWithLocResource" /> in the colleciton will belong to the same instance of <see cref="ManagementGroupResource" />.
+    /// To get a <see cref="MgmtGrpParentWithNonResChWithLocCollection" /> instance call the GetMgmtGrpParentWithNonResChWithLocs method from an instance of <see cref="ManagementGroupResource" />.
+    /// </summary>
     public partial class MgmtGrpParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<MgmtGrpParentWithNonResChWithLocResource>, IAsyncEnumerable<MgmtGrpParentWithNonResChWithLocResource>
     {
         private readonly ClientDiagnostics _mgmtGrpParentWithNonResChWithLocClientDiagnostics;

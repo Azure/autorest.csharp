@@ -21,7 +21,11 @@ using ResourceRename.Models;
 
 namespace ResourceRename
 {
-    /// <summary> A class representing collection of SshPublicKeyInfo and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SshPublicKeyInfoResource" /> and their operations.
+    /// Each <see cref="SshPublicKeyInfoResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="SshPublicKeyInfoCollection" /> instance call the GetSshPublicKeyInfos method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class SshPublicKeyInfoCollection : ArmCollection, IEnumerable<SshPublicKeyInfoResource>, IAsyncEnumerable<SshPublicKeyInfoResource>
     {
         private readonly ClientDiagnostics _sshPublicKeyInfoSshPublicKeysClientDiagnostics;

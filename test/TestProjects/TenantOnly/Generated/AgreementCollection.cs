@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of Agreement and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="AgreementResource" /> and their operations.
+    /// Each <see cref="AgreementResource" /> in the colleciton will belong to the same instance of <see cref="BillingAccountResource" />.
+    /// To get an <see cref="AgreementCollection" /> instance call the GetAgreements method from an instance of <see cref="BillingAccountResource" />.
+    /// </summary>
     public partial class AgreementCollection : ArmCollection, IEnumerable<AgreementResource>, IAsyncEnumerable<AgreementResource>
     {
         private readonly ClientDiagnostics _agreementClientDiagnostics;

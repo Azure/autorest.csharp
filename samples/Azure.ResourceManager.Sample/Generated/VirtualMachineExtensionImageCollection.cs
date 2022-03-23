@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="VirtualMachineExtensionImageResource" /> and their operations.
+    /// Each <see cref="VirtualMachineExtensionImageResource" /> in the colleciton will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// To get a <see cref="VirtualMachineExtensionImageCollection" /> instance call the GetVirtualMachineExtensionImages method from an instance of <see cref="SubscriptionResource" />.
+    /// </summary>
     public partial class VirtualMachineExtensionImageCollection : ArmCollection, IEnumerable<VirtualMachineExtensionImageResource>, IAsyncEnumerable<VirtualMachineExtensionImageResource>
     {
         private readonly ClientDiagnostics _virtualMachineExtensionImageClientDiagnostics;

@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Management;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a MgmtGrpParentWithLocResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="MgmtGrpParentWithLocResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetMgmtGrpParentWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ManagementGroupResource" /> using the GetMgmtGrpParentWithLoc method.
+    /// </summary>
     public partial class MgmtGrpParentWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="MgmtGrpParentWithLocResource"/> instance. </summary>

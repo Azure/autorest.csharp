@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> A Class representing a TrackedResourceModel1Resource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a TrackedResourceModel1 along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TrackedResourceModel1Resource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetTrackedResourceModel1Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetTrackedResourceModel1 method.
+    /// </summary>
     public partial class TrackedResourceModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TrackedResourceModel1Resource"/> instance. </summary>

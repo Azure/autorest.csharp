@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace TenantOnly
 {
-    /// <summary> A Class representing a BillingAccountResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a BillingAccount along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="BillingAccountResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetBillingAccountResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetBillingAccount method.
+    /// </summary>
     public partial class BillingAccountResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="BillingAccountResource"/> instance. </summary>

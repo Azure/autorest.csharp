@@ -18,7 +18,12 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a VirtualMachineScaleSetVirtualMachineExtensionResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a VirtualMachineScaleSetVirtualMachineExtension along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetVirtualMachineExtensionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="VirtualMachineScaleSetVMResource" /> using the GetVirtualMachineScaleSetVirtualMachineExtension method.
+    /// </summary>
     public partial class VirtualMachineScaleSetVirtualMachineExtensionResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/> instance. </summary>

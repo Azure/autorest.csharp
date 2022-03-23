@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="BillingAccountResource" /> and their operations.
+    /// Each <see cref="BillingAccountResource" /> in the colleciton will belong to the same instance of <see cref="TenantResource" />.
+    /// To get a <see cref="BillingAccountCollection" /> instance call the GetBillingAccounts method from an instance of <see cref="TenantResource" />.
+    /// </summary>
     public partial class BillingAccountCollection : ArmCollection, IEnumerable<BillingAccountResource>, IAsyncEnumerable<BillingAccountResource>
     {
         private readonly ClientDiagnostics _billingAccountClientDiagnostics;

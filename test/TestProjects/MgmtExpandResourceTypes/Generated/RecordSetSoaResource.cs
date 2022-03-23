@@ -17,7 +17,12 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A Class representing a RecordSetSoaResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a RecordSetSoa along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetSoaResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetSoaResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetSoa method.
+    /// </summary>
     public partial class RecordSetSoaResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetSoaResource"/> instance. </summary>

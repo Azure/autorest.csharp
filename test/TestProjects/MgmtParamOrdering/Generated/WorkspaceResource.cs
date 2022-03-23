@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A Class representing a WorkspaceResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a Workspace along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="WorkspaceResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetWorkspaceResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetWorkspace method.
+    /// </summary>
     public partial class WorkspaceResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="WorkspaceResource"/> instance. </summary>

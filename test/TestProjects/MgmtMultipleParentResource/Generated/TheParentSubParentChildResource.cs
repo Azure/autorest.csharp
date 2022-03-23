@@ -18,7 +18,12 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A Class representing a TheParentSubParentChildResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a TheParentSubParentChild along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TheParentSubParentChildResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetTheParentSubParentChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubParentResource" /> using the GetTheParentSubParentChild method.
+    /// </summary>
     public partial class TheParentSubParentChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TheParentSubParentChildResource"/> instance. </summary>

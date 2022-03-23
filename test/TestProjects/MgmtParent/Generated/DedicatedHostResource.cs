@@ -18,7 +18,12 @@ using MgmtParent.Models;
 
 namespace MgmtParent
 {
-    /// <summary> A Class representing a DedicatedHostResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a DedicatedHost along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DedicatedHostResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetDedicatedHostResource method.
+    /// Otherwise you can get one from its parent resource <see cref="DedicatedHostGroupResource" /> using the GetDedicatedHost method.
+    /// </summary>
     public partial class DedicatedHostResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DedicatedHostResource"/> instance. </summary>

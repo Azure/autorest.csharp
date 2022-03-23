@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of ResGrpParentWithAncestorWithLoc and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> and their operations.
+    /// Each <see cref="ResGrpParentWithAncestorWithLocResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="ResGrpParentWithAncestorWithLocCollection" /> instance call the GetResGrpParentWithAncestorWithLocs method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ResGrpParentWithAncestorWithLocCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorWithLocResource>, IAsyncEnumerable<ResGrpParentWithAncestorWithLocResource>
     {
         private readonly ClientDiagnostics _resGrpParentWithAncestorWithLocClientDiagnostics;

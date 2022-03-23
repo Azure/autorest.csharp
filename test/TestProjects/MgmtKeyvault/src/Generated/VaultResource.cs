@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
 {
-    /// <summary> A Class representing a VaultResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a Vault along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VaultResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetVaultResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVault method.
+    /// </summary>
     public partial class VaultResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VaultResource"/> instance. </summary>

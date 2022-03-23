@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a FakeResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a Fake along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetFakeResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetFake method.
+    /// </summary>
     public partial class FakeResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeResource"/> instance. </summary>

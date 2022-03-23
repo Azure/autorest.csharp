@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
 {
-    /// <summary> A class representing collection of Car and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="CarResource" /> and their operations.
+    /// Each <see cref="CarResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="CarCollection" /> instance call the GetCars method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class CarCollection : ArmCollection, IEnumerable<CarResource>, IAsyncEnumerable<CarResource>
     {
         private readonly ClientDiagnostics _carClientDiagnostics;

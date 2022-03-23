@@ -17,7 +17,12 @@ using Azure.ResourceManager;
 
 namespace MgmtOperations
 {
-    /// <summary> A Class representing a AvailabilitySetChildResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an AvailabilitySetChild along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetChildResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetResource" /> using the GetAvailabilitySetChild method.
+    /// </summary>
     public partial class AvailabilitySetChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetChildResource"/> instance. </summary>

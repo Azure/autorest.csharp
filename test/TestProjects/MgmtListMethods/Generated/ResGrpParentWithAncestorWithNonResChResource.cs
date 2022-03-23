@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A Class representing a ResGrpParentWithAncestorWithNonResChResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResGrpParentWithAncestorWithNonResChResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetResGrpParentWithAncestorWithNonResChResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResGrpParentWithAncestorWithNonResCh method.
+    /// </summary>
     public partial class ResGrpParentWithAncestorWithNonResChResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> instance. </summary>

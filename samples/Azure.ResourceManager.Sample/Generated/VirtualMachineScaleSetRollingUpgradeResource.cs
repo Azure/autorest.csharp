@@ -17,7 +17,12 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a VirtualMachineScaleSetRollingUpgradeResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetRollingUpgradeResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetRollingUpgradeResource method.
+    /// Otherwise you can get one from its parent resource <see cref="VirtualMachineScaleSetResource" /> using the GetVirtualMachineScaleSetRollingUpgrade method.
+    /// </summary>
     public partial class VirtualMachineScaleSetRollingUpgradeResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> instance. </summary>

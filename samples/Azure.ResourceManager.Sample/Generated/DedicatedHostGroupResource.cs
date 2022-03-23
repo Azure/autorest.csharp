@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a DedicatedHostGroupResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a DedicatedHostGroup along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DedicatedHostGroupResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetDedicatedHostGroupResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetDedicatedHostGroup method.
+    /// </summary>
     public partial class DedicatedHostGroupResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DedicatedHostGroupResource"/> instance. </summary>

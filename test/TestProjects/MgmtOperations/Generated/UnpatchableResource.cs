@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtOperations
 {
-    /// <summary> A Class representing a UnpatchableResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an UnpatchableResource along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="UnpatchableResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetUnpatchableResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetUnpatchableResource method.
+    /// </summary>
     public partial class UnpatchableResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="UnpatchableResource"/> instance. </summary>

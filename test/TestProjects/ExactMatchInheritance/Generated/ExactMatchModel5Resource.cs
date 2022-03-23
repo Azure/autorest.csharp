@@ -14,10 +14,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A Class representing a ExactMatchModel5Resource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an ExactMatchModel5 along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="ExactMatchModel5Resource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetExactMatchModel5Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetExactMatchModel5 method.
+    /// </summary>
     public partial class ExactMatchModel5Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ExactMatchModel5Resource"/> instance. </summary>

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace XmlDeserialization
 {
-    /// <summary> A class representing collection of XmlInstance and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="XmlInstanceResource" /> and their operations.
+    /// Each <see cref="XmlInstanceResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="XmlInstanceCollection" /> instance call the GetXmlInstances method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class XmlInstanceCollection : ArmCollection, IEnumerable<XmlInstanceResource>, IAsyncEnumerable<XmlInstanceResource>
     {
         private readonly ClientDiagnostics _xmlInstanceXmlDeserializationClientDiagnostics;

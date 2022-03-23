@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of TenantParentWithNonResChWithLoc and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TenantParentWithNonResChWithLocResource" /> and their operations.
+    /// Each <see cref="TenantParentWithNonResChWithLocResource" /> in the colleciton will belong to the same instance of <see cref="TenantTestResource" />.
+    /// To get a <see cref="TenantParentWithNonResChWithLocCollection" /> instance call the GetTenantParentWithNonResChWithLocs method from an instance of <see cref="TenantTestResource" />.
+    /// </summary>
     public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLocResource>, IAsyncEnumerable<TenantParentWithNonResChWithLocResource>
     {
         private readonly ClientDiagnostics _tenantParentWithNonResChWithLocClientDiagnostics;
