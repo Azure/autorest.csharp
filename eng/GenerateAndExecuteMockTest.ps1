@@ -324,7 +324,7 @@ function  MockTestInit {
             $RPName = ($_.Substring($_.IndexOf("Azure.ResourceManager"), $_.Length - $_.IndexOf("Azure.ResourceManager"))).Replace("Azure.ResourceManager.", "")
             # run .sln test
             & cd $_
-            $response = dotnet test --filter FullyQualifiedName~Mock
+            $response = dotnet test --filter FullyQualifiedName~Mock --logger "trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CodeCoverageDirectory=$_\src
             $log = @()
             $allResult = @()
             $flag = $false

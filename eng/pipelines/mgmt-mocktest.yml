@@ -1,17 +1,13 @@
-trigger:
+trigger: none
+pr: none
+schedules:
+- cron: "0 20 * * *"
+  displayName: "4AM (UTC +8) daily mock test"
   branches:
     include:
-    - feature/*
-    - pipelinetest
-
-pr:
-  branches:
-    include:
-    - feature/*
-    - pipelinetest
+    - feature/v3
 
 variables:
-  BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
   NugetSecurityAnalysisWarningLevel: 'none'
 
@@ -33,8 +29,8 @@ resources:
 stages:
   - stage: 'Build_and_Test'
     jobs:
-      - job: MockInit
-        timeoutInMinutes: 180
+      - job: MockTest
+        timeoutInMinutes: 240
         pool:
           name: azsdk-pool-mms-win-2019-general
           vmImage: MMS2019
@@ -50,6 +46,7 @@ stages:
           - task: NodeTool@0
             displayName: "Install Node 16.x"
             inputs:
+              # https://github.com/nodejs/node/issues/40468
               versionSpec: '16.6.2'
           - script: |
               npm ci
@@ -67,6 +64,28 @@ stages:
               pwsh ./eng/GenerateAndExecuteMockTest.ps1
             displayName: "GenerateAndExecuteMockTest"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-        parameters:
-          name: SmokeTest_S_Z
-          filter: "^[s-z]"
+          - task: PublishTestResults@2
+            condition: always()
+            displayName: "Publish Results"
+            inputs:
+              testResultsFiles: "**/*.trx"
+              testRunTitle: "Publish Results for build $(OfficialBuildId)"
+              testResultsFormat: "VSTest"
+              mergeTestResults: false
+          - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+            condition: succeededOrFailed()
+            displayName: Generate Code Coverage Reports
+            inputs:
+              reports: $(Build.SourcesDirectory)\**\coverage.cobertura.xml
+              targetdir: $(Build.ArtifactStagingDirectory)\coverage
+              reporttypes: Cobertura
+              filefilters: +$(Build.SourcesDirectory)\**
+              assemblyfilters: '+Azure.ResourceManager.*;-Azure.ResourceManager.*.Tests'
+              verbosity: Verbose
+              classfilters: '-Azure.Core.*'
+          - task: PublishCodeCoverageResults@1
+            condition: succeededOrFailed()
+            displayName: Publish Code Coverage Reports
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.xml
