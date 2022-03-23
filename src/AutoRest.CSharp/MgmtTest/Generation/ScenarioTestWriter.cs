@@ -105,17 +105,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     if (step.ExampleModel.Operation.IsResourceOperation(out Resource? resource, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation))
                     {
                         ResourceTestWriter testWriter = new ResourceTestWriter(_writer, resource!, scenarioDefinedVariables);
-                        testWriter.WriteOperationInvocation(resource!, clientOperation!, restOperation!, step.ExampleModel, true, resource!.DeleteOperation == clientOperation);
+                        testWriter.WriteOperationInvocation(clientOperation, restOperation, step.ExampleModel, true, resource!.DeleteOperation == clientOperation, resource);
                     }
                     else if (step.ExampleModel.Operation.IsCollectionOperation(out ResourceCollection? collection, out clientOperation, out restOperation))
                     {
                         ResourceCollectionTestWriter testWriter = new ResourceCollectionTestWriter(_writer, collection!, scenarioDefinedVariables);
-                        testWriter.WriteOperationInvocation(clientOperation!, restOperation!, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
+                        testWriter.WriteOperationInvocation(clientOperation, restOperation, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
                     }
                     else if (step.ExampleModel.Operation.IsSubscriptionOperation(out clientOperation, out restOperation))
                     {
                         MgmtExtensionTestWriter testWriter = new MgmtExtensionTestWriter(_writer, MgmtContext.Library.SubscriptionExtensions, scenarioDefinedVariables);
-                        testWriter.WriteOperationInvocation(clientOperation!, restOperation!, step.ExampleModel, true, false);
+                        testWriter.WriteOperationInvocation(clientOperation, restOperation, step.ExampleModel, true, false);
                     }
                     else
                     {

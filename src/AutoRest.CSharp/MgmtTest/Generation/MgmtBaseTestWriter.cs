@@ -29,7 +29,7 @@ using AutoRest.CSharp.MgmtTest.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
-    internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
+    internal abstract partial class MgmtBaseTestWriter: MgmtClientBaseWriter
     {
         public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
@@ -648,84 +648,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return parameterValues;
         }
 
-        public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
-        {
-            List<string> result = new List<string>();
-            var segements = requestPath.Split('/');
-            if (tp is Resource resource)
-                    {
-                        var resourceTypeSegments = resource.ResourceType.SerializedType.Split('/');
-                        bool inResourceType = false;
-                        int idxInResourceType = 1;
-                        bool odd = true;
-                        foreach (string segment in segements)
-                        {
-                            if (segment == resourceTypeSegments[0])
-                            {
-                                inResourceType = true;
-                            }
-                            if (segment.StartsWith("{") && segment.EndsWith("}"))
-                            {
-                                var v = FindParameterValueByName(exampleModel, segment.Substring(1, segment.Length - 2));
-                                if (v is null)
-                                {
-                                    return null;
-                                }
-                                result.Add(v);
-                            }
-                            else
-                            {
-                                if (inResourceType && !odd)
-                                {
-                                    if (idxInResourceType >= resourceTypeSegments.Length)
-                                    {
-                                        break;
-                                    }
-                                    if (segment.ToLower() != resourceTypeSegments[idxInResourceType++].ToLower())
-                                    {
-                                        break;
-                                    }
-                                }
-                                result.Add(segment);
-                            }
-                            odd = !odd;
-                        }
-                        return String.Join("/", result.ToArray());
-                    }
-            int maxSegment = 0;
-            if (tp is MgmtExtensions extension)
-            {
-                if (extension.ArmCoreType == typeof(ResourceGroupResource))
-                {
-                    maxSegment = 5;
-                }
-                else if (extension.ArmCoreType == typeof(SubscriptionResource))
-                {
-                    maxSegment = 3;
-                }
-            }
-            int i = 0;
-            foreach (string segment in segements)
-            {
-                if (segment.StartsWith("{") && segment.EndsWith("}"))
-                {
-                    var v = FindParameterValueByName(exampleModel, segment.Substring(1, segment.Length - 2));
-                    if (v is null)
-                    {
-                         return null;
-                    }
-                    result.Add(v);
-                }
-                else
-                {
-                    result.Add(segment);
-                }
-                if (++i >= maxSegment)
-                    break;
-            }
-            return String.Join("/", result.ToArray());
-        }
-
         public FormattableString ComposeResourceIdentifierParams(RequestPath requestPath, ExampleModel exampleModel)
         {
             var identifierParams = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => {
@@ -752,7 +674,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return $"{identifierParams}";
         }
 
-        public string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
+        public static string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
         {
             foreach (var parameterValue in exampleModel.AllParameter)
             {
@@ -795,5 +717,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 _writer.Line($"{WriteMethodInvocation($"{methodName}", paramNames)};");
             }
         }
+
+        public static string GetExampleValueFromRequestPath(RequestPath requestPath, ExampleModel exampleModel, string type)
+        {
+            int i = 0;
+            string? exampleValue = null;
+            foreach (var segment in requestPath)
+            {
+                if (segment.IsConstant && segment.ConstantValue.ToLower()==type){
+                    exampleValue = FindParameterValueByName(exampleModel, requestPath.ElementAt(i+1).ReferenceName);
+                    break;
+                }
+                i++;
+            }
+            return exampleValue ?? "00000000-0000-0000-0000-000000000000";
+        }
+
+        public abstract bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource resource);
     }
 }
