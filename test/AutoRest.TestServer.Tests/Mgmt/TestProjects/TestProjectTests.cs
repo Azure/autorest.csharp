@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -156,8 +157,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedType, genericArgument, $"Return type did not match for {type.Name}.{method.Name}");
         }
 
-        private Type? GetResourceFromCollection(Type collection) => MyTypes().FirstOrDefault(t => t.Name == GetResourceNameFromCollectionName(collection.Name));
-        private string GetResourceNameFromCollectionName(string collectionName) => collectionName.Substring(0, collectionName.IndexOf("Collection"));
+        private Type? GetResourceFromCollection(Type collection)
+        {
+            var baseName = collection.Name.Substring(0, collection.Name.IndexOf("Collection"));
+            return MyTypes().FirstOrDefault(t => t.Name == baseName.AddResourceSuffixToResourceName() || t.Name == baseName);
+        }
 
         protected virtual HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>();
         [Test]
@@ -176,7 +180,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                         continue;
                     var genericArg = interFace.GetGenericArguments().FirstOrDefault();
                     Assert.NotNull(genericArg, $"{interFace.Name} did not have a type argument for {collection.Name}");
-                    Assert.AreEqual(GetResourceNameFromCollectionName(collection.Name), genericArg.Name);
+                    Assert.AreEqual(GetResourceFromCollection(collection).Name, genericArg.Name);
                 }
             }
         }
@@ -239,7 +243,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.ReturnType.IsSubclassOf(typeof(Task))))
                 {
                     var typeArg = method.ReturnType.GenericTypeArguments.FirstOrDefault();
-                    if (typeArg.IsSubclassOf(typeof(Operation)))
+                    if (typeArg.IsSubclassOf(typeof(Azure.Operation)))
                         continue; //skip LROs
 
                     Assert.IsNotNull(typeArg);
@@ -323,12 +327,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
                 Assert.AreEqual(3, method.GetParameters().Length, $"{type.Name}.{method.Name} had more parameters than expected. Only expected 3 but got {{{string.Join(',', method.GetParameters().Select(p => p.Name))}}}");
-                var param1 = TypeAsserts.HasParameter(method, "key");
-                Assert.AreEqual(typeof(string), param1.ParameterType);
-                var param2 = TypeAsserts.HasParameter(method, "value");
-                Assert.AreEqual(typeof(string), param2.ParameterType);
-                var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
-                Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
+                TypeAsserts.HasParameter(method, "key", typeof(string));
+                TypeAsserts.HasParameter(method, "value", typeof(string));
+                TypeAsserts.HasParameter(method, "cancellationToken", typeof(CancellationToken));
             }
         }
 
@@ -357,10 +358,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
                 Assert.AreEqual(2, method.GetParameters().Length);
-                var param1 = TypeAsserts.HasParameter(method, "tags");
-                Assert.AreEqual(typeof(IDictionary<string, string>), param1.ParameterType);
-                var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
-                Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
+                TypeAsserts.HasParameter(method, "tags", typeof(IDictionary<string, string>));
+                TypeAsserts.HasParameter(method, "cancellationToken", typeof(CancellationToken));
             }
         }
 
@@ -380,10 +379,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
 
                 Assert.AreEqual(2, method.GetParameters().Length);
-                var param1 = TypeAsserts.HasParameter(method, "key");
-                Assert.AreEqual(typeof(string), param1.ParameterType);
-                var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
-                Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
+                TypeAsserts.HasParameter(method, "key", typeof(string));
+                TypeAsserts.HasParameter(method, "cancellationToken", typeof(CancellationToken));
             }
         }
 
@@ -420,8 +417,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var getCollectionMethods = resourceExtensions.GetMethods()
                         .Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}")
-                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroup)}));
-                    Assert.AreEqual(1, getCollectionMethods.Count());
+                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroupResource)}));
+                    Assert.AreEqual(1, getCollectionMethods.Count(), $"Cannot find {resourceExtensions.Name}.Get{resourceName.ResourceNameToPlural()}");
                 }
             }
         }
@@ -472,6 +469,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (Type t in allTypes)
             {
                 if (t.BaseType.FullName == typeof(ArmResource).FullName &&
+                    !t.Name.Contains("Tests") &&
+                    t.Namespace == _projectName &&
+                    !t.Name.EndsWith("ExtensionClient"))
+                {
+                    yield return t;
+                }
+            }
+        }
+
+        public IEnumerable<Type> FindAllResourceData()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if ((t.BaseType.FullName == typeof(ResourceData).FullName || t.BaseType.FullName == typeof(TrackedResourceData).FullName) &&
                     !t.Name.Contains("Tests") &&
                     t.Namespace == _projectName &&
                     !t.Name.EndsWith("ExtensionClient"))
@@ -536,7 +549,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void ValidateSubscriptionExtensionsGetResourceCollection()
+        public void ValidateSubscriptionResourceExtensionsGetResourceCollection()
         {
             if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
@@ -559,8 +572,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var methodInfos = resourceExtensions.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.ReturnType.Name == type.Name);
                     Assert.AreEqual(methodInfos.Count(), 1);
-                    var param = TypeAsserts.HasParameter(methodInfos.First(), "subscription");
-                    Assert.AreEqual(typeof(Subscription), param.ParameterType);
+                    var param = TypeAsserts.HasParameter(methodInfos.First(), "subscriptionResource", typeof(SubscriptionResource));
                 }
             }
         }
@@ -572,7 +584,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [Test]
-        public void ValidateSubscriptionExtensionsListResource()
+        public void ValidateSubscriptionResourceExtensionsListResource()
         {
             if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
@@ -600,18 +612,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     var listMethodInfos = resourceExtensions.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listMethodInfo = listMethodInfos.First();
-                    var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(Subscription), listParam1.ParameterType);
-                    var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
-                    Assert.AreEqual(typeof(CancellationToken), listParam2.ParameterType);
+
+                    TypeAsserts.HasParameter(listMethodInfo, "subscriptionResource", typeof(SubscriptionResource));
+                    TypeAsserts.HasParameter(listMethodInfo, "cancellationToken", typeof(CancellationToken));
 
                     var listAsyncMethodInfos = resourceExtensions.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}Async" && m.GetParameters().Length >= 2);
                     Assert.AreEqual(listMethodInfos.Count(), 1);
                     var listAsyncMethodInfo = listAsyncMethodInfos.First();
-                    var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(Subscription), listAsyncParam1.ParameterType);
-                    var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");
-                    Assert.AreEqual(typeof(CancellationToken), listAsyncParam2.ParameterType);
+                    TypeAsserts.HasParameter(listAsyncMethodInfo, "subscriptionResource", typeof(SubscriptionResource));
+                    TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken", typeof(CancellationToken));
                 }
             }
         }
@@ -628,8 +637,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     if (IsParent(collection, resourceIdentifier))
                     {
-                        var name = collection.Name.Remove(collection.Name.LastIndexOf("Collection"));
-                        var method = operation.GetMethod($"Get{name.ToPlural()}");
+                        var resourceName = collection.Name.Remove(collection.Name.LastIndexOf("Collection"));
+                        var method = operation.GetMethod($"Get{resourceName.ToPlural()}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(collection.Namespace + "." + collection.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

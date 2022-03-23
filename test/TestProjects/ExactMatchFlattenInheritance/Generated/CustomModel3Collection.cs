@@ -21,7 +21,7 @@ using Azure.ResourceManager.Resources;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over its parent. </summary>
-    public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3>, IAsyncEnumerable<CustomModel3>
+    public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3Resource>, IAsyncEnumerable<CustomModel3Resource>
     {
         private readonly ClientDiagnostics _customModel3ClientDiagnostics;
         private readonly CustomModel3SRestOperations _customModel3RestClient;
@@ -36,9 +36,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal CustomModel3Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(CustomModel3.ResourceType, out string customModel3ApiVersion);
-            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
+            _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", CustomModel3Resource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(CustomModel3Resource.ResourceType, out string customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -46,8 +46,8 @@ namespace ExactMatchFlattenInheritance
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<CustomModel3>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<CustomModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -71,7 +71,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _customModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3>(Response.FromValue(new CustomModel3(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3Resource>(Response.FromValue(new CustomModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,7 +94,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<CustomModel3> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<CustomModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -104,7 +104,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _customModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3>(Response.FromValue(new CustomModel3(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3Resource>(Response.FromValue(new CustomModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -125,7 +125,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<CustomModel3>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel3Resource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -136,7 +136,7 @@ namespace ExactMatchFlattenInheritance
                 var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,7 +154,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<CustomModel3> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel3Resource> Get(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -165,7 +165,7 @@ namespace ExactMatchFlattenInheritance
                 var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,17 +180,17 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: CustomModel3s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel3" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<CustomModel3> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="CustomModel3Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<CustomModel3Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<CustomModel3>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<CustomModel3Resource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _customModel3RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,17 +207,17 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: CustomModel3s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel3" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<CustomModel3> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="CustomModel3Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<CustomModel3Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<CustomModel3> FirstPageFunc(int? pageSizeHint)
+            Page<CustomModel3Resource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _customModel3RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new CustomModel3Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -291,7 +291,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<CustomModel3>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel3Resource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -301,8 +301,8 @@ namespace ExactMatchFlattenInheritance
             {
                 var response = await _customModel3RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<CustomModel3Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -320,7 +320,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<CustomModel3> GetIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel3Resource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -330,8 +330,8 @@ namespace ExactMatchFlattenInheritance
             {
                 var response = _customModel3RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<CustomModel3>(null, response.GetRawResponse());
-                return Response.FromValue(new CustomModel3(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<CustomModel3Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new CustomModel3Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -340,7 +340,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        IEnumerator<CustomModel3> IEnumerable<CustomModel3>.GetEnumerator()
+        IEnumerator<CustomModel3Resource> IEnumerable<CustomModel3Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -350,7 +350,7 @@ namespace ExactMatchFlattenInheritance
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<CustomModel3> IAsyncEnumerable<CustomModel3>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<CustomModel3Resource> IAsyncEnumerable<CustomModel3Resource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

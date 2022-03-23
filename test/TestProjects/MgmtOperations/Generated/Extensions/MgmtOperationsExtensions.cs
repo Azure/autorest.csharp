@@ -19,21 +19,21 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
-        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
+        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
+            return GetExtensionClient(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -41,15 +41,15 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
         /// Operation Id: AvailabilitySets_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static async Task<Response<AvailabilitySet>> GetAvailabilitySetAsync(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -57,23 +57,23 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
         /// Operation Id: AvailabilitySets_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static Response<AvailabilitySet> GetAvailabilitySet(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
+            return resourceGroupResource.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <summary> Gets a collection of UnpatchableResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
-        public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroup resourceGroup)
+        public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetUnpatchableResources();
+            return GetExtensionClient(resourceGroupResource).GetUnpatchableResources();
         }
 
         /// <summary>
@@ -81,15 +81,15 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
         /// Operation Id: UnpatchableResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroup resourceGroup, string name, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetUnpatchableResources().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetUnpatchableResources().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -97,15 +97,15 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
         /// Operation Id: UnpatchableResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroup resourceGroup, string name, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetUnpatchableResources().Get(name, expand, cancellationToken);
+            return resourceGroupResource.GetUnpatchableResources().Get(name, expand, cancellationToken);
         }
 
         /// <summary>
@@ -113,16 +113,16 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
         /// Operation Id: AvailabilitySets_TestLROMethod
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return await GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySetAsync(waitUntil, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -130,68 +130,80 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
         /// Operation Id: AvailabilitySets_TestLROMethod
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySet(waitUntil, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, parameters, cancellationToken);
         }
 
-        #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySet along with the instance operations that can be performed on it but with no data. </summary>
+        #region AvailabilitySetResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySet" /> object. </returns>
-        public static AvailabilitySet GetAvailabilitySet(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AvailabilitySet.ValidateResourceId(id);
-                return new AvailabilitySet(client, id);
+                AvailabilitySetResource.ValidateResourceId(id);
+                return new AvailabilitySetResource(client, id);
             }
             );
         }
         #endregion
 
-        #region AvailabilitySetChild
-        /// <summary> Gets an object representing a AvailabilitySetChild along with the instance operations that can be performed on it but with no data. </summary>
+        #region AvailabilitySetChildResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetChild" /> object. </returns>
-        public static AvailabilitySetChild GetAvailabilitySetChild(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
+        public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AvailabilitySetChild.ValidateResourceId(id);
-                return new AvailabilitySetChild(client, id);
+                AvailabilitySetChildResource.ValidateResourceId(id);
+                return new AvailabilitySetChildResource(client, id);
             }
             );
         }
         #endregion
 
-        #region AvailabilitySetGrandChild
-        /// <summary> Gets an object representing a AvailabilitySetGrandChild along with the instance operations that can be performed on it but with no data. </summary>
+        #region AvailabilitySetGrandChildResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetGrandChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetGrandChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetGrandChild" /> object. </returns>
-        public static AvailabilitySetGrandChild GetAvailabilitySetGrandChild(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
+        public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                AvailabilitySetGrandChild.ValidateResourceId(id);
-                return new AvailabilitySetGrandChild(client, id);
+                AvailabilitySetGrandChildResource.ValidateResourceId(id);
+                return new AvailabilitySetGrandChildResource(client, id);
             }
             );
         }
         #endregion
 
         #region UnpatchableResource
-        /// <summary> Gets an object representing a UnpatchableResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing an <see cref="UnpatchableResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>

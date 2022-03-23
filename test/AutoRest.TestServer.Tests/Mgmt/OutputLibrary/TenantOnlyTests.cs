@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public TenantOnlyTests() : base("TenantOnly") { }
 
-        [TestCase("BillingAccount")]
+        [TestCase("BillingAccountResource")]
         public void TestTenant(string resourceName)
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);

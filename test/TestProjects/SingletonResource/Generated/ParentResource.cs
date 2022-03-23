@@ -50,9 +50,9 @@ namespace SingletonResource
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ParentResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
+            _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string parentResourceApiVersion);
-            _parentResourceRestClient = new ParentResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
+            _parentResourceRestClient = new ParentResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

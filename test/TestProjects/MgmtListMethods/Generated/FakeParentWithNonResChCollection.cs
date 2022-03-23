@@ -20,7 +20,7 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParentWithNonResCh and their operations over its parent. </summary>
-    public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResCh>, IAsyncEnumerable<FakeParentWithNonResCh>
+    public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResChResource>, IAsyncEnumerable<FakeParentWithNonResChResource>
     {
         private readonly ClientDiagnostics _fakeParentWithNonResChClientDiagnostics;
         private readonly FakeParentWithNonResChesRestOperations _fakeParentWithNonResChRestClient;
@@ -35,9 +35,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FakeParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fakeParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FakeParentWithNonResCh.ResourceType, out string fakeParentWithNonResChApiVersion);
-            _fakeParentWithNonResChRestClient = new FakeParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithNonResChApiVersion);
+            _fakeParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResChResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(FakeParentWithNonResChResource.ResourceType, out string fakeParentWithNonResChApiVersion);
+            _fakeParentWithNonResChRestClient = new FakeParentWithNonResChesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, fakeParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -45,8 +45,8 @@ namespace MgmtListMethods
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != Fake.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Fake.ResourceType), nameof(id));
+            if (id.ResourceType != FakeResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, FakeResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakeParentWithNonResCh>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakeParentWithNonResChResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -70,7 +70,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentWithNonResChRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResCh>(Response.FromValue(new FakeParentWithNonResCh(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResChResource>(Response.FromValue(new FakeParentWithNonResChResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,7 +93,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakeParentWithNonResCh> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeParentWithNonResChResource> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -103,7 +103,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentWithNonResChRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, parameters, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResCh>(Response.FromValue(new FakeParentWithNonResCh(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeParentWithNonResChResource>(Response.FromValue(new FakeParentWithNonResChResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -124,7 +124,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithNonResCh>> GetAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithNonResChResource>> GetAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
@@ -135,7 +135,7 @@ namespace MgmtListMethods
                 var response = await _fakeParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeParentWithNonResCh(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +153,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual Response<FakeParentWithNonResCh> Get(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithNonResChResource> Get(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
@@ -164,7 +164,7 @@ namespace MgmtListMethods
                 var response = _fakeParentWithNonResChRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeParentWithNonResCh(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -179,17 +179,17 @@ namespace MgmtListMethods
         /// Operation Id: FakeParentWithNonResChes_ListTest
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FakeParentWithNonResCh> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<FakeParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<FakeParentWithNonResCh>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<FakeParentWithNonResChResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _fakeParentWithNonResChRestClient.ListTestAsync(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -197,14 +197,14 @@ namespace MgmtListMethods
                     throw;
                 }
             }
-            async Task<Page<FakeParentWithNonResCh>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<FakeParentWithNonResChResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _fakeParentWithNonResChRestClient.ListTestNextPageAsync(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -221,17 +221,17 @@ namespace MgmtListMethods
         /// Operation Id: FakeParentWithNonResChes_ListTest
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FakeParentWithNonResCh> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<FakeParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<FakeParentWithNonResCh> FirstPageFunc(int? pageSizeHint)
+            Page<FakeParentWithNonResChResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _fakeParentWithNonResChRestClient.ListTest(Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -239,14 +239,14 @@ namespace MgmtListMethods
                     throw;
                 }
             }
-            Page<FakeParentWithNonResCh> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<FakeParentWithNonResChResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _fakeParentWithNonResChClientDiagnostics.CreateScope("FakeParentWithNonResChCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _fakeParentWithNonResChRestClient.ListTestNextPage(nextLink, Id.SubscriptionId, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResCh(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new FakeParentWithNonResChResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -320,7 +320,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<FakeParentWithNonResCh>> GetIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakeParentWithNonResChResource>> GetIfExistsAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
@@ -330,8 +330,8 @@ namespace MgmtListMethods
             {
                 var response = await _fakeParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<FakeParentWithNonResCh>(null, response.GetRawResponse());
-                return Response.FromValue(new FakeParentWithNonResCh(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<FakeParentWithNonResChResource>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -349,7 +349,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
-        public virtual Response<FakeParentWithNonResCh> GetIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual Response<FakeParentWithNonResChResource> GetIfExists(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithNonResChName, nameof(fakeParentWithNonResChName));
 
@@ -359,8 +359,8 @@ namespace MgmtListMethods
             {
                 var response = _fakeParentWithNonResChRestClient.Get(Id.SubscriptionId, Id.Name, fakeParentWithNonResChName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<FakeParentWithNonResCh>(null, response.GetRawResponse());
-                return Response.FromValue(new FakeParentWithNonResCh(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<FakeParentWithNonResChResource>(null, response.GetRawResponse());
+                return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -369,7 +369,7 @@ namespace MgmtListMethods
             }
         }
 
-        IEnumerator<FakeParentWithNonResCh> IEnumerable<FakeParentWithNonResCh>.GetEnumerator()
+        IEnumerator<FakeParentWithNonResChResource> IEnumerable<FakeParentWithNonResChResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -379,7 +379,7 @@ namespace MgmtListMethods
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<FakeParentWithNonResCh> IAsyncEnumerable<FakeParentWithNonResCh>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<FakeParentWithNonResChResource> IAsyncEnumerable<FakeParentWithNonResChResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

@@ -18,21 +18,21 @@ namespace XmlDeserialization
     /// <summary> A class to add extension methods to XmlDeserialization. </summary>
     public static partial class XmlDeserializationExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of XmlInstances in the XmlInstance. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
-        public static XmlInstanceCollection GetXmlInstances(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of XmlInstanceResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
+        public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetXmlInstances();
+            return GetExtensionClient(resourceGroupResource).GetXmlInstances();
         }
 
         /// <summary>
@@ -40,14 +40,14 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}
         /// Operation Id: XmlDeserialization_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public static async Task<Response<XmlInstance>> GetXmlInstanceAsync(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
+        public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -55,27 +55,30 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}
         /// Operation Id: XmlDeserialization_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public static Response<XmlInstance> GetXmlInstance(this ResourceGroup resourceGroup, string xmlName, CancellationToken cancellationToken = default)
+        public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetXmlInstances().Get(xmlName, cancellationToken);
+            return resourceGroupResource.GetXmlInstances().Get(xmlName, cancellationToken);
         }
 
-        #region XmlInstance
-        /// <summary> Gets an object representing a XmlInstance along with the instance operations that can be performed on it but with no data. </summary>
+        #region XmlInstanceResource
+        /// <summary>
+        /// Gets an object representing a <see cref="XmlInstanceResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="XmlInstanceResource.CreateResourceIdentifier" /> to create a <see cref="XmlInstanceResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="XmlInstance" /> object. </returns>
-        public static XmlInstance GetXmlInstance(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
+        public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                XmlInstance.ValidateResourceId(id);
-                return new XmlInstance(client, id);
+                XmlInstanceResource.ValidateResourceId(id);
+                return new XmlInstanceResource(client, id);
             }
             );
         }

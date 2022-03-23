@@ -14,14 +14,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void RenamedModelExists()
         {
-            var modelType = typeof(SshPublicKeyInfo);
+            var modelType = typeof(SshPublicKeyInfoResource);
             Assert.NotNull(modelType);
         }
 
         [Test]
         public void OldModelDoesNotExist()
         {
-            var modelType = typeof(SshPublicKeyInfo);
+            var modelType = typeof(SshPublicKeyInfoResource);
             Assert.Null(modelType.Assembly.GetType("SshPublicKeyResource"));
         }
 

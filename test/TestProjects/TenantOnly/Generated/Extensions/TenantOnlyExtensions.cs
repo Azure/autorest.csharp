@@ -18,21 +18,21 @@ namespace TenantOnly
     /// <summary> A class to add extension methods to TenantOnly. </summary>
     public static partial class TenantOnlyExtensions
     {
-        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
         {
-            return tenant.GetCachedClient((client) =>
+            return tenantResource.GetCachedClient((client) =>
             {
-                return new TenantExtensionClient(client, tenant.Id);
+                return new TenantResourceExtensionClient(client, tenantResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of BillingAccounts in the BillingAccount. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of BillingAccounts and their operations over a BillingAccount. </returns>
-        public static BillingAccountCollection GetBillingAccounts(this Tenant tenant)
+        /// <summary> Gets a collection of BillingAccountResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
+        public static BillingAccountCollection GetBillingAccounts(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenant).GetBillingAccounts();
+            return GetExtensionClient(tenantResource).GetBillingAccounts();
         }
 
         /// <summary>
@@ -40,15 +40,15 @@ namespace TenantOnly
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public static async Task<Response<BillingAccount>> GetBillingAccountAsync(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<BillingAccountResource>> GetBillingAccountAsync(this TenantResource tenantResource, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetBillingAccounts().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
+            return await tenantResource.GetBillingAccounts().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,44 +56,50 @@ namespace TenantOnly
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public static Response<BillingAccount> GetBillingAccount(this Tenant tenant, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<BillingAccountResource> GetBillingAccount(this TenantResource tenantResource, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenant.GetBillingAccounts().Get(billingAccountName, expand, cancellationToken);
+            return tenantResource.GetBillingAccounts().Get(billingAccountName, expand, cancellationToken);
         }
 
-        #region BillingAccount
-        /// <summary> Gets an object representing a BillingAccount along with the instance operations that can be performed on it but with no data. </summary>
+        #region BillingAccountResource
+        /// <summary>
+        /// Gets an object representing a <see cref="BillingAccountResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BillingAccountResource.CreateResourceIdentifier" /> to create a <see cref="BillingAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
-        public static BillingAccount GetBillingAccount(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="BillingAccountResource" /> object. </returns>
+        public static BillingAccountResource GetBillingAccountResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                BillingAccount.ValidateResourceId(id);
-                return new BillingAccount(client, id);
+                BillingAccountResource.ValidateResourceId(id);
+                return new BillingAccountResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Agreement
-        /// <summary> Gets an object representing a Agreement along with the instance operations that can be performed on it but with no data. </summary>
+        #region AgreementResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AgreementResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AgreementResource.CreateResourceIdentifier" /> to create an <see cref="AgreementResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Agreement" /> object. </returns>
-        public static Agreement GetAgreement(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="AgreementResource" /> object. </returns>
+        public static AgreementResource GetAgreementResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Agreement.ValidateResourceId(id);
-                return new Agreement(client, id);
+                AgreementResource.ValidateResourceId(id);
+                return new AgreementResource(client, id);
             }
             );
         }

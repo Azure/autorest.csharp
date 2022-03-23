@@ -10,10 +10,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase("AvailabilitySet", true)]
-        [TestCase("DedicatedHostGroup", true)]
-        [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", true)]
+        [TestCase("AvailabilitySetResource", true)]
+        [TestCase("DedicatedHostGroupResource", true)]
+        [TestCase("DedicatedHostResource", true)]
+        [TestCase("VirtualMachineExtensionImageResource", true)]
         public void ValidateResource(string operation, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == operation);

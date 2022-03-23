@@ -18,57 +18,57 @@ namespace SingletonResource
     /// <summary> A class to add extension methods to SingletonResource. </summary>
     public static partial class SingletonResourceExtensions
     {
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of Cars in the Car. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
-        public static CarCollection GetCars(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of CarResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
+        public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetCars();
+            return GetExtensionClient(resourceGroupResource).GetCars();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// Operation Id: Cars_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public static async Task<Response<Car>> GetCarAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        public static async Task<Response<CarResource>> GetCarAsync(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// Operation Id: Cars_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public static Response<Car> GetCar(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        public static Response<CarResource> GetCar(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetCars().Get(carName, cancellationToken);
+            return resourceGroupResource.GetCars().Get(carName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <summary> Gets a collection of ParentResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
-        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
+        public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetParentResources();
+            return GetExtensionClient(resourceGroupResource).GetParentResources();
         }
 
         /// <summary>
@@ -76,14 +76,14 @@ namespace SingletonResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
         /// Operation Id: ParentResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -91,50 +91,59 @@ namespace SingletonResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
         /// Operation Id: ParentResources_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public static Response<ParentResource> GetParentResource(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
+        public static Response<ParentResource> GetParentResource(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetParentResources().Get(parentName, cancellationToken);
+            return resourceGroupResource.GetParentResources().Get(parentName, cancellationToken);
         }
 
-        #region Car
-        /// <summary> Gets an object representing a Car along with the instance operations that can be performed on it but with no data. </summary>
+        #region CarResource
+        /// <summary>
+        /// Gets an object representing a <see cref="CarResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CarResource.CreateResourceIdentifier" /> to create a <see cref="CarResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Car" /> object. </returns>
-        public static Car GetCar(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="CarResource" /> object. </returns>
+        public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Car.ValidateResourceId(id);
-                return new Car(client, id);
+                CarResource.ValidateResourceId(id);
+                return new CarResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Ignition
-        /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it but with no data. </summary>
+        #region IgnitionResource
+        /// <summary>
+        /// Gets an object representing an <see cref="IgnitionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="IgnitionResource.CreateResourceIdentifier" /> to create an <see cref="IgnitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Ignition" /> object. </returns>
-        public static Ignition GetIgnition(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
+        public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Ignition.ValidateResourceId(id);
-                return new Ignition(client, id);
+                IgnitionResource.ValidateResourceId(id);
+                return new IgnitionResource(client, id);
             }
             );
         }
         #endregion
 
         #region SingletonResource
-        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="SingletonResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SingletonResource.CreateResourceIdentifier" /> to create a <see cref="SingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
@@ -150,7 +159,10 @@ namespace SingletonResource
         #endregion
 
         #region ParentResource
-        /// <summary> Gets an object representing a ParentResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="ParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ParentResource.CreateResourceIdentifier" /> to create a <see cref="ParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>

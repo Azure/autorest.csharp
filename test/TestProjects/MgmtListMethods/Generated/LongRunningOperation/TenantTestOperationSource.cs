@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    internal class TenantTestOperationSource : IOperationSource<TenantTest>
+    internal class TenantTestOperationSource : IOperationSource<TenantTestResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtListMethods
             _client = client;
         }
 
-        TenantTest IOperationSource<TenantTest>.CreateResult(Response response, CancellationToken cancellationToken)
+        TenantTestResource IOperationSource<TenantTestResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_client, data);
+            return new TenantTestResource(_client, data);
         }
 
-        async ValueTask<TenantTest> IOperationSource<TenantTest>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<TenantTestResource> IOperationSource<TenantTestResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTest(_client, data);
+            return new TenantTestResource(_client, data);
         }
     }
 }

@@ -20,21 +20,21 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to MgmtScopeResource. </summary>
     public static partial class MgmtScopeResourceExtensions
     {
-        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
         {
-            return tenant.GetCachedClient((client) =>
+            return tenantResource.GetCachedClient((client) =>
             {
-                return new TenantExtensionClient(client, tenant.Id);
+                return new TenantResourceExtensionClient(client, tenantResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Tenant tenant)
+        /// <summary> Gets a collection of DeploymentExtendedResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenant).GetDeploymentExtendeds();
+            return GetExtensionClient(tenantResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -42,14 +42,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await tenantResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -57,26 +57,26 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtended(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return tenant.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return tenantResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
-        public static ResourceLinkCollection GetResourceLinks(this Tenant tenant, string scope)
+        /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
+        public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
         {
             Argument.AssertNotNull(scope, nameof(scope));
 
-            return GetExtensionClient(tenant).GetResourceLinks(scope);
+            return GetExtensionClient(tenantResource).GetResourceLinks(scope);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace MgmtScopeResource
         /// Request Path: /{linkId}
         /// Operation Id: ResourceLinks_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public static async Task<Response<ResourceLink>> GetResourceLinkAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return await GetResourceLinks(tenant, scope).GetAsync(cancellationToken).ConfigureAwait(false);
+            return await GetResourceLinks(tenantResource, scope).GetAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace MgmtScopeResource
         /// Request Path: /{linkId}
         /// Operation Id: ResourceLinks_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public static Response<ResourceLink> GetResourceLink(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinks(tenant, scope).Get(cancellationToken);
+            return GetResourceLinks(tenantResource, scope).Get(cancellationToken);
         }
 
         /// <summary>
@@ -112,15 +112,15 @@ namespace MgmtScopeResource
         /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
         /// Operation Id: Deployments_CalculateTemplateHash
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, BinaryData template, CancellationToken cancellationToken = default)
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return await GetExtensionClient(tenant).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -128,32 +128,32 @@ namespace MgmtScopeResource
         /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
         /// Operation Id: Deployments_CalculateTemplateHash
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, BinaryData template, CancellationToken cancellationToken = default)
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return GetExtensionClient(tenant).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetExtensionClient(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
 
-        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
-            return subscription.GetCachedClient((client) =>
+            return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(client, subscription.Id);
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
+        /// <summary> Gets a collection of DeploymentExtendedResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscription).GetDeploymentExtendeds();
+            return GetExtensionClient(subscriptionResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -161,14 +161,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await subscriptionResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -176,14 +176,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtended(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return subscriptionResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
         /// <summary>
@@ -191,13 +191,13 @@ namespace MgmtScopeResource
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// Operation Id: ResourceLinks_ListAtSubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResourceLink> GetResourceLinksAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
         }
 
         /// <summary>
@@ -205,30 +205,30 @@ namespace MgmtScopeResource
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
         /// Operation Id: ResourceLinks_ListAtSubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResourceLink> GetResourceLinks(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResourceLinks(filter, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResourceLinks(filter, cancellationToken);
         }
 
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of DeploymentExtendedResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetDeploymentExtendeds();
+            return GetExtensionClient(resourceGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -236,14 +236,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -251,31 +251,31 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return resourceGroupResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
-        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        private static ManagementGroupResourceExtensionClient GetExtensionClient(ManagementGroupResource managementGroupResource)
         {
-            return managementGroup.GetCachedClient((client) =>
+            return managementGroupResource.GetCachedClient((client) =>
             {
-                return new ManagementGroupExtensionClient(client, managementGroup.Id);
+                return new ManagementGroupResourceExtensionClient(client, managementGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroup managementGroup)
+        /// <summary> Gets a collection of DeploymentExtendedResources in the ManagementGroupResource. </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
         {
-            return GetExtensionClient(managementGroup).GetDeploymentExtendeds();
+            return GetExtensionClient(managementGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -283,14 +283,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this ManagementGroup managementGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await managementGroupResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -298,14 +298,14 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this ManagementGroup managementGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return managementGroupResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
         }
 
         private static ArmResourceExtensionClient GetExtensionClient(ArmResource armResource)
@@ -317,9 +317,9 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignments in the FakePolicyAssignment. </summary>
+        /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
+        /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
             return GetExtensionClient(armResource).GetFakePolicyAssignments();
@@ -335,7 +335,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public static async Task<Response<FakePolicyAssignment>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
@@ -350,54 +350,63 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public static Response<FakePolicyAssignment> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             return armResource.GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);
         }
 
-        #region FakePolicyAssignment
-        /// <summary> Gets an object representing a FakePolicyAssignment along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakePolicyAssignmentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakePolicyAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakePolicyAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="FakePolicyAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakePolicyAssignment" /> object. </returns>
-        public static FakePolicyAssignment GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
+        public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakePolicyAssignment.ValidateResourceId(id);
-                return new FakePolicyAssignment(client, id);
+                FakePolicyAssignmentResource.ValidateResourceId(id);
+                return new FakePolicyAssignmentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtended along with the instance operations that can be performed on it but with no data. </summary>
+        #region DeploymentExtendedResource
+        /// <summary>
+        /// Gets an object representing a <see cref="DeploymentExtendedResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeploymentExtendedResource.CreateResourceIdentifier" /> to create a <see cref="DeploymentExtendedResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeploymentExtended" /> object. </returns>
-        public static DeploymentExtended GetDeploymentExtended(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
+        public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                DeploymentExtended.ValidateResourceId(id);
-                return new DeploymentExtended(client, id);
+                DeploymentExtendedResource.ValidateResourceId(id);
+                return new DeploymentExtendedResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResourceLink
-        /// <summary> Gets an object representing a ResourceLink along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResourceLinkResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResourceLinkResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResourceLinkResource.CreateResourceIdentifier" /> to create a <see cref="ResourceLinkResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceLink" /> object. </returns>
-        public static ResourceLink GetResourceLink(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
+        public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResourceLink.ValidateResourceId(id);
-                return new ResourceLink(client, id);
+                ResourceLinkResource.ValidateResourceId(id);
+                return new ResourceLinkResource(client, id);
             }
             );
         }

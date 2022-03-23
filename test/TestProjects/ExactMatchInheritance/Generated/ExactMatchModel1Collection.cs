@@ -21,7 +21,7 @@ using Azure.ResourceManager.Resources;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel1 and their operations over its parent. </summary>
-    public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1>, IAsyncEnumerable<ExactMatchModel1>
+    public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1Resource>, IAsyncEnumerable<ExactMatchModel1Resource>
     {
         private readonly ClientDiagnostics _exactMatchModel1ClientDiagnostics;
         private readonly ExactMatchModel1SRestOperations _exactMatchModel1RestClient;
@@ -36,9 +36,9 @@ namespace ExactMatchInheritance
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ExactMatchModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ExactMatchModel1.ResourceType, out string exactMatchModel1ApiVersion);
-            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
+            _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1Resource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ExactMatchModel1Resource.ResourceType, out string exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -46,12 +46,12 @@ namespace ExactMatchInheritance
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -60,7 +60,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ExactMatchModel1>> CreateOrUpdateAsync(WaitUntil waitUntil, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ExactMatchModel1Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -70,7 +70,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = await _exactMatchModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -83,7 +83,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Put
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
@@ -92,7 +92,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ExactMatchModel1> CreateOrUpdate(WaitUntil waitUntil, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ExactMatchModel1Resource> CreateOrUpdate(WaitUntil waitUntil, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -102,7 +102,7 @@ namespace ExactMatchInheritance
             try
             {
                 var response = _exactMatchModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, parameters, cancellationToken);
-                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(Client, response), response.GetRawResponse()));
+                var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel1Resource>(Response.FromValue(new ExactMatchModel1Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -115,14 +115,14 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public virtual async Task<Response<ExactMatchModel1>> GetAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel1Resource>> GetAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
@@ -133,7 +133,7 @@ namespace ExactMatchInheritance
                 var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,14 +143,14 @@ namespace ExactMatchInheritance
         }
 
         /// <summary>
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public virtual Response<ExactMatchModel1> Get(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel1Resource> Get(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
@@ -161,7 +161,7 @@ namespace ExactMatchInheritance
                 var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,17 +175,17 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel1s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ExactMatchModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ExactMatchModel1> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ExactMatchModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ExactMatchModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ExactMatchModel1>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ExactMatchModel1Resource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _exactMatchModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -201,17 +201,17 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel1s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ExactMatchModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ExactMatchModel1> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ExactMatchModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ExactMatchModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ExactMatchModel1> FirstPageFunc(int? pageSizeHint)
+            Page<ExactMatchModel1Resource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1Collection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _exactMatchModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ExactMatchModel1Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -224,7 +224,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
@@ -251,7 +251,7 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
@@ -278,14 +278,14 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public virtual async Task<Response<ExactMatchModel1>> GetIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel1Resource>> GetIfExistsAsync(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
@@ -295,8 +295,8 @@ namespace ExactMatchInheritance
             {
                 var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ExactMatchModel1Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,14 +307,14 @@ namespace ExactMatchInheritance
 
         /// <summary>
         /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public virtual Response<ExactMatchModel1> GetIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel1Resource> GetIfExists(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel1SName, nameof(exactMatchModel1SName));
 
@@ -324,8 +324,8 @@ namespace ExactMatchInheritance
             {
                 var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel1SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<ExactMatchModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ExactMatchModel1Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new ExactMatchModel1Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -334,7 +334,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        IEnumerator<ExactMatchModel1> IEnumerable<ExactMatchModel1>.GetEnumerator()
+        IEnumerator<ExactMatchModel1Resource> IEnumerable<ExactMatchModel1Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -344,7 +344,7 @@ namespace ExactMatchInheritance
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<ExactMatchModel1> IAsyncEnumerable<ExactMatchModel1>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<ExactMatchModel1Resource> IAsyncEnumerable<ExactMatchModel1Resource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

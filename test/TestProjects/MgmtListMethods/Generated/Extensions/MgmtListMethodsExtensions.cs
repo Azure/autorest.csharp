@@ -20,21 +20,21 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to MgmtListMethods. </summary>
     public static partial class MgmtListMethodsExtensions
     {
-        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
         {
-            return tenant.GetCachedClient((client) =>
+            return tenantResource.GetCachedClient((client) =>
             {
-                return new TenantExtensionClient(client, tenant.Id);
+                return new TenantResourceExtensionClient(client, tenantResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
-        public static TenantTestCollection GetTenantTests(this Tenant tenant)
+        /// <summary> Gets a collection of TenantTestResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
+        public static TenantTestCollection GetTenantTests(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenant).GetTenantTests();
+            return GetExtensionClient(tenantResource).GetTenantTests();
         }
 
         /// <summary>
@@ -42,15 +42,15 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// Operation Id: TenantTests_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public static async Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TenantTestResource>> GetTenantTestAsync(this TenantResource tenantResource, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
+            return await tenantResource.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,32 +58,32 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// Operation Id: TenantTests_Get
         /// </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public static Response<TenantTest> GetTenantTest(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<TenantTestResource> GetTenantTest(this TenantResource tenantResource, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenant.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
+            return tenantResource.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
         }
 
-        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
-            return subscription.GetCachedClient((client) =>
+            return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(client, subscription.Id);
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of Fakes in the Fake. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
-        public static FakeCollection GetFakes(this Subscription subscription)
+        /// <summary> Gets a collection of FakeResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
+        public static FakeCollection GetFakes(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscription).GetFakes();
+            return GetExtensionClient(subscriptionResource).GetFakes();
         }
 
         /// <summary>
@@ -91,15 +91,15 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
         /// Operation Id: Fakes_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static async Task<Response<Fake>> GetFakeAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakeResource>> GetFakeAsync(this SubscriptionResource subscriptionResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await subscriptionResource.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -107,38 +107,23 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
         /// Operation Id: Fakes_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static Response<Fake> GetFake(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<FakeResource> GetFake(this SubscriptionResource subscriptionResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return subscription.GetFakes().Get(fakeName, expand, cancellationToken);
+            return subscriptionResource.GetFakes().Get(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChWithLocs in the SubParentWithNonResChWithLoc. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithNonResChWithLocs and their operations over a SubParentWithNonResChWithLoc. </returns>
-        public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this Subscription subscription)
+        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
+        public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscription).GetSubParentWithNonResChWithLocs();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// Operation Id: SubParentWithNonResChWithLocs_Get
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<SubParentWithNonResChWithLoc>> GetSubParentWithNonResChWithLocAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
-        {
-            return await subscription.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscriptionResource).GetSubParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -146,22 +131,37 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
         /// Operation Id: SubParentWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public static Response<SubParentWithNonResChWithLoc> GetSubParentWithNonResChWithLoc(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResChWithLocResource>> GetSubParentWithNonResChWithLocAsync(this SubscriptionResource subscriptionResource, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
+            return await subscriptionResource.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChes in the SubParentWithNonResCh. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithNonResChes and their operations over a SubParentWithNonResCh. </returns>
-        public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this Subscription subscription)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        public static Response<SubParentWithNonResChWithLocResource> GetSubParentWithNonResChWithLoc(this SubscriptionResource subscriptionResource, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSubParentWithNonResChes();
+            return subscriptionResource.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
+        public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this SubscriptionResource subscriptionResource)
+        {
+            return GetExtensionClient(subscriptionResource).GetSubParentWithNonResChes();
         }
 
         /// <summary>
@@ -169,14 +169,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
         /// Operation Id: SubParentWithNonResChes_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<SubParentWithNonResCh>> GetSubParentWithNonResChAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResChResource>> GetSubParentWithNonResChAsync(this SubscriptionResource subscriptionResource, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await subscriptionResource.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,37 +184,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
         /// Operation Id: SubParentWithNonResChes_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public static Response<SubParentWithNonResCh> GetSubParentWithNonResCh(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static Response<SubParentWithNonResChResource> GetSubParentWithNonResCh(this SubscriptionResource subscriptionResource, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
+            return subscriptionResource.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithLocs in the SubParentWithLoc. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithLocs and their operations over a SubParentWithLoc. </returns>
-        public static SubParentWithLocCollection GetSubParentWithLocs(this Subscription subscription)
+        /// <summary> Gets a collection of SubParentWithLocResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
+        public static SubParentWithLocCollection GetSubParentWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscription).GetSubParentWithLocs();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
-        /// Operation Id: SubParentWithLocs_Get
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="subParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public static async Task<Response<SubParentWithLoc>> GetSubParentWithLocAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
-        {
-            return await subscription.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscriptionResource).GetSubParentWithLocs();
         }
 
         /// <summary>
@@ -222,22 +207,37 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
         /// Operation Id: SubParentWithLocs_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public static Response<SubParentWithLoc> GetSubParentWithLoc(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithLocResource>> GetSubParentWithLocAsync(this SubscriptionResource subscriptionResource, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
+            return await subscriptionResource.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of SubParents in the SubParent. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
-        public static SubParentCollection GetSubParents(this Subscription subscription)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
+        /// Operation Id: SubParentWithLocs_Get
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="subParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        public static Response<SubParentWithLocResource> GetSubParentWithLoc(this SubscriptionResource subscriptionResource, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSubParents();
+            return subscriptionResource.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of SubParentResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
+        public static SubParentCollection GetSubParents(this SubscriptionResource subscriptionResource)
+        {
+            return GetExtensionClient(subscriptionResource).GetSubParents();
         }
 
         /// <summary>
@@ -245,14 +245,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
         /// Operation Id: SubParents_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public static async Task<Response<SubParent>> GetSubParentAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentResource>> GetSubParentAsync(this SubscriptionResource subscriptionResource, string subParentName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
+            return await subscriptionResource.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -260,14 +260,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
         /// Operation Id: SubParents_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="subParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public static Response<SubParent> GetSubParent(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        public static Response<SubParentResource> GetSubParent(this SubscriptionResource subscriptionResource, string subParentName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParents().Get(subParentName, cancellationToken);
+            return subscriptionResource.GetSubParents().Get(subParentName, cancellationToken);
         }
 
         /// <summary>
@@ -275,12 +275,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
         /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
         }
 
         /// <summary>
@@ -288,12 +288,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChWithLocs
         /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLoc(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
         }
 
         /// <summary>
@@ -301,17 +301,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
         /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -319,17 +319,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild
         /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
         }
 
         /// <summary>
@@ -337,12 +337,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
         /// Operation Id: FakeParentWithAncestorWithNonResChes_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -350,12 +350,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithNonResChes
         /// Operation Id: FakeParentWithAncestorWithNonResChes_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChes(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
         }
 
         /// <summary>
@@ -363,12 +363,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
         /// Operation Id: FakeParentWithAncestorWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -376,12 +376,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestorWithLocs
         /// Operation Id: FakeParentWithAncestorWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocs(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -389,17 +389,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
         /// Operation Id: FakeParentWithAncestorWithLocs_ListTestByLocations
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocationAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -407,17 +407,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/fakeParentWithAncestorWithLocs
         /// Operation Id: FakeParentWithAncestorWithLocs_ListTestByLocations
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocation(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -425,12 +425,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
         /// Operation Id: FakeParentWithAncestors_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestor> GetFakeParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorsAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -438,12 +438,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakeParentWithAncestors
         /// Operation Id: FakeParentWithAncestors_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestor> GetFakeParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestors(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -451,13 +451,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -465,13 +465,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
         }
 
         /// <summary>
@@ -479,13 +479,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes
         /// Operation Id: ResGrpParentWithAncestorWithNonResChes_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResCh> GetResGrpParentWithAncestorWithNonResChesAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -493,13 +493,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes
         /// Operation Id: ResGrpParentWithAncestorWithNonResChes_ListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResCh> GetResGrpParentWithAncestorWithNonResChes(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
         }
 
         /// <summary>
@@ -507,12 +507,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithLocs_ListTest
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithLoc> GetResGrpParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -520,12 +520,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithLocs_ListTest
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithLoc> GetResGrpParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocs(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -533,17 +533,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithLocs_ListAll
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -551,17 +551,17 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/locations/{location}/resGrpParentWithAncestorWithLocs
         /// Operation Id: ResGrpParentWithAncestorWithLocs_ListAll
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
         }
 
         /// <summary>
@@ -569,12 +569,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// Operation Id: ResGrpParentWithAncestors_NonPageableListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestor> GetResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorsAsync(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -582,12 +582,12 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors
         /// Operation Id: ResGrpParentWithAncestors_NonPageableListBySubscription
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestor> GetResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestors(cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -595,19 +595,19 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
         /// Operation Id: Quotas_Update
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this SubscriptionResource subscriptionResource, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(subscription).UpdateQuotasAsync(location, parameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).UpdateQuotasAsync(location, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -615,36 +615,36 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas
         /// Operation Id: Quotas_Update
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
         /// <param name="parameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this Subscription subscription, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this SubscriptionResource subscriptionResource, string location, QuotaUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(subscription).UpdateQuotas(location, parameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).UpdateQuotas(location, parameters, cancellationToken);
         }
 
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocs in the ResGrpParentWithAncestorWithNonResChWithLoc. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocs and their operations over a ResGrpParentWithAncestorWithNonResChWithLoc. </returns>
-        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
+        public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChWithLocs();
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -652,14 +652,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocResource>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -667,37 +667,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLoc(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChes in the ResGrpParentWithAncestorWithNonResCh. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChes and their operations over a ResGrpParentWithAncestorWithNonResCh. </returns>
-        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
+        public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChes();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
-        /// Operation Id: ResGrpParentWithAncestorWithNonResChes_Get
-        /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
         }
 
         /// <summary>
@@ -705,22 +690,37 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
         /// Operation Id: ResGrpParentWithAncestorWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithNonResCh> GetResGrpParentWithAncestorWithNonResCh(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocs in the ResGrpParentWithAncestorWithLoc. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocs and their operations over a ResGrpParentWithAncestorWithLoc. </returns>
-        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroup resourceGroup)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
+        /// Operation Id: ResGrpParentWithAncestorWithNonResChes_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="resGrpParentWithAncestorWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
+        public static Response<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithLocs();
+            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
+        public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
         }
 
         /// <summary>
@@ -728,14 +728,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestorWithLoc>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithLocResource>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -743,37 +743,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
         /// Operation Id: ResGrpParentWithAncestorWithLocs_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestorWithLoc> GetResGrpParentWithAncestorWithLoc(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithAncestors in the ResGrpParentWithAncestor. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParentWithAncestors and their operations over a ResGrpParentWithAncestor. </returns>
-        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
+        public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestors();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
-        /// Operation Id: ResGrpParentWithAncestors_Get
-        /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="resGrpParentWithAncestorName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithAncestor>> GetResGrpParentWithAncestorAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithAncestors();
         }
 
         /// <summary>
@@ -781,22 +766,37 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
         /// Operation Id: ResGrpParentWithAncestors_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithAncestorName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
-        public static Response<ResGrpParentWithAncestor> GetResGrpParentWithAncestor(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorResource>> GetResGrpParentWithAncestorAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
+            return await resourceGroupResource.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of ResGrpParentWithNonResChes in the ResGrpParentWithNonResCh. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParentWithNonResChes and their operations over a ResGrpParentWithNonResCh. </returns>
-        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroup resourceGroup)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
+        /// Operation Id: ResGrpParentWithAncestors_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="resGrpParentWithAncestorName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
+        public static Response<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestor(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParentWithNonResChes();
+            return resourceGroupResource.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
+        public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetExtensionClient(resourceGroupResource).GetResGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -804,14 +804,14 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
         /// Operation Id: ResGrpParentWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<ResGrpParentWithNonResCh>> GetResGrpParentWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithNonResChResource>> GetResGrpParentWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -819,37 +819,22 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
         /// Operation Id: ResGrpParentWithNonResChes_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public static Response<ResGrpParentWithNonResCh> GetResGrpParentWithNonResCh(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static Response<ResGrpParentWithNonResChResource> GetResGrpParentWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
+            return resourceGroupResource.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResGrpParents in the ResGrpParent. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ResGrpParents and their operations over a ResGrpParent. </returns>
-        public static ResGrpParentCollection GetResGrpParents(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of ResGrpParentResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
+        public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetResGrpParents();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
-        /// Operation Id: ResGrpParents_Get
-        /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="resGrpParentName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public static async Task<Response<ResGrpParent>> GetResGrpParentAsync(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(resourceGroupResource).GetResGrpParents();
         }
 
         /// <summary>
@@ -857,31 +842,46 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
         /// Operation Id: ResGrpParents_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public static Response<ResGrpParent> GetResGrpParent(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentResource>> GetResGrpParentAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetResGrpParents().Get(resGrpParentName, cancellationToken);
+            return await resourceGroupResource.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
         }
 
-        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
+        /// Operation Id: ResGrpParents_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="resGrpParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
+        public static Response<ResGrpParentResource> GetResGrpParent(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetResGrpParents().Get(resGrpParentName, cancellationToken);
+        }
+
+        private static ManagementGroupResourceExtensionClient GetExtensionClient(ManagementGroupResource managementGroupResource)
+        {
+            return managementGroupResource.GetCachedClient((client) =>
             {
-                return new ManagementGroupExtensionClient(client, managementGroup.Id);
+                return new ManagementGroupResourceExtensionClient(client, managementGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocs in the MgmtGrpParentWithNonResChWithLoc. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
-        public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroup managementGroup)
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource. </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
+        public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroupResource managementGroupResource)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChWithLocs();
+            return GetExtensionClient(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -889,14 +889,14 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
         /// Operation Id: MgmtGrpParentWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await managementGroupResource.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -904,37 +904,22 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
         /// Operation Id: MgmtGrpParentWithNonResChWithLocs_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithNonResChWithLoc> GetMgmtGrpParentWithNonResChWithLoc(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static Response<MgmtGrpParentWithNonResChWithLocResource> GetMgmtGrpParentWithNonResChWithLoc(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithNonResChWithLocs().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
+            return managementGroupResource.GetMgmtGrpParentWithNonResChWithLocs().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
-        public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroup managementGroup)
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource. </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
+        public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroupResource managementGroupResource)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChes();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
-        /// Operation Id: MgmtGrpParentWithNonResChes_Get
-        /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithNonResCh>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
-        {
-            return await managementGroup.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(managementGroupResource).GetMgmtGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -942,22 +927,37 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
         /// Operation Id: MgmtGrpParentWithNonResChes_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithNonResCh> GetMgmtGrpParentWithNonResCh(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResChResource>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithNonResChes().Get(mgmtGrpParentWithNonResChName, cancellationToken);
+            return await managementGroupResource.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
-        public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroup managementGroup)
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
+        /// Operation Id: MgmtGrpParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
+        public static Response<MgmtGrpParentWithNonResChResource> GetMgmtGrpParentWithNonResCh(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithLocs();
+            return managementGroupResource.GetMgmtGrpParentWithNonResChes().Get(mgmtGrpParentWithNonResChName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource. </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
+        public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroupResource managementGroupResource)
+        {
+            return GetExtensionClient(managementGroupResource).GetMgmtGrpParentWithLocs();
         }
 
         /// <summary>
@@ -965,14 +965,14 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
         /// Operation Id: MgmtGrpParentWithLocs_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithLoc>> GetMgmtGrpParentWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithLocResource>> GetMgmtGrpParentWithLocAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return await managementGroupResource.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -980,37 +980,22 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
         /// Operation Id: MgmtGrpParentWithLocs_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithLoc> GetMgmtGrpParentWithLoc(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public static Response<MgmtGrpParentWithLocResource> GetMgmtGrpParentWithLoc(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithLocs().Get(mgmtGrpParentWithLocName, cancellationToken);
+            return managementGroupResource.GetMgmtGrpParentWithLocs().Get(mgmtGrpParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
-        public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroup managementGroup)
+        /// <summary> Gets a collection of MgmtGroupParentResources in the ManagementGroupResource. </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
+        public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroupResource managementGroupResource)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGroupParents();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// Operation Id: MgmtGroupParents_Get
-        /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public static async Task<Response<MgmtGroupParent>> GetMgmtGroupParentAsync(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
-        {
-            return await managementGroup.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(managementGroupResource).GetMgmtGroupParents();
         }
 
         /// <summary>
@@ -1018,427 +1003,520 @@ namespace MgmtListMethods
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
         /// Operation Id: MgmtGroupParents_Get
         /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public static Response<MgmtGroupParent> GetMgmtGroupParent(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGroupParentResource>> GetMgmtGroupParentAsync(this ManagementGroupResource managementGroupResource, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGroupParents().Get(mgmtGroupParentName, cancellationToken);
+            return await managementGroupResource.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
         }
 
-        #region Fake
-        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
+        /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
+        public static Response<MgmtGroupParentResource> GetMgmtGroupParent(this ManagementGroupResource managementGroupResource, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        {
+            return managementGroupResource.GetMgmtGroupParents().Get(mgmtGroupParentName, cancellationToken);
+        }
+
+        #region FakeResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Fake" /> object. </returns>
-        public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Fake.ValidateResourceId(id);
-                return new Fake(client, id);
+                FakeResource.ValidateResourceId(id);
+                return new FakeResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithNonResChWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> object. </returns>
-        public static FakeParentWithAncestorWithNonResChWithLoc GetFakeParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        public static FakeParentWithAncestorWithNonResChWithLocResource GetFakeParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResChWithLoc(client, id);
+                FakeParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResCh" /> object. </returns>
-        public static FakeParentWithAncestorWithNonResCh GetFakeParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource" /> object. </returns>
+        public static FakeParentWithAncestorWithNonResChResource GetFakeParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParentWithAncestorWithNonResCh.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResCh(client, id);
+                FakeParentWithAncestorWithNonResChResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLoc" /> object. </returns>
-        public static FakeParentWithAncestorWithLoc GetFakeParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource" /> object. </returns>
+        public static FakeParentWithAncestorWithLocResource GetFakeParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParentWithAncestorWithLoc.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithLoc(client, id);
+                FakeParentWithAncestorWithLocResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestor
-        /// <summary> Gets an object representing a FakeParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestor" /> object. </returns>
-        public static FakeParentWithAncestor GetFakeParentWithAncestor(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorResource" /> object. </returns>
+        public static FakeParentWithAncestorResource GetFakeParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParentWithAncestor.ValidateResourceId(id);
-                return new FakeParentWithAncestor(client, id);
+                FakeParentWithAncestorResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithNonResCh" /> object. </returns>
-        public static FakeParentWithNonResCh GetFakeParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithNonResChResource" /> object. </returns>
+        public static FakeParentWithNonResChResource GetFakeParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParentWithNonResCh.ValidateResourceId(id);
-                return new FakeParentWithNonResCh(client, id);
+                FakeParentWithNonResChResource.ValidateResourceId(id);
+                return new FakeParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParent
-        /// <summary> Gets an object representing a FakeParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParent" /> object. </returns>
-        public static FakeParent GetFakeParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentResource" /> object. </returns>
+        public static FakeParentResource GetFakeParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                FakeParent.ValidateResourceId(id);
-                return new FakeParent(client, id);
+                FakeParentResource.ValidateResourceId(id);
+                return new FakeParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithNonResChWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResChWithLoc GetResGrpParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithNonResChWithLocResource GetResGrpParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResChWithLoc(client, id);
+                ResGrpParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResCh" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResCh GetResGrpParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithNonResChResource GetResGrpParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParentWithAncestorWithNonResCh.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResCh(client, id);
+                ResGrpParentWithAncestorWithNonResChResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLoc" /> object. </returns>
-        public static ResGrpParentWithAncestorWithLoc GetResGrpParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithLocResource GetResGrpParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParentWithAncestorWithLoc.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithLoc(client, id);
+                ResGrpParentWithAncestorWithLocResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestor
-        /// <summary> Gets an object representing a ResGrpParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestor" /> object. </returns>
-        public static ResGrpParentWithAncestor GetResGrpParentWithAncestor(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource" /> object. </returns>
+        public static ResGrpParentWithAncestorResource GetResGrpParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParentWithAncestor.ValidateResourceId(id);
-                return new ResGrpParentWithAncestor(client, id);
+                ResGrpParentWithAncestorResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithNonResCh" /> object. </returns>
-        public static ResGrpParentWithNonResCh GetResGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource" /> object. </returns>
+        public static ResGrpParentWithNonResChResource GetResGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParentWithNonResCh.ValidateResourceId(id);
-                return new ResGrpParentWithNonResCh(client, id);
+                ResGrpParentWithNonResChResource.ValidateResourceId(id);
+                return new ResGrpParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParent
-        /// <summary> Gets an object representing a ResGrpParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResGrpParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParent" /> object. </returns>
-        public static ResGrpParent GetResGrpParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentResource" /> object. </returns>
+        public static ResGrpParentResource GetResGrpParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                ResGrpParent.ValidateResourceId(id);
-                return new ResGrpParent(client, id);
+                ResGrpParentResource.ValidateResourceId(id);
+                return new ResGrpParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a SubParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithNonResChWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChWithLoc" /> object. </returns>
-        public static SubParentWithNonResChWithLoc GetSubParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource" /> object. </returns>
+        public static SubParentWithNonResChWithLocResource GetSubParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                SubParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new SubParentWithNonResChWithLoc(client, id);
+                SubParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new SubParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithNonResCh
-        /// <summary> Gets an object representing a SubParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResCh" /> object. </returns>
-        public static SubParentWithNonResCh GetSubParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithNonResChResource" /> object. </returns>
+        public static SubParentWithNonResChResource GetSubParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                SubParentWithNonResCh.ValidateResourceId(id);
-                return new SubParentWithNonResCh(client, id);
+                SubParentWithNonResChResource.ValidateResourceId(id);
+                return new SubParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithLoc
-        /// <summary> Gets an object representing a SubParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithLoc" /> object. </returns>
-        public static SubParentWithLoc GetSubParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithLocResource" /> object. </returns>
+        public static SubParentWithLocResource GetSubParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                SubParentWithLoc.ValidateResourceId(id);
-                return new SubParentWithLoc(client, id);
+                SubParentWithLocResource.ValidateResourceId(id);
+                return new SubParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParent
-        /// <summary> Gets an object representing a SubParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParent" /> object. </returns>
-        public static SubParent GetSubParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                SubParent.ValidateResourceId(id);
-                return new SubParent(client, id);
+                SubParentResource.ValidateResourceId(id);
+                return new SubParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithNonResChWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithNonResChWithLoc GetMgmtGrpParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> object. </returns>
+        public static MgmtGrpParentWithNonResChWithLocResource GetMgmtGrpParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                MgmtGrpParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResChWithLoc(client, id);
+                MgmtGrpParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResCh" /> object. </returns>
-        public static MgmtGrpParentWithNonResCh GetMgmtGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource" /> object. </returns>
+        public static MgmtGrpParentWithNonResChResource GetMgmtGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                MgmtGrpParentWithNonResCh.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResCh(client, id);
+                MgmtGrpParentWithNonResChResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGrpParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithLoc GetMgmtGrpParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource" /> object. </returns>
+        public static MgmtGrpParentWithLocResource GetMgmtGrpParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                MgmtGrpParentWithLoc.ValidateResourceId(id);
-                return new MgmtGrpParentWithLoc(client, id);
+                MgmtGrpParentWithLocResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGroupParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtGroupParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGroupParentResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGroupParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParent" /> object. </returns>
-        public static MgmtGroupParent GetMgmtGroupParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGroupParentResource" /> object. </returns>
+        public static MgmtGroupParentResource GetMgmtGroupParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                MgmtGroupParent.ValidateResourceId(id);
-                return new MgmtGroupParent(client, id);
+                MgmtGroupParentResource.ValidateResourceId(id);
+                return new MgmtGroupParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantTest
-        /// <summary> Gets an object representing a TenantTest along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantTestResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantTestResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantTestResource.CreateResourceIdentifier" /> to create a <see cref="TenantTestResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantTest" /> object. </returns>
-        public static TenantTest GetTenantTest(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantTestResource" /> object. </returns>
+        public static TenantTestResource GetTenantTestResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TenantTest.ValidateResourceId(id);
-                return new TenantTest(client, id);
+                TenantTestResource.ValidateResourceId(id);
+                return new TenantTestResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a TenantParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithNonResChWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLoc" /> object. </returns>
-        public static TenantParentWithNonResChWithLoc GetTenantParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource" /> object. </returns>
+        public static TenantParentWithNonResChWithLocResource GetTenantParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TenantParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new TenantParentWithNonResChWithLoc(client, id);
+                TenantParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new TenantParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithNonResCh
-        /// <summary> Gets an object representing a TenantParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithNonResChResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResCh" /> object. </returns>
-        public static TenantParentWithNonResCh GetTenantParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithNonResChResource" /> object. </returns>
+        public static TenantParentWithNonResChResource GetTenantParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TenantParentWithNonResCh.ValidateResourceId(id);
-                return new TenantParentWithNonResCh(client, id);
+                TenantParentWithNonResChResource.ValidateResourceId(id);
+                return new TenantParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithLoc
-        /// <summary> Gets an object representing a TenantParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithLocResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithLoc" /> object. </returns>
-        public static TenantParentWithLoc GetTenantParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithLocResource" /> object. </returns>
+        public static TenantParentWithLocResource GetTenantParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TenantParentWithLoc.ValidateResourceId(id);
-                return new TenantParentWithLoc(client, id);
+                TenantParentWithLocResource.ValidateResourceId(id);
+                return new TenantParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParent
-        /// <summary> Gets an object representing a TenantParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TenantParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParent" /> object. </returns>
-        public static TenantParent GetTenantParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentResource" /> object. </returns>
+        public static TenantParentResource GetTenantParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                TenantParent.ValidateResourceId(id);
-                return new TenantParent(client, id);
+                TenantParentResource.ValidateResourceId(id);
+                return new TenantParentResource(client, id);
             }
             );
         }

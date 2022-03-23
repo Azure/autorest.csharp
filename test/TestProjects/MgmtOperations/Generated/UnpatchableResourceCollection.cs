@@ -36,9 +36,9 @@ namespace MgmtOperations
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal UnpatchableResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", UnpatchableResource.ResourceType.Namespace, DiagnosticOptions);
+            _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", UnpatchableResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(UnpatchableResource.ResourceType, out string unpatchableResourceApiVersion);
-            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
+            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, unpatchableResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -46,8 +46,8 @@ namespace MgmtOperations
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>

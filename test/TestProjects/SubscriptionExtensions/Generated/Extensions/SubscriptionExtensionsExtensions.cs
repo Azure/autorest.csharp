@@ -18,123 +18,129 @@ namespace SubscriptionExtensions
     /// <summary> A class to add extension methods to SubscriptionExtensions. </summary>
     public static partial class SubscriptionExtensionsExtensions
     {
-        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
         {
-            return subscription.GetCachedClient((client) =>
+            return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(client, subscription.Id);
+                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of Toasters in the Toaster. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Toasters and their operations over a Toaster. </returns>
-        public static ToasterCollection GetToasters(this Subscription subscription)
+        /// <summary> Gets a collection of ToasterResources in the SubscriptionResource. </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
+        public static ToasterCollection GetToasters(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscription).GetToasters();
+            return GetExtensionClient(subscriptionResource).GetToasters();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
         /// Operation Id: Toasters_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public static async Task<Response<Toaster>> GetToasterAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ToasterResource>> GetToasterAsync(this SubscriptionResource subscriptionResource, string toasterName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
+            return await subscriptionResource.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
         /// Operation Id: Toasters_Get
         /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public static Response<Toaster> GetToaster(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        public static Response<ToasterResource> GetToaster(this SubscriptionResource subscriptionResource, string toasterName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetToasters().Get(toasterName, cancellationToken);
+            return subscriptionResource.GetToasters().Get(toasterName, cancellationToken);
         }
 
-        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
         {
-            return resourceGroup.GetCachedClient((client) =>
+            return resourceGroupResource.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
             }
             );
         }
 
-        /// <summary> Gets a collection of Ovens in the Oven. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Ovens and their operations over a Oven. </returns>
-        public static OvenCollection GetOvens(this ResourceGroup resourceGroup)
+        /// <summary> Gets a collection of OvenResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
+        public static OvenCollection GetOvens(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroup).GetOvens();
+            return GetExtensionClient(resourceGroupResource).GetOvens();
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
         /// Operation Id: Ovens_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public static async Task<Response<Oven>> GetOvenAsync(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        public static async Task<Response<OvenResource>> GetOvenAsync(this ResourceGroupResource resourceGroupResource, string ovenName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroupResource.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
         /// Operation Id: Ovens_Get
         /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
-        public static Response<Oven> GetOven(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        public static Response<OvenResource> GetOven(this ResourceGroupResource resourceGroupResource, string ovenName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetOvens().Get(ovenName, cancellationToken);
+            return resourceGroupResource.GetOvens().Get(ovenName, cancellationToken);
         }
 
-        #region Toaster
-        /// <summary> Gets an object representing a Toaster along with the instance operations that can be performed on it but with no data. </summary>
+        #region ToasterResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ToasterResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ToasterResource.CreateResourceIdentifier" /> to create a <see cref="ToasterResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Toaster" /> object. </returns>
-        public static Toaster GetToaster(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ToasterResource" /> object. </returns>
+        public static ToasterResource GetToasterResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Toaster.ValidateResourceId(id);
-                return new Toaster(client, id);
+                ToasterResource.ValidateResourceId(id);
+                return new ToasterResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Oven
-        /// <summary> Gets an object representing a Oven along with the instance operations that can be performed on it but with no data. </summary>
+        #region OvenResource
+        /// <summary>
+        /// Gets an object representing an <see cref="OvenResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="OvenResource.CreateResourceIdentifier" /> to create an <see cref="OvenResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Oven" /> object. </returns>
-        public static Oven GetOven(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="OvenResource" /> object. </returns>
+        public static OvenResource GetOvenResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetResourceClient(() =>
             {
-                Oven.ValidateResourceId(id);
-                return new Oven(client, id);
+                OvenResource.ValidateResourceId(id);
+                return new OvenResource(client, id);
             }
             );
         }
