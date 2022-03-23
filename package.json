@@ -4,9 +4,6 @@
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "devDependencies": {
     "@microsoft.azure/autorest.testserver": "3.2.4",
-    "autorest": "3.6.0-dev.2"
-  },
-  "dependencies": {
-    "@autorest/modelerfour": "^4.23.0-dev.3"
+    "autorest": "3.6.1"
   }
 }
