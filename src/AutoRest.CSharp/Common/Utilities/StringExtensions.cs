@@ -411,6 +411,11 @@ namespace AutoRest.CSharp.Utilities
                     newName = pluralMethodName;
                 }
                 newName = newName.ReplaceFirst("List", getMethodPrefix);
+                // For the next page method of List operations, Next is appended to the end of a List method and ListXXXNext will be renamed to GetXXXNexts. Here we need to check and fix this case by removing the "s" in the end.
+                if (words.Last().Equals("Next", StringComparison.Ordinal))
+                {
+                    newName = newName.TrimEnd('s');
+                }
             }
             return newName;
         }

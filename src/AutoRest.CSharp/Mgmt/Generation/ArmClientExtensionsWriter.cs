@@ -1,11 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -13,33 +17,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private MgmtExtensions This { get; }
 
-        public ArmClientExtensionsWriter(MgmtExtensions extensions)
-            : base(extensions)
+        public ArmClientExtensionsWriter(ArmClientExtensions extensions) : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public override void Write()
+        public ArmClientExtensionsWriter(CodeWriter writer, ArmClientExtensions extensions) : base(writer, extensions)
         {
-            using (_writer.Namespace(This.Namespace))
+            This = extensions;
+        }
+
+        protected internal override void WriteImplementations()
+        {
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                WriteClassDeclaration();
-                using (_writer.Scope())
-                {
-                    foreach (var resource in MgmtContext.Library.ArmResources)
-                    {
-                        _writer.Line($"#region {resource.Type.Name}");
-                        WriteGetResourceFromIdMethod(resource);
-                        _writer.LineRaw("#endregion");
-                        _writer.Line();
-                    }
-                }
+                _writer.Line($"#region {resource.Type.Name}");
+                WriteGetResourceFromIdMethod(resource);
+                _writer.LineRaw("#endregion");
+                _writer.Line();
             }
         }
 
         protected void WriteGetResourceFromIdMethod(Resource resource)
         {
-            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
+            List<FormattableString> lines = new List<FormattableString>();
+            string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
+            lines.Add($"Gets an object representing {an} <see cref=\"{resource.Type}\" /> along with the instance operations that can be performed on it but with no data.");
+            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
+            _writer.WriteXmlDocumentationSummary(FormattableStringHelpers.Join(lines, "\r\n"));
             if (!IsArmCore)
             {
                 _writer.WriteXmlDocumentationParameter($"{This.ExtensionParameter.Name}", $"The <see cref=\"{This.ExtensionParameter.Type}\" /> instance the method will execute against.");

@@ -16,13 +16,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeFloatModel and their operations over its parent. </summary>
-    public partial class PageSizeFloatModelCollection : ArmCollection, IEnumerable<PageSizeFloatModel>, IAsyncEnumerable<PageSizeFloatModel>
+    public partial class PageSizeFloatModelCollection : ArmCollection, IEnumerable<PageSizeFloatModelResource>, IAsyncEnumerable<PageSizeFloatModelResource>
     {
         private readonly ClientDiagnostics _pageSizeFloatModelClientDiagnostics;
         private readonly PageSizeFloatModelsRestOperations _pageSizeFloatModelRestClient;
@@ -37,9 +36,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PageSizeFloatModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeFloatModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeFloatModel.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(PageSizeFloatModel.ResourceType, out string pageSizeFloatModelApiVersion);
-            _pageSizeFloatModelRestClient = new PageSizeFloatModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeFloatModelApiVersion);
+            _pageSizeFloatModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeFloatModelResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(PageSizeFloatModelResource.ResourceType, out string pageSizeFloatModelApiVersion);
+            _pageSizeFloatModelRestClient = new PageSizeFloatModelsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, pageSizeFloatModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -47,8 +46,8 @@ namespace Pagination
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<PageSizeFloatModel>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<PageSizeFloatModelResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -71,7 +70,7 @@ namespace Pagination
             try
             {
                 var response = await _pageSizeFloatModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PaginationArmOperation<PageSizeFloatModel>(Response.FromValue(new PageSizeFloatModel(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,7 +92,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<PageSizeFloatModel> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PageSizeFloatModelResource> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeFloatModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -103,7 +102,7 @@ namespace Pagination
             try
             {
                 var response = _pageSizeFloatModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PaginationArmOperation<PageSizeFloatModel>(Response.FromValue(new PageSizeFloatModel(Client, response), response.GetRawResponse()));
+                var operation = new PaginationArmOperation<PageSizeFloatModelResource>(Response.FromValue(new PageSizeFloatModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -123,7 +122,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<PageSizeFloatModel>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeFloatModelResource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -134,7 +133,7 @@ namespace Pagination
                 var response = await _pageSizeFloatModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,7 +150,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<PageSizeFloatModel> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeFloatModelResource> Get(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -162,7 +161,7 @@ namespace Pagination
                 var response = _pageSizeFloatModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -177,17 +176,17 @@ namespace Pagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PageSizeFloatModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PageSizeFloatModel> GetAllAsync(float? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="PageSizeFloatModelResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<PageSizeFloatModelResource> GetAllAsync(float? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeFloatModel>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<PageSizeFloatModelResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _pageSizeFloatModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -195,14 +194,14 @@ namespace Pagination
                     throw;
                 }
             }
-            async Task<Page<PageSizeFloatModel>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<PageSizeFloatModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = await _pageSizeFloatModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,17 +218,17 @@ namespace Pagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PageSizeFloatModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PageSizeFloatModel> GetAll(float? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="PageSizeFloatModelResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<PageSizeFloatModelResource> GetAll(float? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeFloatModel> FirstPageFunc(int? pageSizeHint)
+            Page<PageSizeFloatModelResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _pageSizeFloatModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -237,14 +236,14 @@ namespace Pagination
                     throw;
                 }
             }
-            Page<PageSizeFloatModel> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<PageSizeFloatModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _pageSizeFloatModelClientDiagnostics.CreateScope("PageSizeFloatModelCollection.GetAll");
                 scope.Start();
                 try
                 {
                     var response = _pageSizeFloatModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeFloatModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -318,7 +317,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<PageSizeFloatModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeFloatModelResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -328,8 +327,8 @@ namespace Pagination
             {
                 var response = await _pageSizeFloatModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<PageSizeFloatModelResource>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -347,7 +346,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<PageSizeFloatModel> GetIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeFloatModelResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -357,8 +356,8 @@ namespace Pagination
             {
                 var response = _pageSizeFloatModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<PageSizeFloatModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeFloatModel(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<PageSizeFloatModelResource>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeFloatModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -367,7 +366,7 @@ namespace Pagination
             }
         }
 
-        IEnumerator<PageSizeFloatModel> IEnumerable<PageSizeFloatModel>.GetEnumerator()
+        IEnumerator<PageSizeFloatModelResource> IEnumerable<PageSizeFloatModelResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -377,7 +376,7 @@ namespace Pagination
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<PageSizeFloatModel> IAsyncEnumerable<PageSizeFloatModel>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<PageSizeFloatModelResource> IAsyncEnumerable<PageSizeFloatModelResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

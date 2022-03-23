@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Core
+namespace Azure.ResourceManager
 {
     internal class InitializationConstructorAttribute : Attribute
     {

@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 case Resource parentResource:
                     {
                         var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
-                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPath, exampleModel)});");
                         _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     extraParamNames.Add($"default");
                 }
             }
-            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
+            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.ResourceName.ResourceNameToPlural()}", extraParamNames)};");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
@@ -184,28 +184,28 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() != 0)
+                if (tp is Resource rt)
                 {
                     return tp;
                 }
                 var segments = requestPath.Split('/');
                 if (tp is MgmtExtensions extension)
                 {
-                    if (extension.ArmCoreType == typeof(ResourceGroup))
+                    if (extension.ArmCoreType == typeof(ResourceGroupResource))
                     {
                         if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
                         {
                             return tp;
                         }
                     }
-                    if (extension.ArmCoreType == typeof(Subscription))
+                    if (extension.ArmCoreType == typeof(SubscriptionResource))
                     {
                         if (segments.Length > 3 && segments[1].ToLower() == "subscriptions")
                         {
                             return tp;
                         }
                     }
-                    if (extension.ArmCoreType == typeof(Tenant))
+                    if (extension.ArmCoreType == typeof(TenantResource))
                     {
                         return tp;
                     }

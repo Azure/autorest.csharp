@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
 
             if (allPossibleTypes.Count() == 1)
-                WriteStaticValidate(validResourceType, _writer);
+                WriteStaticValidate(validResourceType);
         }
 
         private void WriteExistsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)

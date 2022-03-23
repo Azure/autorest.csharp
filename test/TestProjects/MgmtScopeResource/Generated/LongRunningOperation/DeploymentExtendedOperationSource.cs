@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtScopeResource
 {
-    internal class DeploymentExtendedOperationSource : IOperationSource<DeploymentExtended>
+    internal class DeploymentExtendedOperationSource : IOperationSource<DeploymentExtendedResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtScopeResource
             _client = client;
         }
 
-        DeploymentExtended IOperationSource<DeploymentExtended>.CreateResult(Response response, CancellationToken cancellationToken)
+        DeploymentExtendedResource IOperationSource<DeploymentExtendedResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_client, data);
+            return new DeploymentExtendedResource(_client, data);
         }
 
-        async ValueTask<DeploymentExtended> IOperationSource<DeploymentExtended>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<DeploymentExtendedResource> IOperationSource<DeploymentExtendedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtended(_client, data);
+            return new DeploymentExtendedResource(_client, data);
         }
     }
 }

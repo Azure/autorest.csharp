@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtLRO
 {
-    internal class BarOperationSource : IOperationSource<Bar>
+    internal class BarOperationSource : IOperationSource<BarResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtLRO
             _client = client;
         }
 
-        Bar IOperationSource<Bar>.CreateResult(Response response, CancellationToken cancellationToken)
+        BarResource IOperationSource<BarResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new Bar(_client, data);
+            return new BarResource(_client, data);
         }
 
-        async ValueTask<Bar> IOperationSource<Bar>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<BarResource> IOperationSource<BarResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new Bar(_client, data);
+            return new BarResource(_client, data);
         }
     }
 }

@@ -17,7 +17,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 
@@ -114,6 +114,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ReorderOperationParameters();
         }
 
+        public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
+
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
@@ -154,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var request in operation.Requests)
                     {
-                        if (request.Protocol.Http is not HttpRequest {Method: HttpMethod.Patch})
+                        if (request.Protocol.Http is not HttpRequest { Method: HttpMethod.Patch })
                             continue;
 
                         var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
@@ -316,11 +318,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensions? _subscriptionExtensions;
         private MgmtExtensions? _resourceGroupsExtensions;
         private MgmtExtensions? _armResourceExtensions;
-        public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(Tenant), RequestPath.Tenant);
-        public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(Subscription), RequestPath.Subscription);
-        public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroup), RequestPath.ResourceGroup);
-        public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroup), RequestPath.ManagementGroup);
+        public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(TenantResource), RequestPath.Tenant);
+        public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(SubscriptionResource), RequestPath.Subscription);
+        public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroupResource), RequestPath.ResourceGroup);
+        public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
         public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
+
+        public MgmtExtensionsWrapper ExtensionWrapper => EnsureExtensionsWrapper();
+
+        private MgmtExtensionsWrapper? _extensionsWrapper;
+        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
+        {
+            if (_extensionsWrapper != null)
+                return _extensionsWrapper;
+
+            _extensionsWrapper = IsArmCore ?
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
+                new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
+            return _extensionsWrapper;
+        }
 
         private MgmtExtensionClient? _tenantExtensionClient;
         private MgmtExtensionClient? _managementGroupExtensionClient;
@@ -475,25 +491,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
-                foreach (var resourceOperations in resourceOperationsList)
+                foreach ((var operationSet, var operations) in resourceOperationsList)
                 {
-                    // ensure this set of OperationSets are either all singletons, or none of them is singleton
-                    Debug.Assert(resourceOperations.Keys.All(operationSet => operationSet.IsSingletonResource())
-                        || resourceOperations.Keys.All(operationSet => !operationSet.IsSingletonResource()));
-                    var isSingleton = resourceOperations.Keys.Any(operationSet => operationSet.IsSingletonResource());
+                    var isSingleton = operationSet.IsSingletonResource();
                     // get the corresponding resource data
-                    var originalResourcePaths = resourceOperations.Keys.Select(operationSet => operationSet.GetRequestPath());
-                    var resourceDatas = originalResourcePaths.Select(path => GetResourceData(path)).Distinct();
-                    if (resourceDatas.Count() != 1)
-                        throw new InvalidOperationException($"{resourceDatas.Count()} ResourceData instances were found corresponding to the resource (RequestPath: [{string.Join(", ", originalResourcePaths)}]), please double confirm and separate them into different resources");
-                    var resourceData = resourceDatas.Single();
+                    var originalResourcePath = operationSet.GetRequestPath();
+                    var resourceData = GetResourceData(originalResourcePath);
                     // we calculate the resource type of the resource
-                    var resourcePaths = originalResourcePaths.Select(path => path.Expand()).Distinct(new RequestPathCollectionEqualityComparer()).Single();
+                    var resourcePaths = originalResourcePath.Expand();
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType();
-                        var resource = new Resource(resourceOperations, GetResourceName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData);
-                        var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource);
+                        var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
+                        var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
                         resource.ResourceCollection = collection;
 
                         requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
@@ -629,19 +639,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private IEnumerable<Dictionary<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
+        private Dictionary<OperationSet, IEnumerable<Operation>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         {
-            var operations = new List<Tuple<OperationSet, IEnumerable<Operation>>>();
-
-            foreach (var resourceOperationSet in resourceOperationSets)
-            {
-                // all the child operations with the parent of current request path
-                operations.Add(new Tuple<OperationSet, IEnumerable<Operation>>(resourceOperationSet, GetChildOperations(resourceOperationSet.RequestPath)));
-            }
-
-            // TODO -- we need to categrize the above list to see if some of the resources have the operation list and we can combine them.
-            // now by default we will never combine any of them
-            return operations.Select(tuple => new Dictionary<OperationSet, IEnumerable<Operation>> { { tuple.Item1, tuple.Item2 } });
+            return resourceOperationSets.ToDictionary(
+                operationSet => operationSet,
+                operationSet => GetChildOperations(operationSet.RequestPath));
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)
