@@ -127,7 +127,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Generate src code
     & cd $srcFolder
-    $null = & dotnet build /t:GenerateCode
+    & dotnet build /t:GenerateCode
     if ($?) {
         Write-Host "$RPName Src Generate Successed"
         $Script:srcGenerateSuccessedRps += $RPName
@@ -139,7 +139,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     }
     
     # Build src code
-    $null = & dotnet build
+    & dotnet build
     if ($?) {
         Write-Host "$RPName Src Build Successed"
         $Script:srcBuildSuccessedRps += $RPName
