@@ -22,7 +22,7 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A class representing a collection of <see cref="Disk" /> and their operations.
-    /// Each <see cref="Disk" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="Disk" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="DiskCollection" /> instance call the GetDisks method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class DiskCollection : ArmCollection, IEnumerable<Disk>, IAsyncEnumerable<Disk>

@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary>
     /// A class representing a collection of <see cref="VirtualMachineScaleSetVMResource" /> and their operations.
-    /// Each <see cref="VirtualMachineScaleSetVMResource" /> in the colleciton will belong to the same instance of <see cref="VirtualMachineScaleSetResource" />.
+    /// Each <see cref="VirtualMachineScaleSetVMResource" /> in the collection will belong to the same instance of <see cref="VirtualMachineScaleSetResource" />.
     /// To get a <see cref="VirtualMachineScaleSetVMCollection" /> instance call the GetVirtualMachineScaleSetVMs method from an instance of <see cref="VirtualMachineScaleSetResource" />.
     /// </summary>
     public partial class VirtualMachineScaleSetVMCollection : ArmCollection, IEnumerable<VirtualMachineScaleSetVMResource>, IAsyncEnumerable<VirtualMachineScaleSetVMResource>

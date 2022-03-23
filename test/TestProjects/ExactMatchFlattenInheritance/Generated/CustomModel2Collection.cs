@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
 {
     /// <summary>
     /// A class representing a collection of <see cref="CustomModel2Resource" /> and their operations.
-    /// Each <see cref="CustomModel2Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="CustomModel2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="CustomModel2Collection" /> instance call the GetCustomModel2s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class CustomModel2Collection : ArmCollection, IEnumerable<CustomModel2Resource>, IAsyncEnumerable<CustomModel2Resource>

@@ -22,7 +22,7 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A class representing a collection of <see cref="NetworkResource" /> and their operations.
-    /// Each <see cref="NetworkResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="NetworkResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="NetworkCollection" /> instance call the GetNetworks method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class NetworkCollection : ArmCollection, IEnumerable<NetworkResource>, IAsyncEnumerable<NetworkResource>

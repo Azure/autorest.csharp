@@ -22,7 +22,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="MgmtGroupParentResource" /> and their operations.
-    /// Each <see cref="MgmtGroupParentResource" /> in the colleciton will belong to the same instance of <see cref="ManagementGroupResource" />.
+    /// Each <see cref="MgmtGroupParentResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
     /// To get a <see cref="MgmtGroupParentCollection" /> instance call the GetMgmtGroupParents method from an instance of <see cref="ManagementGroupResource" />.
     /// </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParentResource>, IAsyncEnumerable<MgmtGroupParentResource>

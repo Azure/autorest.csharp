@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
 {
     /// <summary>
     /// A class representing a collection of <see cref="AzureResourceFlattenModel1Resource" /> and their operations.
-    /// Each <see cref="AzureResourceFlattenModel1Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="AzureResourceFlattenModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get an <see cref="AzureResourceFlattenModel1Collection" /> instance call the GetAzureResourceFlattenModel1s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class AzureResourceFlattenModel1Collection : ArmCollection, IEnumerable<AzureResourceFlattenModel1Resource>, IAsyncEnumerable<AzureResourceFlattenModel1Resource>

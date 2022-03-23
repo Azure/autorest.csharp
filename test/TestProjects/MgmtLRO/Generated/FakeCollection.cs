@@ -22,7 +22,7 @@ namespace MgmtLRO
 {
     /// <summary>
     /// A class representing a collection of <see cref="FakeResource" /> and their operations.
-    /// Each <see cref="FakeResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="FakeResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="FakeCollection" /> instance call the GetFakes method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class FakeCollection : ArmCollection, IEnumerable<FakeResource>, IAsyncEnumerable<FakeResource>

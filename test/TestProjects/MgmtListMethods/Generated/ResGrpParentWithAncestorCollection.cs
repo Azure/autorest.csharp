@@ -22,7 +22,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="ResGrpParentWithAncestorResource" /> and their operations.
-    /// Each <see cref="ResGrpParentWithAncestorResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ResGrpParentWithAncestorResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ResGrpParentWithAncestorCollection" /> instance call the GetResGrpParentWithAncestors method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ResGrpParentWithAncestorCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorResource>, IAsyncEnumerable<ResGrpParentWithAncestorResource>

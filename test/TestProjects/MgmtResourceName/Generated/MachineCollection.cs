@@ -22,7 +22,7 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A class representing a collection of <see cref="MachineResource" /> and their operations.
-    /// Each <see cref="MachineResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="MachineResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="MachineCollection" /> instance call the GetMachines method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class MachineCollection : ArmCollection, IEnumerable<MachineResource>, IAsyncEnumerable<MachineResource>

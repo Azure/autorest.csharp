@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="StorageAccountResource" /> and their operations.
-    /// Each <see cref="StorageAccountResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="StorageAccountResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="StorageAccountCollection" /> instance call the GetStorageAccounts method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class StorageAccountCollection : ArmCollection, IEnumerable<StorageAccountResource>, IAsyncEnumerable<StorageAccountResource>

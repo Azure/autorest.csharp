@@ -22,7 +22,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="ResGrpParentWithNonResChResource" /> and their operations.
-    /// Each <see cref="ResGrpParentWithNonResChResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ResGrpParentWithNonResChResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ResGrpParentWithNonResChCollection" /> instance call the GetResGrpParentWithNonResChes method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ResGrpParentWithNonResChCollection : ArmCollection, IEnumerable<ResGrpParentWithNonResChResource>, IAsyncEnumerable<ResGrpParentWithNonResChResource>

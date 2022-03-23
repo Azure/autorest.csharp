@@ -22,7 +22,7 @@ namespace MgmtSafeFlatten
 {
     /// <summary>
     /// A class representing a collection of <see cref="TypeOneResource" /> and their operations.
-    /// Each <see cref="TypeOneResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="TypeOneResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="TypeOneCollection" /> instance call the GetTypeOnes method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOneResource>, IAsyncEnumerable<TypeOneResource>

@@ -21,7 +21,7 @@ namespace TenantOnly
 {
     /// <summary>
     /// A class representing a collection of <see cref="AgreementResource" /> and their operations.
-    /// Each <see cref="AgreementResource" /> in the colleciton will belong to the same instance of <see cref="BillingAccountResource" />.
+    /// Each <see cref="AgreementResource" /> in the collection will belong to the same instance of <see cref="BillingAccountResource" />.
     /// To get an <see cref="AgreementCollection" /> instance call the GetAgreements method from an instance of <see cref="BillingAccountResource" />.
     /// </summary>
     public partial class AgreementCollection : ArmCollection, IEnumerable<AgreementResource>, IAsyncEnumerable<AgreementResource>

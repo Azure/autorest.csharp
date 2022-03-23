@@ -1122,9 +1122,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1153,9 +1153,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1182,10 +1182,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                await TagHelper.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1212,10 +1212,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                TagHelper.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = TagHelper.Get(cancellationToken);
+                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1242,9 +1242,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1271,9 +1271,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

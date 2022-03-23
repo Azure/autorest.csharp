@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary>
     /// A class representing a collection of <see cref="VirtualMachineResource" /> and their operations.
-    /// Each <see cref="VirtualMachineResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="VirtualMachineResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="VirtualMachineCollection" /> instance call the GetVirtualMachines method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachineResource>, IAsyncEnumerable<VirtualMachineResource>

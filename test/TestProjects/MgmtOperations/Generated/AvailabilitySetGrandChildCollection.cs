@@ -21,7 +21,7 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A class representing a collection of <see cref="AvailabilitySetGrandChildResource" /> and their operations.
-    /// Each <see cref="AvailabilitySetGrandChildResource" /> in the colleciton will belong to the same instance of <see cref="AvailabilitySetChildResource" />.
+    /// Each <see cref="AvailabilitySetGrandChildResource" /> in the collection will belong to the same instance of <see cref="AvailabilitySetChildResource" />.
     /// To get an <see cref="AvailabilitySetGrandChildCollection" /> instance call the GetAvailabilitySetGrandChildren method from an instance of <see cref="AvailabilitySetChildResource" />.
     /// </summary>
     public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChildResource>, IAsyncEnumerable<AvailabilitySetGrandChildResource>

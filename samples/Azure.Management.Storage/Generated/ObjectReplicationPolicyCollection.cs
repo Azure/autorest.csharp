@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="ObjectReplicationPolicyResource" /> and their operations.
-    /// Each <see cref="ObjectReplicationPolicyResource" /> in the colleciton will belong to the same instance of <see cref="StorageAccountResource" />.
+    /// Each <see cref="ObjectReplicationPolicyResource" /> in the collection will belong to the same instance of <see cref="StorageAccountResource" />.
     /// To get an <see cref="ObjectReplicationPolicyCollection" /> instance call the GetObjectReplicationPolicies method from an instance of <see cref="StorageAccountResource" />.
     /// </summary>
     public partial class ObjectReplicationPolicyCollection : ArmCollection, IEnumerable<ObjectReplicationPolicyResource>, IAsyncEnumerable<ObjectReplicationPolicyResource>

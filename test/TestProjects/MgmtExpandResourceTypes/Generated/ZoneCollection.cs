@@ -22,7 +22,7 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A class representing a collection of <see cref="ZoneResource" /> and their operations.
-    /// Each <see cref="ZoneResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ZoneResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ZoneCollection" /> instance call the GetZones method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ZoneCollection : ArmCollection, IEnumerable<ZoneResource>, IAsyncEnumerable<ZoneResource>

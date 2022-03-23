@@ -22,7 +22,7 @@ namespace SubscriptionExtensions
 {
     /// <summary>
     /// A class representing a collection of <see cref="ToasterResource" /> and their operations.
-    /// Each <see cref="ToasterResource" /> in the colleciton will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// Each <see cref="ToasterResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
     /// To get a <see cref="ToasterCollection" /> instance call the GetToasters method from an instance of <see cref="SubscriptionResource" />.
     /// </summary>
     public partial class ToasterCollection : ArmCollection, IEnumerable<ToasterResource>, IAsyncEnumerable<ToasterResource>

@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="FileShareResource" /> and their operations.
-    /// Each <see cref="FileShareResource" /> in the colleciton will belong to the same instance of <see cref="FileServiceResource" />.
+    /// Each <see cref="FileShareResource" /> in the collection will belong to the same instance of <see cref="FileServiceResource" />.
     /// To get a <see cref="FileShareCollection" /> instance call the GetFileShares method from an instance of <see cref="FileServiceResource" />.
     /// </summary>
     public partial class FileShareCollection : ArmCollection, IEnumerable<FileShareResource>, IAsyncEnumerable<FileShareResource>

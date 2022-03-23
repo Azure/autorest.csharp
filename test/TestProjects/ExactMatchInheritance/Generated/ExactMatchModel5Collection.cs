@@ -22,7 +22,7 @@ namespace ExactMatchInheritance
 {
     /// <summary>
     /// A class representing a collection of <see cref="ExactMatchModel5Resource" /> and their operations.
-    /// Each <see cref="ExactMatchModel5Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ExactMatchModel5Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get an <see cref="ExactMatchModel5Collection" /> instance call the GetExactMatchModel5s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ExactMatchModel5Collection : ArmCollection, IEnumerable<ExactMatchModel5Resource>, IAsyncEnumerable<ExactMatchModel5Resource>

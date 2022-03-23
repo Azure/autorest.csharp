@@ -23,7 +23,7 @@ namespace ResourceRename
 {
     /// <summary>
     /// A class representing a collection of <see cref="SshPublicKeyInfoResource" /> and their operations.
-    /// Each <see cref="SshPublicKeyInfoResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="SshPublicKeyInfoResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="SshPublicKeyInfoCollection" /> instance call the GetSshPublicKeyInfos method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class SshPublicKeyInfoCollection : ArmCollection, IEnumerable<SshPublicKeyInfoResource>, IAsyncEnumerable<SshPublicKeyInfoResource>

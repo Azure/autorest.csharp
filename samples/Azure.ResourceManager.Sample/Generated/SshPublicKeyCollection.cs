@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary>
     /// A class representing a collection of <see cref="SshPublicKeyResource" /> and their operations.
-    /// Each <see cref="SshPublicKeyResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="SshPublicKeyResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="SshPublicKeyCollection" /> instance call the GetSshPublicKeys method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class SshPublicKeyCollection : ArmCollection, IEnumerable<SshPublicKeyResource>, IAsyncEnumerable<SshPublicKeyResource>

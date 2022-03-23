@@ -22,7 +22,7 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A class representing a collection of <see cref="RecordSetCNameResource" /> and their operations.
-    /// Each <see cref="RecordSetCNameResource" /> in the colleciton will belong to the same instance of <see cref="ZoneResource" />.
+    /// Each <see cref="RecordSetCNameResource" /> in the collection will belong to the same instance of <see cref="ZoneResource" />.
     /// To get a <see cref="RecordSetCNameCollection" /> instance call the GetRecordSetCNames method from an instance of <see cref="ZoneResource" />.
     /// </summary>
     public partial class RecordSetCNameCollection : ArmCollection, IEnumerable<RecordSetCNameResource>, IAsyncEnumerable<RecordSetCNameResource>

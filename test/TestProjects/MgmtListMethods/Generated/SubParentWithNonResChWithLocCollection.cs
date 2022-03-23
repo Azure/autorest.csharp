@@ -22,7 +22,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="SubParentWithNonResChWithLocResource" /> and their operations.
-    /// Each <see cref="SubParentWithNonResChWithLocResource" /> in the colleciton will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// Each <see cref="SubParentWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
     /// To get a <see cref="SubParentWithNonResChWithLocCollection" /> instance call the GetSubParentWithNonResChWithLocs method from an instance of <see cref="SubscriptionResource" />.
     /// </summary>
     public partial class SubParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<SubParentWithNonResChWithLocResource>, IAsyncEnumerable<SubParentWithNonResChWithLocResource>

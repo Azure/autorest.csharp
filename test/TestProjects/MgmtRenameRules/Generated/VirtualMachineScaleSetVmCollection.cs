@@ -21,7 +21,7 @@ namespace MgmtRenameRules
 {
     /// <summary>
     /// A class representing a collection of <see cref="VirtualMachineScaleSetVmResource" /> and their operations.
-    /// Each <see cref="VirtualMachineScaleSetVmResource" /> in the colleciton will belong to the same instance of <see cref="VirtualMachineScaleSetResource" />.
+    /// Each <see cref="VirtualMachineScaleSetVmResource" /> in the collection will belong to the same instance of <see cref="VirtualMachineScaleSetResource" />.
     /// To get a <see cref="VirtualMachineScaleSetVmCollection" /> instance call the GetVirtualMachineScaleSetVms method from an instance of <see cref="VirtualMachineScaleSetResource" />.
     /// </summary>
     public partial class VirtualMachineScaleSetVmCollection : ArmCollection, IEnumerable<VirtualMachineScaleSetVmResource>, IAsyncEnumerable<VirtualMachineScaleSetVmResource>

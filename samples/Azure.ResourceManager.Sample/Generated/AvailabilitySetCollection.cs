@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
 {
     /// <summary>
     /// A class representing a collection of <see cref="AvailabilitySetResource" /> and their operations.
-    /// Each <see cref="AvailabilitySetResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="AvailabilitySetResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get an <see cref="AvailabilitySetCollection" /> instance call the GetAvailabilitySets method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class AvailabilitySetCollection : ArmCollection, IEnumerable<AvailabilitySetResource>, IAsyncEnumerable<AvailabilitySetResource>

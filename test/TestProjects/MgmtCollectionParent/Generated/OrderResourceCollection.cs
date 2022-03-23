@@ -22,7 +22,7 @@ namespace MgmtCollectionParent
 {
     /// <summary>
     /// A class representing a collection of <see cref="OrderResource" /> and their operations.
-    /// Each <see cref="OrderResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="OrderResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get an <see cref="OrderResourceCollection" /> instance call the GetOrderResources method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class OrderResourceCollection : ArmCollection, IEnumerable<OrderResource>, IAsyncEnumerable<OrderResource>

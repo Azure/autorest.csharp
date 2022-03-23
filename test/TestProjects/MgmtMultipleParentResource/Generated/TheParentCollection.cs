@@ -22,7 +22,7 @@ namespace MgmtMultipleParentResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="TheParentResource" /> and their operations.
-    /// Each <see cref="TheParentResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="TheParentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="TheParentCollection" /> instance call the GetTheParents method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class TheParentCollection : ArmCollection, IEnumerable<TheParentResource>, IAsyncEnumerable<TheParentResource>

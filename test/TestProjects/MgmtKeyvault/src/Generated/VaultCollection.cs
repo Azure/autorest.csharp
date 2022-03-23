@@ -23,7 +23,7 @@ namespace MgmtKeyvault
 {
     /// <summary>
     /// A class representing a collection of <see cref="VaultResource" /> and their operations.
-    /// Each <see cref="VaultResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="VaultResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="VaultCollection" /> instance call the GetVaults method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class VaultCollection : ArmCollection, IEnumerable<VaultResource>, IAsyncEnumerable<VaultResource>

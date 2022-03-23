@@ -22,7 +22,7 @@ namespace SubscriptionExtensions
 {
     /// <summary>
     /// A class representing a collection of <see cref="OvenResource" /> and their operations.
-    /// Each <see cref="OvenResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="OvenResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get an <see cref="OvenCollection" /> instance call the GetOvens method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<OvenResource>, IAsyncEnumerable<OvenResource>

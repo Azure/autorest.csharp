@@ -20,7 +20,7 @@ namespace MgmtScopeResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="ResourceLinkResource" /> and their operations.
-    /// Each <see cref="ResourceLinkResource" /> in the colleciton will belong to the same instance of <see cref="TenantResource" />.
+    /// Each <see cref="ResourceLinkResource" /> in the collection will belong to the same instance of <see cref="TenantResource" />.
     /// To get a <see cref="ResourceLinkCollection" /> instance call the GetResourceLinks method from an instance of <see cref="TenantResource" />.
     /// </summary>
     public partial class ResourceLinkCollection : ArmCollection

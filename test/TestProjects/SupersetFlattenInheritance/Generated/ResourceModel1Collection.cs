@@ -22,7 +22,7 @@ namespace SupersetFlattenInheritance
 {
     /// <summary>
     /// A class representing a collection of <see cref="ResourceModel1Resource" /> and their operations.
-    /// Each <see cref="ResourceModel1Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ResourceModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ResourceModel1Collection" /> instance call the GetResourceModel1s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1Resource>, IAsyncEnumerable<ResourceModel1Resource>

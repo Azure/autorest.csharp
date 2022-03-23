@@ -22,7 +22,7 @@ namespace Pagination
 {
     /// <summary>
     /// A class representing a collection of <see cref="PageSizeFloatModelResource" /> and their operations.
-    /// Each <see cref="PageSizeFloatModelResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="PageSizeFloatModelResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="PageSizeFloatModelCollection" /> instance call the GetPageSizeFloatModels method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class PageSizeFloatModelCollection : ArmCollection, IEnumerable<PageSizeFloatModelResource>, IAsyncEnumerable<PageSizeFloatModelResource>

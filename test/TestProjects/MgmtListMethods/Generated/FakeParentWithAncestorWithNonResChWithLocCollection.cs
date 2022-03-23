@@ -21,7 +21,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> and their operations.
-    /// Each <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> in the colleciton will belong to the same instance of <see cref="FakeResource" />.
+    /// Each <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="FakeResource" />.
     /// To get a <see cref="FakeParentWithAncestorWithNonResChWithLocCollection" /> instance call the GetFakeParentWithAncestorWithNonResChWithLocs method from an instance of <see cref="FakeResource" />.
     /// </summary>
     public partial class FakeParentWithAncestorWithNonResChWithLocCollection : ArmCollection, IEnumerable<FakeParentWithAncestorWithNonResChWithLocResource>, IAsyncEnumerable<FakeParentWithAncestorWithNonResChWithLocResource>

@@ -22,7 +22,7 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A class representing a collection of <see cref="DedicatedHostGroupResource" /> and their operations.
-    /// Each <see cref="DedicatedHostGroupResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="DedicatedHostGroupResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="DedicatedHostGroupCollection" /> instance call the GetDedicatedHostGroups method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroupResource>, IAsyncEnumerable<DedicatedHostGroupResource>

@@ -22,7 +22,7 @@ namespace NoTypeReplacement
 {
     /// <summary>
     /// A class representing a collection of <see cref="NoTypeReplacementModel2Resource" /> and their operations.
-    /// Each <see cref="NoTypeReplacementModel2Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="NoTypeReplacementModel2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="NoTypeReplacementModel2Collection" /> instance call the GetNoTypeReplacementModel2s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2Resource>, IAsyncEnumerable<NoTypeReplacementModel2Resource>

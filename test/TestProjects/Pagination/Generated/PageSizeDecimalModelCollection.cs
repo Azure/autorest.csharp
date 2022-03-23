@@ -22,7 +22,7 @@ namespace Pagination
 {
     /// <summary>
     /// A class representing a collection of <see cref="PageSizeDecimalModelResource" /> and their operations.
-    /// Each <see cref="PageSizeDecimalModelResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="PageSizeDecimalModelResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="PageSizeDecimalModelCollection" /> instance call the GetPageSizeDecimalModels method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class PageSizeDecimalModelCollection : ArmCollection, IEnumerable<PageSizeDecimalModelResource>, IAsyncEnumerable<PageSizeDecimalModelResource>

@@ -22,7 +22,7 @@ namespace MgmtScopeResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="DeploymentExtendedResource" /> and their operations.
-    /// Each <see cref="DeploymentExtendedResource" /> in the colleciton will belong to the same instance of <see cref="ManagementGroupResource" />.
+    /// Each <see cref="DeploymentExtendedResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
     /// To get a <see cref="DeploymentExtendedCollection" /> instance call the GetDeploymentExtendeds method from an instance of <see cref="ManagementGroupResource" />.
     /// </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtendedResource>, IAsyncEnumerable<DeploymentExtendedResource>

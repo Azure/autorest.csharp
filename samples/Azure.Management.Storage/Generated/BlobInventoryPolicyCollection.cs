@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="BlobInventoryPolicyResource" /> and their operations.
-    /// Each <see cref="BlobInventoryPolicyResource" /> in the colleciton will belong to the same instance of <see cref="StorageAccountResource" />.
+    /// Each <see cref="BlobInventoryPolicyResource" /> in the collection will belong to the same instance of <see cref="StorageAccountResource" />.
     /// To get a <see cref="BlobInventoryPolicyCollection" /> instance call the GetBlobInventoryPolicies method from an instance of <see cref="StorageAccountResource" />.
     /// </summary>
     public partial class BlobInventoryPolicyCollection : ArmCollection, IEnumerable<BlobInventoryPolicyResource>, IAsyncEnumerable<BlobInventoryPolicyResource>

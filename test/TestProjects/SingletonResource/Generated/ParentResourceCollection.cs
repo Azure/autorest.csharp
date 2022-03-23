@@ -22,7 +22,7 @@ namespace SingletonResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="ParentResource" /> and their operations.
-    /// Each <see cref="ParentResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ParentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ParentResourceCollection" /> instance call the GetParentResources method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>

@@ -21,7 +21,7 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A class representing a collection of <see cref="TenantParentWithNonResChWithLocResource" /> and their operations.
-    /// Each <see cref="TenantParentWithNonResChWithLocResource" /> in the colleciton will belong to the same instance of <see cref="TenantTestResource" />.
+    /// Each <see cref="TenantParentWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="TenantTestResource" />.
     /// To get a <see cref="TenantParentWithNonResChWithLocCollection" /> instance call the GetTenantParentWithNonResChWithLocs method from an instance of <see cref="TenantTestResource" />.
     /// </summary>
     public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLocResource>, IAsyncEnumerable<TenantParentWithNonResChWithLocResource>

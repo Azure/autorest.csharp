@@ -22,7 +22,7 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A class representing a collection of <see cref="WorkspaceResource" /> and their operations.
-    /// Each <see cref="WorkspaceResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="WorkspaceResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="WorkspaceCollection" /> instance call the GetWorkspaces method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class WorkspaceCollection : ArmCollection, IEnumerable<WorkspaceResource>, IAsyncEnumerable<WorkspaceResource>

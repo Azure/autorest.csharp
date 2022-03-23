@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="PrivateEndpointConnectionResource" /> and their operations.
-    /// Each <see cref="PrivateEndpointConnectionResource" /> in the colleciton will belong to the same instance of <see cref="StorageAccountResource" />.
+    /// Each <see cref="PrivateEndpointConnectionResource" /> in the collection will belong to the same instance of <see cref="StorageAccountResource" />.
     /// To get a <see cref="PrivateEndpointConnectionCollection" /> instance call the GetPrivateEndpointConnections method from an instance of <see cref="StorageAccountResource" />.
     /// </summary>
     public partial class PrivateEndpointConnectionCollection : ArmCollection, IEnumerable<PrivateEndpointConnectionResource>, IAsyncEnumerable<PrivateEndpointConnectionResource>

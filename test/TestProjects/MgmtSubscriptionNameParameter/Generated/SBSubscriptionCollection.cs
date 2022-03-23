@@ -22,7 +22,7 @@ namespace MgmtSubscriptionNameParameter
 {
     /// <summary>
     /// A class representing a collection of <see cref="SBSubscriptionResource" /> and their operations.
-    /// Each <see cref="SBSubscriptionResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="SBSubscriptionResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="SBSubscriptionCollection" /> instance call the GetSBSubscriptions method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class SBSubscriptionCollection : ArmCollection, IEnumerable<SBSubscriptionResource>, IAsyncEnumerable<SBSubscriptionResource>

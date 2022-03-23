@@ -22,7 +22,7 @@ namespace MgmtExtensionResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="SubscriptionPolicyDefinitionResource" /> and their operations.
-    /// Each <see cref="SubscriptionPolicyDefinitionResource" /> in the colleciton will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// Each <see cref="SubscriptionPolicyDefinitionResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
     /// To get a <see cref="SubscriptionPolicyDefinitionCollection" /> instance call the GetSubscriptionPolicyDefinitions method from an instance of <see cref="SubscriptionResource" />.
     /// </summary>
     public partial class SubscriptionPolicyDefinitionCollection : ArmCollection, IEnumerable<SubscriptionPolicyDefinitionResource>, IAsyncEnumerable<SubscriptionPolicyDefinitionResource>

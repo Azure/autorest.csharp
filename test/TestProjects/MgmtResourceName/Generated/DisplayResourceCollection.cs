@@ -22,7 +22,7 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A class representing a collection of <see cref="DisplayResource" /> and their operations.
-    /// Each <see cref="DisplayResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="DisplayResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="DisplayResourceCollection" /> instance call the GetDisplayResources method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class DisplayResourceCollection : ArmCollection, IEnumerable<DisplayResource>, IAsyncEnumerable<DisplayResource>

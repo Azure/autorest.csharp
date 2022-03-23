@@ -22,7 +22,7 @@ namespace SupersetInheritance
 {
     /// <summary>
     /// A class representing a collection of <see cref="SupersetModel7Resource" /> and their operations.
-    /// Each <see cref="SupersetModel7Resource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="SupersetModel7Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="SupersetModel7Collection" /> instance call the GetSupersetModel7s method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class SupersetModel7Collection : ArmCollection, IEnumerable<SupersetModel7Resource>, IAsyncEnumerable<SupersetModel7Resource>

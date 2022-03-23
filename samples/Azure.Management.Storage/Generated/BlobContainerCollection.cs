@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
 {
     /// <summary>
     /// A class representing a collection of <see cref="BlobContainerResource" /> and their operations.
-    /// Each <see cref="BlobContainerResource" /> in the colleciton will belong to the same instance of <see cref="BlobServiceResource" />.
+    /// Each <see cref="BlobContainerResource" /> in the collection will belong to the same instance of <see cref="BlobServiceResource" />.
     /// To get a <see cref="BlobContainerCollection" /> instance call the GetBlobContainers method from an instance of <see cref="BlobServiceResource" />.
     /// </summary>
     public partial class BlobContainerCollection : ArmCollection, IEnumerable<BlobContainerResource>, IAsyncEnumerable<BlobContainerResource>

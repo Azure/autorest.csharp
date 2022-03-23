@@ -22,7 +22,7 @@ namespace MgmtExtensionResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="ManagementGroupPolicyDefinitionResource" /> and their operations.
-    /// Each <see cref="ManagementGroupPolicyDefinitionResource" /> in the colleciton will belong to the same instance of <see cref="ManagementGroupResource" />.
+    /// Each <see cref="ManagementGroupPolicyDefinitionResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
     /// To get a <see cref="ManagementGroupPolicyDefinitionCollection" /> instance call the GetManagementGroupPolicyDefinitions method from an instance of <see cref="ManagementGroupResource" />.
     /// </summary>
     public partial class ManagementGroupPolicyDefinitionCollection : ArmCollection, IEnumerable<ManagementGroupPolicyDefinitionResource>, IAsyncEnumerable<ManagementGroupPolicyDefinitionResource>

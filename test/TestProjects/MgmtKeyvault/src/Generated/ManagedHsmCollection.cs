@@ -22,7 +22,7 @@ namespace MgmtKeyvault
 {
     /// <summary>
     /// A class representing a collection of <see cref="ManagedHsmResource" /> and their operations.
-    /// Each <see cref="ManagedHsmResource" /> in the colleciton will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ManagedHsmResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
     /// To get a <see cref="ManagedHsmCollection" /> instance call the GetManagedHsms method from an instance of <see cref="ResourceGroupResource" />.
     /// </summary>
     public partial class ManagedHsmCollection : ArmCollection, IEnumerable<ManagedHsmResource>, IAsyncEnumerable<ManagedHsmResource>
