@@ -26,13 +26,13 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtExtensionsWrapper(IEnumerable<MgmtExtensions> extensions) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
         {
             DefaultName = $"{ResourceName}Extensions";
-            Description = Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
+            Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
             Extensions = extensions;
         }
 
         public override CSharpType? BaseType => null;
 
-        public override string Description { get; }
+        public override FormattableString Description { get; }
 
         protected override string DefaultName { get; }
 
