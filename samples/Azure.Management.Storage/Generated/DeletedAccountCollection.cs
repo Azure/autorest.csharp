@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="DeletedAccountResource" /> and their operations.
+    /// Each <see cref="DeletedAccountResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// To get a <see cref="DeletedAccountCollection" /> instance call the GetDeletedAccounts method from an instance of <see cref="SubscriptionResource" />.
+    /// </summary>
     public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccountResource>, IAsyncEnumerable<DeletedAccountResource>
     {
         private readonly ClientDiagnostics _deletedAccountClientDiagnostics;

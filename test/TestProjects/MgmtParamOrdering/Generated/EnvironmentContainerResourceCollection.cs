@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing collection of EnvironmentContainerResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="EnvironmentContainerResource" /> and their operations.
+    /// Each <see cref="EnvironmentContainerResource" /> in the collection will belong to the same instance of <see cref="WorkspaceResource" />.
+    /// To get an <see cref="EnvironmentContainerResourceCollection" /> instance call the GetEnvironmentContainerResources method from an instance of <see cref="WorkspaceResource" />.
+    /// </summary>
     public partial class EnvironmentContainerResourceCollection : ArmCollection, IEnumerable<EnvironmentContainerResource>, IAsyncEnumerable<EnvironmentContainerResource>
     {
         private readonly ClientDiagnostics _environmentContainerResourceEnvironmentContainersClientDiagnostics;

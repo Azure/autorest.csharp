@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of FakeParentWithAncestorWithNonResChWithLoc and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> and their operations.
+    /// Each <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="FakeResource" />.
+    /// To get a <see cref="FakeParentWithAncestorWithNonResChWithLocCollection" /> instance call the GetFakeParentWithAncestorWithNonResChWithLocs method from an instance of <see cref="FakeResource" />.
+    /// </summary>
     public partial class FakeParentWithAncestorWithNonResChWithLocCollection : ArmCollection, IEnumerable<FakeParentWithAncestorWithNonResChWithLocResource>, IAsyncEnumerable<FakeParentWithAncestorWithNonResChWithLocResource>
     {
         private readonly ClientDiagnostics _fakeParentWithAncestorWithNonResChWithLocClientDiagnostics;

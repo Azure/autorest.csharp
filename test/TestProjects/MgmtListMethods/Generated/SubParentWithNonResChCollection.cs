@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of SubParentWithNonResCh and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SubParentWithNonResChResource" /> and their operations.
+    /// Each <see cref="SubParentWithNonResChResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// To get a <see cref="SubParentWithNonResChCollection" /> instance call the GetSubParentWithNonResChes method from an instance of <see cref="SubscriptionResource" />.
+    /// </summary>
     public partial class SubParentWithNonResChCollection : ArmCollection, IEnumerable<SubParentWithNonResChResource>, IAsyncEnumerable<SubParentWithNonResChResource>
     {
         private readonly ClientDiagnostics _subParentWithNonResChClientDiagnostics;

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing collection of Memory and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="Memory" /> and their operations.
+    /// Each <see cref="Memory" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="MemoryCollection" /> instance call the GetMemories method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class MemoryCollection : ArmCollection, IEnumerable<Memory>, IAsyncEnumerable<Memory>
     {
         private readonly ClientDiagnostics _memoryMemoryResourcesClientDiagnostics;

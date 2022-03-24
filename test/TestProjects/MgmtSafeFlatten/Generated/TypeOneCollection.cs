@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtSafeFlatten
 {
-    /// <summary> A class representing collection of TypeOne and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TypeOneResource" /> and their operations.
+    /// Each <see cref="TypeOneResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="TypeOneCollection" /> instance call the GetTypeOnes method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOneResource>, IAsyncEnumerable<TypeOneResource>
     {
         private readonly ClientDiagnostics _typeOneCommonClientDiagnostics;
