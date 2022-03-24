@@ -192,6 +192,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
     },
+    "dpg-customization-LowLevel": {
+        "commandName": "Project",
+        "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
+    },
     "dpg_initial-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_initial\\Generated"
@@ -199,10 +203,6 @@
     "dpg_update1-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_update1\\Generated"
-    },
-    "dpg-customization-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
     },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",

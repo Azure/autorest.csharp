@@ -323,13 +323,14 @@ operationGroups:
     $key: firstTemplate
     operations:
       - !Operation 
+        operationId: firstTemplate_Create
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_13
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -344,7 +345,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
+              - !Parameter &ref_12
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -370,7 +371,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_11
+              - *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -383,6 +384,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_13
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -404,13 +407,14 @@ operationGroups:
             description: Create or update resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: firstTemplate_Delete
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_12
-            schema: *ref_8
+          - !Parameter &ref_14
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -433,7 +437,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_12
+          - *ref_14
         responses:
           - !Response 
             language: !Languages 
@@ -450,13 +454,14 @@ operationGroups:
             description: Delete resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: firstTemplate_Get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_13
-            schema: *ref_8
+          - !Parameter &ref_15
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -494,7 +499,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_13
+          - *ref_15
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -523,13 +528,14 @@ operationGroups:
     $key: secondTemplate
     operations:
       - !Operation 
+        operationId: secondTemplate_Create
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_17
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -544,7 +550,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
+              - !Parameter &ref_16
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -570,7 +576,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_14
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -583,6 +589,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_17
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -604,13 +612,14 @@ operationGroups:
             description: Create or update resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: secondTemplate_Delete
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_15
-            schema: *ref_8
+          - !Parameter &ref_18
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -633,7 +642,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_15
+          - *ref_18
         responses:
           - !Response 
             language: !Languages 
@@ -650,13 +659,14 @@ operationGroups:
             description: Delete resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: secondTemplate_Get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-          - !Parameter &ref_16
-            schema: *ref_8
+          - !Parameter &ref_19
+            schema: *ref_9
             implementation: Method
             required: true
             language: !Languages 
@@ -694,7 +704,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_16
+          - *ref_19
         responses:
           - !SchemaResponse 
             schema: *ref_5
