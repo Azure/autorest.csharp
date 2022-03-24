@@ -17,7 +17,12 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A Class representing a RecordSetMxResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a RecordSetMx along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetMxResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetMxResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetMx method.
+    /// </summary>
     public partial class RecordSetMxResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetMxResource"/> instance. </summary>

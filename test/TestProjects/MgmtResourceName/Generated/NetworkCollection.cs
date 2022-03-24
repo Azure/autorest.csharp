@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing collection of Network and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="NetworkResource" /> and their operations.
+    /// Each <see cref="NetworkResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="NetworkCollection" /> instance call the GetNetworks method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class NetworkCollection : ArmCollection, IEnumerable<NetworkResource>, IAsyncEnumerable<NetworkResource>
     {
         private readonly ClientDiagnostics _networkNetworkResourcesClientDiagnostics;

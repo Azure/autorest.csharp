@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing collection of FakePolicyAssignment and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="FakePolicyAssignmentResource" /> and their operations.
+    /// Each <see cref="FakePolicyAssignmentResource" /> in the collection will belong to the same instance of <see cref="ArmResource" />.
+    /// To get a <see cref="FakePolicyAssignmentCollection" /> instance call the GetFakePolicyAssignments method from an instance of <see cref="ArmResource" />.
+    /// </summary>
     public partial class FakePolicyAssignmentCollection : ArmCollection, IEnumerable<FakePolicyAssignmentResource>, IAsyncEnumerable<FakePolicyAssignmentResource>
     {
         private readonly ClientDiagnostics _fakePolicyAssignmentClientDiagnostics;

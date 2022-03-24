@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing collection of SupersetModel6 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SupersetModel6Resource" /> and their operations.
+    /// Each <see cref="SupersetModel6Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="SupersetModel6Collection" /> instance call the GetSupersetModel6s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class SupersetModel6Collection : ArmCollection, IEnumerable<SupersetModel6Resource>, IAsyncEnumerable<SupersetModel6Resource>
     {
         private readonly ClientDiagnostics _supersetModel6ClientDiagnostics;

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtDiscriminator
 {
-    /// <summary> A class representing collection of DeliveryRule and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="DeliveryRuleResource" /> and their operations.
+    /// Each <see cref="DeliveryRuleResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="DeliveryRuleCollection" /> instance call the GetDeliveryRules method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class DeliveryRuleCollection : ArmCollection, IEnumerable<DeliveryRuleResource>, IAsyncEnumerable<DeliveryRuleResource>
     {
         private readonly ClientDiagnostics _deliveryRuleClientDiagnostics;

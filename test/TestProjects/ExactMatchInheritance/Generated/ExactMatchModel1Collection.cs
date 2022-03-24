@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing collection of ExactMatchModel1 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ExactMatchModel1Resource" /> and their operations.
+    /// Each <see cref="ExactMatchModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="ExactMatchModel1Collection" /> instance call the GetExactMatchModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1Resource>, IAsyncEnumerable<ExactMatchModel1Resource>
     {
         private readonly ClientDiagnostics _exactMatchModel1ClientDiagnostics;

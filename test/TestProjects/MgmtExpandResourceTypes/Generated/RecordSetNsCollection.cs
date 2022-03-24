@@ -20,7 +20,11 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing collection of RecordSetNs and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="RecordSetNsResource" /> and their operations.
+    /// Each <see cref="RecordSetNsResource" /> in the collection will belong to the same instance of <see cref="ZoneResource" />.
+    /// To get a <see cref="RecordSetNsCollection" /> instance call the GetRecordSetNs method from an instance of <see cref="ZoneResource" />.
+    /// </summary>
     public partial class RecordSetNsCollection : ArmCollection, IEnumerable<RecordSetNsResource>, IAsyncEnumerable<RecordSetNsResource>
     {
         private readonly ClientDiagnostics _recordSetNsRecordSetsClientDiagnostics;

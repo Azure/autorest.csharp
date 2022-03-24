@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> A class representing collection of TrackedResourceModel1 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TrackedResourceModel1Resource" /> and their operations.
+    /// Each <see cref="TrackedResourceModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="TrackedResourceModel1Collection" /> instance call the GetTrackedResourceModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1Resource>, IAsyncEnumerable<TrackedResourceModel1Resource>
     {
         private readonly ClientDiagnostics _trackedResourceModel1ClientDiagnostics;

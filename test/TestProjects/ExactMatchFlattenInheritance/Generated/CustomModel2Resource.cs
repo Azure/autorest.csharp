@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace ExactMatchFlattenInheritance
 {
-    /// <summary> A Class representing a CustomModel2Resource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a CustomModel2 along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="CustomModel2Resource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetCustomModel2Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetCustomModel2 method.
+    /// </summary>
     public partial class CustomModel2Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="CustomModel2Resource"/> instance. </summary>

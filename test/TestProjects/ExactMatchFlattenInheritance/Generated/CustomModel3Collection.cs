@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace ExactMatchFlattenInheritance
 {
-    /// <summary> A class representing collection of CustomModel3 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="CustomModel3Resource" /> and their operations.
+    /// Each <see cref="CustomModel3Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="CustomModel3Collection" /> instance call the GetCustomModel3s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3Resource>, IAsyncEnumerable<CustomModel3Resource>
     {
         private readonly ClientDiagnostics _customModel3ClientDiagnostics;

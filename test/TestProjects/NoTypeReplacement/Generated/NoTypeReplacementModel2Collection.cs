@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace NoTypeReplacement
 {
-    /// <summary> A class representing collection of NoTypeReplacementModel2 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="NoTypeReplacementModel2Resource" /> and their operations.
+    /// Each <see cref="NoTypeReplacementModel2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="NoTypeReplacementModel2Collection" /> instance call the GetNoTypeReplacementModel2s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2Resource>, IAsyncEnumerable<NoTypeReplacementModel2Resource>
     {
         private readonly ClientDiagnostics _noTypeReplacementModel2ClientDiagnostics;

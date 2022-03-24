@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtSubscriptionNameParameter
 {
-    /// <summary> A Class representing a SBSubscriptionResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a SBSubscription along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SBSubscriptionResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetSBSubscriptionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetSBSubscription method.
+    /// </summary>
     public partial class SBSubscriptionResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SBSubscriptionResource"/> instance. </summary>

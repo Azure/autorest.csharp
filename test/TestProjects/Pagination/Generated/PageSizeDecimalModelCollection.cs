@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace Pagination
 {
-    /// <summary> A class representing collection of PageSizeDecimalModel and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="PageSizeDecimalModelResource" /> and their operations.
+    /// Each <see cref="PageSizeDecimalModelResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="PageSizeDecimalModelCollection" /> instance call the GetPageSizeDecimalModels method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class PageSizeDecimalModelCollection : ArmCollection, IEnumerable<PageSizeDecimalModelResource>, IAsyncEnumerable<PageSizeDecimalModelResource>
     {
         private readonly ClientDiagnostics _pageSizeDecimalModelClientDiagnostics;

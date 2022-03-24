@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -201,9 +202,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         // name after `{ResourceName}Collection`
         protected override string DefaultName => ResourceName + _suffixValue;
 
-        protected override string CreateDescription(string clientPrefix)
+        protected override FormattableString CreateDescription(string clientPrefix)
         {
-            return $"A class representing collection of {clientPrefix} and their operations over its parent.";
+            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            List<FormattableString> lines = new List<FormattableString>();
+            var parent = Resource.Parent().First();
+            var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+
+            lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
+            lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
+            lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+
+            return FormattableStringHelpers.Join(lines, "\r\n");
         }
 
         protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()

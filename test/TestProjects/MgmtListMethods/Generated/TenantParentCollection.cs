@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of TenantParent and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TenantParentResource" /> and their operations.
+    /// Each <see cref="TenantParentResource" /> in the collection will belong to the same instance of <see cref="TenantTestResource" />.
+    /// To get a <see cref="TenantParentCollection" /> instance call the GetTenantParents method from an instance of <see cref="TenantTestResource" />.
+    /// </summary>
     public partial class TenantParentCollection : ArmCollection, IEnumerable<TenantParentResource>, IAsyncEnumerable<TenantParentResource>
     {
         private readonly ClientDiagnostics _tenantParentClientDiagnostics;
