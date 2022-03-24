@@ -7,6 +7,7 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -25,7 +26,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task CreateOrUpdate()
+        public async Task CreateOrUpdate()
         {
             // Example: KeyVaultPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
@@ -45,7 +46,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: KeyVaultGetPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
@@ -56,7 +57,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetAll()
+        public async Task GetAll()
         {
             // Example: KeyVaultListPrivateEndpointConnection
 
