@@ -7,6 +7,7 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -25,7 +26,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: Retrieve a vault
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
@@ -35,7 +36,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Delete()
+        public async Task Delete()
         {
             // Example: Delete a vault
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
@@ -45,7 +46,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Update()
+        public async Task Update()
         {
             // Example: Update an existing vault
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
@@ -105,7 +106,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task UpdateAccessPolicy()
+        public async Task UpdateAccessPolicy()
         {
             // Example: Add an access policy, or update an access policy with new permissions
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
@@ -117,7 +118,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetPrivateLinkResources()
+        public async Task GetPrivateLinkResources()
         {
             // Example: KeyVaultListPrivateLinkResources
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");

@@ -7,9 +7,10 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault.Models;
 
@@ -25,7 +26,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task CreateOrUpdate()
+        public async Task CreateOrUpdate()
         {
             // Example: Create a new vault or update an existing vault
             string vaultName = "sample-vault";
@@ -80,7 +81,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task CreateOrUpdate2()
+        public async Task CreateOrUpdate2()
         {
             // Example: Create or update a vault with network acls
             string vaultName = "sample-vault";
@@ -104,22 +105,22 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: Retrieve a vault
             string vaultName = "sample-vault";
 
-            var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
+            var collection = GetArmClient().GetResourceGroupResource(ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group")).GetVaults();
             await collection.GetAsync(vaultName);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetAll()
+        public async Task GetAll()
         {
             // Example: List vaults in the specified resource group
             int? top = 1;
 
-            var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group")).GetVaults();
+            var collection = GetArmClient().GetResourceGroupResource(ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group")).GetVaults();
             await foreach (var _ in collection.GetAllAsync(top))
             {
             }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
@@ -26,7 +27,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task CreateOrUpdate()
+        public async Task CreateOrUpdate()
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
@@ -45,7 +46,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
@@ -56,7 +57,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetAll()
+        public async Task GetAll()
         {
             // Example: List managed HSM Pools in a subscription
 
