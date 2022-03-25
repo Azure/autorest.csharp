@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class PrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class StoragePrivateLinkServiceConnectionState : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static PrivateLinkServiceConnectionState DeserializePrivateLinkServiceConnectionState(JsonElement element)
+        internal static StoragePrivateLinkServiceConnectionState DeserializeStoragePrivateLinkServiceConnectionState(JsonElement element)
         {
             Optional<PrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
@@ -61,7 +61,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionRequired.Value);
+            return new StoragePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionRequired.Value);
         }
     }
 }

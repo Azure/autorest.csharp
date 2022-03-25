@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static PrivateEndpointConnectionListResult DeserializePrivateEndpointConnectionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PrivateEndpointConnectionData>> value = default;
+            Optional<IReadOnlyList<StoragePrivateEndpointConnectionData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -26,10 +26,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
+                    List<StoragePrivateEndpointConnectionData> array = new List<StoragePrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                        array.Add(StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(item));
                     }
                     value = array;
                     continue;

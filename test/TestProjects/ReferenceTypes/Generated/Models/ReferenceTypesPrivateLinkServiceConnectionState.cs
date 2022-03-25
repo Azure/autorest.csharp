@@ -11,20 +11,20 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
     [TypeReferenceType]
-    public partial class PrivateLinkServiceConnectionState
+    public partial class ReferenceTypesPrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesPrivateLinkServiceConnectionState. </summary>
         [InitializationConstructor]
-        public PrivateLinkServiceConnectionState()
+        public ReferenceTypesPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesPrivateLinkServiceConnectionState. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
         [SerializationConstructor]
-        internal PrivateLinkServiceConnectionState(PrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired)
+        internal ReferenceTypesPrivateLinkServiceConnectionState(PrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired)
         {
             Status = status;
             Description = description;

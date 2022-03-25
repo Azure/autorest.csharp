@@ -12,16 +12,16 @@ using Azure.ResourceManager.Models;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A private link resource. </summary>
-    public partial class PrivateLinkResource : ResourceData
+    public partial class StoragePrivateLinkResource : ResourceData
     {
-        /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
-        public PrivateLinkResource()
+        /// <summary> Initializes a new instance of StoragePrivateLinkResource. </summary>
+        public StoragePrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateLinkResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="groupId"> The private link resource group id. </param>
         /// <param name="requiredMembers"> The private link resource required member names. </param>
         /// <param name="requiredZoneNames"> The private link resource Private link DNS zone name. </param>
-        internal PrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
+        internal StoragePrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

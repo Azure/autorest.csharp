@@ -17,46 +17,46 @@ using Azure.ResourceManager;
 namespace Azure.Management.Storage
 {
     /// <summary>
-    /// A Class representing a PrivateEndpointConnection along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PrivateEndpointConnectionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetPrivateEndpointConnectionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="StorageAccountResource" /> using the GetPrivateEndpointConnection method.
+    /// A Class representing a StoragePrivateEndpointConnection along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="StoragePrivateEndpointConnectionResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetStoragePrivateEndpointConnectionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="StorageAccountResource" /> using the GetStoragePrivateEndpointConnection method.
     /// </summary>
-    public partial class PrivateEndpointConnectionResource : ArmResource
+    public partial class StoragePrivateEndpointConnectionResource : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="PrivateEndpointConnectionResource"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="StoragePrivateEndpointConnectionResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName, string privateEndpointConnectionName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}";
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _privateEndpointConnectionClientDiagnostics;
-        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionRestClient;
-        private readonly PrivateEndpointConnectionData _data;
+        private readonly ClientDiagnostics _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics;
+        private readonly PrivateEndpointConnectionsRestOperations _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient;
+        private readonly StoragePrivateEndpointConnectionData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionResource"/> class for mocking. </summary>
-        protected PrivateEndpointConnectionResource()
+        /// <summary> Initializes a new instance of the <see cref="StoragePrivateEndpointConnectionResource"/> class for mocking. </summary>
+        protected StoragePrivateEndpointConnectionResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "StoragePrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionResource(ArmClient client, PrivateEndpointConnectionData data) : this(client, data.Id)
+        internal StoragePrivateEndpointConnectionResource(ArmClient client, StoragePrivateEndpointConnectionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="StoragePrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal StoragePrivateEndpointConnectionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(ResourceType, out string privateEndpointConnectionApiVersion);
-            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, privateEndpointConnectionApiVersion);
+            _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string storagePrivateEndpointConnectionPrivateEndpointConnectionsApiVersion);
+            _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, storagePrivateEndpointConnectionPrivateEndpointConnectionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -70,7 +70,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PrivateEndpointConnectionData Data
+        public virtual StoragePrivateEndpointConnectionData Data
         {
             get
             {
@@ -92,16 +92,16 @@ namespace Azure.Management.Storage
         /// Operation Id: PrivateEndpointConnections_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StoragePrivateEndpointConnectionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StoragePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -116,16 +116,16 @@ namespace Azure.Management.Storage
         /// Operation Id: PrivateEndpointConnections_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PrivateEndpointConnectionResource> Get(CancellationToken cancellationToken = default)
+        public virtual Response<StoragePrivateEndpointConnectionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new StoragePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,11 +143,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -169,11 +169,11 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new StorageArmOperation(response);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
@@ -195,16 +195,16 @@ namespace Azure.Management.Storage
         /// <param name="data"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<PrivateEndpointConnectionResource>> UpdateAsync(WaitUntil waitUntil, PrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<StoragePrivateEndpointConnectionResource>> UpdateAsync(WaitUntil waitUntil, StoragePrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Update");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Update");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var response = await _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageArmOperation<StoragePrivateEndpointConnectionResource>(Response.FromValue(new StoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -225,16 +225,16 @@ namespace Azure.Management.Storage
         /// <param name="data"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<PrivateEndpointConnectionResource> Update(WaitUntil waitUntil, PrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<StoragePrivateEndpointConnectionResource> Update(WaitUntil waitUntil, StoragePrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Update");
+            using var scope = _storagePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("StoragePrivateEndpointConnectionResource.Update");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
-                var operation = new StorageArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var response = _storagePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
+                var operation = new StorageArmOperation<StoragePrivateEndpointConnectionResource>(Response.FromValue(new StoragePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

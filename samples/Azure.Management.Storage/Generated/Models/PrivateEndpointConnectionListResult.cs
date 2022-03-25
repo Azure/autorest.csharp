@@ -17,17 +17,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
         internal PrivateEndpointConnectionListResult()
         {
-            Value = new ChangeTrackingList<PrivateEndpointConnectionData>();
+            Value = new ChangeTrackingList<StoragePrivateEndpointConnectionData>();
         }
 
         /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
-        internal PrivateEndpointConnectionListResult(IReadOnlyList<PrivateEndpointConnectionData> value)
+        internal PrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value)
         {
             Value = value;
         }
 
         /// <summary> Array of private endpoint connections. </summary>
-        public IReadOnlyList<PrivateEndpointConnectionData> Value { get; }
+        public IReadOnlyList<StoragePrivateEndpointConnectionData> Value { get; }
     }
 }

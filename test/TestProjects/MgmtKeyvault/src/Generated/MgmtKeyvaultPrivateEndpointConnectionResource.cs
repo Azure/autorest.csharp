@@ -18,46 +18,46 @@ using Azure.ResourceManager;
 namespace MgmtKeyvault
 {
     /// <summary>
-    /// A Class representing a PrivateEndpointConnection along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PrivateEndpointConnectionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetPrivateEndpointConnectionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="VaultResource" /> using the GetPrivateEndpointConnection method.
+    /// A Class representing a MgmtKeyvaultPrivateEndpointConnection along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="MgmtKeyvaultPrivateEndpointConnectionResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetMgmtKeyvaultPrivateEndpointConnectionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="VaultResource" /> using the GetMgmtKeyvaultPrivateEndpointConnection method.
     /// </summary>
-    public partial class PrivateEndpointConnectionResource : ArmResource
+    public partial class MgmtKeyvaultPrivateEndpointConnectionResource : ArmResource
     {
-        /// <summary> Generate the resource identifier of a <see cref="PrivateEndpointConnectionResource"/> instance. </summary>
+        /// <summary> Generate the resource identifier of a <see cref="MgmtKeyvaultPrivateEndpointConnectionResource"/> instance. </summary>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vaultName, string privateEndpointConnectionName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}";
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _privateEndpointConnectionClientDiagnostics;
-        private readonly PrivateEndpointConnectionsRestOperations _privateEndpointConnectionRestClient;
-        private readonly PrivateEndpointConnectionData _data;
+        private readonly ClientDiagnostics _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics;
+        private readonly PrivateEndpointConnectionsRestOperations _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient;
+        private readonly MgmtKeyvaultPrivateEndpointConnectionData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionResource"/> class for mocking. </summary>
-        protected PrivateEndpointConnectionResource()
+        /// <summary> Initializes a new instance of the <see cref="MgmtKeyvaultPrivateEndpointConnectionResource"/> class for mocking. </summary>
+        protected MgmtKeyvaultPrivateEndpointConnectionResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "MgmtKeyvaultPrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionResource(ArmClient client, PrivateEndpointConnectionData data) : this(client, data.Id)
+        internal MgmtKeyvaultPrivateEndpointConnectionResource(ArmClient client, MgmtKeyvaultPrivateEndpointConnectionData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtKeyvaultPrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PrivateEndpointConnectionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal MgmtKeyvaultPrivateEndpointConnectionResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(ResourceType, out string privateEndpointConnectionApiVersion);
-            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, privateEndpointConnectionApiVersion);
+            _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ResourceType, out string mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsApiVersion);
+            _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -71,7 +71,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PrivateEndpointConnectionData Data
+        public virtual MgmtKeyvaultPrivateEndpointConnectionData Data
         {
             get
             {
@@ -93,16 +93,16 @@ namespace MgmtKeyvault
         /// Operation Id: PrivateEndpointConnections_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtKeyvaultPrivateEndpointConnectionResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -117,16 +117,16 @@ namespace MgmtKeyvault
         /// Operation Id: PrivateEndpointConnections_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PrivateEndpointConnectionResource> Get(CancellationToken cancellationToken = default)
+        public virtual Response<MgmtKeyvaultPrivateEndpointConnectionResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Get");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Get");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,14 +142,14 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation<PrivateEndpointConnectionResource>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation<PrivateEndpointConnectionResource>(new PrivateEndpointConnectionOperationSource(Client), _privateEndpointConnectionClientDiagnostics, Pipeline, _privateEndpointConnectionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>(new MgmtKeyvaultPrivateEndpointConnectionOperationSource(Client), _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -168,14 +168,14 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation<PrivateEndpointConnectionResource> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Delete");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Delete");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation<PrivateEndpointConnectionResource>(new PrivateEndpointConnectionOperationSource(Client), _privateEndpointConnectionClientDiagnostics, Pipeline, _privateEndpointConnectionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var response = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>(new MgmtKeyvaultPrivateEndpointConnectionOperationSource(Client), _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -196,16 +196,16 @@ namespace MgmtKeyvault
         /// <param name="data"> The intended state of private endpoint connection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<PrivateEndpointConnectionResource>> UpdateAsync(WaitUntil waitUntil, PrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>> UpdateAsync(WaitUntil waitUntil, MgmtKeyvaultPrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Update");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Update");
             scope.Start();
             try
             {
-                var response = await _privateEndpointConnectionRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var response = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtKeyvaultArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>(Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -226,16 +226,16 @@ namespace MgmtKeyvault
         /// <param name="data"> The intended state of private endpoint connection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<PrivateEndpointConnectionResource> Update(WaitUntil waitUntil, PrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource> Update(WaitUntil waitUntil, MgmtKeyvaultPrivateEndpointConnectionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(data, nameof(data));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.Update");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.Update");
             scope.Start();
             try
             {
-                var response = _privateEndpointConnectionRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation<PrivateEndpointConnectionResource>(Response.FromValue(new PrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var response = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
+                var operation = new MgmtKeyvaultArmOperation<MgmtKeyvaultPrivateEndpointConnectionResource>(Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -256,20 +256,20 @@ namespace MgmtKeyvault
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtKeyvaultPrivateEndpointConnectionResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.AddTag");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,20 +287,20 @@ namespace MgmtKeyvault
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public virtual Response<PrivateEndpointConnectionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<MgmtKeyvaultPrivateEndpointConnectionResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.AddTag");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.AddTag");
             scope.Start();
             try
             {
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -317,11 +317,11 @@ namespace MgmtKeyvault
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtKeyvaultPrivateEndpointConnectionResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.SetTags");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.SetTags");
             scope.Start();
             try
             {
@@ -329,8 +329,8 @@ namespace MgmtKeyvault
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -347,11 +347,11 @@ namespace MgmtKeyvault
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public virtual Response<PrivateEndpointConnectionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<MgmtKeyvaultPrivateEndpointConnectionResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.SetTags");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.SetTags");
             scope.Start();
             try
             {
@@ -359,8 +359,8 @@ namespace MgmtKeyvault
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -377,19 +377,19 @@ namespace MgmtKeyvault
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtKeyvaultPrivateEndpointConnectionResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.RemoveTag");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
                 await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _privateEndpointConnectionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -406,19 +406,19 @@ namespace MgmtKeyvault
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public virtual Response<PrivateEndpointConnectionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<MgmtKeyvaultPrivateEndpointConnectionResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
-            using var scope = _privateEndpointConnectionClientDiagnostics.CreateScope("PrivateEndpointConnectionResource.RemoveTag");
+            using var scope = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics.CreateScope("MgmtKeyvaultPrivateEndpointConnectionResource.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
                 GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
-                var originalResponse = _privateEndpointConnectionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(new PrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _mgmtKeyvaultPrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new MgmtKeyvaultPrivateEndpointConnectionResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {

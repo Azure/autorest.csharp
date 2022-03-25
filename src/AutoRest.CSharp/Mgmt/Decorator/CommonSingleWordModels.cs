@@ -24,7 +24,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             "Plan",
             "Usage",
             "Resource",
-            "Kind"
+            "Kind",
+            // Private endpoint definitions which are defined in swagger common-types/privatelinks.json and are used by RPs
+            "PrivateEndpointConnection",
+            "PrivateLinkResource",
+            "PrivateLinkServiceConnectionState",
+            "PrivateLinkServiceConnectionStatus",
+            "PrivateLinkServiceConnectionProvisioningState",
         };
 
         public static void Update(IEnumerable<Schema> allSchemas)

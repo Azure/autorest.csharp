@@ -15,7 +15,7 @@ namespace MgmtKeyvault.Models
     {
         internal static PrivateLinkResourceListResult DeserializePrivateLinkResourceListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PrivateLinkResource>> value = default;
+            Optional<IReadOnlyList<MgmtKeyvaultPrivateLinkResource>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,10 +25,10 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PrivateLinkResource> array = new List<PrivateLinkResource>();
+                    List<MgmtKeyvaultPrivateLinkResource> array = new List<MgmtKeyvaultPrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
+                        array.Add(MgmtKeyvaultPrivateLinkResource.DeserializeMgmtKeyvaultPrivateLinkResource(item));
                     }
                     value = array;
                     continue;

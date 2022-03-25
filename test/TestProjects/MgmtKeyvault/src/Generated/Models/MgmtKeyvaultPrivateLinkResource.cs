@@ -12,16 +12,16 @@ using Azure.ResourceManager.Models;
 namespace MgmtKeyvault.Models
 {
     /// <summary> A private link resource. </summary>
-    public partial class PrivateLinkResource : MgmtKeyvaultResourceData
+    public partial class MgmtKeyvaultPrivateLinkResource : MgmtKeyvaultResourceData
     {
-        /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
-        public PrivateLinkResource()
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResource. </summary>
+        public MgmtKeyvaultPrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,7 +31,7 @@ namespace MgmtKeyvault.Models
         /// <param name="groupId"> Group identifier of private link resource. </param>
         /// <param name="requiredMembers"> Required member names of private link resource. </param>
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
-        internal PrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData, location, tags)
+        internal MgmtKeyvaultPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, resourceType, systemData, location, tags)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

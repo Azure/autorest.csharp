@@ -16,7 +16,7 @@ namespace MgmtKeyvault.Models
     {
         internal static PrivateEndpointConnectionListResult DeserializePrivateEndpointConnectionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PrivateEndpointConnectionData>> value = default;
+            Optional<IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
+                    List<MgmtKeyvaultPrivateEndpointConnectionData> array = new List<MgmtKeyvaultPrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                        array.Add(MgmtKeyvaultPrivateEndpointConnectionData.DeserializeMgmtKeyvaultPrivateEndpointConnectionData(item));
                     }
                     value = array;
                     continue;

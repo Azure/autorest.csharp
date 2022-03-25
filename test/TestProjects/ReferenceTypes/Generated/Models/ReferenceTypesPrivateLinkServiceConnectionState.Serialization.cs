@@ -12,8 +12,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(PrivateLinkServiceConnectionStateConverter))]
-    public partial class PrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    [JsonConverter(typeof(ReferenceTypesPrivateLinkServiceConnectionStateConverter))]
+    public partial class ReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static PrivateLinkServiceConnectionState DeserializePrivateLinkServiceConnectionState(JsonElement element)
+        internal static ReferenceTypesPrivateLinkServiceConnectionState DeserializeReferenceTypesPrivateLinkServiceConnectionState(JsonElement element)
         {
             Optional<PrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
@@ -64,19 +64,19 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionsRequired.Value);
+            return new ReferenceTypesPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionsRequired.Value);
         }
 
-        internal partial class PrivateLinkServiceConnectionStateConverter : JsonConverter<PrivateLinkServiceConnectionState>
+        internal partial class ReferenceTypesPrivateLinkServiceConnectionStateConverter : JsonConverter<ReferenceTypesPrivateLinkServiceConnectionState>
         {
-            public override void Write(Utf8JsonWriter writer, PrivateLinkServiceConnectionState model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, ReferenceTypesPrivateLinkServiceConnectionState model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
-            public override PrivateLinkServiceConnectionState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override ReferenceTypesPrivateLinkServiceConnectionState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializePrivateLinkServiceConnectionState(document.RootElement);
+                return DeserializeReferenceTypesPrivateLinkServiceConnectionState(document.RootElement);
             }
         }
     }

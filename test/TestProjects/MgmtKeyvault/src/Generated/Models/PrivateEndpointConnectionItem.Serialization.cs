@@ -18,7 +18,7 @@ namespace MgmtKeyvault.Models
             Optional<string> id = default;
             Optional<string> etag = default;
             Optional<SubResource> privateEndpoint = default;
-            Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            Optional<MgmtKeyvaultPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -58,7 +58,7 @@ namespace MgmtKeyvault.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            privateLinkServiceConnectionState = PrivateLinkServiceConnectionState.DeserializePrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = MgmtKeyvaultPrivateLinkServiceConnectionState.DeserializeMgmtKeyvaultPrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))

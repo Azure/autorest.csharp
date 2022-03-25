@@ -8,18 +8,18 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
-    public partial class PrivateLinkServiceConnectionState
+    public partial class StoragePrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
-        public PrivateLinkServiceConnectionState()
+        /// <summary> Initializes a new instance of StoragePrivateLinkServiceConnectionState. </summary>
+        public StoragePrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateLinkServiceConnectionState. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        internal PrivateLinkServiceConnectionState(PrivateEndpointServiceConnectionStatus? status, string description, string actionRequired)
+        internal StoragePrivateLinkServiceConnectionState(PrivateEndpointServiceConnectionStatus? status, string description, string actionRequired)
         {
             Status = status;
             Description = description;

@@ -13,15 +13,15 @@ using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
 {
-    /// <summary> A class representing the PrivateEndpointConnection data model. </summary>
-    public partial class PrivateEndpointConnectionData : MgmtKeyvaultResourceData
+    /// <summary> A class representing the MgmtKeyvaultPrivateEndpointConnection data model. </summary>
+    public partial class MgmtKeyvaultPrivateEndpointConnectionData : MgmtKeyvaultResourceData
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
-        public PrivateEndpointConnectionData()
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionData. </summary>
+        public MgmtKeyvaultPrivateEndpointConnectionData()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,7 +32,7 @@ namespace MgmtKeyvault
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
+        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
@@ -51,7 +51,7 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Approval state of the private link connection. </summary>
-        public PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
+        public MgmtKeyvaultPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public PrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
     }

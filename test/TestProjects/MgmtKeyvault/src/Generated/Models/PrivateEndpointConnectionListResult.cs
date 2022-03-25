@@ -17,20 +17,20 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
         internal PrivateEndpointConnectionListResult()
         {
-            Value = new ChangeTrackingList<PrivateEndpointConnectionData>();
+            Value = new ChangeTrackingList<MgmtKeyvaultPrivateEndpointConnectionData>();
         }
 
         /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
         /// <param name="value"> The list of private endpoint connections. </param>
         /// <param name="nextLink"> The URL to get the next set of private endpoint connections. </param>
-        internal PrivateEndpointConnectionListResult(IReadOnlyList<PrivateEndpointConnectionData> value, string nextLink)
+        internal PrivateEndpointConnectionListResult(IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of private endpoint connections. </summary>
-        public IReadOnlyList<PrivateEndpointConnectionData> Value { get; }
+        public IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData> Value { get; }
         /// <summary> The URL to get the next set of private endpoint connections. </summary>
         public string NextLink { get; }
     }
