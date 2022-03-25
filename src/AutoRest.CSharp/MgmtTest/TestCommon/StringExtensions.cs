@@ -23,18 +23,21 @@ namespace AutoRest.CSharp.MgmtTest.TestCommon
 
         public static FormattableString? RefScenarioDefinedVariables(this string src, IEnumerable<string>? scenarioVariables)
         {
-            if (src is null)
-            {
-                return null;
-            }
             if (scenarioVariables is null)
             {
-                return $"{src:L}";
+                scenarioVariables = Enumerable.Empty<string>();
             }
-            return $"{src.RefScenarioDefinedVariablesToString(scenarioVariables):L}";
+            foreach (var scenarioVariable in scenarioVariables)
+            {
+                if (src.Contains($"$({scenarioVariable})"))
+                {
+                    return $"${src.RefScenarioDefinedVariablesToString(scenarioVariables):L}";
+                }
+            }
+            return $"{src:L}";
         }
 
-        public static string MultipleStartingSpace(this string src, int mul)
+        public static string MultiplyStartingSpace(this string src, int mul)
         {
             var lines = src.Split('\n');
             for (int i = 0; i < lines.Length; i++)
@@ -47,13 +50,9 @@ namespace AutoRest.CSharp.MgmtTest.TestCommon
 
         public static string ToSnakeCase(this string text)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
             if (text.Length < 2)
             {
-                return text;
+                return text.ToLower();
             }
             var sb = new StringBuilder();
             sb.Append(char.ToLowerInvariant(text[0]));

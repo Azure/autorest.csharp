@@ -3,8 +3,6 @@
 
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Types;
-
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal class TestEnvironmentWriter

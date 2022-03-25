@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.MgmtTest.TestCommon;
 using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -19,15 +20,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class MgmtExtensionTestWriter : MgmtBaseTestWriter
     {
-        protected MgmtExtensions _extensions;
-        protected string TestNamespace => _extensions.Type.Namespace + ".Tests.Mock";
-        protected string TypeNameOfThis => _extensions.Type.Name + "MockTests";
+        protected string TestNamespace => MgmtContext.Library.ExtensionWrapper.Type.Namespace + ".Tests.Mock";
+        protected string TypeNameOfThis => MgmtContext.Library.ExtensionWrapper.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
 
-        public MgmtExtensionTestWriter(CodeWriter writer, MgmtExtensions extensions, IEnumerable<string>? scenarioVariables = default) : base(writer, extensions, scenarioVariables)
+        public MgmtExtensionTestWriter(CodeWriter writer, IEnumerable<string>? scenarioVariables = default) : base(writer, MgmtContext.Library.ExtensionWrapper, scenarioVariables)
         {
-            this._extensions = extensions;
         }
 
         public override void Write()
@@ -36,16 +35,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test for {_extensions.ResourceName}");
+                _writer.WriteXmlDocumentationSummary($"Test for {MgmtContext.Library.ExtensionWrapper.Type.Name}");
                 _writer.Append($"public partial class {TypeNameOfThis:D} : ");
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
                 {
                     WriteTesterCtors();
-                    foreach (var clientOperation in _extensions.ClientOperations)
+                    foreach (var extensions in MgmtContext.Library.ExtensionWrapper.Extensions)
                     {
-                        _writer.Line();
-                        WriteTestMethod(clientOperation, true, false);
+                        foreach (var clientOperation in extensions.ClientOperations)
+                        {
+                            _writer.Line();
+                            WriteTestMethod(extensions, clientOperation, true, false);
+                        }
                     }
                 }
             }
@@ -66,7 +68,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected void WriteTestMethod(MgmtClientOperation clientOperation, bool async, bool isLroOperation)
+        protected void WriteTestMethod(MgmtExtensions extensions, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             var methodName = clientOperation.Name;
             int exampleIdx = 0;
@@ -83,7 +85,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        WriteOperationInvocation(clientOperation, operation, exampleModel, async, isLroOperation);
+                        WriteOperationInvocation(extensions, clientOperation, operation, exampleModel, async, isLroOperation);
                     }
                     _writer.Line();
                     exampleIdx++;
@@ -91,16 +93,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource? resource=null)
+        public bool WriteOperationInvocation(MgmtExtensions extensions, MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
         {
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             var resourceIdentifierParams = ComposeResourceIdentifierParams(restOperation.RequestPath, exampleModel);
-            var subscriptionVariableName = new CodeWriterDeclaration(_extensions.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {subscriptionVariableName:D} = GetArmClient().GetSubscriptionResource({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(restOperation.RequestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}));");
+            var resourceVariableName = new CodeWriterDeclaration(extensions.ResourceName.FirstCharToLowerCase());
+            _writer.Line($"var {resourceVariableName:D} ={WriteGetExtension(extensions, restOperation.RequestPath, exampleModel, _scenarioVariables)};");
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters.Skip(1), exampleModel);
 
             _writer.Line();
-            WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{subscriptionVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
+            WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
             return true;
         }
     }
