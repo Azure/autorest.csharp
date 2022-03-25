@@ -71,7 +71,7 @@ namespace Azure.Management.Storage.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            ResourceManager.Models.SystemData systemData = default;
             Optional<string> version = default;
             Optional<bool> deleted = default;
             Optional<DateTimeOffset> deletedTime = default;
@@ -115,7 +115,7 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("systemData"))
                 {
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))

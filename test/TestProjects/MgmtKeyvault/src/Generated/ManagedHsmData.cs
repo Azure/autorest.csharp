@@ -30,7 +30,7 @@ namespace MgmtKeyvault
         /// <param name="location"> The location. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="properties"> Properties of the managed HSM. </param>
-        internal ManagedHsmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, ManagedHsmProperties properties) : base(id, name, resourceType, systemData, tags, location, sku)
+        internal ManagedHsmData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku, ManagedHsmProperties properties) : base(id, name, resourceType, systemData, tags, location, sku)
         {
             Properties = properties;
         }

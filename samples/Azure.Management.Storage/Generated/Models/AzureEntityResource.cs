@@ -24,7 +24,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="etag"> Resource Etag. </param>
-        internal AzureEntityResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag) : base(id, name, resourceType, systemData)
+        internal AzureEntityResource(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, string etag) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
         }

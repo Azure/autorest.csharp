@@ -103,7 +103,7 @@ namespace MgmtParamOrdering
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            Azure.ResourceManager.Models.SystemData systemData = default;
             Optional<string> workspaceId = default;
             Optional<string> description = default;
             Optional<string> friendlyName = default;
@@ -154,7 +154,7 @@ namespace MgmtParamOrdering
                 }
                 if (property.NameEquals("systemData"))
                 {
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<Azure.ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))

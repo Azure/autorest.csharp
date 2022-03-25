@@ -36,7 +36,7 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The Geo-location where the resource lives. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        internal TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;

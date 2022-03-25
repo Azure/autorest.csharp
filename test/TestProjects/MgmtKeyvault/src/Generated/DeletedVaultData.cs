@@ -25,7 +25,7 @@ namespace MgmtKeyvault
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties) : base(id, name, resourceType, systemData)
+        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, DeletedVaultProperties properties) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
         }

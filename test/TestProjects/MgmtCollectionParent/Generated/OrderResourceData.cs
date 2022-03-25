@@ -30,7 +30,7 @@ namespace MgmtCollectionParent
         /// <param name="orderItemIds"> List of order item ARM Ids which are part of an order. </param>
         /// <param name="currentStage"> Order current status. </param>
         /// <param name="orderStageHistory"> Order status history. </param>
-        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory) : base(id, name, resourceType, systemData)
+        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory) : base(id, name, resourceType, systemData)
         {
             OrderItemIds = orderItemIds;
             CurrentStage = currentStage;

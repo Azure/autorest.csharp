@@ -38,7 +38,7 @@ namespace MgmtKeyvault
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, VaultProperties properties) : base(id, name, resourceType, systemData)
+        internal VaultData(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, VaultProperties properties) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;

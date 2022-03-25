@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         /// <param name="lastModifiedTime"> Gets the last modification date and time of the encryption scope in UTC. </param>
         /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope &apos;source&apos; attribute is set to &apos;Microsoft.KeyVault&apos;. </param>
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
-        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption) : base(id, name, resourceType, systemData)
+        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption) : base(id, name, resourceType, systemData)
         {
             Source = source;
             State = state;

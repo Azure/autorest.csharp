@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
         /// <param name="systemData"> The systemData. </param>
         /// <param name="lastModifiedTime"> Returns the last modified date and time of the blob inventory policy. </param>
         /// <param name="policy"> The storage account blob inventory policy object. It is composed of policy rules. </param>
-        internal BlobInventoryPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedTime, BlobInventoryPolicySchema policy) : base(id, name, resourceType, systemData)
+        internal BlobInventoryPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, DateTimeOffset? lastModifiedTime, BlobInventoryPolicySchema policy) : base(id, name, resourceType, systemData)
         {
             LastModifiedTime = lastModifiedTime;
             Policy = policy;

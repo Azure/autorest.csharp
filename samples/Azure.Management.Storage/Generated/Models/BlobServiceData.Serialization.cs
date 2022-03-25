@@ -74,7 +74,7 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            SystemData systemData = default;
+            ResourceManager.Models.SystemData systemData = default;
             Optional<CorsRules> cors = default;
             Optional<string> defaultServiceVersion = default;
             Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
@@ -113,7 +113,7 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("systemData"))
                 {
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))

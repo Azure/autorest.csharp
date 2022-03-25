@@ -30,7 +30,7 @@ namespace MgmtParamOrdering.Models
         /// <param name="location"> The location. </param>
         /// <param name="instanceId"> remove some properties to simplify; The virtual machine instance ID. </param>
         /// <param name="zones"> The virtual machine zones. </param>
-        internal VirtualMachineScaleSetVM(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, IReadOnlyList<string> zones) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetVM(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, IReadOnlyList<string> zones) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Zones = zones;

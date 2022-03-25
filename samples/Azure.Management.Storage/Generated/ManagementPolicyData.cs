@@ -28,7 +28,7 @@ namespace Azure.Management.Storage
         /// <param name="systemData"> The systemData. </param>
         /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy) : base(id, name, resourceType, systemData)
+        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy) : base(id, name, resourceType, systemData)
         {
             LastModifiedTime = lastModifiedTime;
             Policy = policy;

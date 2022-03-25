@@ -18,7 +18,7 @@ namespace MgmtSubscriptionNameParameter.Models
         internal ErrorResponseError()
         {
             Details = new ChangeTrackingList<ErrorResponse>();
-            AdditionalInfo = new ChangeTrackingList<ErrorAdditionalInfo>();
+            AdditionalInfo = new ChangeTrackingList<Azure.ResourceManager.Models.ErrorAdditionalInfo>();
         }
 
         /// <summary> Initializes a new instance of ErrorResponseError. </summary>
@@ -27,7 +27,7 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <param name="target"> The error target. </param>
         /// <param name="details"> The error details. </param>
         /// <param name="additionalInfo"> The error additional info. </param>
-        internal ErrorResponseError(string code, string message, string target, IReadOnlyList<ErrorResponse> details, IReadOnlyList<ErrorAdditionalInfo> additionalInfo)
+        internal ErrorResponseError(string code, string message, string target, IReadOnlyList<ErrorResponse> details, IReadOnlyList<Azure.ResourceManager.Models.ErrorAdditionalInfo> additionalInfo)
         {
             Code = code;
             Message = message;
@@ -45,6 +45,6 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <summary> The error details. </summary>
         public IReadOnlyList<ErrorResponse> Details { get; }
         /// <summary> The error additional info. </summary>
-        public IReadOnlyList<ErrorAdditionalInfo> AdditionalInfo { get; }
+        public IReadOnlyList<Azure.ResourceManager.Models.ErrorAdditionalInfo> AdditionalInfo { get; }
     }
 }

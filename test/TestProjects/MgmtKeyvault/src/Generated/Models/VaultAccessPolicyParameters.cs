@@ -35,7 +35,7 @@ namespace MgmtKeyvault.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The resource type of the access policy. </param>
         /// <param name="properties"> Properties of the access policy. </param>
-        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, VaultAccessPolicyProperties properties) : base(id, name, resourceType, systemData)
+        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, string location, VaultAccessPolicyProperties properties) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;

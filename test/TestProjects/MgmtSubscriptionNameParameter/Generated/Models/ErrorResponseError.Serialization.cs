@@ -20,7 +20,7 @@ namespace MgmtSubscriptionNameParameter.Models
             Optional<string> message = default;
             Optional<string> target = default;
             Optional<IReadOnlyList<ErrorResponse>> details = default;
-            Optional<IReadOnlyList<ErrorAdditionalInfo>> additionalInfo = default;
+            Optional<IReadOnlyList<Azure.ResourceManager.Models.ErrorAdditionalInfo>> additionalInfo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -60,10 +60,10 @@ namespace MgmtSubscriptionNameParameter.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ErrorAdditionalInfo> array = new List<ErrorAdditionalInfo>();
+                    List<Azure.ResourceManager.Models.ErrorAdditionalInfo> array = new List<Azure.ResourceManager.Models.ErrorAdditionalInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<ErrorAdditionalInfo>(item.ToString()));
+                        array.Add(JsonSerializer.Deserialize<Azure.ResourceManager.Models.ErrorAdditionalInfo>(item.ToString()));
                     }
                     additionalInfo = array;
                     continue;

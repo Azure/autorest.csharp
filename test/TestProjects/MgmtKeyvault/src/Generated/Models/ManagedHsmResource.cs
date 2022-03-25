@@ -28,7 +28,7 @@ namespace MgmtKeyvault.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sku"> SKU details. </param>
-        internal ManagedHsmResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
+        internal ManagedHsmResource(ResourceIdentifier id, string name, ResourceType resourceType, Azure.ResourceManager.Models.SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
         }
