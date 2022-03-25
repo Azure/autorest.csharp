@@ -3,7 +3,6 @@
 
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Types;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.MgmtTest.Generation

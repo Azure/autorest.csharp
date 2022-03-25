@@ -2,18 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
-using System.Reflection.Metadata.Ecma335;
-using AutoRest.CSharp.MgmtTest.TestCommon;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {

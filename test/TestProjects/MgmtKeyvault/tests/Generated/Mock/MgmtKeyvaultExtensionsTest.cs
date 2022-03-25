@@ -15,10 +15,10 @@ using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault.Tests.Mock
 {
-    /// <summary> Test for SubscriptionResource. </summary>
-    public partial class SubscriptionResourceExtensionsMockTests : MockTestBase
+    /// <summary> Test for MgmtKeyvaultExtensions. </summary>
+    public partial class MgmtKeyvaultExtensionsMockTests : MockTestBase
     {
-        public SubscriptionResourceExtensionsMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
+        public MgmtKeyvaultExtensionsMockTests(bool isAsync) : base(isAsync, RecordedTestMode.Record)
         {
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
             Environment.SetEnvironmentVariable("RESOURCE_MANAGER_URL", $"https://localhost:8443");
@@ -28,10 +28,10 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetVaults()
         {
             // Example: List vaults in the specified subscription
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
             int? top = 1;
 
-            await foreach (var _ in subscriptionResourceExtensions.GetVaultsAsync(top))
+            await foreach (var _ in subscriptionResource.GetVaultsAsync(top))
             {
             }
         }
@@ -40,9 +40,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetDeletedVaults()
         {
             // Example: List deleted vaults in the specified subscription
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
 
-            await foreach (var _ in subscriptionResourceExtensions.GetDeletedVaultsAsync())
+            await foreach (var _ in subscriptionResource.GetDeletedVaultsAsync())
             {
             }
         }
@@ -51,20 +51,20 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task CheckNameAvailabilityVault()
         {
             // Example: Validate a vault name
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
             MgmtKeyvault.Models.VaultCheckNameAvailabilityParameters vaultName = new MgmtKeyvault.Models.VaultCheckNameAvailabilityParameters(name: "sample-vault");
 
-            await subscriptionResourceExtensions.CheckNameAvailabilityVaultAsync(vaultName);
+            await subscriptionResource.CheckNameAvailabilityVaultAsync(vaultName);
         }
 
         [RecordedTest]
         public async Task GetManagedHsms()
         {
             // Example: List managed HSM Pools in a subscription
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
             int? top = default;
 
-            await foreach (var _ in subscriptionResourceExtensions.GetManagedHsmsAsync(top))
+            await foreach (var _ in subscriptionResource.GetManagedHsmsAsync(top))
             {
             }
         }
@@ -73,9 +73,9 @@ namespace MgmtKeyvault.Tests.Mock
         public async Task GetDeletedManagedHsms()
         {
             // Example: List deleted managed HSMs in the specified subscription
-            var subscriptionResourceExtensions = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
+            var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
 
-            await foreach (var _ in subscriptionResourceExtensions.GetDeletedManagedHsmsAsync())
+            await foreach (var _ in subscriptionResource.GetDeletedManagedHsmsAsync())
             {
             }
         }

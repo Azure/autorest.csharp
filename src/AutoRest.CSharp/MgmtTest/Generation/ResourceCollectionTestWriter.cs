@@ -122,19 +122,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 case MgmtExtensions extension:
                     {
-                        if (extension == MgmtContext.Library.TenantExtensions) {
-                            _writer.UseNamespace("System.Linq");
-                            _writer.Append($"var collection = GetArmClient().GetTenants().First()");
-                        }
-                        if (extension == MgmtContext.Library.ResourceGroupExtensions) {
-                             _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}({typeof(ResourceGroupResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}, {GetExampleValueFromRequestPath(requestPath, exampleModel, "resourcegroups").RefScenarioDefinedVariables(_scenarioVariables)}))");
-                        }
-                        else if  (extension == MgmtContext.Library.SubscriptionExtensions) {
-                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(_scenarioVariables)}))");
-                        }
-                        else {
-                            throw new Exception($"Unknown parent extension {extension}");
-                        }
+                        _writer.Append($"var collection = {WriteGetExtension(extension, requestPath, exampleModel, _scenarioVariables)}");
                         break;
                     }
                 default:
@@ -252,10 +240,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource? resource=null)
+        public bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation)
         {
             MgmtTypeProvider? parentTp = FindParentByRequestPath(restOperation.RequestPath.SerializedPath, exampleModel);
-            if (parentTp is null) {
+            if (parentTp is null)
+            {
                 return false;
             }
 
