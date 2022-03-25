@@ -32,7 +32,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
             string name = "hsm1";
-            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: "westus")
+            MgmtKeyvault.ManagedHsmData data = new MgmtKeyvault.ManagedHsmData(location: "westus")
             {
                 Properties = new MgmtKeyvault.Models.ManagedHsmProperties()
                 {
@@ -43,14 +43,14 @@ namespace MgmtKeyvault.Tests.Mock
                 },
                 Sku = new MgmtKeyvault.Models.ManagedHsmSku(family: new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), name: MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
             };
-            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            data.Tags.ReplaceWith(new Dictionary<string, string>()
             {
                 ["Dept"] = "hsm",
                 ["Environment"] = "dogfood",
             });
 
             var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, parameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data);
         }
 
         [RecordedTest]

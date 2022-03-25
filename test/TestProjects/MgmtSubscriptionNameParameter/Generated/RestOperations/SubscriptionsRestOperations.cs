@@ -122,7 +122,7 @@ namespace MgmtSubscriptionNameParameter
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -140,7 +140,7 @@ namespace MgmtSubscriptionNameParameter
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -150,18 +150,18 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
-        /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
+        /// <param name="data"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SBSubscriptionData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SBSubscriptionData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -181,18 +181,18 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
-        /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
+        /// <param name="data"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SBSubscriptionData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public Response<SBSubscriptionData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

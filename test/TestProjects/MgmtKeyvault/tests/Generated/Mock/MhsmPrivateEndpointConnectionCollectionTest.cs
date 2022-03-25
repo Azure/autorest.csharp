@@ -31,7 +31,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
+            MgmtKeyvault.MhsmPrivateEndpointConnectionData data = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {
@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
 
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
             var collection = GetArmClient().GetManagedHsmResource(managedHsmResourceId).GetMhsmPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, properties);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
         }
 
         [RecordedTest]

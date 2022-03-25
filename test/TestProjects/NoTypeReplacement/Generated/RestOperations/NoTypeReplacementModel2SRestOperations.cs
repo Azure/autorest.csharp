@@ -108,7 +108,7 @@ namespace NoTypeReplacement
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -126,7 +126,7 @@ namespace NoTypeReplacement
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -135,18 +135,18 @@ namespace NoTypeReplacement
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The NoTypeReplacementModel2 to use. </param>
+        /// <param name="data"> The NoTypeReplacementModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel2SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<NoTypeReplacementModel2Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<NoTypeReplacementModel2Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel2SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel2SName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -165,18 +165,18 @@ namespace NoTypeReplacement
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The NoTypeReplacementModel2 to use. </param>
+        /// <param name="data"> The NoTypeReplacementModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel2SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<NoTypeReplacementModel2Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
+        public Response<NoTypeReplacementModel2Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel2SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel2SName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
