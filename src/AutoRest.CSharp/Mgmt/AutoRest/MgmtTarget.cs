@@ -61,9 +61,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.Models)
             {
-                if (ShouldSkipModelGeneration(model))
-                    continue;
-
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
                 var name = model.Type.Name;

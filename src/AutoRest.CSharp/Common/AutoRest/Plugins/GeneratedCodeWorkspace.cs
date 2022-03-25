@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -436,10 +437,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync();
 
-            var modelFactoryNode = await GetModelFactoryClass();
-            var tree = modelFactoryNode.SyntaxTree;
-            var document = _project.GetDocument(tree)!;
-            var newModelFactoryNode = modelFactoryNode;
             await foreach (var model in publicModels)
             {
                 definitions = definitions.Remove(model);
@@ -447,20 +444,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // get the models we need to mark internal
             foreach (var model in definitions)
             {
-                MarkInternal(model, ref newModelFactoryNode);
+                MarkInternal(model);
             }
 
-            var newRoot = tree.GetRoot().ReplaceNode(modelFactoryNode, newModelFactoryNode).WithAdditionalAnnotations(Simplifier.Annotation);
-            _project = _project.RemoveDocument(document.Id);
-            document = document.WithSyntaxRoot(newRoot);
-            _project = document.Project;
+            // remove the factory method of internal models in the model factory
+            await RemoveInternalModelFactoryMethods(
+                definitions.Select(node => GetInternalModelName(node)).WhereNotNull().ToImmutableHashSet());
         }
 
-        private void MarkInternal(SyntaxNode declarationNode, ref ClassDeclarationSyntax modelFactoryNode)
+        private void MarkInternal(SyntaxNode declarationNode)
         {
             var newNode = declarationNode switch
             {
-                MemberDeclarationSyntax declaration => MarkInternal(declaration, ref modelFactoryNode),
+                MemberDeclarationSyntax declaration => ChangeAccessibility(declaration, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword),
                 _ => throw new InvalidOperationException()
             };
             var tree = declarationNode.SyntaxTree;
@@ -471,25 +467,39 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _project = document.Project;
         }
 
-        private static MemberDeclarationSyntax MarkInternal(MemberDeclarationSyntax memberDeclaration, ref ClassDeclarationSyntax modelFactoryNode)
+        private static MemberDeclarationSyntax ChangeAccessibility(MemberDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
         {
-            string? name = memberDeclaration switch
-            {
-                ClassDeclarationSyntax classDeclaration => classDeclaration.Identifier.Text,
-                StructDeclarationSyntax structDeclaration => structDeclaration.Identifier.Text,
-                _ => null
-            };
-
-            if (name is not null)
-            {
-                var methodToRemove = modelFactoryNode.DescendantNodes(node => node is MethodDeclarationSyntax method && method.Identifier.Text == name);
-                modelFactoryNode = modelFactoryNode.RemoveNodes(methodToRemove, SyntaxRemoveOptions.KeepNoTrivia)!;
-            }
-
-            var publicTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(SyntaxKind.PublicKeyword));
-            var internalToken = SyntaxFactory.Token(publicTokenInList.LeadingTrivia, SyntaxKind.InternalKeyword, publicTokenInList.TrailingTrivia);
-            var newModifiers = memberDeclaration.Modifiers.Replace(publicTokenInList, internalToken);
+            var originalToken = memberDeclaration.Modifiers.First(token => token.IsKind(from));
+            var newToken = SyntaxFactory.Token(originalToken.LeadingTrivia, to, originalToken.TrailingTrivia);
+            var newModifiers = memberDeclaration.Modifiers.Replace(originalToken, newToken);
             return memberDeclaration.WithModifiers(newModifiers);
+        }
+
+        private static string? GetInternalModelName(SyntaxNode node) => node switch
+        {
+            ClassDeclarationSyntax classDeclaration => classDeclaration.Identifier.Text,
+            StructDeclarationSyntax structDeclaration => structDeclaration.Identifier.Text,
+            _ => null,
+        };
+
+        private async Task RemoveInternalModelFactoryMethods(ImmutableHashSet<string> internalClassNames)
+        {
+            var modelFactoryClassDeclaration = await GetModelFactoryClass();
+
+            // mark myself public
+            var newModelFactoryClassDeclaration = ChangeAccessibility(modelFactoryClassDeclaration, SyntaxKind.InternalKeyword, SyntaxKind.PublicKeyword)!;
+
+            // remove the methods for internal models
+            var methodsToRemove = modelFactoryClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .Where(node => internalClassNames.Contains(node.Identifier.Text));
+            newModelFactoryClassDeclaration = modelFactoryClassDeclaration.RemoveNodes(methodsToRemove, SyntaxRemoveOptions.KeepNoTrivia)!;
+
+            var tree = modelFactoryClassDeclaration.SyntaxTree;
+            var document = _project.GetDocument(tree)!;
+            var newRoot = tree.GetRoot().ReplaceNode(modelFactoryClassDeclaration, newModelFactoryClassDeclaration).WithAdditionalAnnotations(Simplifier.Annotation);
+            _project = _project.RemoveDocument(document.Id);
+            document = document.WithSyntaxRoot(newRoot);
+            _project = document.Project;
         }
     }
 }
