@@ -66,9 +66,11 @@ An operation set is marked as a resource, only when the following conditions mee
 
 If all the above conditions are met, this operation set will be marked as a "resource" by management generator, and the schema of the `200` response of the GET request will be its corresponding `ResourceData`.
 
-We have multiple ways to tweak the criteria of identifying resources, please see [change resource data](#change-resource-data) section.
+There are multiple ways to tweak the criteria of identifying resources, please see [change the criteria of ARM resources](#change-the-criteria-of-arm-resources) and [change resource data](#change-resource-data) section.
 
 The name of a resource usually is derived from the name of the resource data, but with some exceptions. Please see [change resource name](#change-resource-name) for more details.
+
+If a request path is incorrectly marked as a resource, you could use a configuration to make it non-resource again. Please see [mark a request path is non-resource](#mark-a-request-path-is-a-non-resource) section.
 
 // TODO -- add more links here
 
@@ -93,7 +95,18 @@ For each operation set, the management generator will try to find its parent, by
 
 Now every operation set (and it corresponds to a resource) will have a parent and only have one parent, the resource hierarchy has been built.
 
+There is a way to change the hierarchical structure of resources by the configuration, please see [change the parent of request paths](#change-parent-of-request-paths) section.
+
 ### Resource types and expanded resources
+
+Every `[Resource]Resource` class has a public static field for its resource type, like:
+```csharp
+public partial class AvailabilitySetResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
+}
+```
 
 Once an operation set is marked as a resource, resource type is able to calculate. In general, the resource type of a resource is calculated in this way:
 
@@ -106,7 +119,7 @@ In the design of .Net management SDK, one resource must only have one constant r
 
 For instance, if the above procedure is applied on this request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}`, it produces the resource type `Microsoft.Network/dnsZones/{recordType}` which contains a variable in it and is not a constant. If this happens, the generator will try to expand it into multiple constant resource types. This requires the variables in the resulted resource type to be an enum type, if this condition is not met, the generator will throw exceptions for you to resolve by adding configuration/directives.
 
-We have some ways to change the resource type of a resource, please see [changing the resource type](Changing-the-resource-type) section.
+We have some ways to change the resource type of a resource, please see [change the resource type](#change-the-resource-type) section.
 
 ### Singleton resources
 
@@ -117,7 +130,7 @@ The generator will mark a resource as a singleton, when its request path subtrac
 When a resource is marked as a singleton resource, it will not have its corresponding `[Resource]Collection` class, only have `[Resource]Resource` class and `[Resource]Data` class. The method to get a singleton resource on its parent will be called as `Get[Resource]` in singular form, like
 
 ```csharp
-public partial class StorageAccount : ArmResource
+public partial class StorageAccountResource : ArmResource
 {
     public virtual BlobServiceResource GetBlobService()
     {
@@ -126,7 +139,7 @@ public partial class StorageAccount : ArmResource
 }
 ```
 
-If you want to change the behavior how the generator identifies singleton resources, please see [Singleton resources](Singleton-resources) section
+If you want to change the behavior how the generator identifies singleton resources, please see [change singleton resources](#change-singleton-resources) section.
 
 ## Management plane configurations
 
@@ -323,11 +336,9 @@ request-path-to-resource-name:
 ```
 Now you will have `SomethingResource` instead of `AvailabilitySetResource`, `SomethingCollection` instead of `AvailabilitySetCollection`, but still have the original resource data `AvailabilitySetData` because this configuration only change the corresponding resource name and the collection name (if it has a collection).
 
-### Changing the criteria of ARM resources
+### Change the criteria of ARM resources
 
-// TODO -- need to revise this
-
-By default, we will only mark a request path as resource, if its schema meets ARM's resource criteria, the model must have `id`, `type` and `name`. You can use the `resource-model-requires-type` and `resource-model-requires-name` configuration to loose this criteria.
+By default, a resource requires its schema to meet ARM's resource criteria that the model must have `id`, `type` and `name`. You can use the `resource-model-requires-type` and `resource-model-requires-name` configuration to loose this criteria.
 
 For instance
 
@@ -337,16 +348,38 @@ resource-model-requires-type: false
 
 This configuration will globally change the criteria of a resource model to only have `id` and `name`.
 
-### Changing the resource type
+### Change the resource type
 
-The .Net management plane SDK requires a resource to have its own resource type, and the generator will automatically calculate the corresponding resource type from the request path of that resource. There are situations that the resource type cannot be calculated, in this case, you need to use the `request-path-to-resource-type` configuration to assign a resource type to the resource. For instance
+The resource type is usually automatically calculated by its request path, but there are situations that the resource type cannot be calculated or not correctly calculated. In this case, you need to use the `request-path-to-resource-type` configuration to assign a resource type to the resource.
 
+<details>
+
+For instance, if we have the `AvailabilitySetResource` class
+```csharp
+public partial class AvailabilitySetResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
+}
+```
+and if we have this configuration
 ```
 request-path-to-resource-type:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Microsoft.Compute/virtualNetworks
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Microsoft.Compute/availabilitysets
+```
+Then we will have the following changes in `AvailabilitySetResource` class
+```diff
+public partial class AvailabilitySetResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+-   public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
++   public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitysets";
+}
 ```
 
-This will change the resource type of the `AvailabilitySet` from the default `Microsoft.Compute/availabilitySets` to `Microsoft.Compute/virtualNetworks`.
+</details>
+
+There are also some special request paths which is not possible to derive resource type from, for instance, `/{linkId}`. When this happens, the generator will throw exception and require the user to provide a `request-path-to-resource-type` for it, or mark it as a non-resource using `request-path-is-non-resource` configuration. Please see [mark a request path is non-resource](#mark-a-request-path-is-a-non-resource) section.
 
 ### Mark a request path is a non-resource
 
@@ -361,20 +394,82 @@ request-path-is-non-resource:
 
 This configuration will mark the availability set request paths as a non-resource. The operations of non-resources will append to their corresponding parent.
 
-### Changing parent of the request paths
+### Change parent of request paths
 
 By default, the generator will automatically find the parent of a request path, and append the operations of a non-resource to their corresponding parents.
 
-You can manually assign the parent of an operation using the configuration `request-path-to-parent` which is a dictionary from the request path of you want to change, to the request path you want to be the new parent. For instance
+You can manually assign the parent of an operation using the configuration `request-path-to-parent` which is a dictionary from the request path of you want to change, to the request path you want to be the new parent. 
 
+For instance, `Subnet` is the child resource of `VirtualNetwork`, and `VirtualNetwork` is the child resource of `ResourceGroupResource`, you can easily see this in their paths:
+- Subnet: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}`
+- VirtualNetwork: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}`
+
+And we will have these in the generated code:
+```csharp
+public partial static class NetworkExtensions
+{
+    public static VirtualNetworkCollection GetVirtualNetworks()
+    {
+        /* ... */
+    }
+}
+
+public partial class VirtualNetworkResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Network/virtualNetworks";
+
+    public virtual SubnetCollection GetSubnets()
+    {
+        /* ... */
+    }
+}
+
+public partial class SubnetResource: ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Network/virtualNetworks/subnets";    
+}
+```
+if you manually assign the parent of subnet to resource group, using the following configuration:
 ```
 request-path-to-parent:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+```
+You will have the following changes which shows that now the parent of resource `SubnetResource` is `ResourceGroupResource`:
+```diff
+public partial static class NetworkExtensions
+{
+    public static VirtualNetworkCollection GetVirtualNetworks()
+    {
+        /* ... */
+    }
+
++   public virtual SubnetCollection GetSubnets()
++   {
++       /* ... */
++   }
+}
+
+public partial class VirtualNetworkResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Network/virtualNetworks";
+
+-   public virtual SubnetCollection GetSubnets()
+-   {
+-       /* ... */
+-   }
+}
+
+public partial class SubnetResource: ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Network/virtualNetworks/subnets";    
+}
 ```
 
-This configuration will change the parent of `ManagementPolicy` from its default parent `StorageAccount` to the new parent `ResourceGroup`.
-
-### Singleton resources
+### Change singleton resources
 
 Some resources are automatically recognized as singleton resources. If a resource is generated as a singleton resource, it will not have a corresponding collection class.
 
@@ -382,25 +477,85 @@ By default the generator will make a resource as a singleton, if it finds the ex
 
 Sometimes, you might need to manually make a resource singleton due to some issues in the swagger, you need to add the corresponding entries into the `request-path-to-singleton-resource` configuration. This configuration is a map from the request path to the extra segments of the resource identifier of the singleton resource.
 
-For instance,
+For instance, for some reasons, the resource `ManagementPolicy` has the following path
+```
+/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}
+```
+Its name here `{managementPolicyName}` is an extensible enum type, despite it only has one value `default` right now. This is probably a mistake because it is not really extensible. But the generator cannot identify this because the name of this resource is not a constant, it generates this like a normal resource with a collection, like this:
+```csharp
+public partial class StorageAccountResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
+
+    public virtual ManagementPolicyCollection GetManagementPolicies()
+    {
+        return new ManagementPolicyCollection(Client, Id);
+    }
+}
+public partial class ManagementPolicyResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";
+}
+
+public partial class ManagementPolicyCollection : ArmCollection
+{
+    /* ... */
+}
+```
+if you want to correct this, you could try the following configuration:
 ```
 request-path-to-singleton-resource:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: managementPolicies/default
 ```
+This will mark the resource with path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}` as singleton resource, and its Id will be its parent's Id appending `managementPolicies/default`. This produces the following diff:
+```diff
+public partial class StorageAccountResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
 
-This will mark the resource with path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}` as singleton resource, and its ID will be its parent's ID appending `managementPolicies/default`.
+-   public virtual ManagementPolicyCollection GetManagementPolicies()
++   public virtual ManagementPolicyResource GetManagementPolicy()
+    {
+-       return new ManagementPolicyCollection(Client, Id);
++       return new ManagementPolicyResource(Client, new ResourceIdentifier(Id.ToString() + "managementPolicies/default"));
+    }
+}
+public partial class ManagementPolicyResource : ArmResource
+{
+    /// <summary> Gets the resource type for the operations. </summary>
+    public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";
+}
 
-### Changing the name of operations
+-public partial class ManagementPolicyCollection : ArmCollection
+-{
+-   /* ... */
+-}
+```
 
-We provide a new configuration `override-operation-name` to assign new names to operations, which is a dictionary from the operationId of the operation to its new name. For instance,
+### Change the name of operations
 
+We provide a new configuration `override-operation-name` to assign new names to operations, which is a dictionary from the operationId of the operation to its new name.
+
+For instance, originally, a `VirtualMachineResource` has a method `Start` which means to power on the machine, to align with the method `PowerOff`, we could use the following configuration:
 ```
 override-operation-name:
-  RecordSets_ListByDnsZone: GetRecordSets
-  RecordSets_ListAllByDnsZone: GetAllRecordSets
+  VirtualMachines_Start: PowerOn
+```
+and get the following changes in the generated code:
+```diff
+public partial class VirtualMachineResource : ArmResource
+{
+-   public virtual async Task<ArmOperation> StartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
++   public virtual async Task<ArmOperation> PowerOnAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
+}
 ```
 
 ### Resource collection should have a `GetAll` method
+
+// TODO -- revise this
 
 From .Net convention, a resource collection class needs to implement the `IEnumerable<>` interface since the name of them ends with the word `Collection`. This will require resource collection classes to have a `GetAll` method to provider the `Enumerator` to the caller. If there is a collection without `GetAll` method, the generator will throw an error.
 
@@ -434,10 +589,7 @@ A debug configuration is also introduced to show some extra information in the g
 
 ```
 mgmt-debug:
-  show-request-path: true
   suppress-list-exception: true
 ```
-
-The configuration `show-request-path` will add comments in front of every operation with the request path and operation Id, which is useful when you are making customization to the generated SDK.
 
 The configuration `suppress-list-exception` will suppress all the exceptions about the collection class without a `GetAll` method.
