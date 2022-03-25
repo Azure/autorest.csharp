@@ -30,14 +30,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
-                            param.Language.Default.Name = GetNewName(objectSchema, dataSchemaHash);
+                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema, dataSchemaHash);
                         }
                     }
                 }
             }
         }
 
-        private static string GetNewName(ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        private static string GetNewName(string paramName, ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
         {
             if (objectSchema.Name.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
@@ -45,7 +45,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (objectSchema.Name.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(objectSchema.Name))
                 return "data";
 
-            return objectSchema.Name.FirstCharToLowerCase();
+            if (paramName.Equals("parameters", StringComparison.Ordinal))
+                return objectSchema.Name.FirstCharToLowerCase();
+
+            return paramName;
         }
     }
 }
