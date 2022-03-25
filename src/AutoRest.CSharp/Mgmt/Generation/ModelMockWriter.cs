@@ -36,7 +36,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (model is not SchemaObjectType schemaModel)
                             continue;
 
-                        if (!schemaModel.IncludeDeserializer) //this means the full ctor won't be there
+                        if (!schemaModel.IncludeDeserializer) // this means the full ctor won't be there
+                            continue;
+
+                        if (schemaModel.IsAbstract) // do not write method for abstract types
                             continue;
 
                         var serializationSignature = schemaModel.SerializationConstructor.Signature;
