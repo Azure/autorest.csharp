@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// <summary>
     /// Code writer for resource test.
     /// </summary>
-    internal class ScenarioTestWriter: ClientWriter
+    internal class ScenarioTestWriter : ClientWriter
     {
         private TestDefinitionModel _testDef;
         private CodeWriter _writer;
@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 existedVariables.UnionWith(scenario.GetAllVariableNames());
             }
+
             using (new CodeWriterOavVariableScope(_writer, step, existedVariables))
             {
                 WriteVariableInitializations(step, existedVariables);
@@ -112,10 +113,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         ResourceCollectionTestWriter testWriter = new ResourceCollectionTestWriter(_writer, collection!, scenarioDefinedVariables);
                         testWriter.WriteOperationInvocation(clientOperation, restOperation, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
                     }
-                    else if (step.ExampleModel.Operation.IsSubscriptionOperation(out clientOperation, out restOperation))
+                    else if (step.ExampleModel.Operation.IsExtensionOperation(out MgmtExtensions? extensions, out clientOperation, out restOperation))
                     {
-                        MgmtExtensionTestWriter testWriter = new MgmtExtensionTestWriter(_writer, MgmtContext.Library.SubscriptionExtensions, scenarioDefinedVariables);
-                        testWriter.WriteOperationInvocation(clientOperation, restOperation, step.ExampleModel, true, false);
+                        MgmtExtensionTestWriter testWriter = new MgmtExtensionTestWriter(_writer, scenarioDefinedVariables);
+                        testWriter.WriteOperationInvocation(extensions, clientOperation, restOperation, step.ExampleModel, true, false);
                     }
                     else
                     {
@@ -125,36 +126,35 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayloadString is not null)
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
-                    _writer.Line($"var {templatePayload:D} = $@\"{step.ArmTemplatePayloadString.RefScenarioDefinedVariablesToString(scenarioDefinedVariables).Replace("\"", "\"\"").MultipleStartingSpace(2)}\";");
+                    _writer.Line($"var {templatePayload:D} = $@\"{step.ArmTemplatePayloadString.RefScenarioDefinedVariablesToString(scenarioDefinedVariables).Replace("\"", "\"\"").MultiplyStartingSpace(2)}\";");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
-                    using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
+                    using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
                         _writer.Append($"Template = {typeof(System.Text.Json.JsonDocument)}.Parse({templatePayload}).RootElement");
                         _writer.Line($",");
                     }
 
                     var outputs = new CodeWriterDeclaration("deployOutputs");
-                    using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is {typeof(Dictionary<string, object>)} {outputs:D})"))
+                    _writer.Line($"var {outputs:D} = {deploymentOperation}.Value.Data.Properties.Outputs.ToObjectFromJson<{typeof(Dictionary<string, object>)}>();");
+                    var armTemplate = new JsonRawValue(step.ArmTemplatePayload);
+                    if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("outputs", out object? variables))
                     {
-                        var armTemplate = new JsonRawValue(step.ArmTemplatePayload);
-                        if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("outputs", out object? variables))
+                        var rawVariables = new JsonRawValue(variables);
+                        if (rawVariables.IsDictionary())
                         {
-                            var rawVariables = new JsonRawValue(variables);
-                            if (rawVariables.IsDictionary())
+                            foreach (var variableName in rawVariables.AsDictionary().Keys)
                             {
-                                foreach (var variableName in rawVariables.AsDictionary().Keys)
+                                if (!existedVariables.Contains(variableName))
+                                    continue;
+                                var element = new CodeWriterDeclaration($"{variableName}Output");
+                                using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is {typeof(Dictionary<string, object>)} {element:D})"))
                                 {
-                                    if (!existedVariables.Contains(variableName))
-                                        continue;
-                                    var element = new CodeWriterDeclaration($"{variableName}Output");
-                                    using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is {typeof(Dictionary<string, object>)} {element:D})"))
-                                    {
-                                        _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
-                                    }
+                                    _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
                                 }
                             }
                         }
                     }
+
                 }
             }
             _writer.Line();
@@ -194,22 +194,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var variables = ovs.Variables;
 
             if (ovs is TestDefinitionModel)
-            foreach (var requiredVariable in requiredVariables)
-            {
-                if (!existedVarialbes.Contains(requiredVariable))
+                foreach (var requiredVariable in requiredVariables)
                 {
-                    _writer.Append($"string {new CodeWriterDeclaration(requiredVariable):D} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
+                    if (!existedVarialbes.Contains(requiredVariable))
+                    {
+                        _writer.Append($"string {new CodeWriterDeclaration(requiredVariable):D} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
+                    }
+                    else
+                    {
+                        _writer.Append($"{requiredVariable} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
+                    }
+                    if (requiredVariableDefault.ContainsKey(requiredVariable))
+                    {
+                        _writer.Append($" ?? {requiredVariableDefault[requiredVariable]:L}");
+                    }
+                    _writer.Line($";");
                 }
-                else
-                {
-                    _writer.Append($"{requiredVariable} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
-                }
-                if (requiredVariableDefault.ContainsKey(requiredVariable))
-                {
-                    _writer.Append($" ?? {requiredVariableDefault[requiredVariable]:L}");
-                }
-                _writer.Line($";");
-            }
 
             foreach (var variable in variables.Keys)
             {
@@ -224,9 +224,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
 
-            if (ovs is not TestDefinitionModel && variables.Count>0)
+            if (ovs is not TestDefinitionModel && variables.Count > 0)
             {
-                _writer.Append($"{typeof(Console)}.WriteLine($\"{(ovs is Scenario ? "Scenario": "Step")} variables: ");
+                _writer.Append($"{typeof(Console)}.WriteLine($\"{(ovs is Scenario ? "Scenario" : "Step")} variables: ");
                 foreach (var variable in variables.Keys)
                 {
                     _writer.Append($"{variable} -> $\\\"{{{variable}}}\\\", ");

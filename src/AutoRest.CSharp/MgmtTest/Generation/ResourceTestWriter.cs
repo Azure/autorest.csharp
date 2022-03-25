@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public override bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource resource)
+        public bool WriteOperationInvocation(MgmtClientOperation clientOperation, MgmtRestOperation restOperation, ExampleModel exampleModel, bool async, bool isLroOperation, Resource resource)
         {
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPath, exampleModel);

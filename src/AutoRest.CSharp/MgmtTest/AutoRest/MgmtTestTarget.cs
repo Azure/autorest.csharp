@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -17,10 +18,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            if (codeModel.TestModel is null)
-            {
-                throw new NotSupportedException("The codeModel.TestModel is required for test Generation!");
-            }
+            Debug.Assert(codeModel.TestModel is not null);
 
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
@@ -58,11 +56,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());
             }
 
-            WriteExtensionTest(project, MgmtContext.Library.SubscriptionExtensionsClient);
-            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
-            {
-                WriteExtensionTest(project, MgmtContext.Library.TenantExtensionsClient);
-            }
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
+            project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
 
             bool hasScenarioTest = false;
             foreach (var scenarioTestDefinition in codeModel.TestModel.ScenarioTests)
@@ -83,13 +79,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"Scenario/{testEnvironmentWriter.TypeName}Test.cs", codeWriter.ToString());
             }
-        }
-
-        private static void WriteExtensionTest(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
-        {
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter, extensionClient.Extension).Write();
-            project.AddGeneratedFile($"Mock/{extensionClient.Extension.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
         }
     }
 }

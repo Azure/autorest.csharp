@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
@@ -54,7 +55,12 @@ namespace MgmtKeyvault.Tests.Mock
             MgmtKeyvault.ManagedHsmData data = new MgmtKeyvault.ManagedHsmData(location: AzureLocation.WestUS)
             {
             };
-            parameters.Tags.ReplaceWith(null);
+            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            {
+                ["Dept"] = "hsm",
+                ["Environment"] = "dogfood",
+                ["Slice"] = "A",
+            });
 
             await managedHsmResource.UpdateAsync(WaitUntil.Completed, data);
         }
