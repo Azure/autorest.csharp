@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Append($"return new {schemaModel.Type}(");
                             foreach (var param in factorySignature.Parameters)
                             {
-                                _writer.Append($"{param.Name},");
+                                _writer.Append($"{param.Name:I},");
                             }
                             _writer.RemoveTrailingComma();
                             _writer.Line($");");
