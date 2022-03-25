@@ -59,22 +59,25 @@ namespace AutoRest.CSharp.MgmtTest.TestCommon
             return false;
         }
 
-        public static bool IsSubscriptionOperation(this Operation operation, [MaybeNullWhen(false)] out MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out MgmtRestOperation restOperation)
+        public static bool IsExtensionOperation(this Operation operation, [MaybeNullWhen(false)] out MgmtExtensions extensions, [MaybeNullWhen(false)] out MgmtClientOperation clientOperation, [MaybeNullWhen(false)] out MgmtRestOperation restOperation)
         {
+            extensions = null;
             clientOperation = null;
             restOperation = null;
-            foreach (var co in MgmtContext.Library.SubscriptionExtensions.ClientOperations)
-            {
-                foreach (var ro in co)
+            foreach (var ex in MgmtContext.Library.ExtensionWrapper.Extensions)
+                foreach (var co in ex.ClientOperations)
                 {
-                    if (ro.Operation == operation)
+                    foreach (var ro in co)
                     {
-                        clientOperation = co;
-                        restOperation = ro;
-                        return true;
+                        if (ro.Operation == operation)
+                        {
+                            extensions = ex;
+                            clientOperation = co;
+                            restOperation = ro;
+                            return true;
+                        }
                     }
                 }
-            }
             return false;
         }
     }

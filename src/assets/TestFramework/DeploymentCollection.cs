@@ -7,7 +7,7 @@ namespace Azure.ResourceManager.TestFramework
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public class DeploymentCollection
     {
-        public async Task<ArmOperation<Deployment>> CreateOrUpdateAsync(bool waitForCompletion, string deploymentName, object parameters, object? cancellationToken=default)
+        public async Task<ArmOperation<Deployment>> CreateOrUpdateAsync(Azure.WaitUntil waitForCompletion, string deploymentName, object parameters, object? cancellationToken=default)
         {
             await Task.Yield();
             return new FakeResourcesArmOperation<Deployment>();
