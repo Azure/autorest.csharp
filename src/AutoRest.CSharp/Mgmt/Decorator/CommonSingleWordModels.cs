@@ -33,9 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (_schemasToChange.Contains(schema.Name))
                 {
-                    string prefix = MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.Context.DefaultNamespace.Split('.').Last();
                     string suffix = schema.Language.Default.Name.Equals("Resource") ? "Data" : string.Empty;
-                    schema.Language.Default.Name = prefix + schema.Name + suffix;
+                    schema.Language.Default.Name = MgmtContext.RpName + schema.Name + suffix;
                 }
             }
         }

@@ -105,6 +105,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+            =>WriteMethodDeclaration(writer, methodBase, false, disabledWarnings);
+
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool enforceDefaultValue, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
@@ -141,7 +144,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var parameter in methodBase.Parameters)
             {
-                writer.WriteParameter(parameter);
+                writer.WriteParameter(parameter, enforceDefaultValue: enforceDefaultValue);
             }
 
             writer.RemoveTrailingComma();

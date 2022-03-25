@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -17,6 +19,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public static CodeModel CodeModel => Context.CodeModel;
 
         public static bool IsInitialized => _context is not null;
+
+        private static string? _rpName;
+        public static string RpName => _rpName ??= Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : Context.DefaultNamespace.Split('.').Last();
 
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)
         {

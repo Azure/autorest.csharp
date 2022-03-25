@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -289,6 +290,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
+        private async Task<ClassDeclarationSyntax> GetModelFactoryClass()
+        {
+            var fileName = $"{MgmtContext.RpName}ModelFactory.cs";
+            var root = await _project.Documents.First(d => d.Name.EndsWith(fileName)).GetSyntaxRootAsync();
+            return root!.DescendantNodes().OfType<ClassDeclarationSyntax>().First();
+        }
+
         private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync()
         {
             var compilation = await _project.GetCompilationAsync();
@@ -427,6 +435,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var definitions = await GetAllDeclaredModels(modelsToKeep);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync();
+
+            var modelFactoryNode = await GetModelFactoryClass();
+            var tree = modelFactoryNode.SyntaxTree;
+            var document = _project.GetDocument(tree)!;
+            var newModelFactoryNode = modelFactoryNode;
             await foreach (var model in publicModels)
             {
                 definitions = definitions.Remove(model);
@@ -434,15 +447,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // get the models we need to mark internal
             foreach (var model in definitions)
             {
-                MarkInternal(model);
+                MarkInternal(model, ref newModelFactoryNode);
             }
+
+            var newRoot = tree.GetRoot().ReplaceNode(modelFactoryNode, newModelFactoryNode).WithAdditionalAnnotations(Simplifier.Annotation);
+            _project = _project.RemoveDocument(document.Id);
+            document = document.WithSyntaxRoot(newRoot);
+            _project = document.Project;
         }
 
-        private void MarkInternal(SyntaxNode declarationNode)
+        private void MarkInternal(SyntaxNode declarationNode, ref ClassDeclarationSyntax modelFactoryNode)
         {
             var newNode = declarationNode switch
             {
-                MemberDeclarationSyntax declaration => MarkInternal(declaration),
+                MemberDeclarationSyntax declaration => MarkInternal(declaration, ref modelFactoryNode),
                 _ => throw new InvalidOperationException()
             };
             var tree = declarationNode.SyntaxTree;
@@ -453,8 +471,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _project = document.Project;
         }
 
-        private static MemberDeclarationSyntax MarkInternal(MemberDeclarationSyntax memberDeclaration)
+        private static MemberDeclarationSyntax MarkInternal(MemberDeclarationSyntax memberDeclaration, ref ClassDeclarationSyntax modelFactoryNode)
         {
+            string? name = memberDeclaration switch
+            {
+                ClassDeclarationSyntax classDeclaration => classDeclaration.Identifier.Text,
+                StructDeclarationSyntax structDeclaration => structDeclaration.Identifier.Text,
+                _ => null
+            };
+
+            if (name is not null)
+            {
+                var methodToRemove = modelFactoryNode.DescendantNodes(node => node is MethodDeclarationSyntax method && method.Identifier.Text == name);
+                modelFactoryNode = modelFactoryNode.RemoveNodes(methodToRemove, SyntaxRemoveOptions.KeepNoTrivia)!;
+            }
+
             var publicTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(SyntaxKind.PublicKeyword));
             var internalToken = SyntaxFactory.Token(publicTokenInList.LeadingTrivia, SyntaxKind.InternalKeyword, publicTokenInList.TrailingTrivia);
             var newModifiers = memberDeclaration.Modifiers.Replace(publicTokenInList, internalToken);

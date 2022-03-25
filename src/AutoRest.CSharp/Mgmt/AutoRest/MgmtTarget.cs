@@ -153,6 +153,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
+            var modelFactoryWriter = new ModelMockWriter();
+            modelFactoryWriter.Write();
+            AddGeneratedFile(project, $"Models/{modelFactoryWriter.FileName}.cs", modelFactoryWriter.ToString());
+
             if (!isArmCore)
             {
                 var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
