@@ -11,17 +11,17 @@ using Azure.Core;
 namespace MgmtKeyvault.Models
 {
     /// <summary> A list of private link resources. </summary>
-    internal partial class PrivateLinkResourceListResult
+    internal partial class MgmtKeyvaultPrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceListResult. </summary>
-        internal PrivateLinkResourceListResult()
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResourceListResult. </summary>
+        internal MgmtKeyvaultPrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MgmtKeyvaultPrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResourceListResult. </summary>
         /// <param name="value"> Array of private link resources. </param>
-        internal PrivateLinkResourceListResult(IReadOnlyList<MgmtKeyvaultPrivateLinkResource> value)
+        internal MgmtKeyvaultPrivateLinkResourceListResult(IReadOnlyList<MgmtKeyvaultPrivateLinkResource> value)
         {
             Value = value;
         }

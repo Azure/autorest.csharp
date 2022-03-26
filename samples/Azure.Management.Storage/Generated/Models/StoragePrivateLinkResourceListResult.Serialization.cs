@@ -11,9 +11,9 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    internal partial class PrivateLinkResourceListResult
+    internal partial class StoragePrivateLinkResourceListResult
     {
-        internal static PrivateLinkResourceListResult DeserializePrivateLinkResourceListResult(JsonElement element)
+        internal static StoragePrivateLinkResourceListResult DeserializeStoragePrivateLinkResourceListResult(JsonElement element)
         {
             Optional<IReadOnlyList<StoragePrivateLinkResource>> value = default;
             foreach (var property in element.EnumerateObject())
@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateLinkResourceListResult(Optional.ToList(value));
+            return new StoragePrivateLinkResourceListResult(Optional.ToList(value));
         }
     }
 }

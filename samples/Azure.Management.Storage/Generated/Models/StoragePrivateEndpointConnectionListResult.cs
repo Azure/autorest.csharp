@@ -12,17 +12,17 @@ using Azure.Management.Storage;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> List of private endpoint connection associated with the specified storage account. </summary>
-    internal partial class PrivateEndpointConnectionListResult
+    internal partial class StoragePrivateEndpointConnectionListResult
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
-        internal PrivateEndpointConnectionListResult()
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionListResult. </summary>
+        internal StoragePrivateEndpointConnectionListResult()
         {
             Value = new ChangeTrackingList<StoragePrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionListResult. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
-        internal PrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value)
+        internal StoragePrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value)
         {
             Value = value;
         }

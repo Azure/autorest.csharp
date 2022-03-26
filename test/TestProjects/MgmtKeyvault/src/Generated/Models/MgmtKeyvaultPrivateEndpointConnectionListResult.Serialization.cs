@@ -12,9 +12,9 @@ using MgmtKeyvault;
 
 namespace MgmtKeyvault.Models
 {
-    internal partial class PrivateEndpointConnectionListResult
+    internal partial class MgmtKeyvaultPrivateEndpointConnectionListResult
     {
-        internal static PrivateEndpointConnectionListResult DeserializePrivateEndpointConnectionListResult(JsonElement element)
+        internal static MgmtKeyvaultPrivateEndpointConnectionListResult DeserializeMgmtKeyvaultPrivateEndpointConnectionListResult(JsonElement element)
         {
             Optional<IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData>> value = default;
             Optional<string> nextLink = default;
@@ -41,7 +41,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new PrivateEndpointConnectionListResult(Optional.ToList(value), nextLink.Value);
+            return new MgmtKeyvaultPrivateEndpointConnectionListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

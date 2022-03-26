@@ -8,14 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage;
 
-namespace MgmtKeyvault.Models
+namespace Azure.Management.Storage.Models
 {
-    internal partial class PrivateLinkResourceListResult
+    internal partial class StoragePrivateEndpointConnectionListResult
     {
-        internal static PrivateLinkResourceListResult DeserializePrivateLinkResourceListResult(JsonElement element)
+        internal static StoragePrivateEndpointConnectionListResult DeserializeStoragePrivateEndpointConnectionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<MgmtKeyvaultPrivateLinkResource>> value = default;
+            Optional<IReadOnlyList<StoragePrivateEndpointConnectionData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,16 +26,16 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<MgmtKeyvaultPrivateLinkResource> array = new List<MgmtKeyvaultPrivateLinkResource>();
+                    List<StoragePrivateEndpointConnectionData> array = new List<StoragePrivateEndpointConnectionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtKeyvaultPrivateLinkResource.DeserializeMgmtKeyvaultPrivateLinkResource(item));
+                        array.Add(StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new PrivateLinkResourceListResult(Optional.ToList(value));
+            return new StoragePrivateEndpointConnectionListResult(Optional.ToList(value));
         }
     }
 }

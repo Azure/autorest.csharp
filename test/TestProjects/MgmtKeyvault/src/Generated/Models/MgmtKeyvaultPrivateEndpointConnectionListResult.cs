@@ -12,18 +12,18 @@ using MgmtKeyvault;
 namespace MgmtKeyvault.Models
 {
     /// <summary> List of private endpoint connections. </summary>
-    internal partial class PrivateEndpointConnectionListResult
+    internal partial class MgmtKeyvaultPrivateEndpointConnectionListResult
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
-        internal PrivateEndpointConnectionListResult()
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionListResult. </summary>
+        internal MgmtKeyvaultPrivateEndpointConnectionListResult()
         {
             Value = new ChangeTrackingList<MgmtKeyvaultPrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionListResult. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionListResult. </summary>
         /// <param name="value"> The list of private endpoint connections. </param>
         /// <param name="nextLink"> The URL to get the next set of private endpoint connections. </param>
-        internal PrivateEndpointConnectionListResult(IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData> value, string nextLink)
+        internal MgmtKeyvaultPrivateEndpointConnectionListResult(IReadOnlyList<MgmtKeyvaultPrivateEndpointConnectionData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
