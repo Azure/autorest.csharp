@@ -191,6 +191,7 @@ namespace AutoRest.CSharp.Generation.Types
                 XMsFormat.ArmId => typeof(ResourceIdentifier),
                 XMsFormat.ResourceType => typeof(ResourceType),
                 XMsFormat.DurationConstant => typeof(TimeSpan),
+                XMsFormat.AzureLocation => typeof(AzureLocation),
                 _ => typeof(string)
             },
             AllSchemaTypes.Time => typeof(TimeSpan),

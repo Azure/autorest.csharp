@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
+using MgmtParamOrdering.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -54,6 +56,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 firstParamName = method?.GetParameters()[1].Name;
             }
             Assert.AreEqual(parameterName, firstParamName);
+        }
+
+        public void ValidateAzureLocationFormat()
+        {
+            var obj = typeof(LocationFormatObject);
+            Assert.IsNotNull(obj);
+            var stringProperty = obj.GetProperty("StringObject");
+            Assert.IsNotNull(stringProperty);
+            Assert.AreEqual(typeof(string), stringProperty.PropertyType);
+            var objProperty = obj.GetProperty("ObjectProperty");
+            Assert.IsNotNull(objProperty);
+            Assert.AreEqual(typeof(AzureLocation), objProperty.PropertyType);
         }
     }
 }

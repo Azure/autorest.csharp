@@ -165,7 +165,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(char) ||
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
-                                 frameworkType == typeof(Azure.Core.ResourceType))
+                                 frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -539,7 +540,8 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
-                frameworkType == typeof(Azure.Core.ResourceType))
+                frameworkType == typeof(Azure.Core.ResourceType) ||
+                frameworkType == typeof(Azure.Core.AzureLocation))
             {
                 writer.Append($"new {frameworkType}({element}.GetString())");
                 return;
