@@ -105,6 +105,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
+            UrlToUri.UpdateSuffix(_allSchemas);
             MgmtContext.CodeModel.UpdatePatchOperations();
             _allSchemas.VerifyAndUpdateFrameworkTypes();
             _allSchemas.UpdateSealChoiceTypes();
