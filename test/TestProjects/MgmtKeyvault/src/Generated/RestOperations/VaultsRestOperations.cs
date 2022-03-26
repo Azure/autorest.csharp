@@ -819,7 +819,7 @@ namespace MgmtKeyvault
             }
         }
 
-        internal HttpMessage CreateCheckNameAvailabilityRequest(string subscriptionId, VaultCheckNameAvailabilityParameters vaultCheckNameAvailabilityParameters)
+        internal HttpMessage CreateCheckNameAvailabilityRequest(string subscriptionId, VaultCheckNameAvailabilityParameters vaultName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -834,7 +834,7 @@ namespace MgmtKeyvault
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(vaultCheckNameAvailabilityParameters);
+            content.JsonWriter.WriteObjectValue(vaultName);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -842,16 +842,16 @@ namespace MgmtKeyvault
 
         /// <summary> Checks that the vault name is valid and is not already in use. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="vaultCheckNameAvailabilityParameters"> The name of the vault. </param>
+        /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="vaultCheckNameAvailabilityParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string subscriptionId, VaultCheckNameAvailabilityParameters vaultCheckNameAvailabilityParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string subscriptionId, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(vaultCheckNameAvailabilityParameters, nameof(vaultCheckNameAvailabilityParameters));
+            Argument.AssertNotNull(vaultName, nameof(vaultName));
 
-            using var message = CreateCheckNameAvailabilityRequest(subscriptionId, vaultCheckNameAvailabilityParameters);
+            using var message = CreateCheckNameAvailabilityRequest(subscriptionId, vaultName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -869,16 +869,16 @@ namespace MgmtKeyvault
 
         /// <summary> Checks that the vault name is valid and is not already in use. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="vaultCheckNameAvailabilityParameters"> The name of the vault. </param>
+        /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="vaultCheckNameAvailabilityParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string subscriptionId, VaultCheckNameAvailabilityParameters vaultCheckNameAvailabilityParameters, CancellationToken cancellationToken = default)
+        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string subscriptionId, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNull(vaultCheckNameAvailabilityParameters, nameof(vaultCheckNameAvailabilityParameters));
+            Argument.AssertNotNull(vaultName, nameof(vaultName));
 
-            using var message = CreateCheckNameAvailabilityRequest(subscriptionId, vaultCheckNameAvailabilityParameters);
+            using var message = CreateCheckNameAvailabilityRequest(subscriptionId, vaultName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

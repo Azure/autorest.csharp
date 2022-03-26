@@ -453,18 +453,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         /// Operation Id: StorageAccounts_RegenerateKey
         /// </summary>
-        /// <param name="storageAccountRegenerateKeyParameters"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="storageAccountRegenerateKeyParameters"/> is null. </exception>
-        public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyParameters storageAccountRegenerateKeyParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
+        public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(storageAccountRegenerateKeyParameters, nameof(storageAccountRegenerateKeyParameters));
+            Argument.AssertNotNull(regenerateKey, nameof(regenerateKey));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
             try
             {
-                var response = await _storageAccountRestClient.RegenerateKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, storageAccountRegenerateKeyParameters, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.RegenerateKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -479,18 +479,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         /// Operation Id: StorageAccounts_RegenerateKey
         /// </summary>
-        /// <param name="storageAccountRegenerateKeyParameters"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="storageAccountRegenerateKeyParameters"/> is null. </exception>
-        public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyParameters storageAccountRegenerateKeyParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
+        public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(storageAccountRegenerateKeyParameters, nameof(storageAccountRegenerateKeyParameters));
+            Argument.AssertNotNull(regenerateKey, nameof(regenerateKey));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
             try
             {
-                var response = _storageAccountRestClient.RegenerateKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, storageAccountRegenerateKeyParameters, cancellationToken);
+                var response = _storageAccountRestClient.RegenerateKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
                 return response;
             }
             catch (Exception e)

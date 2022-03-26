@@ -168,14 +168,14 @@ namespace MgmtKeyvault
         /// Operation Id: Vaults_CheckNameAvailability
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="vaultCheckNameAvailabilityParameters"> The name of the vault. </param>
+        /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultCheckNameAvailabilityParameters"/> is null. </exception>
-        public static async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityParameters vaultCheckNameAvailabilityParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        public static async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vaultCheckNameAvailabilityParameters, nameof(vaultCheckNameAvailabilityParameters));
+            Argument.AssertNotNull(vaultName, nameof(vaultName));
 
-            return await GetExtensionClient(subscriptionResource).CheckNameAvailabilityVaultAsync(vaultCheckNameAvailabilityParameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscriptionResource).CheckNameAvailabilityVaultAsync(vaultName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,14 +184,14 @@ namespace MgmtKeyvault
         /// Operation Id: Vaults_CheckNameAvailability
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="vaultCheckNameAvailabilityParameters"> The name of the vault. </param>
+        /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultCheckNameAvailabilityParameters"/> is null. </exception>
-        public static Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityParameters vaultCheckNameAvailabilityParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        public static Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vaultCheckNameAvailabilityParameters, nameof(vaultCheckNameAvailabilityParameters));
+            Argument.AssertNotNull(vaultName, nameof(vaultName));
 
-            return GetExtensionClient(subscriptionResource).CheckNameAvailabilityVault(vaultCheckNameAvailabilityParameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).CheckNameAvailabilityVault(vaultName, cancellationToken);
         }
 
         /// <summary>

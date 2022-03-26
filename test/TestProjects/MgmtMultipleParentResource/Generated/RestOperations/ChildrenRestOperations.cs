@@ -127,7 +127,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBodyUpdate)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -149,7 +149,7 @@ namespace MgmtMultipleParentResource
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(childBodyUpdate);
+            content.JsonWriter.WriteObjectValue(childBody);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -161,20 +161,20 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBodyUpdate"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/>, <paramref name="childName"/> or <paramref name="childBodyUpdate"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBodyUpdate, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBodyUpdate, nameof(childBodyUpdate));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBodyUpdate);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -191,20 +191,20 @@ namespace MgmtMultipleParentResource
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBodyUpdate"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/>, <paramref name="childName"/> or <paramref name="childBodyUpdate"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBodyUpdate, CancellationToken cancellationToken = default)
+        public Response Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(theParentName, nameof(theParentName));
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBodyUpdate, nameof(childBodyUpdate));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBodyUpdate);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, theParentName, instanceId, childName, childBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
