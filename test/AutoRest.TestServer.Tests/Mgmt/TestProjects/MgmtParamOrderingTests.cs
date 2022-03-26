@@ -58,16 +58,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(parameterName, firstParamName);
         }
 
+        [Test]
         public void ValidateAzureLocationFormat()
         {
             var obj = typeof(LocationFormatObject);
             Assert.IsNotNull(obj);
-            var stringProperty = obj.GetProperty("StringObject");
+            var stringProperty = obj.GetProperty("StringLocation");
             Assert.IsNotNull(stringProperty);
             Assert.AreEqual(typeof(string), stringProperty.PropertyType);
-            var objProperty = obj.GetProperty("ObjectProperty");
+            var objProperty = obj.GetProperty("ObjectLocation");
             Assert.IsNotNull(objProperty);
-            Assert.AreEqual(typeof(AzureLocation), objProperty.PropertyType);
+            Assert.AreEqual(typeof(AzureLocation?), objProperty.PropertyType);
         }
     }
 }
