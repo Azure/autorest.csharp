@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
+                        certificateUrl = null;
                         continue;
                     }
                     certificateUrl = new Uri(property.Value.GetString());

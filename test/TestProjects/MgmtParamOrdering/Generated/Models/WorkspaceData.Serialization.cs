@@ -211,7 +211,7 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
+                                discoveryUrl = null;
                                 continue;
                             }
                             discoveryUrl = new Uri(property0.Value.GetString());
