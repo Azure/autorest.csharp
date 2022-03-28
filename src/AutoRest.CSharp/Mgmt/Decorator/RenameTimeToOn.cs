@@ -24,8 +24,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         continue;
 
                     var propName = property.Language.Default.Name;
+
+                    if (propName.StartsWith("From", StringComparison.Ordinal) ||
+                        propName.StartsWith("To", StringComparison.Ordinal))
+                        continue;
+
                     var lengthToCut = 0;
-                    if (propName.Length > 4 &&
+                    if (propName.Length > 8 &&
+                        propName.EndsWith("DateTime", StringComparison.Ordinal))
+                    {
+                        lengthToCut = 8;
+                    }
+                    else if (propName.Length > 4 &&
                         propName.EndsWith("Time", StringComparison.Ordinal) ||
                         propName.EndsWith("Date", StringComparison.Ordinal))
                     {
