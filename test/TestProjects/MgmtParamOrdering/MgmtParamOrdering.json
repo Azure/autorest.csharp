@@ -2512,6 +2512,19 @@
             ],
             "description": "Describes a virtual machine scale set virtual machine."
 
+        },
+        "LocationFormatObject": {
+            "properties": {
+                "stringLocation": {
+                    "type": "string",
+                    "description": "This location should be a string"
+                },
+                "objectLocation": {
+                    "type": "string",
+                    "x-ms-format": "azure-location",
+                    "description": "This location should be an AzureLocation"
+                }
+            }
         }
     },
     "parameters": {

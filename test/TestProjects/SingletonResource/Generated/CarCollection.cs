@@ -60,20 +60,20 @@ namespace SingletonResource
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="carName"> The String to use. </param>
-        /// <param name="parameters"> The Car to use. </param>
+        /// <param name="data"> The Car to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<CarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<CarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new SingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -92,20 +92,20 @@ namespace SingletonResource
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="carName"> The String to use. </param>
-        /// <param name="parameters"> The Car to use. </param>
+        /// <param name="data"> The Car to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<CarResource> CreateOrUpdate(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<CarResource> CreateOrUpdate(WaitUntil waitUntil, string carName, CarData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
+                var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken);
                 var operation = new SingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

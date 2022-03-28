@@ -113,7 +113,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string tenantTestName, TenantTestData parameters)
+        internal HttpMessage CreateCreateRequest(string tenantTestName, TenantTestData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -127,7 +127,7 @@ namespace MgmtListMethods
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -135,16 +135,16 @@ namespace MgmtListMethods
 
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="data"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string tenantTestName, TenantTestData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateRequest(tenantTestName, parameters);
+            using var message = CreateCreateRequest(tenantTestName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -157,16 +157,16 @@ namespace MgmtListMethods
 
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="data"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Create(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public Response Create(string tenantTestName, TenantTestData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateRequest(tenantTestName, parameters);
+            using var message = CreateCreateRequest(tenantTestName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -24,7 +24,7 @@ namespace MgmtParent.Models
         /// <summary> A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host. </summary>
         public string HostId { get; }
         /// <summary> The date when the host was first provisioned. </summary>
-        public DateTimeOffset? ProvisioningTime { get; }
+        public DateTimeOffset? ProvisioningOn { get; }
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
     }

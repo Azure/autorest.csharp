@@ -200,18 +200,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
         /// Operation Id: FileShares_Update
         /// </summary>
-        /// <param name="fileShare"> Properties to update for the file share. </param>
+        /// <param name="data"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<Response<FileShareResource>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<Response<FileShareResource>> UpdateAsync(FileShareData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(fileShare, nameof(fileShare));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Update");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken).ConfigureAwait(false);
+                var response = await _fileShareRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -226,18 +226,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
         /// Operation Id: FileShares_Update
         /// </summary>
-        /// <param name="fileShare"> Properties to update for the file share. </param>
+        /// <param name="data"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual Response<FileShareResource> Update(FileShareData fileShare, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual Response<FileShareResource> Update(FileShareData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(fileShare, nameof(fileShare));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Update");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, fileShare, cancellationToken);
+                var response = _fileShareRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, data, cancellationToken);
                 return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -304,16 +304,16 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease
         /// Operation Id: FileShares_Lease
         /// </summary>
-        /// <param name="parameters"> Lease Share request body. </param>
+        /// <param name="leaseShareRequest"> Lease Share request body. </param>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseShareResponse>> LeaseAsync(LeaseShareRequest parameters = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseShareResponse>> LeaseAsync(LeaseShareRequest leaseShareRequest = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Lease");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.LeaseAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, xMsSnapshot, cancellationToken).ConfigureAwait(false);
+                var response = await _fileShareRestClient.LeaseAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, leaseShareRequest, xMsSnapshot, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -328,16 +328,16 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease
         /// Operation Id: FileShares_Lease
         /// </summary>
-        /// <param name="parameters"> Lease Share request body. </param>
+        /// <param name="leaseShareRequest"> Lease Share request body. </param>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<LeaseShareResponse> Lease(LeaseShareRequest parameters = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual Response<LeaseShareResponse> Lease(LeaseShareRequest leaseShareRequest = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Lease");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Lease(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, xMsSnapshot, cancellationToken);
+                var response = _fileShareRestClient.Lease(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, leaseShareRequest, xMsSnapshot, cancellationToken);
                 return response;
             }
             catch (Exception e)

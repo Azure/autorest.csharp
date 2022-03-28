@@ -146,15 +146,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel1s_Put
         /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutCustomModel1");
             scope.Start();
             try
             {
-                var response = await CustomModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await CustomModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -169,15 +169,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel1s_Put
         /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutCustomModel1");
             scope.Start();
             try
             {
-                var response = CustomModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, customModel1SName, parameters, cancellationToken);
+                var response = CustomModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, customModel1SName, customModel1, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -288,15 +288,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel2s_Put
         /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutCustomModel2");
             scope.Start();
             try
             {
-                var response = await CustomModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await CustomModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -311,15 +311,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel2s_Put
         /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutCustomModel2");
             scope.Start();
             try
             {
-                var response = CustomModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, customModel2SName, parameters, cancellationToken);
+                var response = CustomModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, customModel2SName, customModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -430,15 +430,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel1s_Put
         /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
             {
-                var response = await SubResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await SubResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -453,15 +453,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel1s_Put
         /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
             {
-                var response = SubResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken);
+                var response = SubResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel1SName, subResourceModel1, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -572,15 +572,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel2s_Put
         /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
             {
-                var response = await SubResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await SubResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -595,15 +595,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel2s_Put
         /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
             {
-                var response = SubResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken);
+                var response = SubResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, subResourceModel2SName, subResourceModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -714,15 +714,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel1s_Put
         /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
             {
-                var response = await WritableSubResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await WritableSubResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -737,15 +737,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel1s_Put
         /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
             {
-                var response = WritableSubResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken);
+                var response = WritableSubResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -856,15 +856,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel2s_Put
         /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
             {
-                var response = await WritableSubResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await WritableSubResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -879,15 +879,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel2s_Put
         /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
             {
-                var response = WritableSubResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken);
+                var response = WritableSubResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -998,15 +998,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel2s_Put
         /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutResourceModel2");
             scope.Start();
             try
             {
-                var response = await ResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await ResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1021,15 +1021,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel2s_Put
         /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutResourceModel2");
             scope.Start();
             try
             {
-                var response = ResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken);
+                var response = ResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel2SName, resourceModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -1140,15 +1140,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel2s_Put
         /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
             {
-                var response = await TrackedResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await TrackedResourceModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1163,15 +1163,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel2s_Put
         /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
             {
-                var response = TrackedResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
+                var response = TrackedResourceModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -1230,15 +1230,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: NonResourceModel1s_Put
         /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
             {
-                var response = await NonResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await NonResourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1253,15 +1253,15 @@ namespace SupersetFlattenInheritance
         /// Operation Id: NonResourceModel1s_Put
         /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
             {
-                var response = NonResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken);
+                var response = NonResourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, nonResourceModel1SName, nonResourceModel1, cancellationToken);
                 return response;
             }
             catch (Exception e)
