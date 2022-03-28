@@ -18,7 +18,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest

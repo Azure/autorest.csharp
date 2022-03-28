@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods

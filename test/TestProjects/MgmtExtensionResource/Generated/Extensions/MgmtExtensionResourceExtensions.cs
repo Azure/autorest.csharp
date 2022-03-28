@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using MgmtExtensionResource.Models;
 
