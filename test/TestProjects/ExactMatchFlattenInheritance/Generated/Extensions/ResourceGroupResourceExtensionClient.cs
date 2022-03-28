@@ -136,15 +136,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel2s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel2");
             scope.Start();
             try
             {
-                var response = await AzureResourceFlattenModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await AzureResourceFlattenModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -160,15 +160,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel2s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel2");
             scope.Start();
             try
             {
-                var response = AzureResourceFlattenModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = AzureResourceFlattenModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -284,15 +284,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel3s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel3");
             scope.Start();
             try
             {
-                var response = await AzureResourceFlattenModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await AzureResourceFlattenModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel3, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -308,15 +308,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel3s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel3");
             scope.Start();
             try
             {
-                var response = AzureResourceFlattenModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = AzureResourceFlattenModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel3, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -432,15 +432,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel4s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
+        /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel4");
             scope.Start();
             try
             {
-                var response = await AzureResourceFlattenModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await AzureResourceFlattenModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel4, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -456,15 +456,15 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel4s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
+        /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel4");
             scope.Start();
             try
             {
-                var response = AzureResourceFlattenModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = AzureResourceFlattenModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, azureResourceFlattenModel4, cancellationToken);
                 return response;
             }
             catch (Exception e)

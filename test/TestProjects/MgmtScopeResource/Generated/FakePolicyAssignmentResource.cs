@@ -16,7 +16,12 @@ using Azure.ResourceManager;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A Class representing a FakePolicyAssignmentResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a FakePolicyAssignment along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakePolicyAssignmentResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetFakePolicyAssignmentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ArmResource" /> using the GetFakePolicyAssignment method.
+    /// </summary>
     public partial class FakePolicyAssignmentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakePolicyAssignmentResource"/> instance. </summary>

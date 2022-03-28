@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace SupersetInheritance
 {
-    /// <summary> A Class representing a SupersetModel7Resource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a SupersetModel7 along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SupersetModel7Resource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetSupersetModel7Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetSupersetModel7 method.
+    /// </summary>
     public partial class SupersetModel7Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SupersetModel7Resource"/> instance. </summary>

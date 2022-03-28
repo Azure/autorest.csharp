@@ -14,11 +14,17 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a VirtualMachineScaleSetResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a VirtualMachineScaleSet along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineScaleSet method.
+    /// </summary>
     public partial class VirtualMachineScaleSetResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineScaleSetResource"/> instance. </summary>
@@ -1144,18 +1150,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
         /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
         /// </summary>
-        /// <param name="parameters"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="vmScaleSetConvertToSinglePlacementGroupInput"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response> ConvertToSinglePlacementGroupAsync(VMScaleSetConvertToSinglePlacementGroupInput parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetConvertToSinglePlacementGroupInput"/> is null. </exception>
+        public virtual async Task<Response> ConvertToSinglePlacementGroupAsync(VMScaleSetConvertToSinglePlacementGroupInput vmScaleSetConvertToSinglePlacementGroupInput, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(vmScaleSetConvertToSinglePlacementGroupInput, nameof(vmScaleSetConvertToSinglePlacementGroupInput));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.ConvertToSinglePlacementGroup");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetConvertToSinglePlacementGroupInput, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1170,18 +1176,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
         /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
         /// </summary>
-        /// <param name="parameters"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="vmScaleSetConvertToSinglePlacementGroupInput"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response ConvertToSinglePlacementGroup(VMScaleSetConvertToSinglePlacementGroupInput parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetConvertToSinglePlacementGroupInput"/> is null. </exception>
+        public virtual Response ConvertToSinglePlacementGroup(VMScaleSetConvertToSinglePlacementGroupInput vmScaleSetConvertToSinglePlacementGroupInput, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(vmScaleSetConvertToSinglePlacementGroupInput, nameof(vmScaleSetConvertToSinglePlacementGroupInput));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.ConvertToSinglePlacementGroup");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetConvertToSinglePlacementGroupInput, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -1197,19 +1203,19 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="parameters"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="orchestrationServiceStateInput"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation> SetOrchestrationServiceStateAsync(WaitUntil waitUntil, OrchestrationServiceStateInput parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="orchestrationServiceStateInput"/> is null. </exception>
+        public virtual async Task<ArmOperation> SetOrchestrationServiceStateAsync(WaitUntil waitUntil, OrchestrationServiceStateInput orchestrationServiceStateInput, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(orchestrationServiceStateInput, nameof(orchestrationServiceStateInput));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetOrchestrationServiceState");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRestClient.SetOrchestrationServiceStateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.SetOrchestrationServiceStateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1227,19 +1233,19 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="parameters"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="orchestrationServiceStateInput"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation SetOrchestrationServiceState(WaitUntil waitUntil, OrchestrationServiceStateInput parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="orchestrationServiceStateInput"/> is null. </exception>
+        public virtual ArmOperation SetOrchestrationServiceState(WaitUntil waitUntil, OrchestrationServiceStateInput orchestrationServiceStateInput, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(orchestrationServiceStateInput, nameof(orchestrationServiceStateInput));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetOrchestrationServiceState");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRestClient.SetOrchestrationServiceState(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.SetOrchestrationServiceState(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -1425,9 +1431,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1456,9 +1462,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1485,10 +1491,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                await TagHelper.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1515,10 +1521,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                TagHelper.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = TagHelper.Get(cancellationToken);
+                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1545,9 +1551,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = await TagHelper.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagHelper.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -1574,9 +1580,9 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalTags = TagHelper.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagHelper.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

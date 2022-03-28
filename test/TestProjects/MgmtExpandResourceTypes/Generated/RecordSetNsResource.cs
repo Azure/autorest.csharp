@@ -17,7 +17,12 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A Class representing a RecordSetNsResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a RecordSetNs along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetNsResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetNsResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetNs method.
+    /// </summary>
     public partial class RecordSetNsResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetNsResource"/> instance. </summary>
@@ -189,19 +194,19 @@ namespace MgmtExpandResourceTypes
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
         /// Operation Id: RecordSets_Update
         /// </summary>
-        /// <param name="parameters"> Parameters supplied to the Update operation. </param>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<RecordSetNsResource>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<Response<RecordSetNsResource>> UpdateAsync(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Update");
             scope.Start();
             try
             {
-                var response = await _recordSetNsRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "NS".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetNsRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "NS".ToRecordType(), Id.Name, data, ifMatch, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new RecordSetNsResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -216,19 +221,19 @@ namespace MgmtExpandResourceTypes
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
         /// Operation Id: RecordSets_Update
         /// </summary>
-        /// <param name="parameters"> Parameters supplied to the Update operation. </param>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<RecordSetNsResource> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual Response<RecordSetNsResource> Update(RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _recordSetNsRecordSetsClientDiagnostics.CreateScope("RecordSetNsResource.Update");
             scope.Start();
             try
             {
-                var response = _recordSetNsRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "NS".ToRecordType(), Id.Name, parameters, ifMatch, cancellationToken);
+                var response = _recordSetNsRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "NS".ToRecordType(), Id.Name, data, ifMatch, cancellationToken);
                 return Response.FromValue(new RecordSetNsResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of SubParent and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SubParentResource" /> and their operations.
+    /// Each <see cref="SubParentResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
+    /// To get a <see cref="SubParentCollection" /> instance call the GetSubParents method from an instance of <see cref="SubscriptionResource" />.
+    /// </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParentResource>, IAsyncEnumerable<SubParentResource>
     {
         private readonly ClientDiagnostics _subParentClientDiagnostics;
@@ -57,20 +61,20 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SubParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<SubParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subParentName, SubParentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _subParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _subParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<SubParentResource>(Response.FromValue(new SubParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -90,20 +94,20 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="subParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SubParentResource> CreateOrUpdate(WaitUntil waitUntil, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<SubParentResource> CreateOrUpdate(WaitUntil waitUntil, string subParentName, SubParentData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _subParentRestClient.CreateOrUpdate(Id.SubscriptionId, subParentName, parameters, cancellationToken);
+                var response = _subParentRestClient.CreateOrUpdate(Id.SubscriptionId, subParentName, data, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<SubParentResource>(Response.FromValue(new SubParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

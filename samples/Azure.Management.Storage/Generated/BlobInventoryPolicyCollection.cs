@@ -20,7 +20,11 @@ using Azure.ResourceManager;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of BlobInventoryPolicy and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="BlobInventoryPolicyResource" /> and their operations.
+    /// Each <see cref="BlobInventoryPolicyResource" /> in the collection will belong to the same instance of <see cref="StorageAccountResource" />.
+    /// To get a <see cref="BlobInventoryPolicyCollection" /> instance call the GetBlobInventoryPolicies method from an instance of <see cref="StorageAccountResource" />.
+    /// </summary>
     public partial class BlobInventoryPolicyCollection : ArmCollection, IEnumerable<BlobInventoryPolicyResource>, IAsyncEnumerable<BlobInventoryPolicyResource>
     {
         private readonly ClientDiagnostics _blobInventoryPolicyClientDiagnostics;
@@ -57,18 +61,18 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
-        /// <param name="properties"> The blob inventory policy set to a storage account. </param>
+        /// <param name="data"> The blob inventory policy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual async Task<ArmOperation<BlobInventoryPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData properties, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<BlobInventoryPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(properties, nameof(properties));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _blobInventoryPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _blobInventoryPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,18 +92,18 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
-        /// <param name="properties"> The blob inventory policy set to a storage account. </param>
+        /// <param name="data"> The blob inventory policy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual ArmOperation<BlobInventoryPolicyResource> CreateOrUpdate(WaitUntil waitUntil, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData properties, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<BlobInventoryPolicyResource> CreateOrUpdate(WaitUntil waitUntil, BlobInventoryPolicyName blobInventoryPolicyName, BlobInventoryPolicyData data, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(properties, nameof(properties));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicyCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _blobInventoryPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, properties, cancellationToken);
+                var response = _blobInventoryPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, data, cancellationToken);
                 var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

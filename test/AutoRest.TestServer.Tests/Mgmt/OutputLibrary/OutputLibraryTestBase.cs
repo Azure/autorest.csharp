@@ -17,7 +17,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary

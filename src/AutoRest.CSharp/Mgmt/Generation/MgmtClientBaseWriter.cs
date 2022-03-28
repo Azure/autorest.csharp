@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteClassDeclaration()
         {
-            _writer.WriteXmlDocumentationSummary($"{This.Description}");
+            _writer.WriteXmlDocumentationSummary(This.Description);
             _writer.Append($"{This.Accessibility}");
             if (This.IsStatic)
                 _writer.Append($" static");

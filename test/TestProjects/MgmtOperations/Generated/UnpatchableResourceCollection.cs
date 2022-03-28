@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of UnpatchableResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="UnpatchableResource" /> and their operations.
+    /// Each <see cref="UnpatchableResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="UnpatchableResourceCollection" /> instance call the GetUnpatchableResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class UnpatchableResourceCollection : ArmCollection, IEnumerable<UnpatchableResource>, IAsyncEnumerable<UnpatchableResource>
     {
         private readonly ClientDiagnostics _unpatchableResourceClientDiagnostics;
@@ -57,20 +61,20 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
-        /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
+        /// <param name="data"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<UnpatchableResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<UnpatchableResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, UnpatchableResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _unpatchableResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _unpatchableResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -90,20 +94,20 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
-        /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
+        /// <param name="data"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<UnpatchableResource> CreateOrUpdate(WaitUntil waitUntil, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<UnpatchableResource> CreateOrUpdate(WaitUntil waitUntil, string name, UnpatchableResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _unpatchableResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _unpatchableResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
                 var operation = new MgmtOperationsArmOperation<UnpatchableResource>(Response.FromValue(new UnpatchableResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

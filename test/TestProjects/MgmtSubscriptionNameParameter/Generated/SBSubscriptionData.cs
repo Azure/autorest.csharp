@@ -26,9 +26,9 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="messageCount"> Number of messages. </param>
-        /// <param name="createdAt"> Exact time the message was created. </param>
-        /// <param name="accessedAt"> Last time there was a receive request to this subscription. </param>
-        /// <param name="updatedAt"> The exact time the message was updated. </param>
+        /// <param name="createdOn"> Exact time the message was created. </param>
+        /// <param name="accessedOn"> Last time there was a receive request to this subscription. </param>
+        /// <param name="updatedOn"> The exact time the message was updated. </param>
         /// <param name="lockDuration"> ISO 8061 lock duration timespan for the subscription. The default value is 1 minute. </param>
         /// <param name="requiresSession"> Value indicating if a subscription supports the concept of sessions. </param>
         /// <param name="defaultMessageTimeToLive"> ISO 8061 Default message timespan to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself. </param>
@@ -42,12 +42,12 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="forwardDeadLetteredMessagesTo"> Queue/Topic name to forward the Dead Letter message. </param>
         /// <param name="isClientAffine"> Value that indicates whether the subscription has an affinity to the client id. </param>
         /// <param name="clientAffineProperties"> Properties specific to client affine subscriptions. </param>
-        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdAt, DateTimeOffset? accessedAt, DateTimeOffset? updatedAt, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties) : base(id, name, resourceType, systemData)
+        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdOn, DateTimeOffset? accessedOn, DateTimeOffset? updatedOn, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties) : base(id, name, resourceType, systemData)
         {
             MessageCount = messageCount;
-            CreatedAt = createdAt;
-            AccessedAt = accessedAt;
-            UpdatedAt = updatedAt;
+            CreatedOn = createdOn;
+            AccessedOn = accessedOn;
+            UpdatedOn = updatedOn;
             LockDuration = lockDuration;
             RequiresSession = requiresSession;
             DefaultMessageTimeToLive = defaultMessageTimeToLive;
@@ -66,11 +66,11 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Number of messages. </summary>
         public long? MessageCount { get; }
         /// <summary> Exact time the message was created. </summary>
-        public DateTimeOffset? CreatedAt { get; }
+        public DateTimeOffset? CreatedOn { get; }
         /// <summary> Last time there was a receive request to this subscription. </summary>
-        public DateTimeOffset? AccessedAt { get; }
+        public DateTimeOffset? AccessedOn { get; }
         /// <summary> The exact time the message was updated. </summary>
-        public DateTimeOffset? UpdatedAt { get; }
+        public DateTimeOffset? UpdatedOn { get; }
         /// <summary> ISO 8061 lock duration timespan for the subscription. The default value is 1 minute. </summary>
         public TimeSpan? LockDuration { get; set; }
         /// <summary> Value indicating if a subscription supports the concept of sessions. </summary>

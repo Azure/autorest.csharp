@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A Class representing a Disk along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a Disk along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="Disk" />
+    /// from an instance of <see cref="ArmClient" /> using the GetDisk method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetDisk method.
+    /// </summary>
     public partial class Disk : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Disk"/> instance. </summary>

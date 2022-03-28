@@ -108,7 +108,7 @@ namespace MgmtResourceName
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string machineName, MachineData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -126,7 +126,7 @@ namespace MgmtResourceName
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -135,18 +135,18 @@ namespace MgmtResourceName
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="machineName"> The String to use. </param>
-        /// <param name="parameters"> The Machine to use. </param>
+        /// <param name="data"> The Machine to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MachineData>> PutAsync(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<MachineData>> PutAsync(string subscriptionId, string resourceGroupName, string machineName, MachineData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, machineName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, machineName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -165,18 +165,18 @@ namespace MgmtResourceName
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="machineName"> The String to use. </param>
-        /// <param name="parameters"> The Machine to use. </param>
+        /// <param name="data"> The Machine to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MachineData> Put(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public Response<MachineData> Put(string subscriptionId, string resourceGroupName, string machineName, MachineData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, machineName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, machineName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

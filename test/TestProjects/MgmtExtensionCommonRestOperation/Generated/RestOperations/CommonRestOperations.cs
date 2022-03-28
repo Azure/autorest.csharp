@@ -399,7 +399,7 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne)
+        internal HttpMessage CreateCreateOrUpdateTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -417,7 +417,7 @@ namespace MgmtExtensionCommonRestOperation
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(typeOne);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -427,18 +427,18 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
-        /// <param name="typeOne"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeOneData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeOneData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            Argument.AssertNotNull(typeOne, nameof(typeOne));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, typeOne);
+            using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -458,18 +458,18 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
-        /// <param name="typeOne"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeOneData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public Response<TypeOneData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            Argument.AssertNotNull(typeOne, nameof(typeOne));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, typeOne);
+            using var message = CreateCreateOrUpdateTypeOneRequest(subscriptionId, resourceGroupName, typeOneName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -567,7 +567,7 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo)
+        internal HttpMessage CreateCreateOrUpdateTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -585,7 +585,7 @@ namespace MgmtExtensionCommonRestOperation
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(typeTwo);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -595,18 +595,18 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
-        /// <param name="typeTwo"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TypeTwoData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        public async Task<Response<TypeTwoData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-            Argument.AssertNotNull(typeTwo, nameof(typeTwo));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, typeTwo);
+            using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -626,18 +626,18 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
-        /// <param name="typeTwo"> Information to validate. </param>
+        /// <param name="data"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TypeTwoData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        public Response<TypeTwoData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
-            Argument.AssertNotNull(typeTwo, nameof(typeTwo));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, typeTwo);
+            using var message = CreateCreateOrUpdateTypeTwoRequest(subscriptionId, resourceGroupName, typeTwoName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

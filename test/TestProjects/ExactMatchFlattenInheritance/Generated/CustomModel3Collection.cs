@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace ExactMatchFlattenInheritance
 {
-    /// <summary> A class representing collection of CustomModel3 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="CustomModel3Resource" /> and their operations.
+    /// Each <see cref="CustomModel3Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="CustomModel3Collection" /> instance call the GetCustomModel3s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class CustomModel3Collection : ArmCollection, IEnumerable<CustomModel3Resource>, IAsyncEnumerable<CustomModel3Resource>
     {
         private readonly ClientDiagnostics _customModel3ClientDiagnostics;
@@ -57,20 +61,20 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel3 to use. </param>
+        /// <param name="data"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<CustomModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<CustomModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _customModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _customModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3Resource>(Response.FromValue(new CustomModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -90,20 +94,20 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel3 to use. </param>
+        /// <param name="data"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<CustomModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<CustomModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _customModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var response = _customModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
                 var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel3Resource>(Response.FromValue(new CustomModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

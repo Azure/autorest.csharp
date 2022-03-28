@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtOperations
 {
-    /// <summary> A class representing collection of AvailabilitySetChild and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="AvailabilitySetChildResource" /> and their operations.
+    /// Each <see cref="AvailabilitySetChildResource" /> in the collection will belong to the same instance of <see cref="AvailabilitySetResource" />.
+    /// To get an <see cref="AvailabilitySetChildCollection" /> instance call the GetAvailabilitySetChildren method from an instance of <see cref="AvailabilitySetResource" />.
+    /// </summary>
     public partial class AvailabilitySetChildCollection : ArmCollection, IEnumerable<AvailabilitySetChildResource>, IAsyncEnumerable<AvailabilitySetChildResource>
     {
         private readonly ClientDiagnostics _availabilitySetChildavailabilitySetChildClientDiagnostics;
@@ -56,20 +60,20 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<AvailabilitySetChildResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<AvailabilitySetChildResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtOperationsArmOperation<AvailabilitySetChildResource>(Response.FromValue(new AvailabilitySetChildResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -89,20 +93,20 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<AvailabilitySetChildResource> CreateOrUpdate(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<AvailabilitySetChildResource> CreateOrUpdate(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _availabilitySetChildavailabilitySetChildClientDiagnostics.CreateScope("AvailabilitySetChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
+                var response = _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, data, cancellationToken);
                 var operation = new MgmtOperationsArmOperation<AvailabilitySetChildResource>(Response.FromValue(new AvailabilitySetChildResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

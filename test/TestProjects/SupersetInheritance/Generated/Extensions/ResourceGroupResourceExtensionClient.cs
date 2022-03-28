@@ -80,15 +80,15 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel2s_Put
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel2 to use. </param>
+        /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel2");
             scope.Start();
             try
             {
-                var response = await SupersetModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await SupersetModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -103,15 +103,15 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel2s_Put
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel2 to use. </param>
+        /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel2");
             scope.Start();
             try
             {
-                var response = SupersetModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel2SName, parameters, cancellationToken);
+                var response = SupersetModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel2SName, supersetModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -170,15 +170,15 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel3s_Put
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel3");
             scope.Start();
             try
             {
-                var response = await SupersetModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await SupersetModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -193,15 +193,15 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel3s_Put
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel3");
             scope.Start();
             try
             {
-                var response = SupersetModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel3SName, parameters, cancellationToken);
+                var response = SupersetModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel3SName, supersetModel3, cancellationToken);
                 return response;
             }
             catch (Exception e)

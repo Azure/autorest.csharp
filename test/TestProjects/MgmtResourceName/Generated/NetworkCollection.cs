@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing collection of Network and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="NetworkResource" /> and their operations.
+    /// Each <see cref="NetworkResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="NetworkCollection" /> instance call the GetNetworks method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class NetworkCollection : ArmCollection, IEnumerable<NetworkResource>, IAsyncEnumerable<NetworkResource>
     {
         private readonly ClientDiagnostics _networkNetworkResourcesClientDiagnostics;
@@ -56,20 +60,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="networkResourceName"> The String to use. </param>
-        /// <param name="parameters"> The Network to use. </param>
+        /// <param name="data"> The Network to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<NetworkResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<NetworkResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string networkResourceName, NetworkData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _networkNetworkResourcesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _networkNetworkResourcesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtResourceNameArmOperation<NetworkResource>(Response.FromValue(new NetworkResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="networkResourceName"> The String to use. </param>
-        /// <param name="parameters"> The Network to use. </param>
+        /// <param name="data"> The Network to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<NetworkResource> CreateOrUpdate(WaitUntil waitUntil, string networkResourceName, NetworkData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<NetworkResource> CreateOrUpdate(WaitUntil waitUntil, string networkResourceName, NetworkData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(networkResourceName, nameof(networkResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _networkNetworkResourcesClientDiagnostics.CreateScope("NetworkCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _networkNetworkResourcesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, parameters, cancellationToken);
+                var response = _networkNetworkResourcesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, data, cancellationToken);
                 var operation = new MgmtResourceNameArmOperation<NetworkResource>(Response.FromValue(new NetworkResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtResourceName
 {
-    /// <summary> A class representing collection of DisplayResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="DisplayResource" /> and their operations.
+    /// Each <see cref="DisplayResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="DisplayResourceCollection" /> instance call the GetDisplayResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class DisplayResourceCollection : ArmCollection, IEnumerable<DisplayResource>, IAsyncEnumerable<DisplayResource>
     {
         private readonly ClientDiagnostics _displayResourceClientDiagnostics;
@@ -56,20 +60,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DisplayResource to use. </param>
+        /// <param name="data"> The DisplayResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<DisplayResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string displayResourceName, DisplayResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<DisplayResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _displayResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _displayResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DisplayResource to use. </param>
+        /// <param name="data"> The DisplayResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<DisplayResource> CreateOrUpdate(WaitUntil waitUntil, string displayResourceName, DisplayResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<DisplayResource> CreateOrUpdate(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _displayResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, parameters, cancellationToken);
+                var response = _displayResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken);
                 var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

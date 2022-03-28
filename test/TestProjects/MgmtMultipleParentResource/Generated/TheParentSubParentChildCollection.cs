@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of TheParentSubParentChild and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TheParentSubParentChildResource" /> and their operations.
+    /// Each <see cref="TheParentSubParentChildResource" /> in the collection will belong to the same instance of <see cref="SubParentResource" />.
+    /// To get a <see cref="TheParentSubParentChildCollection" /> instance call the GetTheParentSubParentChildren method from an instance of <see cref="SubParentResource" />.
+    /// </summary>
     public partial class TheParentSubParentChildCollection : ArmCollection, IEnumerable<TheParentSubParentChildResource>, IAsyncEnumerable<TheParentSubParentChildResource>
     {
         private readonly ClientDiagnostics _theParentSubParentChildChildrenClientDiagnostics;
@@ -56,21 +60,21 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public virtual async Task<ArmOperation<TheParentSubParentChildResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<TheParentSubParentChildResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _theParentSubParentChildChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response, OperationFinalStateVia.Location);
+                var response = await _theParentSubParentChildChildrenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -89,21 +93,21 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public virtual ArmOperation<TheParentSubParentChildResource> CreateOrUpdate(WaitUntil waitUntil, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<TheParentSubParentChildResource> CreateOrUpdate(WaitUntil waitUntil, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _theParentSubParentChildChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
-                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response, OperationFinalStateVia.Location);
+                var response = _theParentSubParentChildChildrenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data, cancellationToken);
+                var operation = new MgmtMultipleParentResourceArmOperation<TheParentSubParentChildResource>(new TheParentSubParentChildOperationSource(Client), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, _theParentSubParentChildChildrenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsOperationOfPageable(CSharpType type)
             => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
 
-        private static Type? ToFrameworkType(Schema schema) => schema.Type switch
+        internal static Type? ToFrameworkType(Schema schema) => schema.Type switch
         {
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
@@ -191,6 +191,7 @@ namespace AutoRest.CSharp.Generation.Types
                 XMsFormat.ArmId => typeof(ResourceIdentifier),
                 XMsFormat.ResourceType => typeof(ResourceType),
                 XMsFormat.DurationConstant => typeof(TimeSpan),
+                XMsFormat.AzureLocation => typeof(AzureLocation),
                 _ => typeof(string)
             },
             AllSchemaTypes.Time => typeof(TimeSpan),

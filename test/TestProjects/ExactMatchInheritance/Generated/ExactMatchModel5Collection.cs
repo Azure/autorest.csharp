@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing collection of ExactMatchModel5 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ExactMatchModel5Resource" /> and their operations.
+    /// Each <see cref="ExactMatchModel5Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="ExactMatchModel5Collection" /> instance call the GetExactMatchModel5s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ExactMatchModel5Collection : ArmCollection, IEnumerable<ExactMatchModel5Resource>, IAsyncEnumerable<ExactMatchModel5Resource>
     {
         private readonly ClientDiagnostics _exactMatchModel5ClientDiagnostics;
@@ -56,20 +60,20 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ExactMatchModel5Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<ExactMatchModel5Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _exactMatchModel5RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel5RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ExactMatchModel5Resource> CreateOrUpdate(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<ExactMatchModel5Resource> CreateOrUpdate(WaitUntil waitUntil, string exactMatchModel5SName, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _exactMatchModel5RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken);
+                var response = _exactMatchModel5RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, data, cancellationToken);
                 var operation = new ExactMatchInheritanceArmOperation<ExactMatchModel5Resource>(Response.FromValue(new ExactMatchModel5Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

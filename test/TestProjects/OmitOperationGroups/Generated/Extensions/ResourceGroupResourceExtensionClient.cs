@@ -107,15 +107,15 @@ namespace OmitOperationGroups
         /// Operation Id: Model5s_CreateOrUpdate
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
             {
-                var response = await Model5sRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await Model5sRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model5SName, model5, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -130,15 +130,15 @@ namespace OmitOperationGroups
         /// Operation Id: Model5s_CreateOrUpdate
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
             {
-                var response = Model5sRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model5SName, parameters, cancellationToken);
+                var response = Model5sRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model5SName, model5, cancellationToken);
                 return response;
             }
             catch (Exception e)

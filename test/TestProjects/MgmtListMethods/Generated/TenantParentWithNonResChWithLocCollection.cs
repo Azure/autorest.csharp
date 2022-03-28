@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing collection of TenantParentWithNonResChWithLoc and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="TenantParentWithNonResChWithLocResource" /> and their operations.
+    /// Each <see cref="TenantParentWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="TenantTestResource" />.
+    /// To get a <see cref="TenantParentWithNonResChWithLocCollection" /> instance call the GetTenantParentWithNonResChWithLocs method from an instance of <see cref="TenantTestResource" />.
+    /// </summary>
     public partial class TenantParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<TenantParentWithNonResChWithLocResource>, IAsyncEnumerable<TenantParentWithNonResChWithLocResource>
     {
         private readonly ClientDiagnostics _tenantParentWithNonResChWithLocClientDiagnostics;
@@ -56,20 +60,20 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<TenantParentWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<TenantParentWithNonResChWithLocResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChWithLocName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChWithLocResource>(Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -89,20 +93,20 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<TenantParentWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<TenantParentWithNonResChWithLocResource> CreateOrUpdate(WaitUntil waitUntil, string tenantParentWithNonResChWithLocName, TenantParentWithNonResChWithLocData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChWithLocName, nameof(tenantParentWithNonResChWithLocName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _tenantParentWithNonResChWithLocClientDiagnostics.CreateScope("TenantParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _tenantParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChWithLocName, parameters, cancellationToken);
+                var response = _tenantParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChWithLocName, data, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChWithLocResource>(Response.FromValue(new TenantParentWithNonResChWithLocResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

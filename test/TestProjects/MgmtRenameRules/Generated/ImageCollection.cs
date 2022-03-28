@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtRenameRules
 {
-    /// <summary> A class representing collection of Image and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="ImageResource" /> and their operations.
+    /// Each <see cref="ImageResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="ImageCollection" /> instance call the GetImages method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class ImageCollection : ArmCollection, IEnumerable<ImageResource>, IAsyncEnumerable<ImageResource>
     {
         private readonly ClientDiagnostics _imageClientDiagnostics;
@@ -57,21 +61,21 @@ namespace MgmtRenameRules
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="imageName"> The name of the image. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ImageResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<ImageResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string imageName, ImageData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _imageRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _imageRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -90,21 +94,21 @@ namespace MgmtRenameRules
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="imageName"> The name of the image. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ImageResource> CreateOrUpdate(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<ImageResource> CreateOrUpdate(WaitUntil waitUntil, string imageName, ImageData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _imageRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _imageRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, data, cancellationToken);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

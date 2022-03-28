@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Oven and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="OvenResource" /> and their operations.
+    /// Each <see cref="OvenResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get an <see cref="OvenCollection" /> instance call the GetOvens method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class OvenCollection : ArmCollection, IEnumerable<OvenResource>, IAsyncEnumerable<OvenResource>
     {
         private readonly ClientDiagnostics _ovenClientDiagnostics;
@@ -57,21 +61,21 @@ namespace SubscriptionExtensions
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<OvenResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<OvenResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string ovenName, OvenData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _ovenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _ovenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -90,21 +94,21 @@ namespace SubscriptionExtensions
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<OvenResource> CreateOrUpdate(WaitUntil waitUntil, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<OvenResource> CreateOrUpdate(WaitUntil waitUntil, string ovenName, OvenData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _ovenClientDiagnostics.CreateScope("OvenCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _ovenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters, cancellationToken);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _ovenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data, cancellationToken);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

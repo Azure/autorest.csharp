@@ -19,7 +19,11 @@ using Azure.ResourceManager;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing collection of EnvironmentContainerResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="EnvironmentContainerResource" /> and their operations.
+    /// Each <see cref="EnvironmentContainerResource" /> in the collection will belong to the same instance of <see cref="WorkspaceResource" />.
+    /// To get an <see cref="EnvironmentContainerResourceCollection" /> instance call the GetEnvironmentContainerResources method from an instance of <see cref="WorkspaceResource" />.
+    /// </summary>
     public partial class EnvironmentContainerResourceCollection : ArmCollection, IEnumerable<EnvironmentContainerResource>, IAsyncEnumerable<EnvironmentContainerResource>
     {
         private readonly ClientDiagnostics _environmentContainerResourceEnvironmentContainersClientDiagnostics;
@@ -56,20 +60,20 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> Container name. </param>
-        /// <param name="body"> Container entity to create or update. </param>
+        /// <param name="data"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<EnvironmentContainerResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<EnvironmentContainerResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, EnvironmentContainerResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
+                var response = await _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtParamOrderingArmOperation<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -89,20 +93,20 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> Container name. </param>
-        /// <param name="body"> Container entity to create or update. </param>
+        /// <param name="data"> Container entity to create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<EnvironmentContainerResource> CreateOrUpdate(WaitUntil waitUntil, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<EnvironmentContainerResource> CreateOrUpdate(WaitUntil waitUntil, string name, EnvironmentContainerResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _environmentContainerResourceEnvironmentContainersClientDiagnostics.CreateScope("EnvironmentContainerResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
+                var response = _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, data, cancellationToken);
                 var operation = new MgmtParamOrderingArmOperation<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

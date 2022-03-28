@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing collection of SupersetModel6 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SupersetModel6Resource" /> and their operations.
+    /// Each <see cref="SupersetModel6Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="SupersetModel6Collection" /> instance call the GetSupersetModel6s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class SupersetModel6Collection : ArmCollection, IEnumerable<SupersetModel6Resource>, IAsyncEnumerable<SupersetModel6Resource>
     {
         private readonly ClientDiagnostics _supersetModel6ClientDiagnostics;
@@ -56,20 +60,20 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel6 to use. </param>
+        /// <param name="data"> The SupersetModel6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SupersetModel6Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<SupersetModel6Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel6SName, SupersetModel6Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _supersetModel6ClientDiagnostics.CreateScope("SupersetModel6Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _supersetModel6RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel6RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel6 to use. </param>
+        /// <param name="data"> The SupersetModel6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SupersetModel6Resource> CreateOrUpdate(WaitUntil waitUntil, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<SupersetModel6Resource> CreateOrUpdate(WaitUntil waitUntil, string supersetModel6SName, SupersetModel6Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _supersetModel6ClientDiagnostics.CreateScope("SupersetModel6Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _supersetModel6RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, parameters, cancellationToken);
+                var response = _supersetModel6RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, data, cancellationToken);
                 var operation = new SupersetInheritanceArmOperation<SupersetModel6Resource>(Response.FromValue(new SupersetModel6Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

@@ -24,10 +24,10 @@ namespace MgmtRenameRules.Models
         /// <param name="criticalAndSecurityPatchCount"> The number of critical or security patches that have been detected as available and not yet installed. </param>
         /// <param name="otherPatchCount"> The number of all available patches excluding critical and security. </param>
         /// <param name="uri"> The managed application artifact blob uri. </param>
-        /// <param name="startTime"> The UTC timestamp when the operation began. </param>
-        /// <param name="lastModifiedTime"> The UTC timestamp when the operation began. </param>
+        /// <param name="startOn"> The UTC timestamp when the operation began. </param>
+        /// <param name="lastModifiedOn"> The UTC timestamp when the operation began. </param>
         /// <param name="error"> The errors that were encountered during execution of the operation. The details array contains the list of them. </param>
-        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, Uri uri, DateTimeOffset? startTime, DateTimeOffset? lastModifiedTime, ApiError error)
+        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, Uri uri, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -35,8 +35,8 @@ namespace MgmtRenameRules.Models
             CriticalAndSecurityPatchCount = criticalAndSecurityPatchCount;
             OtherPatchCount = otherPatchCount;
             Uri = uri;
-            StartTime = startTime;
-            LastModifiedTime = lastModifiedTime;
+            StartOn = startOn;
+            LastModifiedOn = lastModifiedOn;
             Error = error;
         }
 
@@ -53,9 +53,9 @@ namespace MgmtRenameRules.Models
         /// <summary> The managed application artifact blob uri. </summary>
         public Uri Uri { get; }
         /// <summary> The UTC timestamp when the operation began. </summary>
-        public DateTimeOffset? StartTime { get; }
+        public DateTimeOffset? StartOn { get; }
         /// <summary> The UTC timestamp when the operation began. </summary>
-        public DateTimeOffset? LastModifiedTime { get; }
+        public DateTimeOffset? LastModifiedOn { get; }
         /// <summary> The errors that were encountered during execution of the operation. The details array contains the list of them. </summary>
         public ApiError Error { get; }
     }

@@ -13,10 +13,16 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace Pagination
 {
-    /// <summary> A Class representing a PageSizeFloatModelResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing a PageSizeFloatModel along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PageSizeFloatModelResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetPageSizeFloatModelResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetPageSizeFloatModel method.
+    /// </summary>
     public partial class PageSizeFloatModelResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="PageSizeFloatModelResource"/> instance. </summary>

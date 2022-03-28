@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace NoTypeReplacement
 {
-    /// <summary> A class representing collection of NoTypeReplacementModel3 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="NoTypeReplacementModel3Resource" /> and their operations.
+    /// Each <see cref="NoTypeReplacementModel3Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="NoTypeReplacementModel3Collection" /> instance call the GetNoTypeReplacementModel3s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class NoTypeReplacementModel3Collection : ArmCollection, IEnumerable<NoTypeReplacementModel3Resource>, IAsyncEnumerable<NoTypeReplacementModel3Resource>
     {
         private readonly ClientDiagnostics _noTypeReplacementModel3ClientDiagnostics;
@@ -56,20 +60,20 @@ namespace NoTypeReplacement
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
+        /// <param name="data"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<NoTypeReplacementModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<NoTypeReplacementModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace NoTypeReplacement
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
+        /// <param name="data"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<NoTypeReplacementModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<NoTypeReplacementModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel3SName, nameof(noTypeReplacementModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, parameters, cancellationToken);
+                var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel3SName, data, cancellationToken);
                 var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

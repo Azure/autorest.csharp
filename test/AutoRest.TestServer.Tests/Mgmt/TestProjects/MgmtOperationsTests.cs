@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
             Assert.AreEqual(3, method.GetParameters().Length);
-            var param1 = TypeAsserts.HasParameter(method, "parameters", typeof(ConnectionSharedKey));
+            var param1 = TypeAsserts.HasParameter(method, "connectionSharedKey", typeof(ConnectionSharedKey));
             Assert.False(param1.IsOptional);
             TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name, typeof(WaitUntil));
             TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name, typeof(CancellationToken));

@@ -20,7 +20,11 @@ using Azure.ResourceManager.Resources;
 
 namespace OmitOperationGroups
 {
-    /// <summary> A class representing collection of Model2 and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="Model2Resource" /> and their operations.
+    /// Each <see cref="Model2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="Model2Collection" /> instance call the GetModel2s method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class Model2Collection : ArmCollection, IEnumerable<Model2Resource>, IAsyncEnumerable<Model2Resource>
     {
         private readonly ClientDiagnostics _model2ClientDiagnostics;
@@ -56,20 +60,20 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="parameters"> The Model2 to use. </param>
+        /// <param name="data"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<Model2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<Model2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _model2RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, model2SName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -88,20 +92,20 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="parameters"> The Model2 to use. </param>
+        /// <param name="data"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<Model2Resource> CreateOrUpdate(WaitUntil waitUntil, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<Model2Resource> CreateOrUpdate(WaitUntil waitUntil, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _model2ClientDiagnostics.CreateScope("Model2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, parameters, cancellationToken);
+                var response = _model2RestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, model2SName, data, cancellationToken);
                 var operation = new OmitOperationGroupsArmOperation<Model2Resource>(Response.FromValue(new Model2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);

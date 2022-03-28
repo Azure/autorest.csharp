@@ -62,14 +62,14 @@ namespace MgmtExpandResourceTypes
         /// Operation Id: DnsResourceReference_GetByTargetResources
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="parameters"> Properties for dns resource reference request. </param>
+        /// <param name="dnsResourceReferenceRequest"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this SubscriptionResource subscriptionResource, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="dnsResourceReferenceRequest"/> is null. </exception>
+        public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this SubscriptionResource subscriptionResource, DnsResourceReferenceRequest dnsResourceReferenceRequest, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(dnsResourceReferenceRequest, nameof(dnsResourceReferenceRequest));
 
-            return await GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(dnsResourceReferenceRequest, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -78,14 +78,14 @@ namespace MgmtExpandResourceTypes
         /// Operation Id: DnsResourceReference_GetByTargetResources
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="parameters"> Properties for dns resource reference request. </param>
+        /// <param name="dnsResourceReferenceRequest"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this SubscriptionResource subscriptionResource, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="dnsResourceReferenceRequest"/> is null. </exception>
+        public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this SubscriptionResource subscriptionResource, DnsResourceReferenceRequest dnsResourceReferenceRequest, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(dnsResourceReferenceRequest, nameof(dnsResourceReferenceRequest));
 
-            return GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReference(parameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReference(dnsResourceReferenceRequest, cancellationToken);
         }
 
         private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
