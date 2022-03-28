@@ -111,6 +111,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _allSchemas.UpdateSealChoiceTypes();
             CommonSingleWordModels.Update(_allSchemas);
             NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
+            RenameTimeToOn.UpdateNames(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
