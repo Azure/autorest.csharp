@@ -153,11 +153,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            if (!isArmCore)
-            {
-                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
-            }
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
