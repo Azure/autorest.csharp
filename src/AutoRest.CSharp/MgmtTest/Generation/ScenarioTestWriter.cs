@@ -130,7 +130,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
                     using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync({typeof(WaitUntil)}.Completed, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
-                        _writer.Append($"Template = {typeof(System.Text.Json.JsonDocument)}.Parse({templatePayload}).RootElement");
+                        _writer.Append($"Template = {templatePayload}");
                         _writer.Line($",");
                     }
 
@@ -241,7 +241,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             // write protected default constructor
             if (_testDef.Scope == TestDefinitionScope.ResourceGroup)
             {
-                _writer.Line($"{typeof(ResourceGroup)} resourceGroup;");
+                _writer.Line($"{typeof(ResourceGroupResource)} resourceGroup;");
             }
 
             if (!_testDef.RequiredVariables.Contains("resourceGroupName"))

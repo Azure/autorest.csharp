@@ -112,7 +112,7 @@ namespace MgmtKeyvault.Tests.Mock
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             MgmtKeyvault.Models.AccessPolicyUpdateKind operationKind = MgmtKeyvault.Models.AccessPolicyUpdateKind.Add;
-            MgmtKeyvault.Models.VaultAccessPolicyParameters parameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: null));
+            MgmtKeyvault.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: null));
 
             await vaultResource.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
         }

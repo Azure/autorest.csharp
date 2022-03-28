@@ -10,10 +10,5 @@ namespace Azure.ResourceManager.TestFramework
         {
             return new DeploymentCollection();
         }
-
-        public static DeploymentCollection GetDeployments(this Azure.ResourceManager.Resources.ResourceGroup resourceGroup)
-        {
-            return new DeploymentCollection();
-        }
     }
 }

@@ -43,15 +43,15 @@ namespace MgmtKeyvault.Tests.Mock
                 },
                 Sku = new MgmtKeyvault.Models.ManagedHsmSku(family: new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), name: MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
             };
-            parameters.Properties.InitialAdminObjectIds.Add("00000000-0000-0000-0000-000000000000");
-            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            data.Properties.InitialAdminObjectIds.Add("00000000-0000-0000-0000-000000000000");
+            data.Tags.ReplaceWith(new Dictionary<string, string>()
             {
                 ["Dept"] = "hsm",
                 ["Environment"] = "dogfood",
             });
 
             var collection = GetArmClient().GetResourceGroupResource(ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group")).GetManagedHsms();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, parameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data);
         }
 
         [RecordedTest]

@@ -35,15 +35,15 @@ namespace MgmtSignalR
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the region. </param>
-        /// <param name="parameters"> Parameters supplied to the operation. </param>
+        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return await GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalRAsync(location, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalRAsync(location, nameAvailabilityParameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -53,15 +53,15 @@ namespace MgmtSignalR
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> the region. </param>
-        /// <param name="parameters"> Parameters supplied to the operation. </param>
+        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<NameAvailability> CheckNameAvailabilitySignalR(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public static Response<NameAvailability> CheckNameAvailabilitySignalR(this SubscriptionResource subscriptionResource, string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalR(location, parameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).CheckNameAvailabilitySignalR(location, nameAvailabilityParameters, cancellationToken);
         }
 
         /// <summary>
