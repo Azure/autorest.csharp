@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     foreach (var entry in exampleValue.Properties)
                     {
                         var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
-                        writer.Append($"${variableName}[{k}] = ");
+                        writer.Append($"{variableName}[{k}] = ");
                         WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
                         writer.Line($";");
                     }
@@ -495,10 +495,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     writer.Append($"{typeof(DateTimeOffset)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
                     break;
                 case ("System.Guid", string):
-                    writer.Append($"System.Guid.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(Guid)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
                     break;
                 case ("System.TimeSpan", string):
-                    writer.Append($"System.TimeSpan.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(TimeSpan)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    break;
+                case ("System.Uri", string):
+                    writer.Append($"new {typeof(Uri)}({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
                     break;
                 case ("System.String", string):
                 case ("Azure.Core.AzureLocation", string):
