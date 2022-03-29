@@ -13,19 +13,19 @@ namespace Azure.Core.Tests
     public class ClientDiagnosticListener : IObserver<KeyValuePair<string, object>>, IObserver<DiagnosticListener>, IDisposable
     {
         private readonly Func<string, bool> _sourceNameFilter;
-        private readonly AsyncLocal<bool> _collectThisStack;
+        private readonly AsyncLocal<bool>? _collectThisStack;
 
-        private List<IDisposable> _subscriptions = new List<IDisposable>();
-        private readonly Action<ProducedDiagnosticScope> _scopeStartCallback;
+        private List<IDisposable>? _subscriptions = new List<IDisposable>();
+        private readonly Action<ProducedDiagnosticScope>? _scopeStartCallback;
 
         public List<ProducedDiagnosticScope> Scopes { get; } = new List<ProducedDiagnosticScope>();
 
-        public ClientDiagnosticListener(string name, bool asyncLocal = false, Action<ProducedDiagnosticScope> scopeStartCallback = default)
+        public ClientDiagnosticListener(string name, bool asyncLocal = false, Action<ProducedDiagnosticScope>? scopeStartCallback = default)
             : this(n => n == name, asyncLocal, scopeStartCallback)
         {
         }
 
-        public ClientDiagnosticListener(Func<string, bool> filter, bool asyncLocal = false, Action<ProducedDiagnosticScope> scopeStartCallback = default)
+        public ClientDiagnosticListener(Func<string, bool> filter, bool asyncLocal = false, Action<ProducedDiagnosticScope>? scopeStartCallback = default)
         {
             if (asyncLocal)
             {
@@ -60,17 +60,10 @@ namespace Azure.Core.Tests
                 if (value.Key.EndsWith(startSuffix))
                 {
                     var name = value.Key.Substring(0, value.Key.Length - startSuffix.Length);
-                    PropertyInfo propertyInfo = value.Value.GetType().GetTypeInfo().GetDeclaredProperty("Links");
-                    var links = propertyInfo?.GetValue(value.Value) as IEnumerable<Activity> ?? Array.Empty<Activity>();
+                    PropertyInfo? propertyInfo = value.Value.GetType().GetTypeInfo().GetDeclaredProperty("Links");
+                    var links = propertyInfo?.GetValue(value.Value) is IEnumerable<Activity> activities ? activities.ToArray() : Array.Empty<Activity>();
 
-                    var scope = new ProducedDiagnosticScope()
-                    {
-                        Name = name,
-                        Activity = Activity.Current,
-                        Links = links.Select(a => new ProducedLink(a.ParentId, a.TraceStateString)).ToList(),
-                        LinkedActivities = links.ToList()
-                    };
-
+                    var scope = new ProducedDiagnosticScope(name, Activity.Current, links.Select(a => new ProducedLink(a.ParentId, a.TraceStateString)).ToArray(), links);
                     Scopes.Add(scope);
                     _scopeStartCallback?.Invoke(scope);
                 }
@@ -213,7 +206,7 @@ namespace Azure.Core.Tests
             return scope;
         }
 
-        public ProducedDiagnosticScope AssertScopeException(string name, Action<Exception> action = null)
+        public ProducedDiagnosticScope AssertScopeException(string name, Action<Exception>? action = null)
         {
             ProducedDiagnosticScope scope = AssertScopeStarted(name);
 
@@ -229,13 +222,21 @@ namespace Azure.Core.Tests
 
         public class ProducedDiagnosticScope
         {
-            public string Name { get; set; }
-            public Activity Activity { get; set; }
+            public ProducedDiagnosticScope(string name, Activity activity, ProducedLink[] links, Activity[] linkedActivities)
+            {
+                Name = name;
+                Activity = activity;
+                Links = links;
+                LinkedActivities = linkedActivities;
+            }
+
+            public string Name { get; }
+            public Activity Activity { get; }
             public bool IsCompleted { get; set; }
             public bool IsFailed => Exception != null;
-            public Exception Exception { get; set; }
-            public List<ProducedLink> Links { get; set; } = new List<ProducedLink>();
-            public List<Activity> LinkedActivities { get; set; } = new List<Activity>();
+            public Exception? Exception { get; set; }
+            public ProducedLink[] Links { get; }
+            public Activity[] LinkedActivities { get; }
 
             public override string ToString()
             {
@@ -258,7 +259,7 @@ namespace Azure.Core.Tests
             }
 
             public string Traceparent { get; set; }
-            public string Tracestate { get; set; }
+            public string? Tracestate { get; set; }
         }
     }
 }
