@@ -9,8 +9,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.MgmtTest.TestCommon;
-using Azure.ResourceManager.Resources;
 using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -42,13 +40,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     WriteTesterCtors();
                     foreach (var extensions in MgmtContext.Library.ExtensionWrapper.Extensions)
-                    {
-                        foreach (var clientOperation in extensions.ClientOperations)
+                        if (extensions != MgmtContext.Library.ArmClientExtensions)
                         {
-                            _writer.Line();
-                            WriteTestMethod(extensions, clientOperation, true, false);
+                            foreach (var clientOperation in extensions.ClientOperations)
+                            {
+                                _writer.Line();
+                                WriteTestMethod(extensions, clientOperation, true, false);
+                            }
                         }
-                    }
                 }
             }
         }
