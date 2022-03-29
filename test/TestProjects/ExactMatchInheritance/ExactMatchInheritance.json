@@ -476,6 +476,12 @@
             "properties": {
                 "new": {
                     "type": "string"
+                },
+                "supportingUris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                 }
             },
             "allOf": [
