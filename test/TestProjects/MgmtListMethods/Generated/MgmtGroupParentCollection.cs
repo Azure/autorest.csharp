@@ -279,7 +279,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -306,66 +306,8 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = GetIfExists(mgmtGroupParentName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// Operation Id: MgmtGroupParents_Get
-        /// </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual async Task<Response<MgmtGroupParentResource>> GetIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
-
-            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<MgmtGroupParentResource>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// Operation Id: MgmtGroupParents_Get
-        /// </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual Response<MgmtGroupParentResource> GetIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
-
-            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _mgmtGroupParentRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<MgmtGroupParentResource>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

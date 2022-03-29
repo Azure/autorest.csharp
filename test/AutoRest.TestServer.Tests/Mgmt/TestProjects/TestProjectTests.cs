@@ -133,7 +133,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var resource = GetResourceFromCollection(collection);
                 Assert.NotNull(resource);
                 VerifyMethodReturnType(collection, resource, "Get");
-                VerifyMethodReturnType(collection, resource, "GetIfExists");
 
                 if (!ListExceptionCollections.Contains(collection))
                     VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));

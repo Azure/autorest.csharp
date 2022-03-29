@@ -279,7 +279,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -306,66 +306,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = GetIfExists(vmScaleSetName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
-        /// </summary>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineScaleSetResource>> GetIfExistsAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-
-            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _virtualMachineScaleSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<VirtualMachineScaleSetResource>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
-        /// Operation Id: VirtualMachineScaleSets_Get
-        /// </summary>
-        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
-        public virtual Response<VirtualMachineScaleSetResource> GetIfExists(string vmScaleSetName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-
-            using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _virtualMachineScaleSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<VirtualMachineScaleSetResource>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -285,7 +285,7 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -312,66 +312,8 @@ namespace MgmtExpandResourceTypes
             scope.Start();
             try
             {
-                var response = GetIfExists(zoneName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
-        /// </summary>
-        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
-        public virtual async Task<Response<ZoneResource>> GetIfExistsAsync(string zoneName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
-
-            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _zoneRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<ZoneResource>(null, response.GetRawResponse());
-                return Response.FromValue(new ZoneResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// Operation Id: Zones_Get
-        /// </summary>
-        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
-        public virtual Response<ZoneResource> GetIfExists(string zoneName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
-
-            using var scope = _zoneClientDiagnostics.CreateScope("ZoneCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _zoneRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, zoneName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<ZoneResource>(null, response.GetRawResponse());
-                return Response.FromValue(new ZoneResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

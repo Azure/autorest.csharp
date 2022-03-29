@@ -249,7 +249,7 @@ namespace MgmtSafeFlatten
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -276,66 +276,8 @@ namespace MgmtSafeFlatten
             scope.Start();
             try
             {
-                var response = GetIfExists(typeOneName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
-        /// Operation Id: Common_GetTypeOne
-        /// </summary>
-        /// <param name="typeOneName"> The name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual async Task<Response<TypeOneResource>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<TypeOneResource>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
-        /// Operation Id: Common_GetTypeOne
-        /// </summary>
-        /// <param name="typeOneName"> The name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual Response<TypeOneResource> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<TypeOneResource>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

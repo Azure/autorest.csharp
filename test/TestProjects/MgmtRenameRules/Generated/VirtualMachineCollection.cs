@@ -279,7 +279,7 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -306,66 +306,8 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = GetIfExists(vmName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
-        /// Operation Id: VirtualMachines_Get
-        /// </summary>
-        /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineResource>> GetIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
-
-            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<VirtualMachineResource>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
-        /// Operation Id: VirtualMachines_Get
-        /// </summary>
-        /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        public virtual Response<VirtualMachineResource> GetIfExists(string vmName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
-
-            using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachineCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<VirtualMachineResource>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

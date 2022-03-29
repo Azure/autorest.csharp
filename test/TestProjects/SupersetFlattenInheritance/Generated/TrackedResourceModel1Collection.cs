@@ -243,7 +243,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -270,66 +270,8 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = GetIfExists(trackedResourceModel1SName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
-        /// Operation Id: TrackedResourceModel1s_Get
-        /// </summary>
-        /// <param name="trackedResourceModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual async Task<Response<TrackedResourceModel1Resource>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
-
-            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _trackedResourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<TrackedResourceModel1Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
-        /// Operation Id: TrackedResourceModel1s_Get
-        /// </summary>
-        /// <param name="trackedResourceModel1SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
-        public virtual Response<TrackedResourceModel1Resource> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel1SName, nameof(trackedResourceModel1SName));
-
-            using var scope = _trackedResourceModel1ClientDiagnostics.CreateScope("TrackedResourceModel1Collection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _trackedResourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<TrackedResourceModel1Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new TrackedResourceModel1Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

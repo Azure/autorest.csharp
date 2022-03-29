@@ -239,7 +239,7 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(fakeName, expand: expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -263,60 +263,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = GetIfExists(fakeName, expand: expand, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
-        /// Operation Id: Fakes_Get
-        /// </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FakeResource>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<FakeResource>(null, response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
-        /// Operation Id: Fakes_Get
-        /// </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FakeResource> GetIfExists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<FakeResource>(null, response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -279,7 +279,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _subParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -306,66 +306,8 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = GetIfExists(subParentWithNonResChName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
-        /// </summary>
-        /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public virtual async Task<Response<SubParentWithNonResChResource>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
-
-            using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _subParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, subParentWithNonResChName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<SubParentWithNonResChResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
-        /// Operation Id: SubParentWithNonResChes_Get
-        /// </summary>
-        /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public virtual Response<SubParentWithNonResChResource> GetIfExists(string subParentWithNonResChName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
-
-            using var scope = _subParentWithNonResChClientDiagnostics.CreateScope("SubParentWithNonResChCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _subParentWithNonResChRestClient.Get(Id.SubscriptionId, subParentWithNonResChName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<SubParentWithNonResChResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SubParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
