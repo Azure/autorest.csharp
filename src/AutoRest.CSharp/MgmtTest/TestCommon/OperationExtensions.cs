@@ -65,7 +65,8 @@ namespace AutoRest.CSharp.MgmtTest.TestCommon
             clientOperation = null;
             restOperation = null;
             foreach (var ex in MgmtContext.Library.ExtensionWrapper.Extensions)
-                foreach (var co in ex.ClientOperations)
+                if (extensions != MgmtContext.Library.ArmClientExtensions)
+                    foreach (var co in ex.ClientOperations)
                 {
                     foreach (var ro in co)
                     {
