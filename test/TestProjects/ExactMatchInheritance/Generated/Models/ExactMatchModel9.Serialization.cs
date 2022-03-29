@@ -25,10 +25,10 @@ namespace ExactMatchInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(ExactMatchModel9Type))
+            if (Optional.IsDefined(Model9Type))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(ExactMatchModel9Type);
+                writer.WriteStringValue(Model9Type);
             }
             writer.WriteEndObject();
         }

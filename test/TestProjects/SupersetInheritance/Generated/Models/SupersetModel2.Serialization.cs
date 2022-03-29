@@ -25,10 +25,10 @@ namespace SupersetInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(SupersetModel2Type))
+            if (Optional.IsDefined(Model2Type))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(SupersetModel2Type);
+                writer.WriteStringValue(Model2Type);
             }
             if (Optional.IsDefined(New))
             {

@@ -17,14 +17,14 @@ namespace MgmtListMethods.Models
 
         /// <summary> Initializes a new instance of UpdateWorkspaceQuotas. </summary>
         /// <param name="id"> Specifies the resource ID. </param>
-        /// <param name="updateWorkspaceQuotasType"> Specifies the resource type. </param>
+        /// <param name="quotasType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
         /// <param name="unit"> An enum describing the unit of quota measurement. </param>
         /// <param name="status"> Status of update workspace quota. </param>
-        internal UpdateWorkspaceQuotas(string id, string updateWorkspaceQuotasType, long? limit, QuotaUnit? unit, Status? status)
+        internal UpdateWorkspaceQuotas(string id, string quotasType, long? limit, QuotaUnit? unit, Status? status)
         {
             Id = id;
-            UpdateWorkspaceQuotasType = updateWorkspaceQuotasType;
+            QuotasType = quotasType;
             Limit = limit;
             Unit = unit;
             Status = status;
@@ -33,7 +33,7 @@ namespace MgmtListMethods.Models
         /// <summary> Specifies the resource ID. </summary>
         public string Id { get; }
         /// <summary> Specifies the resource type. </summary>
-        public string UpdateWorkspaceQuotasType { get; }
+        public string QuotasType { get; }
         /// <summary> The maximum permitted quota of the resource. </summary>
         public long? Limit { get; }
         /// <summary> An enum describing the unit of quota measurement. </summary>

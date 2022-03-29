@@ -38,10 +38,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("publisher");
                 writer.WriteStringValue(Publisher);
             }
-            if (Optional.IsDefined(VirtualMachineExtensionUpdatePropertiesType))
+            if (Optional.IsDefined(PropertiesType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(VirtualMachineExtensionUpdatePropertiesType);
+                writer.WriteStringValue(PropertiesType);
             }
             if (Optional.IsDefined(TypeHandlerVersion))
             {

@@ -18,12 +18,12 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of IdentityWithNoUserIdentity. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
-        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
-        internal IdentityWithNoUserIdentity(string principalId, string tenantId, ResourceIdentityType? resourceIdentityType)
+        /// <param name="identityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
+        internal IdentityWithNoUserIdentity(string principalId, string tenantId, ResourceIdentityType? identityType)
         {
             PrincipalId = principalId;
             TenantId = tenantId;
-            ResourceIdentityType = resourceIdentityType;
+            IdentityType = identityType;
         }
 
         /// <summary> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </summary>
@@ -31,6 +31,6 @@ namespace MgmtPropertyChooser.Models
         /// <summary> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </summary>
         public string TenantId { get; }
         /// <summary> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </summary>
-        public ResourceIdentityType? ResourceIdentityType { get; set; }
+        public ResourceIdentityType? IdentityType { get; set; }
     }
 }

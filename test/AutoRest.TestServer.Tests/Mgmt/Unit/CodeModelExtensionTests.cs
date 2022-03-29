@@ -38,6 +38,29 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             ValidateRearrangeChoices(expected, input);
         }
 
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentityType", "IdentityType")]
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", "Identity7Type")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", "TokenType")]
+        [TestCase("JitApproverDefinition", "JitApproverType", "ApproverType")]
+        [TestCase("JitSchedulingPolicy", "JitSchedulingType", "SchedulingType")]
+        [TestCase("JitScheduling", "JitSchedulingType", "SchedulingType")]
+        [TestCase("JitSchedulingPolicy", "JitScheduling", "JitScheduling")]
+        [TestCase("JitSchedulingPolicy", "JitSchedulingPolicy", "SchedulingPolicy")]
+        [TestCase("JitSchedulingPolicy", "Scheduling7Policy", "Scheduling7Policy")]
+        [TestCase("Jit7SchedulingPolicy", "Jit7Scheduling", "Jit7Scheduling")]
+        [TestCase("JitSchedulingPolicy", "Jit", "Jit")]
+        [TestCase("JitSchedulingPolicy", "ManagedServiceIdentityType", "IdentityType")]
+        [TestCase("JitSchedulingPolicy", "JitApproverType", "ApproverType")]
+        [TestCase("JitSchedulingPolicy", "JitApprover7Type", "Approver7Type")]
+        [TestCase("ManagedServiceIdentity", "JitApproverType", "ApproverType")]
+        [TestCase("Identity", "JitApproverType", "ApproverType")]
+        [TestCase("Identity", "JitApprover7Type", "Approver7Type")]
+        public void ValidateGetTypePropertyName(string parentName, string propertyTypeName, string expected)
+        {
+            var typePropertyName = CodeModelExtension.GetTypePropertyName(parentName, propertyTypeName);
+            Assert.AreEqual(expected, typePropertyName);
+        }
+
         [TestCase]
         public void ValidateRearrangeChoicesWithMultipleMatches()
         {

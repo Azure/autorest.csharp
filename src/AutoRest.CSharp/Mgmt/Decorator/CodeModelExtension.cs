@@ -82,11 +82,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
                         {
-                            property.Language.Default.Name = property.Schema.Name;
+                            property.Language.Default.Name = GetTypePropertyName(objSchema.Name, property.Schema.Name);
                         }
                         else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
                         {
-                            property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
+                            property.Language.Default.Name = GetTypePropertyName(objSchema.Name, property.Schema.Name.TrimEnd('s'));
                         }
                         else
                         {
@@ -95,6 +95,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
             }
+        }
+
+        internal static string GetTypePropertyName(string parentName, string propertyTypeName)
+        {
+            var propertyWords = propertyTypeName.SplitByCamelCase().ToArray();
+            if (propertyWords.Length < 2)
+            {
+                return propertyTypeName;
+            }
+
+            var parentWords = parentName.SplitByCamelCase().ToArray();
+            var commonPrefixes = new List<string>();
+            for (int i = 0; i < parentWords.Length && i < propertyWords.Length; i++)
+            {
+                if (parentWords[i] == propertyWords[i])
+                {
+                    commonPrefixes.Add(parentWords[i]);
+                }
+                else
+                {
+                    break;
+                };
+            }
+
+            var newPropertyWords = propertyWords.TakeLast(propertyWords.Length - commonPrefixes.Count()).ToList();
+            if (newPropertyWords.Count > 2)
+            {
+                commonPrefixes.AddRange(newPropertyWords.Take(newPropertyWords.Count - 2));
+                newPropertyWords.RemoveRange(0, newPropertyWords.Count - 2);
+            }
+            while (newPropertyWords.Count < 2 || int.TryParse(newPropertyWords.First(), out _))
+            {
+                newPropertyWords.Insert(0, commonPrefixes.Last());
+                commonPrefixes.RemoveAt(commonPrefixes.Count - 1);
+            }
+
+            return String.Join("", newPropertyWords);
         }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)

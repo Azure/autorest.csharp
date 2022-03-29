@@ -15,10 +15,10 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ResourceIdentityType))
+            if (Optional.IsDefined(IdentityType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
+                writer.WriteStringValue(IdentityType.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }
