@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -16,6 +18,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
         public ExactMatchModel1Data()
         {
+            SupportingUris = new ChangeTrackingList<Uri>();
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
@@ -24,12 +27,16 @@ namespace ExactMatchInheritance
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
+        /// <param name="supportingUris"></param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris) : base(id, name, resourceType, systemData)
         {
             New = @new;
+            SupportingUris = supportingUris;
         }
 
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
+        /// <summary> Gets the supporting uris. </summary>
+        public IList<Uri> SupportingUris { get; }
     }
 }

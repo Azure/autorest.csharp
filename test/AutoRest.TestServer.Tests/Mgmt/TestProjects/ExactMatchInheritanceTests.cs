@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Azure.Core;
@@ -54,6 +55,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ExactMatchModel7Type", "ExactMatchModel7", typeof(string))]
         [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
         [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
+        [TestCase("SupportingUris", "ExactMatchModel1Data", typeof(IList<Uri>))]
         public void ValidatePropertyType(string propertyName, string className, Type expectedType)
         {
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
