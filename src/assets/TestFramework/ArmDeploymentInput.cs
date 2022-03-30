@@ -9,15 +9,15 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Resources.Models
+namespace Azure.ResourceManager.Resources.Models
 {
-    /// <summary> Deployment operation parameters. </summary>
-    public partial class DeploymentInput
+    /// <summary> ArmDeployment operation parameters. </summary>
+    public partial class ArmDeploymentInput
     {
-        /// <summary> Initializes a new instance of DeploymentInput. </summary>
-        /// <param name="properties"> The deployment properties. </param>
+        /// <summary> Initializes a new instance of ArmDeploymentInput. </summary>
+        /// <param name="properties"> The ArmDeployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public DeploymentInput(DeploymentProperties properties)
+        public ArmDeploymentInput(ArmDeploymentProperties properties)
         {
             if (properties == null)
             {
@@ -28,11 +28,11 @@ namespace Resources.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> The location to store the deployment data. </summary>
+        /// <summary> The location to store the ArmDeployment data. </summary>
         public string Location { get; set; }
-        /// <summary> The deployment properties. </summary>
-        public DeploymentProperties Properties { get; }
-        /// <summary> Deployment tags. </summary>
+        /// <summary> The ArmDeployment properties. </summary>
+        public ArmDeploymentProperties Properties { get; }
+        /// <summary> ArmDeployment tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }
 }

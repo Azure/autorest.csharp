@@ -10,22 +10,19 @@ namespace AutoRest.CSharp.MgmtTest.TestCommon
     {
         public static string GetVariableDefaultValue(this OavVariableScope ovs, string variableKey, string defaultValue = "default")
         {
-            if (ovs.Variables is not null)
+            if (ovs.Variables.ContainsKey(variableKey))
             {
-                if (ovs.Variables.ContainsKey(variableKey))
+                var rawValue = new JsonRawValue(ovs.Variables[variableKey]);
+                if (rawValue.IsString())
                 {
-                    var rawValue = new JsonRawValue(ovs.Variables[variableKey]);
-                    if (rawValue.IsString())
+                    return rawValue.AsString()!;
+                }
+                else if (rawValue.IsDictionary())
+                {
+                    var dict = rawValue.AsDictionary();
+                    if (dict.ContainsKey("defaultValue"))
                     {
-                        return rawValue.AsString()!;
-                    }
-                    else if (rawValue.IsDictionary())
-                    {
-                        var dict = rawValue.AsDictionary();
-                        if (dict.ContainsKey("defaultValue"))
-                        {
-                            return dict["defaultValue"]?.ToString() ?? defaultValue;
-                        }
+                        return dict["defaultValue"]?.ToString() ?? defaultValue;
                     }
                 }
             }
