@@ -11,39 +11,39 @@ namespace AutoRest.TestServer.Tests.MgmtTest
 {
     public class StringExtensionsTests
     {
-        [Test]
-        public void TestRefScenarioDefinedVariablesToString()
+        [TestCase("", "")]
+        [TestCase("{'abc': '$(variable1)'}", "{{'abc': '{variable1}'}}")]
+        [TestCase("..$(variable1).$(variable2).$(variable3).$variable2).${variable2}", "..{variable1}.{variable2}.$(variable3).$variable2).${{variable2}}")]
+        public void TestRefScenarioDefinedVariablesToString(string input, string expected)
         {
             var scenarioDefinedVariables = new List<string> {
                 "variable1",
                 "variable2",
             };
-            Assert.AreEqual("".RefScenarioDefinedVariablesToString(scenarioDefinedVariables), "");
-            Assert.AreEqual("{'abc': '$(variable1)'}".RefScenarioDefinedVariablesToString(scenarioDefinedVariables), "{{'abc': '{variable1}'}}");
-            Assert.AreEqual("..$(variable1).$(variable2).$(variable3).$variable2).${variable2}".RefScenarioDefinedVariablesToString(scenarioDefinedVariables), "..{variable1}.{variable2}.$(variable3).$variable2).${{variable2}}");
-            Assert.AreEqual("..$(variable1).$(variable2).$(variable3).$variable2).${variable2}".RefScenarioDefinedVariablesToString(Enumerable.Empty<string>()), "..$(variable1).$(variable2).$(variable3).$variable2).${{variable2}}");
+            Assert.AreEqual(input.RefScenarioDefinedVariablesToString(scenarioDefinedVariables), expected);
         }
 
-        [Test]
-        public void TestRefScenarioDefinedVariables()
+        [TestCase("", "")]
+        [TestCase("{'abc': '$(variable1)'}", "${{'abc': '{variable1}'}}")]
+        [TestCase("{'abc': '$(variable3)'}", "{'abc': '$(variable3)'}")]
+        public void TestRefScenarioDefinedVariables(string input, string expected)
         {
             var scenarioDefinedVariables = new List<string> {
                 "variable1",
                 "variable2",
             };
-            Assert.AreEqual("".RefScenarioDefinedVariables(scenarioDefinedVariables).ToString(), "");
-            Assert.AreEqual("{'abc': '$(variable1)'}".RefScenarioDefinedVariables(scenarioDefinedVariables).ToString(), "${{'abc': '{variable1}'}}");
-            Assert.AreEqual("{'abc': '$(variable3)'}".RefScenarioDefinedVariables(scenarioDefinedVariables).ToString(), "{'abc': '$(variable3)'}");
-            Assert.AreEqual("{'abc': '$(variable3)'}".RefScenarioDefinedVariables(null).ToString(), "{'abc': '$(variable3)'}");
+            Assert.AreEqual(input.RefScenarioDefinedVariables(scenarioDefinedVariables).ToString(), expected);
+            Assert.AreEqual(input.RefScenarioDefinedVariables(null).ToString(), input);
         }
 
-        [Test]
-        public void TestToSnakeCase()
+        [TestCase("", "")]
+        [TestCase("I", "i")]
+        [TestCase("IAmHere", "i_am_here")]
+        [TestCase("iAmHere", "i_am_here")]
+        public void TestToSnakeCase(string input, string expected)
         {
-            Assert.AreEqual("".ToSnakeCase(), "");
-            Assert.AreEqual("I".ToSnakeCase(), "i");
-            Assert.AreEqual("IAmHere".ToSnakeCase(), "i_am_here");
-            Assert.AreEqual("iAmHere".ToSnakeCase(), "i_am_here");
+            Assert.AreEqual(input.ToSnakeCase(), expected);
+
         }
     }
 }

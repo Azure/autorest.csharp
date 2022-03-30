@@ -219,8 +219,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     constructor = c;
             }
 
-            // There is customized information not loaded in codegen for "Azure.ResourceManager.Resources.Models", use the simplest constructor
-            if (sot.Type.Namespace == "Azure.ResourceManager.Resources.Models")
+            // There is customized information not loaded in codegen for "Azure.ResourceManager" as SystemObjectType, use the simplest constructor
+            if (sot is SystemObjectType)
             {
                 return constructor;
             }

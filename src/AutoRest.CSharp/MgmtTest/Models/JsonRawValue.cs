@@ -39,11 +39,10 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 return false;
             return RawValue is string;
         }
-        public string? AsString()
+        public string AsString()
         {
-            return RawValue?.ToString();
+            return RawValue!.ToString()!;
         }
-
         public bool IsDictionary()
         {
             if (RawValue == null)
