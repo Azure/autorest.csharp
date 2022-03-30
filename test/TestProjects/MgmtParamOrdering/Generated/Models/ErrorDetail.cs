@@ -8,25 +8,25 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace MgmtSubscriptionNameParameter.Models
+namespace MgmtParamOrdering.Models
 {
-    /// <summary> The error object. </summary>
-    internal partial class ErrorResponseError
+    /// <summary> The error detail. </summary>
+    internal partial class ErrorDetail
     {
-        /// <summary> Initializes a new instance of ErrorResponseError. </summary>
-        internal ErrorResponseError()
+        /// <summary> Initializes a new instance of ErrorDetail. </summary>
+        internal ErrorDetail()
         {
-            Details = new ChangeTrackingList<ErrorResponse>();
+            Details = new ChangeTrackingList<ErrorDetail>();
             AdditionalInfo = new ChangeTrackingList<ErrorAdditionalInfo>();
         }
 
-        /// <summary> Initializes a new instance of ErrorResponseError. </summary>
+        /// <summary> Initializes a new instance of ErrorDetail. </summary>
         /// <param name="code"> The error code. </param>
         /// <param name="message"> The error message. </param>
         /// <param name="target"> The error target. </param>
         /// <param name="details"> The error details. </param>
         /// <param name="additionalInfo"> The error additional info. </param>
-        internal ErrorResponseError(string code, string message, string target, IReadOnlyList<ErrorResponse> details, IReadOnlyList<ErrorAdditionalInfo> additionalInfo)
+        internal ErrorDetail(string code, string message, string target, IReadOnlyList<ErrorDetail> details, IReadOnlyList<ErrorAdditionalInfo> additionalInfo)
         {
             Code = code;
             Message = message;
@@ -42,7 +42,7 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <summary> The error target. </summary>
         public string Target { get; }
         /// <summary> The error details. </summary>
-        public IReadOnlyList<ErrorResponse> Details { get; }
+        public IReadOnlyList<ErrorDetail> Details { get; }
         /// <summary> The error additional info. </summary>
         public IReadOnlyList<ErrorAdditionalInfo> AdditionalInfo { get; }
     }

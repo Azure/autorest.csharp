@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtSubscriptionNameParameter.Models
+namespace MgmtPropertyChooser.Models
 {
-    internal partial class ErrorResponseError
+    internal partial class ErrorResponse
     {
-        internal static ErrorResponseError DeserializeErrorResponseError(JsonElement element)
+        internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
             Optional<string> code = default;
             Optional<string> message = default;
@@ -47,7 +47,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     List<ErrorResponse> array = new List<ErrorResponse>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        array.Add(DeserializeErrorResponse(item));
                     }
                     details = array;
                     continue;
@@ -68,7 +68,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     continue;
                 }
             }
-            return new ErrorResponseError(code.Value, message.Value, target.Value, Optional.ToList(details), Optional.ToList(additionalInfo));
+            return new ErrorResponse(code.Value, message.Value, target.Value, Optional.ToList(details), Optional.ToList(additionalInfo));
         }
     }
 }

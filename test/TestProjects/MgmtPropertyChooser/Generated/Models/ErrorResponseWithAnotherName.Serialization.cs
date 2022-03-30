@@ -9,16 +9,16 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtSubscriptionNameParameter.Models
+namespace MgmtPropertyChooser.Models
 {
-    internal partial class ErrorResponseError
+    internal partial class ErrorResponseWithAnotherName
     {
-        internal static ErrorResponseError DeserializeErrorResponseError(JsonElement element)
+        internal static ErrorResponseWithAnotherName DeserializeErrorResponseWithAnotherName(JsonElement element)
         {
             Optional<string> code = default;
             Optional<string> message = default;
             Optional<string> target = default;
-            Optional<IReadOnlyList<ErrorResponse>> details = default;
+            Optional<IReadOnlyList<ErrorResponseWithAnotherName>> details = default;
             Optional<IReadOnlyList<ErrorAdditionalInfo>> additionalInfo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -44,10 +44,10 @@ namespace MgmtSubscriptionNameParameter.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ErrorResponse> array = new List<ErrorResponse>();
+                    List<ErrorResponseWithAnotherName> array = new List<ErrorResponseWithAnotherName>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ErrorResponse.DeserializeErrorResponse(item));
+                        array.Add(DeserializeErrorResponseWithAnotherName(item));
                     }
                     details = array;
                     continue;
@@ -68,7 +68,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     continue;
                 }
             }
-            return new ErrorResponseError(code.Value, message.Value, target.Value, Optional.ToList(details), Optional.ToList(additionalInfo));
+            return new ErrorResponseWithAnotherName(code.Value, message.Value, target.Value, Optional.ToList(details), Optional.ToList(additionalInfo));
         }
     }
 }
