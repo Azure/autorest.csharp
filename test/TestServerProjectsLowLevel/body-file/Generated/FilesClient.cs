@@ -34,13 +34,19 @@ namespace body_file_LowLevel
 
         /// <summary> Initializes a new instance of FilesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public FilesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new FilesClientOptions())
+        {
+        }
+        /// <summary> Initializes a new instance of FilesClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public FilesClient(AzureKeyCredential credential, Uri endpoint = null, FilesClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public FilesClient(AzureKeyCredential credential, Uri endpoint, FilesClientOptions options = null)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new FilesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);

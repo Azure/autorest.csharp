@@ -99,9 +99,24 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        private static bool IsEmptyConstructorExisted(LowLevelClient client)
+        {
+            foreach (var constructor in client.PublicConstructors)
+            {
+                if (constructor.Parameters.Count() == 0)
+                    return true;
+            }
+
+            return false;
+        }
+
         private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
-            WriteEmptyConstructor(writer, client);
+            if (!IsEmptyConstructorExisted(client))
+            {
+                WriteEmptyConstructor(writer, client);
+            }
+
             foreach (var constructor in client.PublicConstructors)
             {
                 WritePublicConstructor(writer, client, constructor);
@@ -127,6 +142,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
+                if (signature is ConstructorSignature { Initializer: { } } constructor)
+                {
+                    return;
+                }
                 writer.WriteParametersValidation(signature.Parameters);
                 writer.Line();
 

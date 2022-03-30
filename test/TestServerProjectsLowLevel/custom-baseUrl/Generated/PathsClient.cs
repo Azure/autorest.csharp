@@ -34,10 +34,16 @@ namespace custom_baseUrl_LowLevel
 
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PathsClient(AzureKeyCredential credential) : this(credential, "host", new PathsClientOptions())
+        {
+        }
+        /// <summary> Initializes a new instance of PathsClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, string host = "host", PathsClientOptions options = null)
+        public PathsClient(AzureKeyCredential credential, string host, PathsClientOptions options = null)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(host, nameof(host));

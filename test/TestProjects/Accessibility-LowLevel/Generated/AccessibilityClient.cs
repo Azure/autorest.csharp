@@ -34,13 +34,19 @@ namespace Accessibility_LowLevel
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public AccessibilityClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AccessibilityClientOptions())
+        {
+        }
+        /// <summary> Initializes a new instance of AccessibilityClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public AccessibilityClient(AzureKeyCredential credential, Uri endpoint = null, AccessibilityClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public AccessibilityClient(AzureKeyCredential credential, Uri endpoint, AccessibilityClientOptions options = null)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);

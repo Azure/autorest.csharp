@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Operation = AutoRest.CSharp.Input.Operation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -121,6 +122,12 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private Parameter CreateOptionsParameter(bool isRequired)
+        {
+            var clientOptionsType = ClientOptions.Type.WithNullable(true);
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, isRequired ? null : Constant.NewInstanceOf(clientOptionsType), false);
+        }
+
         private IEnumerable<ConstructorSignature> BuildPublicConstructors()
         {
             if (!_hasPublicConstructors)
@@ -128,26 +135,83 @@ namespace AutoRest.CSharp.Output.Models
                 yield break;
             }
 
-            var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
-
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return BuildPublicConstructor(null, clientOptionsParameter);
+                foreach (var constructor in BuildPublicConstructor(null))
+                {
+                    yield return constructor;
+                }
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return BuildPublicConstructor(credentialField, clientOptionsParameter);
+                    foreach (var constructor in BuildPublicConstructor(credentialField))
+                    {
+                        yield return constructor;
+                    }
                 }
             }
         }
 
-        private ConstructorSignature BuildPublicConstructor(FieldDeclaration? credentialField, Parameter clientOptionsParameter)
+        private ConstructorInitializer BuildConstructorInitializer(Parameter[] constructorParameters)
         {
-            var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, constructorParameters);
+            var initializer = constructorParameters.Select(parameter =>
+            {
+                if (parameter.DefaultValue == null)
+                {
+                    return FormattableStringFactory.Create("{0:I}", parameter.Name);
+                }
+
+                var defaultValue = parameter.DefaultValue.Value;
+                if (defaultValue.IsNewInstanceSentinel)
+                {
+                    return FormattableStringFactory.Create("new {0:I}()", defaultValue.Type);
+                }
+                if (parameter.Type.Equals(typeof(Uri)))
+                {
+                    return FormattableStringFactory.Create("new {0:I}({1:L})", typeof(Uri), defaultValue.Value);
+                }
+                return FormattableStringFactory.Create("{0:L}", defaultValue.Value);
+            }).ToArray();
+
+            return new ConstructorInitializer(false, initializer);
+        }
+
+        private IEnumerable<ConstructorSignature> BuildPublicConstructor(FieldDeclaration? credentialField)
+        {
+            var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(CreateOptionsParameter(false)).ToArray();
+
+            var requiredParameters = constructorParameters.Where(parameter => parameter.DefaultValue == null).ToArray();
+            var minimalConstructorSignature = new ConstructorSignature(
+                Declaration.Name,
+                $"Initializes a new instance of {Declaration.Name}",
+                Public,
+                requiredParameters,
+                BuildConstructorInitializer(constructorParameters));
+            yield return minimalConstructorSignature;
+
+            var optionalParameters = constructorParameters.Where(parameter => parameter.DefaultValue != null).ToArray();
+            if (optionalParameters.Length == 1)
+            {
+                var optionsRequiredConstructorSignature = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, constructorParameters.SkipLast(1).Append(CreateOptionsParameter(true)).ToArray());
+                yield return optionsRequiredConstructorSignature;
+            }
+            else
+            {
+                var optionsOptionalParameters = requiredParameters.ToList();
+                foreach (var parameter in optionalParameters)
+                {
+                    if (parameter.Name != "options")
+                    {
+                        optionsOptionalParameters.Add(new Parameter(parameter.Name, parameter.Description, parameter.Type, null, parameter.Validate, parameter.IsApiVersionParameter, parameter.IsResourceIdentifier, parameter.SkipUrlEncoding, parameter.RequestLocation, parameter.UseDefaultValueInCtorParam));
+                    }
+                }
+                optionsOptionalParameters.Add(CreateOptionsParameter(false));
+
+                var optionsOptionalConstructorSignature = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, optionsOptionalParameters);
+                yield return optionsOptionalConstructorSignature;
+            }
         }
 
         public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
@@ -178,14 +242,14 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = GetSubClientFactoryMethodParameters(this)
-                .Select(p => p with {DefaultValue = null, Validate = false})
+                .Select(p => p with { DefaultValue = null, Validate = false })
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Internal, constructorParameters);
         }
 
         private static IEnumerable<Parameter> GetSubClientFactoryMethodParameters(LowLevelClient subClient)
-            => new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
+            => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(subClient.Parameters, null, includeAPIVersion: true))
                 .Where(p => subClient.Fields.GetFieldByParameter(p) != null);
     }

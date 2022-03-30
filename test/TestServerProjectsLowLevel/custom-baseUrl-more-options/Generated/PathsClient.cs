@@ -36,11 +36,19 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public PathsClient(string subscriptionId, AzureKeyCredential credential) : this(subscriptionId, credential, "host", new PathsClientOptions())
+        {
+        }
+        /// <summary> Initializes a new instance of PathsClient. </summary>
+        /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/> or <paramref name="dnsSuffix"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix, PathsClientOptions options = null)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(credential, nameof(credential));
