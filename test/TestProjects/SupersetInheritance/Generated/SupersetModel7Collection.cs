@@ -243,7 +243,7 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(supersetModel7SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -270,66 +270,8 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
-                var response = GetIfExists(supersetModel7SName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
-        /// Operation Id: SupersetModel7s_Get
-        /// </summary>
-        /// <param name="supersetModel7SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
-        public virtual async Task<Response<SupersetModel7Resource>> GetIfExistsAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
-
-            using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Collection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<SupersetModel7Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7sName}
-        /// Operation Id: SupersetModel7s_Get
-        /// </summary>
-        /// <param name="supersetModel7SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
-        public virtual Response<SupersetModel7Resource> GetIfExists(string supersetModel7SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
-
-            using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7Collection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<SupersetModel7Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new SupersetModel7Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

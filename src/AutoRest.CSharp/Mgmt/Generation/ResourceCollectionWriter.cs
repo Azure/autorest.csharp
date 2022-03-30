@@ -58,21 +58,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(clientOperation.OperationMappings.Values.First())))
             {
-                _writer.Append($"var response = {GetAwait(async)} {CreateMethodName("GetIfExists", async)}(");
-                foreach (var parameter in clientOperation.MethodParameters)
-                {
-                    if (parameter.IsRequired)
-                    {
-                        _writer.AppendRaw(parameter.Name);
-                    }
-                    else
-                    {
-                        _writer.AppendRaw($"{parameter.Name}: {parameter.Name}");
-                    }
-                    _writer.AppendRaw(", ");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.Line($"){GetConfigureAwait(async)};");
+                var operation = clientOperation.OperationMappings.Values.First();
+                var response = new CodeWriterDeclaration("response");
+                _writer
+                    .Append($"var {response:D} = {GetAwait(async)} ")
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
+                _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }
         }
