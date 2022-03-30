@@ -5,30 +5,37 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtParamOrdering.Models
 {
-    internal partial class ErrorResponse
+    internal partial class ErrorAdditionalInfo
     {
-        internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
+        internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element)
         {
-            Optional<ErrorDetail> error = default;
+            Optional<string> type = default;
+            Optional<BinaryData> info = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("error"))
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("info"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorDetail.DeserializeErrorDetail(property.Value);
+                    info = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
             }
-            return new ErrorResponse(error.Value);
+            return new ErrorAdditionalInfo(type.Value, info.Value);
         }
     }
 }
