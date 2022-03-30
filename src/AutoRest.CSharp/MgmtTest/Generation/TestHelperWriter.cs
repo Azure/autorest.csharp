@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteReplaceWith()
         {
-            using (_writer.Scope($"public static {typeof(IDictionary<string, string>)} ReplaceWith(this IDictionary<string, string> dest, IDictionary<string, string> src)"))
+            using (_writer.Scope($"public static {typeof(IDictionary<string, string>)} ReplaceWith(this {typeof(IDictionary<string, string>)} dest, {typeof(IDictionary<string, string>)} src)"))
             {
                 _writer.Line($"dest.Clear();");
                 using (_writer.Scope($"foreach (var kv in src)"))
