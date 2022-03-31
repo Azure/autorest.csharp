@@ -57,7 +57,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("Identity", "JitApprover7Type", "Approver7Type")]
         public void ValidateGetTypePropertyName(string parentName, string propertyTypeName, string expected)
         {
-            var typePropertyName = CodeModelExtension.GetTypePropertyName(parentName, propertyTypeName);
+            var typePropertyName = CodeModelExtension.GetEnclosingTypeName(parentName, propertyTypeName);
             Assert.AreEqual(expected, typePropertyName);
         }
 

@@ -82,11 +82,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
                         {
-                            property.Language.Default.Name = GetTypePropertyName(objSchema.Name, property.Schema.Name);
+                            property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name);
                         }
                         else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
                         {
-                            property.Language.Default.Name = GetTypePropertyName(objSchema.Name, property.Schema.Name.TrimEnd('s'));
+                            property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name.TrimEnd('s'));
                         }
                         else
                         {
@@ -97,9 +97,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        internal static string GetTypePropertyName(string parentName, string propertyTypeName)
+        internal static string GetEnclosingTypeName(string parentName, string propertyTypeName)
         {
             var propertyWords = propertyTypeName.SplitByCamelCase().ToArray();
+            // we keep at most 2 words
             if (propertyWords.Length < 2)
             {
                 return propertyTypeName;
@@ -125,6 +126,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 commonPrefixes.AddRange(newPropertyWords.Take(newPropertyWords.Count - 2));
                 newPropertyWords.RemoveRange(0, newPropertyWords.Count - 2);
             }
+
+            // A property namne cannot start with number, so we need to shift another word from prefixes to new property.
+            // The worst case is that new property is the original property. The loop should end eventually.
             while (newPropertyWords.Count < 2 || int.TryParse(newPropertyWords.First(), out _))
             {
                 newPropertyWords.Insert(0, commonPrefixes.Last());
