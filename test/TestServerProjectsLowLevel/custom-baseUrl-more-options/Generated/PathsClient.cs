@@ -41,6 +41,7 @@ namespace custom_baseUrl_more_options_LowLevel
         public PathsClient(string subscriptionId, AzureKeyCredential credential) : this(subscriptionId, credential, "host", new PathsClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>

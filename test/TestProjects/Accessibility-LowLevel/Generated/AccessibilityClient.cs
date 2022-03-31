@@ -38,6 +38,7 @@ namespace Accessibility_LowLevel
         public AccessibilityClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AccessibilityClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

@@ -41,6 +41,7 @@ namespace ResourceClients_LowLevel
         public ResourceServiceClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ResourceServiceClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of ResourceServiceClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

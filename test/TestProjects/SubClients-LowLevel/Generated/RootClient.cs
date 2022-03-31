@@ -42,6 +42,7 @@ namespace SubClients_LowLevel
         public RootClient(string cachedParameter, AzureKeyCredential credential) : this(cachedParameter, credential, new Uri("http://localhost:3000"), new RootClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of RootClient. </summary>
         /// <param name="cachedParameter"> The String to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>

@@ -38,6 +38,7 @@ namespace media_types_LowLevel
         public MediaTypesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new MediaTypesClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of MediaTypesClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

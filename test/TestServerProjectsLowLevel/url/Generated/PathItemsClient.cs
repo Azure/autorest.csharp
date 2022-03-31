@@ -42,6 +42,7 @@ namespace url_LowLevel
         public PathItemsClient(string globalStringPath, AzureKeyCredential credential) : this(globalStringPath, credential, new Uri("http://localhost:3000"), null, new AutoRestUrlTestServiceClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
         /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>

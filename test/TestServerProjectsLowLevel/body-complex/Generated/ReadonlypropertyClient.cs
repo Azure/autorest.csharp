@@ -38,6 +38,7 @@ namespace body_complex_LowLevel
         public ReadonlypropertyClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestComplexTestServiceClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of ReadonlypropertyClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

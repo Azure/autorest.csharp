@@ -38,6 +38,7 @@ namespace lro_LowLevel
         public LROsClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestLongRunningOperationTestServiceClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of LROsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

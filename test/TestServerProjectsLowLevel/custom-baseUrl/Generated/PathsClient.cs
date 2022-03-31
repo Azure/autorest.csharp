@@ -38,6 +38,7 @@ namespace custom_baseUrl_LowLevel
         public PathsClient(AzureKeyCredential credential) : this(credential, "host", new PathsClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>

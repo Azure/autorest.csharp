@@ -38,6 +38,7 @@ namespace body_string_LowLevel
         public EnumClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestSwaggerBATServiceClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of EnumClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

@@ -38,6 +38,7 @@ namespace dpg_initial_LowLevel
         public ParamsClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new ParamsClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of ParamsClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

@@ -42,6 +42,7 @@ namespace Azure.AI.DocumentTranslation
         public DocumentTranslationClient(string endpoint, AzureKeyCredential credential) : this(endpoint, credential, new DocumentTranslationClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of DocumentTranslationClient. </summary>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>

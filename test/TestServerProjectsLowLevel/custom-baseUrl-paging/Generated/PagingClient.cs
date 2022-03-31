@@ -40,6 +40,7 @@ namespace custom_baseUrl_paging_LowLevel
         public PagingClient(AzureKeyCredential credential) : this(credential, "host", new PagingClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>

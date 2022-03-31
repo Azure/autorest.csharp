@@ -29,6 +29,7 @@ namespace Accessibility_LowLevel_NoAuth
         public AccessibilityClient() : this(new Uri("http://localhost:3000"), new AccessibilityClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>

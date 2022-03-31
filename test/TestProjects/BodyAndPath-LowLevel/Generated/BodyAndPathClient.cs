@@ -39,6 +39,7 @@ namespace BodyAndPath_LowLevel
         public BodyAndPathClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new BodyAndPathClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of BodyAndPathClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

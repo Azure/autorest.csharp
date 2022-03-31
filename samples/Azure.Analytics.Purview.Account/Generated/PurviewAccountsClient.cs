@@ -43,6 +43,7 @@ namespace Azure.Analytics.Purview.Account
         public PurviewAccountsClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new PurviewAccountsClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of PurviewAccountsClient. </summary>
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>

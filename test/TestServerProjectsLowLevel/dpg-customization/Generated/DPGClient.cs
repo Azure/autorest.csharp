@@ -41,6 +41,7 @@ namespace dpg_customization_LowLevel
         public DPGClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new DPGClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of DPGClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

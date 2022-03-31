@@ -38,6 +38,7 @@ namespace CollapseRequestCondition_LowLevel
         public NonCollapseClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new CollapseRequestConditionsClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of NonCollapseClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>

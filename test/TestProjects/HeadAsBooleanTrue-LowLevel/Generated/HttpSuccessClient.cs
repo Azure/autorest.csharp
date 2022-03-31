@@ -38,6 +38,7 @@ namespace HeadAsBooleanTrue_LowLevel
         public HttpSuccessClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new HttpSuccessClientOptions())
         {
         }
+
         /// <summary> Initializes a new instance of HttpSuccessClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
