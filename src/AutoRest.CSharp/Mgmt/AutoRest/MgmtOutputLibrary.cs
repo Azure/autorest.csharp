@@ -159,7 +159,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var request in operation.Requests)
                     {
-                        if (request.Protocol.Http is not HttpRequest { Method: HttpMethod.Patch })
+                        if (request.Protocol.Http is not HttpRequest httpRequest)
+                            continue;
+
+                        if (httpRequest.Method != HttpMethod.Patch && httpRequest.Method != HttpMethod.Put)
                             continue;
 
                         var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
@@ -184,8 +187,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            bodyParam.Schema.Language.Default.Name = $"Patchable{name}Data";
-                            bodyParam.Language.Default.Name = "data";
+                            BodyParameterNormalizer.Update(httpRequest.Method, bodyParam, name);
                         }
                     }
                 }

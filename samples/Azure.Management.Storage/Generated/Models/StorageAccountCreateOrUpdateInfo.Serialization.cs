@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class StorageAccountCreateParameters : IUtf8JsonSerializable
+    public partial class StorageAccountCreateOrUpdateInfo : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
