@@ -38,26 +38,35 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             ValidateRearrangeChoices(expected, input);
         }
 
-        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentityType", "IdentityType")]
-        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", "Identity7Type")]
-        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", "TokenType")]
-        [TestCase("JitApproverDefinition", "JitApproverType", "ApproverType")]
-        [TestCase("JitSchedulingPolicy", "JitSchedulingType", "SchedulingType")]
-        [TestCase("JitScheduling", "JitSchedulingType", "SchedulingType")]
-        [TestCase("JitSchedulingPolicy", "JitScheduling", "JitScheduling")]
-        [TestCase("JitSchedulingPolicy", "JitSchedulingPolicy", "SchedulingPolicy")]
-        [TestCase("JitSchedulingPolicy", "Scheduling7Policy", "Scheduling7Policy")]
-        [TestCase("Jit7SchedulingPolicy", "Jit7Scheduling", "Jit7Scheduling")]
-        [TestCase("JitSchedulingPolicy", "Jit", "Jit")]
-        [TestCase("JitSchedulingPolicy", "ManagedServiceIdentityType", "IdentityType")]
-        [TestCase("JitSchedulingPolicy", "JitApproverType", "ApproverType")]
-        [TestCase("JitSchedulingPolicy", "JitApprover7Type", "Approver7Type")]
-        [TestCase("ManagedServiceIdentity", "JitApproverType", "ApproverType")]
-        [TestCase("Identity", "JitApproverType", "ApproverType")]
-        [TestCase("Identity", "JitApprover7Type", "Approver7Type")]
-        public void ValidateGetTypePropertyName(string parentName, string propertyTypeName, string expected)
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "ServiceIdentityType")]
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", AllSchemaTypes.Boolean, "Identity7Type")]
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", AllSchemaTypes.String, "ManagedServiceIdentity7Type")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", AllSchemaTypes.Boolean, "PathTokenType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", AllSchemaTypes.String, "ResourceTypeAliasPathTokenType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceType", AllSchemaTypes.Boolean, "ResourceType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceType", AllSchemaTypes.String, "ResourceType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPath", AllSchemaTypes.Boolean, "TypeAliasPath")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPath", AllSchemaTypes.String, "ResourceTypeAliasPath")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ManagedServiceIdentity7Type", AllSchemaTypes.Boolean, "ManagedServiceIdentity7Type")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "ManagedServiceIdentityType")]
+        [TestCase("JitScheduling", "JitSchedulingType", AllSchemaTypes.Boolean, "JitSchedulingType")]
+        [TestCase("JitScheduling", "JitSchedulingType", AllSchemaTypes.String, "JitSchedulingType")]
+        [TestCase("JitSchedulingPolicyMaker", "JitSchedulingPolicyMakerType", AllSchemaTypes.Boolean, "PolicyMakerType")]
+        [TestCase("JitSchedulingPolicyMaker", "JitSchedulingPolicyMakerType", AllSchemaTypes.String, "JitSchedulingPolicyMakerType")]
+        [TestCase("JitScheduling", "JitSchedulingType", AllSchemaTypes.String, "JitSchedulingType")]
+        [TestCase("JitSchedulingPolicy", "JitScheduling", AllSchemaTypes.Boolean, "JitScheduling")]
+        [TestCase("JitSchedulingPolicy", "JitScheduling", AllSchemaTypes.String, "JitScheduling")]
+        [TestCase("JitScheduling7AlertPolicy", "Scheduling7AlertPolicy", AllSchemaTypes.Boolean, "Scheduling7AlertPolicy")]
+        [TestCase("JitScheduling7AlertPolicy", "Scheduling7AlertPolicy", AllSchemaTypes.String, "Scheduling7AlertPolicy")]
+        [TestCase("Jit7SchedulingPolicy", "Jit7Scheduling", AllSchemaTypes.Boolean, "Jit7Scheduling")]
+        [TestCase("Jit7SchedulingPolicy", "Jit7Scheduling", AllSchemaTypes.String, "Jit7Scheduling")]
+        [TestCase("JitSchedulingPolicy", "Jit", AllSchemaTypes.Boolean, "Jit")]
+        [TestCase("JitSchedulingPolicy", "Jit", AllSchemaTypes.String, "Jit")]
+        [TestCase("JitSchedulingPolicy", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "ManagedServiceIdentityType")]
+        [TestCase("JitSchedulingPolicy", "ManagedServiceIdentityType", AllSchemaTypes.String, "ManagedServiceIdentityType")]
+        public void ValidateGetTypePropertyName(string parentName, string propertyTypeName, AllSchemaTypes type, string expected)
         {
-            var typePropertyName = CodeModelExtension.GetEnclosingTypeName(parentName, propertyTypeName);
+            var typePropertyName = CodeModelExtension.GetEnclosingTypeName(parentName, propertyTypeName, type);
             Assert.AreEqual(expected, typePropertyName);
         }
 

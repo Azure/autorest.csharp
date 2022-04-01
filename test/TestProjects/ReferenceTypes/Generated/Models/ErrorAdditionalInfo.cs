@@ -21,17 +21,17 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> Initializes a new instance of ErrorAdditionalInfo. </summary>
-        /// <param name="infoType"> The additional info type. </param>
+        /// <param name="errorAdditionalInfoType"> The additional info type. </param>
         /// <param name="info"> The additional info. </param>
         [SerializationConstructor]
-        internal ErrorAdditionalInfo(string infoType, BinaryData info)
+        internal ErrorAdditionalInfo(string errorAdditionalInfoType, BinaryData info)
         {
-            InfoType = infoType;
+            ErrorAdditionalInfoType = errorAdditionalInfoType;
             Info = info;
         }
 
         /// <summary> The additional info type. </summary>
-        public string InfoType { get; }
+        public string ErrorAdditionalInfoType { get; }
         /// <summary> The additional info. </summary>
         public BinaryData Info { get; }
     }

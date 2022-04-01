@@ -20,10 +20,10 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(PropertiesType))
+            if (Optional.IsDefined(QuotaBasePropertiesType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(PropertiesType);
+                writer.WriteStringValue(QuotaBasePropertiesType);
             }
             if (Optional.IsDefined(Limit))
             {
