@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -46,11 +48,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IList<Type> GetExternalTypes()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly == null)
-            {
-                return new List<Type>();
-            }
-            return assembly.GetTypes().ToList();
+            List<Type> types = new List<Type>();
+            if (assembly != null)
+                types.AddRange(assembly.GetTypes());
+
+            assembly = Assembly.GetAssembly(typeof(Operation));
+            if (assembly != null)
+                types.AddRange(assembly.GetTypes());
+
+            return types;
         }
 
         private static IList<Type> GetReferenceClassCollectionInternal()

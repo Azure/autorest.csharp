@@ -103,4 +103,11 @@ directive:
   - from: types.json
     where: $.definitions.CheckNameAvailabilityRequest.properties.type
     transform: $["x-ms-client-name"] = "ResourceType"
+# Needs to go last in order to override the global setting
+  - from: types.json
+    where: $.definitions.ErrorDetail
+    transform: >
+      $["x-ms-mgmt-referenceType"] = false;
+      $["x-ms-mgmt-propertyReferenceType"] = false;
+      $["x-csharp-usage"] = "model";
 ```
