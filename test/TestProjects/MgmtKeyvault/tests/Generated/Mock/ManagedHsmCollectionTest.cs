@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
@@ -32,7 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
             string name = "hsm1";
-            MgmtKeyvault.ManagedHsmData data = new MgmtKeyvault.ManagedHsmData(location: "westus")
+            MgmtKeyvault.ManagedHsmData data = new MgmtKeyvault.ManagedHsmData(location: new AzureLocation("westus"))
             {
                 Properties = new MgmtKeyvault.Models.ManagedHsmProperties()
                 {
