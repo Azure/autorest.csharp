@@ -12,13 +12,13 @@ using Azure.Core;
 namespace MgmtKeyvault.Models
 {
     /// <summary> Parameters for creating or updating a vault. </summary>
-    public partial class VaultCreateOrUpdateParameters
+    public partial class VaultCreateOrUpdateInfo
     {
-        /// <summary> Initializes a new instance of VaultCreateOrUpdateParameters. </summary>
+        /// <summary> Initializes a new instance of VaultCreateOrUpdateInfo. </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="properties"/> is null. </exception>
-        public VaultCreateOrUpdateParameters(string location, VaultProperties properties)
+        public VaultCreateOrUpdateInfo(string location, VaultProperties properties)
         {
             if (location == null)
             {
