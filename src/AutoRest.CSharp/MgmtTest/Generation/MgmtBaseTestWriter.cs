@@ -181,32 +181,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static ExampleValue? FindPropertyValue(ObjectType ot, ExampleValue ev, ObjectTypeProperty targetProperty)
         {
-            if (ot is SchemaObjectType sot)
+            foreach (var exampleProperty in ev.Properties)
             {
-                var obj = (JsonSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
-                foreach (var exampleProperty in ev.Properties)
-                {
-                    var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList() : new List<string> { exampleProperty.Key }, obj);
-                    if (property == targetProperty)
-                    {
-                        return exampleProperty.Value;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var exampleProperty in ev.Properties)
-                {
-                    foreach (var property in ot.Properties)
-                    {
-                        if (property == targetProperty)
-                        {
-                            return exampleProperty.Value;
-                        }
-                    }
-                }
-            }
+                if (targetProperty.SchemaProperty?.SerializedName == exampleProperty.Key)
+                    return exampleProperty.Value;
 
+                // handle special cases hard coded in Azure.ResourceManager
+                if (ot is SystemObjectType)
+                {
+                    if (targetProperty.SchemaProperty?.SerializedName == "managedServiceIdentityType" && exampleProperty.Key == "type")
+                        return exampleProperty.Value;
+                }
+            }
             return null;
         }
 
@@ -365,9 +351,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in exampleValue.Properties)
                     {
-                        var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
-                        writer.Append($"{variableName}[{k}] = ");
-                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
+                        var keyDelegate = WriteStringValue(cst.Arguments[0], entry.Key);
+                        writer.Append($"{variableName}[{keyDelegate}] = ");
+                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{keyDelegate}]");
                         writer.Line($";");
                     }
                 }
@@ -458,9 +444,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
             Debug.Assert(cst.IsFrameworkType);
-            switch ($"{cst.Namespace}.{cst.Name}", exampleValue.RawValue)
+            switch ($"{cst.Namespace}.{cst.Name}")
             {
-                case ("System.Collections.Generic.IList", _):
+                case "System.Collections.Generic.IList":
                     using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
                     {
                         var idx = 0;
@@ -472,42 +458,33 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         }
                     }
                     break;
-                case ("System.Collections.Generic.IDictionary", _):
+                case "System.Collections.Generic.IDictionary":
                     using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
                     {
                         foreach (var entry in exampleValue.Properties)
                         {
-                            var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
-                            writer.Append($"[{k}] = ");
-                            WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
+                            var keyDelegate = WriteStringValue(cst.Arguments[0], entry.Key);
+                            writer.Append($"[{keyDelegate}] = ");
+                            WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{keyDelegate}]");
                             writer.Append($",");
                         }
                     }
                     break;
-                case ("System.Object", _):
+                case "System.Object":
                     WriteJsonRawValue(writer, new JsonRawValue(exampleValue.RawValue));
                     break;
-                case ("Azure.Core.ResourceIdentifier", string):
-                case ("Azure.Core.ResourceType", string):
-                    writer.Append($"new {cst}({FormatResourceId(exampleValue.RawValue.ToString()!).RefScenarioDefinedVariables(_scenarioVariables)})");
+                case "Azure.ResourceManager.Models.UserAssignedIdentity":
+                    WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.UserAssignedIdentity), MgmtContext.Context)), exampleValue, variableName);
                     break;
-                case ("System.DateTimeOffset", string):
-                    writer.Append($"{typeof(DateTimeOffset)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
-                    break;
-                case ("System.Guid", string):
-                    writer.Append($"{typeof(Guid)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
-                    break;
-                case ("System.TimeSpan", string):
-                    writer.Append($"{typeof(TimeSpan)}.Parse({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
-                    break;
-                case ("System.Uri", string):
-                    writer.Append($"new {typeof(Uri)}({exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)})");
-                    break;
-                case ("System.String", string):
-                case ("Azure.Core.AzureLocation", string):
-                    writer.Append($"{exampleValue.RawValue.ToString()!.RefScenarioDefinedVariables(_scenarioVariables)}");
+                case "Azure.ResourceManager.Models.SystemAssignedServiceIdentity":
+                    WriteExampleValue(writer, new CSharpType(new SystemObjectType(typeof(Azure.ResourceManager.Models.SystemAssignedServiceIdentity), MgmtContext.Context)), exampleValue, variableName);
                     break;
                 default:
+                    var rawValue = new JsonRawValue(exampleValue.RawValue);
+                    if (rawValue.IsString() && WriteStringValue(writer, cst, rawValue.AsString()))
+                    {
+                        return;
+                    }
                     if (exampleValue.RawValue is null)
                     {
                         writer.Append($"null");
@@ -523,6 +500,50 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                     break;
             }
+        }
+
+        public bool WriteStringValue(CodeWriter writer, CSharpType cst, string value)
+        {
+            switch ($"{cst.Namespace}.{cst.Name}")
+            {
+                case "Azure.Core.ResourceIdentifier":
+                case "Azure.Core.ResourceType":
+                    writer.Append($"new {cst}({FormatResourceId(value).RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.DateTimeOffset":
+                    writer.Append($"{typeof(DateTimeOffset)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.Guid":
+                    writer.Append($"{typeof(Guid)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.TimeSpan":
+                    writer.Append($"{typeof(TimeSpan)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.Uri":
+                    writer.Append($"new {typeof(Uri)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "Azure.ResourceManager.Models.ManagedServiceIdentityType":
+                    writer.Append($"new {typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "Azure.Core.AzureLocation":
+                    writer.Append($"new {typeof(Azure.Core.AzureLocation)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.String":
+                    writer.Append($"{value.RefScenarioDefinedVariables(_scenarioVariables)}");
+                    return true;
+            }
+            return false;
+        }
+
+        public CodeWriterDelegate WriteStringValue(CSharpType cst, string value)
+        {
+            return writer =>
+            {
+                if (!WriteStringValue(writer, cst, value))
+                {
+                    writer.Append($"null");
+                }
+            };
         }
 
         public void WriteEnumTypeExampleValue(CodeWriter writer, EnumType enumType, ExampleValue exampleValue)
