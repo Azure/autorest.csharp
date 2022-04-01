@@ -69,8 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     foreach (var propertyName in (string[])internalToInclude)
                     {
                         var property = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
-                        if (property is not null)
-                            parentProperties.Add(property);
+                        if (property is null)
+                            throw new InvalidOperationException($"{sourceType.Name} listed {propertyName} as an internal property to include in the match but that property was not found.");
+                        parentProperties.Add(property);
                     }
                 }
             }
