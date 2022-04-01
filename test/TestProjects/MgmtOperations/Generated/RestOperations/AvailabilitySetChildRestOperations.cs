@@ -204,7 +204,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -224,7 +224,7 @@ namespace MgmtOperations
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -235,19 +235,19 @@ namespace MgmtOperations
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<AvailabilitySetChildData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetChildData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -268,19 +268,19 @@ namespace MgmtOperations
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="data"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="availabilitySetChildName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<AvailabilitySetChildData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetChildData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, availabilitySetName, availabilitySetChildName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

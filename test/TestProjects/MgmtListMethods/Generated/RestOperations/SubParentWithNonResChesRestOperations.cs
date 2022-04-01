@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -53,7 +53,7 @@ namespace MgmtListMethods
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -62,17 +62,17 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentWithNonResChData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentWithNonResChData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, subParentWithNonResChName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, subParentWithNonResChName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -91,17 +91,17 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="subParentWithNonResChName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentWithNonResChData> CreateOrUpdate(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public Response<SubParentWithNonResChData> CreateOrUpdate(string subscriptionId, string subParentWithNonResChName, SubParentWithNonResChData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, subParentWithNonResChName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, subParentWithNonResChName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

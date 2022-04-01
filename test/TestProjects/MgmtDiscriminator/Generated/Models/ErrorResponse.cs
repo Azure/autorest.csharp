@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Models;
-
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Error response indicates Azure Front Door Standard or Azure Front Door Premium or CDN service is not able to process the incoming request. The reason is provided in the error message. </summary>

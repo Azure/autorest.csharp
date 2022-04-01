@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary> Virtual Machine Scale Set OS Upgrade History operation response. </summary>
@@ -19,7 +21,7 @@ namespace MgmtRenameRules.Models
         /// <param name="properties"> Information about the properties of the upgrade operation. </param>
         /// <param name="resourceType"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string resourceType, string location)
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? resourceType, string location)
         {
             Properties = properties;
             ResourceType = resourceType;
@@ -29,7 +31,7 @@ namespace MgmtRenameRules.Models
         /// <summary> Information about the properties of the upgrade operation. </summary>
         public UpgradeOperationHistoricalStatusInfoProperties Properties { get; }
         /// <summary> Resource type. </summary>
-        public string ResourceType { get; }
+        public ResourceType? ResourceType { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }
     }

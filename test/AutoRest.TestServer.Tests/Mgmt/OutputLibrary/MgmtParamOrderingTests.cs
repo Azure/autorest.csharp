@@ -17,9 +17,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtParamOrderingTests() : base("MgmtParamOrdering") { }
 
-        [TestCase("VirtualMachineExtensionImage", "SubscriptionExtensions")]
-        [TestCase("AvailabilitySet", "ResourceGroupExtensions")]
-        [TestCase("DedicatedHost", "DedicatedHostGroup")]
+        [TestCase("VirtualMachineExtensionImageResource", "SubscriptionResourceExtensions")]
+        [TestCase("AvailabilitySetResource", "ResourceGroupResourceExtensions")]
+        [TestCase("DedicatedHostResource", "DedicatedHostGroupResource")]
         public void TestParent(string resourceName, string parentName)
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
@@ -45,14 +45,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == HttpParameterIn.Path).Select(p => p.CSharpName())));
         }
 
-        [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "parameters", "quick" }, new[] { true, true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "data", "quick" }, new[] { true, true, false })]
         [TestCase(typeof(VirtualMachineScaleSetCollection), "Get", false, new[]{ "vmScaleSetName", "expand"}, new[] { true, false })]
-        [TestCase(typeof(VirtualMachineScaleSet), "Update", true, new[]{ "data"}, new[] { true })]
-        [TestCase(typeof(VirtualMachineScaleSet), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]
-        [TestCase(typeof(VirtualMachineScaleSet), "Get", false, new[]{ "expand"}, new[] { false })]
-        [TestCase(typeof(VirtualMachineScaleSet), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]
-        [TestCase(typeof(VirtualMachineScaleSet), "DeleteInstances", true, new[]{ "vmInstanceIDs", "forceDeletion"}, new[] { true, false })]
-        [TestCase(typeof(VirtualMachineScaleSet), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "Update", true, new[]{ "data"}, new[] { true })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "Get", false, new[]{ "expand"}, new[] { false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "DeleteInstances", true, new[]{ "vmInstanceIDs", "forceDeletion"}, new[] { true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetResource), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
         public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
         {
             var parameters = type.GetMethod(methodName).GetParameters();

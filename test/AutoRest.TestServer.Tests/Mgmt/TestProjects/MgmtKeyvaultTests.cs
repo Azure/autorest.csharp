@@ -57,32 +57,32 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Delete")]
         [TestCase("Update")]
         [TestCase("GetMHSMPrivateLinkResourcesByMhsmResource")]
-        public void ValidateManagedHsmMockTests(string methodName, params string[] argTypes)
+        public void ValidateManagedHsmResourceMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.ManagedHsmMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.ManagedHsmResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
         [TestCase("Delete")]
-        public void ValidateMhsmPrivateEndpointConnectionMockTests(string methodName, params string[] argTypes)
+        public void ValidateMhsmPrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MhsmPrivateEndpointConnectionMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MhsmPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
         [TestCase("Delete")]
-        public void ValidatePrivateEndpointConnectionMockTests(string methodName, params string[] argTypes)
+        public void ValidatePrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]
         [TestCase("Delete")]
         [TestCase("Update")]
         [TestCase("GetPrivateLinkResources")]
-        public void ValidateVaultMockTests(string methodName, params string[] argTypes)
+        public void ValidateVaultResourceMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.VaultMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.VaultResourceMockTests", methodName, argTypes);
         }
     }
 }

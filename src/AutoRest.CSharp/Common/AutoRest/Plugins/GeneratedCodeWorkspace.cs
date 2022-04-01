@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsStatic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
 
-        private async Task<ImmutableHashSet<SyntaxNode>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
+        private async Task<ImmutableHashSet<SyntaxNode>> GetAllPublicDeclaredModels(ImmutableHashSet<string> modelsToKeep)
         {
             var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
 
@@ -289,6 +289,49 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
+        private static HashSet<string> _referenceAttributes = new HashSet<string> { "ReferenceType", "PropertyReferenceType", "TypeReferenceType" };
+
+        private bool IsReferenceType(SyntaxNode? node)
+        {
+            if (node is null)
+                return false;
+
+            var namespaceNode = node.ChildNodes().OfType<NamespaceDeclarationSyntax>().FirstOrDefault();
+            if (namespaceNode is null)
+                return false;
+
+            SyntaxNode? classOrStructNode = namespaceNode.ChildNodes().OfType<ClassDeclarationSyntax>().FirstOrDefault();
+            if (classOrStructNode is null)
+            {
+                classOrStructNode = namespaceNode.ChildNodes().OfType<StructDeclarationSyntax>().FirstOrDefault();
+                if (classOrStructNode is null)
+                    return false;
+            }
+
+            var attributeLists = GetAttributeLists(classOrStructNode);
+            if (attributeLists is null || attributeLists.Value.Count == 0)
+                return false;
+
+            foreach (var attributeList in attributeLists.Value)
+            {
+                if (_referenceAttributes.Contains(attributeList.Attributes[0].Name.ToString()))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private SyntaxList<AttributeListSyntax>? GetAttributeLists(SyntaxNode node)
+        {
+            if (node is StructDeclarationSyntax structDeclaration)
+                return structDeclaration.AttributeLists;
+
+            if (node is ClassDeclarationSyntax classDeclaration)
+                return classDeclaration.AttributeLists;
+
+            return null;
+        }
+
         private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync()
         {
             var compilation = await _project.GetCompilationAsync();
@@ -299,10 +342,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var classVisitor = new PublicDefinitionVisitor();
             foreach (var document in _project.Documents)
             {
+                var root = await document.GetSyntaxRootAsync();
                 // we only find the files directly under `Generated` and `Extensions`
-                if (IsMgmtRootDocument(document))
+                if (IsMgmtRootDocument(document) || IsReferenceType(root))
                 {
-                    var root = await document.GetSyntaxRootAsync();
                     classVisitor.Visit(root);
                 }
             }
@@ -424,7 +467,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
             // first get all the declared models
-            var definitions = await GetAllDeclaredModels(modelsToKeep);
+            var definitions = await GetAllPublicDeclaredModels(modelsToKeep);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync();
             await foreach (var model in publicModels)

@@ -133,8 +133,16 @@ namespace AutoRest.TestServer.Tests
         public static ParameterInfo HasParameter(MethodInfo method, string name)
         {
             var parameterInfo = method.GetParameters().FirstOrDefault(p=>p.Name == name);
-            Assert.NotNull(parameterInfo);
+            Assert.NotNull(parameterInfo, $"Method {method.Name} doesn't have parameter {name}");
             return parameterInfo;
+        }
+
+        public static ParameterInfo HasParameter(MethodInfo method, string expectedName, Type expectedType)
+        {
+            var parameter = method.GetParameters().FirstOrDefault(p=>p.Name == expectedName);
+            Assert.NotNull(parameter, $"Method {method.Name} doesn't have parameter {expectedName}");
+            Assert.AreEqual(expectedType, parameter.ParameterType, $"Method {method.Name} parameter {expectedName} is not of type {expectedType.Name}, but is of type {parameter.ParameterType.Name}");
+            return parameter;
         }
 
         public static PropertyInfo HasProperty(Type type, string name, BindingFlags bindingFlags)

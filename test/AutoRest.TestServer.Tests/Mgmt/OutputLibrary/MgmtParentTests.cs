@@ -13,9 +13,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtParentTests() : base("MgmtParent") { }
 
-        [TestCase("VirtualMachineExtensionImage", "SubscriptionExtensions")]
-        [TestCase("AvailabilitySet", "ResourceGroupExtensions")]
-        [TestCase("DedicatedHost", "DedicatedHostGroup")]
+        [TestCase("VirtualMachineExtensionImageResource", "SubscriptionResourceExtensions")]
+        [TestCase("AvailabilitySetResource", "ResourceGroupResourceExtensions")]
+        [TestCase("DedicatedHostResource", "DedicatedHostGroupResource")]
         public void TestParent(string resourceName, string parentName)
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);

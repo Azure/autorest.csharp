@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -67,10 +68,10 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("storageAccount");
                 writer.WriteStringValue(StorageAccount);
             }
-            if (Optional.IsDefined(DiscoveryUrl))
+            if (Optional.IsDefined(DiscoveryUri))
             {
                 writer.WritePropertyName("discoveryUrl");
-                writer.WriteStringValue(DiscoveryUrl);
+                writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
             if (Optional.IsDefined(HbiWorkspace))
             {
@@ -111,7 +112,7 @@ namespace MgmtParamOrdering
             Optional<string> applicationInsights = default;
             Optional<string> containerRegistry = default;
             Optional<string> storageAccount = default;
-            Optional<string> discoveryUrl = default;
+            Optional<Uri> discoveryUrl = default;
             Optional<ProvisioningState> provisioningState = default;
             Optional<bool> hbiWorkspace = default;
             Optional<string> serviceProvisionedResourceGroup = default;
@@ -208,7 +209,12 @@ namespace MgmtParamOrdering
                         }
                         if (property0.NameEquals("discoveryUrl"))
                         {
-                            discoveryUrl = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                discoveryUrl = null;
+                                continue;
+                            }
+                            discoveryUrl = new Uri(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))

@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateExportRequestRateByIntervalRequest(string subscriptionId, string location, RequestRateByIntervalInput parameters)
+        internal HttpMessage CreateExportRequestRateByIntervalRequest(string subscriptionId, string location, RequestRateByIntervalInput requestRateByIntervalInput)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(requestRateByIntervalInput);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -62,17 +62,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
-        /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
+        /// <param name="requestRateByIntervalInput"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="requestRateByIntervalInput"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> ExportRequestRateByIntervalAsync(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> ExportRequestRateByIntervalAsync(string subscriptionId, string location, RequestRateByIntervalInput requestRateByIntervalInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(requestRateByIntervalInput, nameof(requestRateByIntervalInput));
 
-            using var message = CreateExportRequestRateByIntervalRequest(subscriptionId, location, parameters);
+            using var message = CreateExportRequestRateByIntervalRequest(subscriptionId, location, requestRateByIntervalInput);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -87,17 +87,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
-        /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
+        /// <param name="requestRateByIntervalInput"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="requestRateByIntervalInput"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response ExportRequestRateByInterval(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public Response ExportRequestRateByInterval(string subscriptionId, string location, RequestRateByIntervalInput requestRateByIntervalInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(requestRateByIntervalInput, nameof(requestRateByIntervalInput));
 
-            using var message = CreateExportRequestRateByIntervalRequest(subscriptionId, location, parameters);
+            using var message = CreateExportRequestRateByIntervalRequest(subscriptionId, location, requestRateByIntervalInput);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateExportThrottledRequestsRequest(string subscriptionId, string location, ThrottledRequestsInput parameters)
+        internal HttpMessage CreateExportThrottledRequestsRequest(string subscriptionId, string location, ThrottledRequestsInput throttledRequestsInput)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(throttledRequestsInput);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -135,17 +135,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
-        /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
+        /// <param name="throttledRequestsInput"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="throttledRequestsInput"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> ExportThrottledRequestsAsync(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> ExportThrottledRequestsAsync(string subscriptionId, string location, ThrottledRequestsInput throttledRequestsInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(throttledRequestsInput, nameof(throttledRequestsInput));
 
-            using var message = CreateExportThrottledRequestsRequest(subscriptionId, location, parameters);
+            using var message = CreateExportThrottledRequestsRequest(subscriptionId, location, throttledRequestsInput);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -160,17 +160,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
-        /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
+        /// <param name="throttledRequestsInput"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="throttledRequestsInput"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response ExportThrottledRequests(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public Response ExportThrottledRequests(string subscriptionId, string location, ThrottledRequestsInput throttledRequestsInput, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(throttledRequestsInput, nameof(throttledRequestsInput));
 
-            using var message = CreateExportThrottledRequestsRequest(subscriptionId, location, parameters);
+            using var message = CreateExportThrottledRequestsRequest(subscriptionId, location, throttledRequestsInput);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

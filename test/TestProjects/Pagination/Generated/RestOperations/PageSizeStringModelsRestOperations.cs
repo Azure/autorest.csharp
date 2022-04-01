@@ -114,7 +114,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -132,7 +132,7 @@ namespace Pagination
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -141,18 +141,18 @@ namespace Pagination
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The PageSizeStringModel to use. </param>
+        /// <param name="data"> The PageSizeStringModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PageSizeStringModelData>> PutAsync(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeStringModelData>> PutAsync(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -171,18 +171,18 @@ namespace Pagination
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The PageSizeStringModel to use. </param>
+        /// <param name="data"> The PageSizeStringModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PageSizeStringModelData> Put(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData parameters, CancellationToken cancellationToken = default)
+        public Response<PageSizeStringModelData> Put(string subscriptionId, string resourceGroupName, string name, PageSizeStringModelData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

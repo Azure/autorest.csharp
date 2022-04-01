@@ -192,13 +192,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl-paging\\Generated"
     },
-    "dpg_initial-LowLevel": {
+    "dpg-customization-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_initial\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-customization\\Generated"
     },
-    "dpg_update1-LowLevel": {
+    "dpg-initial-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg_update1\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-initial\\Generated"
+    },
+    "dpg-update1-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\dpg-update1\\Generated"
     },
     "ExactMatchFlattenInheritance": {
       "commandName": "Project",
@@ -347,6 +351,10 @@
     "MgmtRenameRules": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtRenameRules\\Generated"
+    },
+    "MgmtResourceName": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtResourceName\\Generated"
     },
     "MgmtSafeFlatten": {
       "commandName": "Project",

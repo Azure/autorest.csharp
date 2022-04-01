@@ -22,7 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
-        protected const string BaseUriProperty = "BaseUri";
+        protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
@@ -62,37 +62,43 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClassDeclaration();
                 using (_writer.Scope())
                 {
-                    WriteStaticMethods();
-
-                    WriteFields(_writer);
-
-                    WriteCtors();
-
-                    WriteProperties();
-
-                    WritePrivateHelpers();
-
-                    WriteChildResourceEntries();
-
-                    // Write other orphan operations with the parent of ResourceGroup
-                    foreach (var clientOperation in This.AllOperations)
-                    {
-                        WriteMethod(clientOperation, true);
-                        WriteMethod(clientOperation, false);
-                    }
-
-                    if (This.EnumerableInterfaces.Any())
-                        WriteEnumerables();
+                    WriteImplementations();
                 }
             }
         }
+
+        protected internal virtual void WriteImplementations()
+        {
+            WriteStaticMethods();
+
+            WriteFields();
+
+            WriteCtors();
+
+            WriteProperties();
+
+            WritePrivateHelpers();
+
+            WriteChildResourceEntries();
+
+            // Write other orphan operations with the parent of ResourceGroup
+            foreach (var clientOperation in This.AllOperations)
+            {
+                WriteMethod(clientOperation, true);
+                WriteMethod(clientOperation, false);
+            }
+
+            if (This.EnumerableInterfaces.Any())
+                WriteEnumerables();
+        }
+
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
 
         protected void WriteClassDeclaration()
         {
-            _writer.WriteXmlDocumentationSummary($"{This.Description}");
+            _writer.WriteXmlDocumentationSummary(This.Description);
             _writer.Append($"{This.Accessibility}");
             if (This.IsStatic)
                 _writer.Append($" static");
@@ -153,7 +159,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteRestClientConstructorPair(set.RestClient, set.Resource);
                     }
                     if (This.CanValidateResourceType)
-                        WriteDebugValidate(_writer);
+                        WriteDebugValidate();
                 }
             }
             _writer.Line();
@@ -201,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteRestClientConstructorPair(MgmtRestClient restClient, Resource? resource)
         {
             string? resourceName = resource?.Type.Name;
-            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticOptionsProperty);
+            FormattableString ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceName)}", DiagnosticsProperty);
             string diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
             string apiVersionText = string.Empty;
@@ -240,8 +246,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteSingletonResourceGetMethod(Resource resource)
         {
             var signature = new MethodSignature(
-                $"Get{resource.Type.Name}",
-                $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
+                $"Get{resource.ResourceName}",
+                $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resource.Type,
                 $"Returns a <see cref=\"{resource.Type}\" /> object.",
@@ -257,7 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
-                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
+                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {This.ResourceName}.",
                 GetMethodModifiers(),
                 resourceCollection.Type,
                 $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
@@ -279,8 +285,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
             {
-                // name after `Get{ResourceType}`
-                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.Type.Name}",
+                // name after `Get{ResourceName}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
@@ -304,7 +310,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
         {
-            return $"Get{resourceCollection.Resource.Type.Name.ResourceNameToPlural()}";
+            return $"Get{resourceCollection.Resource.ResourceName.ResourceNameToPlural()}";
         }
 
         protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
@@ -353,29 +359,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStaticValidate(FormattableString validResourceType, CodeWriter writer)
+        protected void WriteStaticValidate(FormattableString validResourceType)
         {
-            using (writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
+            using (_writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
             {
-                writer.Line($"if (id.ResourceType != {validResourceType})");
-                writer.Line($"throw new {typeof(ArgumentException)}(string.Format({typeof(CultureInfo)}.CurrentCulture, \"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}), nameof(id));");
+                _writer.Line($"if (id.ResourceType != {validResourceType})");
+                _writer.Line($"throw new {typeof(ArgumentException)}(string.Format({typeof(CultureInfo)}.CurrentCulture, \"Invalid resource type {{0}} expected {{1}}\", id.ResourceType, {validResourceType}), nameof(id));");
             }
         }
 
-        protected void WriteDebugValidate(CodeWriter writer)
+        protected void WriteDebugValidate()
         {
-            writer.Line($"#if DEBUG");
-            writer.Line($"\t\t\tValidateResourceId(Id);");
-            writer.Line($"#endif");
+            _writer.Line($"#if DEBUG");
+            _writer.Line($"\t\t\tValidateResourceId(Id);");
+            _writer.Line($"#endif");
         }
 
-        protected void WriteFields(CodeWriter writer)
+        protected void WriteFields()
         {
             foreach (var field in This.Fields)
             {
-                writer.WriteFieldDeclaration(field);
+                _writer.WriteFieldDeclaration(field);
             }
-            writer.Line();
+            _writer.Line();
         }
 
         protected FormattableString GetProviderNamespaceFromReturnType(string? returnType)
@@ -403,7 +409,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string subIdVariable = ", Id.SubscriptionId";
             if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
                 subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticOptionsProperty}.ApplicationId{subIdVariable}, {BaseUriProperty}{apiVersionVariable})";
+            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
@@ -459,13 +465,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
         {
             if (resourceType == ResourceTypeSegment.ResourceGroup)
-                return $"{typeof(ResourceGroup)}.ResourceType";
+                return $"{typeof(ResourceGroupResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Subscription)
-                return $"{typeof(Subscription)}.ResourceType";
+                return $"{typeof(SubscriptionResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.Tenant)
-                return $"{typeof(Tenant)}.ResourceType";
+                return $"{typeof(TenantResource)}.ResourceType";
             if (resourceType == ResourceTypeSegment.ManagementGroup)
-                return $"{typeof(ManagementGroup)}.ResourceType";
+                return $"{typeof(ManagementGroupResource)}.ResourceType";
 
             if (!resourceType.IsConstant)
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
@@ -676,7 +682,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature().Values.OrderBy(method => method.Parameters.Count).First();
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature();
             var cache = new List<ParameterMapping>(parameterMappings);
 
             var parameterInvocations = new List<FormattableString>();
