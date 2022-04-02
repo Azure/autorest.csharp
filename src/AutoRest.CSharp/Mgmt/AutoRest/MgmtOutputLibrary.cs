@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private Dictionary<string, Schema> UpdatePatchParameterNames()
+        private Dictionary<string, Schema> UpdateBodyParameterNames()
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             //this is where we update
-            var updatedModels = UpdatePatchParameterNames();
+            var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
                 resourceModels.Remove(schema);
