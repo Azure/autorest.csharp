@@ -312,10 +312,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtHierarchicalNonResource\\Generated"
     },
-    "MgmtKeyvault": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtKeyvault\\src\\Generated"
-    },
     "MgmtListMethods": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtListMethods\\Generated"
