@@ -30,10 +30,15 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new vault or update an existing vault
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters vaultCreateOrUpdateParameters = default; /* Can't find this parameter in example, please provide value here!*/
+            MgmtKeyvault.Models.VaultCreateOrUpdateInfo info = new MgmtKeyvault.Models.VaultCreateOrUpdateInfo(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
+            {
+                EnabledForDeployment = true,
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+            });
 
             var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, vaultCreateOrUpdateParameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, info);
         }
 
         [RecordedTest]
@@ -41,10 +46,20 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create or update a vault with network acls
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters vaultCreateOrUpdateParameters = default; /* Can't find this parameter in example, please provide value here!*/
+            MgmtKeyvault.Models.VaultCreateOrUpdateInfo info = new MgmtKeyvault.Models.VaultCreateOrUpdateInfo(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
+            {
+                EnabledForDeployment = true,
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+                NetworkAcls = new MgmtKeyvault.Models.NetworkRuleSet()
+                {
+                    Bypass = new MgmtKeyvault.Models.NetworkRuleBypassOptions("AzureServices"),
+                    DefaultAction = new MgmtKeyvault.Models.NetworkRuleAction("Deny"),
+                },
+            });
 
             var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, vaultCreateOrUpdateParameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, info);
         }
 
         [RecordedTest]
