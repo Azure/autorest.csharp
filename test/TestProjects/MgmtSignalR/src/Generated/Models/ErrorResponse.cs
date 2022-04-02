@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure;
+
 namespace MgmtSignalR.Models
 {
     /// <summary> Contains information about an API error. </summary>
@@ -17,12 +19,12 @@ namespace MgmtSignalR.Models
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> Describes a particular API error with an error code and a message. </param>
-        internal ErrorResponse(ErrorResponseBody error)
+        internal ErrorResponse(ResponseError error)
         {
             Error = error;
         }
 
         /// <summary> Describes a particular API error with an error code and a message. </summary>
-        public ErrorResponseBody Error { get; }
+        public ResponseError Error { get; }
     }
 }
