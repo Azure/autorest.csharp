@@ -5,5 +5,8 @@
   "devDependencies": {
     "@microsoft.azure/autorest.testserver": "3.3.24",
     "autorest": "3.5.1"
+  },
+  "dependencies": {
+    "es5-ext": "^0.10.56"
   }
 }
