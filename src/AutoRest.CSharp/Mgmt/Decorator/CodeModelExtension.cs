@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class CodeModelExtension
     {
         // max number of words to keep if trimming the property
-        private const int MaxTrimmingPropertyWordCount = 3;
+        private const int MaxTrimmingPropertyWordCount = 2;
 
         private static readonly List<string> EnumValuesShouldBePrompted = new()
         {
@@ -108,8 +108,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return propertyTypeName;
             }
 
-            var propertyWords = propertyTypeName.SplitByCamelCase().ToArray();
-            // we keep at most 3 words, if trim the property
+            var propertyWords = propertyTypeName.SplitByCamelCaseAndGroup().ToArray();
+            // we keep at most 2 words, if trim the property
             if (propertyWords.Length < MaxTrimmingPropertyWordCount)
             {
                 return propertyTypeName;
