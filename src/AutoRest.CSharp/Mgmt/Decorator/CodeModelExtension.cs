@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return propertyTypeName;
             }
 
-            var parentWords = parentName.SplitByCamelCase().ToArray();
+            var parentWords = parentName.SplitByCamelCaseAndGroup().ToArray();
             var commonPrefixes = new List<string>();
             for (int i = 0; i < parentWords.Length && i < propertyWords.Length; i++)
             {

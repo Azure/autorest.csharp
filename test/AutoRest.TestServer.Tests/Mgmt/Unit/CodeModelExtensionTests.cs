@@ -38,14 +38,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             ValidateRearrangeChoices(expected, input);
         }
 
-        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "ServiceIdentityType")]
+        [TestCase("ManagedServiceIdentity", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "IdentityType")]
         [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", AllSchemaTypes.Boolean, "Identity7Type")]
         [TestCase("ManagedServiceIdentity", "ManagedServiceIdentity7Type", AllSchemaTypes.String, "ManagedServiceIdentity7Type")]
-        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", AllSchemaTypes.Boolean, "PathTokenType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", AllSchemaTypes.Boolean, "TokenType")]
         [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPathTokenType", AllSchemaTypes.String, "ResourceTypeAliasPathTokenType")]
         [TestCase("ResourceTypeAliasPathMetadata", "ResourceType", AllSchemaTypes.Boolean, "ResourceType")]
         [TestCase("ResourceTypeAliasPathMetadata", "ResourceType", AllSchemaTypes.String, "ResourceType")]
-        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPath", AllSchemaTypes.Boolean, "TypeAliasPath")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAlias", AllSchemaTypes.Boolean, "ResourceTypeAlias")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAlias", AllSchemaTypes.String, "ResourceTypeAlias")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasType", AllSchemaTypes.Boolean, "AliasType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasType", AllSchemaTypes.String, "ResourceTypeAliasType")]
+        [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPath", AllSchemaTypes.Boolean, "AliasPath")]
         [TestCase("ResourceTypeAliasPathMetadata", "ResourceTypeAliasPath", AllSchemaTypes.String, "ResourceTypeAliasPath")]
         [TestCase("ResourceTypeAliasPathMetadata", "ManagedServiceIdentity7Type", AllSchemaTypes.Boolean, "ManagedServiceIdentity7Type")]
         [TestCase("ResourceTypeAliasPathMetadata", "ManagedServiceIdentityType", AllSchemaTypes.Boolean, "ManagedServiceIdentityType")]
