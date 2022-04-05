@@ -105,6 +105,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<DedicatedHostResource>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
         {
             return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
@@ -119,6 +120,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<DedicatedHostResource> GetDedicatedHost(string hostName, CancellationToken cancellationToken = default)
         {
             return GetDedicatedHosts().Get(hostName, cancellationToken);

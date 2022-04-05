@@ -45,6 +45,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<Model2Resource>> GetModel2Async(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
@@ -59,6 +60,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<Model2Resource> GetModel2(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetModel2s().Get(model2SName, cancellationToken);
