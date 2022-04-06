@@ -45,6 +45,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
@@ -60,6 +61,7 @@ namespace MgmtPropertyChooser
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetVirtualMachines().Get(vmName, cancellationToken);

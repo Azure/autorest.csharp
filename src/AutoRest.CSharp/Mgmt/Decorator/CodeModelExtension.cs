@@ -14,6 +14,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        // max number of words to keep if trimming the property
+        private const int MaxTrimmingPropertyWordCount = 2;
+
         private static readonly List<string> EnumValuesShouldBePrompted = new()
         {
             "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
@@ -82,11 +85,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
                         {
-                            property.Language.Default.Name = property.Schema.Name;
+                            property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name, property.Schema.Type);
                         }
                         else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
                         {
-                            property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
+                            property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name.TrimEnd('s'), property.Schema.Type);
                         }
                         else
                         {
@@ -95,6 +98,59 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
             }
+        }
+
+        internal static string GetEnclosingTypeName(string parentName, string propertyTypeName, AllSchemaTypes type)
+        {
+            if (type == AllSchemaTypes.String)
+            {
+                // for string type property, return the original property name so that it's easier to identify the semantic meaning
+                return propertyTypeName;
+            }
+
+            var propertyWords = propertyTypeName.SplitByCamelCaseAndGroup().ToArray();
+            // we keep at most 2 words, if trim the property
+            if (propertyWords.Length < MaxTrimmingPropertyWordCount)
+            {
+                return propertyTypeName;
+            }
+
+            var parentWords = parentName.SplitByCamelCaseAndGroup().ToArray();
+            var commonPrefixes = new List<string>();
+            for (int i = 0; i < parentWords.Length && i < propertyWords.Length; i++)
+            {
+                if (parentWords[i] == propertyWords[i])
+                {
+                    commonPrefixes.Add(parentWords[i]);
+                }
+                else
+                {
+                    break;
+                };
+            }
+
+            if (commonPrefixes.Count == 0)
+            {
+                // if no common prefix, just return the original property name
+                return propertyTypeName;
+            }
+
+            var newPropertyWords = propertyWords.TakeLast(propertyWords.Length - commonPrefixes.Count()).ToList();
+            if (newPropertyWords.Count > MaxTrimmingPropertyWordCount)
+            {
+                commonPrefixes.AddRange(newPropertyWords.Take(newPropertyWords.Count - MaxTrimmingPropertyWordCount));
+                newPropertyWords.RemoveRange(0, newPropertyWords.Count - MaxTrimmingPropertyWordCount);
+            }
+
+            // A property namne cannot start with number, so we need to shift another word from prefixes to new property.
+            // The worst case is that new property is the original property. The loop should end eventually.
+            while (newPropertyWords.Count < MaxTrimmingPropertyWordCount || int.TryParse(newPropertyWords.First(), out _))
+            {
+                newPropertyWords.Insert(0, commonPrefixes.Last());
+                commonPrefixes.RemoveAt(commonPrefixes.Count - 1);
+            }
+
+            return String.Join("", newPropertyWords);
         }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)

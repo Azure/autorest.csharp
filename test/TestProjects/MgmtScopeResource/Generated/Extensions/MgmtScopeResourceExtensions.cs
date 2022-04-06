@@ -47,6 +47,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return await tenantResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
@@ -62,6 +63,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return tenantResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
@@ -88,6 +90,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
             return await GetResourceLinks(tenantResource, scope).GetAsync(cancellationToken).ConfigureAwait(false);
@@ -102,6 +105,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
             return GetResourceLinks(tenantResource, scope).Get(cancellationToken);
@@ -166,6 +170,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return await subscriptionResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
@@ -181,6 +186,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return subscriptionResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
@@ -241,6 +247,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
@@ -256,6 +263,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
@@ -288,6 +296,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return await managementGroupResource.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
@@ -303,6 +312,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
             return managementGroupResource.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
@@ -335,6 +345,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
@@ -350,6 +361,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             return armResource.GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);

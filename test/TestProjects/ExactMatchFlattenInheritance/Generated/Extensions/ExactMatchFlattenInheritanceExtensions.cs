@@ -46,6 +46,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<AzureResourceFlattenModel1Resource>> GetAzureResourceFlattenModel1Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetAzureResourceFlattenModel1s().GetAsync(name, cancellationToken).ConfigureAwait(false);
@@ -61,6 +62,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<AzureResourceFlattenModel1Resource> GetAzureResourceFlattenModel1(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetAzureResourceFlattenModel1s().Get(name, cancellationToken);
@@ -84,6 +86,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<CustomModel2Resource>> GetCustomModel2Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetCustomModel2s().GetAsync(name, cancellationToken).ConfigureAwait(false);
@@ -99,6 +102,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<CustomModel2Resource> GetCustomModel2(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetCustomModel2s().Get(name, cancellationToken);
@@ -122,6 +126,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<CustomModel3Resource>> GetCustomModel3Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetCustomModel3s().GetAsync(name, cancellationToken).ConfigureAwait(false);
@@ -137,6 +142,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<CustomModel3Resource> GetCustomModel3(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetCustomModel3s().Get(name, cancellationToken);
