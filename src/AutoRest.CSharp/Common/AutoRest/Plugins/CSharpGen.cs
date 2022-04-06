@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var codeModel = await codeModelTask;
 
-            if (Configuration.DataPlane)
+            if (Configuration.Generation1ConvenienceClient)
             {
-                LowLevelTarget.Execute(project, codeModel, sourceInputModel);
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
             }
             else if (Configuration.AzureArm)
             {
@@ -44,16 +44,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                DataPlaneTarget.Execute(project, codeModel, sourceInputModel);
+                LowLevelTarget.Execute(project, codeModel, sourceInputModel);
             }
             return project;
         }
 
         private static void ValidateConfiguration ()
         {
-            if (Configuration.DataPlane && Configuration.AzureArm)
+            if (Configuration.Generation1ConvenienceClient && Configuration.AzureArm)
             {
-                throw new Exception("Enabling both 'data-plane' and 'azure-arm' at the same time is not supported.");
+                throw new Exception("Enabling both 'generation1-convenience-client' and 'azure-arm' at the same time is not supported.");
             }
         }
 

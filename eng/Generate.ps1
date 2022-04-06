@@ -165,7 +165,7 @@ if (!($Exclude -contains "TestProjects"))
         }
         if (Test-Path $readmeConfigurationPath)
         {
-            $testArguments = "--require=$readmeConfigurationPath --generation1-convenience-client"
+            $testArguments = "--require=$readmeConfigurationPath"
         }
         else
         {
