@@ -30,7 +30,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new vault or update an existing vault
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters vaultCreateOrUpdateParameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateContent content = new MgmtKeyvault.Models.VaultCreateOrUpdateContent(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -38,7 +38,7 @@ namespace MgmtKeyvault.Tests.Mock
             });
 
             var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, vaultCreateOrUpdateParameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
         }
 
         [RecordedTest]
@@ -46,7 +46,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create or update a vault with network acls
             string vaultName = "sample-vault";
-            MgmtKeyvault.Models.VaultCreateOrUpdateParameters vaultCreateOrUpdateParameters = new MgmtKeyvault.Models.VaultCreateOrUpdateParameters(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
+            MgmtKeyvault.Models.VaultCreateOrUpdateContent content = new MgmtKeyvault.Models.VaultCreateOrUpdateContent(location: "westus", properties: new MgmtKeyvault.Models.VaultProperties(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"), sku: new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.MgmtKeyvaultSkuFamily("A"), name: MgmtKeyvault.Models.MgmtKeyvaultSkuName.Standard))
             {
                 EnabledForDeployment = true,
                 EnabledForDiskEncryption = true,
@@ -59,7 +59,7 @@ namespace MgmtKeyvault.Tests.Mock
             });
 
             var collection = GetArmClient().GetResourceGroupResource(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, vaultCreateOrUpdateParameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
         }
 
         [RecordedTest]
