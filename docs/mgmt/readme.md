@@ -20,13 +20,13 @@ This class represents the operations you can perform on a collection of resource
 
 | Collection Behavior | Collection Method |
 | :--- | :--- |
-| Iterate/List | GetAll() |
-| Index | Get(string name) |
-| Add | CreateOrUpdate(string name, [Resource]Data data) |
-| Contains | Exists(string name) |
-| TryGet | GetIfExists(string name) |
+| Iterate/List | `GetAll()` |
+| Index | `Get(string name)` |
+| Add | `CreateOrUpdate(string name, [Resource]Data data)` |
+| Contains | `Exists(string name)` |
+| TryGet | `GetIfExists(string name)` |
 
-The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [list exception](#list-exception) section for details.
+The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [List exception](#list-exception) section for details.
 
 The parent resource of this resource will carry all the methods to get its child resources by returning its corresponding collection. For instance, on the resource of `VirtualNetworkResource`, you will find a method `GetSubnets` which returns a `SubnetCollection` to represent a collection of `SubnetResource`:
 ```csharp
@@ -71,8 +71,6 @@ There are multiple ways to tweak the criteria of identifying resources, please s
 The name of a resource usually is derived from the name of the resource data, but with some exceptions. Please see [change resource name](#change-resource-name) for more details.
 
 If a request path is incorrectly marked as a resource, you could use a configuration to make it non-resource again. Please see [mark a request path is non-resource](#mark-a-request-path-is-a-non-resource) section.
-
-// TODO -- add more links here
 
 ## How does the generator build hierarchical structure of resources
 
@@ -249,7 +247,7 @@ For instance, if we have this swagger:
 ```
 
 The generated code will have a resource `DatabaseAccountResource`, `DatabaseAccountCollection`, and `DatabaseAccountData`. And if you want to assign another schema in these request as a resource data, you could add this configuration:
-```
+```yaml
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}: DatabaseAccountCreateUpdateParameters
 ```
@@ -315,7 +313,7 @@ public static partial class ComputeExtensions
 ```
 
 But we still could add the `request-path-to-resource-data` configuration:
-```
+```yaml
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}: SharedGallery
 ```
@@ -330,7 +328,7 @@ In most cases, a resource class will share the same name as the resource data cl
 But if the RP is complicated, there might be multiple resources sharing the same resource data schema. If this happens, the generator has multiple strategies to generate unique names for all those resources in order to make sure the generated code could properly compile. These auto-generated names might not be ideal, and you might need the `request-path-to-resource-name` configuration to customize the resource names.
 
 For instance, we have a resource `AvailabilitySetResource`, `AvailabilitySetCollection` and `AvailabilitySetData`. If we add this configuration:
-```
+```yaml
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
 ```
@@ -342,7 +340,7 @@ By default, a resource requires its schema to meet ARM's resource criteria that 
 
 For instance
 
-```
+```yaml
 resource-model-requires-type: false
 ```
 
@@ -363,7 +361,7 @@ public partial class AvailabilitySetResource : ArmResource
 }
 ```
 and if we have this configuration
-```
+```yaml
 request-path-to-resource-type:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Microsoft.Compute/availabilitysets
 ```
@@ -387,7 +385,7 @@ By default the generator will mark all the request paths that meet the criteria 
 
 For instance,
 
-```
+```yaml
 request-path-is-non-resource:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
 ```
@@ -432,7 +430,7 @@ public partial class SubnetResource: ArmResource
 }
 ```
 if you manually assign the parent of subnet to resource group, using the following configuration:
-```
+```yaml
 request-path-to-parent:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
 ```
@@ -505,7 +503,7 @@ public partial class ManagementPolicyCollection : ArmCollection
 }
 ```
 if you want to correct this, you could try the following configuration:
-```
+```yaml
 request-path-to-singleton-resource:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: managementPolicies/default
 ```
@@ -540,7 +538,7 @@ public partial class ManagementPolicyResource : ArmResource
 We provide a new configuration `override-operation-name` to assign new names to operations, which is a dictionary from the operationId of the operation to its new name.
 
 For instance, originally, a `VirtualMachineResource` has a method `Start` which means to power on the machine, to align with the method `PowerOff`, we could use the following configuration:
-```
+```yaml
 override-operation-name:
   VirtualMachines_Start: PowerOn
 ```
@@ -553,35 +551,100 @@ public partial class VirtualMachineResource : ArmResource
 }
 ```
 
-### Resource collection should have a `GetAll` method
+### List exception
 
-// TODO -- revise this
-
-From .Net convention, a resource collection class needs to implement the `IEnumerable<>` interface since the name of them ends with the word `Collection`. This will require resource collection classes to have a `GetAll` method to provider the `Enumerator` to the caller. If there is a collection without `GetAll` method, the generator will throw an error.
-
-If you are sure this collection really do not have a `GetAll` method and want to proceed the generation, you can add the corresponding request path of the resource collection which can be found in the error message, to the `list-exception` configuration, like
-
+If the generator finds a case that a collection class does not have a `GetAll` method, the following error message will be thrown:
 ```
+fatal   | The ResourceCollection AvailabilitySetCollection (RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}) does not have a GetAll method
+```
+
+When this happens, first we need to make sure if the swagger has a corresponding `List` operation for your resource. This should be a `GET` operation returns a collection of the resource data of your resource.
+
+If there is no such operation, we need to double think if this is really a resource or it should be a singleton resource. You can use the `request-path-is-non-resource` configuration to mark it as a non-resource (see [Mark a request path is a non-resource](#mark-a-request-path-is-a-non-resource) section for details), or use the `request-path-to-singleton-resource` configuration to mark it as a singleton-resource (see [Change singleton resources](#change-singleton-resources) section for details).
+
+If there is such an operation, but it is not automatically recognized by the generator, you can use the following combination of configurations to put it inside the collection class as a `GetAll` method:
+```yaml
+request-path-to-parent:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+override-operation-name:
+  AvailabilitySets_List: GetAll
+operation-positions:
+  AvailabilitySets_List: collection
+```
+
+If all the above efforts are not met, you need to use the `list-exception` configuration to temporarily disable this check for this collection class:
+```yaml
 list-exception:
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
 ```
 
 ### Scope resources
 
 Some resources are scope resources, which means that these resources can be created under different scopes, like subscriptions, resource groups, management groups, etc. In the swagger, we currently do not have an extension which assigns which type of resources can be the scope of this resource, therefore we add a configuration in our generator `request-path-to-scope-resource-types` for this new information.
 
-By default, the generator will recognize the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator will generate the resource assuming the scope can be anything. To assign specific resource types to this scope, you can use the following configuration:
-
+By default, the generator will recognize the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator will generate the resource assuming the scope can be anything. For instance, if we have a request path like this:
 ```
+/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+```
+and we should have a resource generated like this:
+```csharp
+public partial class DeploymentResource : ArmResource
+{
+    /* ... */
+}
+
+public partial class DeploymentCollection : ArmCollection, IEnumerable<DeploymentResource>, IAsyncEnumerable<DeploymentResource>
+{
+    /* ... */
+}
+
+public partial class DeploymentData
+{
+    /* ... */
+}
+```
+and since it is a scope resource without any configuration, its parent will be marked as anything, and we should have the following extension method:
+```csharp
+public static partial class ResourcesExtension
+{
+    public static DeploymentCollection GetDeployments(this ArmResource armResource)
+    {
+        /* ... */
+    }
+}
+```
+To assign specific resource types to this scope, you can use the following configuration:
+
+```yaml
 request-path-to-scope-resource-types:
   /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}:
     - subscriptions
     - resourceGroups
     - managementGroups
-    - tenant
 ```
 
-This configuration add the constraint that the scope can only be subscription, resource group, management group or tenant. Other resources cannot be the scope of this resource `Deployment`.
+After we applied this configuration, we will have the following changes:
+```diff
+public static partial class ResourcesExtension
+{
+-   public static DeploymentCollection GetDeployments(this ArmResource armResource)
+-   {
+-       /* ... */
+-   }
++   public static DeploymentCollection GetDeployments(this SubscriptionResource subscription)
++   {
++       /* ... */
++   }
++   public static DeploymentCollection GetDeployments(this ResourceGroupResource resourceGroup)
++   {
++       /* ... */
++   }
++   public static DeploymentCollection GetDeployments(this ManagementGroupResource managementGroup)
++   {
++       /* ... */
++   }
+}
+```
 
 ### Management debug options
 
