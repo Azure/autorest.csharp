@@ -108,6 +108,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetAResource>> GetRecordSetAAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetAs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -121,6 +122,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetAResource> GetRecordSetA(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetAs().Get(relativeRecordSetName, cancellationToken);
@@ -141,6 +143,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetAaaaResource>> GetRecordSetAaaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetAaaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -154,6 +157,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetAaaaResource> GetRecordSetAaaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetAaaas().Get(relativeRecordSetName, cancellationToken);
@@ -174,6 +178,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetCaaResource>> GetRecordSetCaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetCaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -187,6 +192,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetCaaResource> GetRecordSetCaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetCaas().Get(relativeRecordSetName, cancellationToken);
@@ -207,6 +213,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetCNameResource>> GetRecordSetCNameAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetCNames().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -220,6 +227,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetCNameResource> GetRecordSetCName(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetCNames().Get(relativeRecordSetName, cancellationToken);
@@ -240,6 +248,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetMxResource>> GetRecordSetMxAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetMxes().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -253,6 +262,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetMxResource> GetRecordSetMx(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetMxes().Get(relativeRecordSetName, cancellationToken);
@@ -273,6 +283,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetNsResource>> GetRecordSetNsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -286,6 +297,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetNsResource> GetRecordSetNs(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetNs().Get(relativeRecordSetName, cancellationToken);
@@ -306,6 +318,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetPtrResource>> GetRecordSetPtrAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetPtrs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -319,6 +332,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetPtrResource> GetRecordSetPtr(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetPtrs().Get(relativeRecordSetName, cancellationToken);
@@ -339,6 +353,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetSoaResource>> GetRecordSetSoaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetSoas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -352,6 +367,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetSoaResource> GetRecordSetSoa(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetSoas().Get(relativeRecordSetName, cancellationToken);
@@ -372,6 +388,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetSrvResource>> GetRecordSetSrvAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetSrvs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -385,6 +402,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetSrvResource> GetRecordSetSrv(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetSrvs().Get(relativeRecordSetName, cancellationToken);
@@ -405,6 +423,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<RecordSetTxtResource>> GetRecordSetTxtAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return await GetRecordSetTxts().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
@@ -418,6 +437,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<RecordSetTxtResource> GetRecordSetTxt(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             return GetRecordSetTxts().Get(relativeRecordSetName, cancellationToken);

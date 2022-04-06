@@ -1227,8 +1227,9 @@ schemas: !Schemas
       extensions:
         x-accessibility: public
         x-csharp-formats: json
-        x-csharp-usage: model,input,output
-        x-ms-mgmt-propertyReferenceType: true
+        x-csharp-usage: model
+        x-ms-mgmt-propertyReferenceType: false
+        x-ms-mgmt-referenceType: false
         x-namespace: Azure.ResourceManager.Fake.Models
       language: !Languages 
         default:

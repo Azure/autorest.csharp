@@ -52,7 +52,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Update an existing vault
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
-            MgmtKeyvault.Models.PatchableVaultData data = new MgmtKeyvault.Models.PatchableVaultData()
+            MgmtKeyvault.Models.VaultPatch patch = new MgmtKeyvault.Models.VaultPatch()
             {
                 Properties = new MgmtKeyvault.Models.VaultPatchProperties()
                 {
@@ -64,7 +64,7 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             };
 
-            await vaultResource.UpdateAsync(data);
+            await vaultResource.UpdateAsync(patch);
         }
 
         [RecordedTest]

@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private Dictionary<string, Schema> UpdatePatchParameterNames()
+        private Dictionary<string, Schema> UpdateBodyParameterNames()
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
@@ -159,7 +159,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var request in operation.Requests)
                     {
-                        if (request.Protocol.Http is not HttpRequest { Method: HttpMethod.Patch })
+                        if (request.Protocol.Http is not HttpRequest httpRequest)
+                            continue;
+
+                        if (httpRequest.Method != HttpMethod.Patch && httpRequest.Method != HttpMethod.Put && httpRequest.Method != HttpMethod.Post)
                             continue;
 
                         var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
@@ -184,8 +187,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            bodyParam.Schema.Language.Default.Name = $"Patchable{name}Data";
-                            bodyParam.Language.Default.Name = "data";
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
                     }
                 }
@@ -219,7 +221,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             //this is where we update
-            var updatedModels = UpdatePatchParameterNames();
+            var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
                 resourceModels.Remove(schema);
