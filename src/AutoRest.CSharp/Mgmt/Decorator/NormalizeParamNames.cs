@@ -42,6 +42,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (objectSchema.Name.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
 
+            if (objectSchema.Name.EndsWith("Content", StringComparison.Ordinal))
+                return "content";
+
+            if (objectSchema.Name.EndsWith("Patch", StringComparison.Ordinal))
+                return "patch";
+
             if (objectSchema.Name.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(objectSchema.Name))
                 return "data";
 

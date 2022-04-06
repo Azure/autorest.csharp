@@ -2,21 +2,27 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class BodyParameterNormalizer
     {
-        internal static void Update(HttpMethod method, RequestParameter bodyParameter, string resourceName)
+        internal static void Update(HttpMethod method, string methodName, RequestParameter bodyParameter, string resourceName)
         {
             switch (method)
             {
                 case HttpMethod.Put:
-                    UpdateRequestParameter(bodyParameter, "info", $"{resourceName}CreateOrUpdateInfo");
+                    UpdateRequestParameter(bodyParameter, "content", $"{resourceName}CreateOrUpdateContent");
+                    break;
+                case HttpMethod.Post:
+                    UpdateRequestParameter(bodyParameter, "content", $"{resourceName}{methodName}Content");
                     break;
                 case HttpMethod.Patch:
-                    UpdateRequestParameter(bodyParameter, "data", $"Patchable{resourceName}Data");
+                    UpdateRequestParameter(bodyParameter, "patch", $"{resourceName}Patch");
                     break;
                 default:
                     throw new InvalidOperationException($"unhandled HttpMethod {method} for resource {resourceName}");
