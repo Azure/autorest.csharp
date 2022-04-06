@@ -17,4 +17,8 @@ directive:
     transform: >
        $["x-ms-format"] = "resource-type";
        $["x-ms-client-name"] = "ResourceType";
+  - from: ExactMatchInheritance.json
+    where: $.definitions.ExactMatchModel1.properties.type1
+    transform: >
+       $["x-ms-format"] = "resource-type";
 ```

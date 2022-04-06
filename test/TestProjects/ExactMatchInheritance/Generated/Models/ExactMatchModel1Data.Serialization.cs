@@ -33,6 +33,16 @@ namespace ExactMatchInheritance
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsDefined(Type1))
+            {
+                writer.WritePropertyName("type1");
+                writer.WriteStringValue(Type1.Value);
+            }
+            if (Optional.IsDefined(Type2))
+            {
+                writer.WritePropertyName("type2");
+                writer.WriteStringValue(Type2);
+            }
             writer.WriteEndObject();
         }
 
@@ -40,6 +50,8 @@ namespace ExactMatchInheritance
         {
             Optional<string> @new = default;
             Optional<IList<Uri>> supportingUris = default;
+            Optional<ResourceType> type1 = default;
+            Optional<string> type2 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -66,6 +78,21 @@ namespace ExactMatchInheritance
                     supportingUris = array;
                     continue;
                 }
+                if (property.NameEquals("type1"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type1 = new ResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("type2"))
+                {
+                    type2 = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -87,7 +114,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value, Optional.ToList(supportingUris));
+            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), type2.Value);
         }
     }
 }

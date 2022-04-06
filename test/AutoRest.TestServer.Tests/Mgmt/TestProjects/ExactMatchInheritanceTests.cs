@@ -56,6 +56,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
         [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
         [TestCase("SupportingUris", "ExactMatchModel1Data", typeof(IList<Uri>))]
+        [TestCase("Type1", "ExactMatchModel1Data", typeof(ResourceType?))]
+        [TestCase("Type2", "ExactMatchModel1Data", typeof(string))]
         public void ValidatePropertyType(string propertyName, string className, Type expectedType)
         {
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
