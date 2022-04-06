@@ -19,6 +19,8 @@ namespace ExactMatchInheritance
         public ExactMatchModel1Data()
         {
             SupportingUris = new ChangeTrackingList<Uri>();
+            Type1 = "Microsoft.Foo/bar";
+            Type2 = "foo";
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
@@ -28,15 +30,23 @@ namespace ExactMatchInheritance
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
         /// <param name="supportingUris"></param>
-        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris) : base(id, name, resourceType, systemData)
+        /// <param name="type1"></param>
+        /// <param name="type2"></param>
+        internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, ResourceType? type1, string type2) : base(id, name, resourceType, systemData)
         {
             New = @new;
             SupportingUris = supportingUris;
+            Type1 = type1;
+            Type2 = type2;
         }
 
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
         /// <summary> Gets the supporting uris. </summary>
         public IList<Uri> SupportingUris { get; }
+        /// <summary> Gets or sets the type 1. </summary>
+        public ResourceType? Type1 { get; set; }
+        /// <summary> Gets or sets the type 2. </summary>
+        public string Type2 { get; set; }
     }
 }

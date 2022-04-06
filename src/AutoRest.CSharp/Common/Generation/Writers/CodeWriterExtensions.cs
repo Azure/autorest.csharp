@@ -425,6 +425,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Append($"}}");
             }
+            else if (frameworkType == typeof(ResourceType))
+            {
+                var value = ((ResourceType)constant.Value).ToString();
+                writer.Append($"\"{value}\"");
+            }
             else
             {
                 writer.Literal(constant.Value);
