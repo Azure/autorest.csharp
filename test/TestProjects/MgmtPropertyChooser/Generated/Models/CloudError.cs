@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure;
+
 namespace MgmtPropertyChooser.Models
 {
     /// <summary> An error response for a resource management request. </summary>
@@ -18,15 +20,15 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of CloudError. </summary>
         /// <param name="error"> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </param>
         /// <param name="anotherError"> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </param>
-        internal CloudError(ErrorResponse error, ErrorResponseWithAnotherName anotherError)
+        internal CloudError(ResponseError error, ResponseError anotherError)
         {
             Error = error;
             AnotherError = anotherError;
         }
 
         /// <summary> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </summary>
-        public ErrorResponse Error { get; }
+        public ResponseError Error { get; }
         /// <summary> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </summary>
-        public ErrorResponseWithAnotherName AnotherError { get; }
+        public ResponseError AnotherError { get; }
     }
 }

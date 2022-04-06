@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace MgmtPropertyChooser.Models
@@ -14,8 +15,8 @@ namespace MgmtPropertyChooser.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            Optional<ErrorResponse> error = default;
-            Optional<ErrorResponseWithAnotherName> anotherError = default;
+            Optional<ResponseError> error = default;
+            Optional<ResponseError> anotherError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -25,7 +26,7 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    error = JsonSerializer.Deserialize<ResponseError>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("anotherError"))
@@ -35,7 +36,7 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    anotherError = ErrorResponseWithAnotherName.DeserializeErrorResponseWithAnotherName(property.Value);
+                    anotherError = JsonSerializer.Deserialize<ResponseError>(property.Value.ToString());
                     continue;
                 }
             }
