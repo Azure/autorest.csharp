@@ -54,10 +54,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (objectSchema.Name.EndsWith("Patch", StringComparison.Ordinal))
                 return "patch";
 
+            if (objectSchema.Name.EndsWith("Input", StringComparison.Ordinal))
+                return "input";
+
             if (objectSchema.Name.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(objectSchema.Name))
                 return "data";
 
-            if (paramName.Equals("parameters", StringComparison.Ordinal))
+            if (paramName.Equals("parameters", StringComparison.OrdinalIgnoreCase))
                 return objectSchema.Name.FirstCharToLowerCase();
 
             return paramName;

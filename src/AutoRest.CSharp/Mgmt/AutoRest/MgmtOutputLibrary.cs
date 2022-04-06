@@ -175,8 +175,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (count != 1)
                         {
                             //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            if (bodyParam.Schema is ObjectSchema objSchema)
-                                bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, objSchema, ResourceDataSchemaNameToOperationSets);
+                            UpdateParameterNameOnly(bodyParam);
                             continue;
                         }
 
@@ -195,10 +194,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
                             BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
+                        else
+                        {
+                            //if we can't find the name of the resource then we shouldn't rename the type but we should still avoid parameters as the param name
+                            UpdateParameterNameOnly(bodyParam);
+                        }
                     }
                 }
             }
             return updatedModels;
+        }
+
+        private void UpdateParameterNameOnly(RequestParameter bodyParam)
+        {
+            if (bodyParam.Schema is ObjectSchema objSchema)
+                bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, objSchema, ResourceDataSchemaNameToOperationSets);
         }
 
         private string? GetResourceName(KeyValuePair<string, HashSet<OperationSet>> resourceDataModelName, RequestPath requestPath)
