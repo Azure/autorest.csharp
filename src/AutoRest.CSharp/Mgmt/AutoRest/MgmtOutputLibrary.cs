@@ -173,19 +173,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             continue;
 
                         if (count != 1)
+                        {
+                            //even if it has multiple uses for a model type we should normalize the param name just not change the type
+                            if (bodyParam.Schema is ObjectSchema objSchema)
+                                bodyParam.Language.Default.Name = NormalizeParamNames.GetNewName(bodyParam.Language.Default.Name, objSchema, ResourceDataSchemaNameToOperationSets);
                             continue;
+                        }
 
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
                         var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        if (resourceDataModelName.Key is not null)
+                        string? resourceName = GetResourceName(resourceDataModelName, requestPath);
+                        if (resourceName is not null)
                         {
                             //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
                             //types use the same model they should have a common name, but since this case doesn't exist yet
                             //we don't know for sure
                             if (requestPath.IsExpandable)
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
+                            var name = GetResourceName(resourceName, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
                             BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
@@ -193,6 +199,35 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return updatedModels;
+        }
+
+        private string? GetResourceName(KeyValuePair<string, HashSet<OperationSet>> resourceDataModelName, RequestPath requestPath)
+        {
+            if (resourceDataModelName.Key is not null)
+                return resourceDataModelName.Key;
+
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var parentRequestPath) &&
+                Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var position) &&
+                position.Contains("collection"))
+            {
+                var operationSet = RawRequestPathToOperationSets[parentRequestPath];
+                var parentDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                return parentDataModelName.Key is null ? null : parentDataModelName.Key;
+            }
+
+            if (Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(requestPath, out var resourceName))
+                return resourceName;
+
+            if (requestPath.Last().IsConstant)
+            {
+                //try the parent if this is a POST that ends in a constant
+                requestPath = requestPath.ParentRequestPath();
+                var operationSet = RawRequestPathToOperationSets[requestPath];
+                var parentDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                return parentDataModelName.Key is null ? null : parentDataModelName.Key;
+            }
+
+            return null;
         }
 
         private static void IncrementCount(Dictionary<Schema, int> usageCounts, Schema schema)

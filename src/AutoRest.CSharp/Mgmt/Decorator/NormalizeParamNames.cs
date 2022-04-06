@@ -37,10 +37,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static string GetNewName(string paramName, ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        internal static string GetNewName(string paramName, ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
         {
             if (objectSchema.Name.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
+
+            if (objectSchema.Name.EndsWith("Info", StringComparison.Ordinal))
+                return "info";
+
+            if (objectSchema.Name.EndsWith("Details", StringComparison.Ordinal))
+                return "details";
 
             if (objectSchema.Name.EndsWith("Content", StringComparison.Ordinal))
                 return "content";
