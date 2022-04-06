@@ -36,8 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return ReferenceClassFinder.ExternalTypes.Where(t =>
             {
-                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName) &&
-                    t.Name.SplitByCamelCase().Count() > 1; //this is needed while we have the backcompat Plan and ArmPlan inside Azure.ResourceManager
+                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName);
             }).ToList();
         }
 
@@ -66,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                    if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
+                    if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace, replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
                         result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
                         _valueCache.TryAdd(typeToReplace.ObjectSchema, result);

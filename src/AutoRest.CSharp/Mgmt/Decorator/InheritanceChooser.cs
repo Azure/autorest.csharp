@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
-                if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
+                if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(originalType, parentType);
                     _valueCache.TryAdd(originalType.ObjectSchema, result);
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
-                if (IsSuperset(parentType, properties))
+                if (IsSuperset(parentType, originalType, properties))
                 {
                     return GetCSharpType(originalType, parentType);
                 }
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return CSharpType.FromSystemType(originalType.Context, parentType);
         }
 
-        private static List<PropertyInfo> GetParentPropertiesToCompare(System.Type parentType, ObjectTypeProperty[] properties)
+        private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)
         {
             var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
             var attributeObj = parentType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceAttributeName).First();
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentProperties;
         }
 
-        private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
+        private static bool IsSuperset(Type parentType, MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (parentProperties.Count == matchCount)
                     break;
 
-                if (PropertyMatchDetection.DoesPropertyExistInParent(childProperty, parentDict))
+                if (PropertyMatchDetection.DoesPropertyExistInParent(parentType, originalType, childProperty, parentDict))
                     matchCount++;
             }
 

@@ -44,6 +44,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<CarResource>> GetCarAsync(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
@@ -58,6 +59,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<CarResource> GetCar(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetCars().Get(carName, cancellationToken);
@@ -81,6 +83,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
@@ -96,6 +99,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<ParentResource> GetParentResource(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetParentResources().Get(parentName, cancellationToken);

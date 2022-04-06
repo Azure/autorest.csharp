@@ -106,6 +106,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual async Task<Response<SubParentResource>> GetSubParentAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetSubParents().GetAsync(instanceId, expand, cancellationToken).ConfigureAwait(false);
@@ -121,6 +122,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        [ForwardsClientCalls]
         public virtual Response<SubParentResource> GetSubParent(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetSubParents().Get(instanceId, expand, cancellationToken);
