@@ -51,7 +51,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot; | &quot;application/json&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
@@ -71,7 +71,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot; | &quot;application/json&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
@@ -91,7 +91,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot; | &quot;application/json&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
@@ -111,7 +111,7 @@ namespace media_types_LowLevel
 
         /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot; | &quot;application/json&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
         {
