@@ -476,6 +476,12 @@
             "properties": {
                 "new": {
                     "type": "string"
+                },
+                "supportingUris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                 }
             },
             "allOf": [
@@ -607,7 +613,8 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "x-ms-format": "arm-id"
                 },
                 "name": {
                     "type": "string"

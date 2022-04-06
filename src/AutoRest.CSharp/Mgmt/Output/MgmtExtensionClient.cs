@@ -9,10 +9,10 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Input;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -66,10 +66,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtExtensions Extension { get; }
 
+        public bool IsEmpty => Extension.IsEmpty;
+
         public override IEnumerable<Resource> ChildResources => Extension.ChildResources;
 
-        private string? _description;
-        public override string Description => _description ??= $"A class to add extension methods to {ResourceName}.";
+        private FormattableString? _description;
+        public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
         protected override string DefaultAccessibility => "internal";
 

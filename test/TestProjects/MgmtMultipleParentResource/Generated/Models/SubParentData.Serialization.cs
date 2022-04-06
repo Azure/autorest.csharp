@@ -159,7 +159,7 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
+                                outputBlobUri = null;
                                 continue;
                             }
                             outputBlobUri = new Uri(property0.Value.GetString());
@@ -169,7 +169,7 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
+                                errorBlobUri = null;
                                 continue;
                             }
                             errorBlobUri = new Uri(property0.Value.GetString());

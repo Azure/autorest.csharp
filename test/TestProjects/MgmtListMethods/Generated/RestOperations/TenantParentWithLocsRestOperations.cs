@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
     internal partial class TenantParentWithLocsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,10 +34,10 @@ namespace MgmtListMethods
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -54,26 +53,26 @@ namespace MgmtListMethods
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
         /// <summary> Create or update. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="tenantParentWithLocName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TenantParentWithLocData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentWithLocData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, parameters);
+            using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -92,17 +91,17 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="tenantParentWithLocName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="data"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TenantParentWithLocData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public Response<TenantParentWithLocData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, parameters);
+            using var message = CreateCreateOrUpdateRequest(tenantTestName, tenantParentWithLocName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -132,7 +131,7 @@ namespace MgmtListMethods
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -207,7 +206,7 @@ namespace MgmtListMethods
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -271,7 +270,7 @@ namespace MgmtListMethods
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

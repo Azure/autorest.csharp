@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Models;
+using Azure;
 
 namespace MgmtCollectionParent.Models
 {
@@ -19,12 +19,12 @@ namespace MgmtCollectionParent.Models
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> The error object. </param>
-        internal ErrorResponse(ErrorDetail error)
+        internal ErrorResponse(ResponseError error)
         {
             Error = error;
         }
 
         /// <summary> The error object. </summary>
-        public ErrorDetail Error { get; }
+        public ResponseError Error { get; }
     }
 }

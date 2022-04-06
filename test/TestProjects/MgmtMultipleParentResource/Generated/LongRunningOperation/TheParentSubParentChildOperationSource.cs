@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace MgmtMultipleParentResource
 {
-    internal class TheParentSubParentChildOperationSource : IOperationSource<TheParentSubParentChild>
+    internal class TheParentSubParentChildOperationSource : IOperationSource<TheParentSubParentChildResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace MgmtMultipleParentResource
             _client = client;
         }
 
-        TheParentSubParentChild IOperationSource<TheParentSubParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
+        TheParentSubParentChildResource IOperationSource<TheParentSubParentChildResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new TheParentSubParentChild(_client, data);
+            return new TheParentSubParentChildResource(_client, data);
         }
 
-        async ValueTask<TheParentSubParentChild> IOperationSource<TheParentSubParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<TheParentSubParentChildResource> IOperationSource<TheParentSubParentChildResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new TheParentSubParentChild(_client, data);
+            return new TheParentSubParentChildResource(_client, data);
         }
     }
 }

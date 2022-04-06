@@ -20,9 +20,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSingleField()
         {
-            ValidateFields(typeof(TypeOne), "typetwo");
+            ValidateFields(typeof(TypeOneResource), "typetwo");
             ValidateFields(typeof(TypeOneCollection), "typetwo");
-            ValidateFields(typeof(TypeTwo), "typeone");
+            ValidateFields(typeof(TypeTwoResource), "typeone");
             ValidateFields(typeof(TypeTwoCollection), "typeone");
         }
 
@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateBothFieldsInExtension()
         {
-            var extensionClient = typeof(SubscriptionExtensionClient);
+            var extensionClient = typeof(SubscriptionResourceExtensionClient);
             var fields = extensionClient.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
             var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);

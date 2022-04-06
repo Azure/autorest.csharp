@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
     internal partial class SupersetModel3SRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,10 +34,10 @@ namespace SupersetInheritance
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 supersetModel3)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -56,27 +55,27 @@ namespace SupersetInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(supersetModel3);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SupersetModel3>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel3>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel3SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel3SName, supersetModel3);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -95,18 +94,18 @@ namespace SupersetInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SupersetModel3> Put(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public Response<SupersetModel3> Put(string subscriptionId, string resourceGroupName, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel3SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, supersetModel3SName, supersetModel3);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -138,7 +137,7 @@ namespace SupersetInheritance
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

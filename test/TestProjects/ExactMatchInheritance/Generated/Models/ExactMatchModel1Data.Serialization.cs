@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -21,12 +23,23 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
+            if (Optional.IsCollectionDefined(SupportingUris))
+            {
+                writer.WritePropertyName("supportingUris");
+                writer.WriteStartArray();
+                foreach (var item in SupportingUris)
+                {
+                    writer.WriteStringValue(item.AbsoluteUri);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
         {
             Optional<string> @new = default;
+            Optional<IList<Uri>> supportingUris = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -36,6 +49,21 @@ namespace ExactMatchInheritance
                 if (property.NameEquals("new"))
                 {
                     @new = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("supportingUris"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<Uri> array = new List<Uri>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(new Uri(item.GetString()));
+                    }
+                    supportingUris = array;
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -59,7 +87,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value, Optional.ToList(supportingUris));
         }
     }
 }

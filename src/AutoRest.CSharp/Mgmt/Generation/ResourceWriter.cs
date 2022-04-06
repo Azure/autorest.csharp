@@ -14,7 +14,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -40,25 +39,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResourceIdentifierMethods()
         {
-            // Right now, `RequestPaths` contains only one path. But in the future when we start to support multiple context path per resource,
-            // we should implement the logic to avoid overload conflicts (e.g. /{A}/{B}/{C} v.s. /{D}/{E}/{F}, both context path contains 3 parameters).
-            foreach (var requestPath in This.RequestPaths)
+            var requestPath = This.RequestPath;
+            _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{This.Type}\"/> instance.");
+            var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
+            using (_writer.Scope($"public static {typeof(Azure.Core.ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
             {
-                if (requestPath.Count == 0)
-                    continue;
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Generate the resource identifier of a <see cref=\"{This.Type}\"/> instance.");
-                var parameterList = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => $"string {segment.ReferenceName}"));
-                using (_writer.Scope($"public static {typeof(Azure.Core.ResourceIdentifier)} CreateResourceIdentifier({parameterList})"))
-                {
-                    // Storage has inconsistent definitions:
-                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
-                    // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
-                    // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
-                    // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
-                    _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, requestPath.First().IsConstant)}\";");
-                    _writer.Line($"return new {typeof(Azure.Core.ResourceIdentifier)}(resourceId);");
-                }
+                // Storage has inconsistent definitions:
+                // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
+                // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
+                // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
+                // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
+                _writer.Line($"var resourceId = $\"{Segment.BuildSerializedSegments(requestPath, !requestPath.Any() || requestPath.First().IsConstant)}\";");
+                _writer.Line($"return new {typeof(Azure.Core.ResourceIdentifier)}(resourceId);");
             }
         }
 
@@ -84,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             _writer.Line();
-            WriteStaticValidate($"ResourceType", _writer);
+            WriteStaticValidate($"ResourceType");
         }
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool async)
@@ -96,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues[key] = value;");
                 WriteTaggableCommonMethod(async);
             }
@@ -111,13 +103,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Delete", async)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"GetTagResource().{CreateMethodName("Delete", async)}({typeof(WaitUntil)}.Completed, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Append($"var originalTags  = ");
                 if (async)
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues.ReplaceWith(tags);");
                 WriteTaggableCommonMethod(async);
             }
@@ -133,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"await ");
                 }
-                _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                _writer.Line($"GetTagResource().{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"originalTags.Value.Data.TagValues.Remove(key);");
                 WriteTaggableCommonMethod(async);
             }
@@ -142,7 +134,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteTaggableCommonMethod(bool async)
         {
-            _writer.Line($"{GetAwait(async)} TagResource.{CreateMethodName("CreateOrUpdate", async)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"{GetAwait(async)} GetTagResource().{CreateMethodName("CreateOrUpdate", async)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             MgmtClientOperation clientOperation = This.GetOperation!;
             // we need to write multiple branches for a normal method

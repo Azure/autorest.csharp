@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Azure.ResourceManager.Core;
+using Azure;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Fake.Models;
 using NUnit.Framework;
 using ReferenceTypes.Models;
@@ -81,6 +82,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var ctors = referenceType.GetConstructors();
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute)) != null), $"InitializationConstructor attribute was not found for {referenceType.Name}");
             Assert.IsNotNull(ctors.Any(c => c.GetCustomAttribute(typeof(SerializationConstructorAttribute)) != null), $"SerializationConstructor attribute was not found for {referenceType.Name}");
+        }
+
+        [Test]
+        public void ValidateResponseErrorFromAzureCore()
+        {
+            var property = typeof(ErrorResponse).GetProperty("Error");
+            Assert.IsNotNull(property);
+            Assert.AreEqual(typeof(ResponseError), property.PropertyType);
         }
     }
 }

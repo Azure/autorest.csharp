@@ -31,7 +31,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
+            MgmtKeyvault.MhsmPrivateEndpointConnectionData data = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {
@@ -40,9 +40,9 @@ namespace MgmtKeyvault.Tests.Mock
                 },
             };
 
-            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, properties);
+            var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsmResource(managedHsmResourceId).GetMhsmPrivateEndpointConnections();
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
         }
 
         [RecordedTest]
@@ -51,8 +51,8 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: ManagedHsmGetPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
 
-            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
+            var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsmResource(managedHsmResourceId).GetMhsmPrivateEndpointConnections();
             await collection.GetAsync(privateEndpointConnectionName);
         }
 
@@ -61,8 +61,8 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: List managed HSM Pools in a subscription
 
-            var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
-            var collection = GetArmClient().GetManagedHsm(managedHsmId).GetMhsmPrivateEndpointConnections();
+            var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            var collection = GetArmClient().GetManagedHsmResource(managedHsmResourceId).GetMhsmPrivateEndpointConnections();
             await foreach (var _ in collection.GetAllAsync())
             {
             }

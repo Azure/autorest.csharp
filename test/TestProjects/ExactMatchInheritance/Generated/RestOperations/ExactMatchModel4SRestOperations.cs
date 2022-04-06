@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
     internal partial class ExactMatchModel4SRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,10 +34,10 @@ namespace ExactMatchInheritance
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -56,27 +55,27 @@ namespace ExactMatchInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(exactMatchModel4);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ExactMatchModel4>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel4>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel4SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel4SName, exactMatchModel4);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -95,18 +94,18 @@ namespace ExactMatchInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ExactMatchModel4> Put(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel4> Put(string subscriptionId, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel4SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, exactMatchModel4SName, exactMatchModel4);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

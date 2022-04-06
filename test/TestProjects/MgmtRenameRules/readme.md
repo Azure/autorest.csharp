@@ -43,5 +43,7 @@ directive:
       to: VirtualMachineScaleSetRollingUpgrade
   - from: MgmtRenameRules.json
     where: $.definitions.UpgradeOperationHistoricalStatusInfo.properties.type
-    transform: $["x-ms-client-name"] = "ResourceType"
+    transform: > 
+      $["x-ms-format"] = "resource-type";
+      $["x-ms-client-name"] = "ResourceType";
 ```

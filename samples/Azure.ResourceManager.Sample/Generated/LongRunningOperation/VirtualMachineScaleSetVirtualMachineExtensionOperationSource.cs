@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample
 {
-    internal class VirtualMachineScaleSetVirtualMachineExtensionOperationSource : IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>
+    internal class VirtualMachineScaleSetVirtualMachineExtensionOperationSource : IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>
     {
         private readonly ArmClient _client;
 
@@ -23,18 +23,18 @@ namespace Azure.ResourceManager.Sample
             _client = client;
         }
 
-        VirtualMachineScaleSetVirtualMachineExtension IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResult(Response response, CancellationToken cancellationToken)
+        VirtualMachineScaleSetVirtualMachineExtensionResource IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            return new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data);
         }
 
-        async ValueTask<VirtualMachineScaleSetVirtualMachineExtension> IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<VirtualMachineScaleSetVirtualMachineExtensionResource> IOperationSource<VirtualMachineScaleSetVirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            return new VirtualMachineScaleSetVirtualMachineExtensionResource(_client, data);
         }
     }
 }
