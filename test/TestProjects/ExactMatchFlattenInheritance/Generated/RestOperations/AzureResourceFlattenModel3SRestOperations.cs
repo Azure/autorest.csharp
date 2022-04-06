@@ -110,7 +110,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 azureResourceFlattenModel3)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -128,7 +128,7 @@ namespace ExactMatchFlattenInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(azureResourceFlattenModel3);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -138,18 +138,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<AzureResourceFlattenModel3>> PutAsync(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AzureResourceFlattenModel3>> PutAsync(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, azureResourceFlattenModel3);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -169,18 +169,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<AzureResourceFlattenModel3> Put(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public Response<AzureResourceFlattenModel3> Put(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, name, azureResourceFlattenModel3);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

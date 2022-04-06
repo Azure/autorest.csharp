@@ -138,7 +138,7 @@ namespace MgmtKeyvault.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
+                        vaultUri = null;
                         continue;
                     }
                     vaultUri = new Uri(property.Value.GetString());

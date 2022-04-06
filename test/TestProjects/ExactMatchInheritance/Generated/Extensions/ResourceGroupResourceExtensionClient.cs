@@ -70,15 +70,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel2s_Put
         /// </summary>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
             {
-                var response = await ExactMatchModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await ExactMatchModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -93,15 +93,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel2s_Put
         /// </summary>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
             {
-                var response = ExactMatchModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
+                var response = ExactMatchModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel2SName, exactMatchModel2, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -168,15 +168,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel3s_Put
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
             {
-                var response = await ExactMatchModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await ExactMatchModel3sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -191,15 +191,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel3s_Put
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
             {
-                var response = ExactMatchModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken);
+                var response = ExactMatchModel3sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel3SName, exactMatchModel3, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -258,15 +258,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel4s_Put
         /// </summary>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try
             {
-                var response = await ExactMatchModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await ExactMatchModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -281,15 +281,15 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel4s_Put
         /// </summary>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try
             {
-                var response = ExactMatchModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
+                var response = ExactMatchModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel4SName, exactMatchModel4, cancellationToken);
                 return response;
             }
             catch (Exception e)

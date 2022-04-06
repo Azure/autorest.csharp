@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
+                        blobUri = null;
                         continue;
                     }
                     blobUri = new Uri(property.Value.GetString());

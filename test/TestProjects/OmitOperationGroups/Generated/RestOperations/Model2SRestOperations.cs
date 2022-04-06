@@ -108,7 +108,7 @@ namespace OmitOperationGroups
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string model2SName, Model2Data data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -126,7 +126,7 @@ namespace OmitOperationGroups
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -135,18 +135,18 @@ namespace OmitOperationGroups
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="parameters"> The Model2 to use. </param>
+        /// <param name="data"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<Model2Data>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Model2Data>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, model2SName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, model2SName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -165,18 +165,18 @@ namespace OmitOperationGroups
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
-        /// <param name="parameters"> The Model2 to use. </param>
+        /// <param name="data"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<Model2Data> CreateOrUpdate(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
+        public Response<Model2Data> CreateOrUpdate(string subscriptionId, string resourceGroupName, string model2SName, Model2Data data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(model2SName, nameof(model2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, model2SName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, model2SName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

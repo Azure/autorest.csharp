@@ -94,16 +94,16 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
+        public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(model5, nameof(model5));
 
-            return await GetExtensionClient(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -112,16 +112,16 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<Model5> CreateOrUpdateModel5(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
+        public static Response<Model5> CreateOrUpdateModel5(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(model5, nameof(model5));
 
-            return GetExtensionClient(resourceGroupResource).CreateOrUpdateModel5(model5SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
         }
 
         /// <summary>

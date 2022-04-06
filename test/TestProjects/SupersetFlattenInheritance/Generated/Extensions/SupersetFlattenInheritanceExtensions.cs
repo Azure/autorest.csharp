@@ -130,16 +130,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
+        public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            return await GetExtensionClient(resourceGroupResource).PutCustomModel1Async(customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -148,16 +148,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<CustomModel1> PutCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
+        public static Response<CustomModel1> PutCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            return GetExtensionClient(resourceGroupResource).PutCustomModel1(customModel1SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
         }
 
         /// <summary>
@@ -222,16 +222,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
+        public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel2, nameof(customModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutCustomModel2Async(customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -240,16 +240,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<CustomModel2> PutCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
+        public static Response<CustomModel2> PutCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel2, nameof(customModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutCustomModel2(customModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
         }
 
         /// <summary>
@@ -314,16 +314,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
+        public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
-            return await GetExtensionClient(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -332,16 +332,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
+        public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
-            return GetExtensionClient(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -406,16 +406,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
+        public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -424,16 +424,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
+        public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -498,16 +498,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
+        public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
-            return await GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -516,16 +516,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
+        public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
-            return GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -590,16 +590,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
+        public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -608,16 +608,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
+        public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -682,16 +682,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
+        public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -700,16 +700,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<ResourceModel2> PutResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
+        public static Response<ResourceModel2> PutResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutResourceModel2(resourceModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -774,16 +774,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
+        public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -792,16 +792,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
+        public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -842,16 +842,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
+        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
-            return await GetExtensionClient(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -860,16 +860,16 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
+        public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
-            return GetExtensionClient(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
         }
 
         /// <summary>

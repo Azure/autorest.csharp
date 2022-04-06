@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == HttpParameterIn.Path).Select(p => p.CSharpName())));
         }
 
-        [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "parameters", "quick" }, new[] { true, true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "data", "quick" }, new[] { true, true, false })]
         [TestCase(typeof(VirtualMachineScaleSetCollection), "Get", false, new[]{ "vmScaleSetName", "expand"}, new[] { true, false })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "Update", true, new[]{ "data"}, new[] { true })]
         [TestCase(typeof(VirtualMachineScaleSetResource), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]

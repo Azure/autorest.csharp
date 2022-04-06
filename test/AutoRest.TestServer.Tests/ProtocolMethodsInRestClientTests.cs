@@ -53,6 +53,13 @@ namespace AutoRest.TestServer.Tests
         [TestCase("CreateAsync", typeof(SecondTemplateRestClient))]
         [TestCase("Delete", typeof(SecondTemplateRestClient))]
         [TestCase("DeleteAsync", typeof(SecondTemplateRestClient))]
+
+        [TestCase("Create", typeof(ThirdTemplateRestClient))]
+        [TestCase("CreateAsync", typeof(ThirdTemplateRestClient))]
+        [TestCase("Delete", typeof(ThirdTemplateRestClient))]
+        [TestCase("DeleteAsync", typeof(ThirdTemplateRestClient))]
+        [TestCase("Get", typeof(ThirdTemplateRestClient))]
+        [TestCase("GetAsync", typeof(ThirdTemplateRestClient))]
         public void ProtocolMethodNotGeneratedInRestClient(string methodName, Type clientType)
         {
             var methods = clientType.GetMethods();

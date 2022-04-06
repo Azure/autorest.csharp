@@ -106,16 +106,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
+        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
-            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -124,16 +124,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
+        public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
-            return GetExtensionClient(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
         }
 
         /// <summary>
@@ -166,16 +166,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
+        public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
-            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -184,16 +184,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
+        public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
-            return GetExtensionClient(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
         }
 
         /// <summary>
@@ -234,16 +234,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
+        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -252,16 +252,16 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
+        public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            return GetExtensionClient(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
         }
 
         #region ExactMatchModel1Resource

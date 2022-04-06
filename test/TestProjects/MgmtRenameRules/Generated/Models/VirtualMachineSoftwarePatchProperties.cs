@@ -28,10 +28,10 @@ namespace MgmtRenameRules.Models
         /// <param name="classifications"> The classification(s) of the patch as provided by the patch publisher. </param>
         /// <param name="rebootBehavior"> Describes the reboot requirements of the patch. </param>
         /// <param name="activityId"> The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs. </param>
-        /// <param name="publishedDate"> The UTC timestamp when the repository published this patch. </param>
-        /// <param name="lastModifiedDateTime"> The UTC timestamp of the last update to this patch record. </param>
+        /// <param name="publishedOn"> The UTC timestamp when the repository published this patch. </param>
+        /// <param name="lastModifiedOn"> The UTC timestamp of the last update to this patch record. </param>
         /// <param name="assessmentState"> Describes the outcome of an install operation for a given patch. </param>
-        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedDate, DateTimeOffset? lastModifiedDateTime, PatchAssessmentState? assessmentState)
+        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedOn, DateTimeOffset? lastModifiedOn, PatchAssessmentState? assessmentState)
         {
             PatchId = patchId;
             Name = name;
@@ -40,8 +40,8 @@ namespace MgmtRenameRules.Models
             Classifications = classifications;
             RebootBehavior = rebootBehavior;
             ActivityId = activityId;
-            PublishedDate = publishedDate;
-            LastModifiedDateTime = lastModifiedDateTime;
+            PublishedOn = publishedOn;
+            LastModifiedOn = lastModifiedOn;
             AssessmentState = assessmentState;
         }
 
@@ -60,9 +60,9 @@ namespace MgmtRenameRules.Models
         /// <summary> The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs. </summary>
         public string ActivityId { get; }
         /// <summary> The UTC timestamp when the repository published this patch. </summary>
-        public DateTimeOffset? PublishedDate { get; }
+        public DateTimeOffset? PublishedOn { get; }
         /// <summary> The UTC timestamp of the last update to this patch record. </summary>
-        public DateTimeOffset? LastModifiedDateTime { get; }
+        public DateTimeOffset? LastModifiedOn { get; }
         /// <summary> Describes the outcome of an install operation for a given patch. </summary>
         public PatchAssessmentState? AssessmentState { get; }
     }

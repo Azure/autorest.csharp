@@ -30,7 +30,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: KeyVaultPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.PrivateEndpointConnectionData properties = new MgmtKeyvault.PrivateEndpointConnectionData()
+            MgmtKeyvault.PrivateEndpointConnectionData data = new MgmtKeyvault.PrivateEndpointConnectionData()
             {
                 Etag = "",
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.PrivateLinkServiceConnectionState()
@@ -42,7 +42,7 @@ namespace MgmtKeyvault.Tests.Mock
 
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var collection = GetArmClient().GetVaultResource(vaultResourceId).GetPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, properties);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
         }
 
         [RecordedTest]

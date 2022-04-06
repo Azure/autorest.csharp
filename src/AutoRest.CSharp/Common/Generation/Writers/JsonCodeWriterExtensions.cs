@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -165,7 +166,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(char) ||
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
-                                 frameworkType == typeof(Azure.Core.ResourceType))
+                                 frameworkType == typeof(Azure.Core.ResourceType) ||
+                                 frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -313,11 +315,22 @@ namespace AutoRest.CSharp.Generation.Writers
                                      property.Property?.ValueType.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                                      property.Property?.ValueType.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
                             {
-                                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                if (Configuration.AzureArm && property.Property?.ValueType.Equals(typeof(Uri)) == true)
                                 {
-                                    writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-                                    writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
-                                    writer.Append($"continue;");
+                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                    {
+                                        writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
+                                        writer.Append($"continue;");
+                                    }
+                                }
+                                else
+                                {
+                                    using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                    {
+                                        writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+                                        writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
+                                        writer.Append($"continue;");
+                                    }
                                 }
                             }
 
@@ -539,7 +552,8 @@ namespace AutoRest.CSharp.Generation.Writers
             if (frameworkType == typeof(ETag) ||
                 frameworkType == typeof(Uri) ||
                 frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
-                frameworkType == typeof(Azure.Core.ResourceType))
+                frameworkType == typeof(Azure.Core.ResourceType) ||
+                frameworkType == typeof(Azure.Core.AzureLocation))
             {
                 writer.Append($"new {frameworkType}({element}.GetString())");
                 return;

@@ -60,20 +60,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DisplayResource to use. </param>
+        /// <param name="data"> The DisplayResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<DisplayResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string displayResourceName, DisplayResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<DisplayResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _displayResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _displayResourceRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -92,20 +92,20 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="parameters"> The DisplayResource to use. </param>
+        /// <param name="data"> The DisplayResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<DisplayResource> CreateOrUpdate(WaitUntil waitUntil, string displayResourceName, DisplayResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> or <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<DisplayResource> CreateOrUpdate(WaitUntil waitUntil, string displayResourceName, DisplayResourceData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _displayResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, parameters, cancellationToken);
+                var response = _displayResourceRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, data, cancellationToken);
                 var operation = new MgmtResourceNameArmOperation<DisplayResource>(Response.FromValue(new DisplayResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -243,7 +243,7 @@ namespace MgmtResourceName
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(displayResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _displayResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -270,66 +270,8 @@ namespace MgmtResourceName
             scope.Start();
             try
             {
-                var response = GetIfExists(displayResourceName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
-        /// </summary>
-        /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
-        public virtual async Task<Response<DisplayResource>> GetIfExistsAsync(string displayResourceName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-
-            using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _displayResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<DisplayResource>(null, response.GetRawResponse());
-                return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
-        /// </summary>
-        /// <param name="displayResourceName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
-        public virtual Response<DisplayResource> GetIfExists(string displayResourceName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(displayResourceName, nameof(displayResourceName));
-
-            using var scope = _displayResourceClientDiagnostics.CreateScope("DisplayResourceCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _displayResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<DisplayResource>(null, response.GetRawResponse());
-                return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

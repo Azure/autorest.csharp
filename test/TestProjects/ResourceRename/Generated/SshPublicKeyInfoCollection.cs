@@ -278,7 +278,7 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -305,66 +305,8 @@ namespace ResourceRename
             scope.Start();
             try
             {
-                var response = GetIfExists(sshPublicKeyName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// Operation Id: SshPublicKeys_Get
-        /// </summary>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual async Task<Response<SshPublicKeyInfoResource>> GetIfExistsAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
-
-            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<SshPublicKeyInfoResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// Operation Id: SshPublicKeys_Get
-        /// </summary>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual Response<SshPublicKeyInfoResource> GetIfExists(string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
-
-            using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<SshPublicKeyInfoResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SshPublicKeyInfoResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
