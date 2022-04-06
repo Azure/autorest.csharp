@@ -14,18 +14,16 @@ input-file:
   - $(this-folder)/Links.json
 namespace: MgmtScopeResource
 
-list-exception:
-  - /{linkId}
 request-path-to-resource-data:
   # model of this has id, type and name, but its type has the type of `object` instead of `string`
   /{linkId}: ResourceLink
-request-path-to-parent:
-  /{scope}/providers/Microsoft.Resources/links: /{linkId}
+operation-to-parent:
+  ResourceLinks_ListAtSourceScope: /{linkId}
   # setting these to the same parent will automatically merge these operations
-  /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-  /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-  /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-  /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+  Deployments_WhatIfAtTenantScope: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+  Deployments_WhatIfAtSubscriptionScope: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+  Deployments_WhatIfAtManagementGroupScope: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+  Deployments_WhatIf: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
 request-path-to-resource-type:
   /{linkId}: Microsoft.Resources/links
 request-path-to-scope-resource-types:
@@ -42,7 +40,7 @@ request-path-to-scope-resource-types:
 override-operation-name:
   ResourceLinks_ListAtSourceScope: GetAll
 operation-positions:
-  /{scope}/providers/Microsoft.Resources/links: collection
+  ResourceLinks_ListAtSourceScope: collection
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: FakePolicyAssignments_DeleteById

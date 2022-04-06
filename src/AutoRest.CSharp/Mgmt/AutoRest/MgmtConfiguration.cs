@@ -107,6 +107,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> keepOrphanedModels,
             IReadOnlyList<string> noResourceSuffix,
             MgmtDebugConfiguration mgmtDebug,
+            JsonElement? operationToParent = default,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
             JsonElement? requestPathToResourceData = default,
@@ -124,6 +125,7 @@ namespace AutoRest.CSharp.Input
             TestModelerConfiguration? testmodeler = default,
             JsonElement? operationIdMappings = default)
         {
+            OperationToParent = !IsValidJsonElement(operationToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationToParent.ToString());
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
             RequestPathToResourceData = !IsValidJsonElement(requestPathToResourceData) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceData.ToString());
@@ -182,6 +184,7 @@ namespace AutoRest.CSharp.Input
         /// Will we only see the resource name to be in the dictionary to make a resource singleton? Defaults to false
         /// </summary>
         public bool DoesSingletonRequiresKeyword { get; }
+        public IReadOnlyDictionary<string, string> OperationToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToParent { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceName { get; }
         public IReadOnlyDictionary<string, string> RequestPathToResourceData { get; }
@@ -216,6 +219,7 @@ namespace AutoRest.CSharp.Input
                 keepOrphanedModels: autoRest.GetValue<string[]?>("keep-orphaned-models").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
+                operationToParent: autoRest.GetValue<JsonElement?>("operation-to-parent").GetAwaiter().GetResult(),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
                 requestPathToResourceData: autoRest.GetValue<JsonElement?>("request-path-to-resource-data").GetAwaiter().GetResult(),
@@ -243,6 +247,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(KeepOrphanedModels), KeepOrphanedModels);
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            WriteNonEmptySettings(writer, nameof(OperationToParent), OperationToParent);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceName), RequestPathToResourceName);
@@ -277,6 +282,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(ListException), out var listException);
             root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModels);
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
+            root.TryGetProperty(nameof(OperationToParent), out var operationToParent);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -332,6 +338,7 @@ namespace AutoRest.CSharp.Input
                 keepOrphanedModels: keepOrphanedModelsList,
                 noResourceSuffix: noResourceSuffixList,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
+                operationToParent: operationToParent,
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
                 requestPathToResourceData: requestPathToResourceData,

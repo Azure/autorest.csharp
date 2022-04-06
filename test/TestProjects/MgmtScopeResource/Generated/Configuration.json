@@ -10,18 +10,15 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "ListException": [
-    "/{linkId}"
-  ],
-  "RequestPathToParent": {
-    "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",
-    "/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
+  "OperationToParent": {
+    "ResourceLinks_ListAtSourceScope": "/{linkId}",
+    "Deployments_WhatIfAtTenantScope": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
+    "Deployments_WhatIfAtSubscriptionScope": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
+    "Deployments_WhatIfAtManagementGroupScope": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}",
+    "Deployments_WhatIf": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
   },
   "OperationPositions": {
-    "/{scope}/providers/Microsoft.Resources/links": [
+    "ResourceLinks_ListAtSourceScope": [
       "collection"
     ]
   },

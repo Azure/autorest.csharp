@@ -122,8 +122,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static RequestPath GetParentRequestPath(this Operation operation)
         {
+            // returns early if this operation has been set its own parent
+            if (Configuration.MgmtConfiguration.OperationToParent.TryGetValue(operation.OperationId(), out var rawPath))
+                return GetRequestPathFromRawPath(rawPath);
             // escape the calculation if this is configured in the configuration
-            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
             var currentRequestPath = operation.GetRequestPath();

@@ -71,14 +71,10 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
-        public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
+        public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-
-            return GetExtensionClient(tenantResource).GetResourceLinks(scope);
+            return GetExtensionClient(tenantResource).GetResourceLinks();
         }
 
         /// <summary>
@@ -87,13 +83,13 @@ namespace MgmtScopeResource
         /// Operation Id: ResourceLinks_Get
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
-            return await GetResourceLinks(tenantResource, scope).GetAsync(cancellationToken).ConfigureAwait(false);
+            return await tenantResource.GetResourceLinks().GetAsync(linkId, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -102,13 +98,13 @@ namespace MgmtScopeResource
         /// Operation Id: ResourceLinks_Get
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
+        public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, ResourceIdentifier linkId, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinks(tenantResource, scope).Get(cancellationToken);
+            return tenantResource.GetResourceLinks().Get(linkId, cancellationToken);
         }
 
         /// <summary>

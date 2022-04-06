@@ -51,11 +51,10 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
-        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
-        public virtual ResourceLinkCollection GetResourceLinks(string scope)
+        public virtual ResourceLinkCollection GetResourceLinks()
         {
-            return new ResourceLinkCollection(Client, Id, scope);
+            return GetCachedClient(Client => new ResourceLinkCollection(Client, Id));
         }
 
         /// <summary>
@@ -67,8 +66,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
-            scope0.Start();
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
             try
             {
                 var response = await DeploymentExtendedDeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
@@ -76,7 +75,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -90,8 +89,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
-            using var scope0 = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
-            scope0.Start();
+            using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
+            scope.Start();
             try
             {
                 var response = DeploymentExtendedDeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
@@ -99,7 +98,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
