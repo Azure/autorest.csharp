@@ -355,15 +355,15 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease
         /// Operation Id: BlobContainers_Lease
         /// </summary>
-        /// <param name="leaseContainerRequest"> Lease Container request body. </param>
+        /// <param name="content"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest leaseContainerRequest = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(BlobContainerLeaseContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerResource.Lease");
             scope.Start();
             try
             {
-                var response = await _blobContainerRestClient.LeaseAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, leaseContainerRequest, cancellationToken).ConfigureAwait(false);
+                var response = await _blobContainerRestClient.LeaseAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -378,15 +378,15 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/lease
         /// Operation Id: BlobContainers_Lease
         /// </summary>
-        /// <param name="leaseContainerRequest"> Lease Container request body. </param>
+        /// <param name="content"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<LeaseContainerResponse> Lease(LeaseContainerRequest leaseContainerRequest = null, CancellationToken cancellationToken = default)
+        public virtual Response<LeaseContainerResponse> Lease(BlobContainerLeaseContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerResource.Lease");
             scope.Start();
             try
             {
-                var response = _blobContainerRestClient.Lease(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, leaseContainerRequest, cancellationToken);
+                var response = _blobContainerRestClient.Lease(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, content, cancellationToken);
                 return response;
             }
             catch (Exception e)

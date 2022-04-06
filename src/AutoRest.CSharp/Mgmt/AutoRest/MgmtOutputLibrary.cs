@@ -222,7 +222,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 //try the parent if this is a POST that ends in a constant
                 requestPath = requestPath.ParentRequestPath();
-                var operationSet = RawRequestPathToOperationSets[requestPath];
+                if (!RawRequestPathToOperationSets.TryGetValue(requestPath, out var operationSet))
+                    return null;
                 var parentDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
                 return parentDataModelName.Key is null ? null : parentDataModelName.Key;
             }

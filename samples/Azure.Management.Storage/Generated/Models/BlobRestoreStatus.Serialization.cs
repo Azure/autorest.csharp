@@ -17,7 +17,7 @@ namespace Azure.Management.Storage.Models
             Optional<BlobRestoreProgressStatus> status = default;
             Optional<string> failureReason = default;
             Optional<string> restoreId = default;
-            Optional<BlobRestoreParameters> parameters = default;
+            Optional<StorageAccountRestoreBlobRangesContent> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -47,7 +47,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    parameters = BlobRestoreParameters.DeserializeBlobRestoreParameters(property.Value);
+                    parameters = StorageAccountRestoreBlobRangesContent.DeserializeStorageAccountRestoreBlobRangesContent(property.Value);
                     continue;
                 }
             }
