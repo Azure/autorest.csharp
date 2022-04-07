@@ -20,7 +20,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="failureReason"> Failure reason when blob restore is failed. </param>
         /// <param name="restoreId"> Id for tracking blob restore request. </param>
         /// <param name="parameters"> Blob restore request parameters. </param>
-        internal BlobRestoreStatus(BlobRestoreProgressStatus? status, string failureReason, string restoreId, StorageAccountRestoreBlobRangesContent parameters)
+        internal BlobRestoreStatus(BlobRestoreProgressStatus? status, string failureReason, string restoreId, BlobRestoreContent parameters)
         {
             Status = status;
             FailureReason = failureReason;
@@ -35,6 +35,6 @@ namespace Azure.Management.Storage.Models
         /// <summary> Id for tracking blob restore request. </summary>
         public string RestoreId { get; }
         /// <summary> Blob restore request parameters. </summary>
-        public StorageAccountRestoreBlobRangesContent Parameters { get; }
+        public BlobRestoreContent Parameters { get; }
     }
 }

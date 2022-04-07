@@ -609,17 +609,17 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="quotaUpdateParameters"> Quota update parameters. </param>
+        /// <param name="content"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="quotaUpdateParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this SubscriptionResource subscriptionResource, string location, QuotaUpdateParameters quotaUpdateParameters, CancellationToken cancellationToken = default)
+        public static AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(quotaUpdateParameters, nameof(quotaUpdateParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
-            return GetExtensionClient(subscriptionResource).UpdateQuotasAsync(location, quotaUpdateParameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).UpdateQuotasAsync(location, content, cancellationToken);
         }
 
         /// <summary>
@@ -629,17 +629,17 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="quotaUpdateParameters"> Quota update parameters. </param>
+        /// <param name="content"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="quotaUpdateParameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this SubscriptionResource subscriptionResource, string location, QuotaUpdateParameters quotaUpdateParameters, CancellationToken cancellationToken = default)
+        public static Pageable<UpdateWorkspaceQuotas> UpdateQuotas(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(quotaUpdateParameters, nameof(quotaUpdateParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
-            return GetExtensionClient(subscriptionResource).UpdateQuotas(location, quotaUpdateParameters, cancellationToken);
+            return GetExtensionClient(subscriptionResource).UpdateQuotas(location, content, cancellationToken);
         }
 
         private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)

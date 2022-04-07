@@ -1597,7 +1597,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateConvertToSinglePlacementGroupRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetConvertToSinglePlacementGroupContent content)
+        internal HttpMessage CreateConvertToSinglePlacementGroupRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VmScaleSetConvertToSinglePlacementGroupInput input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1615,7 +1615,7 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(content);
+            content0.JsonWriter.WriteObjectValue(input);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -1625,18 +1625,18 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the virtual machine scale set to create or update. </param>
-        /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="input"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="input"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> ConvertToSinglePlacementGroupAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetConvertToSinglePlacementGroupContent content, CancellationToken cancellationToken = default)
+        public async Task<Response> ConvertToSinglePlacementGroupAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VmScaleSetConvertToSinglePlacementGroupInput input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using var message = CreateConvertToSinglePlacementGroupRequest(subscriptionId, resourceGroupName, vmScaleSetName, content);
+            using var message = CreateConvertToSinglePlacementGroupRequest(subscriptionId, resourceGroupName, vmScaleSetName, input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1651,18 +1651,18 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the virtual machine scale set to create or update. </param>
-        /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="input"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="input"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response ConvertToSinglePlacementGroup(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetConvertToSinglePlacementGroupContent content, CancellationToken cancellationToken = default)
+        public Response ConvertToSinglePlacementGroup(string subscriptionId, string resourceGroupName, string vmScaleSetName, VmScaleSetConvertToSinglePlacementGroupInput input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using var message = CreateConvertToSinglePlacementGroupRequest(subscriptionId, resourceGroupName, vmScaleSetName, content);
+            using var message = CreateConvertToSinglePlacementGroupRequest(subscriptionId, resourceGroupName, vmScaleSetName, input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1673,7 +1673,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateSetOrchestrationServiceStateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetSetOrchestrationServiceStateContent content)
+        internal HttpMessage CreateSetOrchestrationServiceStateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, OrchestrationServiceStateInput input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1691,7 +1691,7 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(content);
+            content0.JsonWriter.WriteObjectValue(input);
             request.Content = content0;
             _userAgent.Apply(message);
             return message;
@@ -1701,18 +1701,18 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the virtual machine scale set to create or update. </param>
-        /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="input"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="input"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> SetOrchestrationServiceStateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetSetOrchestrationServiceStateContent content, CancellationToken cancellationToken = default)
+        public async Task<Response> SetOrchestrationServiceStateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, OrchestrationServiceStateInput input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using var message = CreateSetOrchestrationServiceStateRequest(subscriptionId, resourceGroupName, vmScaleSetName, content);
+            using var message = CreateSetOrchestrationServiceStateRequest(subscriptionId, resourceGroupName, vmScaleSetName, input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1728,18 +1728,18 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the virtual machine scale set to create or update. </param>
-        /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="input"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="input"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response SetOrchestrationServiceState(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetSetOrchestrationServiceStateContent content, CancellationToken cancellationToken = default)
+        public Response SetOrchestrationServiceState(string subscriptionId, string resourceGroupName, string vmScaleSetName, OrchestrationServiceStateInput input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(input, nameof(input));
 
-            using var message = CreateSetOrchestrationServiceStateRequest(subscriptionId, resourceGroupName, vmScaleSetName, content);
+            using var message = CreateSetOrchestrationServiceStateRequest(subscriptionId, resourceGroupName, vmScaleSetName, input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

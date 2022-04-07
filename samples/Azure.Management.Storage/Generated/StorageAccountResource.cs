@@ -516,7 +516,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response<ListAccountSasResponse>> GetAccountSASAsync(StorageAccountListAccountSASContent content, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListAccountSasResponse>> GetAccountSASAsync(AccountSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -542,7 +542,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response<ListAccountSasResponse> GetAccountSAS(StorageAccountListAccountSASContent content, CancellationToken cancellationToken = default)
+        public virtual Response<ListAccountSasResponse> GetAccountSAS(AccountSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -568,7 +568,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response<ListServiceSasResponse>> GetServiceSASAsync(StorageAccountListServiceSASContent content, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListServiceSasResponse>> GetServiceSASAsync(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -594,7 +594,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response<ListServiceSasResponse> GetServiceSAS(StorageAccountListServiceSASContent content, CancellationToken cancellationToken = default)
+        public virtual Response<ListServiceSasResponse> GetServiceSAS(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -785,7 +785,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<ArmOperation<BlobRestoreStatus>> RestoreBlobRangesAsync(WaitUntil waitUntil, StorageAccountRestoreBlobRangesContent content, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BlobRestoreStatus>> RestoreBlobRangesAsync(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -815,7 +815,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual ArmOperation<BlobRestoreStatus> RestoreBlobRanges(WaitUntil waitUntil, StorageAccountRestoreBlobRangesContent content, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BlobRestoreStatus> RestoreBlobRanges(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(content, nameof(content));
 

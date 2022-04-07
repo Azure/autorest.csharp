@@ -740,7 +740,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateListAccountSASRequest(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListAccountSASContent content)
+        internal HttpMessage CreateListAccountSASRequest(string subscriptionId, string resourceGroupName, string accountName, AccountSasContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -773,7 +773,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListAccountSASContent content, CancellationToken cancellationToken = default)
+        public async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(string subscriptionId, string resourceGroupName, string accountName, AccountSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -804,7 +804,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ListAccountSasResponse> ListAccountSAS(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListAccountSASContent content, CancellationToken cancellationToken = default)
+        public Response<ListAccountSasResponse> ListAccountSAS(string subscriptionId, string resourceGroupName, string accountName, AccountSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -827,7 +827,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateListServiceSASRequest(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListServiceSASContent content)
+        internal HttpMessage CreateListServiceSASRequest(string subscriptionId, string resourceGroupName, string accountName, ServiceSasContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -860,7 +860,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListServiceSASContent content, CancellationToken cancellationToken = default)
+        public async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(string subscriptionId, string resourceGroupName, string accountName, ServiceSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -891,7 +891,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ListServiceSasResponse> ListServiceSAS(string subscriptionId, string resourceGroupName, string accountName, StorageAccountListServiceSASContent content, CancellationToken cancellationToken = default)
+        public Response<ListServiceSasResponse> ListServiceSAS(string subscriptionId, string resourceGroupName, string accountName, ServiceSasContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1131,7 +1131,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateRestoreBlobRangesRequest(string subscriptionId, string resourceGroupName, string accountName, StorageAccountRestoreBlobRangesContent content)
+        internal HttpMessage CreateRestoreBlobRangesRequest(string subscriptionId, string resourceGroupName, string accountName, BlobRestoreContent content)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1164,7 +1164,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> RestoreBlobRangesAsync(string subscriptionId, string resourceGroupName, string accountName, StorageAccountRestoreBlobRangesContent content, CancellationToken cancellationToken = default)
+        public async Task<Response> RestoreBlobRangesAsync(string subscriptionId, string resourceGroupName, string accountName, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -1191,7 +1191,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response RestoreBlobRanges(string subscriptionId, string resourceGroupName, string accountName, StorageAccountRestoreBlobRangesContent content, CancellationToken cancellationToken = default)
+        public Response RestoreBlobRanges(string subscriptionId, string resourceGroupName, string accountName, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));

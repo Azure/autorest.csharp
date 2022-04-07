@@ -245,15 +245,15 @@ namespace MgmtKeyvault
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability
         /// Operation Id: Vaults_CheckNameAvailability
         /// </summary>
-        /// <param name="vaultName"> The name of the vault. </param>
+        /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
             using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilityVault");
             scope.Start();
             try
             {
-                var response = await VaultsRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, vaultName, cancellationToken).ConfigureAwait(false);
+                var response = await VaultsRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -268,15 +268,15 @@ namespace MgmtKeyvault
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability
         /// Operation Id: Vaults_CheckNameAvailability
         /// </summary>
-        /// <param name="vaultName"> The name of the vault. </param>
+        /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
             using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilityVault");
             scope.Start();
             try
             {
-                var response = VaultsRestClient.CheckNameAvailability(Id.SubscriptionId, vaultName, cancellationToken);
+                var response = VaultsRestClient.CheckNameAvailability(Id.SubscriptionId, content, cancellationToken);
                 return response;
             }
             catch (Exception e)

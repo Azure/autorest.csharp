@@ -252,18 +252,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore
         /// Operation Id: FileShares_Restore
         /// </summary>
-        /// <param name="content"> The FileShareRestoreContent to use. </param>
+        /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response> RestoreAsync(FileShareRestoreContent content, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deletedShare"/> is null. </exception>
+        public virtual async Task<Response> RestoreAsync(DeletedShare deletedShare, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(deletedShare, nameof(deletedShare));
 
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Restore");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.RestoreAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, content, cancellationToken).ConfigureAwait(false);
+                var response = await _fileShareRestClient.RestoreAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, deletedShare, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -278,18 +278,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore
         /// Operation Id: FileShares_Restore
         /// </summary>
-        /// <param name="content"> The FileShareRestoreContent to use. </param>
+        /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response Restore(FileShareRestoreContent content, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deletedShare"/> is null. </exception>
+        public virtual Response Restore(DeletedShare deletedShare, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(deletedShare, nameof(deletedShare));
 
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Restore");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Restore(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, content, cancellationToken);
+                var response = _fileShareRestClient.Restore(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, deletedShare, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -307,7 +307,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> Lease Share request body. </param>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseShareResponse>> LeaseAsync(FileShareLeaseContent content = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseShareResponse>> LeaseAsync(LeaseShareContent content = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Lease");
             scope.Start();
@@ -331,7 +331,7 @@ namespace Azure.Management.Storage
         /// <param name="content"> Lease Share request body. </param>
         /// <param name="xMsSnapshot"> Optional. Specify the snapshot time to lease a snapshot. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<LeaseShareResponse> Lease(FileShareLeaseContent content = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual Response<LeaseShareResponse> Lease(LeaseShareContent content = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fileShareClientDiagnostics.CreateScope("FileShareResource.Lease");
             scope.Start();

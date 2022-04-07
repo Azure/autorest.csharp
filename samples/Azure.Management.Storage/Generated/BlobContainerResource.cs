@@ -357,7 +357,7 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="content"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(BlobContainerLeaseContent content = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerResource.Lease");
             scope.Start();
@@ -380,7 +380,7 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="content"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<LeaseContainerResponse> Lease(BlobContainerLeaseContent content = null, CancellationToken cancellationToken = default)
+        public virtual Response<LeaseContainerResponse> Lease(LeaseContainerContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainerResource.Lease");
             scope.Start();
