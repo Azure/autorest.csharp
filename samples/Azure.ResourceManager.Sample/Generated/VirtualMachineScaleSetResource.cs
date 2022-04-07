@@ -230,7 +230,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
         /// Operation Id: VirtualMachineScaleSets_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -256,7 +256,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
         /// Operation Id: VirtualMachineScaleSets_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -282,7 +282,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
         /// Operation Id: VirtualMachineScaleSets_Update
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
@@ -312,7 +312,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
         /// Operation Id: VirtualMachineScaleSets_Update
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
@@ -342,7 +342,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate
         /// Operation Id: VirtualMachineScaleSets_Deallocate
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeallocateAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -369,7 +369,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate
         /// Operation Id: VirtualMachineScaleSets_Deallocate
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Deallocate(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -396,7 +396,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete
         /// Operation Id: VirtualMachineScaleSets_DeleteInstances
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
@@ -426,7 +426,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete
         /// Operation Id: VirtualMachineScaleSets_DeleteInstances
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
@@ -668,7 +668,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff
         /// Operation Id: VirtualMachineScaleSets_PowerOff
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -696,7 +696,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff
         /// Operation Id: VirtualMachineScaleSets_PowerOff
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -724,7 +724,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
         /// Operation Id: VirtualMachineScaleSets_Restart
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> RestartAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -751,7 +751,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
         /// Operation Id: VirtualMachineScaleSets_Restart
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Restart(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -778,7 +778,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
         /// Operation Id: VirtualMachineScaleSets_Start
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> StartAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -805,7 +805,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
         /// Operation Id: VirtualMachineScaleSets_Start
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Start(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -832,7 +832,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
         /// Operation Id: VirtualMachineScaleSets_Redeploy
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> RedeployAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -859,7 +859,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
         /// Operation Id: VirtualMachineScaleSets_Redeploy
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Redeploy(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -886,7 +886,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
         /// Operation Id: VirtualMachineScaleSets_PerformMaintenance
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> PerformMaintenanceAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -913,7 +913,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
         /// Operation Id: VirtualMachineScaleSets_PerformMaintenance
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation PerformMaintenance(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -940,7 +940,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
         /// Operation Id: VirtualMachineScaleSets_UpdateInstances
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
@@ -970,7 +970,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
         /// Operation Id: VirtualMachineScaleSets_UpdateInstances
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
@@ -1000,17 +1000,17 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
         /// Operation Id: VirtualMachineScaleSets_Reimage
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="vmScaleSetReimageInput"> Parameters for Reimaging VM ScaleSet. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> Parameters for Reimaging VM ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> ReimageAsync(WaitUntil waitUntil, VirtualMachineScaleSetReimageParameters vmScaleSetReimageInput = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> ReimageAsync(WaitUntil waitUntil, VirtualMachineScaleSetReimageContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Reimage");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1027,17 +1027,17 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
         /// Operation Id: VirtualMachineScaleSets_Reimage
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="vmScaleSetReimageInput"> Parameters for Reimaging VM ScaleSet. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> Parameters for Reimaging VM ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Reimage(WaitUntil waitUntil, VirtualMachineScaleSetReimageParameters vmScaleSetReimageInput = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Reimage(WaitUntil waitUntil, VirtualMachineScaleSetReimageContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Reimage");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetReimageInput).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -1054,7 +1054,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
         /// Operation Id: VirtualMachineScaleSets_ReimageAll
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> ReimageAllAsync(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -1081,7 +1081,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
         /// Operation Id: VirtualMachineScaleSets_ReimageAll
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation ReimageAll(WaitUntil waitUntil, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, CancellationToken cancellationToken = default)
@@ -1154,18 +1154,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
         /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
         /// </summary>
-        /// <param name="vmScaleSetConvertToSinglePlacementGroupInput"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetConvertToSinglePlacementGroupInput"/> is null. </exception>
-        public virtual async Task<Response> ConvertToSinglePlacementGroupAsync(VMScaleSetConvertToSinglePlacementGroupInput vmScaleSetConvertToSinglePlacementGroupInput, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response> ConvertToSinglePlacementGroupAsync(VMScaleSetConvertToSinglePlacementGroupContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vmScaleSetConvertToSinglePlacementGroupInput, nameof(vmScaleSetConvertToSinglePlacementGroupInput));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.ConvertToSinglePlacementGroup");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetConvertToSinglePlacementGroupInput, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -1180,18 +1180,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup
         /// Operation Id: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
         /// </summary>
-        /// <param name="vmScaleSetConvertToSinglePlacementGroupInput"> The input object for ConvertToSinglePlacementGroup API. </param>
+        /// <param name="content"> The input object for ConvertToSinglePlacementGroup API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetConvertToSinglePlacementGroupInput"/> is null. </exception>
-        public virtual Response ConvertToSinglePlacementGroup(VMScaleSetConvertToSinglePlacementGroupInput vmScaleSetConvertToSinglePlacementGroupInput, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response ConvertToSinglePlacementGroup(VMScaleSetConvertToSinglePlacementGroupContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(vmScaleSetConvertToSinglePlacementGroupInput, nameof(vmScaleSetConvertToSinglePlacementGroupInput));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.ConvertToSinglePlacementGroup");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, vmScaleSetConvertToSinglePlacementGroupInput, cancellationToken);
+                var response = _virtualMachineScaleSetRestClient.ConvertToSinglePlacementGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -1206,20 +1206,20 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState
         /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="orchestrationServiceStateInput"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="orchestrationServiceStateInput"/> is null. </exception>
-        public virtual async Task<ArmOperation> SetOrchestrationServiceStateAsync(WaitUntil waitUntil, OrchestrationServiceStateInput orchestrationServiceStateInput, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<ArmOperation> SetOrchestrationServiceStateAsync(WaitUntil waitUntil, OrchestrationServiceStateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(orchestrationServiceStateInput, nameof(orchestrationServiceStateInput));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetOrchestrationServiceState");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetRestClient.SetOrchestrationServiceStateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput).Request, response, OperationFinalStateVia.Location);
+                var response = await _virtualMachineScaleSetRestClient.SetOrchestrationServiceStateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1236,20 +1236,20 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState
         /// Operation Id: VirtualMachineScaleSets_SetOrchestrationServiceState
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="orchestrationServiceStateInput"> The input object for SetOrchestrationServiceState API. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The input object for SetOrchestrationServiceState API. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="orchestrationServiceStateInput"/> is null. </exception>
-        public virtual ArmOperation SetOrchestrationServiceState(WaitUntil waitUntil, OrchestrationServiceStateInput orchestrationServiceStateInput, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual ArmOperation SetOrchestrationServiceState(WaitUntil waitUntil, OrchestrationServiceStateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(orchestrationServiceStateInput, nameof(orchestrationServiceStateInput));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.SetOrchestrationServiceState");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetRestClient.SetOrchestrationServiceState(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput, cancellationToken);
-                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, orchestrationServiceStateInput).Request, response, OperationFinalStateVia.Location);
+                var response = _virtualMachineScaleSetRestClient.SetOrchestrationServiceState(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
+                var operation = new SampleArmOperation(_virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateSetOrchestrationServiceStateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -1266,7 +1266,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_Cancel
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> CancelVirtualMachineScaleSetRollingUpgradeAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -1292,7 +1292,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_Cancel
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation CancelVirtualMachineScaleSetRollingUpgrade(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -1318,7 +1318,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> StartOSUpgradeVirtualMachineScaleSetRollingUpgradeAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -1344,7 +1344,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation StartOSUpgradeVirtualMachineScaleSetRollingUpgrade(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -1370,7 +1370,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> StartExtensionUpgradeVirtualMachineScaleSetRollingUpgradeAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -1396,7 +1396,7 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade
         /// Operation Id: VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation StartExtensionUpgradeVirtualMachineScaleSetRollingUpgrade(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {

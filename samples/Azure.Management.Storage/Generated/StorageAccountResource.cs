@@ -313,7 +313,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         /// Operation Id: StorageAccounts_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -339,7 +339,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         /// Operation Id: StorageAccounts_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -461,18 +461,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         /// Operation Id: StorageAccounts_RegenerateKey
         /// </summary>
-        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="content"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
-        public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(regenerateKey, nameof(regenerateKey));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
             try
             {
-                var response = await _storageAccountRestClient.RegenerateKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.RegenerateKeyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -487,18 +487,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         /// Operation Id: StorageAccounts_RegenerateKey
         /// </summary>
-        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="content"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
-        public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(regenerateKey, nameof(regenerateKey));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RegenerateKey");
             scope.Start();
             try
             {
-                var response = _storageAccountRestClient.RegenerateKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
+                var response = _storageAccountRestClient.RegenerateKey(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -513,18 +513,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
         /// Operation Id: StorageAccounts_ListAccountSAS
         /// </summary>
-        /// <param name="accountSasParameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="content"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountSasParameters"/> is null. </exception>
-        public virtual async Task<Response<ListAccountSasResponse>> GetAccountSASAsync(AccountSasParameters accountSasParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response<ListAccountSasResponse>> GetAccountSASAsync(AccountSasContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(accountSasParameters, nameof(accountSasParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetAccountSAS");
             scope.Start();
             try
             {
-                var response = await _storageAccountRestClient.ListAccountSASAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, accountSasParameters, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.ListAccountSASAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -539,18 +539,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
         /// Operation Id: StorageAccounts_ListAccountSAS
         /// </summary>
-        /// <param name="accountSasParameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="content"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountSasParameters"/> is null. </exception>
-        public virtual Response<ListAccountSasResponse> GetAccountSAS(AccountSasParameters accountSasParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response<ListAccountSasResponse> GetAccountSAS(AccountSasContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(accountSasParameters, nameof(accountSasParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetAccountSAS");
             scope.Start();
             try
             {
-                var response = _storageAccountRestClient.ListAccountSAS(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, accountSasParameters, cancellationToken);
+                var response = _storageAccountRestClient.ListAccountSAS(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -565,18 +565,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
         /// Operation Id: StorageAccounts_ListServiceSAS
         /// </summary>
-        /// <param name="serviceSasParameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="content"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="serviceSasParameters"/> is null. </exception>
-        public virtual async Task<Response<ListServiceSasResponse>> GetServiceSASAsync(ServiceSasParameters serviceSasParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response<ListServiceSasResponse>> GetServiceSASAsync(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(serviceSasParameters, nameof(serviceSasParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetServiceSAS");
             scope.Start();
             try
             {
-                var response = await _storageAccountRestClient.ListServiceSASAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, serviceSasParameters, cancellationToken).ConfigureAwait(false);
+                var response = await _storageAccountRestClient.ListServiceSASAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -591,18 +591,18 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
         /// Operation Id: StorageAccounts_ListServiceSAS
         /// </summary>
-        /// <param name="serviceSasParameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="content"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="serviceSasParameters"/> is null. </exception>
-        public virtual Response<ListServiceSasResponse> GetServiceSAS(ServiceSasParameters serviceSasParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response<ListServiceSasResponse> GetServiceSAS(ServiceSasContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(serviceSasParameters, nameof(serviceSasParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.GetServiceSAS");
             scope.Start();
             try
             {
-                var response = _storageAccountRestClient.ListServiceSAS(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, serviceSasParameters, cancellationToken);
+                var response = _storageAccountRestClient.ListServiceSAS(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -617,7 +617,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
         /// Operation Id: StorageAccounts_Failover
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> FailoverAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -643,7 +643,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
         /// Operation Id: StorageAccounts_Failover
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Failover(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -669,7 +669,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
         /// Operation Id: StorageAccounts_HierarchicalNamespaceMigration
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
@@ -699,7 +699,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
         /// Operation Id: StorageAccounts_HierarchicalNamespaceMigration
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requestType"/> is null. </exception>
@@ -729,7 +729,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
         /// Operation Id: StorageAccounts_AbortHierarchicalNamespaceMigration
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> AbortHierarchicalNamespaceMigrationAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -755,7 +755,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
         /// Operation Id: StorageAccounts_AbortHierarchicalNamespaceMigration
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation AbortHierarchicalNamespaceMigration(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -781,20 +781,20 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
         /// Operation Id: StorageAccounts_RestoreBlobRanges
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="blobRestoreParameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="blobRestoreParameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<BlobRestoreStatus>> RestoreBlobRangesAsync(WaitUntil waitUntil, BlobRestoreParameters blobRestoreParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<ArmOperation<BlobRestoreStatus>> RestoreBlobRangesAsync(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(blobRestoreParameters, nameof(blobRestoreParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RestoreBlobRanges");
             scope.Start();
             try
             {
-                var response = await _storageAccountRestClient.RestoreBlobRangesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobRestoreParameters, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<BlobRestoreStatus>(new BlobRestoreStatusOperationSource(), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateRestoreBlobRangesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobRestoreParameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _storageAccountRestClient.RestoreBlobRangesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageArmOperation<BlobRestoreStatus>(new BlobRestoreStatusOperationSource(), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateRestoreBlobRangesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -811,20 +811,20 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
         /// Operation Id: StorageAccounts_RestoreBlobRanges
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="blobRestoreParameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="content"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="blobRestoreParameters"/> is null. </exception>
-        public virtual ArmOperation<BlobRestoreStatus> RestoreBlobRanges(WaitUntil waitUntil, BlobRestoreParameters blobRestoreParameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual ArmOperation<BlobRestoreStatus> RestoreBlobRanges(WaitUntil waitUntil, BlobRestoreContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(blobRestoreParameters, nameof(blobRestoreParameters));
+            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = _storageAccountClientDiagnostics.CreateScope("StorageAccountResource.RestoreBlobRanges");
             scope.Start();
             try
             {
-                var response = _storageAccountRestClient.RestoreBlobRanges(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobRestoreParameters, cancellationToken);
-                var operation = new StorageArmOperation<BlobRestoreStatus>(new BlobRestoreStatusOperationSource(), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateRestoreBlobRangesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobRestoreParameters).Request, response, OperationFinalStateVia.Location);
+                var response = _storageAccountRestClient.RestoreBlobRanges(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content, cancellationToken);
+                var operation = new StorageArmOperation<BlobRestoreStatus>(new BlobRestoreStatusOperationSource(), _storageAccountClientDiagnostics, Pipeline, _storageAccountRestClient.CreateRestoreBlobRangesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, content).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
