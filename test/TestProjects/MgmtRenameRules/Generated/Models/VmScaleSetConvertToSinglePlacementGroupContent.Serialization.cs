@@ -8,17 +8,18 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtRenameRules.Models
 {
-    public partial class OrchestrationServiceStateInput : IUtf8JsonSerializable
+    public partial class VmScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("serviceName");
-            writer.WriteStringValue(ServiceName.ToString());
-            writer.WritePropertyName("action");
-            writer.WriteStringValue(Action.ToString());
+            if (Optional.IsDefined(ActivePlacementGroupId))
+            {
+                writer.WritePropertyName("activePlacementGroupId");
+                writer.WriteStringValue(ActivePlacementGroupId);
+            }
             writer.WriteEndObject();
         }
     }

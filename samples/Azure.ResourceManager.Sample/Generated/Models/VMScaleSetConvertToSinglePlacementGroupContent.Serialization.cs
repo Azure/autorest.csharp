@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtRenameRules.Models
+namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VmScaleSetConvertToSinglePlacementGroupInput : IUtf8JsonSerializable
+    public partial class VMScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

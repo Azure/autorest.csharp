@@ -8,21 +8,19 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtRenameRules.Models
 {
-    public partial class RequestRateByIntervalInput : IUtf8JsonSerializable
+    public partial class ThrottledRequestsContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("intervalLength");
-            writer.WriteStringValue(IntervalLength.ToSerialString());
             writer.WritePropertyName("blobContainerSasUri");
             writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
             writer.WritePropertyName("fromTime");
-            writer.WriteStringValue(FromOn, "O");
+            writer.WriteStringValue(FromTime, "O");
             writer.WritePropertyName("toTime");
-            writer.WriteStringValue(ToOn, "O");
+            writer.WriteStringValue(ToTime, "O");
             if (Optional.IsDefined(GroupByThrottlePolicy))
             {
                 writer.WritePropertyName("groupByThrottlePolicy");

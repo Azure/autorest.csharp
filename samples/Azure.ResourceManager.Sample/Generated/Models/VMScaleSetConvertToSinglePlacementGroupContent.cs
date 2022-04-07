@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace MgmtRenameRules.Models
+namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The VmScaleSetConvertToSinglePlacementGroupInput. </summary>
-    public partial class VmScaleSetConvertToSinglePlacementGroupInput
+    /// <summary> The VMScaleSetConvertToSinglePlacementGroupInput. </summary>
+    public partial class VMScaleSetConvertToSinglePlacementGroupContent
     {
-        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupInput. </summary>
-        public VmScaleSetConvertToSinglePlacementGroupInput()
+        /// <summary> Initializes a new instance of VMScaleSetConvertToSinglePlacementGroupContent. </summary>
+        public VMScaleSetConvertToSinglePlacementGroupContent()
         {
         }
 
