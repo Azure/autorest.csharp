@@ -109,7 +109,7 @@ namespace MgmtSignalR.Tests.Scenario
                     Kind = new MgmtSignalR.Models.ServiceKind("SignalR"),
                     Identity = new MgmtSignalR.Models.ManagedIdentity()
                     {
-                        ManagedIdentityType = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
+                        IdentityType = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
                     },
                     NetworkACLs = new MgmtSignalR.Models.SignalRNetworkACLs()
                     {
@@ -156,7 +156,7 @@ namespace MgmtSignalR.Tests.Scenario
                     Kind = new MgmtSignalR.Models.ServiceKind("SignalR"),
                     Identity = new MgmtSignalR.Models.ManagedIdentity()
                     {
-                        ManagedIdentityType = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
+                        IdentityType = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
                     },
                     NetworkACLs = new MgmtSignalR.Models.SignalRNetworkACLs()
                     {
