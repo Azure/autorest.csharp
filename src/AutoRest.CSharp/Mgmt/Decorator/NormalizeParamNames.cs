@@ -30,38 +30,38 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
-                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema, dataSchemaHash);
+                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaHash);
                         }
                     }
                 }
             }
         }
 
-        internal static string GetNewName(string paramName, ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        internal static string GetNewName(string paramName, string schemaName, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
         {
-            if (objectSchema.Name.EndsWith("Options", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
 
-            if (objectSchema.Name.EndsWith("Info", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Info", StringComparison.Ordinal))
                 return "info";
 
-            if (objectSchema.Name.EndsWith("Details", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Details", StringComparison.Ordinal))
                 return "details";
 
-            if (objectSchema.Name.EndsWith("Content", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Content", StringComparison.Ordinal))
                 return "content";
 
-            if (objectSchema.Name.EndsWith("Patch", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Patch", StringComparison.Ordinal))
                 return "patch";
 
-            if (objectSchema.Name.EndsWith("Input", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Input", StringComparison.Ordinal))
                 return "input";
 
-            if (objectSchema.Name.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(objectSchema.Name))
+            if (schemaName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(schemaName))
                 return "data";
 
             if (paramName.Equals("parameters", StringComparison.OrdinalIgnoreCase))
-                return objectSchema.Name.FirstCharToLowerCase();
+                return schemaName.FirstCharToLowerCase();
 
             return paramName;
         }
