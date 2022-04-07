@@ -45,6 +45,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void ValidateNoParametersNamedParameter()
+        {
+            foreach (var type in MyTypes())
+            {
+                foreach (var method in type.GetMethods())
+                {
+                    foreach (var param in method.GetParameters())
+                    {
+                        Assert.IsFalse(param.Name.Equals("parameters"));
+                    }
+                }
+            }
+        }
+
+        [Test]
         public void VerifyNoSingleWordsThatShouldBeReplaced()
         {
             var singlesToReplace = typeof(CommonSingleWordModels).GetField("_schemasToChange", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as HashSet<string>;

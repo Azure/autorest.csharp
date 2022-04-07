@@ -178,6 +178,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        public static void UpdateAcronym(Schema schema)
+        {
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+                return;
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+            var wordCache = new ConcurrentDictionary<string, string>();
+            UpdateAcronyms(new Schema[] { schema }, transformer, wordCache);
+        }
+
         public static void UpdateAcronyms(this CodeModel codeModel)
         {
             if (Configuration.MgmtConfiguration.RenameRules.Count == 0)

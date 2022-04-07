@@ -173,7 +173,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             continue;
 
                         if (count != 1)
+                        {
+                            //even if it has multiple uses for a model type we should normalize the param name just not change the type
+                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
                             continue;
+                        }
 
                         RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
@@ -187,7 +191,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, ResourceDataSchemaNameToOperationSets);
+                        }
+                        else
+                        {
+                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
                         }
                     }
                 }
