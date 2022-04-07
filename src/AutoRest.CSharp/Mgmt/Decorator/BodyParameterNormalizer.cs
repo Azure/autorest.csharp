@@ -40,6 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 schemaName = schemaName.ReplaceLast("Options", Content);
             if (schemaName.EndsWith("Info", StringComparison.Ordinal))
                 schemaName = schemaName.ReplaceLast("Info", Content);
+            if (schemaName.EndsWith("Input", StringComparison.Ordinal))
+                schemaName = schemaName.ReplaceLast("Input", Content);
             var paramName = NormalizeParamNames.GetNewName(bodyParameter.Language.Default.Name, schemaName, resourceDataDictionary);
             UpdateRequestParameter(bodyParameter, paramName, schemaName);
         }
