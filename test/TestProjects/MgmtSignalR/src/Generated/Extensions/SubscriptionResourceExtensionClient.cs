@@ -54,15 +54,15 @@ namespace MgmtSignalR
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
         /// <param name="location"> the region. </param>
-        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
+        /// <param name="content"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(string location, NameAvailabilityContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilitySignalR");
             scope.Start();
             try
             {
-                var response = await SignalRResourceSignalRRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, location, nameAvailabilityParameters, cancellationToken).ConfigureAwait(false);
+                var response = await SignalRResourceSignalRRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, location, content, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -78,15 +78,15 @@ namespace MgmtSignalR
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
         /// <param name="location"> the region. </param>
-        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
+        /// <param name="content"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<NameAvailability> CheckNameAvailabilitySignalR(string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
+        public virtual Response<NameAvailability> CheckNameAvailabilitySignalR(string location, NameAvailabilityContent content = null, CancellationToken cancellationToken = default)
         {
             using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilitySignalR");
             scope.Start();
             try
             {
-                var response = SignalRResourceSignalRRestClient.CheckNameAvailability(Id.SubscriptionId, location, nameAvailabilityParameters, cancellationToken);
+                var response = SignalRResourceSignalRRestClient.CheckNameAvailability(Id.SubscriptionId, location, content, cancellationToken);
                 return response;
             }
             catch (Exception e)
