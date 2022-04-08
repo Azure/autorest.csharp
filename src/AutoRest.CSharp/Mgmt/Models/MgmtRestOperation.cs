@@ -34,11 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// The underlying <see cref="Operation"/> object.
         /// </summary>
         public Operation Operation => Method.Operation;
-        /// <summary>
-        /// We use the <see cref="OperationGroup"/> to get a fully quanlified name for this operation
-        /// </summary>
-        public OperationGroup OperationGroup => RestClient.OperationGroup;
-        public string OperationId => Operation.OperationId(OperationGroup);
+
+        public string OperationId => Operation.OperationId();
         /// <summary>
         /// The name of this operation
         /// </summary>
