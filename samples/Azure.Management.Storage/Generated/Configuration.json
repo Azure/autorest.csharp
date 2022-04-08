@@ -15,10 +15,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
   },
   "OperationPositions": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": [
+    "DeletedAccounts_List": [
       "collection"
     ],
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": [
+    "StorageAccounts_CheckNameAvailability": [
       "collection"
     ]
   },
