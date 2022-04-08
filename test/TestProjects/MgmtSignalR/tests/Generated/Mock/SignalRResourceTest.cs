@@ -101,12 +101,12 @@ namespace MgmtSignalR.Tests.Mock
             // Example: SignalR_RegenerateKey
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
-            MgmtSignalR.Models.RegenerateKeyParameters regenerateKeyParameters = new MgmtSignalR.Models.RegenerateKeyParameters()
+            MgmtSignalR.Models.RegenerateKeyContent content = new MgmtSignalR.Models.RegenerateKeyContent()
             {
                 KeyType = new MgmtSignalR.Models.KeyType("Primary"),
             };
 
-            await signalRResource.RegenerateKeyAsync(WaitUntil.Completed, regenerateKeyParameters);
+            await signalRResource.RegenerateKeyAsync(WaitUntil.Completed, content);
         }
 
         [RecordedTest]
