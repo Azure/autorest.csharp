@@ -90,9 +90,9 @@ namespace MgmtSignalR.Tests.Scenario
 
                 var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier($"{subscriptionId}"));
                 string location0 = $"{location}";
-                MgmtSignalR.Models.NameAvailabilityParameters nameAvailabilityParameters = new MgmtSignalR.Models.NameAvailabilityParameters(resourceType: "Microsoft.SignalRService/SignalR", name: "my-signalr-service");
+                MgmtSignalR.Models.NameAvailabilityContent content = new MgmtSignalR.Models.NameAvailabilityContent(resourceType: "Microsoft.SignalRService/SignalR", name: "my-signalr-service");
 
-                await subscriptionResource.CheckNameAvailabilitySignalRAsync(location0, nameAvailabilityParameters);
+                await subscriptionResource.CheckNameAvailabilitySignalRAsync(location0, content);
             }
 
             {
@@ -192,12 +192,12 @@ namespace MgmtSignalR.Tests.Scenario
 
                 var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
-                MgmtSignalR.Models.RegenerateKeyParameters regenerateKeyParameters = new MgmtSignalR.Models.RegenerateKeyParameters()
+                MgmtSignalR.Models.RegenerateKeyContent content = new MgmtSignalR.Models.RegenerateKeyContent()
                 {
                     KeyType = new MgmtSignalR.Models.KeyType("Primary"),
                 };
 
-                await signalRResource.RegenerateKeyAsync(WaitUntil.Completed, regenerateKeyParameters);
+                await signalRResource.RegenerateKeyAsync(WaitUntil.Completed, content);
             }
 
             {
