@@ -10,13 +10,13 @@ using System;
 namespace MgmtSignalR.Models
 {
     /// <summary> Data POST-ed to the nameAvailability action. </summary>
-    public partial class NameAvailabilityParameters
+    public partial class NameAvailabilityContent
     {
-        /// <summary> Initializes a new instance of NameAvailabilityParameters. </summary>
+        /// <summary> Initializes a new instance of NameAvailabilityContent. </summary>
         /// <param name="resourceType"> The resource type. Can be &quot;Microsoft.SignalRService/SignalR&quot; or &quot;Microsoft.SignalRService/webPubSub&quot;. </param>
         /// <param name="name"> The SignalR service name to validate. e.g.&quot;my-signalR-name-here&quot;. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceType"/> or <paramref name="name"/> is null. </exception>
-        public NameAvailabilityParameters(string resourceType, string name)
+        public NameAvailabilityContent(string resourceType, string name)
         {
             if (resourceType == null)
             {
