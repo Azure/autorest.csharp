@@ -39,6 +39,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
 
         /// <summary>
+        /// This is a map from operation to its corresponding operation group
+        /// </summary>
+        private CachedDictionary<Operation, OperationGroup> OperationsToOperationGroups { get; }
+
+        /// <summary>
         /// This is a map from operation to its request path
         /// </summary>
         private CachedDictionary<Operation, RequestPath> OperationsToRequestPaths { get; }
@@ -88,6 +93,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
+            OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
             OperationsToRequestPaths = new CachedDictionary<Operation, RequestPath>(PopulateOperationsToRequestPaths);
             ResourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
@@ -284,6 +290,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
+
+        public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups[operation];
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
@@ -838,13 +846,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     requestPathList.Add(path);
                     if (rawRequestPathToOperationSets.TryGetValue(path, out var operationSet))
                     {
-                        operationSet.Add(operation, operationGroup);
+                        operationSet.Add(operation);
                     }
                     else
                     {
                         operationSet = new OperationSet(path)
                         {
-                            {operation, operationGroup }
+                            operation
                         };
                         rawRequestPathToOperationSets.Add(path, operationSet);
                     }
@@ -864,6 +872,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return operationsToRequestPath;
+        }
+
+        private Dictionary<Operation, OperationGroup> PopulateOperationsToOperationGroups()
+        {
+            var operationsToOperationGroups = new Dictionary<Operation, OperationGroup>();
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    operationsToOperationGroups[operation] = operationGroup;
+                }
+            }
+            return operationsToOperationGroups;
         }
     }
 }
