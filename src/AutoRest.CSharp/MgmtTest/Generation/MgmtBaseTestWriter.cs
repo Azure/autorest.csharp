@@ -256,7 +256,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
                 if (mappedTypeProvider is SchemaObjectType mappedSot)
                 {
-                    sot = mappedSot;
+                    if (mappedSot != sot)
+                    {
+                        sot = mappedSot;
+                        variableName = $"(({mappedSot.Type}){variableName})";
+                    }
                 }
             }
 
