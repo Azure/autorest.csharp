@@ -11,13 +11,13 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Resources.Models
 {
-    /// <summary> ArmDeployment operation parameters. </summary>
-    public partial class ArmDeploymentInput
+    /// <summary> ArmDeploymentResource operation parameters. </summary>
+    public partial class ArmDeploymentContent
     {
-        /// <summary> Initializes a new instance of ArmDeploymentInput. </summary>
-        /// <param name="properties"> The ArmDeployment properties. </param>
+        /// <summary> Initializes a new instance of ArmDeploymentContent. </summary>
+        /// <param name="properties"> The ArmDeploymentResource properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public ArmDeploymentInput(ArmDeploymentProperties properties)
+        public ArmDeploymentContent(ArmDeploymentProperties properties)
         {
             if (properties == null)
             {
@@ -28,11 +28,11 @@ namespace Azure.ResourceManager.Resources.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> The location to store the ArmDeployment data. </summary>
+        /// <summary> The location to store the ArmDeploymentResource data. </summary>
         public string Location { get; set; }
-        /// <summary> The ArmDeployment properties. </summary>
+        /// <summary> The ArmDeploymentResource properties. </summary>
         public ArmDeploymentProperties Properties { get; }
-        /// <summary> ArmDeployment tags. </summary>
+        /// <summary> ArmDeploymentResource tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }
 }

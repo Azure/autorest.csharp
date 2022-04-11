@@ -7,7 +7,7 @@
 
 namespace Azure.ResourceManager.Resources.Models
 {
-    /// <summary> ArmDeployment properties. </summary>
+    /// <summary> ArmDeploymentResource properties. </summary>
     public partial class ArmDeploymentProperties
     {
         /// <summary> Initializes a new instance of ArmDeploymentProperties. </summary>

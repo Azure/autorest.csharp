@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The ArmDeployment mode. </summary>
+    /// <summary> The ArmDeploymentResource mode. </summary>
     public readonly partial struct ArmDeploymentMode : IEquatable<ArmDeploymentMode>
     {
         private readonly string _value;
