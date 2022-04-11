@@ -70,7 +70,7 @@ namespace MgmtSignalR.Tests.Scenario
         }}
     }}
 }}";
-                var deploymentOperation = await resourceGroup.GetArmDeployments().CreateOrUpdateAsync(WaitUntil.Completed, "Generate_Unique_Name", new ArmDeploymentInput(new ArmDeploymentProperties(ArmDeploymentMode.Complete)
+                var deploymentOperation = await resourceGroup.GetArmDeployments().CreateOrUpdateAsync(WaitUntil.Completed, "Generate_Unique_Name", new ArmDeploymentContent(new Azure.ResourceManager.Resources.Models.ArmDeploymentProperties(ArmDeploymentMode.Complete)
                 {
                     Template = BinaryData.FromString(templatePayload),
                 }));
