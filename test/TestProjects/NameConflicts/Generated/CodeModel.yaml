@@ -2418,14 +2418,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_127
-                schema: *ref_0
+                schema: *ref_116
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: stringBody
@@ -2433,7 +2434,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
               - *ref_127
             language: !Languages 
@@ -2441,11 +2442,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /conflictingLROOverloads
                 method: post
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'

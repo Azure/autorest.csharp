@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema 
+    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
@@ -61,7 +61,7 @@ operationGroups:
         parameters:
           - *ref_1
         requestMediaTypes:
-          application/json: !Request &ref_4
+          application/json: !Request &ref_5
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -71,14 +71,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_3
-                schema: *ref_0
+              - !Parameter &ref_4
+                schema: *ref_3
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -86,24 +87,23 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
-              - *ref_3
+              - *ref_4
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /Operation/
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_4
+          - *ref_5
         signatureParameters: []
         responses:
           - !Response 
@@ -128,7 +128,7 @@ operationGroups:
         parameters:
           - *ref_1
         requestMediaTypes:
-          application/json: !Request &ref_6
+          application/json: !Request &ref_7
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -138,14 +138,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_5
-                schema: *ref_0
+              - !Parameter &ref_6
+                schema: *ref_3
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -153,24 +154,23 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
-              - *ref_5
+              - *ref_6
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /OperationInternal/
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_6
+          - *ref_7
         signatureParameters: []
         responses:
           - !Response 

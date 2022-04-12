@@ -855,14 +855,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_25
-                schema: *ref_0
+                schema: *ref_13
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: bodyParameter
@@ -870,7 +871,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_19
                 implementation: Method
@@ -891,11 +892,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /reqopt/implicit/optional/body
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1960,13 +1960,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_52
-                schema: *ref_0
+                schema: *ref_13
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1976,7 +1976,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_19
                 implementation: Method
@@ -1997,11 +1997,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /reqopt/requied/string/parameter
                 method: post
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -2055,13 +2054,13 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_54
-                schema: *ref_0
+                schema: *ref_13
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2071,7 +2070,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_19
                 implementation: Method
@@ -2092,11 +2091,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /reqopt/optional/string/parameter
                 method: post
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'

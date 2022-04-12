@@ -466,7 +466,9 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = new StringRequestContent(bodyParameter);
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(bodyParameter);
+            request.Content = content;
             return message;
         }
 
@@ -527,7 +529,9 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = new StringRequestContent(bodyParameter);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(bodyParameter);
+                request.Content = content;
             }
             return message;
         }

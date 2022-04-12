@@ -115,7 +115,9 @@ namespace body_string
             if (stringBody != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                request.Content = new StringRequestContent(stringBody);
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(stringBody);
+                request.Content = content;
             }
             return message;
         }

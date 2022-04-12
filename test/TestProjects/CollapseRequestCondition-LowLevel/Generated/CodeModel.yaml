@@ -139,14 +139,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_5
-                schema: *ref_0
+                schema: *ref_2
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -154,7 +155,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
               - *ref_5
             language: !Languages 
@@ -162,11 +163,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /RequestConditionCollapse/
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -894,14 +894,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_34
-                schema: *ref_0
+                schema: *ref_2
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -909,7 +910,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
               - *ref_34
             language: !Languages 
@@ -917,11 +918,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /MatchConditionCollapse/
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1049,14 +1049,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_40
-                schema: *ref_0
+                schema: *ref_2
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -1064,7 +1065,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
               - *ref_40
             language: !Languages 
@@ -1072,11 +1073,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /NonCollapse/ifMatch
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -1131,14 +1131,15 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_43
-                schema: *ref_0
+                schema: *ref_2
                 implementation: Method
+                required: false
                 language: !Languages 
                   default:
                     name: body
@@ -1146,7 +1147,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
             signatureParameters:
               - *ref_43
             language: !Languages 
@@ -1154,11 +1155,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /NonCollapse/ifNoneMatch
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'

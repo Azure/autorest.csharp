@@ -422,15 +422,16 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Upload file type
+                    description: Body Parameter content-type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_10
-                schema: *ref_0
+                schema: *ref_7
                 implementation: Method
                 nullable: true
+                required: false
                 language: !Languages 
                   default:
                     name: stringBody
@@ -438,7 +439,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: binary
+                    style: json
               - !Parameter 
                 schema: *ref_6
                 implementation: Method
@@ -459,11 +460,10 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpBinaryRequest 
+              http: !HttpWithBodyRequest 
                 path: /string/null
                 method: put
-                binary: true
-                knownMediaType: text
+                knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'

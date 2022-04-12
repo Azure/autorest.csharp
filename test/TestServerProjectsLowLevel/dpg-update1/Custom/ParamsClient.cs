@@ -111,20 +111,8 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, RequestContext context)
         {
-            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
-
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePutRequiredOptionalRequest(requiredParam, optionalParam, null, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var result = await PutRequiredOptionalAsync(requiredParam, optionalParam, null, context);
+            return result;
         }
 
         /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. Overload method to be compatible with dpg_initial where optional parameters become required. </summary>
