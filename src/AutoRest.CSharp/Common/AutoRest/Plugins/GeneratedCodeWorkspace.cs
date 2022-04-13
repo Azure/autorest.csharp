@@ -300,24 +300,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static HashSet<string> _referenceAttributes = new HashSet<string> { "ReferenceType", "PropertyReferenceType", "TypeReferenceType" };
 
-        private bool IsReferenceType(SyntaxNode? node)
+        private bool IsReferenceType(SyntaxNode? root)
         {
-            if (node is null)
+            if (root is null)
                 return false;
 
-            var namespaceNode = node.ChildNodes().OfType<NamespaceDeclarationSyntax>().FirstOrDefault();
-            if (namespaceNode is null)
-                return false;
-
-            SyntaxNode? classOrStructNode = namespaceNode.ChildNodes().OfType<ClassDeclarationSyntax>().FirstOrDefault();
-            if (classOrStructNode is null)
+            var childNodes = root.DescendantNodes();
+            var typeNode = childNodes.OfType<TypeDeclarationSyntax>().FirstOrDefault();
+            if (typeNode is null)
             {
-                classOrStructNode = namespaceNode.ChildNodes().OfType<StructDeclarationSyntax>().FirstOrDefault();
-                if (classOrStructNode is null)
-                    return false;
+                return false;
             }
 
-            var attributeLists = GetAttributeLists(classOrStructNode);
+            var attributeLists = GetAttributeLists(typeNode);
             if (attributeLists is null || attributeLists.Value.Count == 0)
                 return false;
 
