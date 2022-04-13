@@ -230,7 +230,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private static bool IsMgmtRootDocument(Document document) => GeneratedCodeWorkspace.IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
 
-
         private static HashSet<string> _referenceAttributes = new HashSet<string> { "ReferenceType", "PropertyReferenceType", "TypeReferenceType" };
 
         private static bool IsReferenceType(SyntaxNode? root)
@@ -371,8 +370,5 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private static bool IsPublic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.PublicKeyword));
-
-        private static bool IsStatic(SyntaxTokenList tokenList)
-            => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
     }
 }
