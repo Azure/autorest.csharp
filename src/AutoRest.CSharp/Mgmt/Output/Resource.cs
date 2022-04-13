@@ -206,8 +206,24 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(GetOperation);
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
-            if (UpdateOperation != null)
+            if (UpdateOperation is null)
+            {
+                if (ResourceCollection?.CreateOperation is not null)
+                {
+                    var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
+                    result.Add(MgmtClientOperation.FromOperation(
+                        new MgmtRestOperation(
+                            createOrUpdateOperation,
+                            "Update",
+                            createOrUpdateOperation.MgmtReturnType,
+                            createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
+                            createOrUpdateOperation.RequestPath)));
+                }
+            }
+            else
+            {
                 result.Add(UpdateOperation);
+            }
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);

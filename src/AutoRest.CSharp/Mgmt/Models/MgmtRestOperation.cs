@@ -115,6 +115,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
+            : this(other, nameOverride, overrideReturnType, overrideDescription, other.ContextualPath, overrideParameters)
+        {
+        }
+
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, RequestPath contextualPath, params Parameter[] overrideParameters)
         {
             //copy values from other method
             _isLongRunning = other.IsLongRunningOperation;
@@ -122,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Method = other.Method;
             RestClient = other.RestClient;
             RequestPath = other.RequestPath;
-            ContextualPath = other.ContextualPath;
+            ContextualPath = contextualPath;
             Resource = other.Resource;
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
