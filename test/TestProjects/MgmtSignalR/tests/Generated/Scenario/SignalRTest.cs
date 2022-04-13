@@ -20,7 +20,7 @@ using MgmtSignalR.Models;
 namespace MgmtSignalR.Tests.Scenario
 {
     /// <summary> Test generated from Api Scenario scenarios\signalR.yaml. </summary>
-    public partial class SignalR : ManagementRecordedTestBase<KeyVaultTestEnvironment>
+    public partial class SignalR : ManagementRecordedTestBase<SignalRTestEnvironment>
     {
         ResourceGroupResource resourceGroup;
         string subscriptionId = Environment.GetEnvironmentVariable("SUBSCRIPTION_ID") ?? "00000000-00000000-00000000-00000000";

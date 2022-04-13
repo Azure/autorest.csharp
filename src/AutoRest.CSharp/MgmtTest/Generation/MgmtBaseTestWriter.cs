@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Diagnostics;
@@ -34,6 +35,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
         protected IEnumerable<string>? _scenarioVariables;
+
+        private HashSet<KeyValuePair<string, string>> _operationExamples = new HashSet<KeyValuePair<string, string>>();
 
         protected bool InScenario => _scenarioVariables is not null;
 
@@ -65,6 +68,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var testCaseSuffix = exampleIndex > 0 ? (exampleIndex + 1).ToString() : string.Empty;
             return methodName + testCaseSuffix;
+        }
+
+        protected bool ShouldWriteTest(MgmtClientOperation clientOperation, ExampleModel exampleModel)
+        {
+            var operationExample = new KeyValuePair<string, string>(clientOperation.Name, exampleModel.Name);
+            if (_operationExamples.Contains(operationExample))
+            {
+                return false;
+            }
+            _operationExamples.Add(operationExample);
+            return true;
         }
 
         public string FormatResourceId(string resourceId)
@@ -531,6 +545,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     return true;
                 case "System.Uri":
                     writer.Append($"new {typeof(Uri)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    return true;
+                case "System.Byte[]":
+                    writer.Append($"{typeof(Encoding)}.ASCII.GetBytes({value.RefScenarioDefinedVariables(_scenarioVariables)})");
                     return true;
                 case "Azure.ResourceManager.Models.ManagedServiceIdentityType":
                     writer.Append($"new {typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
