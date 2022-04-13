@@ -10,7 +10,7 @@ using Azure.Core.TestFramework;
 namespace MgmtSignalR.Tests
 {
     /// <summary> Test Environment for MgmtSignalR. </summary>
-    public partial class KeyVaultTestEnvironment : TestEnvironment
+    public partial class SignalRTestEnvironment : TestEnvironment
     {
     }
 }

@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 foreach (var exampleModel in exampleGroup.Examples)
                 {
                     MgmtTypeProvider? parentTp = FindParentByRequestPath(operation.RequestPath.SerializedPath, exampleModel);
-                    if (parentTp is null)
+                    if (parentTp is null || !ShouldWriteTest(clientOperation, exampleModel))
                     {
                         continue;
                     }

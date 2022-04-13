@@ -79,6 +79,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup.Examples)
                 {
+                    if (!ShouldWriteTest(clientOperation, exampleModel))
+                        continue;
                     WriteTestDecorator();
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {CreateTestMethodName(methodName, exampleIdx)}()");
                     using (_writer.Scope())

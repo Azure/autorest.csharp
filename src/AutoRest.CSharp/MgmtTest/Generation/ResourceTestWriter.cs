@@ -117,6 +117,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup.Examples)
                 {
+                    if (!ShouldWriteTest(clientOperation, exampleModel))
+                        continue;
                     WriteTestDecorator();
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{CreateTestMethodName(methodName, exampleIdx)}()");
 

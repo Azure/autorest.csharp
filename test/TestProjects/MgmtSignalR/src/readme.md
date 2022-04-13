@@ -4,7 +4,7 @@ Run `dotnet build /t:GenerateCode` to generate code.
 
 ``` yaml
 azure-arm: true
-library-name: KeyVault
+library-name: SignalR
 require:
 - $(this-folder)/specification/readme.md
 - $(this-folder)/../../../../readme.md
