@@ -89,7 +89,7 @@ if (!($Exclude -contains "TestServer"))
 {
     foreach ($testName in $testNames)
     {
-        Add-TestServer-Swagger $testName "" $testServerDirectory
+        Add-TestServer-Swagger $testName "" $testServerDirectory "--generation1-convenience-client"
     }
 }
 
@@ -134,7 +134,7 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     else
     {
         $inputFile = Join-Path $directory "$testName.json"
-        $testArguments ="--require=$configurationPath --input-file=$inputFile"
+        $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
     }
 
     if ($forTest) {
@@ -170,7 +170,7 @@ if (!($Exclude -contains "TestProjects"))
         else
         {
             $inputFile = Join-Path $directory "$testName.json"
-            $testArguments ="--require=$configurationPath --input-file=$inputFile"
+            $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
         }
 
         Add-Swagger $testName $directory $testArguments
@@ -213,7 +213,7 @@ if (!($Exclude -contains "SmokeTests"))
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
-            Add-Swagger $projectName $projectDirectory "--require=$configurationPath $args $input"
+            Add-Swagger $projectName $projectDirectory "--generation1-convenience-client --require=$configurationPath $args $input"
         }
     }
 }
