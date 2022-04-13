@@ -171,6 +171,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return compilation;
         }
 
+        public static bool IsCustomDocument(Document document) => !IsGeneratedDocument(document) && !IsSharedDocument(document);
+        public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
         private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
 
@@ -224,16 +226,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private class PublicMemberVisitor : CSharpSyntaxRewriter
+        private class MemberVisitor : CSharpSyntaxRewriter
         {
             private List<SyntaxNode> _members = new();
 
             public IEnumerable<SyntaxNode> PublicMembers => _members;
 
+            private Func<SyntaxTokenList, bool> _predicate;
+
+            public MemberVisitor(Func<SyntaxTokenList, bool> accessibility)
+            {
+                _predicate = accessibility;
+            }
+
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
-                if (IsPublic(node.Modifiers))
+                if (_predicate(node.Modifiers))
                 {
                     _members.Add(node);
                 }
@@ -243,7 +252,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public override SyntaxNode? VisitPropertyDeclaration(PropertyDeclarationSyntax node)
             {
                 node = (PropertyDeclarationSyntax)base.VisitPropertyDeclaration(node)!;
-                if (IsPublic(node.Modifiers))
+                if (_predicate(node.Modifiers))
                 {
                     _members.Add(node);
                 }
@@ -253,7 +262,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
-                if (IsPublic(node.Modifiers))
+                if (_predicate(node.Modifiers))
                     _members.Add(node);
                 return node;
             }
@@ -261,7 +270,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public override SyntaxNode? VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
             {
                 node = (ConstructorDeclarationSyntax)base.VisitConstructorDeclaration(node)!;
-                if (IsPublic(node.Modifiers))
+                if (_predicate(node.Modifiers))
                     _members.Add(node);
                 return node;
             }
@@ -332,24 +341,28 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return null;
         }
 
-        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync()
+        private async Task<ImmutableHashSet<SyntaxNode>> GetRootNodes()
         {
-            var compilation = await _project.GetCompilationAsync();
-            if (compilation == null)
-                yield break;
-
-            // get the root nodes
             var classVisitor = new PublicDefinitionVisitor();
             foreach (var document in _project.Documents)
             {
                 var root = await document.GetSyntaxRootAsync();
-                // we only find the files directly under `Generated` and `Extensions`
-                if (IsMgmtRootDocument(document) || IsReferenceType(root))
+                // we add a declaration as root node when
+                // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
+                // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
+                // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
+                if (IsMgmtRootDocument(document) || IsReferenceType(root) || IsCustomDocument(document))
                 {
                     classVisitor.Visit(root);
                 }
             }
-            var queue = new Queue<SyntaxNode>(classVisitor.ModelDeclarations);
+
+            return classVisitor.ModelDeclarations;
+        }
+
+        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync(Compilation compilation, ImmutableHashSet<SyntaxNode> rootNodes)
+        {
+            var queue = new Queue<SyntaxNode>(rootNodes);
             // traverse all the models starting from the root nodes
             var visited = new HashSet<SyntaxNode>();
             while (queue.Count > 0)
@@ -371,7 +384,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private async IAsyncEnumerable<SyntaxNode> GetReferencedTypes(Compilation compilation, SyntaxNode root)
         {
             var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
-            var publicMemberVisitor = new PublicMemberVisitor();
+            var publicMemberVisitor = new MemberVisitor(IsPublic);
             publicMemberVisitor.Visit(root);
             foreach (var member in publicMemberVisitor.PublicMembers)
             {
@@ -466,10 +479,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
+            var compilation = await GetCompilationAsync();
+
             // first get all the declared models
             var definitions = await GetAllPublicDeclaredModels(modelsToKeep);
+            // get the root nodes
+            var rootNodes = await GetRootNodes();
             // traverse all the root and recursively add all the things we met
-            var publicModels = TraverseAllPublicModelsAsync();
+            var publicModels = TraverseAllPublicModelsAsync(compilation, rootNodes);
             await foreach (var model in publicModels)
             {
                 definitions = definitions.Remove(model);
