@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtParamOrdering.Models
 {
-    internal partial class WorkspacePatch : IUtf8JsonSerializable
+    public partial class WorkspacePatch : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

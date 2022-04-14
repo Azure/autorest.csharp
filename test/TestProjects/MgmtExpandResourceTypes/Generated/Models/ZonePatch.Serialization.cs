@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    internal partial class ZonePatch : IUtf8JsonSerializable
+    public partial class ZonePatch : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
