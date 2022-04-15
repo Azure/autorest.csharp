@@ -58,6 +58,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
 
+        public static FormattableString GetConstantFormattable(this Constant constant)
+        {
+            if (constant.Value == null)
+            {
+                // Cast helps the overload resolution
+                return $"({constant.Type}){null:L}";
+            }
+
+            if (constant.IsNewInstanceSentinel)
+            {
+                return $"new {constant.Type}()";
+            }
+
+            return $"{constant.Value:L}";
+        }
+
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)
         {
             var sb = new StringBuilder(5 * parametersCount + 2 * (parametersCount - 1));

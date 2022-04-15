@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static bool IsEmptyConstructorExisted(LowLevelClient client)
         {
-            foreach (var constructor in client.PublicConstructors)
+            foreach (var constructor in client.SecondaryConstructors.Concat(client.PrimaryConstructors))
             {
                 if (constructor.Parameters.Count() == 0)
                     return true;
@@ -117,9 +117,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteEmptyConstructor(writer, client);
             }
 
-            foreach (var constructor in client.PublicConstructors)
+            foreach (var constructor in client.SecondaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor);
+                WritePublicConstructor(writer, client, constructor, false);
+            }
+
+            foreach (var constructor in client.PrimaryConstructors)
+            {
+                WritePublicConstructor(writer, client, constructor, true);
             }
 
             if (client.IsSubClient)
@@ -137,12 +142,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
+        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature, bool isPrimary)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                if (signature is not ConstructorSignature { Initializer: { } } constructor)
+                if (isPrimary)
                 {
                     writer.WriteParametersValidation(signature.Parameters);
                     writer.Line();

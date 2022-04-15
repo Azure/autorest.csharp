@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsRequired => DefaultValue is null;
+        public Constant? forceInitializeValue { get; init; }
     }
 
     internal enum RequestLocation

@@ -53,6 +53,7 @@ namespace Azure.Analytics.Purview.Account
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
+            options ??= new PurviewAccountsClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
