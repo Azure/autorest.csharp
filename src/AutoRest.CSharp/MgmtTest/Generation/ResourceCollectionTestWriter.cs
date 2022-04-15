@@ -14,7 +14,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Mgmt.Models;
 using Azure.ResourceManager.Resources;
-using AutoRest.CSharp.MgmtTest.TestCommon;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -37,7 +36,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
-        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, IEnumerable<string>? scenarioVariables = default) : base(writer, resourceCollection, scenarioVariables)
+        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection) : base(writer, resourceCollection)
         {
             This = resourceCollection;
             _getAllOperation = resourceCollection.GetAllOperation;
@@ -122,7 +121,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 case MgmtExtensions extension:
                     {
-                        _writer.Append($"var collection = {WriteGetExtension(extension, requestPath, exampleModel, _scenarioVariables)}");
+                        _writer.Append($"var collection = {WriteGetExtension(extension, requestPath, exampleModel)}");
                         break;
                     }
                 default:

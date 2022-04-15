@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected string TestBaseName => $"MockTestBase";
         private Resource This { get; }
 
-        public ResourceTestWriter(CodeWriter writer, Resource resource, IEnumerable<string>? scenarioVariables = default) : base(writer, resource, scenarioVariables)
+        public ResourceTestWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _allOperation = resource.AllOperations;
