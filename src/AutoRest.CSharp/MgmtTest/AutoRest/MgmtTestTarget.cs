@@ -59,26 +59,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var subscriptionExtensionsCodeWriter = new CodeWriter();
             new MgmtExtensionTestWriter(subscriptionExtensionsCodeWriter).Write();
             project.AddGeneratedFile($"Mock/{MgmtContext.Library.ExtensionWrapper.Type.Name}Test.cs", subscriptionExtensionsCodeWriter.ToString());
-
-            bool hasScenarioTest = false;
-            foreach (var scenarioTestDefinition in codeModel.TestModel.ScenarioTests)
-            {
-                var codeWriter = new CodeWriter();
-                var scenarioTestWriter = new ScenarioTestWriter(codeWriter, scenarioTestDefinition);
-                scenarioTestWriter.WriteScenarioTest();
-
-                project.AddGeneratedFile($"Scenario/{scenarioTestWriter.TypeName}Test.cs", codeWriter.ToString());
-                hasScenarioTest = true;
-            }
-
-            if (hasScenarioTest)
-            {
-                var codeWriter = new CodeWriter();
-                var testEnvironmentWriter = new TestEnvironmentWriter(codeWriter);
-                testEnvironmentWriter.WriteTestEnvironment();
-
-                project.AddGeneratedFile($"Scenario/{testEnvironmentWriter.TypeName}Test.cs", codeWriter.ToString());
-            }
         }
     }
 }

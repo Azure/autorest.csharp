@@ -25,7 +25,6 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using AutoRest.CSharp.MgmtTest.TestCommon;
 using AutoRest.CSharp.MgmtTest.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -34,15 +33,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     {
         public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
-        protected IEnumerable<string>? _scenarioVariables;
-
         private HashSet<KeyValuePair<string, string>> _operationExamples = new HashSet<KeyValuePair<string, string>>();
 
-        protected bool InScenario => _scenarioVariables is not null;
 
-        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, IEnumerable<string>? scenarioVariables) : base(writer, provider)
+        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
         {
-            this._scenarioVariables = scenarioVariables;
         }
 
         public void WriteTestDecorator()
@@ -101,7 +96,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var elements = resourceId.Split("/");
             for (int i = 2; i < elements.Length; i += 2)
             {
-                if (elements[i - 1].ToLower() == "subscriptions" && !InScenario)
+                if (elements[i - 1].ToLower() == "subscriptions")
                 {   // to correct subscription value
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(elements[i]);
@@ -439,7 +434,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in jsonRawValue.AsDictionary())
                     {
-                        writer.Append($"[{entry.Key.RefScenarioDefinedVariables(_scenarioVariables)}] = ");
+                        writer.Append($"[{entry.Key:L}] = ");
                         WriteJsonRawValue(writer, new JsonRawValue(entry.Value));
                         writer.Line($",");
                     }
@@ -447,7 +442,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (jsonRawValue.IsString())
             {
-                writer.Append($"{jsonRawValue.AsString()!.RefScenarioDefinedVariables(_scenarioVariables)}");
+                writer.Append($"{jsonRawValue.AsString():L}");
             }
             else if (jsonRawValue.IsNull())
             {
@@ -532,31 +527,31 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 case "Azure.Core.ResourceIdentifier":
                 case "Azure.Core.ResourceType":
-                    writer.Append($"new {cst}({FormatResourceId(value).RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"new {cst}({FormatResourceId(value):L})");
                     return true;
                 case "System.DateTimeOffset":
-                    writer.Append($"{typeof(DateTimeOffset)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(DateTimeOffset)}.Parse({value:L})");
                     return true;
                 case "System.Guid":
-                    writer.Append($"{typeof(Guid)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(Guid)}.Parse({value:L})");
                     return true;
                 case "System.TimeSpan":
-                    writer.Append($"{typeof(TimeSpan)}.Parse({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(TimeSpan)}.Parse({value:L})");
                     return true;
                 case "System.Uri":
-                    writer.Append($"new {typeof(Uri)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"new {typeof(Uri)}({value:L})");
                     return true;
                 case "System.Byte[]":
-                    writer.Append($"{typeof(Encoding)}.ASCII.GetBytes({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"{typeof(Encoding)}.ASCII.GetBytes({value:L})");
                     return true;
                 case "Azure.ResourceManager.Models.ManagedServiceIdentityType":
-                    writer.Append($"new {typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"new {typeof(Azure.ResourceManager.Models.ManagedServiceIdentityType)}({value:L})");
                     return true;
                 case "Azure.Core.AzureLocation":
-                    writer.Append($"new {typeof(Azure.Core.AzureLocation)}({value.RefScenarioDefinedVariables(_scenarioVariables)})");
+                    writer.Append($"new {typeof(Azure.Core.AzureLocation)}({value:L})");
                     return true;
                 case "System.String":
-                    writer.Append($"{value.RefScenarioDefinedVariables(_scenarioVariables)}");
+                    writer.Append($"{value:L}");
                     return true;
             }
             return false;
@@ -579,7 +574,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 if (enumType.BaseType.FrameworkType == typeof(String) && exampleValue.RawValue is string strValue)
                 {
-                    writer.AppendEnumFromString(enumType, w => w.Append($"{strValue.RefScenarioDefinedVariables(_scenarioVariables)}"));
+                    writer.AppendEnumFromString(enumType, w => w.Append($"{strValue:L}"));
                 }
                 else
                 {
@@ -704,7 +699,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 }
 
-                if (segment.ReferenceName == "subscriptionId" && !InScenario)
+                if (segment.ReferenceName == "subscriptionId")
                 {
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(value);
@@ -713,7 +708,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         value = "\"00000000-0000-0000-0000-000000000000\"";
                     }
                 }
-                return value.RefScenarioDefinedVariables(_scenarioVariables);
+                return value;
             }));
             return $"{identifierParams}";
         }
@@ -779,7 +774,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return exampleValue ?? "00000000-0000-0000-0000-000000000000";
         }
 
-        protected static CodeWriterDelegate WriteGetExtension(MgmtExtensions extensions, RequestPath requestPath, ExampleModel exampleModel, IEnumerable<string>? scenarioVariables)
+        protected static CodeWriterDelegate WriteGetExtension(MgmtExtensions extensions, RequestPath requestPath, ExampleModel exampleModel)
         {
             return writer =>
             {
@@ -790,11 +785,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 else if (extensions == MgmtContext.Library.ResourceGroupExtensions)
                 {
-                    writer.Append($"GetArmClient().Get{extensions.ArmCoreType.Name}({typeof(ResourceGroupResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(scenarioVariables)}, {GetExampleValueFromRequestPath(requestPath, exampleModel, "resourcegroups").RefScenarioDefinedVariables(scenarioVariables)}))");
+                    writer.Append($"GetArmClient().Get{extensions.ArmCoreType.Name}({typeof(ResourceGroupResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions"):L}, {GetExampleValueFromRequestPath(requestPath, exampleModel, "resourcegroups"):L}))");
                 }
                 else if (extensions == MgmtContext.Library.SubscriptionExtensions)
                 {
-                    writer.Append($"GetArmClient().Get{extensions.ArmCoreType.Name}({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions").RefScenarioDefinedVariables(scenarioVariables)}))");
+                    writer.Append($"GetArmClient().Get{extensions.ArmCoreType.Name}({typeof(SubscriptionResource)}.CreateResourceIdentifier({GetExampleValueFromRequestPath(requestPath, exampleModel, "subscriptions"):L}))");
                 }
                 else
                 {

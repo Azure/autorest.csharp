@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected string TestBaseName => $"MockTestBase";
 
-        public MgmtExtensionTestWriter(CodeWriter writer, IEnumerable<string>? scenarioVariables = default) : base(writer, MgmtContext.Library.ExtensionWrapper, scenarioVariables)
+        public MgmtExtensionTestWriter(CodeWriter writer) : base(writer, MgmtContext.Library.ExtensionWrapper)
         {
         }
 
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var testMethodName = CreateMethodName(clientOperation.Name, async);
             var resourceIdentifierParams = ComposeResourceIdentifierParams(restOperation.RequestPath, exampleModel);
             var resourceVariableName = new CodeWriterDeclaration(extensions.ResourceName.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName:D} ={WriteGetExtension(extensions, restOperation.RequestPath, exampleModel, _scenarioVariables)};");
+            _writer.Line($"var {resourceVariableName:D} ={WriteGetExtension(extensions, restOperation.RequestPath, exampleModel)};");
             List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters.Skip(1), exampleModel);
 
             _writer.Line();
