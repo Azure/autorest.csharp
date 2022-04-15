@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -75,13 +76,13 @@ namespace MgmtSignalR.Tests.Scenario
                     Template = BinaryData.FromString(templatePayload),
                 }));
                 var deployOutputs = deploymentOperation.Value.Data.Properties.Outputs.ToObjectFromJson<Dictionary<string, object>>();
-                if (deployOutputs.ContainsKey("name") && deployOutputs["name"] is Dictionary<string, object> nameOutput)
+                if (deployOutputs.ContainsKey("name") && deployOutputs["name"] is JsonElement nameOutput)
                 {
-                    name = nameOutput["value"].ToString();
+                    name = nameOutput.GetProperty("value").ToString();
                 }
-                if (deployOutputs.ContainsKey("resourceName") && deployOutputs["resourceName"] is Dictionary<string, object> resourceNameOutput)
+                if (deployOutputs.ContainsKey("resourceName") && deployOutputs["resourceName"] is JsonElement resourceNameOutput)
                 {
-                    resourceName = resourceNameOutput["value"].ToString();
+                    resourceName = resourceNameOutput.GetProperty("value").ToString();
                 }
             }
 
