@@ -148,9 +148,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                                 if (!existedVariables.Contains(variableName))
                                     continue;
                                 var element = new CodeWriterDeclaration($"{variableName}Output");
-                                using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is {typeof(Dictionary<string, object>)} {element:D})"))
+                                using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is {typeof(System.Text.Json.JsonElement)} {element:D})"))
                                 {
-                                    _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
+                                    _writer.Line($"{variableName} = {element}.GetProperty(\"value\").ToString();");
                                 }
                             }
                         }
