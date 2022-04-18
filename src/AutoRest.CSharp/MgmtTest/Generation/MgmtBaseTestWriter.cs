@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
         private HashSet<KeyValuePair<string, string>> _operationExamples = new HashSet<KeyValuePair<string, string>>();
+        private Dictionary<string, int> _testMethodIndex = new Dictionary<string, int>();
 
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
@@ -59,10 +60,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
         }
 
-        protected static string CreateTestMethodName(string methodName, int exampleIndex)
+        protected string CreateTestMethodName(string methodName)
         {
-            var testCaseSuffix = exampleIndex > 0 ? (exampleIndex + 1).ToString() : string.Empty;
-            return methodName + testCaseSuffix;
+            if (_testMethodIndex.ContainsKey(methodName))
+            {
+                return $"{methodName}{++_testMethodIndex[methodName]}";
+            }
+            _testMethodIndex[methodName] = 1;
+            return methodName;
         }
 
         protected bool ShouldWriteTest(MgmtClientOperation clientOperation, ExampleModel exampleModel)
@@ -251,9 +256,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return constructor;
         }
 
-        public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty)
+        public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty, ExampleValue ev)
         {
             bool isSingleProperty = targetProperty.IsSinglePropertyObject(out _);
+            if (MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
+            {
+                var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
+                if (mappedTypeProvider is SchemaObjectType mappedSot)
+                {
+                    isSingleProperty = (new ObjectTypeProperty(targetProperty.Declaration, targetProperty.Description, targetProperty.IsReadOnly, targetProperty.SchemaProperty, mappedSot.Type)).IsSinglePropertyObject(out _);
+                }
+            }
             return isSingleProperty ? variableName : $"{variableName}.{targetProperty.Declaration.Name}";
         }
 
@@ -290,7 +303,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
-                    WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty)}");
+                    WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}");
                 }
                 else
                 {
@@ -339,7 +352,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                     if (paramValue is not null)
                     {
-                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty)}"));
+                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}"));
                     }
                 }
             }
@@ -396,7 +409,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                         if (paramValue is not null)
                         {
-                            FormattableString newVariableName = $"{PropertyVaraibleName(variableName, targetProperty)}";
+                            FormattableString newVariableName = $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
                                 AddTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
@@ -405,7 +418,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                             else if (!targetProperty.IsSinglePropertyObject(out _))
                             {
                                 writer.Append($"{targetProperty.Declaration.Name:D} = ");
-                                WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
+                                WriteExampleValue(writer, targetProperty.ValueType, paramValue, newVariableName);
                                 writer.Append($", ");
                                 consumedProperties.Add(targetProperty);
                             }
