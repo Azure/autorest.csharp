@@ -173,6 +173,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
+            return false;
+#if false
             if (Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(model.Type.Name))
                 return false;
 
@@ -227,6 +229,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
             return false;
+#endif
         }
     }
 }

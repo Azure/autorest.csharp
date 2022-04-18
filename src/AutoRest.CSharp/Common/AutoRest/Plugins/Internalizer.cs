@@ -27,24 +27,37 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             // first get all the declared models
             var definitions = await GetAllPublicDeclaredModels(project, modelsToKeep);
+
             // get the root nodes
             var rootNodes = await GetRootNodes(project);
-            // traverse all the root and recursively add all the things we met
-            var publicModels = TraverseAllPublicModelsAsync(compilation, project, rootNodes);
+            // traverse all the models from the roots and recursively add all the things we met (including non-public things)
+            var referencedModels = TraverseAllModelsAsync(compilation, project, rootNodes, false);
+            var unreferencedModels = new HashSet<SyntaxNode>(definitions);
+            await foreach (var model in referencedModels)
+            {
+                unreferencedModels.Remove(model);
+            }
+            foreach (var model in unreferencedModels)
+            {
+                project = await RemoveNode(compilation, project, model);
+            }
+            // traverse all the models from the roots and recursively add all the public things we met
+            var publicModels = TraverseAllModelsAsync(compilation, project, rootNodes, true);
+            var internalModels = new HashSet<SyntaxNode>(definitions);
             await foreach (var model in publicModels)
             {
-                definitions = definitions.Remove(model);
+                internalModels.Remove(model);
             }
             // get the models we need to mark internal
-            foreach (var model in definitions)
+            foreach (var model in internalModels)
             {
-                project = MarkInternal(project, model);
+                project = await MarkInternal(project, model);
             }
 
             return project;
         }
 
-        private static async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync(Compilation compilation, Project project, ImmutableHashSet<SyntaxNode> rootNodes)
+        private static async IAsyncEnumerable<SyntaxNode> TraverseAllModelsAsync(Compilation compilation, Project project, ImmutableHashSet<SyntaxNode> rootNodes, bool publicOnly)
         {
             var queue = new Queue<SyntaxNode>(rootNodes);
             // traverse all the models starting from the root nodes
@@ -58,35 +71,37 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 // add this node to the public list
                 yield return node;
                 // add every type referenced by this node to the queue
-                await foreach (var child in GetReferencedTypes(compilation, project, node))
+                await foreach (var child in GetReferencedTypes(compilation, project, node, publicOnly))
                 {
                     queue.Enqueue(child);
                 }
             }
         }
 
-        private static async IAsyncEnumerable<SyntaxNode> GetReferencedTypes(Compilation compilation, Project project, SyntaxNode root)
+        private static async IAsyncEnumerable<SyntaxNode> GetReferencedTypes(Compilation compilation, Project project, SyntaxNode root, bool publicOnly)
         {
             var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
-            var publicMemberVisitor = new MemberVisitor(IsPublic);
-            publicMemberVisitor.Visit(root);
-            foreach (var member in publicMemberVisitor.PublicMembers)
+            var memberVisitor = new MemberVisitor(publicOnly);
+            memberVisitor.Visit(root);
+            foreach (var member in memberVisitor.Members)
             {
                 var symbol = semanticModel.GetDeclaredSymbol(member);
                 if (symbol == null)
                     continue;
-                var list = new HashSet<SyntaxNode>();
-                await ProcessSymbol(project, symbol, list);
-                foreach (var node in list)
+                var referencedNodes = new HashSet<SyntaxNode>();
+                await ProcessSymbol(project, symbol, publicOnly, referencedNodes);
+                foreach (var node in referencedNodes)
                 {
                     yield return node;
                 }
             }
         }
 
-        private static async Task ProcessSymbol(Project project, ISymbol? symbol, HashSet<SyntaxNode> result)
+        private static async Task ProcessSymbol(Project project, ISymbol? symbol, bool publicOnly, HashSet<SyntaxNode> referencedNodes)
         {
-            if (symbol == null || symbol.DeclaredAccessibility != Accessibility.Public)
+            if (symbol == null)
+                return;
+            if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
                 return;
             switch (symbol)
             {
@@ -95,9 +110,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                     {
                         var node = await reference.GetSyntaxAsync();
                         // short cut the recursive execution if this has already been in the result
-                        if (result.Contains(node))
+                        if (referencedNodes.Contains(node))
                             return;
-                        result.Add(node);
+                        referencedNodes.Add(node);
                         if (HasDiscriminator(node, out var identifierCandidates))
                         {
                             // first find all the derived types from this type
@@ -105,26 +120,35 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                             {
                                 if (identifierCandidates.Contains(derivedTypeSymbol.Name))
                                 {
-                                    await ProcessSymbol(project, derivedTypeSymbol, result);
+                                    await ProcessSymbol(project, derivedTypeSymbol, publicOnly, referencedNodes);
                                 }
                             }
                         }
                     }
-                    await ProcessSymbol(project, typeSymbol.BaseType, result);
+                    await ProcessSymbol(project, typeSymbol.BaseType, publicOnly, referencedNodes);
                     foreach (var typeArgument in typeSymbol.TypeArguments)
                     {
-                        await ProcessSymbol(project, typeArgument, result);
+                        await ProcessSymbol(project, typeArgument, publicOnly, referencedNodes);
                     }
                     break;
                 case IMethodSymbol methodSymbol:
-                    await ProcessSymbol(project, methodSymbol.ReturnType, result);
+                    await ProcessSymbol(project, methodSymbol.ReturnType, publicOnly, referencedNodes);
                     foreach (var parameter in methodSymbol.Parameters)
                     {
-                        await ProcessSymbol(project, parameter.Type, result);
+                        await ProcessSymbol(project, parameter.Type, publicOnly, referencedNodes);
                     }
                     break;
                 case IPropertySymbol propertySymbol:
-                    await ProcessSymbol(project, propertySymbol.Type, result);
+                    await ProcessSymbol(project, propertySymbol.Type, publicOnly, referencedNodes);
+                    break;
+                case IFieldSymbol fieldSymbol:
+                    await ProcessSymbol(project, fieldSymbol.Type, publicOnly, referencedNodes);
+                    break;
+                case IArrayTypeSymbol arrayTypeSymbol:
+                    await ProcessSymbol(project, arrayTypeSymbol.ElementType, publicOnly, referencedNodes);
+                    break;
+                case ITypeParameterSymbol:
+                    // This is the type parameter place holder (such like a `T`), do nothing
                     break;
                 default:
                     throw new InvalidOperationException($"Not implemented for symbol {symbol.GetType()}");
@@ -161,7 +185,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return false;
         }
 
-        private static Project MarkInternal(Project project, SyntaxNode declarationNode)
+        private static async Task<Project> MarkInternal(Project project, SyntaxNode declarationNode)
         {
             var newNode = declarationNode switch
             {
@@ -169,13 +193,81 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 _ => throw new InvalidOperationException()
             };
             var tree = declarationNode.SyntaxTree;
-            var document = project.GetDocument(tree)!;
-            var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
-            //project = project.RemoveDocument(document.Id);
-            document = document.WithSyntaxRoot(newRoot);
+            var document = project.GetDocument(tree);
+            if (document == null)
+                return project;
+            var root = await tree.GetRootAsync();
+            root = root.ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
+            document = document.WithSyntaxRoot(root);
             project = document.Project;
 
             return project;
+        }
+
+        private static async Task<Project> RemoveNode(Compilation compilation, Project project, SyntaxNode declarationNode)
+        {
+            var tree = declarationNode.SyntaxTree;
+            var document = project.GetDocument(tree);
+            if (document == null)
+                return project;
+            var root = await tree.GetRootAsync();
+            root = root.RemoveNode(declarationNode, SyntaxRemoveOptions.KeepNoTrivia);
+            document = document.WithSyntaxRoot(root!);
+            project = document.Project;
+
+            await foreach (var nodes in GetExtensionNodes(compilation, project, declarationNode))
+            {
+                project = await RemoveNodes(project, nodes);
+            }
+
+            return project;
+        }
+
+        private static async Task<Project> RemoveNodes(Project project, IEnumerable<SyntaxNode> nodes)
+        {
+            var tree = nodes.First().SyntaxTree;
+            var document = project.GetDocument(tree);
+            if (document == null)
+                return project;
+            var root = await tree.GetRootAsync();
+            root = root.RemoveNodes(nodes, SyntaxRemoveOptions.KeepNoTrivia);
+            document = document.WithSyntaxRoot(root!);
+            project = document.Project;
+
+            return project;
+        }
+
+        private static async IAsyncEnumerable<IEnumerable<SyntaxNode>> GetExtensionNodes(Compilation compilation, Project project, SyntaxNode declarationNode)
+        {
+            // in our generation, only enum declarations have extension classes as serialization method which is internal by default. We need to remove it as well if we remove its corresponding enum definition
+            if (declarationNode is not EnumDeclarationSyntax enumDeclaration)
+            {
+                yield break;
+            }
+
+            foreach (var document in project.Documents)
+            {
+                if (GeneratedCodeWorkspace.IsGeneratedDocument(document))
+                {
+                    var root = await document.GetSyntaxRootAsync();
+                    if (root == null)
+                        continue;
+                    var classDeclarations = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+                    var classes = classDeclarations
+                        .Where(delcaration => IsExtensionClass(delcaration, enumDeclaration));
+
+                    if (classes.Any())
+                        yield return classes;
+                }
+            }
+        }
+
+        private static bool IsExtensionClass(ClassDeclarationSyntax classDeclaration, BaseTypeDeclarationSyntax baseTypeDeclaration)
+        {
+            if (!ContainsToken(classDeclaration.Modifiers, SyntaxKind.StaticKeyword))
+                return false;
+
+            return classDeclaration.Identifier.Text.Equals($"{baseTypeDeclaration.Identifier.Text}Extensions");
         }
 
         private static MemberDeclarationSyntax ChangeModifier(MemberDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
@@ -322,13 +414,16 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         {
             private List<SyntaxNode> _members = new();
 
-            public IEnumerable<SyntaxNode> PublicMembers => _members;
+            public IEnumerable<SyntaxNode> Members => _members;
 
             private Func<SyntaxTokenList, bool> _predicate;
 
-            public MemberVisitor(Func<SyntaxTokenList, bool> accessibility)
+            public MemberVisitor(bool publicOnly)
             {
-                _predicate = accessibility;
+                if (publicOnly)
+                    _predicate = IsPublic;
+                else
+                    _predicate = _ => true;
             }
 
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
@@ -351,6 +446,18 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 return node;
             }
 
+            public override SyntaxNode? VisitFieldDeclaration(FieldDeclarationSyntax node)
+            {
+                node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node)!;
+                if (_predicate(node.Modifiers))
+                {
+                    // a field declaration can declare multiple fields, therefore we need to add them one by one
+                    foreach (var variable in node.Declaration.Variables)
+                        _members.Add(variable);
+                }
+                return node;
+            }
+
             public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
@@ -368,7 +475,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             }
         }
 
-        private static bool IsPublic(SyntaxTokenList tokenList)
-            => tokenList.Any(token => token.IsKind(SyntaxKind.PublicKeyword));
+        private static bool ContainsToken(SyntaxTokenList tokenList, SyntaxKind kind)
+            => tokenList.Any(token => token.IsKind(kind));
+        private static bool IsPublic(SyntaxTokenList tokenList) => ContainsToken(tokenList, SyntaxKind.PublicKeyword);
+        private static bool IsStatic(SyntaxTokenList tokenList) => ContainsToken(tokenList, SyntaxKind.StaticKeyword);
     }
 }
