@@ -16,7 +16,7 @@ This class represents the a full resource client object which contains a `Data` 
 
 ### `[Resource]Collection` class
 
-This class represents the operations you can perform on a collection of resources belonging to a specific parent resource. This object provides most of the logical collection operations.
+This class contains operations for a resource collection that belongs to a specific parent resource. It provides most of the logical collection operations.
 
 | Collection Behavior | Collection Method |
 | :--- | :--- |
@@ -52,7 +52,7 @@ public static partial class NetworkExtensions
 
 ## How does the generator identify a resource
 
-The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how the generator identifies the resource classes as well as the hierarchy.
+The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how the generator identifies the resource classes as well as the hierarchy.
 
 The management generator will first go through all the operations and categorize them by resources, then calculate hierarchical structures on them.
 
@@ -140,6 +140,8 @@ public partial class StorageAccountResource : ArmResource
 If you want to change the behavior how the generator identifies singleton resources, please see [change singleton resources](#change-singleton-resources) section.
 
 ## Management plane configurations
+
+The configurations for management plane generator should be written in the `readme.md` file or `autorest.md` file that generates the SDK. You could take [this file](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/compute/Azure.ResourceManager.Compute/src/autorest.md) as an example.
 
 ### Change resource data
 
