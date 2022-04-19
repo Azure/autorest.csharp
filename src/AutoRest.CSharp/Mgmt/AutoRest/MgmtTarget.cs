@@ -179,48 +179,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return true;
             }
 
-            // do not skip generation of reference types in resource manager
-            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
-            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
-            if (model is MgmtReferenceType)
+            if (model is SchemaObjectType objSchema)
             {
-                return false;
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
             }
 
-            //if (model is SchemaObjectType objSchema)
-            //{
-            //    //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
-            //    if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
-            //        return false;
-
-            //    if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
-            //        return true;
-
-            //    //skip things that had exact match replacements
-            //    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-            //    //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to
-            //    //get the information that whether the model has been used as a base class for inheritance and as a property.
-            //    var usedAsInheritance = InheritanceChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var inheritanceResult);
-            //    var usedAsProperty = ReferenceTypePropertyChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var propertyResult);
-            //    if (usedAsInheritance && usedAsProperty)
-            //    {
-            //        //If the model is used both as a base class for inheritance and a property, we only remove the model when it has matches in both cases.
-            //        if (inheritanceResult != null && propertyResult != null)
-            //            return true;
-            //    }
-            //    else if (inheritanceResult != null || propertyResult != null)
-            //    {
-            //        return true;
-            //    }
-            //    else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
-            //    {
-            //        //In the cache of ReferenceTypePropertyChooser, only models used as a direct property of another model is stored.
-            //        //There could be orphaned models that are not a direct property of another model and is not tracked by cache.
-            //        //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-            //        if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType) != null)
-            //            return true;
-            //    }
-            //}
             return false;
         }
     }
