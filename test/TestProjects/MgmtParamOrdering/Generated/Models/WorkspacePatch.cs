@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The parameters for updating a machine learning workspace. </summary>
-    internal partial class WorkspacePatch
+    public partial class WorkspacePatch
     {
         /// <summary> Initializes a new instance of WorkspacePatch. </summary>
         public WorkspacePatch()
