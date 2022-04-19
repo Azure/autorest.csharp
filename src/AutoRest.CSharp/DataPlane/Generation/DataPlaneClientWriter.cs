@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new NotSupportedException($"{typeof(AADTokenSecurityScheme)} is not supported. Use {typeof(OAuth2SecurityScheme)} instead");
                 }
 
-                if (scheme is KeySecurityScheme)
+                if (scheme is KeySecurityScheme keySecurityScheme)
                 {
                     var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
@@ -175,8 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                         writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                        var schemeName = (scheme as KeySecurityScheme)!.Name;
-                        writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{schemeName}\"));");
+                        writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{keySecurityScheme.Name}\"));");
                         writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                         foreach (var parameter in client.RestClient.Parameters)
                         {
@@ -202,7 +201,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.Line();
                 }
-                else if (scheme is OAuth2SecurityScheme)
+                else if (scheme is OAuth2SecurityScheme oauth2SecurityScheme)
                 {
                     var ctorParams = client.GetClientConstructorParameters(typeof(TokenCredential));
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
@@ -229,8 +228,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var scopesParam = new CodeWriterDeclaration("scopes");
                         writer.Append($"string[] {scopesParam:D} = ");
                         writer.Append($"{{ ");
-                        var scopes = (scheme as OAuth2SecurityScheme)!.Scopes;
-                        foreach (var credentialScope in scopes)
+                        foreach (var credentialScope in oauth2SecurityScheme.Scopes)
                         {
                             writer.Append($"{credentialScope:L}, ");
                         }

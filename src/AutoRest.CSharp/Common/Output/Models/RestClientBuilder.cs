@@ -911,7 +911,18 @@ namespace AutoRest.CSharp.Output.Models
 
             private void AddRequestParameterWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
             {
-                var parameter = _parent.BuildContentTypeParameterWithMediaTypes(requestParameter, requestMediaTypes);
+                CSharpType type = new CSharpType(typeof(ContentType), requestParameter.IsNullable || !requestParameter.IsRequired);
+                var parameter = new Parameter(
+                    requestParameter.CSharpName(),
+                    CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes),
+                    TypeFactory.GetInputType(type),
+                    null,
+                    requestParameter.IsRequired,
+                    IsApiVersionParameter: false,
+                    IsResourceIdentifier: requestParameter.IsResourceParameter,
+                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                    RequestLocation: GetRequestLocation(requestParameter));
+
                 _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
                 _parameters.Add(parameter);
             }
