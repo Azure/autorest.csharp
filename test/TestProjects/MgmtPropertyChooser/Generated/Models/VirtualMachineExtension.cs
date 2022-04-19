@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -23,7 +24,7 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
@@ -36,7 +37,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="settings"> Json formatted public settings for the extension. </param>
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal VirtualMachineExtension(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState) : base(id, name, type, systemData, tags, location)
+        internal VirtualMachineExtension(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState) : base(id, name, resourceType, systemData, tags, location)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
@@ -62,9 +63,9 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </summary>
         public bool? EnableAutomaticUpgrade { get; set; }
         /// <summary> Json formatted public settings for the extension. </summary>
-        public object Settings { get; set; }
+        public BinaryData Settings { get; set; }
         /// <summary> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </summary>
-        public object ProtectedSettings { get; set; }
+        public BinaryData ProtectedSettings { get; set; }
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
     }

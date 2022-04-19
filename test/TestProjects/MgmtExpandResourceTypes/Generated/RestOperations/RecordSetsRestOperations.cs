@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
     internal partial class RecordSetsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,10 +34,10 @@ namespace MgmtExpandResourceTypes
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-09-01";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -64,9 +63,9 @@ namespace MgmtExpandResourceTypes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -76,20 +75,20 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="recordType"> The type of DNS record in this record set. </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
-        /// <param name="parameters"> Parameters supplied to the Update operation. </param>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<RecordSetData>> UpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RecordSetData>> UpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, parameters, ifMatch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, data, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -111,20 +110,20 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="recordType"> The type of DNS record in this record set. </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
-        /// <param name="parameters"> Parameters supplied to the Update operation. </param>
+        /// <param name="data"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<RecordSetData> Update(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<RecordSetData> Update(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, parameters, ifMatch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, data, ifMatch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -140,7 +139,7 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -170,9 +169,9 @@ namespace MgmtExpandResourceTypes
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -182,21 +181,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="recordType"> The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created). </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
-        /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="data"> Parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<RecordSetData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RecordSetData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, parameters, ifMatch, ifNoneMatch);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, data, ifMatch, ifNoneMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -219,21 +218,21 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="recordType"> The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created). </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
-        /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="data"> Parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, <paramref name="relativeRecordSetName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<RecordSetData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public Response<RecordSetData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData data, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(zoneName, nameof(zoneName));
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, parameters, ifMatch, ifNoneMatch);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, zoneName, recordType, relativeRecordSetName, data, ifMatch, ifNoneMatch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -274,7 +273,7 @@ namespace MgmtExpandResourceTypes
                 request.Headers.Add("If-Match", ifMatch);
             }
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -356,7 +355,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -454,7 +453,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -547,7 +546,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -638,7 +637,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -714,7 +713,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -796,7 +795,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -876,7 +875,7 @@ namespace MgmtExpandResourceTypes
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

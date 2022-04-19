@@ -14,11 +14,15 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A Class representing a EnvironmentContainerResource along with the instance operations that can be performed on it. </summary>
+    /// <summary>
+    /// A Class representing an EnvironmentContainerResource along with the instance operations that can be performed on it.
+    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="EnvironmentContainerResource" />
+    /// from an instance of <see cref="ArmClient" /> using the GetEnvironmentContainerResource method.
+    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource" /> using the GetEnvironmentContainerResource method.
+    /// </summary>
     public partial class EnvironmentContainerResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="EnvironmentContainerResource"/> instance. </summary>
@@ -51,9 +55,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal EnvironmentContainerResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _environmentContainerResourceEnvironmentContainersClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
+            _environmentContainerResourceEnvironmentContainersClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
-            _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, environmentContainerResourceEnvironmentContainersApiVersion);
+            _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, environmentContainerResourceEnvironmentContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -136,7 +140,7 @@ namespace MgmtParamOrdering
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
         /// Operation Id: EnvironmentContainers_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -162,7 +166,7 @@ namespace MgmtParamOrdering
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
         /// Operation Id: EnvironmentContainers_Delete
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
@@ -201,9 +205,9 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -232,9 +236,9 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var originalTags = TagResource.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -261,10 +265,10 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
+                await GetTagResource().DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -291,10 +295,10 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
-                var originalTags = TagResource.Get(cancellationToken);
+                GetTagResource().Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -321,9 +325,9 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await GetTagResource().GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -350,9 +354,9 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var originalTags = TagResource.Get(cancellationToken);
+                var originalTags = GetTagResource().Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
+                GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new EnvironmentContainerResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

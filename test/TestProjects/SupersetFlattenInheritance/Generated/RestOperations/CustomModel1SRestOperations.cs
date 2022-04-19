@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     internal partial class CustomModel1SRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,7 +34,7 @@ namespace SupersetFlattenInheritance
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2021-06-10";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
@@ -53,7 +52,7 @@ namespace SupersetFlattenInheritance
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -109,7 +108,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 customModel1)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -127,27 +126,27 @@ namespace SupersetFlattenInheritance
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(customModel1);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CustomModel1>> PutAsync(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel1>> PutAsync(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, customModel1SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, customModel1SName, customModel1);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -166,18 +165,18 @@ namespace SupersetFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CustomModel1> Put(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public Response<CustomModel1> Put(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            using var message = CreatePutRequest(subscriptionId, resourceGroupName, customModel1SName, parameters);
+            using var message = CreatePutRequest(subscriptionId, resourceGroupName, customModel1SName, customModel1);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -209,7 +208,7 @@ namespace SupersetFlattenInheritance
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

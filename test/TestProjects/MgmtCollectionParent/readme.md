@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 
 operation-positions:
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders: collection
+  ListOrderAtResourceGroupLevel: collection
 
 request-path-to-parent:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}

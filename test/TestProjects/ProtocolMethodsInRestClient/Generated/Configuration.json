@@ -8,8 +8,12 @@
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
+  "generation1-convenience-client": true,
   "ProtocolMethodList": [
     "Create",
-    "Delete"
+    "Delete",
+    "firstTemplate_Create",
+    "firstTemplate_Get",
+    "secondTemplate_Get"
   ]
 }

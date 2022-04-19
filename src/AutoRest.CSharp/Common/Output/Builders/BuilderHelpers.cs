@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -48,6 +49,8 @@ namespace AutoRest.CSharp.Output.Builders
                 normalizedValue = Convert.FromBase64String(base64String);
             else if (frameworkType == typeof(DateTimeOffset) && value is string dateTimeString)
                 normalizedValue = DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal);
+            else if (frameworkType == typeof(ResourceType) && value is string resourceTypeString)
+                normalizedValue = new ResourceType(resourceTypeString);
             else
                 normalizedValue = Convert.ChangeType(value, frameworkType);
 
@@ -62,9 +65,13 @@ namespace AutoRest.CSharp.Output.Builders
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => schema.Extensions?.Format?.Equals("duration-constant") == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
+            DurationSchema _ => schema.Extensions?.Format?.Equals(XMsFormat.DurationConstant) == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
-            _ => SerializationFormat.Default
+            _ => schema.Extensions?.Format switch
+                {
+                    XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
+                    _ => SerializationFormat.Default
+                }
         };
 
         public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;

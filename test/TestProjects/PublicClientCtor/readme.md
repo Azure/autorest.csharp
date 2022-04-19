@@ -4,6 +4,7 @@
 
 ``` yaml
 title: PublicClientCtor
+generation1-convenience-client: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/PublicClientCtor.json
 namespace: Azure.PublicClientCtor

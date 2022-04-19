@@ -4,13 +4,13 @@
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
-using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
         {
-            writer.Line($"private readonly {typeof(string)} {UserAgentField};");
+            writer.Line($"private readonly {typeof(TelemetryDetails)} {UserAgentField};");
             writer.WriteFieldDeclarations(restClient.Fields);
         }
 
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
                     }
                 }
-                writer.Line($"{UserAgentField} = {typeof(HttpMessageUtilities)}.GetUserAgentName(this, {MgmtRestClient.ApplicationIdParameter.Name});");
+                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {MgmtRestClient.ApplicationIdParameter.Name});");
             }
             writer.Line();
         }

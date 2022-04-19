@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
-            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent());
+            return resource.OperationSet.GetParent();
         }
 
         private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet)

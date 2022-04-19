@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using XmlDeserialization.Models;
 
 namespace XmlDeserialization
 {
     internal partial class XmlDeserializationRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -35,7 +34,7 @@ namespace XmlDeserialization
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2021-08-01";
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string filter, int? top, int? skip)
@@ -65,7 +64,7 @@ namespace XmlDeserialization
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, application/xml");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -145,7 +144,7 @@ namespace XmlDeserialization
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, application/xml");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -229,7 +228,7 @@ namespace XmlDeserialization
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, application/xml");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -295,7 +294,7 @@ namespace XmlDeserialization
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData data, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -317,9 +316,9 @@ namespace XmlDeserialization
             request.Headers.Add("Accept", "application/json, application/xml");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -327,19 +326,19 @@ namespace XmlDeserialization
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
-        /// <param name="parameters"> Create or update parameters. </param>
+        /// <param name="data"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<XmlInstanceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<XmlInstanceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, xmlName, parameters, ifMatch);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, xmlName, data, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -360,19 +359,19 @@ namespace XmlDeserialization
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
-        /// <param name="parameters"> Create or update parameters. </param>
+        /// <param name="data"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<XmlInstanceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<XmlInstanceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, xmlName, parameters, ifMatch);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, xmlName, data, ifMatch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -406,7 +405,7 @@ namespace XmlDeserialization
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Accept", "application/json, application/xml");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -474,7 +473,7 @@ namespace XmlDeserialization
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, application/xml");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

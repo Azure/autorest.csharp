@@ -20,8 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
-        private IDictionary<Operation, OperationGroup> _operationGroupCache = new Dictionary<Operation, OperationGroup>();
-
         /// <summary>
         /// The raw request path of string of the operations in this <see cref="OperationSet"/>
         /// </summary>
@@ -44,15 +42,13 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// Add a new operation to this <see cref="OperationSet"/>
         /// </summary>
         /// <param name="operation">The operation to be added</param>
-        /// <param name="operationGroup">The operationGroup this operation belongs</param>
         /// <exception cref="InvalidOperationException">when trying to add an operation with a different path from <see cref="RequestPath"/></exception>
-        public void Add(Operation operation, OperationGroup operationGroup)
+        public void Add(Operation operation)
         {
             var path = operation.GetHttpPath();
             if (path != RequestPath)
                 throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
             Operations.Add(operation);
-            _operationGroupCache.TryAdd(operation, operationGroup);
         }
 
         /// <summary>
@@ -62,16 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public void Remove(Operation operation)
         {
             Operations.Remove(operation);
-            _operationGroupCache.Remove(operation);
         }
-
-        /// <summary>
-        /// Get the corresponding <see cref="OperationGroup"/> for the given <see cref="Operation"/>
-        /// </summary>
-        /// <param name="operation"></param>
-        /// <returns></returns>
-        /// <exception cref="KeyNotFoundException">the given operation was not found in this <see cref="OperationSet"/></exception>
-        internal OperationGroup this[Operation operation] => _operationGroupCache[operation];
 
         public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
 
@@ -116,8 +103,23 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath NonHintRequestPath => _nonHintRequestPath ??= GetNonHintRequestPath();
         private RequestPath GetNonHintRequestPath()
         {
-            var operation = Operations.First();
-            return Models.RequestPath.FromOperation(operation, this[operation]);
+            var operation = FindBestOperation();
+            return Models.RequestPath.FromOperation(operation, MgmtContext.Library.GetOperationGroup(operation));
+        }
+
+        private Operation FindBestOperation()
+        {
+            // first we try GET operation
+            var getOperation = FindOperation(HttpMethod.Get);
+            if (getOperation != null)
+                return getOperation;
+            // if no GET operation, we return PUT operation
+            var putOperation = FindOperation(HttpMethod.Put);
+            if (putOperation != null)
+                return putOperation;
+
+            // if no PUT or GET, we just return the first one
+            return Operations.First();
         }
 
         public Operation? FindOperation(HttpMethod method)

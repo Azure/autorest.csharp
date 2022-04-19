@@ -131,11 +131,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    if (resource.RequestPaths is null || resource.RequestPaths.Count() == 0)
-                    {
-                        continue;
-                    }
-
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
                     _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
@@ -143,7 +138,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
+                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPath, exampleModel);
                         var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
                         List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
                         _writer.Line();

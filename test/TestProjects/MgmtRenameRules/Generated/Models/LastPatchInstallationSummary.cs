@@ -27,11 +27,11 @@ namespace MgmtRenameRules.Models
         /// <param name="pendingPatchCount"> The number of all available patches expected to be installed over the course of the patch installation operation. </param>
         /// <param name="installedPatchCount"> The count of patches that successfully installed. </param>
         /// <param name="failedPatchCount"> The count of patches that failed installation. </param>
-        /// <param name="startTime"> The UTC timestamp when the operation began. </param>
-        /// <param name="lastModifiedTime"> The UTC timestamp when the operation began. </param>
+        /// <param name="startOn"> The UTC timestamp when the operation began. </param>
+        /// <param name="lastModifiedOn"> The UTC timestamp when the operation began. </param>
         /// <param name="startedBy"> The person or system account that started the operation. </param>
         /// <param name="error"> The errors that were encountered during execution of the operation. The details array contains the list of them. </param>
-        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startTime, DateTimeOffset? lastModifiedTime, string startedBy, ApiError error)
+        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, string startedBy, ApiError error)
         {
             Status = status;
             InstallationActivityId = installationActivityId;
@@ -42,8 +42,8 @@ namespace MgmtRenameRules.Models
             PendingPatchCount = pendingPatchCount;
             InstalledPatchCount = installedPatchCount;
             FailedPatchCount = failedPatchCount;
-            StartTime = startTime;
-            LastModifiedTime = lastModifiedTime;
+            StartOn = startOn;
+            LastModifiedOn = lastModifiedOn;
             StartedBy = startedBy;
             Error = error;
         }
@@ -67,9 +67,9 @@ namespace MgmtRenameRules.Models
         /// <summary> The count of patches that failed installation. </summary>
         public int? FailedPatchCount { get; }
         /// <summary> The UTC timestamp when the operation began. </summary>
-        public DateTimeOffset? StartTime { get; }
+        public DateTimeOffset? StartOn { get; }
         /// <summary> The UTC timestamp when the operation began. </summary>
-        public DateTimeOffset? LastModifiedTime { get; }
+        public DateTimeOffset? LastModifiedOn { get; }
         /// <summary> The person or system account that started the operation. </summary>
         public string StartedBy { get; }
         /// <summary> The errors that were encountered during execution of the operation. The details array contains the list of them. </summary>

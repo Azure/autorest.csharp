@@ -11,4 +11,14 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/ExactMatchInheritance.json
 namespace: ExactMatchInheritance
+directive:
+  - from: ExactMatchInheritance.json
+    where: $.definitions.ExactMatchModel11.properties.type
+    transform: >
+       $["x-ms-format"] = "resource-type";
+       $["x-ms-client-name"] = "ResourceType";
+  - from: ExactMatchInheritance.json
+    where: $.definitions.ExactMatchModel1.properties.type1
+    transform: >
+       $["x-ms-format"] = "resource-type";
 ```

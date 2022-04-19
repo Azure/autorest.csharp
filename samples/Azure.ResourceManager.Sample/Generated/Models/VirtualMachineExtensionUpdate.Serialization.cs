@@ -38,10 +38,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("publisher");
                 writer.WriteStringValue(Publisher);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(VirtualMachineExtensionUpdatePropertiesType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(VirtualMachineExtensionUpdatePropertiesType);
             }
             if (Optional.IsDefined(TypeHandlerVersion))
             {
@@ -61,12 +61,20 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Settings))
             {
                 writer.WritePropertyName("settings");
-                writer.WriteObjectValue(Settings);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Settings);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Settings.ToString()).RootElement);
+#endif
             }
             if (Optional.IsDefined(ProtectedSettings))
             {
                 writer.WritePropertyName("protectedSettings");
-                writer.WriteObjectValue(ProtectedSettings);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(ProtectedSettings);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(ProtectedSettings.ToString()).RootElement);
+#endif
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

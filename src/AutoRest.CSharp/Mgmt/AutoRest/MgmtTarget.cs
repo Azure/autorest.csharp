@@ -121,34 +121,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            if (!isArmCore)
-            {
-                // we will write the ResourceGroupExtensions and SubscriptionExtensions classes even if it does not contain anything
-                WriteExtensionPair(project, MgmtContext.Library.ResourceGroupExtensionsClient);
-                WriteExtensionPair(project, MgmtContext.Library.SubscriptionExtensionsClient);
-            }
+            // write extension class
+            if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
+                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
-            if (!MgmtContext.Library.ManagementGroupExtensions.IsEmpty)
-            {
-                WriteExtensionPair(project, MgmtContext.Library.ManagementGroupExtensionsClient);
-            }
+            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.TenantExtensionsClient);
+            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensionsClient);
 
-            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
+            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
             {
-                WriteExtensionPair(project, MgmtContext.Library.TenantExtensionsClient);
-            }
-
-            if (!MgmtContext.Library.ArmClientExtensions.IsEmpty)
-            {
-                var armClientExtension = MgmtContext.Library.ArmClientExtensions;
-                var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension);
-                armClientExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
-            }
-
-            if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
-            {
-                WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
+                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
@@ -168,17 +153,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            if (!isArmCore)
-            {
-                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
-            }
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
         }
 
-        private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
         {
-            WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!Configuration.MgmtConfiguration.IsArmCore)
+            if (Configuration.MgmtConfiguration.IsArmCore && !extensionClient.Extension.IsEmpty)
+                WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
+            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
                 WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }
 
@@ -190,6 +173,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
+            if (Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(model.Type.Name))
+                return false;
+
             // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
             // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
             // The includeArmCore parameter should also be removed in FindForType() then.
@@ -228,7 +214,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         return true;
                 }
                 else if (inheritanceResult != null || propertyResult != null)
+                {
                     return true;
+                }
                 else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
                 {
                     //In the cache of ReferenceTypePropertyChooser, only models used as a direct property of another model is stored.

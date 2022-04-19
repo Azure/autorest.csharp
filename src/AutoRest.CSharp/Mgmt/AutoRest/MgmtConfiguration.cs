@@ -105,6 +105,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> listException,
             IReadOnlyList<string> promptedEnumValues,
             IReadOnlyList<string> keepOrphanedModels,
+            IReadOnlyList<string> noResourceSuffix,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -157,6 +158,7 @@ namespace AutoRest.CSharp.Input
             ListException = listException;
             PromptedEnumValues = promptedEnumValues;
             KeepOrphanedModels = keepOrphanedModels;
+            NoResourceSuffix = noResourceSuffix;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
@@ -198,6 +200,8 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepOrphanedModels { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
+        public IReadOnlyList<string> NoResourceSuffix { get;}
+
         public bool IsArmCore { get; }
         public TestModelerConfiguration? TestModeler { get; }
 
@@ -210,6 +214,7 @@ namespace AutoRest.CSharp.Input
                 listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 promptedEnumValues: autoRest.GetValue<string[]?>("prompted-enum-values").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 keepOrphanedModels: autoRest.GetValue<string[]?>("keep-orphaned-models").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -236,6 +241,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoPropertyTypeReplacement), NoPropertyTypeReplacement);
             WriteNonEmptySettings(writer, nameof(ListException), ListException);
             WriteNonEmptySettings(writer, nameof(KeepOrphanedModels), KeepOrphanedModels);
+            WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -270,6 +276,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(NoPropertyTypeReplacement), out var noPropertyTypeReplacement);
             root.TryGetProperty(nameof(ListException), out var listException);
             root.TryGetProperty(nameof(KeepOrphanedModels), out var keepOrphanedModels);
+            root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffix);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -304,6 +311,9 @@ namespace AutoRest.CSharp.Input
             var keepOrphanedModelsList = keepOrphanedModels.ValueKind == JsonValueKind.Array
                 ? keepOrphanedModels.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : Array.Empty<string>();
+            var noResourceSuffixList = noResourceSuffix.ValueKind == JsonValueKind.Array
+                ? noResourceSuffix.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -320,6 +330,7 @@ namespace AutoRest.CSharp.Input
                 listException: listExceptionList,
                 promptedEnumValues: promptedEnumValuesList,
                 keepOrphanedModels: keepOrphanedModelsList,
+                noResourceSuffix: noResourceSuffixList,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,

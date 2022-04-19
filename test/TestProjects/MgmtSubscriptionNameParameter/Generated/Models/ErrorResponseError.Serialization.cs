@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Models;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
@@ -63,7 +62,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     List<ErrorAdditionalInfo> array = new List<ErrorAdditionalInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(JsonSerializer.Deserialize<ErrorAdditionalInfo>(item.ToString()));
+                        array.Add(ErrorAdditionalInfo.DeserializeErrorAdditionalInfo(item));
                     }
                     additionalInfo = array;
                     continue;

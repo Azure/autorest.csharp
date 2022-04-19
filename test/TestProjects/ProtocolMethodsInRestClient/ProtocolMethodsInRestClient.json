@@ -80,6 +80,201 @@
           }
         }
       }
+    },
+    "/firstTemplate/resources": {
+      "put": {
+        "operationId": "firstTemplate_Create",
+        "description": "Create or update resource.",
+        "parameters": [
+          {
+            "name": "resource",
+            "description": "Information about the resource",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/firstTemplate/resources/{resourceId}": {
+      "delete": {
+        "operationId": "firstTemplate_Delete",
+        "description": "Delete resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "operationId": "firstTemplate_Get",
+        "description": "Retrieves information about the resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/secondTemplate/resources": {
+      "put": {
+        "operationId": "secondTemplate_Create",
+        "description": "Create or update resource.",
+        "parameters": [
+          {
+            "name": "resource",
+            "description": "Information about the resource",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/secondTemplate/resources/{resourceId}": {
+      "delete": {
+        "operationId": "secondTemplate_Delete",
+        "description": "Delete resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "operationId": "secondTemplate_Get",
+        "description": "Retrieves information about the resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/thirdTemplate/resources/{resourceId}": {
+      "delete": {
+        "operationId": "thirdTemplate_Delete",
+        "description": "Delete resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "operationId": "thirdTemplate_Get",
+        "description": "Retrieves information about the resource.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
+    },
+    "/thirdTemplate/resources": {
+      "put": {
+        "operationId": "thirdTemplate_Create",
+        "description": "Create or update resource.",
+        "parameters": [
+          {
+            "name": "resource",
+            "description": "Information about the resource",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Resource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

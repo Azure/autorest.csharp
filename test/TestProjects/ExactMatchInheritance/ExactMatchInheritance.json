@@ -476,7 +476,43 @@
             "properties": {
                 "new": {
                     "type": "string"
-                }
+                },
+                "supportingUris": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                },
+                "type1": {
+                    "type": "string",
+                    "enum": [
+                      "Microsoft.Foo/bar"
+                    ],
+                    "x-ms-enum": {
+                      "name": "Type1",
+                      "modelAsString": false,
+                      "values": [
+                        {
+                          "value": "Microsoft.Foo/bar"
+                        }
+                      ]
+                    }
+                  },
+                "type2": {
+                    "type": "string",
+                    "enum": [
+                      "foo"
+                    ],
+                    "x-ms-enum": {
+                      "name": "Type2",
+                      "modelAsString": false,
+                      "values": [
+                        {
+                          "value": "foo"
+                        }
+                      ]
+                    }
+                  }
             },
             "allOf": [
                 {
@@ -607,7 +643,8 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "x-ms-format": "arm-id"
                 },
                 "name": {
                     "type": "string"

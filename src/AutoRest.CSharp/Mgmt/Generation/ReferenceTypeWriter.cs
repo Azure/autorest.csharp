@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var extensions = schema.ObjectSchema.Extensions;
             if (extensions != null)
             {
-                writer.UseNamespace("Azure.ResourceManager.Core");
+                writer.UseNamespace("Azure.Core");
                 if (extensions.MgmtReferenceType)
                 {
                     writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");

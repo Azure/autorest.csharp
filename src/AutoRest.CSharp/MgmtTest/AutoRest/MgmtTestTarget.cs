@@ -15,6 +15,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+
+            // force trigger the model initialization
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            {
+            }
+
             var extensionsWriter = new CodeWriter();
 
             bool hasCollectionTest = false;
