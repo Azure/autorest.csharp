@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> Describes a request to update a DNS zone. </summary>
-    internal partial class ZonePatch
+    public partial class ZonePatch
     {
         /// <summary> Initializes a new instance of ZonePatch. </summary>
         public ZonePatch()

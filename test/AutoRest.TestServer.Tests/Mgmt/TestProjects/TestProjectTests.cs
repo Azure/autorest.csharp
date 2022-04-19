@@ -45,6 +45,61 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void ShouldHaveUpdateMethodIfCollectionHasCreateOrUpdate()
+        {
+            foreach (var collection in FindAllCollections())
+            {
+                var collectionCreateOrUpdateMethod = collection.GetMethod("CreateOrUpdate");
+                if (collectionCreateOrUpdateMethod is null)
+                    continue;
+
+                var resource = GetResourceFromCollection(collection);
+                Assert.NotNull(resource);
+                var resourceUpdateMethod = resource.GetMethod("Update");
+                Assert.IsNotNull(resourceUpdateMethod);
+                Assert.IsNotNull(resource.GetMethod("UpdateAsync"));
+
+                //skip the second parameter in createorupdate since that is the name param which shouldn't be there in the resource update method
+                var createOrUpdateParams = collectionCreateOrUpdateMethod.GetParameters();
+                if (createOrUpdateParams[1].ParameterType.Equals(typeof(string)))
+                    createOrUpdateParams = createOrUpdateParams.Take(1).Concat(createOrUpdateParams.Skip(2)).ToArray();
+                var updateParams = resourceUpdateMethod.GetParameters();
+                if (IsLroMethod(resourceUpdateMethod))
+                {
+                    for (int i = 0; i < createOrUpdateParams.Length; i++)
+                    {
+                        if (updateParams[i].Name.Equals("patch"))
+                        {
+                            Assert.AreEqual("data", createOrUpdateParams[i].Name);
+                            break; //the rest of the parameters can differ at this point
+                        }
+                        else
+                        {
+                            Assert.AreEqual(
+                                createOrUpdateParams[i].Name,
+                                updateParams[i].Name,
+                                $"Mismatch parameter between {collection.Name}.CreateOrUpdate and {resource.Name}.Update");
+                            Assert.AreEqual(createOrUpdateParams[i].ParameterType, updateParams[i].ParameterType);
+                        }
+                    }
+                }
+                else
+                {
+                    Assert.AreEqual(2, updateParams.Length);
+                    Assert.AreNotEqual("data", updateParams[0].Name);
+                    Assert.AreEqual("cancellationToken", updateParams[1].Name);
+                }
+            }
+        }
+
+        private bool IsLroMethod(MethodInfo methodInfo)
+        {
+            return methodInfo.ReturnType.IsGenericType
+                ? methodInfo.ReturnType.GetGenericTypeDefinition().Equals(typeof(ArmOperation<>))
+                : methodInfo.ReturnType.Equals(typeof(ArmOperation));
+        }
+
+        [Test]
         public void ValidateNoParametersNamedParameter()
         {
             foreach (var type in MyTypes())
