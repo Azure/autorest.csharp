@@ -430,14 +430,14 @@ namespace AutoRest.CSharp.Output.Models
             return body;
         }
 
-        private ReferenceOrConstant CreateReference(RequestParameter requestParameter, Parameter parameter, bool ignoreConstantSchema = false)
+        private ReferenceOrConstant CreateReference(RequestParameter requestParameter, Parameter parameter)
         {
             if (requestParameter.Implementation != ImplementationLocation.Method)
             {
                 return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
             }
 
-            if (requestParameter.Schema is ConstantSchema constant && !ignoreConstantSchema)
+            if (requestParameter.Schema is ConstantSchema constant)
             {
                 return ParseConstant(constant);
             }
@@ -623,7 +623,7 @@ namespace AutoRest.CSharp.Output.Models
                 TypeFactory.GetInputType(type),
                 null,
                 requestParameter.IsRequired,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                IsApiVersionParameter: false,
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                 RequestLocation: GetRequestLocation(requestParameter));
@@ -693,17 +693,11 @@ namespace AutoRest.CSharp.Output.Models
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+            var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
 
-            return AddAllowedValues(description, requestMediaTypes);
-
-            static string AddAllowedValues(string description, ICollection<string> choices)
-            {
-                var allowedValues = string.Join(" | ", choices.Select(v => $"\"{v}\""));
-
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
-            }
+            return string.IsNullOrEmpty(allowedValues)
+                ? description
+                : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
         }
 
         protected static string CreateDescription(RequestParameter requestParameter, CSharpType type)
@@ -918,8 +912,7 @@ namespace AutoRest.CSharp.Output.Models
             private void AddRequestParameterWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
             {
                 var parameter = _parent.BuildContentTypeParameterWithMediaTypes(requestParameter, requestMediaTypes);
-                var reference = _parent.CreateReference(requestParameter, parameter, true);
-                _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, reference);
+                _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
                 _parameters.Add(parameter);
             }
 
