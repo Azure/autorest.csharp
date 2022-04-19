@@ -121,9 +121,9 @@ We have some ways to change the resource type of a resource, please see [change 
 
 ### Singleton resources
 
-Some resources are recognized as singleton resources automatically by the generator, for instance, a request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` is a singleton resource with the name `default` and its parent is `StorageAccount`.
+Some resources are recognized as singleton resources automatically by the generator, for instance, a request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` is a singleton resource with the name `default` and its parent is `StorageAccountResource`.
 
-The generator will mark a resource as a singleton, when its request path subtracted by the request path of its parent is a constant. For example, the resource with request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` has a parent of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}`, if you subtract them, you will get `blobServices/default` which is a constant, therefore the resource `BlobService` is a singleton resource.
+The generator will mark a resource as a singleton, when its request path subtracted by the request path of its parent is a constant. For example, the resource with request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` has a parent of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}`, if you subtract them, you will get `blobServices/default` which is a constant, therefore the resource `BlobServiceResource` is a singleton resource.
 
 When a resource is marked as a singleton resource, it will not have its corresponding `[Resource]Collection` class, only have `[Resource]Resource` class and `[Resource]Data` class. The method to get a singleton resource on its parent will be called as `Get[Resource]` in singular form, like
 
