@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(Context, ObjectSchema, IsResourceType);
+        // TODO -- this is a temporary solution. Now we also have a mechanism in SchemaObjectType that checks the usage of this model and assign accessibility of internal. This mechanism increases the complexity of the internalizer. We disable this mechanism so that the internalizer can handle everything
+        protected override string DefaultAccessibility => "public";
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 

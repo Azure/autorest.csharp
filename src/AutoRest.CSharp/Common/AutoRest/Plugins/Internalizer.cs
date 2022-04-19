@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             // get the root nodes
             var rootNodes = await GetRootNodes(project);
             // traverse all the models from the roots and recursively add all the things we met (including non-public things)
+            // TODO -- enhance this to also include the bodies during the traversal. Current traversal only travels on the signartures, not the bodies
             var referencedModels = TraverseAllModelsAsync(compilation, project, rootNodes, false);
             var unreferencedModels = new HashSet<SyntaxNode>(definitions);
             await foreach (var model in referencedModels)
