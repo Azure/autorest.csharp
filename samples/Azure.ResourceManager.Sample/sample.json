@@ -10892,6 +10892,10 @@
                     },
                     "description": "The list of OS upgrades performed on the virtual machine scale set."
                 },
+                "etag": {
+                    "type": "string",
+                    "description": "Modified whenever there is a change."
+                },
                 "nextLink": {
                     "type": "string",
                     "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."

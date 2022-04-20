@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,6 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
         internal static VirtualMachineScaleSetListOSUpgradeHistory DeserializeVirtualMachineScaleSetListOSUpgradeHistory(JsonElement element)
         {
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
+            Optional<ETag> etag = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -29,13 +31,23 @@ namespace Azure.ResourceManager.Sample.Models
                     value = array;
                     continue;
                 }
+                if (property.NameEquals("etag"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    etag = new ETag(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("nextLink"))
                 {
                     nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetListOSUpgradeHistory(value, nextLink.Value);
+            return new VirtualMachineScaleSetListOSUpgradeHistory(value, Optional.ToNullable(etag), nextLink.Value);
         }
     }
 }

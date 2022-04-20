@@ -17,16 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of VirtualMachineImageResource. </summary>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="location"/> is null. </exception>
-        public VirtualMachineImageResource(string name, string location)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public VirtualMachineImageResource(string name, AzureLocation location)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
             }
 
             Name = name;
@@ -39,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
         /// <param name="tags"> Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md). </param>
-        internal VirtualMachineImageResource(string id, string name, string location, IDictionary<string, string> tags) : base(id)
+        internal VirtualMachineImageResource(string id, string name, AzureLocation location, IDictionary<string, string> tags) : base(id)
         {
             Name = name;
             Location = location;
@@ -49,7 +45,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The name of the resource. </summary>
         public string Name { get; set; }
         /// <summary> The supported Azure location of the resource. </summary>
-        public string Location { get; set; }
+        public AzureLocation Location { get; set; }
         /// <summary> Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md). </summary>
         public IDictionary<string, string> Tags { get; }
     }
