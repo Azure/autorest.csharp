@@ -161,14 +161,15 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var operation in clientInfo.Operations)
                 {
+                    if (operation.RequestMediaTypes != null)
+                    {
+                        SetRequestToClient(clientInfo, operation.Requests.First(), operation);
+                        break;
+                    }
+
                     foreach (var request in operation.Requests)
                     {
                         SetRequestToClient(clientInfo, request, operation);
-
-                        if (operation.Requests.All(r => operation?.RequestMediaTypes?.Values.Contains(r) == true))
-                        {
-                            break;
-                        }
                     }
                 }
             }

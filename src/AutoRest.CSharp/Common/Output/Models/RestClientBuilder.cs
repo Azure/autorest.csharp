@@ -613,22 +613,6 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
         }
 
-        private Parameter BuildContentTypeParameterWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
-        {
-            CSharpType type = new CSharpType(typeof(ContentType), requestParameter.IsNullable || !requestParameter.IsRequired);
-
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes),
-                TypeFactory.GetInputType(type),
-                null,
-                requestParameter.IsRequired,
-                IsApiVersionParameter: false,
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                RequestLocation: GetRequestLocation(requestParameter));
-        }
-
         private Parameter BuildParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
         {
             CSharpType type = frameworkParameterType != null
@@ -870,7 +854,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         if (requestMediaTypes?.Count > 1)
                         {
-                            AddRequestParameterWithMediaTypes(contentTypeRequestParameter, requestMediaTypes);
+                            AddContentTypeRequestParameter(contentTypeRequestParameter, requestMediaTypes);
                         }
                         else
                         {
@@ -909,19 +893,11 @@ namespace AutoRest.CSharp.Output.Models
                 _parameters.Add(KnownParameters.RequestContext);
             }
 
-            private void AddRequestParameterWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
+            private void AddContentTypeRequestParameter(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
             {
-                CSharpType type = new CSharpType(typeof(ContentType), requestParameter.IsNullable || !requestParameter.IsRequired);
-                var parameter = new Parameter(
-                    requestParameter.CSharpName(),
-                    CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes),
-                    TypeFactory.GetInputType(type),
-                    null,
-                    requestParameter.IsRequired,
-                    IsApiVersionParameter: false,
-                    IsResourceIdentifier: requestParameter.IsResourceParameter,
-                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                    RequestLocation: GetRequestLocation(requestParameter));
+                var name = requestParameter.CSharpName();
+                var description = CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(ContentType), null, requestParameter.IsRequired, RequestLocation: RequestLocation.Header);
 
                 _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
                 _parameters.Add(parameter);
