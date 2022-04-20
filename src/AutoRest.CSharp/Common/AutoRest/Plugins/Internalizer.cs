@@ -26,13 +26,13 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             var compilation = await GetCompilationAsync(project);
 
             // first get all the declared models
-            var definitions = await GetAllPublicDeclaredModels(project, modelsToKeep);
+            var definitions = await GetAllPublicDeclaredModels(project);
 
             // get the root nodes
-            var rootNodes = await GetRootNodes(project);
+            var allRootNodes = await GetRootNodes(project, modelsToKeep, false);
             // traverse all the models from the roots and recursively add all the things we met (including non-public things)
             // TODO -- enhance this to also include the bodies during the traversal. Current traversal only travels on the signartures, not the bodies
-            var referencedModels = TraverseAllModelsAsync(compilation, project, rootNodes, false);
+            var referencedModels = TraverseAllModelsAsync(compilation, project, allRootNodes, false);
             var unreferencedModels = new HashSet<SyntaxNode>(definitions);
             await foreach (var model in referencedModels)
             {
@@ -43,7 +43,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 project = await RemoveNode(compilation, project, model);
             }
             // traverse all the models from the roots and recursively add all the public things we met
-            var publicModels = TraverseAllModelsAsync(compilation, project, rootNodes, true);
+            var publicRootNodes = await GetRootNodes(project, modelsToKeep, true);
+            var publicModels = TraverseAllModelsAsync(compilation, project, publicRootNodes, true);
             var internalModels = new HashSet<SyntaxNode>(definitions);
             await foreach (var model in publicModels)
             {
@@ -286,9 +287,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return compilation;
         }
 
-        private static async Task<ImmutableHashSet<SyntaxNode>> GetAllPublicDeclaredModels(Project project, ImmutableHashSet<string> modelsToKeep)
+        private static async Task<ImmutableHashSet<SyntaxNode>> GetAllPublicDeclaredModels(Project project)
         {
-            var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
+            var classVisitor = new DefinitionVisitor(true);
 
             foreach (var document in project.Documents)
             {
@@ -302,9 +303,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
-        private static async Task<ImmutableHashSet<SyntaxNode>> GetRootNodes(Project project)
+        private static async Task<ImmutableHashSet<SyntaxNode>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep, bool publicOnly)
         {
-            var classVisitor = new PublicDefinitionVisitor();
+            var classVisitor = new DefinitionVisitor(publicOnly);
             foreach (var document in project.Documents)
             {
                 var root = await document.GetSyntaxRootAsync();
@@ -312,7 +313,8 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
                 // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
                 // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
-                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document))
+                // 4. the model is in `modelsToKeep`, we need to add it to the root so that all the things referenced by this model will be kept
+                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, modelsToKeep))
                 {
                     classVisitor.Visit(root);
                 }
@@ -325,13 +327,24 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private static HashSet<string> _referenceAttributes = new HashSet<string> { "ReferenceType", "PropertyReferenceType", "TypeReferenceType" };
 
+        private static bool ShouldKeepModel(SyntaxNode? root, ImmutableHashSet<string> modelsToKeep)
+        {
+            if (root is null)
+                return false;
+
+            // use `BaseTypeDeclarationSyntax` to also include enums because `EnumDeclarationSyntax` extends `BaseTypeDeclarationSyntax`
+            // `ClassDeclarationSyntax` and `StructDeclarationSyntax` both inherit `TypeDeclarationSyntax`
+            var typeNodes = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
+            // there is possibility that we have multiple types defined in the same document (for instance, custom code)
+            return typeNodes.Any(t => modelsToKeep.Contains(t.Identifier.Text));
+        }
+
         private static bool IsReferenceType(SyntaxNode? root)
         {
             if (root is null)
                 return false;
 
-            var childNodes = root.DescendantNodes();
-            var typeNode = childNodes.OfType<TypeDeclarationSyntax>().FirstOrDefault();
+            var typeNode = root.DescendantNodes().OfType<TypeDeclarationSyntax>().FirstOrDefault();
             if (typeNode is null)
             {
                 return false;
@@ -361,27 +374,24 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return null;
         }
 
-        private class PublicDefinitionVisitor : CSharpSyntaxRewriter
+        private class DefinitionVisitor : CSharpSyntaxRewriter
         {
             public ImmutableHashSet<SyntaxNode> ModelDeclarations { get; private set; }
-            private readonly ImmutableHashSet<string> _modelsToKeep;
+            private readonly Func<SyntaxTokenList, bool> _predicate;
 
-            public PublicDefinitionVisitor(ImmutableHashSet<string> modelsToKeep)
+            public DefinitionVisitor(bool publicOnly)
             {
-                _modelsToKeep = modelsToKeep;
                 ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
-            }
-
-            public PublicDefinitionVisitor()
-            {
-                _modelsToKeep = ImmutableHashSet<string>.Empty;
-                ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
+                if (publicOnly)
+                    _predicate = IsPublic;
+                else
+                    _predicate = _ => true;
             }
 
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                if (_predicate(node.Modifiers))
                 {
                     ModelDeclarations = ModelDeclarations.Add(node);
                 }
@@ -393,7 +403,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             {
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node)!;
 
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                if (_predicate(node.Modifiers))
                 {
                     ModelDeclarations = ModelDeclarations.Add(node);
                 }
@@ -403,7 +413,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node)!;
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                if (_predicate(node.Modifiers))
                 {
                     ModelDeclarations = ModelDeclarations.Add(node);
                 }
