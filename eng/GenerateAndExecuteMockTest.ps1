@@ -240,6 +240,7 @@ function  MockTestInit {
 
         # Launch Mock-service-host
         # Warning: Only absolute paths can be used in ScriptBlock.
+        $env:NODE_OPTIONS="--max-old-space-size=8192"
         & git config --system core.longpaths true
         $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
         $mockServer = Start-Job -ScriptBlock $task
