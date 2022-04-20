@@ -242,7 +242,7 @@ function  MockTestInit {
         # Warning: Only absolute paths can be used in ScriptBlock.
         & git config --system core.longpaths true
         $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
-        Start-Job -ScriptBlock $task
+        $mockServer = Start-Job -ScriptBlock $task
 
         # Generate Track2 SDK Template
         if ($GenerateNewSDKs) {
@@ -367,6 +367,11 @@ function  MockTestInit {
                 Write-Host $item
             }
         }
+
+        Write-Host "`n`n"
+        Write-Host "=============================== Begin of mock-service-host output  ==============================="
+        Receive-Job -Job $mockServer
+        Write-Host "=============================== End of mock-service-host output  ==============================="
         return
     }
     end {
