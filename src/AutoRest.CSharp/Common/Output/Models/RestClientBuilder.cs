@@ -672,18 +672,6 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        protected static string CreateDescriptionWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
-        {
-            var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
-            var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
-
-            return string.IsNullOrEmpty(allowedValues)
-                ? description
-                : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
-        }
-
         protected static string CreateDescription(RequestParameter requestParameter, CSharpType type)
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
@@ -901,6 +889,18 @@ namespace AutoRest.CSharp.Output.Models
 
                 _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
                 _parameters.Add(parameter);
+            }
+
+            private string CreateDescriptionWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
+            {
+                var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+                    $"The {requestParameter.Schema.Name} to use." :
+                    BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+                var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
+
+                return string.IsNullOrEmpty(allowedValues)
+                    ? description
+                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
             }
 
             private void AddRequestParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
