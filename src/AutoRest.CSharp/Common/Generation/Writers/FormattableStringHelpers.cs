@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -71,7 +73,47 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            return $"{constant.Value:L}";
+            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            {
+                return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            {
+                return $"new {constant.Type}({enumValue:L})";
+            }
+
+            FormattableString result;
+            Type frameworkType = constant.Type.FrameworkType;
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                var d = (DateTimeOffset)constant.Value;
+                d = d.ToUniversalTime();
+                result = $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
+            }
+            else if (frameworkType == typeof(byte[]))
+            {
+                result = $"new byte[] {{";
+                var value = (byte[])constant.Value;
+                foreach (byte b in value)
+                {
+                    result = $"{result}{b}, ";
+                }
+
+                result = $"result}}";
+                return result;
+            }
+            else if (frameworkType == typeof(ResourceType))
+            {
+                var value = ((ResourceType)constant.Value).ToString();
+                result = $"\"{value}\"";
+            }
+            else
+            {
+                result = $"{constant.Value:L}";
+            }
+
+            return result;
         }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)

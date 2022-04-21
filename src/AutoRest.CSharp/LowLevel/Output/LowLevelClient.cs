@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models
             if (!IsSubClient)
             {
                 var requiredParameters = RestClientBuilder.GetRequiredParameters(Parameters).ToArray();
-                var optionalParameters = RestClientBuilder.GetOptionalParameters(Parameters).ToArray();
+                var optionalParameters = RestClientBuilder.GetOptionalParameters(Parameters).Append(CreateOptionsParameter()).ToArray();
 
                 return (
                     BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
@@ -140,29 +140,34 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                return (Array.Empty<ConstructorSignature>(), Array.Empty<ConstructorSignature>());
+                return (Array.Empty<ConstructorSignature>(), new[] { CreateMockingConstructor() });
             }
         }
 
         private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var appendedParameters = optionalParameters.Select(parameter => parameter with { DefaultValue = null }).Append(CreateOptionsParameter(optionalParameters.Count == 0)).ToArray();
+            var optionalToRequired = optionalParameters.Select(parameter => parameter with { DefaultValue = null }).ToArray();
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreatePrimaryConstructor(requiredParameters.Concat(appendedParameters).ToArray());
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(appendedParameters).ToArray());
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray());
                 }
             }
         }
 
         private IEnumerable<ConstructorSignature> BuildSecondaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var optionalParametersArguments = optionalParameters.Append(CreateOptionsParameter(false))
+            if (requiredParameters.Any() || Fields.CredentialFields.Any())
+            {
+                yield return CreateMockingConstructor();
+            }
+
+            var optionalParametersArguments = optionalParameters
                 .Select(p => p.Type.EqualsIgnoreNullable(typeof(Uri)) ? $"new {typeof(Uri):I}({p.DefaultValue!.Value.GetConstantFormattable()})" : p.DefaultValue!.Value.GetConstantFormattable())
                 .ToArray();
 
@@ -201,10 +206,13 @@ namespace AutoRest.CSharp.Output.Models
                 true);
         }
 
-        private Parameter CreateOptionsParameter(bool isRequired)
+        private ConstructorSignature CreateMockingConstructor()
+            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", Protected, Array.Empty<Parameter>());
+
+        private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, isRequired ? null : Constant.NewInstanceOf(clientOptionsType), false)
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false)
             {
                 forceInitializeValue = Constant.NewInstanceOf(clientOptionsType)
             };
