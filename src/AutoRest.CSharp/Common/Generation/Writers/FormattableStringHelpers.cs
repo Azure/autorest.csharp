@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     result = $"{result}{b}, ";
                 }
 
-                result = $"result}}";
+                result = $"{result}}}";
                 return result;
             }
             else if (frameworkType == typeof(ResourceType))

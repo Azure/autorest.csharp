@@ -393,51 +393,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant)
         {
-            if (constant.Value == null)
-            {
-                // Cast helps the overload resolution
-                return writer.Append($"({constant.Type}){null:L}");
-            }
-
-            if (constant.IsNewInstanceSentinel)
-            {
-                return writer.Append($"new {constant.Type}()");
-            }
-
-            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
-            {
-                return writer.Append($"{constant.Type}.{enumTypeValue.Declaration.Name}");
-            }
-
-            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
-            {
-                return writer.Append($"new {constant.Type}({enumValue:L})");
-            }
-
-            Type frameworkType = constant.Type.FrameworkType;
-            if (frameworkType == typeof(DateTimeOffset))
-            {
-                var d = (DateTimeOffset)constant.Value;
-                d = d.ToUniversalTime();
-                writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
-            }
-            else if (frameworkType == typeof(byte[]))
-            {
-                var value = (byte[])constant.Value;
-                writer.Append($"new byte[] {{");
-                foreach (byte b in value)
-                {
-                    writer.Append($"{b}, ");
-                }
-
-                writer.Append($"}}");
-            }
-            else
-            {
-                writer.Literal(constant.Value);
-            }
-
-            return writer;
+            return writer.Append(constant.GetConstantFormattable());
         }
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async,
