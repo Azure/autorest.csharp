@@ -44,7 +44,7 @@ namespace Accessibility_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public AccessibilityClient(AzureKeyCredential credential, Uri endpoint, AccessibilityClientOptions options = null)
+        public AccessibilityClient(AzureKeyCredential credential, Uri endpoint, AccessibilityClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));

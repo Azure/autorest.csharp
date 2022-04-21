@@ -45,7 +45,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential, Uri endpoint, QueriesClientOptions options = null)
+        public QueriesClient(AzureKeyCredential credential, Uri endpoint, QueriesClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));

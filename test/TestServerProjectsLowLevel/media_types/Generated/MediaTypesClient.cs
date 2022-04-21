@@ -44,7 +44,7 @@ namespace media_types_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public MediaTypesClient(AzureKeyCredential credential, Uri endpoint, MediaTypesClientOptions options = null)
+        public MediaTypesClient(AzureKeyCredential credential, Uri endpoint, MediaTypesClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));

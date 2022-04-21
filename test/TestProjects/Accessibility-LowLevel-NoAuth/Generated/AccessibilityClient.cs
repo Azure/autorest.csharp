@@ -34,7 +34,7 @@ namespace Accessibility_LowLevel_NoAuth
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public AccessibilityClient(Uri endpoint, AccessibilityClientOptions options = null)
+        public AccessibilityClient(Uri endpoint, AccessibilityClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();

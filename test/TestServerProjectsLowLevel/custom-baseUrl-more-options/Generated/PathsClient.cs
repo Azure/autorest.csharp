@@ -49,7 +49,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/> or <paramref name="dnsSuffix"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix, PathsClientOptions options = null)
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix, PathsClientOptions options)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(credential, nameof(credential));

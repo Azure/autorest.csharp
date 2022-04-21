@@ -50,7 +50,7 @@ namespace SubClients_LowLevel
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/>, <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public RootClient(string cachedParameter, AzureKeyCredential credential, Uri endpoint, RootClientOptions options = null)
+        public RootClient(string cachedParameter, AzureKeyCredential credential, Uri endpoint, RootClientOptions options)
         {
             Argument.AssertNotNullOrEmpty(cachedParameter, nameof(cachedParameter));
             Argument.AssertNotNull(credential, nameof(credential));

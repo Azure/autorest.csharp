@@ -44,7 +44,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint, CollapseRequestConditionsClientOptions options = null)
+        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint, CollapseRequestConditionsClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(endpoint, nameof(endpoint));

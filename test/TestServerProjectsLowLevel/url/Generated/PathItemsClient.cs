@@ -51,7 +51,7 @@ namespace url_LowLevel
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/>, <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
-        public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint, string globalStringQuery, AutoRestUrlTestServiceClientOptions options = null)
+        public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint, string globalStringQuery, AutoRestUrlTestServiceClientOptions options)
         {
             Argument.AssertNotNullOrEmpty(globalStringPath, nameof(globalStringPath));
             Argument.AssertNotNull(credential, nameof(credential));
