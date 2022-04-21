@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -29,15 +30,19 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
         /// <param name="value"> The list of OS upgrades performed on the virtual machine scale set. </param>
+        /// <param name="etag"> Modified whenever there is a change. </param>
         /// <param name="nextLink"> The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades. </param>
-        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, string nextLink)
+        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink)
         {
             Value = value;
+            Etag = etag;
             NextLink = nextLink;
         }
 
         /// <summary> The list of OS upgrades performed on the virtual machine scale set. </summary>
         public IReadOnlyList<UpgradeOperationHistoricalStatusInfo> Value { get; }
+        /// <summary> Modified whenever there is a change. </summary>
+        public ETag? Etag { get; }
         /// <summary> The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades. </summary>
         public string NextLink { get; }
     }
