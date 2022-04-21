@@ -35,9 +35,16 @@ namespace MgmtRenameRules.Models
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
             set
             {
-                if (HardwareProfile is null)
-                    HardwareProfile = new HardwareProfile();
-                HardwareProfile.VmSize = value;
+                if (value is not null)
+                {
+                    if (HardwareProfile is null)
+                        HardwareProfile = new HardwareProfile();
+                    HardwareProfile.VmSize = value;
+                }
+                else
+                {
+                    HardwareProfile = null;
+                }
             }
         }
 
@@ -51,9 +58,16 @@ namespace MgmtRenameRules.Models
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (AdditionalCapabilities is null)
-                    AdditionalCapabilities = new AdditionalCapabilities();
-                AdditionalCapabilities.UltraSSDEnabled = value;
+                if (value is not null)
+                {
+                    if (AdditionalCapabilities is null)
+                        AdditionalCapabilities = new AdditionalCapabilities();
+                    AdditionalCapabilities.UltraSSDEnabled = value;
+                }
+                else
+                {
+                    AdditionalCapabilities = null;
+                }
             }
         }
 
@@ -80,9 +94,16 @@ namespace MgmtRenameRules.Models
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (SecurityProfile is null)
-                    SecurityProfile = new SecurityProfile();
-                SecurityProfile.EncryptionAtHost = value;
+                if (value is not null)
+                {
+                    if (SecurityProfile is null)
+                        SecurityProfile = new SecurityProfile();
+                    SecurityProfile.EncryptionAtHost = value;
+                }
+                else
+                {
+                    SecurityProfile = null;
+                }
             }
         }
 
@@ -94,9 +115,16 @@ namespace MgmtRenameRules.Models
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
             set
             {
-                if (DiagnosticsProfile is null)
-                    DiagnosticsProfile = new DiagnosticsProfile();
-                DiagnosticsProfile.BootDiagnostics = value;
+                if (value is not null)
+                {
+                    if (DiagnosticsProfile is null)
+                        DiagnosticsProfile = new DiagnosticsProfile();
+                    DiagnosticsProfile.BootDiagnostics = value;
+                }
+                else
+                {
+                    DiagnosticsProfile = null;
+                }
             }
         }
 
@@ -108,9 +136,16 @@ namespace MgmtRenameRules.Models
             get => AvailabilitySet is null ? default : AvailabilitySet.Id;
             set
             {
-                if (AvailabilitySet is null)
-                    AvailabilitySet = new WritableSubResource();
-                AvailabilitySet.Id = value;
+                if (value is not null)
+                {
+                    if (AvailabilitySet is null)
+                        AvailabilitySet = new WritableSubResource();
+                    AvailabilitySet.Id = value;
+                }
+                else
+                {
+                    AvailabilitySet = null;
+                }
             }
         }
 
@@ -122,9 +157,16 @@ namespace MgmtRenameRules.Models
             get => VirtualMachineScaleSet is null ? default : VirtualMachineScaleSet.Id;
             set
             {
-                if (VirtualMachineScaleSet is null)
-                    VirtualMachineScaleSet = new WritableSubResource();
-                VirtualMachineScaleSet.Id = value;
+                if (value is not null)
+                {
+                    if (VirtualMachineScaleSet is null)
+                        VirtualMachineScaleSet = new WritableSubResource();
+                    VirtualMachineScaleSet.Id = value;
+                }
+                else
+                {
+                    VirtualMachineScaleSet = null;
+                }
             }
         }
 
@@ -136,9 +178,16 @@ namespace MgmtRenameRules.Models
             get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
             set
             {
-                if (ProximityPlacementGroup is null)
-                    ProximityPlacementGroup = new WritableSubResource();
-                ProximityPlacementGroup.Id = value;
+                if (value is not null)
+                {
+                    if (ProximityPlacementGroup is null)
+                        ProximityPlacementGroup = new WritableSubResource();
+                    ProximityPlacementGroup.Id = value;
+                }
+                else
+                {
+                    ProximityPlacementGroup = null;
+                }
             }
         }
 
@@ -154,9 +203,16 @@ namespace MgmtRenameRules.Models
             get => BillingProfile is null ? default : BillingProfile.MaxPrice;
             set
             {
-                if (BillingProfile is null)
-                    BillingProfile = new BillingProfile();
-                BillingProfile.MaxPrice = value;
+                if (value is not null)
+                {
+                    if (BillingProfile is null)
+                        BillingProfile = new BillingProfile();
+                    BillingProfile.MaxPrice = value;
+                }
+                else
+                {
+                    BillingProfile = null;
+                }
             }
         }
 
@@ -168,9 +224,16 @@ namespace MgmtRenameRules.Models
             get => Host is null ? default : Host.Id;
             set
             {
-                if (Host is null)
-                    Host = new WritableSubResource();
-                Host.Id = value;
+                if (value is not null)
+                {
+                    if (Host is null)
+                        Host = new WritableSubResource();
+                    Host.Id = value;
+                }
+                else
+                {
+                    Host = null;
+                }
             }
         }
 
@@ -182,9 +245,16 @@ namespace MgmtRenameRules.Models
             get => HostGroup is null ? default : HostGroup.Id;
             set
             {
-                if (HostGroup is null)
-                    HostGroup = new WritableSubResource();
-                HostGroup.Id = value;
+                if (value is not null)
+                {
+                    if (HostGroup is null)
+                        HostGroup = new WritableSubResource();
+                    HostGroup.Id = value;
+                }
+                else
+                {
+                    HostGroup = null;
+                }
             }
         }
 

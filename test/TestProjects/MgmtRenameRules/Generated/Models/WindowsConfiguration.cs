@@ -52,9 +52,16 @@ namespace MgmtRenameRules.Models
             get => PatchSettings is null ? default : PatchSettings.PatchMode;
             set
             {
-                if (PatchSettings is null)
-                    PatchSettings = new PatchSettings();
-                PatchSettings.PatchMode = value;
+                if (value is not null)
+                {
+                    if (PatchSettings is null)
+                        PatchSettings = new PatchSettings();
+                    PatchSettings.PatchMode = value;
+                }
+                else
+                {
+                    PatchSettings = null;
+                }
             }
         }
 

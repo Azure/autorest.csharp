@@ -29,9 +29,16 @@ namespace MgmtRenameRules.Models
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (SecurityProfile is null)
-                    SecurityProfile = new SecurityProfile();
-                SecurityProfile.EncryptionAtHost = value;
+                if (value is not null)
+                {
+                    if (SecurityProfile is null)
+                        SecurityProfile = new SecurityProfile();
+                    SecurityProfile.EncryptionAtHost = value;
+                }
+                else
+                {
+                    SecurityProfile = null;
+                }
             }
         }
 
@@ -43,9 +50,16 @@ namespace MgmtRenameRules.Models
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
             set
             {
-                if (DiagnosticsProfile is null)
-                    DiagnosticsProfile = new DiagnosticsProfile();
-                DiagnosticsProfile.BootDiagnostics = value;
+                if (value is not null)
+                {
+                    if (DiagnosticsProfile is null)
+                        DiagnosticsProfile = new DiagnosticsProfile();
+                    DiagnosticsProfile.BootDiagnostics = value;
+                }
+                else
+                {
+                    DiagnosticsProfile = null;
+                }
             }
         }
 
@@ -61,9 +75,16 @@ namespace MgmtRenameRules.Models
             get => BillingProfile is null ? default : BillingProfile.MaxPrice;
             set
             {
-                if (BillingProfile is null)
-                    BillingProfile = new BillingProfile();
-                BillingProfile.MaxPrice = value;
+                if (value is not null)
+                {
+                    if (BillingProfile is null)
+                        BillingProfile = new BillingProfile();
+                    BillingProfile.MaxPrice = value;
+                }
+                else
+                {
+                    BillingProfile = null;
+                }
             }
         }
 
@@ -75,9 +96,16 @@ namespace MgmtRenameRules.Models
             get => ScheduledEventsProfile is null ? default : ScheduledEventsProfile.TerminateNotificationProfile;
             set
             {
-                if (ScheduledEventsProfile is null)
-                    ScheduledEventsProfile = new ScheduledEventsProfile();
-                ScheduledEventsProfile.TerminateNotificationProfile = value;
+                if (value is not null)
+                {
+                    if (ScheduledEventsProfile is null)
+                        ScheduledEventsProfile = new ScheduledEventsProfile();
+                    ScheduledEventsProfile.TerminateNotificationProfile = value;
+                }
+                else
+                {
+                    ScheduledEventsProfile = null;
+                }
             }
         }
     }

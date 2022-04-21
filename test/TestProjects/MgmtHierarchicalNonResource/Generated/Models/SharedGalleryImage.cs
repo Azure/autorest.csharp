@@ -61,7 +61,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> A list of disk types. </summary>
         public IReadOnlyList<string> DisallowedDiskTypes
         {
-            get => Disallowed.DiskTypes;
+            get => Disallowed?.DiskTypes;
         }
 
         /// <summary> The hypervisor generation of the Virtual Machine. Applicable to OS disks only. </summary>

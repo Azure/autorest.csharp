@@ -101,9 +101,16 @@ namespace Azure.ResourceManager.Sample
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
             set
             {
-                if (HardwareProfile is null)
-                    HardwareProfile = new HardwareProfile();
-                HardwareProfile.VmSize = value;
+                if (value is not null)
+                {
+                    if (HardwareProfile is null)
+                        HardwareProfile = new HardwareProfile();
+                    HardwareProfile.VmSize = value;
+                }
+                else
+                {
+                    HardwareProfile = null;
+                }
             }
         }
 
@@ -117,9 +124,16 @@ namespace Azure.ResourceManager.Sample
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (AdditionalCapabilities is null)
-                    AdditionalCapabilities = new AdditionalCapabilities();
-                AdditionalCapabilities.UltraSSDEnabled = value;
+                if (value is not null)
+                {
+                    if (AdditionalCapabilities is null)
+                        AdditionalCapabilities = new AdditionalCapabilities();
+                    AdditionalCapabilities.UltraSSDEnabled = value;
+                }
+                else
+                {
+                    AdditionalCapabilities = null;
+                }
             }
         }
 
@@ -133,9 +147,16 @@ namespace Azure.ResourceManager.Sample
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (SecurityProfile is null)
-                    SecurityProfile = new SecurityProfile();
-                SecurityProfile.EncryptionAtHost = value;
+                if (value is not null)
+                {
+                    if (SecurityProfile is null)
+                        SecurityProfile = new SecurityProfile();
+                    SecurityProfile.EncryptionAtHost = value;
+                }
+                else
+                {
+                    SecurityProfile = null;
+                }
             }
         }
 
@@ -173,9 +194,16 @@ namespace Azure.ResourceManager.Sample
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
             set
             {
-                if (DiagnosticsProfile is null)
-                    DiagnosticsProfile = new DiagnosticsProfile();
-                DiagnosticsProfile.BootDiagnostics = value;
+                if (value is not null)
+                {
+                    if (DiagnosticsProfile is null)
+                        DiagnosticsProfile = new DiagnosticsProfile();
+                    DiagnosticsProfile.BootDiagnostics = value;
+                }
+                else
+                {
+                    DiagnosticsProfile = null;
+                }
             }
         }
 
@@ -187,9 +215,16 @@ namespace Azure.ResourceManager.Sample
             get => AvailabilitySet is null ? default : AvailabilitySet.Id;
             set
             {
-                if (AvailabilitySet is null)
-                    AvailabilitySet = new WritableSubResource();
-                AvailabilitySet.Id = value;
+                if (value is not null)
+                {
+                    if (AvailabilitySet is null)
+                        AvailabilitySet = new WritableSubResource();
+                    AvailabilitySet.Id = value;
+                }
+                else
+                {
+                    AvailabilitySet = null;
+                }
             }
         }
 

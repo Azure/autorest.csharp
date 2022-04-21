@@ -58,10 +58,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Contains the os disk image information. </summary>
         internal OSDiskImage OsDiskImage { get; set; }
         /// <summary> The operating system of the osDiskImage. </summary>
-        public OperatingSystemTypes OsDiskImageOperatingSystem
+        public OperatingSystemTypes? OsDiskImageOperatingSystem
         {
             get => OsDiskImage is null ? default : OsDiskImage.OperatingSystem;
-            set => OsDiskImage = new OSDiskImage(value);
+            set
+            {
+                OsDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
+            }
         }
 
         /// <summary> Gets the data disk images. </summary>
@@ -69,10 +72,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Describes automatic OS upgrade properties on the image. </summary>
         internal AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }
         /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
-        public bool AutomaticOSUpgradeSupported
+        public bool? AutomaticOSUpgradeSupported
         {
             get => AutomaticOSUpgradeProperties is null ? default : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
-            set => AutomaticOSUpgradeProperties = new AutomaticOSUpgradeProperties(value);
+            set
+            {
+                AutomaticOSUpgradeProperties = value.HasValue ? new AutomaticOSUpgradeProperties(value.Value) : null;
+            }
         }
 
         /// <summary> Specifies the HyperVGeneration Type. </summary>
@@ -85,9 +91,16 @@ namespace Azure.ResourceManager.Sample.Models
             get => Disallowed is null ? default : Disallowed.VmDiskType;
             set
             {
-                if (Disallowed is null)
-                    Disallowed = new DisallowedConfiguration();
-                Disallowed.VmDiskType = value;
+                if (value is not null)
+                {
+                    if (Disallowed is null)
+                        Disallowed = new DisallowedConfiguration();
+                    Disallowed.VmDiskType = value;
+                }
+                else
+                {
+                    Disallowed = null;
+                }
             }
         }
     }

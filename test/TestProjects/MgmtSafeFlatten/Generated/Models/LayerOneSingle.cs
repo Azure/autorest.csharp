@@ -30,9 +30,16 @@ namespace MgmtSafeFlatten.Models
             get => LayerTwo is null ? default : LayerTwo.MyProp;
             set
             {
-                if (LayerTwo is null)
-                    LayerTwo = new LayerTwoSingle();
-                LayerTwo.MyProp = value;
+                if (value is not null)
+                {
+                    if (LayerTwo is null)
+                        LayerTwo = new LayerTwoSingle();
+                    LayerTwo.MyProp = value;
+                }
+                else
+                {
+                    LayerTwo = null;
+                }
             }
         }
     }

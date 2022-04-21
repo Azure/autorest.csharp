@@ -43,9 +43,16 @@ namespace MgmtRenameRules.Models
             get => SourceVault is null ? default : SourceVault.Id;
             set
             {
-                if (SourceVault is null)
-                    SourceVault = new WritableSubResource();
-                SourceVault.Id = value;
+                if (value is not null)
+                {
+                    if (SourceVault is null)
+                        SourceVault = new WritableSubResource();
+                    SourceVault.Id = value;
+                }
+                else
+                {
+                    SourceVault = null;
+                }
             }
         }
     }

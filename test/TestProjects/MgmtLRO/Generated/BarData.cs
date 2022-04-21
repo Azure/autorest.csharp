@@ -43,9 +43,16 @@ namespace MgmtLRO
             get => Properties is null ? default : Properties.Buzz;
             set
             {
-                if (Properties is null)
-                    Properties = new BarProperties();
-                Properties.Buzz = value;
+                if (value is not null)
+                {
+                    if (Properties is null)
+                        Properties = new BarProperties();
+                    Properties.Buzz = value;
+                }
+                else
+                {
+                    Properties = null;
+                }
             }
         }
     }

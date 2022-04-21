@@ -48,9 +48,16 @@ namespace Azure.Management.Storage.Models
             get => EncryptionIdentity is null ? default : EncryptionIdentity.EncryptionUserAssignedIdentity;
             set
             {
-                if (EncryptionIdentity is null)
-                    EncryptionIdentity = new EncryptionIdentity();
-                EncryptionIdentity.EncryptionUserAssignedIdentity = value;
+                if (value is not null)
+                {
+                    if (EncryptionIdentity is null)
+                        EncryptionIdentity = new EncryptionIdentity();
+                    EncryptionIdentity.EncryptionUserAssignedIdentity = value;
+                }
+                else
+                {
+                    EncryptionIdentity = null;
+                }
             }
         }
     }

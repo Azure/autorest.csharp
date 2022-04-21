@@ -28,9 +28,16 @@ namespace MgmtRenameRules.Models
             get => HealthProbe is null ? default : HealthProbe.Id;
             set
             {
-                if (HealthProbe is null)
-                    HealthProbe = new WritableSubResource();
-                HealthProbe.Id = value;
+                if (value is not null)
+                {
+                    if (HealthProbe is null)
+                        HealthProbe = new WritableSubResource();
+                    HealthProbe.Id = value;
+                }
+                else
+                {
+                    HealthProbe = null;
+                }
             }
         }
 
