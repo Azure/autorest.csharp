@@ -99,27 +99,16 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static bool IsEmptyConstructorExisted(LowLevelClient client)
-        {
-            foreach (var constructor in client.SecondaryConstructors.Concat(client.PrimaryConstructors))
-            {
-                if (constructor.Parameters.Count() == 0)
-                    return true;
-            }
-
-            return false;
-        }
-
         private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
             foreach (var constructor in client.SecondaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor, false);
+                WriteSecondaryPublicConstructor(writer, constructor);
             }
 
             foreach (var constructor in client.PrimaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor, true);
+                WritePrimaryPublicConstructor(writer, client, constructor);
             }
 
             if (client.IsSubClient)
@@ -128,59 +117,56 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature, bool isPrimary)
+        private static void WriteSecondaryPublicConstructor(CodeWriter writer, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
             {
-                if (isPrimary)
+            }
+            writer.Line();
+        }
+
+        private static void WritePrimaryPublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
+        {
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
+            {
+                writer.WriteParametersValidation(signature.Parameters);
+                writer.Line();
+
+                var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
+                writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I});");
+
+                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+
+                foreach (var parameter in signature.Parameters)
                 {
-                    writer.WriteParametersValidation(signature.Parameters);
-                    writer.Line();
-
-                    var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
-                    writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I});");
-
-                    FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                    FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-
-                    var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
-                    if (credentialParameter != null)
+                    var field = client.Fields.GetFieldByParameter(parameter);
+                    if (field != null)
                     {
-                        var credentialField = client.Fields.GetFieldByParameter(credentialParameter);
-                        if (credentialField != null)
+                        if (field.Type.Equals(typeof(AzureKeyCredential)))
                         {
-                            var fieldName = credentialField.Name;
-                            writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
-                            if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
-                            {
-                                perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {client.Fields.AuthorizationHeaderConstant!.Name})}}";
-                            }
-                            else if (credentialField.Type.Equals(typeof(TokenCredential)))
-                            {
-                                perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {client.Fields.ScopesConstant!.Name})}}";
-                            }
+                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({field.Name:I}, {client.Fields.AuthorizationHeaderConstant!.Name})}}";
                         }
-                    }
-
-                    writer.Line($"{client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
-
-                    foreach (var parameter in client.Parameters)
-                    {
-                        var field = client.Fields.GetFieldByParameter(parameter);
-                        if (field != null)
+                        else if (field.Type.Equals(typeof(TokenCredential)))
                         {
-                            if (parameter.IsApiVersionParameter)
-                            {
-                                writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
-                            }
-                            else
-                            {
-                                writer.Line($"{field.Name:I} = {parameter.Name:I};");
-                            }
+                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({field.Name:I}, {client.Fields.ScopesConstant!.Name})}}";
+                        }
+                        else if (parameter.IsApiVersionParameter)
+                        {
+                            writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
+                        }
+                        else
+                        {
+                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
                         }
                     }
                 }
+
+                writer.Line($"{client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
             }
             writer.Line();
         }

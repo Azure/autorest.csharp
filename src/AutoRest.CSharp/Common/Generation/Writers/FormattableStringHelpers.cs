@@ -83,37 +83,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}({enumValue:L})";
             }
 
-            FormattableString result;
             Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {
                 var d = (DateTimeOffset)constant.Value;
                 d = d.ToUniversalTime();
-                result = $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
+                return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
             }
             else if (frameworkType == typeof(byte[]))
             {
-                result = $"new byte[] {{";
-                var value = (byte[])constant.Value;
-                foreach (byte b in value)
-                {
-                    result = $"{result}{b}, ";
-                }
-
-                result = $"{result}}}";
-                return result;
+                var bytes = (byte[])constant.Value;
+                var joinedBytes = string.Join(", ", bytes);
+                return $"new byte[] {{{joinedBytes}}}";
             }
             else if (frameworkType == typeof(ResourceType))
             {
-                var value = ((ResourceType)constant.Value).ToString();
-                result = $"\"{value}\"";
+                return $"{((ResourceType)constant.Value).ToString():L}";
             }
             else
             {
-                result = $"{constant.Value:L}";
+                return $"{constant.Value:L}";
             }
-
-            return result;
         }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)

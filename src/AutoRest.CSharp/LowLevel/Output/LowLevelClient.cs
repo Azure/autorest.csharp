@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, context);
 
-            (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors();
+            (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
             var clientMethods = BuildMethods(builder, serviceRequests, Declaration.Name).ToArray();
 
@@ -126,12 +126,12 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors()
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {
             if (!IsSubClient)
             {
-                var requiredParameters = RestClientBuilder.GetRequiredParameters(Parameters).ToArray();
-                var optionalParameters = RestClientBuilder.GetOptionalParameters(Parameters).Append(CreateOptionsParameter()).ToArray();
+                var requiredParameters = RestClientBuilder.GetRequiredParameters(orderedParameters).ToArray();
+                var optionalParameters = RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter()).ToArray();
 
                 return (
                     BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
@@ -212,10 +212,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false)
-            {
-                forceInitializeValue = Constant.NewInstanceOf(clientOptionsType)
-            };
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
         }
 
         public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
