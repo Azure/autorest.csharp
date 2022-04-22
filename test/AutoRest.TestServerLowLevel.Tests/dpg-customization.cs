@@ -72,7 +72,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task DPGGlassBreaker() => Test(async (host) =>
         {
-            var pipeline = new DPGClient(Key, host).Pipeline;
+            var pipeline = new DPGClient(Key, host, null).Pipeline;
             HttpMessage message = pipeline.CreateMessage();
             Request request = message.Request;
             request.Method = RequestMethod.Get;
