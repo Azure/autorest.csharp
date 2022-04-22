@@ -18,7 +18,7 @@ output-scope:
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
 ```
 
-```yaml !$(data-plane)
+```yaml $(generation1-convenience-client) || $(azure-arm)
 modelerfour:
   flatten-models: true
   flatten-payloads: true

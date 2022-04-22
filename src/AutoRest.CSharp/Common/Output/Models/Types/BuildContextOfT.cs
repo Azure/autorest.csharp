@@ -20,9 +20,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private T EnsureLibrary()
         {
             T library;
-            if (Configuration.DataPlane)
+            if (Configuration.Generation1ConvenienceClient)
             {
-                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
+                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
             }
             else if (Configuration.AzureArm)
             {
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
+                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
             }
             BaseLibrary = library;
             return library;

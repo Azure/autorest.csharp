@@ -140,9 +140,10 @@ namespace AutoRest.CSharp.Input
     internal static class XMsFormat
     {
         public const string ArmId = "arm-id";
-        public const string ResourceType = "resource-type";
-        public const string DurationConstant = "duration-constant";
         public const string AzureLocation = "azure-location";
+        public const string DurationConstant = "duration-constant";
+        public const string ETag = "etag";
+        public const string ResourceType = "resource-type";
     }
 
     internal partial class ServiceResponse

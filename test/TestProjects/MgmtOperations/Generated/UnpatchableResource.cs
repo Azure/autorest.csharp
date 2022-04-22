@@ -15,6 +15,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
@@ -182,6 +183,58 @@ namespace MgmtOperations
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Update
+        /// </summary>
+        /// <param name="patch"> Parameters supplied to the Update UnpatchableResource operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
+        public virtual async Task<Response<UnpatchableResource>> UpdateAsync(UnpatchableResourcePatch patch, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(patch, nameof(patch));
+
+            using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResource.Update");
+            scope.Start();
+            try
+            {
+                var response = await _unpatchableResourceRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new UnpatchableResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Update an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Update
+        /// </summary>
+        /// <param name="patch"> Parameters supplied to the Update UnpatchableResource operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
+        public virtual Response<UnpatchableResource> Update(UnpatchableResourcePatch patch, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(patch, nameof(patch));
+
+            using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResource.Update");
+            scope.Start();
+            try
+            {
+                var response = _unpatchableResourceRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
+                return Response.FromValue(new UnpatchableResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

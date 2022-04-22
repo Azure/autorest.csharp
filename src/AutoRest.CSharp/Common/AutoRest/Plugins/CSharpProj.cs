@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220329.3"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0"" />
   </ItemGroup>
 ";
 
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (Configuration.DataPlane)
+                else if (!Configuration.Generation1ConvenienceClient)
                 {
                   additionalContent += _llcProjectContent;
                 }

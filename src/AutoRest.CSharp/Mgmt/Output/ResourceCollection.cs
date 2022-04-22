@@ -172,8 +172,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
-            var requestPath = operation.GetHttpPath();
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            var operationId = operation.OperationId();
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operationId, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -206,12 +206,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = Resource.Parent().First();
-            var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : Resource.Parent().First();
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
-            lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
-            lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+            if (parent is not null)
+            {
+                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
+                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+            }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
         }

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtOperations.Models
 {
     /// <summary> The update content of unpatchable resource. </summary>
-    internal partial class UnpatchableResourcePatch
+    public partial class UnpatchableResourcePatch
     {
         /// <summary> Initializes a new instance of UnpatchableResourcePatch. </summary>
         public UnpatchableResourcePatch()
