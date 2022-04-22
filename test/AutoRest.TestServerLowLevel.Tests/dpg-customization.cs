@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
+using Azure.Core.Tests;
 using dpg_customization_LowLevel;
 using dpg_customization_LowLevel.Models;
 using NUnit.Framework;
@@ -23,7 +24,12 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHandwrittenModel() => Test(async (host) =>
         {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            var scopes = diagnosticListener.Scopes;
             Response<Product> result = await new DPGClient(Key, host).GetModelValueAsync("model");
+            var scopeCount = scopes.Count;
+            Assert.True(scopeCount == 1);
+            Assert.True(scopes[0].IsCompleted);
             Assert.AreEqual("model", $"{result.Value.Received}");
         });
 

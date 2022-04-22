@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientOptionsWriter
     {
-        public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions)
+        public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions, bool suppressNestedClientSpans)
         {
             using (writer.Namespace(clientOptions.Type.Namespace))
             {
@@ -36,6 +36,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptions.Type.Name}.");
                     using (writer.Scope($"public {clientOptions.Type.Name}(ServiceVersion version = LatestVersion)"))
                     {
+                        if (suppressNestedClientSpans)
+                        {
+                            writer.Line($"Diagnostics.SuppressNestedClientSpans = true;");
+                        }
                         writer.Append($"Version = version ");
                         using (writer.Scope($"switch", end: "};"))
                         {
