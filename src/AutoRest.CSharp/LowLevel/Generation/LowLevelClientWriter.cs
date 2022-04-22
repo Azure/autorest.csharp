@@ -140,22 +140,33 @@ namespace AutoRest.CSharp.Generation.Writers
                 FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
                 FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
 
-                foreach (var parameter in signature.Parameters)
+                var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
+                if (credentialParameter != null)
+                {
+                    var credentialField = client.Fields.GetFieldByParameter(credentialParameter);
+                    if (credentialField != null)
+                    {
+                        var fieldName = credentialField.Name;
+                        writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
+                        if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
+                        {
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {client.Fields.AuthorizationHeaderConstant!.Name})}}";
+                        }
+                        else if (credentialField.Type.Equals(typeof(TokenCredential)))
+                        {
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {client.Fields.ScopesConstant!.Name})}}";
+                        }
+                    }
+                }
+
+                writer.Line($"{client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+
+                foreach (var parameter in client.Parameters)
                 {
                     var field = client.Fields.GetFieldByParameter(parameter);
                     if (field != null)
                     {
-                        if (field.Type.Equals(typeof(AzureKeyCredential)))
-                        {
-                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({field.Name:I}, {client.Fields.AuthorizationHeaderConstant!.Name})}}";
-                        }
-                        else if (field.Type.Equals(typeof(TokenCredential)))
-                        {
-                            writer.Line($"{field.Name:I} = {parameter.Name:I};");
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({field.Name:I}, {client.Fields.ScopesConstant!.Name})}}";
-                        }
-                        else if (parameter.IsApiVersionParameter)
+                        if (parameter.IsApiVersionParameter)
                         {
                             writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
                         }
@@ -165,8 +176,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
                 }
-
-                writer.Line($"{client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
             }
             writer.Line();
         }

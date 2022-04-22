@@ -265,6 +265,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.Name:I}, nameof({parameter.Name:I}));");
             }
+            else if (parameter.forceInitializeValue != null)
+            {
+                writer
+                    .Append($"{parameter.Name:I} ??= ")
+                    .WriteConstant(parameter.forceInitializeValue.Value)
+                    .LineRaw(";");
+            }
         }
 
         public static CodeWriter WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)

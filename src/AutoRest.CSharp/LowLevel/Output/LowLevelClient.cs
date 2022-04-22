@@ -212,7 +212,10 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false)
+            {
+                forceInitializeValue = Constant.NewInstanceOf(clientOptionsType)
+            };
         }
 
         public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
