@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace AutoRest.CSharp.Common.AutoRest.Plugins
+namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MemberVisitor : CSharpSyntaxRewriter
     {

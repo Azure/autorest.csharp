@@ -180,5 +180,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             _project = await Internalizer.InternalizeAsync(_project, modelsToKeep);
         }
+
+        public async Task RemoveUnusedModels(ImmutableHashSet<string> modelsToKeep)
+        {
+            _project = await Remover.RemoveUnusedAsync(_project);
+        }
     }
 }

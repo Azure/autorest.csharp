@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Simplification;
 
-namespace AutoRest.CSharp.Common.AutoRest.Plugins
+namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal static class Internalizer
     {
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             // first get all the declared models
             var definitions = await GetModels(project, true);
             // get the root nodes
-            var rootNodes = await GetRootNodes(project, modelsToKeep); // TODO -- modelsToKeep goes here now
+            var rootNodes = await GetRootNodes(project, modelsToKeep);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync(compilation, project, rootNodes);
             await foreach (var model in publicModels)
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return project;
         }
 
-        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
+        private static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
         {
             var classVisitor = new DefinitionVisitor(publicOnly);
 

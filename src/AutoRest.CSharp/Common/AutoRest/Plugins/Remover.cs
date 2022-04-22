@@ -2,13 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 
-namespace AutoRest.CSharp.Common.AutoRest.Plugins
+namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal static class Remover
     {
@@ -19,10 +20,12 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 return project;
 
             // find all the declarations, including non-public declared
-            var definitions = await Internalizer.GetModels(project, false);
+            var definitions = await GetModels(project, false);
             // build reference map
             var referenceMap = await BuildReferenceMap(compilation, project, definitions);
-            // traverse the map to determine the declarations that we are about to remove
+            // get root nodes
+            // TODO
+            // traverse the map to determine the declarations that we are about to remove, starting from root nodes
             // TODO
             // remove those declarations one by one
             // TODO
@@ -30,9 +33,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return project;
         }
 
-        private static async Task<Dictionary<BaseTypeDeclarationSyntax, List<Document>>> BuildReferenceMap(Compilation compilation, Project project, IEnumerable<BaseTypeDeclarationSyntax> definitions)
+        private static async Task<Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>> BuildReferenceMap(Compilation compilation, Project project, IEnumerable<BaseTypeDeclarationSyntax> definitions)
         {
-            var references = new Dictionary<BaseTypeDeclarationSyntax, List<Document>>();
+            var references = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
             foreach (var definition in definitions)
             {
                 var semanticModel = compilation.GetSemanticModel(definition.SyntaxTree);
@@ -44,15 +47,31 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 {
                     foreach (var location in reference.Locations)
                     {
-                        if (!references.ContainsKey(definition))
-                            references.Add(definition, new List<Document>());
-                        references[definition].Add(location.Document);
+                        var document = location.Document;
+                        if (!references.ContainsKey(document))
+                            references.Add(document, new HashSet<BaseTypeDeclarationSyntax>());
+                        references[document].Add(definition);
                     }
                 }
             }
 
-            // TODO -- we need to reverse this dictionary to make things easier to travese
             return references;
+        }
+
+        private static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
+        {
+            var classVisitor = new DefinitionVisitor(publicOnly);
+
+            foreach (var document in project.Documents)
+            {
+                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
+                {
+                    var root = await document.GetSyntaxRootAsync();
+                    classVisitor.Visit(root);
+                }
+            }
+
+            return classVisitor.ModelDeclarations;
         }
     }
 }
