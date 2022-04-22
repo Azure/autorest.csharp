@@ -69,11 +69,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
             AsyncPageable<Product> allPages = new DPGClient(Key, host).GetPagesValuesAsync("model");
+            var pagesCount = 0;
             await foreach (Page<Product> page in allPages.AsPages())
             {
+                pagesCount++;
                 Assert.AreEqual("model", $"{page.Values.First().Received}");
             }
+
+            // +1 due to the last iteration of enumeration that doesn't make a call
+            Assert.AreEqual(pagesCount + 1, diagnosticListener.Scopes.Count);
         });
 
         [Test]
