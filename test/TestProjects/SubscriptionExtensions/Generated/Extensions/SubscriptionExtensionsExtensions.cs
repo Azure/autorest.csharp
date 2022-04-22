@@ -44,6 +44,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<ToasterResource>> GetToasterAsync(this SubscriptionResource subscriptionResource, string toasterName, CancellationToken cancellationToken = default)
         {
             return await subscriptionResource.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
@@ -58,6 +59,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<ToasterResource> GetToaster(this SubscriptionResource subscriptionResource, string toasterName, CancellationToken cancellationToken = default)
         {
             return subscriptionResource.GetToasters().Get(toasterName, cancellationToken);
@@ -89,6 +91,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<OvenResource>> GetOvenAsync(this ResourceGroupResource resourceGroupResource, string ovenName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
@@ -103,6 +106,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<OvenResource> GetOven(this ResourceGroupResource resourceGroupResource, string ovenName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetOvens().Get(ovenName, cancellationToken);

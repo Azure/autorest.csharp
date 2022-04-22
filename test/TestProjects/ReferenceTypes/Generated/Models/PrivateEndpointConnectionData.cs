@@ -6,7 +6,6 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Fake.Models

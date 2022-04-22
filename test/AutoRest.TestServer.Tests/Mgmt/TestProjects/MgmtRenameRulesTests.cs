@@ -37,7 +37,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(true, "ResourceType", "ImageData")]
         [TestCase(false, "Type", "ImageData")]
         [TestCase(true, "VirtualMachineExtensionHandlerInstanceViewType", "VirtualMachineExtensionHandlerInstanceView")]
-        [TestCase(false, "Type", "VirtualMachineExtensionHandlerInstanceView")]
+        [TestCase(false, "InstanceViewType", "VirtualMachineExtensionHandlerInstanceView")]
         public void ValidatePropertyName(bool exist, string propertyName, string className)
         {
             var type = FindTypeByName(className);

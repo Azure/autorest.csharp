@@ -68,5 +68,22 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("model", $"{page.Values.First().Received}");
             }
         });
+
+        [Test]
+        public Task DPGGlassBreaker() => Test(async (host) =>
+        {
+            var pipeline = new DPGClient(Key, host).Pipeline;
+            HttpMessage message = pipeline.CreateMessage();
+            Request request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(host);
+            uri.AppendPath("/servicedriven/glassbreaker", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            Response result = await pipeline.ProcessMessageAsync(message, null).ConfigureAwait(false);
+
+            Assert.AreEqual(200, result.Status);
+        });
     }
 }

@@ -187,7 +187,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(agreementName, expand: expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _agreementRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -215,68 +215,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = GetIfExists(agreementName, expand: expand, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
-        /// </summary>
-        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public virtual async Task<Response<AgreementResource>> GetIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
-
-            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _agreementRestClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<AgreementResource>(null, response.GetRawResponse());
-                return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// Operation Id: Agreements_Get
-        /// </summary>
-        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public virtual Response<AgreementResource> GetIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(agreementName, nameof(agreementName));
-
-            using var scope = _agreementClientDiagnostics.CreateScope("AgreementCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _agreementRestClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<AgreementResource>(null, response.GetRawResponse());
-                return Response.FromValue(new AgreementResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

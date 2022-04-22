@@ -19,6 +19,7 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
+      ref: refs/tags/azure-sdk-tools_20220404.3
     - repository: azure-sdk-for-net
       type: github
       name: Azure/azure-sdk-for-net
@@ -26,7 +27,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20211215.1
+      ref: refs/tags/azure-sdk-build-tools_20220329.1
 
 stages:
   - stage: 'Build_and_Test'

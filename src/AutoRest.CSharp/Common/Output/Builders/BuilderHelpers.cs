@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -48,6 +49,8 @@ namespace AutoRest.CSharp.Output.Builders
                 normalizedValue = Convert.FromBase64String(base64String);
             else if (frameworkType == typeof(DateTimeOffset) && value is string dateTimeString)
                 normalizedValue = DateTimeOffset.Parse(dateTimeString, styles: DateTimeStyles.AssumeUniversal);
+            else if (frameworkType == typeof(ResourceType) && value is string resourceTypeString)
+                normalizedValue = new ResourceType(resourceTypeString);
             else
                 normalizedValue = Convert.ChangeType(value, frameworkType);
 

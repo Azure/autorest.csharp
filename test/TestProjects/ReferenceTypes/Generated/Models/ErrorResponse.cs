@@ -5,7 +5,8 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
+using Azure;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -22,12 +23,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> The error object. </param>
         [SerializationConstructor]
-        internal ErrorResponse(ErrorDetail error)
+        internal ErrorResponse(ResponseError error)
         {
             Error = error;
         }
 
         /// <summary> The error object. </summary>
-        public ErrorDetail Error { get; set; }
+        public ResponseError Error { get; set; }
     }
 }

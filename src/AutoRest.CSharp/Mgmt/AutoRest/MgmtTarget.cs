@@ -153,11 +153,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            if (!isArmCore)
-            {
-                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
-            }
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
@@ -176,6 +173,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
+            if (Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(model.Type.Name))
+                return false;
+
             // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
             // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
             // The includeArmCore parameter should also be removed in FindForType() then.
@@ -214,7 +214,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                         return true;
                 }
                 else if (inheritanceResult != null || propertyResult != null)
+                {
                     return true;
+                }
                 else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
                 {
                     //In the cache of ReferenceTypePropertyChooser, only models used as a direct property of another model is stored.
