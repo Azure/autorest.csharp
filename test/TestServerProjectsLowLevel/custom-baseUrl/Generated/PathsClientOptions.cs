@@ -27,6 +27,7 @@ namespace custom_baseUrl_LowLevel
         /// <summary> Initializes new instance of PathsClientOptions. </summary>
         public PathsClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

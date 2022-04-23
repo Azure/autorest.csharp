@@ -27,6 +27,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <summary> Initializes new instance of AccessibilityClientOptions. </summary>
         public AccessibilityClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

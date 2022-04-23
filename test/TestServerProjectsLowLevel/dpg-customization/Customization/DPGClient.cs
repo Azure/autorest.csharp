@@ -68,24 +68,13 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="input"/> is null. </exception>
         public virtual async Task<Response<Product>> PostModelAsync(string mode, Input input, CancellationToken cancellationToken = default)
         {
-            using DiagnosticScope scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
-            scope.Start();
+            Argument.AssertNotNull(input, nameof(input));
 
-            try
-            {
-                Argument.AssertNotNull(input, nameof(input));
+            RequestContext requestContext = new RequestContext();
+            requestContext.CancellationToken = cancellationToken;
 
-                RequestContext requestContext = new RequestContext();
-                requestContext.CancellationToken = cancellationToken;
-
-                Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
-                return Response.FromValue((Product)response, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
+            return Response.FromValue((Product)response, response);
         }
 
         /// <summary> Post either raw response as a model and pass in &apos;raw&apos; for mode, or grow up your operation to take a model instead, and put in &apos;model&apos; as mode. </summary>
@@ -95,24 +84,13 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="input"/> is null. </exception>
         public virtual Response<Product> PostModel(string mode, Input input, CancellationToken cancellationToken = default)
         {
-            using DiagnosticScope scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
-            scope.Start();
+            Argument.AssertNotNull(input, nameof(input));
 
-            try
-            {
-                Argument.AssertNotNull(input, nameof(input));
+            RequestContext requestContext = new RequestContext();
+            requestContext.CancellationToken = cancellationToken;
 
-                RequestContext requestContext = new RequestContext();
-                requestContext.CancellationToken = cancellationToken;
-
-                Response result = PostModel("model", Input.ToRequestContent(input), requestContext);
-                return Response.FromValue((Product)result, result);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Response result = PostModel("model", Input.ToRequestContent(input), requestContext);
+            return Response.FromValue((Product)result, result);
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>
@@ -123,7 +101,7 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            var context = new RequestContext {CancellationToken = cancellationToken};
+            var context = new RequestContext { CancellationToken = cancellationToken };
 
             AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
             return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);

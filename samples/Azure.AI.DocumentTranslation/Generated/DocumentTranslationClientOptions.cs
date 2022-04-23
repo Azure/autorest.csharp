@@ -27,6 +27,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Initializes new instance of DocumentTranslationClientOptions. </summary>
         public DocumentTranslationClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.Vv1_0_preview_1 => "v1.0-preview.1",

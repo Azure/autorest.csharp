@@ -27,6 +27,7 @@ namespace body_complex_LowLevel
         /// <summary> Initializes new instance of AutoRestComplexTestServiceClientOptions. </summary>
         public AutoRestComplexTestServiceClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V2016_02_29 => "2016-02-29",

@@ -27,6 +27,7 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes new instance of ResourceServiceClientOptions. </summary>
         public ResourceServiceClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V2021_10_19 => "2021-10-19",

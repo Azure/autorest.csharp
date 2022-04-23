@@ -27,6 +27,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Initializes new instance of QueriesClientOptions. </summary>
         public QueriesClientOptions(ServiceVersion version = LatestVersion)
         {
+            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",
