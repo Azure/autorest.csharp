@@ -15,6 +15,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
@@ -305,7 +306,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
+                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder, null, true);
                 foreach (var method in methods)
                 {
                     pagingMethods.Add(method.Method, method);
@@ -320,7 +321,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var restClientMethod in restClient.Methods)
+                foreach (var restClientMethod in restClient.UpdatedMethods)
                 {
                     // skip all internal methods
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
@@ -442,7 +443,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            return models;
+            List<TypeProvider> optionalModels = new List<TypeProvider>();
+
+            foreach (var model in OptionalObjectTypes)
+            {
+                optionalModels.Add(model);
+                _nameToTypeProvider.Add(model.ObjectSchema.Name, model);
+            }
+
+            return models.Concat(optionalModels);
+        }
+
+        private IEnumerable<MgmtObjectType>? _optionalObjectTypes;
+        public IEnumerable<MgmtObjectType> OptionalObjectTypes => _optionalObjectTypes ??= GetOptionalObjectTypes();
+
+        private IEnumerable<MgmtObjectType> GetOptionalObjectTypes()
+        {
+            HashSet<MgmtObjectType> types = new HashSet<MgmtObjectType>();
+            foreach (var restClient in RestClients)
+            {
+                foreach (var method in restClient.UpdatedMethods)
+                {
+                    if (restClient.ClientMethodToSchema?.TryGetValue(method, out ObjectSchema? schema) ?? false)
+                    {
+                        types.Add(new MgmtObjectType(schema, true));
+                    }
+                }
+            }
+            return types;
         }
 
         public ResourceData GetResourceData(string requestPath)

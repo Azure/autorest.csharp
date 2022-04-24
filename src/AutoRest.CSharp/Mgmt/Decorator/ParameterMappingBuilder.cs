@@ -9,6 +9,8 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -270,7 +272,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
                 if (mapping == null)
                 {
-                    yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
+                    // if this parameter is a property bag, the value expression is also needed
+                    if (TryUpdatePropertyBag(parameter, out string? valueExpression, out IEnumerable<string>? usages))
+                    {
+                        yield return new ParameterMapping(p, false, $"{valueExpression}", usages!);
+                    }
+                    else
+                    {
+                        yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
+                    }
                 }
                 else
                 {
@@ -291,6 +301,50 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return parameter;
+        }
+
+        private static bool TryUpdatePropertyBag(Parameter parameter, out string? valueExpression, out IEnumerable<string>? usages)
+        {
+            valueExpression = null;
+            usages = null;
+            if (IsPropertyBagParameter(parameter))
+            {
+                var mgmtObject = parameter.Type.Implementation as MgmtObjectType;
+                usages = mgmtObject!.Properties.Select(p => p.Declaration.Type.Namespace);
+                List<string> expressions = new List<string>();
+                foreach (var property in mgmtObject.Properties)
+                {
+                    if (PagingMethod.IsPageSizeName(property.SchemaProperty!.CSharpName()))
+                    {
+                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                        if (PagingMethod.IsPageSizeType(property.Declaration.Type.FrameworkType))
+                        {
+                            expressions.Add($"pageSizeHint");
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Name}' seems to have a page size property, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                            expressions.Add($"options.{property.SchemaProperty!.CSharpName()}");
+                        }
+                    }
+                    else
+                    {
+                        expressions.Add($"options.{property.SchemaProperty!.CSharpName()}");
+                    }
+                }
+                valueExpression = String.Join(", ", expressions);
+                return true;
+            }
+            return false;
+        }
+
+        private static bool IsPropertyBagParameter(Parameter parameter)
+        {
+            if (!parameter.Type.IsFrameworkType && parameter.Type.Implementation is MgmtObjectType mgmtObject && MgmtContext.Library.OptionalObjectTypes.Contains(mgmtObject))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -374,7 +428,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
-            return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
+            // Optional property bag parameter also needs to be returned
+            return parameterMappings.Where(p => p.IsPassThru || IsPropertyBagParameter(p.Parameter)).Select(p => p.Parameter).ToList();
         }
     }
 }
