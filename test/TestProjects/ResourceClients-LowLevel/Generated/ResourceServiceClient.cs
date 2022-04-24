@@ -135,7 +135,12 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return GetAllItemsImplementationAsync("ResourceServiceClient.GetAllItems", context);
+        }
+
+        private AsyncPageable<BinaryData> GetAllItemsImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -154,7 +159,12 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return GetAllItemsImplementation("ResourceServiceClient.GetAllItems", context);
+        }
+
+        private Pageable<BinaryData> GetAllItemsImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

@@ -82,7 +82,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrl");
+            return GetPagesPartialUrlImplementationAsync("PagingClient.GetPagesPartialUrl", accountName, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlImplementationAsync(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -121,7 +126,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrl");
+            return GetPagesPartialUrlImplementation("PagingClient.GetPagesPartialUrl", accountName, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlImplementation(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -160,7 +170,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
+            return GetPagesPartialUrlOperationImplementationAsync("PagingClient.GetPagesPartialUrlOperation", accountName, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlOperationImplementationAsync(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -199,7 +214,12 @@ namespace custom_baseUrl_paging_LowLevel
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperation");
+            return GetPagesPartialUrlOperationImplementation("PagingClient.GetPagesPartialUrlOperation", accountName, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlOperationImplementation(string diagnosticsScopeName, string accountName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -240,7 +260,12 @@ namespace custom_baseUrl_paging_LowLevel
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
+            return GetPagesPartialUrlOperationNextImplementationAsync("PagingClient.GetPagesPartialUrlOperationNext", accountName, nextLink, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextImplementationAsync(string diagnosticsScopeName, string accountName, string nextLink, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -279,7 +304,12 @@ namespace custom_baseUrl_paging_LowLevel
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagesPartialUrlOperationNext");
+            return GetPagesPartialUrlOperationNextImplementation("PagingClient.GetPagesPartialUrlOperationNext", accountName, nextLink, context);
+        }
+
+        private Pageable<BinaryData> GetPagesPartialUrlOperationNextImplementation(string diagnosticsScopeName, string accountName, string nextLink, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
