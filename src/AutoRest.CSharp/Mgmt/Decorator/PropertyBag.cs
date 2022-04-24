@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static ObjectSchema UpdateParameters(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
         {
             ObjectSchema schema = new ObjectSchema();
-            var optionalParameters = restClientMethod.Parameters.Where(p => p.RequestLocation == RequestLocation.Query && p.DefaultValue != null).ToHashSet();
+            var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null).ToHashSet();
             var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
             var optionalRequestParameters = operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
                 Concat(operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            schema.Language.Default.Name = $"{optionsPrefix}Options";
+            schema.Language.Default.Name = $"{optionsPrefix}Options"; // A better way to determine the schema name is needed
             schema.Language.Default.Description = $"A class representing the optional query parameters in {optionsPrefix} {restClientMethod.Name} method.";
         }
 
