@@ -4,6 +4,7 @@
 
 ``` yaml
 title: MultipleInputFiles
+generation1-convenience-client: true
 sync-methods: None
 require: $(this-folder)/../../../readme.md
 openapi-type: data-plane

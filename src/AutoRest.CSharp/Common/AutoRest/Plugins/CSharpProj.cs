@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (Configuration.DataPlane)
+                else if (!Configuration.Generation1ConvenienceClient)
                 {
                   additionalContent += _llcProjectContent;
                 }

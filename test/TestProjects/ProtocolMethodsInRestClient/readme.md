@@ -5,6 +5,7 @@
 > see https://aka.ms/autorest
 
 ```yaml
+generation1-convenience-client: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)\ProtocolMethodsInRestClient.json
 security: AzureKey

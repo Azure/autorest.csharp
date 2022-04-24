@@ -134,5 +134,59 @@ namespace ExactMatchFlattenInheritance
                 throw;
             }
         }
+
+        /// <summary>
+        /// Create or update an CustomModel2.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<ArmOperation<CustomModel2Resource>> UpdateAsync(WaitUntil waitUntil, string foo = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Resource.Update");
+            scope.Start();
+            try
+            {
+                var response = await _customModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, foo, cancellationToken).ConfigureAwait(false);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Create or update an CustomModel2.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual ArmOperation<CustomModel2Resource> Update(WaitUntil waitUntil, string foo = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2Resource.Update");
+            scope.Start();
+            try
+            {
+                var response = _customModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, foo, cancellationToken);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<CustomModel2Resource>(Response.FromValue(new CustomModel2Resource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }
