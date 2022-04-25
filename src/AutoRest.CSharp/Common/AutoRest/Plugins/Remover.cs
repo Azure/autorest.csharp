@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static async Task<Project> RemoveModels(Project project, IEnumerable<BaseTypeDeclarationSyntax> unusedModels)
         {
+            // accumulate the definitions from the same document together
             var documents = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
             foreach (var model in unusedModels)
             {
@@ -54,20 +55,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 documents[document].Add(model);
             }
 
-            // TODO -- remove the models by document one by one
-            // TODO -- fix, two removals are not taking effect
-            foreach ((var document, var models) in documents)
+            foreach (var models in documents.Values)
             {
-                var root = await document.GetSyntaxRootAsync();
-                Debug.Assert(root != null);
-                var newRoot = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
-                if (newRoot != null)
-                    project = document.WithSyntaxRoot(newRoot!).Project;
-                else
-                    project = project.RemoveDocument(document.Id);
+                project = await RemoveModelsFromDocument(project, models);
             }
 
             return project;
+        }
+
+        private static async Task<Project> RemoveModelsFromDocument(Project project, IEnumerable<BaseTypeDeclarationSyntax> models)
+        {
+            var tree = models.First().SyntaxTree;
+            var document = project.GetDocument(tree);
+            if (document == null)
+                return project;
+            var root = await tree.GetRootAsync();
+            root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
+            document = document.WithSyntaxRoot(root!);
+            return document.Project;
         }
 
         private static IEnumerable<BaseTypeDeclarationSyntax> TraverseAllModelsAsync(IEnumerable<BaseTypeDeclarationSyntax> rootNodes, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> referenceMap)
