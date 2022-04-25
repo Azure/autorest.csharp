@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     RestClientMethod method = _clientBuilder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation));
                     if (isPropertyBag && method.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
                     {
-                        ObjectSchema schema = PropertyBag.UpdateParameters(operation, ref method, ClientPrefix);
+                        ObjectSchema schema = PropertyBag.UpdateMgmtRestClientParameters(operation, ref method, ClientPrefix);
                         if (ClientMethodToSchema is null)
                         {
                             ClientMethodToSchema = new Dictionary<RestClientMethod, ObjectSchema>();

@@ -119,6 +119,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             CommonSingleWordModels.Update(_allSchemas);
             NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
             RenameTimeToOn.UpdateNames(_allSchemas);
+            OptionalModels = new List<TypeProvider>();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -443,16 +444,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            List<TypeProvider> optionalModels = new List<TypeProvider>();
-
-            foreach (var model in OptionalObjectTypes)
-            {
-                optionalModels.Add(model);
-                _nameToTypeProvider.Add(model.ObjectSchema.Name, model);
-            }
-
-            return models.Concat(optionalModels);
+            return models;
         }
+
+        public IEnumerable<TypeProvider> OptionalModels { get; set; }
 
         private IEnumerable<MgmtObjectType>? _optionalObjectTypes;
         public IEnumerable<MgmtObjectType> OptionalObjectTypes => _optionalObjectTypes ??= GetOptionalObjectTypes();

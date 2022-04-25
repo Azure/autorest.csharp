@@ -7,7 +7,7 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the optional query parameters in BlobContainerGetAll List method. </summary>
+    /// <summary> A class representing the optional parameters in BlobContainers GetAll method. </summary>
     public partial class BlobContainerGetAllOptions
     {
         /// <summary> Initializes a new instance of BlobContainerGetAllOptions. </summary>

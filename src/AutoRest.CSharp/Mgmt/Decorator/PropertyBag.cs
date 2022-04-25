@@ -15,33 +15,63 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        public static ObjectSchema UpdateParameters(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
+        public static ObjectSchema UpdateMgmtRestClientParameters(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
         {
             ObjectSchema schema = new ObjectSchema();
             var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null).ToHashSet();
             var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
             var optionalRequestParameters = operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
                 Concat(operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
-            InitializeSchema(schema, optionalRequestParameters, restClientMethod, $"{optionsPrefix.LastWordToSingular()}{GetMethodName(operation)}");
+            InitializeSchema(schema, optionalRequestParameters, restClientMethod, optionsPrefix);
             var newParameter = BuildOptionalParameter(schema);
-            restClientMethod = new RestClientMethod(restClientMethod.Name,
-                restClientMethod.Description,
-                restClientMethod.ReturnType,
-                restClientMethod.Request,
-                restClientMethod.Parameters.Where(p => !optionalParameters.Contains(p)).Append(newParameter).ToArray(),
-                restClientMethod.Responses,
-                restClientMethod.HeaderModel,
-                restClientMethod.BufferResponse,
-                restClientMethod.Accessibility.ToString().ToLower(),
-                restClientMethod.Operation,
-                restClientMethod.ConditionHeaderFlag);
+            restClientMethod = UpdateRestClientMethod(restClientMethod, restClientMethod.Parameters.Where(p => !optionalParameters.Contains(p)).Append(newParameter));
             return schema;
+        }
+
+        public static MgmtRestOperation UpdateMgmtRestOperationParameters(this MgmtRestOperation operation)
+        {
+            var optionalParameter = operation.Parameters.Where(p => IsPropertyBagParameter(p)).FirstOrDefault();
+            if (optionalParameter != null)
+            {
+                var resourcePrefix = operation.Resource is null ? operation.RestClient.ClientPrefix : operation.Resource.Type.Name.ReplaceLast("Resource", "");
+                var methodName = operation.Name;
+                var schemaName = $"{resourcePrefix}{methodName}Options";
+                var objectType = optionalParameter.Type.Implementation as MgmtObjectType;
+                if (objectType!.Type.Name != schemaName)
+                {
+                    objectType.ObjectSchema.Language.Default.Name = schemaName;
+                    objectType.ObjectSchema.Language.Default.Description = $"A class representing the optional parameters in {resourcePrefix} {methodName} method.";
+                    optionalParameter = PropertyBag.BuildOptionalParameter(objectType.ObjectSchema);
+                    var updatedMethod = UpdateRestClientMethod(operation.Method, operation.Parameters.SkipLast(1).Append(optionalParameter));
+                    operation = new MgmtRestOperation(
+                        updatedMethod,
+                        operation.RestClient,
+                        operation.RequestPath,
+                        operation.ContextualPath,
+                        operation.Name,
+                        operation.IsLongRunningOperation,
+                        operation.ThrowIfNull);
+                }
+                MgmtContext.Library.OptionalModels = MgmtContext.Library.OptionalModels.Concat(new List<TypeProvider>() { new MgmtObjectType(objectType.ObjectSchema, true) });
+            }
+            return operation;
+        }
+
+        public static bool IsPropertyBagParameter(Parameter parameter)
+        {
+            if (!parameter.Type.IsFrameworkType && parameter.Type.Implementation is MgmtObjectType mgmtObject &&
+                (MgmtContext.Library.OptionalObjectTypes.Contains(mgmtObject) || MgmtContext.Library.OptionalModels.Contains(mgmtObject)))
+            {
+                return true;
+            }
+            return false;
         }
 
         private static void InitializeSchema(ObjectSchema schema, IEnumerable<RequestParameter> parameters, RestClientMethod restClientMethod, string optionsPrefix)
@@ -57,8 +87,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            schema.Language.Default.Name = $"{optionsPrefix}Options"; // A better way to determine the schema name is needed
-            schema.Language.Default.Description = $"A class representing the optional query parameters in {optionsPrefix} {restClientMethod.Name} method.";
+            var methodName = restClientMethod.Name == "List" ? "GetAll" : restClientMethod.Name;
+            schema.Language.Default.Name = $"{optionsPrefix.LastWordToSingular()}{methodName}Options"; // A better way to determine the schema name is needed
+            schema.Language.Default.Description = $"A class representing the optional parameters in {optionsPrefix} {methodName} method.";
         }
 
         private static Parameter BuildOptionalParameter(ObjectSchema schema)
@@ -73,15 +104,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 false,
                 IsApiVersionParameter: false,
                 IsResourceIdentifier: false,
-                SkipUrlEncoding: false,
-                RequestLocation: RequestLocation.Query);
+                SkipUrlEncoding: false);
         }
 
-        private static string GetMethodName(Operation operation)
+        private static RestClientMethod UpdateRestClientMethod(RestClientMethod method, IEnumerable<Parameter> parameters)
         {
-            if (operation.TryGetConfigOperationName(out var name))
-                return name;
-            return operation.MgmtCSharpName(false);
+            return new RestClientMethod(method.Name,
+                method.Description,
+                method.ReturnType,
+                method.Request,
+                parameters.ToArray(),
+                method.Responses,
+                method.HeaderModel,
+                method.BufferResponse,
+                method.Accessibility.ToString().ToLower(),
+                method.Operation,
+                method.ConditionHeaderFlag);
         }
     }
 }

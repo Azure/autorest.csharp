@@ -7,7 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> A class representing the optional query parameters in VirtualMachineScaleSetVMGetAll List method. </summary>
+    /// <summary> A class representing the optional parameters in VirtualMachineScaleSetVMs GetAll method. </summary>
     public partial class VirtualMachineScaleSetVMGetAllOptions
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMGetAllOptions. </summary>

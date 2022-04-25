@@ -183,7 +183,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers
         /// Operation Id: BlobContainers_List
         /// </summary>
-        /// <param name="options"> A class representing the optional query parameters in BlobContainerGetAll List method. </param>
+        /// <param name="options"> A class representing the optional parameters in BlobContainers GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BlobContainerResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BlobContainerResource> GetAllAsync(BlobContainerGetAllOptions options = null, CancellationToken cancellationToken = default)
@@ -228,7 +228,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers
         /// Operation Id: BlobContainers_List
         /// </summary>
-        /// <param name="options"> A class representing the optional query parameters in BlobContainerGetAll List method. </param>
+        /// <param name="options"> A class representing the optional parameters in BlobContainers GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BlobContainerResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BlobContainerResource> GetAll(BlobContainerGetAllOptions options = null, CancellationToken cancellationToken = default)

@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (mapping == null)
                 {
                     // if this parameter is a property bag, the value expression is also needed
-                    if (TryUpdatePropertyBag(parameter, out string? valueExpression, out IEnumerable<string>? usages))
+                    if (TryUpdatePropertyBagParameter(operation, p, out string? valueExpression, out IEnumerable<string>? usages))
                     {
                         yield return new ParameterMapping(p, false, $"{valueExpression}", usages!);
                     }
@@ -303,11 +303,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parameter;
         }
 
-        private static bool TryUpdatePropertyBag(Parameter parameter, out string? valueExpression, out IEnumerable<string>? usages)
+        private static bool TryUpdatePropertyBagParameter(MgmtRestOperation operation, Parameter parameter, out string? valueExpression, out IEnumerable<string>? usages)
         {
             valueExpression = null;
             usages = null;
-            if (IsPropertyBagParameter(parameter))
+            if (PropertyBag.IsPropertyBagParameter(parameter))
             {
                 var mgmtObject = parameter.Type.Implementation as MgmtObjectType;
                 usages = mgmtObject!.Properties.Select(p => p.Declaration.Type.Namespace);
@@ -333,15 +333,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
                 valueExpression = String.Join(", ", expressions);
-                return true;
-            }
-            return false;
-        }
-
-        private static bool IsPropertyBagParameter(Parameter parameter)
-        {
-            if (!parameter.Type.IsFrameworkType && parameter.Type.Implementation is MgmtObjectType mgmtObject && MgmtContext.Library.OptionalObjectTypes.Contains(mgmtObject))
-            {
                 return true;
             }
             return false;
@@ -429,7 +420,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             // Optional property bag parameter also needs to be returned
-            return parameterMappings.Where(p => p.IsPassThru || IsPropertyBagParameter(p.Parameter)).Select(p => p.Parameter).ToList();
+            return parameterMappings.Where(p => p.IsPassThru || PropertyBag.IsPropertyBagParameter(p.Parameter)).Select(p => p.Parameter).ToList();
         }
     }
 }

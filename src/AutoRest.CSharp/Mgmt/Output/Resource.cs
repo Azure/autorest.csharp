@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     operationName,
                     isLongRunning,
                     throwIfNull);
-                result.Add(restOperation);
+                result.Add(restOperation.UpdateMgmtRestOperationParameters());
             }
 
             return MgmtClientOperation.FromOperations(result);
@@ -306,12 +306,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                 // get the MgmtRestOperation with a proper name
                 var restClient = MgmtContext.Library.GetRestClient(operation);
-                var restOperation = new MgmtRestOperation(
+                var restOperation = (new MgmtRestOperation(
                     MgmtContext.Library.GetRestClientMethod(operation),
                     restClient,
                     requestPath,
                     contextualPath,
-                    methodName);
+                    methodName)).UpdateMgmtRestOperationParameters();
 
                 if (result.TryGetValue(key, out var list))
                 {

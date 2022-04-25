@@ -189,7 +189,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares
         /// Operation Id: FileShares_List
         /// </summary>
-        /// <param name="options"> A class representing the optional query parameters in FileShareGetAll List method. </param>
+        /// <param name="options"> A class representing the optional parameters in FileShares GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FileShareResource> GetAllAsync(FileShareGetAllOptions options = null, CancellationToken cancellationToken = default)
@@ -234,7 +234,7 @@ namespace Azure.Management.Storage
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares
         /// Operation Id: FileShares_List
         /// </summary>
-        /// <param name="options"> A class representing the optional query parameters in FileShareGetAll List method. </param>
+        /// <param name="options"> A class representing the optional parameters in FileShares GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FileShareResource> GetAll(FileShareGetAllOptions options = null, CancellationToken cancellationToken = default)

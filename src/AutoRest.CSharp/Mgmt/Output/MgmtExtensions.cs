@@ -91,12 +91,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
-                    new MgmtRestOperation(
+                    (new MgmtRestOperation(
                         MgmtContext.Library.GetRestClientMethod(operation),
                         MgmtContext.Library.GetRestClient(operation),
                         operation.GetRequestPath(),
                         ContextualPath,
-                        operationName),
+                        operationName)).UpdateMgmtRestOperationParameters(),
                     extensionParamToUse);
             });
         }

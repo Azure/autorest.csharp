@@ -185,15 +185,15 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
         /// <param name="type"> The String to use. </param>
-        /// <param name="options"> A class representing the optional query parameters in VirtualMachineExtensionImageGetVersions ListVersions method. </param>
+        /// <param name="options"> A class representing the optional parameters in VirtualMachineExtensionImage GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(string type, VirtualMachineExtensionImageGetVersionsOptions options = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(string type, VirtualMachineExtensionImageGetAllOptions options = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
-            options ??= new VirtualMachineExtensionImageGetVersionsOptions();
+            options ??= new VirtualMachineExtensionImageGetAllOptions();
 
             async Task<Page<VirtualMachineExtensionImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -219,15 +219,15 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
         /// <param name="type"> The String to use. </param>
-        /// <param name="options"> A class representing the optional query parameters in VirtualMachineExtensionImageGetVersions ListVersions method. </param>
+        /// <param name="options"> A class representing the optional parameters in VirtualMachineExtensionImage GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineExtensionImageResource> GetAll(string type, VirtualMachineExtensionImageGetVersionsOptions options = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineExtensionImageResource> GetAll(string type, VirtualMachineExtensionImageGetAllOptions options = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
-            options ??= new VirtualMachineExtensionImageGetVersionsOptions();
+            options ??= new VirtualMachineExtensionImageGetAllOptions();
 
             Page<VirtualMachineExtensionImageResource> FirstPageFunc(int? pageSizeHint)
             {
