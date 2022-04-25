@@ -123,25 +123,41 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (symbol == null)
                     continue;
 
-                foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, project.Solution))
-                {
-                    foreach (var location in reference.Locations)
-                    {
-                        var document = location.Document;
-                        var root = await document.GetSyntaxRootAsync();
-                        if (root == null)
-                            continue;
-                        // get the node of this reference
-                        var node = root.FindNode(location.Location.SourceSpan);
-                        var owner = GetOwner(root, node);
-                        if (!references.ContainsKey(owner))
-                            references.Add(owner, new HashSet<BaseTypeDeclarationSyntax>());
-                        references[owner].Add(definition);
-                    }
-                }
+                await ProcessSymbol(project, symbol, definition, references);
             }
 
             return references;
+        }
+
+        private static async Task ProcessSymbol(Project project, ISymbol symbol, BaseTypeDeclarationSyntax definition, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        {
+            foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, project.Solution))
+            {
+                foreach (var location in reference.Locations)
+                {
+                    var document = location.Document;
+                    var root = await document.GetSyntaxRootAsync();
+                    if (root == null)
+                        continue;
+                    // get the node of this reference
+                    var node = root.FindNode(location.Location.SourceSpan);
+                    var owner = GetOwner(root, node);
+                    if (!references.ContainsKey(owner))
+                        references.Add(owner, new HashSet<BaseTypeDeclarationSyntax>());
+                    references[owner].Add(definition);
+                }
+            }
+
+            // static class can have direct references, like ClassName.Method, but the extension methods might not have direct reference to the class itself
+            // therefore here we find the references of all its members and add them to the reference map
+            if (symbol is INamedTypeSymbol namedTypeSymbol && namedTypeSymbol.IsStatic)
+            {
+                var members = namedTypeSymbol.GetMembers();
+                foreach (var member in members)
+                {
+                    await ProcessSymbol(project, member, definition, references);
+                }
+            }
         }
 
         /// <summary>
