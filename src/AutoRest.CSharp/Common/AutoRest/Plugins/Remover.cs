@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return project;
 
             // find all the declarations, including non-public declared
-            var definitions = await GetModels(project, false);
+            var definitions = await Internalizer.GetModels(project, false);
             // build reference map
             var referenceMap = await BuildReferenceMap(compilation, project, definitions);
             // get root nodes
@@ -75,6 +75,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return document.Project;
         }
 
+        // TODO -- unify this method and Internalizer.TraverseAllPublicModelsAsync
         private static IEnumerable<BaseTypeDeclarationSyntax> TraverseAllModelsAsync(IEnumerable<BaseTypeDeclarationSyntax> rootNodes, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> referenceMap)
         {
             var queue = new Queue<BaseTypeDeclarationSyntax>(rootNodes);
@@ -172,22 +173,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var candidates = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
             var result = candidates.First(candidate => candidate.DescendantNodesAndSelf().Contains(node));
             return result;
-        }
-
-        private static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
-        {
-            var classVisitor = new DefinitionVisitor(publicOnly);
-
-            foreach (var document in project.Documents)
-            {
-                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
-                {
-                    var root = await document.GetSyntaxRootAsync();
-                    classVisitor.Visit(root);
-                }
-            }
-
-            return classVisitor.ModelDeclarations;
         }
     }
 }

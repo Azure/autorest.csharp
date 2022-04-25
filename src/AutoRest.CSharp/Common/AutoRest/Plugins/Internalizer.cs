@@ -44,13 +44,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
-        private static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
         {
             var classVisitor = new DefinitionVisitor(publicOnly);
 
             foreach (var document in project.Documents)
             {
-                if (GeneratedCodeWorkspace.IsGeneratedDocument(document))
+                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
                 {
                     var root = await document.GetSyntaxRootAsync();
                     classVisitor.Visit(root);
