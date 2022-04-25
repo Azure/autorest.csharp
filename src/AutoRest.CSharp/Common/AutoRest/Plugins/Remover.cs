@@ -124,10 +124,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (symbol == null)
                     continue;
 
+                // add the class and all its partial classes to the map
+                // this will make all the partial classes are referencing each other in the reference map
+                // when we make the travesal over the reference map, we will not only remove one of the partial class, instead we will either keep all the partial classes (if at least one of them has references), or remove all of them (if none of them has references)
+                foreach (var reference in symbol.DeclaringSyntaxReferences)
+                {
+                    var node = await reference.GetSyntaxAsync();
+                    AddToReferenceMap(definition, node as BaseTypeDeclarationSyntax, references);
+                }
                 await ProcessSymbol(project, symbol, definition, references);
             }
 
             return references;
+        }
+
+        private static void AddToReferenceMap(BaseTypeDeclarationSyntax key, BaseTypeDeclarationSyntax? value, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        {
+            if (value == null)
+                return;
+
+            if (!references.ContainsKey(key))
+                references.Add(key, new HashSet<BaseTypeDeclarationSyntax>());
+
+            references[key].Add(value);
         }
 
         private static async Task ProcessSymbol(Project project, ISymbol symbol, BaseTypeDeclarationSyntax definition, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
