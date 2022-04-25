@@ -72,7 +72,7 @@ namespace MgmtKeyvault
             SystemData systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -161,7 +161,7 @@ namespace MgmtKeyvault
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            provisioningState = new MgmtKeyvaultPrivateEndpointConnectionProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }

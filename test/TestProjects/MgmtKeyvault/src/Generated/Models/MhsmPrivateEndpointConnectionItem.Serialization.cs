@@ -17,7 +17,7 @@ namespace MgmtKeyvault.Models
         {
             Optional<SubResource> privateEndpoint = default;
             Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
@@ -56,7 +56,7 @@ namespace MgmtKeyvault.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            provisioningState = new MgmtKeyvaultPrivateEndpointConnectionProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }

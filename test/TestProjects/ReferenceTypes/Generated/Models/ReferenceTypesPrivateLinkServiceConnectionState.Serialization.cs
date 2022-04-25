@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ReferenceTypesPrivateLinkServiceConnectionState DeserializeReferenceTypesPrivateLinkServiceConnectionState(JsonElement element)
         {
-            Optional<PrivateEndpointServiceConnectionStatus> status = default;
+            Optional<ReferenceTypesPrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
             Optional<string> actionsRequired = default;
             foreach (var property in element.EnumerateObject())
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Fake.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    status = new PrivateEndpointServiceConnectionStatus(property.Value.GetString());
+                    status = new ReferenceTypesPrivateEndpointServiceConnectionStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("description"))

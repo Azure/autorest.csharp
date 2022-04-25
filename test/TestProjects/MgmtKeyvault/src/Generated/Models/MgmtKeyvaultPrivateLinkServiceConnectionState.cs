@@ -19,7 +19,7 @@ namespace MgmtKeyvault.Models
         /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
         /// <param name="description"> The reason for approval or rejection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        internal MgmtKeyvaultPrivateLinkServiceConnectionState(PrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired)
+        internal MgmtKeyvaultPrivateLinkServiceConnectionState(MgmtKeyvaultPrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired)
         {
             Status = status;
             Description = description;
@@ -27,7 +27,7 @@ namespace MgmtKeyvault.Models
         }
 
         /// <summary> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </summary>
-        public PrivateEndpointServiceConnectionStatus? Status { get; set; }
+        public MgmtKeyvaultPrivateEndpointServiceConnectionStatus? Status { get; set; }
         /// <summary> The reason for approval or rejection. </summary>
         public string Description { get; set; }
         /// <summary> A message indicating if changes on the service provider require any updates on the consumer. </summary>

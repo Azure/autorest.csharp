@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Fake.Models
             ResourceManager.Models.SystemData systemData = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
             Optional<ReferenceTypesPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Optional<PrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Optional<ReferenceTypesPrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Fake.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            provisioningState = new PrivateEndpointConnectionProvisioningState(property0.Value.GetString());
+                            provisioningState = new ReferenceTypesPrivateEndpointConnectionProvisioningState(property0.Value.GetString());
                             continue;
                         }
                     }
