@@ -44,22 +44,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
-        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
-        {
-            var classVisitor = new DefinitionVisitor(publicOnly);
-
-            foreach (var document in project.Documents)
-            {
-                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
-                {
-                    var root = await document.GetSyntaxRootAsync();
-                    classVisitor.Visit(root);
-                }
-            }
-
-            return classVisitor.ModelDeclarations;
-        }
-
         private static async IAsyncEnumerable<BaseTypeDeclarationSyntax> TraverseAllPublicModelsAsync(Compilation compilation, Project project, ImmutableHashSet<BaseTypeDeclarationSyntax> rootNodes)
         {
             var queue = new Queue<BaseTypeDeclarationSyntax>(rootNodes);
@@ -204,6 +188,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var compilation = await project.GetCompilationAsync() as CSharpCompilation;
             Debug.Assert(compilation != null);
             return compilation;
+        }
+
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
+        {
+            var classVisitor = new DefinitionVisitor(publicOnly);
+
+            foreach (var document in project.Documents)
+            {
+                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
+                {
+                    var root = await document.GetSyntaxRootAsync();
+                    classVisitor.Visit(root);
+                }
+            }
+
+            return classVisitor.ModelDeclarations;
         }
 
         public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep, bool publicOnly)
