@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // first get all the declared models
             var definitions = await GetModels(project, true);
             // get the root nodes
-            var rootNodes = await GetRootNodes(project, modelsToKeep);
+            var rootNodes = await GetRootNodes(project, modelsToKeep, true);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync(compilation, project, rootNodes);
             await foreach (var model in publicModels)
@@ -206,9 +206,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return compilation;
         }
 
-        private static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep)
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep, bool publicOnly)
         {
-            var classVisitor = new DefinitionVisitor(true);
+            var classVisitor = new DefinitionVisitor(publicOnly);
             foreach (var document in project.Documents)
             {
                 var root = await document.GetSyntaxRootAsync();

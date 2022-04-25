@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public async Task RemoveUnusedModels(ImmutableHashSet<string> modelsToKeep)
         {
-            _project = await Remover.RemoveUnusedAsync(_project);
+            _project = await Remover.RemoveUnusedAsync(_project, modelsToKeep);
         }
     }
 }
