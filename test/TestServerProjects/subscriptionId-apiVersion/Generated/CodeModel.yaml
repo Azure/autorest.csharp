@@ -198,6 +198,7 @@ operationGroups:
     $key: group
     operations:
       - !Operation 
+        operationId: group_getSampleResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2014-04-01-preview

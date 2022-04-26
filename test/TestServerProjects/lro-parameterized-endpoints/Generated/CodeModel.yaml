@@ -146,6 +146,7 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: pollWithParameterizedEndpoints
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -252,6 +253,7 @@ operationGroups:
             description: Poll with method and client level parameters in endpoint
         protocol: !Protocols {}
       - !Operation 
+        operationId: pollWithConstantParameterizedEndpoints
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
