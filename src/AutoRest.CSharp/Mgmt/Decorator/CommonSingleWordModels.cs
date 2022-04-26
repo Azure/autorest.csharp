@@ -31,6 +31,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             "PrivateLinkServiceConnectionState",
             "PrivateEndpointServiceConnectionStatus",
             "PrivateEndpointConnectionProvisioningState",
+            // not defined in common-types, but common in various RP
+            "PrivateLinkResourceProperties",
+            "PrivateLinkServiceConnectionStateProperty",
             // internal, but could be public in the future, also make the names more consistent
             "PrivateEndpointConnectionListResult",
             "PrivateLinkResourceListResult",
