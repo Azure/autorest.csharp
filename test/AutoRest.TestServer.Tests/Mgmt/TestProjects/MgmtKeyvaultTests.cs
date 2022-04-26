@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAll")]
         public void ValidatePrivateEndpointConnectionCollectionMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MgmtKeyvaultPrivateEndpointConnectionCollectionMockTests", methodName, argTypes);
         }
 
         [TestCase("CreateOrUpdate")]
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("Delete")]
         public void ValidatePrivateEndpointConnectionResourceMockTests(string methodName, params string[] argTypes)
         {
-            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.PrivateEndpointConnectionResourceMockTests", methodName, argTypes);
+            this.ValidateMethodExist("MgmtKeyvault.Tests.Mock.MgmtKeyvaultPrivateEndpointConnectionResourceMockTests", methodName, argTypes);
         }
 
         [TestCase("Get")]

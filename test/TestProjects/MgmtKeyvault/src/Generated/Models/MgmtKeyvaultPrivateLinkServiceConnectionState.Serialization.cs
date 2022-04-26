@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtKeyvault.Models
 {
-    public partial class MhsmPrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class MgmtKeyvaultPrivateLinkServiceConnectionState : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace MgmtKeyvault.Models
             writer.WriteEndObject();
         }
 
-        internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element)
+        internal static MgmtKeyvaultPrivateLinkServiceConnectionState DeserializeMgmtKeyvaultPrivateLinkServiceConnectionState(JsonElement element)
         {
             Optional<MgmtKeyvaultPrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
@@ -66,7 +66,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired));
+            return new MgmtKeyvaultPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired));
         }
     }
 }

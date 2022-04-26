@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtKeyvault.Models
+namespace Azure.Management.Storage.Models
 {
-    public partial class MhsmPrivateLinkServiceConnectionState : IUtf8JsonSerializable
+    public partial class StoragePrivateLinkServiceConnectionState : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -25,19 +25,19 @@ namespace MgmtKeyvault.Models
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Optional.IsDefined(ActionsRequired))
+            if (Optional.IsDefined(ActionRequired))
             {
-                writer.WritePropertyName("actionsRequired");
-                writer.WriteStringValue(ActionsRequired.Value.ToString());
+                writer.WritePropertyName("actionRequired");
+                writer.WriteStringValue(ActionRequired);
             }
             writer.WriteEndObject();
         }
 
-        internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element)
+        internal static StoragePrivateLinkServiceConnectionState DeserializeStoragePrivateLinkServiceConnectionState(JsonElement element)
         {
-            Optional<MgmtKeyvaultPrivateEndpointServiceConnectionStatus> status = default;
+            Optional<StoragePrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
-            Optional<ActionsRequired> actionsRequired = default;
+            Optional<string> actionRequired = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -47,7 +47,7 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    status = new MgmtKeyvaultPrivateEndpointServiceConnectionStatus(property.Value.GetString());
+                    status = new StoragePrivateEndpointServiceConnectionStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("description"))
@@ -55,18 +55,13 @@ namespace MgmtKeyvault.Models
                     description = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("actionsRequired"))
+                if (property.NameEquals("actionRequired"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    actionsRequired = new ActionsRequired(property.Value.GetString());
+                    actionRequired = property.Value.GetString();
                     continue;
                 }
             }
-            return new MhsmPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired));
+            return new StoragePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionRequired.Value);
         }
     }
 }

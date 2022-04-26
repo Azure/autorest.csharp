@@ -6,21 +6,21 @@
 #nullable disable
 
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Fake.Models
+namespace Azure.Management.Storage
 {
-    /// <summary> The Private Endpoint Connection resource. </summary>
-    [TypeReferenceType]
-    public partial class PrivateEndpointConnectionData : ResourceData
+    /// <summary> A class representing the StoragePrivateEndpointConnection data model. </summary>
+    public partial class StoragePrivateEndpointConnectionData : ResourceData
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
-        [InitializationConstructor]
-        public PrivateEndpointConnectionData()
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionData. </summary>
+        public StoragePrivateEndpointConnectionData()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -28,8 +28,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
-        [SerializationConstructor]
-        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, ReferenceTypesPrivateLinkServiceConnectionState privateLinkServiceConnectionState, ReferenceTypesPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
+        internal StoragePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SubResource privateEndpoint, StoragePrivateLinkServiceConnectionState privateLinkServiceConnectionState, StoragePrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
         {
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
@@ -37,16 +36,16 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The resource of private end point. </summary>
-        internal PrivateEndpoint PrivateEndpoint { get; set; }
-        /// <summary> The ARM identifier for Private Endpoint. </summary>
+        internal SubResource PrivateEndpoint { get; set; }
+        /// <summary> Gets Id. </summary>
         public ResourceIdentifier PrivateEndpointId
         {
             get => PrivateEndpoint is null ? default : PrivateEndpoint.Id;
         }
 
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
-        public ReferenceTypesPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
+        public StoragePrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> The provisioning state of the private endpoint connection resource. </summary>
-        public ReferenceTypesPrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
+        public StoragePrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }
 }

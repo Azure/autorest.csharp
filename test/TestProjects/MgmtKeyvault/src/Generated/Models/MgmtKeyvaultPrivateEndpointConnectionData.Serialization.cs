@@ -14,7 +14,7 @@ using MgmtKeyvault.Models;
 
 namespace MgmtKeyvault
 {
-    public partial class MhsmPrivateEndpointConnectionData : IUtf8JsonSerializable
+    public partial class MgmtKeyvaultPrivateEndpointConnectionData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -24,21 +24,6 @@ namespace MgmtKeyvault
                 writer.WritePropertyName("etag");
                 writer.WriteStringValue(Etag);
             }
-            if (Optional.IsDefined(Sku))
-            {
-                writer.WritePropertyName("sku");
-                writer.WriteObjectValue(Sku);
-            }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(PrivateEndpoint))
@@ -60,18 +45,17 @@ namespace MgmtKeyvault
             writer.WriteEndObject();
         }
 
-        internal static MhsmPrivateEndpointConnectionData DeserializeMhsmPrivateEndpointConnectionData(JsonElement element)
+        internal static MgmtKeyvaultPrivateEndpointConnectionData DeserializeMgmtKeyvaultPrivateEndpointConnectionData(JsonElement element)
         {
             Optional<string> etag = default;
-            Optional<ManagedHsmSku> sku = default;
-            IDictionary<string, string> tags = default;
-            AzureLocation location = default;
+            Optional<string> location = default;
+            Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
             Optional<SubResource> privateEndpoint = default;
-            Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            Optional<MgmtKeyvaultPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -80,29 +64,24 @@ namespace MgmtKeyvault
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sku"))
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("tags"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = ManagedHsmSku.DeserializeManagedHsmSku(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("tags"))
-                {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("location"))
-                {
-                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -151,7 +130,7 @@ namespace MgmtKeyvault
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            privateLinkServiceConnectionState = MhsmPrivateLinkServiceConnectionState.DeserializeMhsmPrivateLinkServiceConnectionState(property0.Value);
+                            privateLinkServiceConnectionState = MgmtKeyvaultPrivateLinkServiceConnectionState.DeserializeMgmtKeyvaultPrivateLinkServiceConnectionState(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
@@ -168,7 +147,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData, tags, location, sku.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }
