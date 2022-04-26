@@ -44,9 +44,9 @@ namespace ExactMatchInheritance
         public string New { get; set; }
         /// <summary> Gets the supporting uris. </summary>
         public IList<Uri> SupportingUris { get; }
-        /// <summary> Gets or sets the type 1. </summary>
-        public ResourceType? Type1 { get; set; }
-        /// <summary> Gets or sets the type 2. </summary>
-        public string Type2 { get; set; }
+        /// <summary> Gets the type 1. </summary>
+        public ResourceType? Type1 { get; }
+        /// <summary> Gets the type 2. </summary>
+        public string Type2 { get; }
     }
 }

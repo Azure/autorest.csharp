@@ -69,10 +69,10 @@ namespace validation.Models
         /// <summary> The product documentation. </summary>
         public ConstantProduct ConstChild { get; set; }
         /// <summary> Constant int. </summary>
-        public int ConstInt { get; set; }
+        public int ConstInt { get; }
         /// <summary> Constant string. </summary>
-        public string ConstString { get; set; }
+        public string ConstString { get; }
         /// <summary> Constant string as Enum. </summary>
-        public string ConstStringAsEnum { get; set; }
+        public string ConstStringAsEnum { get; }
     }
 }

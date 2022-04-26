@@ -27,8 +27,8 @@ namespace validation.Models
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; }
+        public string ConstProperty { get; }
         /// <summary> Constant string2. </summary>
-        public string ConstProperty2 { get; set; }
+        public string ConstProperty2 { get; }
     }
 }
