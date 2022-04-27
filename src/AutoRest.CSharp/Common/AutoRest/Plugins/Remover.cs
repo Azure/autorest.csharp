@@ -117,6 +117,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static async Task<Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>> BuildReferenceMap(Compilation compilation, Project project, IEnumerable<BaseTypeDeclarationSyntax> definitions)
         {
             var references = new Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>>();
+            var visited = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
             foreach (var definition in definitions)
             {
                 var semanticModel = compilation.GetSemanticModel(definition.SyntaxTree);
@@ -132,7 +133,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var node = await reference.GetSyntaxAsync();
                     AddToReferenceMap(definition, node as BaseTypeDeclarationSyntax, references);
                 }
-                await ProcessSymbol(project, symbol, definition, references);
+                await ProcessSymbol(project, symbol, definition, references, visited);
             }
 
             return references;
@@ -149,8 +150,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             references[key].Add(value);
         }
 
-        private static async Task ProcessSymbol(Project project, ISymbol symbol, BaseTypeDeclarationSyntax definition, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references)
+        private static async Task ProcessSymbol(Project project, ISymbol symbol, BaseTypeDeclarationSyntax definition, Dictionary<BaseTypeDeclarationSyntax, HashSet<BaseTypeDeclarationSyntax>> references, HashSet<ISymbol> visited)
         {
+            if (visited.Contains(symbol))
+                return;
+
+            visited.Add(symbol);
+
             foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, project.Solution))
             {
                 foreach (var location in reference.Locations)
@@ -175,7 +181,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var members = namedTypeSymbol.GetMembers();
                 foreach (var member in members)
                 {
-                    await ProcessSymbol(project, member, definition, references);
+                    await ProcessSymbol(project, member, definition, references, visited);
                 }
             }
         }
