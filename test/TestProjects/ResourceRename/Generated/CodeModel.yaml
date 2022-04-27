@@ -404,6 +404,7 @@ operationGroups:
     $key: SshPublicKeys
     operations:
       - !Operation 
+        operationId: SshPublicKeys_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -476,12 +477,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SshPublicKeys_Create
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_17
-          - !Parameter &ref_27
+          - !Parameter &ref_28
             schema: *ref_15
             implementation: Method
             required: true
@@ -493,7 +495,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_28
+          - !Parameter &ref_29
             schema: *ref_15
             implementation: Method
             required: true
@@ -507,8 +509,8 @@ operationGroups:
                 in: path
           - *ref_18
           - *ref_19
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_27
             parameters:
               - !Parameter 
                 schema: *ref_23
@@ -574,9 +576,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_27
+        signatureParameters:
           - *ref_28
+          - *ref_29
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -610,12 +614,13 @@ operationGroups:
             description: Creates a new SSH public key resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SshPublicKeys_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_17
-          - !Parameter &ref_29
+          - !Parameter &ref_30
             schema: *ref_15
             implementation: Method
             required: true
@@ -627,7 +632,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_30
+          - !Parameter &ref_31
             schema: *ref_15
             implementation: Method
             required: true
@@ -653,8 +658,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_29
           - *ref_30
+          - *ref_31
         responses:
           - !Response 
             language: !Languages 
@@ -680,12 +685,13 @@ operationGroups:
             description: Delete an SSH public key.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SshPublicKeys_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_17
-          - !Parameter &ref_31
+          - !Parameter &ref_32
             schema: *ref_15
             implementation: Method
             required: true
@@ -697,7 +703,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_32
+          - !Parameter &ref_33
             schema: *ref_15
             implementation: Method
             required: true
@@ -738,8 +744,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_31
           - *ref_32
+          - *ref_33
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -767,8 +773,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

@@ -1245,6 +1245,7 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -1299,7 +1300,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -1307,7 +1308,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1330,6 +1331,7 @@ namespace Azure.AI.DocumentTranslation
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
@@ -1384,7 +1386,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<BinaryData> StartTranslation(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> StartTranslation(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -1392,7 +1394,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
@@ -1402,7 +1404,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        internal HttpMessage CreateStartTranslationRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateStartTranslationRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
@@ -1413,7 +1415,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath("/batches", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }

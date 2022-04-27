@@ -98,13 +98,13 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_13
+    - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_15
+        - !Property &ref_16
           schema: !ArraySchema &ref_6
             type: array
             apiVersions:
@@ -132,13 +132,13 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_17
+    - !ObjectSchema &ref_19
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_19
+        - !Property &ref_21
           schema: *ref_3
           flattenedNames:
             - flattened
@@ -149,7 +149,7 @@ schemas: !Schemas
               name: required
               description: ''
           protocol: !Protocols {}
-        - !Property &ref_20
+        - !Property &ref_22
           schema: *ref_4
           flattenedNames:
             - flattened
@@ -170,13 +170,13 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_23
+    - !ObjectSchema &ref_26
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_25
+        - !Property &ref_28
           schema: *ref_3
           flattenedNames:
             - flattened
@@ -188,7 +188,7 @@ schemas: !Schemas
               name: required
               description: ''
           protocol: !Protocols {}
-        - !Property &ref_26
+        - !Property &ref_29
           schema: *ref_4
           flattenedNames:
             - flattened
@@ -235,13 +235,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_13
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -295,6 +296,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_13
         signatureParameters: []
         responses:
           - !Response 
@@ -312,13 +315,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: OperationNotNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_18
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -333,8 +337,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
-                schema: *ref_13
+              - !Parameter &ref_15
+                schema: *ref_14
                 flattened: true
                 implementation: Method
                 required: false
@@ -346,19 +350,19 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_16
+              - !VirtualParameter &ref_17
                 schema: *ref_6
                 implementation: Method
-                originalParameter: *ref_14
+                originalParameter: *ref_15
                 pathToProperty: []
-                targetProperty: *ref_15
+                targetProperty: *ref_16
                 language: !Languages 
                   default:
                     name: items
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_16
+              - *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -371,6 +375,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_18
         signatureParameters: []
         responses:
           - !Response 
@@ -388,13 +394,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: OperationNotRequired
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_25
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -409,8 +416,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_18
-                schema: *ref_17
+              - !Parameter &ref_20
+                schema: *ref_19
                 flattened: true
                 implementation: Method
                 required: true
@@ -424,31 +431,31 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_21
+              - !VirtualParameter &ref_23
                 schema: *ref_3
                 implementation: Method
-                originalParameter: *ref_18
+                originalParameter: *ref_20
                 pathToProperty: []
-                targetProperty: *ref_19
+                targetProperty: *ref_21
                 language: !Languages 
                   default:
                     name: required
                     description: ''
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_22
+              - !VirtualParameter &ref_24
                 schema: *ref_4
                 implementation: Method
-                originalParameter: *ref_18
+                originalParameter: *ref_20
                 pathToProperty: []
-                targetProperty: *ref_20
+                targetProperty: *ref_22
                 language: !Languages 
                   default:
                     name: nonRequired
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_21
-              - *ref_22
+              - *ref_23
+              - *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -461,6 +468,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_25
         signatureParameters: []
         responses:
           - !Response 
@@ -478,13 +487,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: OperationRequired
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_32
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -499,8 +509,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
-                schema: *ref_23
+              - !Parameter &ref_27
+                schema: *ref_26
                 flattened: true
                 implementation: Method
                 required: true
@@ -514,33 +524,33 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_27
+              - !VirtualParameter &ref_30
                 schema: *ref_3
                 implementation: Method
-                originalParameter: *ref_24
+                originalParameter: *ref_27
                 pathToProperty: []
                 required: true
-                targetProperty: *ref_25
+                targetProperty: *ref_28
                 language: !Languages 
                   default:
                     name: required
                     description: ''
                 protocol: !Protocols {}
-              - !VirtualParameter &ref_28
+              - !VirtualParameter &ref_31
                 schema: *ref_4
                 implementation: Method
-                originalParameter: *ref_24
+                originalParameter: *ref_27
                 pathToProperty: []
                 required: false
-                targetProperty: *ref_26
+                targetProperty: *ref_29
                 language: !Languages 
                   default:
                     name: nonRequired
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_27
-              - *ref_28
+              - *ref_30
+              - *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -553,6 +563,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_32
         signatureParameters: []
         responses:
           - !Response 

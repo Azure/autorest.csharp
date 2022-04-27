@@ -28,6 +28,30 @@ namespace Azure.Network.Management.Interface
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
+        /// <param name="subscriptionId"> The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        public NetworkInterfaceTapConfigurationsClient(string subscriptionId, TokenCredential credential, Uri endpoint = null, AzureNetworkManagementInterfaceClientOptions options = null)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (credential == null)
+            {
+                throw new ArgumentNullException(nameof(credential));
+            }
+            endpoint ??= new Uri("https://management.azure.com");
+
+            options ??= new AzureNetworkManagementInterfaceClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            string[] scopes = { "user_impersonation" };
+            _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
+            RestClient = new NetworkInterfaceTapConfigurationsRestClient(_clientDiagnostics, _pipeline, subscriptionId, endpoint, options.Version);
+        }
+
+        /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

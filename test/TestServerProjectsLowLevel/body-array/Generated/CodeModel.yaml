@@ -524,17 +524,6 @@ schemas: !Schemas
           name: ArrayOfPutContentSchemaItem
           description: The empty array value []
       protocol: !Protocols {}
-    - !ArraySchema &ref_48
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_9
-      language: !Languages 
-        default:
-          name: ArrayOfBoolean
-          description: The array value [true, false, false, true]
-      protocol: !Protocols {}
     - !ArraySchema &ref_49
       type: array
       apiVersions:
@@ -546,7 +535,18 @@ schemas: !Schemas
           name: ArrayOfBoolean
           description: The array value [true, false, false, true]
       protocol: !Protocols {}
-    - !ArraySchema &ref_51
+    - !ArraySchema &ref_50
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_9
+      language: !Languages 
+        default:
+          name: ArrayOfBoolean
+          description: The array value [true, false, false, true]
+      protocol: !Protocols {}
+    - !ArraySchema &ref_53
       type: array
       apiVersions:
         - !ApiVersion 
@@ -557,7 +557,7 @@ schemas: !Schemas
           name: ArrayOfBoolean
           description: The array value [true, null, false]
       protocol: !Protocols {}
-    - !ArraySchema &ref_52
+    - !ArraySchema &ref_54
       type: array
       apiVersions:
         - !ApiVersion 
@@ -568,18 +568,7 @@ schemas: !Schemas
           name: ArrayOfBoolean
           description: The array value [true, 'boolean', false]
       protocol: !Protocols {}
-    - !ArraySchema &ref_53
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_7
-      language: !Languages 
-        default:
-          name: ArrayOfInteger
-          description: The array value [1, -1, 3, 300]
-      protocol: !Protocols {}
-    - !ArraySchema &ref_54
+    - !ArraySchema &ref_55
       type: array
       apiVersions:
         - !ApiVersion 
@@ -599,9 +588,20 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ArrayOfInteger
+          description: The array value [1, -1, 3, 300]
+      protocol: !Protocols {}
+    - !ArraySchema &ref_59
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_7
+      language: !Languages 
+        default:
+          name: ArrayOfInteger
           description: The array value [1, null, 0]
       protocol: !Protocols {}
-    - !ArraySchema &ref_57
+    - !ArraySchema &ref_60
       type: array
       apiVersions:
         - !ApiVersion 
@@ -612,28 +612,6 @@ schemas: !Schemas
           name: ArrayOfInteger
           description: The array value [1, 'integer', 0]
       protocol: !Protocols {}
-    - !ArraySchema &ref_58
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_10
-      language: !Languages 
-        default:
-          name: ArrayOfInteger
-          description: The array value [1, -1, 3, 300]
-      protocol: !Protocols {}
-    - !ArraySchema &ref_59
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_10
-      language: !Languages 
-        default:
-          name: ArrayOfInteger
-          description: The array value [1, -1, 3, 300]
-      protocol: !Protocols {}
     - !ArraySchema &ref_61
       type: array
       apiVersions:
@@ -643,7 +621,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ArrayOfInteger
-          description: The array value [1, null, 0]
+          description: The array value [1, -1, 3, 300]
       protocol: !Protocols {}
     - !ArraySchema &ref_62
       type: array
@@ -654,40 +632,29 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ArrayOfInteger
-          description: The array value [1, 'integer', 0]
+          description: The array value [1, -1, 3, 300]
       protocol: !Protocols {}
-    - !ArraySchema &ref_63
+    - !ArraySchema &ref_65
       type: array
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_11
+      elementType: *ref_10
       language: !Languages 
         default:
-          name: ArrayOfNumber
-          description: The array value [0, -0.01, 1.2e20]
-      protocol: !Protocols {}
-    - !ArraySchema &ref_64
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_11
-      language: !Languages 
-        default:
-          name: ArrayOfNumber
-          description: The array value [0, -0.01, 1.2e20]
+          name: ArrayOfInteger
+          description: The array value [1, null, 0]
       protocol: !Protocols {}
     - !ArraySchema &ref_66
       type: array
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_11
+      elementType: *ref_10
       language: !Languages 
         default:
-          name: ArrayOfNumber
-          description: The array value [0.0, null, -1.2e20]
+          name: ArrayOfInteger
+          description: The array value [1, 'integer', 0]
       protocol: !Protocols {}
     - !ArraySchema &ref_67
       type: array
@@ -698,25 +665,14 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ArrayOfNumber
-          description: The array value [1.0, 'number', 0.0]
+          description: The array value [0, -0.01, 1.2e20]
       protocol: !Protocols {}
     - !ArraySchema &ref_68
       type: array
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_12
-      language: !Languages 
-        default:
-          name: ArrayOfNumber
-          description: The array value [0, -0.01, 1.2e20]
-      protocol: !Protocols {}
-    - !ArraySchema &ref_69
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_12
+      elementType: *ref_11
       language: !Languages 
         default:
           name: ArrayOfNumber
@@ -727,7 +683,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_12
+      elementType: *ref_11
       language: !Languages 
         default:
           name: ArrayOfNumber
@@ -738,7 +694,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_12
+      elementType: *ref_11
       language: !Languages 
         default:
           name: ArrayOfNumber
@@ -749,46 +705,90 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_1
+      elementType: *ref_12
       language: !Languages 
         default:
-          name: ArrayOfString
-          description: The array value ['foo1', 'foo2', 'foo3']
+          name: ArrayOfNumber
+          description: The array value [0, -0.01, 1.2e20]
       protocol: !Protocols {}
     - !ArraySchema &ref_74
       type: array
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      elementType: *ref_1
+      elementType: *ref_12
       language: !Languages 
         default:
-          name: ArrayOfString
-          description: The array value ['foo1', 'foo2', 'foo3']
-      protocol: !Protocols {}
-    - !ArraySchema &ref_76
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_13
-      language: !Languages 
-        default:
-          name: ArrayOfFooEnum
-          description: The array value ['foo1', 'foo2', 'foo3']
+          name: ArrayOfNumber
+          description: The array value [0, -0.01, 1.2e20]
       protocol: !Protocols {}
     - !ArraySchema &ref_77
       type: array
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
+      elementType: *ref_12
+      language: !Languages 
+        default:
+          name: ArrayOfNumber
+          description: The array value [0.0, null, -1.2e20]
+      protocol: !Protocols {}
+    - !ArraySchema &ref_78
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_12
+      language: !Languages 
+        default:
+          name: ArrayOfNumber
+          description: The array value [1.0, 'number', 0.0]
+      protocol: !Protocols {}
+    - !ArraySchema &ref_79
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ArrayOfString
+          description: The array value ['foo1', 'foo2', 'foo3']
+      protocol: !Protocols {}
+    - !ArraySchema &ref_80
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ArrayOfString
+          description: The array value ['foo1', 'foo2', 'foo3']
+      protocol: !Protocols {}
+    - !ArraySchema &ref_83
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       elementType: *ref_13
       language: !Languages 
         default:
           name: ArrayOfFooEnum
           description: The array value ['foo1', 'foo2', 'foo3']
       protocol: !Protocols {}
-    - !ArraySchema &ref_79
+    - !ArraySchema &ref_84
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_13
+      language: !Languages 
+        default:
+          name: ArrayOfFooEnum
+          description: The array value ['foo1', 'foo2', 'foo3']
+      protocol: !Protocols {}
+    - !ArraySchema &ref_87
       type: array
       apiVersions:
         - !ApiVersion 
@@ -799,7 +799,7 @@ schemas: !Schemas
           name: ArrayOfpathsMvtlqmArrayPrimStringEnumFoo1Foo2Foo3GetResponses200ContentApplicationJsonSchemaItems
           description: The array value ['foo1', 'foo2', 'foo3']
       protocol: !Protocols {}
-    - !ArraySchema &ref_80
+    - !ArraySchema &ref_88
       type: array
       apiVersions:
         - !ApiVersion 
@@ -810,7 +810,7 @@ schemas: !Schemas
           name: ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems
           description: The array value ['foo1', 'foo2', 'foo3']
       protocol: !Protocols {}
-    - !ArraySchema &ref_82
+    - !ArraySchema &ref_91
       type: array
       apiVersions:
         - !ApiVersion 
@@ -822,7 +822,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: The array value ['foo', null, 'foo2']
       protocol: !Protocols {}
-    - !ArraySchema &ref_83
+    - !ArraySchema &ref_92
       type: array
       apiVersions:
         - !ApiVersion 
@@ -833,7 +833,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: The array value ['foo', 123, 'foo2']
       protocol: !Protocols {}
-    - !ArraySchema &ref_84
+    - !ArraySchema &ref_93
       type: array
       apiVersions:
         - !ApiVersion 
@@ -844,7 +844,7 @@ schemas: !Schemas
           name: ArrayOfUuid
           description: The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
       protocol: !Protocols {}
-    - !ArraySchema &ref_85
+    - !ArraySchema &ref_94
       type: array
       apiVersions:
         - !ApiVersion 
@@ -855,7 +855,7 @@ schemas: !Schemas
           name: ArrayOfUuid
           description: The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
       protocol: !Protocols {}
-    - !ArraySchema &ref_87
+    - !ArraySchema &ref_97
       type: array
       apiVersions:
         - !ApiVersion 
@@ -866,7 +866,7 @@ schemas: !Schemas
           name: ArrayOfUuid
           description: The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
       protocol: !Protocols {}
-    - !ArraySchema &ref_88
+    - !ArraySchema &ref_98
       type: array
       apiVersions:
         - !ApiVersion 
@@ -877,7 +877,7 @@ schemas: !Schemas
           name: ArrayOfDate
           description: The array value ['2000-12-01', '1980-01-02', '1492-10-12']
       protocol: !Protocols {}
-    - !ArraySchema &ref_89
+    - !ArraySchema &ref_99
       type: array
       apiVersions:
         - !ApiVersion 
@@ -888,7 +888,7 @@ schemas: !Schemas
           name: ArrayOfDate
           description: The array value ['2000-12-01', '1980-01-02', '1492-10-12']
       protocol: !Protocols {}
-    - !ArraySchema &ref_91
+    - !ArraySchema &ref_102
       type: array
       apiVersions:
         - !ApiVersion 
@@ -899,7 +899,7 @@ schemas: !Schemas
           name: ArrayOfDate
           description: The array value ['2012-01-01', null, '1776-07-04']
       protocol: !Protocols {}
-    - !ArraySchema &ref_92
+    - !ArraySchema &ref_103
       type: array
       apiVersions:
         - !ApiVersion 
@@ -910,7 +910,7 @@ schemas: !Schemas
           name: ArrayOfDate
           description: The array value ['2011-03-22', 'date']
       protocol: !Protocols {}
-    - !ArraySchema &ref_93
+    - !ArraySchema &ref_104
       type: array
       apiVersions:
         - !ApiVersion 
@@ -921,7 +921,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
       protocol: !Protocols {}
-    - !ArraySchema &ref_94
+    - !ArraySchema &ref_105
       type: array
       apiVersions:
         - !ApiVersion 
@@ -932,7 +932,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
       protocol: !Protocols {}
-    - !ArraySchema &ref_96
+    - !ArraySchema &ref_108
       type: array
       apiVersions:
         - !ApiVersion 
@@ -943,7 +943,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['2000-12-01t00:00:01z', null]
       protocol: !Protocols {}
-    - !ArraySchema &ref_97
+    - !ArraySchema &ref_109
       type: array
       apiVersions:
         - !ApiVersion 
@@ -954,7 +954,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['2000-12-01t00:00:01z', 'date-time']
       protocol: !Protocols {}
-    - !ArraySchema &ref_98
+    - !ArraySchema &ref_110
       type: array
       apiVersions:
         - !ApiVersion 
@@ -965,7 +965,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
       protocol: !Protocols {}
-    - !ArraySchema &ref_99
+    - !ArraySchema &ref_111
       type: array
       apiVersions:
         - !ApiVersion 
@@ -976,7 +976,7 @@ schemas: !Schemas
           name: ArrayOfDateTime
           description: The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
       protocol: !Protocols {}
-    - !ArraySchema &ref_101
+    - !ArraySchema &ref_114
       type: array
       apiVersions:
         - !ApiVersion 
@@ -987,7 +987,7 @@ schemas: !Schemas
           name: ArrayOfDuration
           description: The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
       protocol: !Protocols {}
-    - !ArraySchema &ref_102
+    - !ArraySchema &ref_115
       type: array
       apiVersions:
         - !ApiVersion 
@@ -998,7 +998,7 @@ schemas: !Schemas
           name: ArrayOfDuration
           description: The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
       protocol: !Protocols {}
-    - !ArraySchema &ref_104
+    - !ArraySchema &ref_118
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1009,7 +1009,7 @@ schemas: !Schemas
           name: ArrayOfByteArray
           description: The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
       protocol: !Protocols {}
-    - !ArraySchema &ref_105
+    - !ArraySchema &ref_119
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1020,7 +1020,7 @@ schemas: !Schemas
           name: ArrayOfByteArray
           description: The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
       protocol: !Protocols {}
-    - !ArraySchema &ref_107
+    - !ArraySchema &ref_122
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1031,7 +1031,7 @@ schemas: !Schemas
           name: ArrayOfByteArray
           description: The byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
       protocol: !Protocols {}
-    - !ArraySchema &ref_108
+    - !ArraySchema &ref_123
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1042,7 +1042,7 @@ schemas: !Schemas
           name: ArrayOfByteArray
           description: Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded
       protocol: !Protocols {}
-    - !ArraySchema &ref_109
+    - !ArraySchema &ref_124
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1054,7 +1054,7 @@ schemas: !Schemas
           name: ArrayOfProduct
           description: array of complex type with null value
       protocol: !Protocols {}
-    - !ArraySchema &ref_110
+    - !ArraySchema &ref_125
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1065,7 +1065,7 @@ schemas: !Schemas
           name: ArrayOfProduct
           description: Empty array of complex type []
       protocol: !Protocols {}
-    - !ArraySchema &ref_111
+    - !ArraySchema &ref_126
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1077,7 +1077,7 @@ schemas: !Schemas
           name: ArrayOfProduct
           description: 'Array of complex type with null item [{''integer'': 1 ''string'': ''2''}, null, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_112
+    - !ArraySchema &ref_127
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1088,7 +1088,7 @@ schemas: !Schemas
           name: ArrayOfProduct
           description: 'Array of complex type with empty item [{''integer'': 1 ''string'': ''2''}, {}, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_113
+    - !ArraySchema &ref_128
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1099,7 +1099,7 @@ schemas: !Schemas
           name: ArrayOfProduct
           description: 'array of complex type with [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_114
+    - !ArraySchema &ref_129
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1121,7 +1121,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: Array of String
       protocol: !Protocols {}
-    - !ArraySchema &ref_116
+    - !ArraySchema &ref_132
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1143,7 +1143,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: Array of String
       protocol: !Protocols {}
-    - !ArraySchema &ref_117
+    - !ArraySchema &ref_133
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1165,7 +1165,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: Array of String
       protocol: !Protocols {}
-    - !ArraySchema &ref_118
+    - !ArraySchema &ref_134
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1188,7 +1188,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: Array of String
       protocol: !Protocols {}
-    - !ArraySchema &ref_119
+    - !ArraySchema &ref_135
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1210,7 +1210,7 @@ schemas: !Schemas
           name: ArrayOfString
           description: Array of String
       protocol: !Protocols {}
-    - !ArraySchema &ref_120
+    - !ArraySchema &ref_136
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1232,7 +1232,7 @@ schemas: !Schemas
           name: ArrayOfPutContentSchemaItemsItem
           description: Array of PutContentSchemaItemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_121
+    - !ArraySchema &ref_137
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1243,7 +1243,7 @@ schemas: !Schemas
           name: ArrayOfPutContentSchemaItemsItem
           description: An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
       protocol: !Protocols {}
-    - !ArraySchema &ref_123
+    - !ArraySchema &ref_140
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1255,7 +1255,7 @@ schemas: !Schemas
           name: ArrayOfDictionaryOfString
           description: An array of Dictionaries with value null
       protocol: !Protocols {}
-    - !ArraySchema &ref_124
+    - !ArraySchema &ref_141
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1266,7 +1266,7 @@ schemas: !Schemas
           name: ArrayOfDictionaryOfString
           description: An array of Dictionaries of type <string, string> with value []
       protocol: !Protocols {}
-    - !ArraySchema &ref_125
+    - !ArraySchema &ref_142
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1278,7 +1278,7 @@ schemas: !Schemas
           name: ArrayOfDictionaryOfString
           description: 'An array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, null, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_126
+    - !ArraySchema &ref_143
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1289,7 +1289,7 @@ schemas: !Schemas
           name: ArrayOfDictionaryOfString
           description: 'An array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_127
+    - !ArraySchema &ref_144
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1300,7 +1300,7 @@ schemas: !Schemas
           name: ArrayOfDictionaryOfString
           description: 'An array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {''4'': ''four'', ''5'': ''five'', ''6'': ''six''}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
       protocol: !Protocols {}
-    - !ArraySchema &ref_128
+    - !ArraySchema &ref_145
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1333,6 +1333,7 @@ operationGroups:
     $key: array
     operations:
       - !Operation 
+        operationId: array_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1399,6 +1400,7 @@ operationGroups:
             description: Get null array value
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1465,6 +1467,7 @@ operationGroups:
             description: Get invalid array [1, 2, 3
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1531,13 +1534,14 @@ operationGroups:
             description: Get empty array value []
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_48
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -1591,6 +1595,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_48
         signatureParameters: []
         responses:
           - !Response 
@@ -1622,6 +1628,7 @@ operationGroups:
             description: Set array value empty []
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getBooleanTfft
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1656,7 +1663,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1688,13 +1695,14 @@ operationGroups:
             description: Get boolean array value [true, false, false, true]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putBooleanTfft
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_52
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -1709,8 +1717,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
-                schema: *ref_49
+              - !Parameter &ref_51
+                schema: *ref_50
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1735,7 +1743,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1748,6 +1756,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_52
         signatureParameters: []
         responses:
           - !Response 
@@ -1779,6 +1789,7 @@ operationGroups:
             description: Set array value empty [true, false, false, true]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getBooleanInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1813,7 +1824,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -1845,6 +1856,7 @@ operationGroups:
             description: Get boolean array value [true, null, false]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getBooleanInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1879,7 +1891,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_52
+            schema: *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1911,6 +1923,7 @@ operationGroups:
             description: Get boolean array value [true, 'boolean', false]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getIntegerValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1945,7 +1958,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -1977,13 +1990,14 @@ operationGroups:
             description: Get integer array value [1, -1, 3, 300]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putIntegerValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_58
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -1998,8 +2012,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
-                schema: *ref_54
+              - !Parameter &ref_57
+                schema: *ref_56
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2024,7 +2038,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_57
             language: !Languages 
               default:
                 name: ''
@@ -2037,6 +2051,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_58
         signatureParameters: []
         responses:
           - !Response 
@@ -2068,6 +2084,7 @@ operationGroups:
             description: Set array value empty [1, -1, 3, 300]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getIntInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2102,7 +2119,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_56
+            schema: *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -2134,6 +2151,7 @@ operationGroups:
             description: Get integer array value [1, null, 0]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getIntInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2168,7 +2186,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_57
+            schema: *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -2200,6 +2218,7 @@ operationGroups:
             description: Get integer array value [1, 'integer', 0]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getLongValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2234,7 +2253,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_58
+            schema: *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -2266,13 +2285,14 @@ operationGroups:
             description: Get integer array value [1, -1, 3, 300]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putLongValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_64
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -2287,8 +2307,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_60
-                schema: *ref_59
+              - !Parameter &ref_63
+                schema: *ref_62
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2313,7 +2333,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_60
+              - *ref_63
             language: !Languages 
               default:
                 name: ''
@@ -2326,6 +2346,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_64
         signatureParameters: []
         responses:
           - !Response 
@@ -2357,6 +2379,7 @@ operationGroups:
             description: Set array value empty [1, -1, 3, 300]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getLongInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2391,7 +2414,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_61
+            schema: *ref_65
             language: !Languages 
               default:
                 name: ''
@@ -2423,6 +2446,7 @@ operationGroups:
             description: Get long array value [1, null, 0]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getLongInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2457,7 +2481,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_62
+            schema: *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -2489,6 +2513,7 @@ operationGroups:
             description: Get long array value [1, 'integer', 0]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getFloatValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2523,7 +2548,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_63
+            schema: *ref_67
             language: !Languages 
               default:
                 name: ''
@@ -2555,13 +2580,14 @@ operationGroups:
             description: Get float array value [0, -0.01, 1.2e20]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putFloatValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_70
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -2576,8 +2602,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_65
-                schema: *ref_64
+              - !Parameter &ref_69
+                schema: *ref_68
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2602,7 +2628,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_65
+              - *ref_69
             language: !Languages 
               default:
                 name: ''
@@ -2615,6 +2641,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_70
         signatureParameters: []
         responses:
           - !Response 
@@ -2646,6 +2674,7 @@ operationGroups:
             description: Set array value [0, -0.01, 1.2e20]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getFloatInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2680,7 +2709,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_66
+            schema: *ref_71
             language: !Languages 
               default:
                 name: ''
@@ -2712,6 +2741,7 @@ operationGroups:
             description: Get float array value [0.0, null, -1.2e20]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getFloatInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2746,7 +2776,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_67
+            schema: *ref_72
             language: !Languages 
               default:
                 name: ''
@@ -2778,6 +2808,7 @@ operationGroups:
             description: Get boolean array value [1.0, 'number', 0.0]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDoubleValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2812,7 +2843,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_68
+            schema: *ref_73
             language: !Languages 
               default:
                 name: ''
@@ -2844,302 +2875,14 @@ operationGroups:
             description: Get float array value [0, -0.01, 1.2e20]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putDoubleValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_45
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_70
-                schema: *ref_69
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_70
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /array/prim/double/0--0.01-1.2e20
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDoubleValid
-            description: Set array value [0, -0.01, 1.2e20]
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/double/0.0-null-1.2e20
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_71
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value [0.0, null, -1.2e20]
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDoubleInvalidNull
-            description: Get float array value [0.0, null, -1.2e20]
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/double/1.number.0
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_72
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value [1.0, 'number', 0.0]
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDoubleInvalidString
-            description: Get boolean array value [1.0, 'number', 0.0]
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/string/foo1.foo2.foo3
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_73
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['foo1', 'foo2', 'foo3']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetStringValid
-            description: Get string array value ['foo1', 'foo2', 'foo3']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_76
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -3187,12 +2930,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /array/prim/string/foo1.foo2.foo3
+                path: /array/prim/double/0--0.01-1.2e20
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_76
         signatureParameters: []
         responses:
           - !Response 
@@ -3220,10 +2965,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: PutStringValid
-            description: Set array value ['foo1', 'foo2', 'foo3']
+            name: PutDoubleValid
+            description: Set array value [0, -0.01, 1.2e20]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDoubleInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3252,17 +2998,17 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/enum/foo1.foo2.foo3
+                path: /array/prim/double/0.0-null-1.2e20
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_76
+            schema: *ref_77
             language: !Languages 
               default:
                 name: ''
-                description: The array value ['foo1', 'foo2', 'foo3']
+                description: The array value [0.0, null, -1.2e20]
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -3286,101 +3032,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetEnumValid
-            description: Get enum array value ['foo1', 'foo2', 'foo3']
+            name: GetDoubleInvalidNull
+            description: Get float array value [0.0, null, -1.2e20]
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_45
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_78
-                schema: *ref_77
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_78
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /array/prim/enum/foo1.foo2.foo3
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutEnumValid
-            description: Set array value ['foo1', 'foo2', 'foo3']
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: array_getDoubleInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3409,7 +3065,74 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/string-enum/foo1.foo2.foo3
+                path: /array/prim/double/1.number.0
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_78
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value [1.0, 'number', 0.0]
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDoubleInvalidString
+            description: Get boolean array value [1.0, 'number', 0.0]
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getStringValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/string/foo1.foo2.foo3
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -3443,17 +3166,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetStringEnumValid
-            description: Get enum array value ['foo1', 'foo2', 'foo3']
+            name: GetStringValid
+            description: Get string array value ['foo1', 'foo2', 'foo3']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putStringValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_82
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -3501,12 +3225,336 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /array/prim/string/foo1.foo2.foo3
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_82
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutStringValid
+            description: Set array value ['foo1', 'foo2', 'foo3']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getEnumValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/enum/foo1.foo2.foo3
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['foo1', 'foo2', 'foo3']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetEnumValid
+            description: Get enum array value ['foo1', 'foo2', 'foo3']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_putEnumValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requestMediaTypes:
+          application/json: !Request &ref_86
+            parameters:
+              - !Parameter 
+                schema: *ref_45
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_85
+                schema: *ref_84
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_85
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /array/prim/enum/foo1.foo2.foo3
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_86
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutEnumValid
+            description: Set array value ['foo1', 'foo2', 'foo3']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getStringEnumValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/string-enum/foo1.foo2.foo3
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_87
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['foo1', 'foo2', 'foo3']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetStringEnumValid
+            description: Get enum array value ['foo1', 'foo2', 'foo3']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_putStringEnumValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requestMediaTypes:
+          application/json: !Request &ref_90
+            parameters:
+              - !Parameter 
+                schema: *ref_45
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_89
+                schema: *ref_88
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_89
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /array/prim/string-enum/foo1.foo2.foo3
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_90
         signatureParameters: []
         responses:
           - !Response 
@@ -3538,6 +3586,7 @@ operationGroups:
             description: Set array value ['foo1', 'foo2', 'foo3']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getStringWithNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3572,7 +3621,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_82
+            schema: *ref_91
             language: !Languages 
               default:
                 name: ''
@@ -3604,6 +3653,7 @@ operationGroups:
             description: Get string array value ['foo', null, 'foo2']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getStringWithInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3638,7 +3688,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_83
+            schema: *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -3670,6 +3720,7 @@ operationGroups:
             description: Get string array value ['foo', 123, 'foo2']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getUuidValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3704,7 +3755,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_84
+            schema: *ref_93
             language: !Languages 
               default:
                 name: ''
@@ -3736,525 +3787,14 @@ operationGroups:
             description: Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putUuidValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_45
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_86
-                schema: *ref_85
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_86
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /array/prim/uuid/valid
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutUuidValid
-            description: Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/uuid/invalidchars
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_87
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetUuidInvalidChars
-            description: Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/date/valid
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_88
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['2000-12-01', '1980-01-02', '1492-10-12']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateValid
-            description: Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_45
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_90
-                schema: *ref_89
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_90
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /array/prim/date/valid
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDateValid
-            description: Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/date/invalidnull
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_91
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['2012-01-01', null, '1776-07-04']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateInvalidNull
-            description: Get date array value ['2012-01-01', null, '1776-07-04']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/date/invalidchars
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_92
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['2011-03-22', 'date']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateInvalidChars
-            description: Get date array value ['2011-03-22', 'date']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/date-time/valid
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTimeValid
-            description: Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_96
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -4302,12 +3842,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /array/prim/date-time/valid
+                path: /array/prim/uuid/valid
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_96
         signatureParameters: []
         responses:
           - !Response 
@@ -4335,10 +3877,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: PutDateTimeValid
-            description: Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+            name: PutUuidValid
+            description: Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getUuidInvalidChars
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4367,73 +3910,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/date-time/invalidnull
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_96
-            language: !Languages 
-              default:
-                name: ''
-                description: The array value ['2000-12-01t00:00:01z', null]
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTimeInvalidNull
-            description: Get date array value ['2000-12-01t00:00:01z', null]
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /array/prim/date-time/invalidchars
+                path: /array/prim/uuid/invalidchars
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -4443,7 +3920,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: ''
-                description: The array value ['2000-12-01t00:00:01z', 'date-time']
+                description: The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -4467,10 +3944,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetDateTimeInvalidChars
-            description: Get date array value ['2000-12-01t00:00:01z', 'date-time']
+            name: GetUuidInvalidChars
+            description: Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4499,7 +3977,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/date-time-rfc1123/valid
+                path: /array/prim/date/valid
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -4509,7 +3987,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: ''
-                description: The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+                description: The array value ['2000-12-01', '1980-01-02', '1492-10-12']
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -4533,17 +4011,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetDateTimeRfc1123Valid
-            description: Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            name: GetDateValid
+            description: Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putDateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_101
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -4591,12 +4070,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /array/prim/date-time-rfc1123/valid
+                path: /array/prim/date/valid
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_101
         signatureParameters: []
         responses:
           - !Response 
@@ -4624,10 +4105,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: PutDateTimeRfc1123Valid
-            description: Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            name: PutDateValid
+            description: Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDateInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4656,17 +4138,17 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/duration/valid
+                path: /array/prim/date/invalidnull
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_101
+            schema: *ref_102
             language: !Languages 
               default:
                 name: ''
-                description: The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+                description: The array value ['2012-01-01', null, '1776-07-04']
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -4690,101 +4172,11 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetDurationValid
-            description: Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            name: GetDateInvalidNull
+            description: Get date array value ['2012-01-01', null, '1776-07-04']
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_39
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_45
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_103
-                schema: *ref_102
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_40
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_103
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /array/prim/duration/valid
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDurationValid
-            description: Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: array_getDateInvalidChars
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4813,7 +4205,74 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /array/prim/byte/valid
+                path: /array/prim/date/invalidchars
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_103
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['2011-03-22', 'date']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateInvalidChars
+            description: Get date array value ['2011-03-22', 'date']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getDateTimeValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/date-time/valid
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -4823,7 +4282,7 @@ operationGroups:
             language: !Languages 
               default:
                 name: ''
-                description: The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
+                description: The array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
             protocol: !Protocols 
               http: !HttpResponse 
                 knownMediaType: json
@@ -4847,17 +4306,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetByteValid
-            description: Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
+            name: GetDateTimeValid
+            description: Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putDateTimeValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_107
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -4905,12 +4365,631 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /array/prim/date-time/valid
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_107
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDateTimeValid
+            description: Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getDateTimeInvalidNull
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/date-time/invalidnull
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_108
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['2000-12-01t00:00:01z', null]
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeInvalidNull
+            description: Get date array value ['2000-12-01t00:00:01z', null]
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getDateTimeInvalidChars
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/date-time/invalidchars
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_109
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['2000-12-01t00:00:01z', 'date-time']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeInvalidChars
+            description: Get date array value ['2000-12-01t00:00:01z', 'date-time']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getDateTimeRfc1123Valid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/date-time-rfc1123/valid
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_110
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeRfc1123Valid
+            description: Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_putDateTimeRfc1123Valid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requestMediaTypes:
+          application/json: !Request &ref_113
+            parameters:
+              - !Parameter 
+                schema: *ref_45
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_112
+                schema: *ref_111
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_112
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /array/prim/date-time-rfc1123/valid
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_113
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDateTimeRfc1123Valid
+            description: Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getDurationValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/duration/valid
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_114
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDurationValid
+            description: Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_putDurationValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requestMediaTypes:
+          application/json: !Request &ref_117
+            parameters:
+              - !Parameter 
+                schema: *ref_45
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_116
+                schema: *ref_115
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_116
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /array/prim/duration/valid
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_117
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDurationValid
+            description: Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_getByteValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /array/prim/byte/valid
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_118
+            language: !Languages 
+              default:
+                name: ''
+                description: The array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_42
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetByteValid
+            description: Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: array_putByteValid
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_39
+        requestMediaTypes:
+          application/json: !Request &ref_121
+            parameters:
+              - !Parameter 
+                schema: *ref_45
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_120
+                schema: *ref_119
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_120
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /array/prim/byte/valid
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_121
         signatureParameters: []
         responses:
           - !Response 
@@ -4942,6 +5021,7 @@ operationGroups:
             description: Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getByteInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4976,7 +5056,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -5008,6 +5088,7 @@ operationGroups:
             description: Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getBase64Url
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5042,7 +5123,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_108
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -5074,6 +5155,7 @@ operationGroups:
             description: Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getComplexNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5108,7 +5190,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_124
             language: !Languages 
               default:
                 name: ''
@@ -5140,6 +5222,7 @@ operationGroups:
             description: Get array of complex type null value
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getComplexEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5174,7 +5257,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_110
+            schema: *ref_125
             language: !Languages 
               default:
                 name: ''
@@ -5206,6 +5289,7 @@ operationGroups:
             description: Get empty array of complex type []
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getComplexItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5240,7 +5324,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_111
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -5272,6 +5356,7 @@ operationGroups:
             description: 'Get array of complex type with null item [{''integer'': 1 ''string'': ''2''}, null, {''integer'': 5, ''string'': ''6''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getComplexItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5306,7 +5391,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -5338,6 +5423,7 @@ operationGroups:
             description: 'Get array of complex type with empty item [{''integer'': 1 ''string'': ''2''}, {}, {''integer'': 5, ''string'': ''6''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getComplexValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5372,7 +5458,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_113
+            schema: *ref_128
             language: !Languages 
               default:
                 name: ''
@@ -5404,13 +5490,14 @@ operationGroups:
             description: 'Get array of complex type with [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putComplexValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_131
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -5425,8 +5512,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_115
-                schema: *ref_114
+              - !Parameter &ref_130
+                schema: *ref_129
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5451,7 +5538,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_115
+              - *ref_130
             language: !Languages 
               default:
                 name: ''
@@ -5464,6 +5551,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_131
         signatureParameters: []
         responses:
           - !Response 
@@ -5495,6 +5584,7 @@ operationGroups:
             description: 'Put an array of complex type with values [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getArrayNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5529,7 +5619,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_132
             language: !Languages 
               default:
                 name: ''
@@ -5561,6 +5651,7 @@ operationGroups:
             description: Get a null array
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getArrayEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5595,7 +5686,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_133
             language: !Languages 
               default:
                 name: ''
@@ -5627,6 +5718,7 @@ operationGroups:
             description: Get an empty array []
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getArrayItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5661,7 +5753,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_134
             language: !Languages 
               default:
                 name: ''
@@ -5693,6 +5785,7 @@ operationGroups:
             description: Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getArrayItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5727,7 +5820,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_119
+            schema: *ref_135
             language: !Languages 
               default:
                 name: ''
@@ -5759,6 +5852,7 @@ operationGroups:
             description: Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getArrayValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5793,7 +5887,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_136
             language: !Languages 
               default:
                 name: ''
@@ -5825,13 +5919,14 @@ operationGroups:
             description: Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putArrayValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_139
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -5846,8 +5941,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_122
-                schema: *ref_121
+              - !Parameter &ref_138
+                schema: *ref_137
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5872,7 +5967,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_122
+              - *ref_138
             language: !Languages 
               default:
                 name: ''
@@ -5885,6 +5980,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_139
         signatureParameters: []
         responses:
           - !Response 
@@ -5916,6 +6013,7 @@ operationGroups:
             description: Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDictionaryNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5950,7 +6048,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_123
+            schema: *ref_140
             language: !Languages 
               default:
                 name: ''
@@ -5982,6 +6080,7 @@ operationGroups:
             description: Get an array of Dictionaries with value null
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDictionaryEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6016,7 +6115,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_141
             language: !Languages 
               default:
                 name: ''
@@ -6048,6 +6147,7 @@ operationGroups:
             description: Get an array of Dictionaries of type <string, string> with value []
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDictionaryItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6082,7 +6182,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_125
+            schema: *ref_142
             language: !Languages 
               default:
                 name: ''
@@ -6114,6 +6214,7 @@ operationGroups:
             description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, null, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDictionaryItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6148,7 +6249,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_126
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -6180,6 +6281,7 @@ operationGroups:
             description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6214,7 +6316,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_127
+            schema: *ref_144
             language: !Languages 
               default:
                 name: ''
@@ -6246,13 +6348,14 @@ operationGroups:
             description: 'Get an array of Dictionaries of type <string, string> with value [{''1'': ''one'', ''2'': ''two'', ''3'': ''three''}, {''4'': ''four'', ''5'': ''five'', ''6'': ''six''}, {''7'': ''seven'', ''8'': ''eight'', ''9'': ''nine''}]'
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_147
             parameters:
               - !Parameter 
                 schema: *ref_45
@@ -6267,8 +6370,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_129
-                schema: *ref_128
+              - !Parameter &ref_146
+                schema: *ref_145
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6293,7 +6396,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_129
+              - *ref_146
             language: !Languages 
               default:
                 name: ''
@@ -6306,6 +6409,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_147
         signatureParameters: []
         responses:
           - !Response 
@@ -6344,9 +6449,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AutoRestSwaggerBATArrayService
