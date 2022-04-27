@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientOptionsWriter
     {
-        public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions, bool suppressNestedClientSpans)
+        public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions, bool suppressNestedClientSpans = false)
         {
             using (writer.Namespace(clientOptions.Type.Namespace))
             {
