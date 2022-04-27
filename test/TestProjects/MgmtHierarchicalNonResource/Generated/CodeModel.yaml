@@ -1266,6 +1266,7 @@ operationGroups:
     $key: SharedGalleries
     operations:
       - !Operation 
+        operationId: SharedGalleries_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1364,6 +1365,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SharedGalleries_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1466,6 +1468,7 @@ operationGroups:
     $key: SharedGalleryImages
     operations:
       - !Operation 
+        operationId: SharedGalleryImages_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1577,6 +1580,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SharedGalleryImages_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1692,6 +1696,7 @@ operationGroups:
     $key: SharedGalleryImageVersions
     operations:
       - !Operation 
+        operationId: SharedGalleryImageVersions_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1816,6 +1821,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SharedGalleryImageVersions_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1945,8 +1951,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

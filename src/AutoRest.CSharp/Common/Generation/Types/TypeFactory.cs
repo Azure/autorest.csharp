@@ -200,9 +200,10 @@ namespace AutoRest.CSharp.Generation.Types
         private static Type? ToXMsFormatType(string? format) => format switch
         {
             XMsFormat.ArmId => typeof(ResourceIdentifier),
-            XMsFormat.ResourceType => typeof(ResourceType),
-            XMsFormat.DurationConstant => typeof(TimeSpan),
             XMsFormat.AzureLocation => typeof(AzureLocation),
+            XMsFormat.DurationConstant => typeof(TimeSpan),
+            XMsFormat.ETag => typeof(ETag),
+            XMsFormat.ResourceType => typeof(ResourceType),
             _ => null
         };
 

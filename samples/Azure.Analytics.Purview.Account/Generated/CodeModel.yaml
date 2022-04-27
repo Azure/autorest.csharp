@@ -1692,9 +1692,6 @@ schemas: !Schemas
                     - json
                   usage:
                     - output
-                  extensions:
-                    x-internal-autorest-anonymous-schema:
-                      anonymous: true
                   language: !Languages 
                     default:
                       name: AccountPropertiesEndpoints
@@ -1791,9 +1788,6 @@ schemas: !Schemas
                     - json
                   usage:
                     - output
-                  extensions:
-                    x-internal-autorest-anonymous-schema:
-                      anonymous: true
                   language: !Languages 
                     default:
                       name: AccountPropertiesManagedResources
@@ -2081,9 +2075,6 @@ schemas: !Schemas
                         usage:
                           - output
                           - input
-                        extensions:
-                          x-internal-autorest-anonymous-schema:
-                            anonymous: true
                         language: !Languages 
                           default:
                             name: CollectionSystemData
@@ -2166,9 +2157,6 @@ schemas: !Schemas
             usage:
               - output
               - input
-            extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
             language: !Languages 
               default:
                 name: AccountSystemData
@@ -2310,9 +2298,6 @@ schemas: !Schemas
               - json
             usage:
               - exception
-            extensions:
-              x-internal-autorest-anonymous-schema:
-                anonymous: true
             language: !Languages 
               default:
                 name: ErrorResponseModelError
@@ -2362,7 +2347,7 @@ schemas: !Schemas
           description: The account properties that can be updated through data plane.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_169
+    - !ObjectSchema &ref_170
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2394,7 +2379,7 @@ schemas: !Schemas
           description: The Account access keys.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_170
+    - !ObjectSchema &ref_171
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2521,7 +2506,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_70
     - *ref_38
-    - !ObjectSchema &ref_177
+    - !ObjectSchema &ref_180
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2574,7 +2559,7 @@ schemas: !Schemas
           description: Paged list of collections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_179
+    - !ObjectSchema &ref_182
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2661,7 +2646,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_78
-    - !ObjectSchema &ref_180
+    - !ObjectSchema &ref_183
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3554,7 +3539,7 @@ schemas: !Schemas
     - *ref_138
     - *ref_139
     - *ref_140
-    - !ObjectSchema &ref_173
+    - !ObjectSchema &ref_175
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3644,7 +3629,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_174
+  - !Parameter &ref_176
     schema: *ref_1
     implementation: Client
     required: true
@@ -3677,6 +3662,7 @@ operationGroups:
     $key: Accounts
     operations:
       - !Operation 
+        operationId: Accounts_GetAccountProperties
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -3799,14 +3785,15 @@ operationGroups:
             description: Get an account
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_UpdateAccountProperties
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_169
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -3860,6 +3847,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_169
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -3945,6 +3934,7 @@ operationGroups:
             description: Updates an account
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_GetAccessKeys
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -3980,7 +3970,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_170
             language: !Languages 
               default:
                 name: ''
@@ -4029,14 +4019,15 @@ operationGroups:
             description: List the authorization keys associated with this account.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_RegenerateAccessKey
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_173
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -4051,8 +4042,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_171
-                schema: *ref_170
+              - !Parameter &ref_172
+                schema: *ref_171
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4077,7 +4068,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_171
+              - *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4090,10 +4081,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_173
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_170
             language: !Languages 
               default:
                 name: ''
@@ -4144,13 +4137,14 @@ operationGroups:
             description: Regenerate the authorization keys associated with this data catalog.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Accounts_GetResourceSetRules
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-          - !Parameter &ref_172
+          - !Parameter &ref_174
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4188,10 +4182,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_172
+          - *ref_174
         responses:
           - !SchemaResponse 
-            schema: *ref_173
+            schema: *ref_175
             language: !Languages 
               default:
                 name: ''
@@ -4433,12 +4427,13 @@ operationGroups:
     $key: Collections
     operations:
       - !Operation 
+        operationId: Collections_GetCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4522,15 +4517,16 @@ operationGroups:
             description: Get a collection
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_CreateOrUpdateCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_178
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -4545,7 +4541,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_175
+              - !Parameter &ref_177
                 schema: *ref_73
                 implementation: Method
                 required: true
@@ -4571,7 +4567,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_175
+              - *ref_177
             language: !Languages 
               default:
                 name: ''
@@ -4584,6 +4580,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_178
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -4643,12 +4641,13 @@ operationGroups:
             description: Creates or updates a collection entity.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_DeleteCollection
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4721,13 +4720,14 @@ operationGroups:
             description: Deletes a Collection entity.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_ListCollections
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-          - !Parameter &ref_176
+          - !Parameter &ref_179
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4765,10 +4765,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_176
+          - *ref_179
         responses:
           - !SchemaResponse 
-            schema: *ref_177
+            schema: *ref_180
             language: !Languages 
               default:
                 name: ''
@@ -4825,14 +4825,15 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_ListChildCollectionNames
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
-          - !Parameter &ref_178
+          - !Parameter &ref_181
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -4870,10 +4871,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_178
+          - *ref_181
         responses:
           - !SchemaResponse 
-            schema: *ref_179
+            schema: *ref_182
             language: !Languages 
               default:
                 name: ''
@@ -4932,12 +4933,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Collections_GetCollectionPath
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
-          - *ref_174
+          - *ref_176
           - *ref_162
         requests:
           - !Request 
@@ -4968,7 +4970,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_180
+            schema: *ref_183
             language: !Languages 
               default:
                 name: ''
@@ -5029,6 +5031,7 @@ operationGroups:
     $key: ResourceSetRules
     operations:
       - !Operation 
+        operationId: ResourceSetRules_GetResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -5293,14 +5296,15 @@ operationGroups:
             description: Get a resource set config service model.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceSetRules_CreateOrUpdateResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
         parameters:
           - *ref_161
           - *ref_162
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_185
             parameters:
               - !Parameter 
                 schema: *ref_166
@@ -5315,7 +5319,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_181
+              - !Parameter &ref_184
                 schema: *ref_143
                 implementation: Method
                 required: true
@@ -5341,7 +5345,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_181
+              - *ref_184
             language: !Languages 
               default:
                 name: ''
@@ -5354,6 +5358,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
+        requests:
+          - *ref_185
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -5754,6 +5760,7 @@ operationGroups:
             description: Creates or updates an resource set config.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceSetRules_DeleteResourceSetRule
         apiVersions:
           - !ApiVersion 
             version: 2019-11-01-preview
@@ -5854,8 +5861,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://purview.azure.net/.default
 language: !Languages 

@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.22.3"
+  "@autorest/modelerfour": "4.23.2"
 modelerfour:
   always-create-content-type-parameter: true
 pipeline:
@@ -37,7 +37,7 @@ pipeline:
 ```yaml $(testmodeler)
 use-extension:
   # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
-  "@autorest/testmodeler": "2.2.0"
+  "@autorest/testmodeler": "2.2.3"
 
 
 pipeline:
@@ -55,6 +55,7 @@ modelerfour:
 testmodeler:
   use-parents-value: true
   split-parents-value: false
+  add-armtemplate-payload-string: true
 ```
 
 ## Help

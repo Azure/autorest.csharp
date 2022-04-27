@@ -81,22 +81,10 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            RequestContext context = new RequestContext();
-            context.CancellationToken = cancellationToken;
+            var context = new RequestContext {CancellationToken = cancellationToken};
 
-            using DiagnosticScope scope = ClientDiagnostics.CreateScope("DPGClient.GetPagesValue");
-            scope.Start();
-
-            try
-            {
-                AsyncPageable<BinaryData> pageableBindaryData = GetPagesAsync(mode, context);
-                return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
+            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
         }
 
         /// <summary> Get pages that you will either return to users in pages of raw bodies, or pages of models following growup. </summary>
@@ -110,19 +98,8 @@ namespace dpg_customization_LowLevel
             RequestContext context = new RequestContext();
             context.CancellationToken = cancellationToken;
 
-            using DiagnosticScope scope = ClientDiagnostics.CreateScope("DPGClient.GetPagesValue");
-            scope.Start();
-
-            try
-            {
-                Pageable<BinaryData> pageableBindaryData = GetPages(mode, context);
-                return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            Pageable<BinaryData> pageableBindaryData = GetPagesImplementation("DPGClient.GetPagesValues", mode, context);
+            return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
         }
     }
 }
