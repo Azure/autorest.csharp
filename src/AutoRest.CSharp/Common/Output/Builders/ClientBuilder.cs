@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
         /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
         public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default, bool isArm = false)
+            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -99,8 +99,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 foreach (var serviceRequest in operation.Requests)
                 {
-                    RestClientMethod method = isArm ? ((MgmtRestClient)restClient).GetUpdatedOperationMethod(serviceRequest) : restClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = isArm ? ((MgmtRestClient)restClient).GetUpdatedNextOperationMethod(serviceRequest) : restClient.GetNextOperationMethod(serviceRequest);
+                    RestClientMethod method = Configuration.AzureArm ? ((MgmtRestClient)restClient).GetUpdatedOperationMethod(serviceRequest) : restClient.GetOperationMethod(serviceRequest);
+                    RestClientMethod? nextPageMethod = Configuration.AzureArm ? ((MgmtRestClient)restClient).GetUpdatedNextOperationMethod(serviceRequest) : restClient.GetNextOperationMethod(serviceRequest);
 
                     if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
                     {

@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder, null, true);
+                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
                 foreach (var method in methods)
                 {
                     pagingMethods.Add(method.Method, method);
@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     if (restClient.ClientMethodToSchema?.TryGetValue(method, out ObjectSchema? schema) ?? false)
                     {
-                        types.Add(new MgmtObjectType(schema, true));
+                        types.Add(new MgmtObjectType(schema));
                     }
                 }
             }

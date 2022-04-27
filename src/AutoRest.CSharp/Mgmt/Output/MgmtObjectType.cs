@@ -22,13 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
         }
 
-        public MgmtObjectType(ObjectSchema objectSchema, bool hasUsageExtension)
-            : this(objectSchema, default, default, hasUsageExtension)
-        {
-        }
-
-        public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default, bool hasUsageExtension = false)
-            : base(objectSchema, MgmtContext.Context, hasUsageExtension)
+        public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
+            : base(objectSchema, MgmtContext.Context)
         {
             _defaultName = name;
             _defaultNamespace = nameSpace;

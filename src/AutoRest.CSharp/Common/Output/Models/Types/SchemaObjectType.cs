@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _implementsDictionaryType;
         private ObjectTypeDiscriminator? _discriminator;
 
-        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context, bool hasUsageExtension = false)
+        public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
         {
             DefaultName = objectSchema.CSharpName();
@@ -40,8 +40,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
             _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
-            if (hasUsageExtension)
+            if (ObjectSchema.Extensions?.Usage is not null)
             {
+                // Need to try to parse Usage again here
+                // because the schemas from the property bag don't exist at the time of constructing the BuildContext
                 _usage |= (SchemaTypeUsage)Enum.Parse(typeof(SchemaTypeUsage), ObjectSchema.Extensions?.Usage!, true);
             }
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);

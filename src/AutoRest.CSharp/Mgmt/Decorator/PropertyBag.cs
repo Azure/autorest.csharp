@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         operation.IsLongRunningOperation,
                         operation.ThrowIfNull);
                 }
-                MgmtContext.Library.OptionalModels = MgmtContext.Library.OptionalModels.Concat(new List<TypeProvider>() { new MgmtObjectType(objectType.ObjectSchema, true) });
+                MgmtContext.Library.OptionalModels = MgmtContext.Library.OptionalModels.Concat(new List<TypeProvider>() { new MgmtObjectType(objectType.ObjectSchema) });
             }
             return operation;
         }
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static Parameter BuildOptionalParameter(ObjectSchema schema)
         {
-            CSharpType type = new MgmtObjectType(schema, true).Type;
+            CSharpType type = new MgmtObjectType(schema).Type;
             var defaultValue = Constant.NewInstanceOf(type);
             return new Parameter(
                 "options",
