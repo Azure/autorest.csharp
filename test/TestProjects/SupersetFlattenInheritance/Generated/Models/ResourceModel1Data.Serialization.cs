@@ -50,7 +50,7 @@ namespace SupersetFlattenInheritance
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("systemData"))

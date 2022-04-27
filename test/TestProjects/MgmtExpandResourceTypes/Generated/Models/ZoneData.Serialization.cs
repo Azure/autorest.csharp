@@ -100,7 +100,7 @@ namespace MgmtExpandResourceTypes
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = (AzureLocation)property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -115,7 +115,7 @@ namespace MgmtExpandResourceTypes
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("systemData"))
