@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public Operation Operation => Method.Operation;
 
-        public string OperationId => Operation.OperationId();
+        public string OperationId => Operation.OperationId!;
         /// <summary>
         /// The name of this operation
         /// </summary>
