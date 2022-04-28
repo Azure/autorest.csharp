@@ -207,7 +207,12 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DPGClient.GetPages");
+            return GetPagesImplementationAsync("DPGClient.GetPages", mode, context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagesImplementationAsync(string diagnosticsScopeName, string mode, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -243,7 +248,12 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DPGClient.GetPages");
+            return GetPagesImplementation("DPGClient.GetPages", mode, context);
+        }
+
+        private Pageable<BinaryData> GetPagesImplementation(string diagnosticsScopeName, string mode, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

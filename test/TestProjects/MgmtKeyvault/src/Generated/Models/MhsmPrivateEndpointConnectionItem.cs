@@ -22,7 +22,7 @@ namespace MgmtKeyvault.Models
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MhsmPrivateEndpointConnectionItem(SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState)
+        internal MhsmPrivateEndpointConnectionItem(SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState)
         {
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
@@ -40,6 +40,6 @@ namespace MgmtKeyvault.Models
         /// <summary> Approval state of the private link connection. </summary>
         public MhsmPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
-        public PrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
+        public MgmtKeyvaultPrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }
 }

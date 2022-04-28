@@ -35,7 +35,7 @@ namespace MgmtKeyvault.Tests.Mock
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {
-                    Status = new MgmtKeyvault.Models.PrivateEndpointServiceConnectionStatus("Approved"),
+                    Status = new MgmtKeyvault.Models.MgmtKeyvaultPrivateEndpointServiceConnectionStatus("Approved"),
                     Description = "My name is Joe and I'm approving this.",
                 },
             };

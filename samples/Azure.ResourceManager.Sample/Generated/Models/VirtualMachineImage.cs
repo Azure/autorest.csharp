@@ -17,16 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="location"/> is null. </exception>
-        public VirtualMachineImage(string name, string location) : base(name, location)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public VirtualMachineImage(string name, AzureLocation location) : base(name, location)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
             }
 
             DataDiskImages = new ChangeTrackingList<DataDiskImage>();
@@ -43,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="automaticOSUpgradeProperties"> Describes automatic OS upgrade properties on the image. </param>
         /// <param name="hyperVGeneration"> Specifies the HyperVGeneration Type. </param>
         /// <param name="disallowed"> Specifies disallowed configuration for the VirtualMachine created from the image. </param>
-        internal VirtualMachineImage(string id, string name, string location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationTypes? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationTypes? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
         {
             Plan = plan;
             OsDiskImage = osDiskImage;

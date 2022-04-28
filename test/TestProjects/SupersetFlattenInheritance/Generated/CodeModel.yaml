@@ -500,7 +500,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_5
-    - !ObjectSchema &ref_73
+    - !ObjectSchema &ref_74
       type: object
       apiVersions:
         - !ApiVersion 
@@ -601,7 +601,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_9
-    - !ObjectSchema &ref_80
+    - !ObjectSchema &ref_82
       type: object
       apiVersions:
         - !ApiVersion 
@@ -682,7 +682,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_13
-    - !ObjectSchema &ref_87
+    - !ObjectSchema &ref_90
       type: object
       apiVersions:
         - !ApiVersion 
@@ -776,7 +776,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_16
-    - !ObjectSchema &ref_94
+    - !ObjectSchema &ref_98
       type: object
       apiVersions:
         - !ApiVersion 
@@ -855,7 +855,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_20
-    - !ObjectSchema &ref_101
+    - !ObjectSchema &ref_106
       type: object
       apiVersions:
         - !ApiVersion 
@@ -948,7 +948,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_23
-    - !ObjectSchema &ref_108
+    - !ObjectSchema &ref_114
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1047,7 +1047,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_29
-    - !ObjectSchema &ref_115
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1151,7 +1151,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_33
-    - !ObjectSchema &ref_122
+    - !ObjectSchema &ref_130
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1265,7 +1265,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_41
-    - !ObjectSchema &ref_129
+    - !ObjectSchema &ref_138
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1407,7 +1407,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_47
-    - !ObjectSchema &ref_135
+    - !ObjectSchema &ref_145
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1516,6 +1516,7 @@ operationGroups:
     $key: CustomModel1s
     operations:
       - !Operation 
+        operationId: CustomModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
@@ -1583,12 +1584,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: CustomModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_68
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1600,7 +1602,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_69
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1614,8 +1616,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_68
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -1669,9 +1671,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_68
+        signatureParameters:
           - *ref_69
+          - *ref_70
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1692,12 +1696,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: CustomModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_70
+          - !Parameter &ref_71
             schema: *ref_1
             implementation: Method
             required: true
@@ -1709,7 +1714,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_71
+          - !Parameter &ref_72
             schema: *ref_1
             implementation: Method
             required: true
@@ -1750,8 +1755,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_70
           - *ref_71
+          - *ref_72
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1780,12 +1785,13 @@ operationGroups:
     $key: CustomModel2s
     operations:
       - !Operation 
+        operationId: CustomModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_72
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -1826,10 +1832,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_72
+          - *ref_73
         responses:
           - !SchemaResponse 
-            schema: *ref_73
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -1847,12 +1853,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: CustomModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_75
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -1864,7 +1871,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_76
+          - !Parameter &ref_78
             schema: *ref_1
             implementation: Method
             required: true
@@ -1878,8 +1885,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_76
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -1894,7 +1901,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_74
+              - !Parameter &ref_75
                 schema: *ref_9
                 implementation: Method
                 required: true
@@ -1920,7 +1927,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_74
+              - *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -1933,9 +1940,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_75
+        requests:
           - *ref_76
+        signatureParameters:
+          - *ref_77
+          - *ref_78
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -1956,12 +1965,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: CustomModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_77
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
@@ -1973,7 +1983,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_78
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -2014,8 +2024,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
-          - *ref_78
+          - *ref_79
+          - *ref_80
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -2044,12 +2054,13 @@ operationGroups:
     $key: SubResourceModel1s
     operations:
       - !Operation 
+        operationId: SubResourceModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_79
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -2090,10 +2101,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_79
+          - *ref_81
         responses:
           - !SchemaResponse 
-            schema: *ref_80
+            schema: *ref_82
             language: !Languages 
               default:
                 name: ''
@@ -2111,12 +2122,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubResourceModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_82
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -2128,7 +2140,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_83
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -2142,8 +2154,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_84
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -2158,7 +2170,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_81
+              - !Parameter &ref_83
                 schema: *ref_13
                 implementation: Method
                 required: true
@@ -2184,7 +2196,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_81
+              - *ref_83
             language: !Languages 
               default:
                 name: ''
@@ -2197,9 +2209,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_84
         signatureParameters:
-          - *ref_82
-          - *ref_83
+          - *ref_85
+          - *ref_86
         responses:
           - !SchemaResponse 
             schema: *ref_13
@@ -2220,12 +2234,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubResourceModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_84
+          - !Parameter &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -2237,7 +2252,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_85
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -2278,8 +2293,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_84
-          - *ref_85
+          - *ref_87
+          - *ref_88
         responses:
           - !SchemaResponse 
             schema: *ref_13
@@ -2308,12 +2323,13 @@ operationGroups:
     $key: SubResourceModel2s
     operations:
       - !Operation 
+        operationId: SubResourceModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_86
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -2354,10 +2370,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_86
+          - *ref_89
         responses:
           - !SchemaResponse 
-            schema: *ref_87
+            schema: *ref_90
             language: !Languages 
               default:
                 name: ''
@@ -2375,12 +2391,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubResourceModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_89
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -2392,7 +2409,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -2406,8 +2423,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_92
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -2422,7 +2439,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_88
+              - !Parameter &ref_91
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -2448,7 +2465,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_88
+              - *ref_91
             language: !Languages 
               default:
                 name: ''
@@ -2461,9 +2478,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_92
         signatureParameters:
-          - *ref_89
-          - *ref_90
+          - *ref_93
+          - *ref_94
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -2484,12 +2503,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubResourceModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_91
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2501,7 +2521,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2542,8 +2562,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_91
-          - *ref_92
+          - *ref_95
+          - *ref_96
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -2572,12 +2592,13 @@ operationGroups:
     $key: WritableSubResourceModel1s
     operations:
       - !Operation 
+        operationId: WritableSubResourceModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_93
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2618,10 +2639,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_93
+          - *ref_97
         responses:
           - !SchemaResponse 
-            schema: *ref_94
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2639,12 +2660,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: WritableSubResourceModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_96
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2656,7 +2678,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2670,8 +2692,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_100
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -2686,7 +2708,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_95
+              - !Parameter &ref_99
                 schema: *ref_20
                 implementation: Method
                 required: true
@@ -2712,7 +2734,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_95
+              - *ref_99
             language: !Languages 
               default:
                 name: ''
@@ -2725,9 +2747,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_100
         signatureParameters:
-          - *ref_96
-          - *ref_97
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
             schema: *ref_20
@@ -2748,12 +2772,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: WritableSubResourceModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_98
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2765,7 +2790,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_99
+          - !Parameter &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -2806,8 +2831,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_98
-          - *ref_99
+          - *ref_103
+          - *ref_104
         responses:
           - !SchemaResponse 
             schema: *ref_20
@@ -2836,12 +2861,13 @@ operationGroups:
     $key: WritableSubResourceModel2s
     operations:
       - !Operation 
+        operationId: WritableSubResourceModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_100
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -2882,10 +2908,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_100
+          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_101
+            schema: *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -2903,12 +2929,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: WritableSubResourceModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_103
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -2920,7 +2947,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_104
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -2934,8 +2961,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_108
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -2950,7 +2977,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_102
+              - !Parameter &ref_107
                 schema: *ref_23
                 implementation: Method
                 required: true
@@ -2976,7 +3003,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_102
+              - *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -2989,9 +3016,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_108
         signatureParameters:
-          - *ref_103
-          - *ref_104
+          - *ref_109
+          - *ref_110
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -3012,12 +3041,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: WritableSubResourceModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_105
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -3029,7 +3059,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_106
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -3070,8 +3100,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_105
-          - *ref_106
+          - *ref_111
+          - *ref_112
         responses:
           - !SchemaResponse 
             schema: *ref_23
@@ -3100,12 +3130,13 @@ operationGroups:
     $key: ResourceModel1s
     operations:
       - !Operation 
+        operationId: ResourceModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_107
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -3146,10 +3177,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_107
+          - *ref_113
         responses:
           - !SchemaResponse 
-            schema: *ref_108
+            schema: *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -3167,12 +3198,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_110
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -3184,7 +3216,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_111
+          - !Parameter &ref_118
             schema: *ref_1
             implementation: Method
             required: true
@@ -3198,8 +3230,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_116
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -3214,7 +3246,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_109
+              - !Parameter &ref_115
                 schema: *ref_29
                 implementation: Method
                 required: true
@@ -3240,7 +3272,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_109
+              - *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -3253,9 +3285,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_116
         signatureParameters:
-          - *ref_110
-          - *ref_111
+          - *ref_117
+          - *ref_118
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -3276,12 +3310,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_112
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             required: true
@@ -3293,7 +3328,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_113
+          - !Parameter &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -3334,8 +3369,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_112
-          - *ref_113
+          - *ref_119
+          - *ref_120
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -3364,270 +3399,7 @@ operationGroups:
     $key: ResourceModel2s
     operations:
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-06-10'
-        parameters:
-          - *ref_60
-          - !Parameter &ref_114
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_61
-          - *ref_62
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_63
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_114
-        responses:
-          - !SchemaResponse 
-            schema: *ref_115
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: List
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-06-10'
-        parameters:
-          - *ref_60
-          - !Parameter &ref_117
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_118
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceModel2SName
-                description: ''
-                serializedName: resourceModel2sName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_61
-          - *ref_62
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_66
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_116
-                schema: *ref_33
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_63
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_116
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_117
-          - *ref_118
-        responses:
-          - !SchemaResponse 
-            schema: *ref_33
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-06-10'
-        parameters:
-          - *ref_60
-          - !Parameter &ref_119
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_120
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceModel2SName
-                description: ''
-                serializedName: resourceModel2sName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_61
-          - *ref_62
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_63
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_119
-          - *ref_120
-        responses:
-          - !SchemaResponse 
-            schema: *ref_33
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: ResourceModel2S
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: TrackedResourceModel1s
-    operations:
-      - !Operation 
+        operationId: ResourceModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
@@ -3670,7 +3442,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -3695,12 +3467,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResourceModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_124
+          - !Parameter &ref_125
             schema: *ref_1
             implementation: Method
             required: true
@@ -3712,22 +3485,22 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_125
+          - !Parameter &ref_126
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: trackedResourceModel1SName
+                name: resourceModel2SName
                 description: ''
-                serializedName: trackedResourceModel1sName
+                serializedName: resourceModel2sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_124
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -3743,7 +3516,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_123
-                schema: *ref_41
+                schema: *ref_33
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3775,15 +3548,286 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_124
+        signatureParameters:
+          - *ref_125
+          - *ref_126
+        responses:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: ResourceModel2s_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-06-10'
+        parameters:
+          - *ref_60
+          - !Parameter &ref_127
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_128
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceModel2SName
+                description: ''
+                serializedName: resourceModel2sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_61
+          - *ref_62
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_63
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_127
+          - *ref_128
+        responses:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ResourceModel2S
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: TrackedResourceModel1s
+    operations:
+      - !Operation 
+        operationId: TrackedResourceModel1s_List
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-06-10'
+        parameters:
+          - *ref_60
+          - !Parameter &ref_129
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_61
+          - *ref_62
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_63
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_129
+        responses:
+          - !SchemaResponse 
+            schema: *ref_130
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: TrackedResourceModel1s_Put
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-06-10'
+        parameters:
+          - *ref_60
+          - !Parameter &ref_133
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_134
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: trackedResourceModel1SName
+                description: ''
+                serializedName: trackedResourceModel1sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_61
+          - *ref_62
+        requestMediaTypes:
+          application/json: !Request &ref_132
+            parameters:
+              - !Parameter 
+                schema: *ref_66
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_131
+                schema: *ref_41
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_63
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_131
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_132
         signatureParameters:
-          - *ref_124
-          - *ref_125
+          - *ref_133
+          - *ref_134
         responses:
           - !SchemaResponse 
             schema: *ref_41
@@ -3804,12 +3848,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: TrackedResourceModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_126
+          - !Parameter &ref_135
             schema: *ref_1
             implementation: Method
             required: true
@@ -3821,7 +3866,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_127
+          - !Parameter &ref_136
             schema: *ref_1
             implementation: Method
             required: true
@@ -3862,8 +3907,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_126
-          - *ref_127
+          - *ref_135
+          - *ref_136
         responses:
           - !SchemaResponse 
             schema: *ref_41
@@ -3892,12 +3937,13 @@ operationGroups:
     $key: TrackedResourceModel2s
     operations:
       - !Operation 
+        operationId: TrackedResourceModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_128
+          - !Parameter &ref_137
             schema: *ref_1
             implementation: Method
             required: true
@@ -3938,10 +3984,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_128
+          - *ref_137
         responses:
           - !SchemaResponse 
-            schema: *ref_129
+            schema: *ref_138
             language: !Languages 
               default:
                 name: ''
@@ -3959,12 +4005,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: TrackedResourceModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_131
+          - !Parameter &ref_141
             schema: *ref_1
             implementation: Method
             required: true
@@ -3976,7 +4023,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_132
+          - !Parameter &ref_142
             schema: *ref_1
             implementation: Method
             required: true
@@ -3990,8 +4037,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_140
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -4006,7 +4053,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_130
+              - !Parameter &ref_139
                 schema: *ref_47
                 implementation: Method
                 required: true
@@ -4032,7 +4079,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_130
+              - *ref_139
             language: !Languages 
               default:
                 name: ''
@@ -4045,9 +4092,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_140
         signatureParameters:
-          - *ref_131
-          - *ref_132
+          - *ref_141
+          - *ref_142
         responses:
           - !SchemaResponse 
             schema: *ref_47
@@ -4068,12 +4117,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: TrackedResourceModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_133
+          - !Parameter &ref_143
             schema: *ref_1
             implementation: Method
             required: true
@@ -4085,7 +4135,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_134
+          - !Parameter &ref_144
             schema: *ref_1
             implementation: Method
             required: true
@@ -4126,8 +4176,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_133
-          - *ref_134
+          - *ref_143
+          - *ref_144
         responses:
           - !SchemaResponse 
             schema: *ref_47
@@ -4156,12 +4206,13 @@ operationGroups:
     $key: NonResourceModel1s
     operations:
       - !Operation 
+        operationId: NonResourceModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_137
+          - !Parameter &ref_148
             schema: *ref_1
             implementation: Method
             required: true
@@ -4173,7 +4224,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_138
+          - !Parameter &ref_149
             schema: *ref_1
             implementation: Method
             required: true
@@ -4187,8 +4238,8 @@ operationGroups:
                 in: path
           - *ref_61
           - *ref_62
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_147
             parameters:
               - !Parameter 
                 schema: *ref_66
@@ -4203,8 +4254,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_136
-                schema: *ref_135
+              - !Parameter &ref_146
+                schema: *ref_145
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4229,7 +4280,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_136
+              - *ref_146
             language: !Languages 
               default:
                 name: ''
@@ -4242,12 +4293,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_147
         signatureParameters:
-          - *ref_137
-          - *ref_138
+          - *ref_148
+          - *ref_149
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_145
             language: !Languages 
               default:
                 name: ''
@@ -4265,12 +4318,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: NonResourceModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-06-10'
         parameters:
           - *ref_60
-          - !Parameter &ref_139
+          - !Parameter &ref_150
             schema: *ref_1
             implementation: Method
             required: true
@@ -4282,7 +4336,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_140
+          - !Parameter &ref_151
             schema: *ref_1
             implementation: Method
             required: true
@@ -4323,11 +4377,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_139
-          - *ref_140
+          - *ref_150
+          - *ref_151
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_145
             language: !Languages 
               default:
                 name: ''
@@ -4352,8 +4406,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

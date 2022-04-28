@@ -94,7 +94,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementationAsync("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private AsyncPageable<BinaryData> GetAllImplementationAsync(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -117,7 +122,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementation("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private Pageable<BinaryData> GetAllImplementation(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

@@ -745,7 +745,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_87
+    - !ObjectSchema &ref_88
       type: object
       apiVersions:
         - !ApiVersion 
@@ -778,7 +778,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_89
+    - !ObjectSchema &ref_91
       type: object
       apiVersions:
         - !ApiVersion 
@@ -811,7 +811,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_91
+    - !ObjectSchema &ref_94
       type: object
       apiVersions:
         - !ApiVersion 
@@ -844,7 +844,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_93
+    - !ObjectSchema &ref_97
       type: object
       apiVersions:
         - !ApiVersion 
@@ -877,7 +877,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_95
+    - !ObjectSchema &ref_100
       type: object
       apiVersions:
         - !ApiVersion 
@@ -910,7 +910,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_97
+    - !ObjectSchema &ref_103
       type: object
       apiVersions:
         - !ApiVersion 
@@ -951,7 +951,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_99
+    - !ObjectSchema &ref_106
       type: object
       apiVersions:
         - !ApiVersion 
@@ -984,7 +984,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_101
+    - !ObjectSchema &ref_109
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1017,7 +1017,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_103
+    - !ObjectSchema &ref_112
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1050,7 +1050,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_105
+    - !ObjectSchema &ref_115
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1075,7 +1075,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_107
+    - !ObjectSchema &ref_118
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1100,7 +1100,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_109
+    - !ObjectSchema &ref_121
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1135,7 +1135,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_112
+    - !ObjectSchema &ref_126
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1721,7 +1721,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_117
+    - !ObjectSchema &ref_135
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1791,7 +1791,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_60
     - *ref_39
-    - !ObjectSchema &ref_122
+    - !ObjectSchema &ref_144
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1984,6 +1984,7 @@ operationGroups:
     $key: basic
     operations:
       - !Operation 
+        operationId: basic_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2050,14 +2051,15 @@ operationGroups:
             description: 'Get complex type {id: 2, name: ''abc'', color: ''YELLOW''}'
         protocol: !Protocols {}
       - !Operation 
+        operationId: basic_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
           - *ref_84
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_87
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -2111,6 +2113,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_87
         signatureParameters: []
         responses:
           - !Response 
@@ -2142,6 +2146,7 @@ operationGroups:
             description: 'Please put {id: 2, name: ''abc'', color: ''Magenta''}'
         protocol: !Protocols {}
       - !Operation 
+        operationId: basic_getInvalid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2208,6 +2213,7 @@ operationGroups:
             description: Get a basic complex type that is invalid for the local strong type
         protocol: !Protocols {}
       - !Operation 
+        operationId: basic_getEmpty
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2274,6 +2280,7 @@ operationGroups:
             description: Get a basic complex type that is empty
         protocol: !Protocols {}
       - !Operation 
+        operationId: basic_getNull
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2340,6 +2347,7 @@ operationGroups:
             description: Get a basic complex type whose properties are null
         protocol: !Protocols {}
       - !Operation 
+        operationId: basic_getNotProvided
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2414,6 +2422,7 @@ operationGroups:
     $key: primitive
     operations:
       - !Operation 
+        operationId: primitive_getInt
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2448,7 +2457,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_87
+            schema: *ref_88
             language: !Languages 
               default:
                 name: ''
@@ -2480,13 +2489,14 @@ operationGroups:
             description: Get complex types with integer properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putInt
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_90
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -2501,8 +2511,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_88
-                schema: *ref_87
+              - !Parameter &ref_89
+                schema: *ref_88
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2527,7 +2537,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_88
+              - *ref_89
             language: !Languages 
               default:
                 name: ''
@@ -2540,6 +2550,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_90
         signatureParameters: []
         responses:
           - !Response 
@@ -2571,6 +2583,7 @@ operationGroups:
             description: Put complex types with integer properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_getLong
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2600,163 +2613,6 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /complex/primitive/long
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_89
-            language: !Languages 
-              default:
-                name: ''
-                description: Get complex types with primitive property
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetLong
-            description: Get complex types with long properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_85
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_90
-                schema: *ref_89
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: complexBody
-                    description: Please put 1099511627775 and -999511627788
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_90
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /complex/primitive/long
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutLong
-            description: Put complex types with long properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/float
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -2790,17 +2646,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetFloat
-            description: Get complex types with float properties
+            name: GetLong
+            description: Get complex types with long properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putLong
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_93
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -2822,7 +2679,7 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: complexBody
-                    description: Please put 1.05 and -0.003
+                    description: Please put 1099511627775 and -999511627788
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
@@ -2848,12 +2705,175 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /complex/primitive/long
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_93
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutLong
+            description: Put complex types with long properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getFloat
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /complex/primitive/float
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_94
+            language: !Languages 
+              default:
+                name: ''
+                description: Get complex types with primitive property
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetFloat
+            description: Get complex types with float properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_putFloat
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requestMediaTypes:
+          application/json: !Request &ref_96
+            parameters:
+              - !Parameter 
+                schema: *ref_85
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_95
+                schema: *ref_94
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: complexBody
+                    description: Please put 1.05 and -0.003
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_95
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /complex/primitive/float
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_96
         signatureParameters: []
         responses:
           - !Response 
@@ -2885,6 +2905,7 @@ operationGroups:
             description: Put complex types with float properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_getDouble
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -2914,320 +2935,6 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpRequest 
                 path: /complex/primitive/double
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: Get complex types with primitive property
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDouble
-            description: Get complex types with double properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_85
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_94
-                schema: *ref_93
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: complexBody
-                    description: Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_94
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /complex/primitive/double
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDouble
-            description: Put complex types with double properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/bool
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_95
-            language: !Languages 
-              default:
-                name: ''
-                description: Get complex types with primitive property
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetBool
-            description: Get complex types with bool properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_85
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_96
-                schema: *ref_95
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: complexBody
-                    description: Please put true and false
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_96
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /complex/primitive/bool
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutBool
-            description: Put complex types with bool properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/string
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -3261,17 +2968,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetString
-            description: Get complex types with string properties
+            name: GetDouble
+            description: Get complex types with double properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putDouble
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_99
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -3293,7 +3001,7 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: complexBody
-                    description: Please put 'goodrequest', '', and null
+                    description: Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
@@ -3319,386 +3027,236 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /complex/primitive/double
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_99
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDouble
+            description: Put complex types with double properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getBool
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /complex/primitive/bool
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_100
+            language: !Languages 
+              default:
+                name: ''
+                description: Get complex types with primitive property
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetBool
+            description: Get complex types with bool properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_putBool
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requestMediaTypes:
+          application/json: !Request &ref_102
+            parameters:
+              - !Parameter 
+                schema: *ref_85
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_101
+                schema: *ref_100
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: complexBody
+                    description: Please put true and false
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_101
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /complex/primitive/bool
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_102
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutBool
+            description: Put complex types with bool properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getString
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /complex/primitive/string
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutString
-            description: Put complex types with string properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/date
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_99
-            language: !Languages 
-              default:
-                name: ''
-                description: Get complex types with primitive property
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDate
-            description: Get complex types with date properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_85
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_100
-                schema: *ref_99
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: complexBody
-                    description: Please put '0001-01-01' and '2016-02-29'
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_100
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /complex/primitive/date
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDate
-            description: Put complex types with date properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/datetime
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_101
-            language: !Languages 
-              default:
-                name: ''
-                description: Get complex types with primitive property
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTime
-            description: Get complex types with datetime properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_85
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_102
-                schema: *ref_101
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: complexBody
-                    description: Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_102
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /complex/primitive/datetime
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_83
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDateTime
-            description: Put complex types with datetime properties
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-02-29'
-        parameters:
-          - *ref_80
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_81
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /complex/primitive/datetimerfc1123
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -3732,17 +3290,18 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: GetDateTimeRfc1123
-            description: Get complex types with datetimeRfc1123 properties
+            name: GetString
+            description: Get complex types with string properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putString
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_105
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -3764,7 +3323,7 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: complexBody
-                    description: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+                    description: Please put 'goodrequest', '', and null
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
@@ -3790,12 +3349,497 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
+                path: /complex/primitive/string
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_105
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutString
+            description: Put complex types with string properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getDate
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /complex/primitive/date
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_106
+            language: !Languages 
+              default:
+                name: ''
+                description: Get complex types with primitive property
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDate
+            description: Get complex types with date properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_putDate
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requestMediaTypes:
+          application/json: !Request &ref_108
+            parameters:
+              - !Parameter 
+                schema: *ref_85
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_107
+                schema: *ref_106
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: complexBody
+                    description: Please put '0001-01-01' and '2016-02-29'
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_107
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /complex/primitive/date
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_108
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDate
+            description: Put complex types with date properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getDateTime
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /complex/primitive/datetime
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_109
+            language: !Languages 
+              default:
+                name: ''
+                description: Get complex types with primitive property
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTime
+            description: Get complex types with datetime properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_putDateTime
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requestMediaTypes:
+          application/json: !Request &ref_111
+            parameters:
+              - !Parameter 
+                schema: *ref_85
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_110
+                schema: *ref_109
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: complexBody
+                    description: Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_110
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /complex/primitive/datetime
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_111
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDateTime
+            description: Put complex types with datetime properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_getDateTimeRfc1123
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /complex/primitive/datetimerfc1123
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_112
+            language: !Languages 
+              default:
+                name: ''
+                description: Get complex types with primitive property
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeRfc1123
+            description: Get complex types with datetimeRfc1123 properties
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: primitive_putDateTimeRfc1123
+        apiVersions:
+          - !ApiVersion 
+            version: '2016-02-29'
+        parameters:
+          - *ref_80
+        requestMediaTypes:
+          application/json: !Request &ref_114
+            parameters:
+              - !Parameter 
+                schema: *ref_85
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_113
+                schema: *ref_112
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: complexBody
+                    description: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_81
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_113
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /complex/primitive/datetimerfc1123
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_114
         signatureParameters: []
         responses:
           - !Response 
@@ -3827,6 +3871,7 @@ operationGroups:
             description: Put complex types with datetimeRfc1123 properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_getDuration
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -3861,7 +3906,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_105
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -3893,13 +3938,14 @@ operationGroups:
             description: Get complex types with duration properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putDuration
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_117
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -3914,8 +3960,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_106
-                schema: *ref_105
+              - !Parameter &ref_116
+                schema: *ref_115
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3940,7 +3986,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_106
+              - *ref_116
             language: !Languages 
               default:
                 name: ''
@@ -3953,6 +3999,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_117
         signatureParameters: []
         responses:
           - !Response 
@@ -3984,6 +4032,7 @@ operationGroups:
             description: Put complex types with duration properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_getByte
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4018,7 +4067,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -4050,13 +4099,14 @@ operationGroups:
             description: Get complex types with byte properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: primitive_putByte
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_120
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -4071,8 +4121,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_108
-                schema: *ref_107
+              - !Parameter &ref_119
+                schema: *ref_118
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4097,7 +4147,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_108
+              - *ref_119
             language: !Languages 
               default:
                 name: ''
@@ -4110,6 +4160,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_120
         signatureParameters: []
         responses:
           - !Response 
@@ -4149,6 +4201,7 @@ operationGroups:
     $key: array
     operations:
       - !Operation 
+        operationId: array_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4183,7 +4236,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -4215,13 +4268,14 @@ operationGroups:
             description: Get complex types with array property
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_123
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -4236,8 +4290,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_110
-                schema: *ref_109
+              - !Parameter &ref_122
+                schema: *ref_121
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4262,7 +4316,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_110
+              - *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -4275,6 +4329,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_123
         signatureParameters: []
         responses:
           - !Response 
@@ -4306,6 +4362,7 @@ operationGroups:
             description: Put complex types with array property
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getEmpty
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4340,7 +4397,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -4372,13 +4429,14 @@ operationGroups:
             description: Get complex types with array property which is empty
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_putEmpty
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_125
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -4393,8 +4451,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_111
-                schema: *ref_109
+              - !Parameter &ref_124
+                schema: *ref_121
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4419,7 +4477,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_111
+              - *ref_124
             language: !Languages 
               default:
                 name: ''
@@ -4432,6 +4490,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_125
         signatureParameters: []
         responses:
           - !Response 
@@ -4463,6 +4523,7 @@ operationGroups:
             description: Put complex types with array property which is empty
         protocol: !Protocols {}
       - !Operation 
+        operationId: array_getNotProvided
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4497,7 +4558,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -4537,6 +4598,7 @@ operationGroups:
     $key: dictionary
     operations:
       - !Operation 
+        operationId: dictionary_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4571,7 +4633,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -4603,13 +4665,14 @@ operationGroups:
             description: Get complex types with dictionary property
         protocol: !Protocols {}
       - !Operation 
+        operationId: dictionary_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_128
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -4624,8 +4687,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_113
-                schema: *ref_112
+              - !Parameter &ref_127
+                schema: *ref_126
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4650,7 +4713,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_113
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -4663,6 +4726,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_128
         signatureParameters: []
         responses:
           - !Response 
@@ -4694,6 +4759,7 @@ operationGroups:
             description: Put complex types with dictionary property
         protocol: !Protocols {}
       - !Operation 
+        operationId: dictionary_getEmpty
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4728,7 +4794,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -4760,13 +4826,14 @@ operationGroups:
             description: Get complex types with dictionary property which is empty
         protocol: !Protocols {}
       - !Operation 
+        operationId: dictionary_putEmpty
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_130
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -4781,8 +4848,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_114
-                schema: *ref_112
+              - !Parameter &ref_129
+                schema: *ref_126
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4807,7 +4874,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_114
+              - *ref_129
             language: !Languages 
               default:
                 name: ''
@@ -4820,6 +4887,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_130
         signatureParameters: []
         responses:
           - !Response 
@@ -4851,6 +4920,7 @@ operationGroups:
             description: Put complex types with dictionary property which is empty
         protocol: !Protocols {}
       - !Operation 
+        operationId: dictionary_getNull
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4885,7 +4955,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -4917,6 +4987,7 @@ operationGroups:
             description: Get complex types with dictionary property which is null
         protocol: !Protocols {}
       - !Operation 
+        operationId: dictionary_getNotProvided
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -4951,7 +5022,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -4991,6 +5062,7 @@ operationGroups:
     $key: inheritance
     operations:
       - !Operation 
+        operationId: inheritance_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5057,13 +5129,14 @@ operationGroups:
             description: Get complex types that extend others
         protocol: !Protocols {}
       - !Operation 
+        operationId: inheritance_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_132
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -5078,7 +5151,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_115
+              - !Parameter &ref_131
                 schema: *ref_30
                 implementation: Method
                 required: true
@@ -5104,7 +5177,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_115
+              - *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -5117,6 +5190,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_132
         signatureParameters: []
         responses:
           - !Response 
@@ -5156,6 +5231,7 @@ operationGroups:
     $key: polymorphism
     operations:
       - !Operation 
+        operationId: polymorphism_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5254,13 +5330,14 @@ operationGroups:
             description: Get complex types that are polymorphic
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_134
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -5275,7 +5352,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_116
+              - !Parameter &ref_133
                 schema: *ref_41
                 implementation: Method
                 required: true
@@ -5334,7 +5411,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_116
+              - *ref_133
             language: !Languages 
               default:
                 name: ''
@@ -5347,6 +5424,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_134
         signatureParameters: []
         responses:
           - !Response 
@@ -5378,6 +5457,7 @@ operationGroups:
             description: Put complex types that are polymorphic
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_getDotSyntax
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5444,6 +5524,7 @@ operationGroups:
             description: Get complex types that are polymorphic, JSON key contains a dot
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_getComposedWithDiscriminator
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5478,7 +5559,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_135
             language: !Languages 
               default:
                 name: ''
@@ -5510,6 +5591,7 @@ operationGroups:
             description: Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_getComposedWithoutDiscriminator
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5544,7 +5626,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_135
             language: !Languages 
               default:
                 name: ''
@@ -5576,6 +5658,7 @@ operationGroups:
             description: Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_getComplicated
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -5642,13 +5725,14 @@ operationGroups:
             description: Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_putComplicated
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_137
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -5663,7 +5747,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_118
+              - !Parameter &ref_136
                 schema: *ref_39
                 implementation: Method
                 required: true
@@ -5689,7 +5773,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_118
+              - *ref_136
             language: !Languages 
               default:
                 name: ''
@@ -5702,6 +5786,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_137
         signatureParameters: []
         responses:
           - !Response 
@@ -5733,13 +5819,14 @@ operationGroups:
             description: Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_putMissingDiscriminator
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_139
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -5754,7 +5841,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_119
+              - !Parameter &ref_138
                 schema: *ref_39
                 implementation: Method
                 required: true
@@ -5780,7 +5867,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_119
+              - *ref_138
             language: !Languages 
               default:
                 name: ''
@@ -5793,6 +5880,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_139
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -5828,13 +5917,14 @@ operationGroups:
             description: Put complex types that are polymorphic, omitting the discriminator
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphism_putValidMissingRequired
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_141
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -5849,7 +5939,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_120
+              - !Parameter &ref_140
                 schema: *ref_41
                 implementation: Method
                 required: true
@@ -5901,7 +5991,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_120
+              - *ref_140
             language: !Languages 
               default:
                 name: ''
@@ -5914,6 +6004,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_141
         signatureParameters: []
         responses:
           - !Response 
@@ -5953,6 +6045,7 @@ operationGroups:
     $key: polymorphicrecursive
     operations:
       - !Operation 
+        operationId: polymorphicrecursive_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -6079,13 +6172,14 @@ operationGroups:
             description: Get complex types that are polymorphic and have recursive references
         protocol: !Protocols {}
       - !Operation 
+        operationId: polymorphicrecursive_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_143
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -6100,7 +6194,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_121
+              - !Parameter &ref_142
                 schema: *ref_41
                 implementation: Method
                 required: true
@@ -6179,7 +6273,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_121
+              - *ref_142
             language: !Languages 
               default:
                 name: ''
@@ -6192,6 +6286,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_143
         signatureParameters: []
         responses:
           - !Response 
@@ -6231,6 +6327,7 @@ operationGroups:
     $key: readonlyproperty
     operations:
       - !Operation 
+        operationId: readonlyproperty_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -6265,7 +6362,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_122
+            schema: *ref_144
             language: !Languages 
               default:
                 name: ''
@@ -6297,13 +6394,14 @@ operationGroups:
             description: Get complex types that have readonly properties
         protocol: !Protocols {}
       - !Operation 
+        operationId: readonlyproperty_putValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
         parameters:
           - *ref_80
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_146
             parameters:
               - !Parameter 
                 schema: *ref_85
@@ -6318,8 +6416,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_123
-                schema: *ref_122
+              - !Parameter &ref_145
+                schema: *ref_144
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6344,7 +6442,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_123
+              - *ref_145
             language: !Languages 
               default:
                 name: ''
@@ -6357,6 +6455,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_146
         signatureParameters: []
         responses:
           - !Response 
@@ -6396,6 +6496,7 @@ operationGroups:
     $key: flattencomplex
     operations:
       - !Operation 
+        operationId: flattencomplex_getValid
         apiVersions:
           - !ApiVersion 
             version: '2016-02-29'
@@ -6455,9 +6556,10 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AzureKeySecurityScheme 
-      type: AzureKey
-      headerName: Fake-Subscription-Key
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
 language: !Languages 
   default:
     name: AutoRestComplexTestService
