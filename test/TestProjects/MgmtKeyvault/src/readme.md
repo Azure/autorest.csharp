@@ -6,7 +6,7 @@ Run `dotnet build /t:GenerateCode` to generate code.
 azure-arm: true
 library-name: KeyVault
 require:
-- C:\Users\dapzhang\Documents\workspace\azure-rest-api-specs/specification/keyvault/resource-manager/readme.md
+- https://raw.githubusercontent.com/Azure/azure-rest-api-specs/954bf4ebc679ba55a6cacb39dbdacdbb956359f2/specification/keyvault/resource-manager/readme.md
 - $(this-folder)/../../../../readme.md
 clear-output-folder: true
 namespace: Azure.ResourceManager.KeyVault
