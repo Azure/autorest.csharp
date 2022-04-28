@@ -29,8 +29,8 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             Response<Product> result = await new DPGClient(Key, host).GetModelValueAsync("model");
-            Assert.True(scopes.Count == 1);
-            Assert.AreEqual(scopes[0].Name, "DPGClient.GetModelValue");
+            Assert.AreEqual(1, scopes.Count);
+            Assert.AreEqual("DPGClient.GetModelValue", scopes[0].Name);
             Assert.True(scopes[0].IsCompleted);
             Assert.AreEqual("model", $"{result.Value.Received}");
         });
@@ -45,9 +45,9 @@ namespace AutoRest.TestServer.Tests
             DPGClientOptions options = new();
             options.Diagnostics.SuppressNestedClientSpans = false;
             Response<Product> result = await new DPGClient(Key, host, options).GetModelValueAsync("model");
-            Assert.True(scopes.Count == 2);
-            Assert.AreEqual(scopes[0].Name, "DPGClient.GetModelValue");
-            Assert.AreEqual(scopes[1].Name, "DPGClient.GetModel");
+            Assert.AreEqual(2, scopes.Count);
+            Assert.AreEqual("DPGClient.GetModelValue", scopes[0].Name);
+            Assert.AreEqual("DPGClient.GetModel", scopes[1].Name);
             Assert.IsTrue(scopes.TrueForAll(s => s.IsCompleted));
             Assert.AreEqual("model", $"{result.Value.Received}");
         }, true);
