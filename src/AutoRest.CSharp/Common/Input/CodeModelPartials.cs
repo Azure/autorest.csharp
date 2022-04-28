@@ -135,12 +135,17 @@ namespace AutoRest.CSharp.Input
         public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
     }
 
+    internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
+    {
+    }
+
     internal static class XMsFormat
     {
         public const string ArmId = "arm-id";
-        public const string ResourceType = "resource-type";
-        public const string DurationConstant = "duration-constant";
         public const string AzureLocation = "azure-location";
+        public const string DurationConstant = "duration-constant";
+        public const string ETag = "etag";
+        public const string ResourceType = "resource-type";
     }
 
     internal partial class ServiceResponse

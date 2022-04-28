@@ -93,11 +93,11 @@ namespace MgmtSignalR
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of PrivateEndpointConnectionResources in the SignalRResource. </summary>
-        /// <returns> An object representing collection of PrivateEndpointConnectionResources and their operations over a PrivateEndpointConnectionResource. </returns>
-        public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
+        /// <summary> Gets a collection of MgmtSignalRPrivateEndpointConnectionResources in the SignalRResource. </summary>
+        /// <returns> An object representing collection of MgmtSignalRPrivateEndpointConnectionResources and their operations over a MgmtSignalRPrivateEndpointConnectionResource. </returns>
+        public virtual MgmtSignalRPrivateEndpointConnectionCollection GetMgmtSignalRPrivateEndpointConnections()
         {
-            return GetCachedClient(Client => new PrivateEndpointConnectionCollection(Client, Id));
+            return GetCachedClient(Client => new MgmtSignalRPrivateEndpointConnectionCollection(Client, Id));
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace MgmtSignalR
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual async Task<Response<PrivateEndpointConnectionResource>> GetPrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtSignalRPrivateEndpointConnectionResource>> GetMgmtSignalRPrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return await GetPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSignalRPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -125,9 +125,9 @@ namespace MgmtSignalR
         /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
         [ForwardsClientCalls]
-        public virtual Response<PrivateEndpointConnectionResource> GetPrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public virtual Response<MgmtSignalRPrivateEndpointConnectionResource> GetMgmtSignalRPrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return GetPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
+            return GetMgmtSignalRPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
         /// <summary>
@@ -446,10 +446,10 @@ namespace MgmtSignalR
         /// Operation Id: SignalRPrivateLinkResources_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PrivateLinkResource> GetSignalRPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="MgmtSignalRPrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<MgmtSignalRPrivateLinkResource> GetSignalRPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<PrivateLinkResource>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<MgmtSignalRPrivateLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _signalRPrivateLinkResourcesClientDiagnostics.CreateScope("SignalRResource.GetSignalRPrivateLinkResources");
                 scope.Start();
@@ -464,7 +464,7 @@ namespace MgmtSignalR
                     throw;
                 }
             }
-            async Task<Page<PrivateLinkResource>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<MgmtSignalRPrivateLinkResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _signalRPrivateLinkResourcesClientDiagnostics.CreateScope("SignalRResource.GetSignalRPrivateLinkResources");
                 scope.Start();
@@ -488,10 +488,10 @@ namespace MgmtSignalR
         /// Operation Id: SignalRPrivateLinkResources_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PrivateLinkResource> GetSignalRPrivateLinkResources(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="MgmtSignalRPrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<MgmtSignalRPrivateLinkResource> GetSignalRPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            Page<PrivateLinkResource> FirstPageFunc(int? pageSizeHint)
+            Page<MgmtSignalRPrivateLinkResource> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = _signalRPrivateLinkResourcesClientDiagnostics.CreateScope("SignalRResource.GetSignalRPrivateLinkResources");
                 scope.Start();
@@ -506,7 +506,7 @@ namespace MgmtSignalR
                     throw;
                 }
             }
-            Page<PrivateLinkResource> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<MgmtSignalRPrivateLinkResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = _signalRPrivateLinkResourcesClientDiagnostics.CreateScope("SignalRResource.GetSignalRPrivateLinkResources");
                 scope.Start();

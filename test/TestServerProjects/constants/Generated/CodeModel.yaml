@@ -1114,6 +1114,7 @@ operationGroups:
     $key: contants
     operations:
       - !Operation 
+        operationId: contants_putNoModelAsStringNoRequiredTwoValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1160,6 +1161,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringNoRequiredTwoValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1209,6 +1211,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringNoRequiredOneValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1254,6 +1257,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringNoRequiredOneValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1302,6 +1306,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringRequiredTwoValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1349,6 +1354,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringRequiredTwoValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1399,6 +1405,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringRequiredOneValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1445,6 +1452,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putNoModelAsStringRequiredOneValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1494,6 +1502,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringNoRequiredTwoValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1540,6 +1549,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringNoRequiredTwoValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1589,6 +1599,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringNoRequiredOneValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1635,6 +1646,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringNoRequiredOneValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1684,6 +1696,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringRequiredTwoValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1731,6 +1744,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringRequiredTwoValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1781,6 +1795,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringRequiredOneValueNoDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1828,6 +1843,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putModelAsStringRequiredOneValueDefault
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1878,6 +1894,7 @@ operationGroups:
             summary: Puts constants to the testserver
         protocol: !Protocols {}
       - !Operation 
+        operationId: contants_putClientConstants
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

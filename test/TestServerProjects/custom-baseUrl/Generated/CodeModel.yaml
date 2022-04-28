@@ -114,6 +114,7 @@ operationGroups:
     $key: paths
     operations:
       - !Operation 
+        operationId: paths_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

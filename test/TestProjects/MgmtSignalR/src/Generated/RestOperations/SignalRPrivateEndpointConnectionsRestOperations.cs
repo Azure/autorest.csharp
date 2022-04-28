@@ -66,7 +66,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PrivateEndpointConnectionData>> GetAsync(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtSignalRPrivateEndpointConnectionData>> GetAsync(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -79,13 +79,13 @@ namespace MgmtSignalR
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionData value = default;
+                        MgmtSignalRPrivateEndpointConnectionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+                        value = MgmtSignalRPrivateEndpointConnectionData.DeserializeMgmtSignalRPrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PrivateEndpointConnectionData)null, message.Response);
+                    return Response.FromValue((MgmtSignalRPrivateEndpointConnectionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -99,7 +99,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PrivateEndpointConnectionData> Get(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public Response<MgmtSignalRPrivateEndpointConnectionData> Get(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -112,19 +112,19 @@ namespace MgmtSignalR
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionData value = default;
+                        MgmtSignalRPrivateEndpointConnectionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+                        value = MgmtSignalRPrivateEndpointConnectionData.DeserializeMgmtSignalRPrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PrivateEndpointConnectionData)null, message.Response);
+                    return Response.FromValue((MgmtSignalRPrivateEndpointConnectionData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, PrivateEndpointConnectionData data)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, MgmtSignalRPrivateEndpointConnectionData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -162,7 +162,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PrivateEndpointConnectionData>> UpdateAsync(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, PrivateEndpointConnectionData data = null, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtSignalRPrivateEndpointConnectionData>> UpdateAsync(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, MgmtSignalRPrivateEndpointConnectionData data = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -175,9 +175,9 @@ namespace MgmtSignalR
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionData value = default;
+                        MgmtSignalRPrivateEndpointConnectionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+                        value = MgmtSignalRPrivateEndpointConnectionData.DeserializeMgmtSignalRPrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -194,7 +194,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PrivateEndpointConnectionData> Update(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, PrivateEndpointConnectionData data = null, CancellationToken cancellationToken = default)
+        public Response<MgmtSignalRPrivateEndpointConnectionData> Update(string subscriptionId, string resourceGroupName, string resourceName, string privateEndpointConnectionName, MgmtSignalRPrivateEndpointConnectionData data = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -207,9 +207,9 @@ namespace MgmtSignalR
             {
                 case 200:
                     {
-                        PrivateEndpointConnectionData value = default;
+                        MgmtSignalRPrivateEndpointConnectionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+                        value = MgmtSignalRPrivateEndpointConnectionData.DeserializeMgmtSignalRPrivateEndpointConnectionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

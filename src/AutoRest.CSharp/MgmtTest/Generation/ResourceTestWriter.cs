@@ -108,7 +108,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var methodName = clientOperation.Name;
 
-            int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
                 var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
@@ -120,7 +119,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     if (!ShouldWriteTest(clientOperation, exampleModel))
                         continue;
                     WriteTestDecorator();
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{CreateTestMethodName(methodName, exampleIdx)}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{CreateTestMethodName(methodName)}()");
 
                     using (_writer.Scope())
                     {
@@ -128,7 +127,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         WriteOperationInvocation(clientOperation, operation, exampleModel, async, isLroOperation, resource);
                     }
                     _writer.Line();
-                    exampleIdx++;
                 }
             }
         }

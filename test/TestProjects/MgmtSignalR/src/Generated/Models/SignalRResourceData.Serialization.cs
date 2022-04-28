@@ -100,7 +100,7 @@ namespace MgmtSignalR
             Optional<int> publicPort = default;
             Optional<int> serverPort = default;
             Optional<string> version = default;
-            Optional<IReadOnlyList<PrivateEndpointConnectionData>> privateEndpointConnections = default;
+            Optional<IReadOnlyList<MgmtSignalRPrivateEndpointConnectionData>> privateEndpointConnections = default;
             Optional<SignalRTlsSettings> tls = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -275,10 +275,10 @@ namespace MgmtSignalR
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
+                            List<MgmtSignalRPrivateEndpointConnectionData> array = new List<MgmtSignalRPrivateEndpointConnectionData>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                                array.Add(MgmtSignalRPrivateEndpointConnectionData.DeserializeMgmtSignalRPrivateEndpointConnectionData(item));
                             }
                             privateEndpointConnections = array;
                             continue;

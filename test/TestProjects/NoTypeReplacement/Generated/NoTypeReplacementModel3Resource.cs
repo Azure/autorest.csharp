@@ -132,5 +132,63 @@ namespace NoTypeReplacement
                 throw;
             }
         }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}
+        /// Operation Id: NoTypeReplacementModel3s_Put
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> The NoTypeReplacementModel3 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual async Task<ArmOperation<NoTypeReplacementModel3Resource>> UpdateAsync(WaitUntil waitUntil, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Resource.Update");
+            scope.Start();
+            try
+            {
+                var response = await _noTypeReplacementModel3RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3sName}
+        /// Operation Id: NoTypeReplacementModel3s_Put
+        /// </summary>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="data"> The NoTypeReplacementModel3 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
+        public virtual ArmOperation<NoTypeReplacementModel3Resource> Update(WaitUntil waitUntil, NoTypeReplacementModel3Data data, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(data, nameof(data));
+
+            using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3Resource.Update");
+            scope.Start();
+            try
+            {
+                var response = _noTypeReplacementModel3RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel3Resource>(Response.FromValue(new NoTypeReplacementModel3Resource(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

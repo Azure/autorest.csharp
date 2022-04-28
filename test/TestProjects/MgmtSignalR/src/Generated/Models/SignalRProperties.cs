@@ -17,7 +17,7 @@ namespace MgmtSignalR.Models
         /// <summary> Initializes a new instance of SignalRProperties. </summary>
         internal SignalRProperties()
         {
-            PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionData>();
+            PrivateEndpointConnections = new ChangeTrackingList<MgmtSignalRPrivateEndpointConnectionData>();
         }
 
         /// <summary> Provisioning state of the resource. </summary>
@@ -33,7 +33,7 @@ namespace MgmtSignalR.Models
         /// <summary> Version of the resource. Probably you need the same or higher version of client SDKs. </summary>
         public string Version { get; }
         /// <summary> Private endpoint connections to the resource. </summary>
-        public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
+        public IReadOnlyList<MgmtSignalRPrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> TLS settings. </summary>
         internal SignalRTlsSettings Tls { get; }
         /// <summary> Request client certificate during TLS handshake if enabled. </summary>

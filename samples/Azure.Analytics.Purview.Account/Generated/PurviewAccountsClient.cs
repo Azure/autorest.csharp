@@ -807,7 +807,12 @@ namespace Azure.Analytics.Purview.Account
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetResourceSetRulesAsync(string skipToken = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");
+            return GetResourceSetRulesImplementationAsync("PurviewAccountsClient.GetResourceSetRules", skipToken, context);
+        }
+
+        private AsyncPageable<BinaryData> GetResourceSetRulesImplementationAsync(string diagnosticsScopeName, string skipToken, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -947,7 +952,12 @@ namespace Azure.Analytics.Purview.Account
         /// </remarks>
         public virtual Pageable<BinaryData> GetResourceSetRules(string skipToken = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PurviewAccountsClient.GetResourceSetRules");
+            return GetResourceSetRulesImplementation("PurviewAccountsClient.GetResourceSetRules", skipToken, context);
+        }
+
+        private Pageable<BinaryData> GetResourceSetRulesImplementation(string diagnosticsScopeName, string skipToken, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1013,7 +1023,12 @@ namespace Azure.Analytics.Purview.Account
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PurviewAccountsClient.GetCollections");
+            return GetCollectionsImplementationAsync("PurviewAccountsClient.GetCollections", skipToken, context);
+        }
+
+        private AsyncPageable<BinaryData> GetCollectionsImplementationAsync(string diagnosticsScopeName, string skipToken, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1079,7 +1094,12 @@ namespace Azure.Analytics.Purview.Account
         /// </remarks>
         public virtual Pageable<BinaryData> GetCollections(string skipToken = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PurviewAccountsClient.GetCollections");
+            return GetCollectionsImplementation("PurviewAccountsClient.GetCollections", skipToken, context);
+        }
+
+        private Pageable<BinaryData> GetCollectionsImplementation(string diagnosticsScopeName, string skipToken, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

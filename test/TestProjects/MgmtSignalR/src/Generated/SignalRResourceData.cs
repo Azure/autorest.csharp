@@ -20,7 +20,7 @@ namespace MgmtSignalR
         public SignalRResourceData(AzureLocation location) : base(location)
         {
             Features = new ChangeTrackingList<SignalRFeature>();
-            PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionData>();
+            PrivateEndpointConnections = new ChangeTrackingList<MgmtSignalRPrivateEndpointConnectionData>();
         }
 
         /// <summary> Initializes a new instance of SignalRResourceData. </summary>
@@ -52,7 +52,7 @@ namespace MgmtSignalR
         /// <param name="version"> Version of the resource. Probably you need the same or higher version of client SDKs. </param>
         /// <param name="privateEndpointConnections"> Private endpoint connections to the resource. </param>
         /// <param name="tls"> TLS settings. </param>
-        internal SignalRResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ResourceSku sku, ServiceKind? kind, ManagedIdentity identity, IList<SignalRFeature> features, SignalRCorsSettings cors, ServerlessUpstreamSettings upstream, SignalRNetworkACLs networkACLs, ProvisioningState? provisioningState, string externalIP, string hostName, int? publicPort, int? serverPort, string version, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, SignalRTlsSettings tls) : base(id, name, resourceType, systemData, tags, location)
+        internal SignalRResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ResourceSku sku, ServiceKind? kind, ManagedIdentity identity, IList<SignalRFeature> features, SignalRCorsSettings cors, ServerlessUpstreamSettings upstream, SignalRNetworkACLs networkACLs, ProvisioningState? provisioningState, string externalIP, string hostName, int? publicPort, int? serverPort, string version, IReadOnlyList<MgmtSignalRPrivateEndpointConnectionData> privateEndpointConnections, SignalRTlsSettings tls) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Kind = kind;
@@ -127,7 +127,7 @@ namespace MgmtSignalR
         /// <summary> Version of the resource. Probably you need the same or higher version of client SDKs. </summary>
         public string Version { get; }
         /// <summary> Private endpoint connections to the resource. </summary>
-        public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
+        public IReadOnlyList<MgmtSignalRPrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> TLS settings. </summary>
         internal SignalRTlsSettings Tls { get; set; }
         /// <summary> Request client certificate during TLS handshake if enabled. </summary>

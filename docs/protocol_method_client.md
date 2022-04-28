@@ -10,35 +10,9 @@ However a handful of configuration changes are needed to get started.
 data-plane: true
 ```
 
-3. Define the authentication in configuration 
+3. Define the authentication in configuration
 
-As clients with protocol methods generate constructors directly, any authentication needs to be defined in the configuration file.
-
-There are two forms of supported authentication: `AzureKeyCredential` (AzureKey) and `TokenCredential` (AADToken).
-
-It is valid to define one, both, or neither (for the rare unauthenticated client use case).
-
-
-Just Key Credential:
-```yaml
-security: AzureKey
-security-header-name: Your-Subscription-Key
-```
-
-Just Token Credential:
-```yaml
-security: AADToken
-security-scopes: https://yourendpoint.azure.com/.default
-```
-
-Both Credentials:
-```yaml
-security: AADToken;AzureKey
-security-header-name: Your-Subscription-Key
-security-scopes: https://yourendpoint.azure.com/.default
-```
-
-`credential-header-name` and `credential-scopes` need to be filled to the service specific values. 
+As clients with protocol methods generate constructors directly, any authentication needs to be defined in the configuration file. See [Authentication Configuration In `autorest.md`](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/DataPlaneCodeGeneration/AzureSDKCodeGeneration_DataPlane_Quickstart.md#authentication-configuration-in-autorestmd) for details.
 
 4. Try the generated code.
 

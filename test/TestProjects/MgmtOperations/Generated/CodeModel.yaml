@@ -554,7 +554,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_20
     - *ref_8
-    - !ObjectSchema &ref_60
+    - !ObjectSchema &ref_64
       type: object
       apiVersions:
         - !ApiVersion 
@@ -599,7 +599,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_9
-    - !ObjectSchema &ref_71
+    - !ObjectSchema &ref_76
       type: object
       apiVersions:
         - !ApiVersion 
@@ -644,7 +644,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_10
-    - !ObjectSchema &ref_54
+    - !ObjectSchema &ref_57
       type: object
       apiVersions:
         - !ApiVersion 
@@ -688,7 +688,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_57
+    - !ObjectSchema &ref_61
       type: object
       apiVersions:
         - !ApiVersion 
@@ -713,7 +713,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_11
-    - !ObjectSchema &ref_84
+    - !ObjectSchema &ref_91
       type: object
       apiVersions:
         - !ApiVersion 
@@ -737,7 +737,7 @@ schemas: !Schemas
           description: The update content of unpatchable resource.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_95
+    - !ObjectSchema &ref_103
       type: object
       apiVersions:
         - !ApiVersion 
@@ -825,12 +825,13 @@ operationGroups:
     $key: AvailabilitySets
     operations:
       - !Operation 
+        operationId: AvailabilitySets_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_39
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
@@ -842,7 +843,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_40
+          - !Parameter &ref_41
             schema: *ref_1
             implementation: Method
             required: true
@@ -856,8 +857,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_39
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -911,9 +912,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_39
+        signatureParameters:
           - *ref_40
+          - *ref_41
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -934,115 +937,7 @@ operationGroups:
             description: Create or update an availability set.
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_33
-          - !Parameter &ref_42
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_43
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_34
-          - *ref_35
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_36
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_41
-                schema: *ref_18
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the Update Availability Set operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_37
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_41
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_42
-          - *ref_43
-        responses:
-          - !SchemaResponse 
-            schema: *ref_2
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Update
-            description: Update an availability set.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: AvailabilitySets_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1074,45 +969,87 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_43
+            parameters:
+              - !Parameter 
+                schema: *ref_36
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_42
+                schema: *ref_18
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Update Availability Set operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_37
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_42
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpRequest 
+              http: !HttpWithBodyRequest 
                 path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
-                method: delete
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_43
         signatureParameters:
           - *ref_44
           - *ref_45
         responses:
-          - !Response 
+          - !SchemaResponse 
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
                 description: OK
             protocol: !Protocols 
               http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 statusCodes:
                   - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: No Content
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '204'
         language: !Languages 
           default:
-            name: Delete
-            description: Delete an availability set.
+            name: Update
+            description: Update an availability set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AvailabilitySets_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1142,7 +1079,78 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_34
+          - *ref_35
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_46
+          - *ref_47
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AvailabilitySets_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_33
           - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_49
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1182,9 +1190,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_46
-          - *ref_47
           - *ref_48
+          - *ref_49
+          - *ref_50
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1205,12 +1213,13 @@ operationGroups:
             description: Retrieves information about an availability set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AvailabilitySets_TestSetSharedKey
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_50
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -1222,7 +1231,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -1236,8 +1245,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_52
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -1252,7 +1261,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_49
+              - !Parameter &ref_51
                 schema: *ref_8
                 implementation: Method
                 required: true
@@ -1278,7 +1287,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_49
+              - *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1291,9 +1300,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_52
         signatureParameters:
-          - *ref_50
-          - *ref_51
+          - *ref_53
+          - *ref_54
         responses:
           - !SchemaResponse 
             schema: *ref_8
@@ -1316,12 +1327,13 @@ operationGroups:
             description: Testing description.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AvailabilitySets_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_52
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1333,7 +1345,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1373,11 +1385,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
-          - *ref_53
+          - *ref_55
+          - *ref_56
         responses:
           - !SchemaResponse 
-            schema: *ref_54
+            schema: *ref_57
             language: !Languages 
               default:
                 name: ''
@@ -1395,12 +1407,13 @@ operationGroups:
             description: Retrieves information about an availability set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: AvailabilitySets_TestLROMethod
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_56
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
             required: true
@@ -1414,8 +1427,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_59
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -1430,7 +1443,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
+              - !Parameter &ref_58
                 schema: *ref_18
                 implementation: Method
                 required: true
@@ -1456,7 +1469,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -1469,11 +1482,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_59
         signatureParameters:
-          - *ref_56
+          - *ref_60
         responses:
           - !SchemaResponse 
-            schema: *ref_57
+            schema: *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -1501,12 +1516,13 @@ operationGroups:
     $key: availabilitySetChild
     operations:
       - !Operation 
+        operationId: availabilitySetChild_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_58
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -1518,7 +1534,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_59
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1559,11 +1575,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_58
-          - *ref_59
+          - *ref_62
+          - *ref_63
         responses:
           - !SchemaResponse 
-            schema: *ref_60
+            schema: *ref_64
             language: !Languages 
               default:
                 name: ''
@@ -1581,99 +1597,7 @@ operationGroups:
             description: Retrieves information about an availability set.
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_33
-          - !Parameter &ref_61
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_62
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_63
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetChildName
-                description: The name of the availability set child.
-                serializedName: availabilitySetChildName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_34
-          - *ref_35
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_37
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_61
-          - *ref_62
-          - *ref_63
-        responses:
-          - !SchemaResponse 
-            schema: *ref_9
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: availabilitySetChild_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1721,6 +1645,100 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
+                schema: *ref_37
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_65
+          - *ref_66
+          - *ref_67
+        responses:
+          - !SchemaResponse 
+            schema: *ref_9
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: AvailabilitySetChild_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_33
+          - !Parameter &ref_70
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_71
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_72
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetChildName
+                description: The name of the availability set child.
+                serializedName: availabilitySetChildName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_34
+          - *ref_35
+        requestMediaTypes:
+          application/json: !Request &ref_69
+            parameters:
+              - !Parameter 
                 schema: *ref_36
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
@@ -1733,7 +1751,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_64
+              - !Parameter &ref_68
                 schema: *ref_9
                 implementation: Method
                 required: true
@@ -1759,7 +1777,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_64
+              - *ref_68
             language: !Languages 
               default:
                 name: ''
@@ -1772,10 +1790,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_69
         signatureParameters:
-          - *ref_65
-          - *ref_66
-          - *ref_67
+          - *ref_70
+          - *ref_71
+          - *ref_72
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -1804,12 +1824,13 @@ operationGroups:
     $key: availabilitySetGrandChild
     operations:
       - !Operation 
+        operationId: availabilitySetGrandChild_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_68
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -1821,7 +1842,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_69
+          - !Parameter &ref_74
             schema: *ref_1
             implementation: Method
             required: true
@@ -1833,7 +1854,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_70
+          - !Parameter &ref_75
             schema: *ref_1
             implementation: Method
             required: true
@@ -1874,12 +1895,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
-          - *ref_69
-          - *ref_70
+          - *ref_73
+          - *ref_74
+          - *ref_75
         responses:
           - !SchemaResponse 
-            schema: *ref_71
+            schema: *ref_76
             language: !Languages 
               default:
                 name: ''
@@ -1897,113 +1918,7 @@ operationGroups:
             description: Retrieves information about an availability set.
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_33
-          - !Parameter &ref_72
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_73
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_74
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetChildName
-                description: The name of the availability set child.
-                serializedName: availabilitySetChildName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_75
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetGrandChildName
-                description: The name of the availability set grand child.
-                serializedName: availabilitySetGrandChildName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_34
-          - *ref_35
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_37
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: >-
-                  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_72
-          - *ref_73
-          - *ref_74
-          - *ref_75
-        responses:
-          - !SchemaResponse 
-            schema: *ref_10
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: availabilitySetGrandChild_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -2063,6 +1978,114 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
+                schema: *ref_37
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: >-
+                  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_77
+          - *ref_78
+          - *ref_79
+          - *ref_80
+        responses:
+          - !SchemaResponse 
+            schema: *ref_10
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: availabilitySetGrandChild_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_33
+          - !Parameter &ref_83
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_84
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_85
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetChildName
+                description: The name of the availability set child.
+                serializedName: availabilitySetChildName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_86
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetGrandChildName
+                description: The name of the availability set grand child.
+                serializedName: availabilitySetGrandChildName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_34
+          - *ref_35
+        requestMediaTypes:
+          application/json: !Request &ref_82
+            parameters:
+              - !Parameter 
                 schema: *ref_36
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
@@ -2075,7 +2098,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_76
+              - !Parameter &ref_81
                 schema: *ref_10
                 implementation: Method
                 required: true
@@ -2101,7 +2124,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_76
+              - *ref_81
             language: !Languages 
               default:
                 name: ''
@@ -2115,11 +2138,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_82
         signatureParameters:
-          - *ref_77
-          - *ref_78
-          - *ref_79
-          - *ref_80
+          - *ref_83
+          - *ref_84
+          - *ref_85
+          - *ref_86
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -2148,12 +2173,13 @@ operationGroups:
     $key: UnpatchableResources
     operations:
       - !Operation 
+        operationId: UnpatchableResources_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_82
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -2165,7 +2191,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_83
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -2179,8 +2205,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_88
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -2195,7 +2221,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_81
+              - !Parameter &ref_87
                 schema: *ref_11
                 implementation: Method
                 required: true
@@ -2221,7 +2247,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_81
+              - *ref_87
             language: !Languages 
               default:
                 name: ''
@@ -2234,9 +2260,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_88
         signatureParameters:
-          - *ref_82
-          - *ref_83
+          - *ref_89
+          - *ref_90
         responses:
           - !SchemaResponse 
             schema: *ref_11
@@ -2257,12 +2285,13 @@ operationGroups:
             description: Create or update an UnpatchableResource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: UnpatchableResources_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_86
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -2274,7 +2303,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_87
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -2288,8 +2317,8 @@ operationGroups:
                 in: path
           - *ref_34
           - *ref_35
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_93
             parameters:
               - !Parameter 
                 schema: *ref_36
@@ -2304,8 +2333,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_85
-                schema: *ref_84
+              - !Parameter &ref_92
+                schema: *ref_91
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2330,7 +2359,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_85
+              - *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -2343,9 +2372,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_93
         signatureParameters:
-          - *ref_86
-          - *ref_87
+          - *ref_94
+          - *ref_95
         responses:
           - !SchemaResponse 
             schema: *ref_11
@@ -2366,12 +2397,13 @@ operationGroups:
             description: Update an UnpatchableResource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: UnpatchableResources_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_88
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2383,7 +2415,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_89
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2409,8 +2441,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_88
-          - *ref_89
+          - *ref_96
+          - *ref_97
         responses:
           - !Response 
             language: !Languages 
@@ -2436,12 +2468,13 @@ operationGroups:
             description: Delete an UnpatchableResource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: UnpatchableResources_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_90
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2453,7 +2486,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_91
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -2465,7 +2498,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2505,9 +2538,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_90
-          - *ref_91
-          - *ref_92
+          - *ref_98
+          - *ref_99
+          - *ref_100
         responses:
           - !SchemaResponse 
             schema: *ref_11
@@ -2528,12 +2561,13 @@ operationGroups:
             description: Retrieves information about an UnpatchableResource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: UnpatchableResources_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_33
-          - !Parameter &ref_93
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2545,7 +2579,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2585,11 +2619,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_93
-          - *ref_94
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
-            schema: *ref_95
+            schema: *ref_103
             language: !Languages 
               default:
                 name: ''
@@ -2614,8 +2648,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

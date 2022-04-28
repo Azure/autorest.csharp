@@ -1692,7 +1692,7 @@ schemas: !Schemas
           description: Data POST-ed to the nameAvailability action
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_150
+    - !ObjectSchema &ref_151
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1732,7 +1732,7 @@ schemas: !Schemas
           description: Result of the request to check name availability. It contains a flag and possible reason of failure.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_173
+    - !ObjectSchema &ref_177
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1862,7 +1862,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_48
     - *ref_49
-    - !ObjectSchema &ref_151
+    - !ObjectSchema &ref_152
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3107,7 +3107,7 @@ schemas: !Schemas
     - *ref_116
     - *ref_117
     - *ref_63
-    - !ObjectSchema &ref_165
+    - !ObjectSchema &ref_168
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3155,7 +3155,7 @@ schemas: !Schemas
           description: A class represents the access keys of the resource.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_186
+    - !ObjectSchema &ref_191
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3198,7 +3198,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_62
-    - !ObjectSchema &ref_166
+    - !ObjectSchema &ref_169
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3289,6 +3289,7 @@ operationGroups:
     $key: Operations
     operations:
       - !Operation 
+        operationId: Operations_List
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -3386,12 +3387,13 @@ operationGroups:
     $key: SignalR
     operations:
       - !Operation 
+        operationId: SignalR_CheckNameAvailability
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
         parameters:
           - *ref_140
-          - !Parameter &ref_149
+          - !Parameter &ref_150
             schema: *ref_1
             implementation: Method
             required: true
@@ -3405,8 +3407,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_145
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_149
             parameters:
               - !Parameter 
                 schema: *ref_146
@@ -3460,11 +3462,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_149
+        signatureParameters:
+          - *ref_150
         responses:
           - !SchemaResponse 
-            schema: *ref_150
+            schema: *ref_151
             language: !Languages 
               default:
                 name: ''
@@ -3512,6 +3516,7 @@ operationGroups:
             description: Checks that the resource name is valid and is not already in use.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -3548,7 +3553,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_151
+            schema: *ref_152
             language: !Languages 
               default:
                 name: ''
@@ -3664,6 +3669,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -3671,7 +3677,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_152
+          - !Parameter &ref_153
             schema: *ref_1
             implementation: Method
             required: true
@@ -3710,10 +3716,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_152
+          - *ref_153
         responses:
           - !SchemaResponse 
-            schema: *ref_151
+            schema: *ref_152
             language: !Languages 
               default:
                 name: ''
@@ -3830,6 +3836,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_Get
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -3837,7 +3844,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_153
+          - !Parameter &ref_154
             schema: *ref_1
             implementation: Method
             required: true
@@ -3849,7 +3856,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_154
+          - !Parameter &ref_155
             schema: *ref_1
             implementation: Method
             required: true
@@ -3888,8 +3895,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_153
           - *ref_154
+          - *ref_155
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -4005,6 +4012,7 @@ operationGroups:
             description: Get the resource and its properties.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -4012,7 +4020,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_156
+          - !Parameter &ref_158
             schema: *ref_1
             implementation: Method
             required: true
@@ -4024,7 +4032,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_157
+          - !Parameter &ref_159
             schema: *ref_1
             implementation: Method
             required: true
@@ -4036,8 +4044,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_157
             parameters:
               - !Parameter 
                 schema: *ref_146
@@ -4052,7 +4060,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_155
+              - !Parameter &ref_156
                 schema: *ref_50
                 implementation: Method
                 required: false
@@ -4078,7 +4086,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_155
+              - *ref_156
             language: !Languages 
               default:
                 name: ''
@@ -4091,9 +4099,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_156
+        requests:
           - *ref_157
+        signatureParameters:
+          - *ref_158
+          - *ref_159
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -4360,6 +4370,7 @@ operationGroups:
             description: Create or update a resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_Delete
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -4367,7 +4378,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_158
+          - !Parameter &ref_160
             schema: *ref_1
             implementation: Method
             required: true
@@ -4379,7 +4390,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_159
+          - !Parameter &ref_161
             schema: *ref_1
             implementation: Method
             required: true
@@ -4418,8 +4429,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_158
-          - *ref_159
+          - *ref_160
+          - *ref_161
         responses:
           - !Response 
             language: !Languages 
@@ -4474,6 +4485,7 @@ operationGroups:
             description: Operation to delete a resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_Update
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -4481,7 +4493,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_161
+          - !Parameter &ref_164
             schema: *ref_1
             implementation: Method
             required: true
@@ -4493,7 +4505,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_162
+          - !Parameter &ref_165
             schema: *ref_1
             implementation: Method
             required: true
@@ -4505,8 +4517,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_163
             parameters:
               - !Parameter 
                 schema: *ref_146
@@ -4521,7 +4533,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_160
+              - !Parameter &ref_162
                 schema: *ref_50
                 implementation: Method
                 required: false
@@ -4547,7 +4559,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_160
+              - *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -4560,9 +4572,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_163
         signatureParameters:
-          - *ref_161
-          - *ref_162
+          - *ref_164
+          - *ref_165
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -4741,6 +4755,7 @@ operationGroups:
             description: Operation to update an exiting resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_ListKeys
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -4748,7 +4763,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_163
+          - !Parameter &ref_166
             schema: *ref_1
             implementation: Method
             required: true
@@ -4760,7 +4775,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_164
+          - !Parameter &ref_167
             schema: *ref_1
             implementation: Method
             required: true
@@ -4799,11 +4814,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_163
-          - *ref_164
+          - *ref_166
+          - *ref_167
         responses:
           - !SchemaResponse 
-            schema: *ref_165
+            schema: *ref_168
             language: !Languages 
               default:
                 name: ''
@@ -4850,6 +4865,7 @@ operationGroups:
             description: Get the access keys of the resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_RegenerateKey
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -4857,7 +4873,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_168
+          - !Parameter &ref_172
             schema: *ref_1
             implementation: Method
             required: true
@@ -4869,7 +4885,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_169
+          - !Parameter &ref_173
             schema: *ref_1
             implementation: Method
             required: true
@@ -4881,8 +4897,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_171
             parameters:
               - !Parameter 
                 schema: *ref_146
@@ -4897,8 +4913,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_167
-                schema: *ref_166
+              - !Parameter &ref_170
+                schema: *ref_169
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4923,7 +4939,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_167
+              - *ref_170
             language: !Languages 
               default:
                 name: ''
@@ -4936,12 +4952,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_171
         signatureParameters:
-          - *ref_168
-          - *ref_169
+          - *ref_172
+          - *ref_173
         responses:
           - !SchemaResponse 
-            schema: *ref_165
+            schema: *ref_168
             language: !Languages 
               default:
                 name: ''
@@ -4996,6 +5014,7 @@ operationGroups:
             description: Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalR_Restart
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -5003,7 +5022,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_170
+          - !Parameter &ref_174
             schema: *ref_1
             implementation: Method
             required: true
@@ -5015,7 +5034,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_171
+          - !Parameter &ref_175
             schema: *ref_1
             implementation: Method
             required: true
@@ -5054,8 +5073,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_170
-          - *ref_171
+          - *ref_174
+          - *ref_175
         responses:
           - !Response 
             language: !Languages 
@@ -5120,12 +5139,13 @@ operationGroups:
     $key: Usages
     operations:
       - !Operation 
+        operationId: Usages_List
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
         parameters:
           - *ref_140
-          - !Parameter &ref_172
+          - !Parameter &ref_176
             schema: *ref_1
             implementation: Method
             required: true
@@ -5166,10 +5186,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_172
+          - *ref_176
         responses:
           - !SchemaResponse 
-            schema: *ref_173
+            schema: *ref_177
             language: !Languages 
               default:
                 name: ''
@@ -5239,12 +5259,13 @@ operationGroups:
     $key: SignalRPrivateEndpointConnections
     operations:
       - !Operation 
+        operationId: SignalRPrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
         parameters:
           - *ref_140
-          - !Parameter &ref_174
+          - !Parameter &ref_178
             schema: *ref_1
             implementation: Method
             required: true
@@ -5258,7 +5279,7 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_145
-          - !Parameter &ref_175
+          - !Parameter &ref_179
             schema: *ref_1
             implementation: Method
             required: true
@@ -5270,7 +5291,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_176
+          - !Parameter &ref_180
             schema: *ref_1
             implementation: Method
             required: true
@@ -5309,9 +5330,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_174
-          - *ref_175
-          - *ref_176
+          - *ref_178
+          - *ref_179
+          - *ref_180
         responses:
           - !SchemaResponse 
             schema: *ref_61
@@ -5370,12 +5391,13 @@ operationGroups:
             description: Get the specified private endpoint connection associated with a SignalR resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalRPrivateEndpointConnections_Update
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
         parameters:
           - *ref_140
-          - !Parameter &ref_178
+          - !Parameter &ref_183
             schema: *ref_1
             implementation: Method
             required: true
@@ -5389,7 +5411,7 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_145
-          - !Parameter &ref_179
+          - !Parameter &ref_184
             schema: *ref_1
             implementation: Method
             required: true
@@ -5401,7 +5423,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_180
+          - !Parameter &ref_185
             schema: *ref_1
             implementation: Method
             required: true
@@ -5413,8 +5435,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_182
             parameters:
               - !Parameter 
                 schema: *ref_146
@@ -5429,7 +5451,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_177
+              - !Parameter &ref_181
                 schema: *ref_61
                 implementation: Method
                 required: false
@@ -5455,7 +5477,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_177
+              - *ref_181
             language: !Languages 
               default:
                 name: ''
@@ -5468,10 +5490,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_182
         signatureParameters:
-          - *ref_178
-          - *ref_179
-          - *ref_180
+          - *ref_183
+          - *ref_184
+          - *ref_185
         responses:
           - !SchemaResponse 
             schema: *ref_61
@@ -5541,12 +5565,13 @@ operationGroups:
             description: Update the state of specified private endpoint connection associated with a SignalR resource.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SignalRPrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
         parameters:
           - *ref_140
-          - !Parameter &ref_181
+          - !Parameter &ref_186
             schema: *ref_1
             implementation: Method
             required: true
@@ -5560,7 +5585,7 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_145
-          - !Parameter &ref_182
+          - !Parameter &ref_187
             schema: *ref_1
             implementation: Method
             required: true
@@ -5572,7 +5597,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_183
+          - !Parameter &ref_188
             schema: *ref_1
             implementation: Method
             required: true
@@ -5611,9 +5636,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_181
-          - *ref_182
-          - *ref_183
+          - *ref_186
+          - *ref_187
+          - *ref_188
         responses:
           - !Response 
             language: !Languages 
@@ -5677,6 +5702,7 @@ operationGroups:
     $key: SignalRPrivateLinkResources
     operations:
       - !Operation 
+        operationId: SignalRPrivateLinkResources_List
         apiVersions:
           - !ApiVersion 
             version: 2020-07-01-preview
@@ -5684,7 +5710,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_145
-          - !Parameter &ref_184
+          - !Parameter &ref_189
             schema: *ref_1
             implementation: Method
             required: true
@@ -5696,7 +5722,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_185
+          - !Parameter &ref_190
             schema: *ref_1
             implementation: Method
             required: true
@@ -5735,11 +5761,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_184
-          - *ref_185
+          - *ref_189
+          - *ref_190
         responses:
           - !SchemaResponse 
-            schema: *ref_186
+            schema: *ref_191
             language: !Languages 
               default:
                 name: ''
@@ -5804,8 +5830,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

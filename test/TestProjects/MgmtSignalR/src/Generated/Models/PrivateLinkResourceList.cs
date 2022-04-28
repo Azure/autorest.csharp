@@ -16,7 +16,7 @@ namespace MgmtSignalR.Models
         /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
         internal PrivateLinkResourceList()
         {
-            Value = new ChangeTrackingList<PrivateLinkResource>();
+            Value = new ChangeTrackingList<MgmtSignalRPrivateLinkResource>();
         }
 
         /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
@@ -25,14 +25,14 @@ namespace MgmtSignalR.Models
         /// The URL the client should use to fetch the next page (per server side paging).
         /// It&apos;s null for now, added for future use.
         /// </param>
-        internal PrivateLinkResourceList(IReadOnlyList<PrivateLinkResource> value, string nextLink)
+        internal PrivateLinkResourceList(IReadOnlyList<MgmtSignalRPrivateLinkResource> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List of PrivateLinkResource. </summary>
-        public IReadOnlyList<PrivateLinkResource> Value { get; }
+        public IReadOnlyList<MgmtSignalRPrivateLinkResource> Value { get; }
         /// <summary>
         /// The URL the client should use to fetch the next page (per server side paging).
         /// It&apos;s null for now, added for future use.

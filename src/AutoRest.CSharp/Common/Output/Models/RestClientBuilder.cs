@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(serviceRequest.Parameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
 
-            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
+            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters, operation.RequestMediaTypes?.Keys);
             Request request = BuildRequest(httpRequest, buildContext);
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
+        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ICollection<string>? requestMediaTypes)
         {
             var pathParameters = new Dictionary<string, RequestParameter>();
             var requiredRequestParameters = new List<RequestParameter>();
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models
             parameters.AddUriOrPathParameters(httpRequest.Uri, pathParameters);
             parameters.AddUriOrPathParameters(httpRequest.Path, pathParameters);
             parameters.AddQueryOrHeaderParameters(requiredRequestParameters);
-            parameters.AddBody(bodyParameter, contentTypeRequestParameter);
+            parameters.AddBody(bodyParameter, contentTypeRequestParameter, requestMediaTypes);
             parameters.AddQueryOrHeaderParameters(optionalRequestParameters);
             parameters.AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter);
             parameters.AddRequestContext();
@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Output.Models
             Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new();
             foreach (var (_, (requestParameter, value)) in allParameters)
             {
-                if (requestParameter is {In: HttpParameterIn.Body})
+                if (requestParameter is { In: HttpParameterIn.Body })
                 {
                     bodyParameters[requestParameter] = value;
                 }
@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (requestParameter.Implementation != ImplementationLocation.Method)
             {
-                return (ReferenceOrConstant) _parameters[requestParameter.Language.Default.Name];
+                return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
             }
 
             if (requestParameter.Schema is ConstantSchema constant)
@@ -833,14 +833,21 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            public void AddBody(Parameter? bodyParameter, RequestParameter? contentTypeRequestParameter)
+            public void AddBody(Parameter? bodyParameter, RequestParameter? contentTypeRequestParameter, ICollection<string>? requestMediaTypes = null)
             {
                 if (bodyParameter != null)
                 {
                     _parameters.Add(bodyParameter);
                     if (contentTypeRequestParameter != null)
                     {
-                        AddRequestParameter(contentTypeRequestParameter, typeof(ContentType));
+                        if (requestMediaTypes?.Count > 1)
+                        {
+                            AddContentTypeRequestParameter(contentTypeRequestParameter, requestMediaTypes);
+                        }
+                        else
+                        {
+                            AddRequestParameter(contentTypeRequestParameter, typeof(ContentType));
+                        }
                     }
                 }
             }
@@ -872,6 +879,28 @@ namespace AutoRest.CSharp.Output.Models
             public void AddRequestContext()
             {
                 _parameters.Add(KnownParameters.RequestContext);
+            }
+
+            private void AddContentTypeRequestParameter(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
+            {
+                var name = requestParameter.CSharpName();
+                var description = CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes);
+                var parameter = new Parameter(name, description, typeof(ContentType), null, requestParameter.IsRequired, RequestLocation: RequestLocation.Header);
+
+                _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
+                _parameters.Add(parameter);
+            }
+
+            private string CreateDescriptionWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
+            {
+                var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+                    $"The {requestParameter.Schema.Name} to use." :
+                    BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+                var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
+
+                return string.IsNullOrEmpty(allowedValues)
+                    ? description
+                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
             }
 
             private void AddRequestParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)

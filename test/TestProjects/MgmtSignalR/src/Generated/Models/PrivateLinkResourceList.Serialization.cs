@@ -15,7 +15,7 @@ namespace MgmtSignalR.Models
     {
         internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element)
         {
-            Optional<IReadOnlyList<PrivateLinkResource>> value = default;
+            Optional<IReadOnlyList<MgmtSignalRPrivateLinkResource>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -26,10 +26,10 @@ namespace MgmtSignalR.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PrivateLinkResource> array = new List<PrivateLinkResource>();
+                    List<MgmtSignalRPrivateLinkResource> array = new List<MgmtSignalRPrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
+                        array.Add(MgmtSignalRPrivateLinkResource.DeserializeMgmtSignalRPrivateLinkResource(item));
                     }
                     value = array;
                     continue;
