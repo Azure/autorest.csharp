@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static ObjectSchema UpdateMgmtRestClientParameters(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
         {
             ObjectSchema schema = new ObjectSchema();
-            var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null).ToHashSet();
+            var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null && p.RequestLocation != RequestLocation.Body).ToHashSet();
             var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
             var optionalRequestParameters = operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
                 Concat(operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
