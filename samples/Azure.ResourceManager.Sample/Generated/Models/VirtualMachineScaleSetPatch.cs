@@ -46,16 +46,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (value is not null)
-                {
-                    if (AdditionalCapabilities is null)
-                        AdditionalCapabilities = new AdditionalCapabilities();
-                    AdditionalCapabilities.UltraSSDEnabled = value;
-                }
-                else
-                {
-                    AdditionalCapabilities = null;
-                }
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
             }
         }
 
@@ -80,16 +73,9 @@ namespace Azure.ResourceManager.Sample.Models
             get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (ProximityPlacementGroup is null)
-                        ProximityPlacementGroup = new WritableSubResource();
-                    ProximityPlacementGroup.Id = value;
-                }
-                else
-                {
-                    ProximityPlacementGroup = null;
-                }
+                if (ProximityPlacementGroup is null)
+                    ProximityPlacementGroup = new WritableSubResource();
+                ProximityPlacementGroup.Id = value;
             }
         }
     }

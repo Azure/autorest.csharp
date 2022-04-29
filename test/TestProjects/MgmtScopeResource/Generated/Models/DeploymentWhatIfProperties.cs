@@ -24,16 +24,9 @@ namespace MgmtScopeResource.Models
             get => WhatIfSettings is null ? default : WhatIfSettings.ResultFormat;
             set
             {
-                if (value is not null)
-                {
-                    if (WhatIfSettings is null)
-                        WhatIfSettings = new DeploymentWhatIfSettings();
-                    WhatIfSettings.ResultFormat = value;
-                }
-                else
-                {
-                    WhatIfSettings = null;
-                }
+                if (WhatIfSettings is null)
+                    WhatIfSettings = new DeploymentWhatIfSettings();
+                WhatIfSettings.ResultFormat = value;
             }
         }
     }

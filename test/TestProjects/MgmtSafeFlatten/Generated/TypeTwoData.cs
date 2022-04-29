@@ -46,16 +46,9 @@ namespace MgmtSafeFlatten
             get => Properties is null ? default : Properties.LayerTwoMyProp;
             set
             {
-                if (value is not null)
-                {
-                    if (Properties is null)
-                        Properties = new LayerOneSingle();
-                    Properties.LayerTwoMyProp = value;
-                }
-                else
-                {
-                    Properties = null;
-                }
+                if (Properties is null)
+                    Properties = new LayerOneSingle();
+                Properties.LayerTwoMyProp = value;
             }
         }
     }

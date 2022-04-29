@@ -89,16 +89,9 @@ namespace MgmtExpandResourceTypes
             get => TargetResource is null ? default : TargetResource.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (TargetResource is null)
-                        TargetResource = new WritableSubResource();
-                    TargetResource.Id = value;
-                }
-                else
-                {
-                    TargetResource = null;
-                }
+                if (TargetResource is null)
+                    TargetResource = new WritableSubResource();
+                TargetResource.Id = value;
             }
         }
 
@@ -124,16 +117,9 @@ namespace MgmtExpandResourceTypes
             get => CnameRecord is null ? default : CnameRecord.Cname;
             set
             {
-                if (value is not null)
-                {
-                    if (CnameRecord is null)
-                        CnameRecord = new CnameRecord();
-                    CnameRecord.Cname = value;
-                }
-                else
-                {
-                    CnameRecord = null;
-                }
+                if (CnameRecord is null)
+                    CnameRecord = new CnameRecord();
+                CnameRecord.Cname = value;
             }
         }
 

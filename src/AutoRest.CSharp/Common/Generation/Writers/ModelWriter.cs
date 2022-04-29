@@ -174,16 +174,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    using (writer.Scope($"if (value is not null)"))
-                    {
-                        writer.Line($"if ({property.Declaration.Name:D} is null)");
-                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                        writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
-                    }
-                    using (writer.Scope($"else"))
-                    {
-                        writer.Line($"{property.Declaration.Name:D} = null;");
-                    }
+                    writer.Line($"if ({property.Declaration.Name:D} is null)");
+                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
                 }
             }
         }

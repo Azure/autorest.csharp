@@ -54,16 +54,9 @@ namespace MgmtRenameRules.Models
             get => NetworkSecurityGroup is null ? default : NetworkSecurityGroup.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (NetworkSecurityGroup is null)
-                        NetworkSecurityGroup = new WritableSubResource();
-                    NetworkSecurityGroup.Id = value;
-                }
-                else
-                {
-                    NetworkSecurityGroup = null;
-                }
+                if (NetworkSecurityGroup is null)
+                    NetworkSecurityGroup = new WritableSubResource();
+                NetworkSecurityGroup.Id = value;
             }
         }
 

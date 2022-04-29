@@ -96,16 +96,9 @@ namespace MgmtRenameRules
             get => HardwareProfile is null ? default : HardwareProfile.VmSize;
             set
             {
-                if (value is not null)
-                {
-                    if (HardwareProfile is null)
-                        HardwareProfile = new HardwareProfile();
-                    HardwareProfile.VmSize = value;
-                }
-                else
-                {
-                    HardwareProfile = null;
-                }
+                if (HardwareProfile is null)
+                    HardwareProfile = new HardwareProfile();
+                HardwareProfile.VmSize = value;
             }
         }
 
@@ -119,16 +112,9 @@ namespace MgmtRenameRules
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (value is not null)
-                {
-                    if (AdditionalCapabilities is null)
-                        AdditionalCapabilities = new AdditionalCapabilities();
-                    AdditionalCapabilities.UltraSSDEnabled = value;
-                }
-                else
-                {
-                    AdditionalCapabilities = null;
-                }
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
             }
         }
 
@@ -142,16 +128,9 @@ namespace MgmtRenameRules
             get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
             set
             {
-                if (value is not null)
-                {
-                    if (SecurityProfile is null)
-                        SecurityProfile = new SecurityProfile();
-                    SecurityProfile.EncryptionAtHost = value;
-                }
-                else
-                {
-                    SecurityProfile = null;
-                }
+                if (SecurityProfile is null)
+                    SecurityProfile = new SecurityProfile();
+                SecurityProfile.EncryptionAtHost = value;
             }
         }
 
@@ -189,16 +168,9 @@ namespace MgmtRenameRules
             get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
             set
             {
-                if (value is not null)
-                {
-                    if (DiagnosticsProfile is null)
-                        DiagnosticsProfile = new DiagnosticsProfile();
-                    DiagnosticsProfile.BootDiagnostics = value;
-                }
-                else
-                {
-                    DiagnosticsProfile = null;
-                }
+                if (DiagnosticsProfile is null)
+                    DiagnosticsProfile = new DiagnosticsProfile();
+                DiagnosticsProfile.BootDiagnostics = value;
             }
         }
 
@@ -210,16 +182,9 @@ namespace MgmtRenameRules
             get => AvailabilitySet is null ? default : AvailabilitySet.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (AvailabilitySet is null)
-                        AvailabilitySet = new WritableSubResource();
-                    AvailabilitySet.Id = value;
-                }
-                else
-                {
-                    AvailabilitySet = null;
-                }
+                if (AvailabilitySet is null)
+                    AvailabilitySet = new WritableSubResource();
+                AvailabilitySet.Id = value;
             }
         }
 

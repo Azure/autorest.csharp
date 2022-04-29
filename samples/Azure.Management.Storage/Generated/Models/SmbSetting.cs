@@ -38,16 +38,9 @@ namespace Azure.Management.Storage.Models
             get => Multichannel is null ? default : Multichannel.Enabled;
             set
             {
-                if (value is not null)
-                {
-                    if (Multichannel is null)
-                        Multichannel = new Multichannel();
-                    Multichannel.Enabled = value;
-                }
-                else
-                {
-                    Multichannel = null;
-                }
+                if (Multichannel is null)
+                    Multichannel = new Multichannel();
+                Multichannel.Enabled = value;
             }
         }
 

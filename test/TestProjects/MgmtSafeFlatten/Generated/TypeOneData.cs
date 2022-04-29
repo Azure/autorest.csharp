@@ -49,16 +49,9 @@ namespace MgmtSafeFlatten
             get => LayerOne is null ? default : LayerOne.LayerTwoMyProp;
             set
             {
-                if (value is not null)
-                {
-                    if (LayerOne is null)
-                        LayerOne = new LayerOneSingle();
-                    LayerOne.LayerTwoMyProp = value;
-                }
-                else
-                {
-                    LayerOne = null;
-                }
+                if (LayerOne is null)
+                    LayerOne = new LayerOneSingle();
+                LayerOne.LayerTwoMyProp = value;
             }
         }
 
@@ -70,16 +63,9 @@ namespace MgmtSafeFlatten
             get => LayerOneConflict is null ? default : LayerOneConflict.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (LayerOneConflict is null)
-                        LayerOneConflict = new WritableSubResource();
-                    LayerOneConflict.Id = value;
-                }
-                else
-                {
-                    LayerOneConflict = null;
-                }
+                if (LayerOneConflict is null)
+                    LayerOneConflict = new WritableSubResource();
+                LayerOneConflict.Id = value;
             }
         }
     }

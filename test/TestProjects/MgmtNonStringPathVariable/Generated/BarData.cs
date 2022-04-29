@@ -43,16 +43,9 @@ namespace MgmtNonStringPathVariable
             get => Properties is null ? default : Properties.Buzz;
             set
             {
-                if (value is not null)
-                {
-                    if (Properties is null)
-                        Properties = new BarProperties();
-                    Properties.Buzz = value;
-                }
-                else
-                {
-                    Properties = null;
-                }
+                if (Properties is null)
+                    Properties = new BarProperties();
+                Properties.Buzz = value;
             }
         }
     }

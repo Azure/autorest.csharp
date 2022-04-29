@@ -104,16 +104,9 @@ namespace MgmtPropertyChooser
             get => FakeWritableSubResource is null ? default : FakeWritableSubResource.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (FakeWritableSubResource is null)
-                        FakeWritableSubResource = new WritableSubResource();
-                    FakeWritableSubResource.Id = value;
-                }
-                else
-                {
-                    FakeWritableSubResource = null;
-                }
+                if (FakeWritableSubResource is null)
+                    FakeWritableSubResource = new WritableSubResource();
+                FakeWritableSubResource.Id = value;
             }
         }
 

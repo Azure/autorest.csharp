@@ -49,16 +49,9 @@ namespace Azure.ResourceManager.Sample
             get => SourceVirtualMachine is null ? default : SourceVirtualMachine.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (SourceVirtualMachine is null)
-                        SourceVirtualMachine = new WritableSubResource();
-                    SourceVirtualMachine.Id = value;
-                }
-                else
-                {
-                    SourceVirtualMachine = null;
-                }
+                if (SourceVirtualMachine is null)
+                    SourceVirtualMachine = new WritableSubResource();
+                SourceVirtualMachine.Id = value;
             }
         }
 

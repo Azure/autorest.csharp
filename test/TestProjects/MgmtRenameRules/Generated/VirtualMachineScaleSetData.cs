@@ -106,16 +106,9 @@ namespace MgmtRenameRules
             get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (ProximityPlacementGroup is null)
-                        ProximityPlacementGroup = new WritableSubResource();
-                    ProximityPlacementGroup.Id = value;
-                }
-                else
-                {
-                    ProximityPlacementGroup = null;
-                }
+                if (ProximityPlacementGroup is null)
+                    ProximityPlacementGroup = new WritableSubResource();
+                ProximityPlacementGroup.Id = value;
             }
         }
 
@@ -127,16 +120,9 @@ namespace MgmtRenameRules
             get => HostGroup is null ? default : HostGroup.Id;
             set
             {
-                if (value is not null)
-                {
-                    if (HostGroup is null)
-                        HostGroup = new WritableSubResource();
-                    HostGroup.Id = value;
-                }
-                else
-                {
-                    HostGroup = null;
-                }
+                if (HostGroup is null)
+                    HostGroup = new WritableSubResource();
+                HostGroup.Id = value;
             }
         }
 
@@ -148,16 +134,9 @@ namespace MgmtRenameRules
             get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
             set
             {
-                if (value is not null)
-                {
-                    if (AdditionalCapabilities is null)
-                        AdditionalCapabilities = new AdditionalCapabilities();
-                    AdditionalCapabilities.UltraSSDEnabled = value;
-                }
-                else
-                {
-                    AdditionalCapabilities = null;
-                }
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
             }
         }
 
