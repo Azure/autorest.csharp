@@ -31,7 +31,7 @@ namespace MultipleInputFiles
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(TokenCredential credential, Source? source = default, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(TokenCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
@@ -50,7 +50,7 @@ namespace MultipleInputFiles
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = default, MultipleInputFilesClientOptions options = null)
+        public MultipleInputFilesClient(AzureKeyCredential credential, Source? source = null, MultipleInputFilesClientOptions options = null)
         {
             if (credential == null)
             {
@@ -69,7 +69,7 @@ namespace MultipleInputFiles
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
+        internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = null)
         {
             RestClient = new MultipleInputFilesRestClient(clientDiagnostics, pipeline, source);
             _clientDiagnostics = clientDiagnostics;

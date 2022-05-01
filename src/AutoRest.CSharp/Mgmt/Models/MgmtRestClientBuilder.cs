@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
@@ -51,7 +52,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
             var parameter = base.BuildConstructorParameter(requestParameter);
-            return parameter.IsApiVersionParameter ? parameter with { UseDefaultValueInCtorParam = false } : parameter;
+            return parameter.IsApiVersionParameter
+                ? parameter with { DefaultValue = Constant.Default(parameter.Type.WithNullable(true)), Initializer = parameter.DefaultValue?.GetConstantFormattable() }
+                : parameter;
         }
 
         protected override Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
@@ -73,18 +76,18 @@ namespace AutoRest.CSharp.Mgmt.Models
                     {
                         bodyParameters.Add(parameter);
                     }
-                    else if (parameter.DefaultValue == null)
+                    else if (parameter.IsOptional)
                     {
-                        requiredParameters.Add(parameter);
+                        optionalParameters.Add(parameter);
                     }
                     else
                     {
-                        optionalParameters.Add(parameter);
+                        requiredParameters.Add(parameter);
                     }
                 }
             }
 
-            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.DefaultValue != null)); // move required body parameters at the beginning
+            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptional)); // move required body parameters at the beginning
             requiredParameters.AddRange(optionalParameters);
 
             return requiredParameters.ToArray();

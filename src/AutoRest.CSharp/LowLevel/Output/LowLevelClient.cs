@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -149,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
+            var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
 
             if (Fields.CredentialFields.Count == 0)
             {
@@ -198,7 +199,7 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = GetSubClientFactoryMethodParameters(this)
-                .Select(p => p with {DefaultValue = null, Validate = false})
+                .Select(p => p with {DefaultValue = null, Validation = ValidationType.None, Initializer = null})
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Internal, constructorParameters);
