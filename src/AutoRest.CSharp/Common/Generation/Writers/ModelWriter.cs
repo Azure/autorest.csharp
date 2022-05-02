@@ -94,8 +94,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
                     string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
                     WriteProperty(writer, property, "internal");
-                    bool isValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
-                    var nullable = isValueType ? "?" : String.Empty;
+                    bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                    var nullable = isOverridenValueType ? "?" : String.Empty;
                     writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
                     using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type}{nullable} {myPropertyName:D}"))
                     {
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             else if (HasCtorWithSingleParam(property, innerProperty))
                             {
                                 WriteGetWithDefault(writer, property, innerProperty, childPropertyName);
-                                WriteSetWithSingleParamCtor(writer, property, isValueType);
+                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
                             }
                             else
                             {
@@ -127,11 +127,11 @@ namespace AutoRest.CSharp.Generation.Writers
                             WriteGetWithDefault(writer, property, innerProperty, childPropertyName);
                             if (HasDefaultPublicCtor(property))
                             {
-                                WriteSetWithNullCheck(writer, property, childPropertyName, isValueType);
+                                WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
                             }
                             else if (HasCtorWithSingleParam(property, innerProperty))
                             {
-                                WriteSetWithSingleParamCtor(writer, property, isValueType);
+                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
                             }
                             else
                             {
@@ -155,11 +155,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteSetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName, bool isValueType)
+        private static void WriteSetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName, bool isOverridenValueType)
         {
             using (writer.Scope($"set"))
             {
-                if (isValueType)
+                if (isOverridenValueType)
                 {
                     using (writer.Scope($"if (value.HasValue)"))
                     {
@@ -196,9 +196,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
         }
 
-        private static void WriteSetWithSingleParamCtor(CodeWriter writer, ObjectTypeProperty property, bool isValueType)
+        private static void WriteSetWithSingleParamCtor(CodeWriter writer, ObjectTypeProperty property, bool isOverridenValueType)
         {
-            if (isValueType)
+            if (isOverridenValueType)
             {
                 using (writer.Scope($"set"))
                 {
