@@ -69,13 +69,12 @@ namespace AutoRest.TestServer.Tests
             Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
             Assert.AreEqual(1, diagnosticListener.Scopes.Count);
             Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
+            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
 
             await lro.WaitForCompletionAsync();
             Assert.AreEqual(2, diagnosticListener.Scopes.Count);
             Assert.AreEqual("model", $"{lro.Value.Received}");
             Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[1].Name);
-
-            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
             Assert.IsTrue(diagnosticListener.Scopes[1].IsCompleted);
         });
 
