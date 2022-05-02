@@ -95,7 +95,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutNonRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -155,7 +155,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutNonRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -215,7 +215,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutNonRetry201Creating400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutNonRetry201Creating400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -335,7 +335,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -395,7 +395,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutNonRetry201Creating400InvalidJsonImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -455,7 +455,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -515,7 +515,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -548,7 +548,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteNonRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -581,7 +581,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteNonRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -614,7 +614,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete202NonRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -647,7 +647,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete202NonRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -680,7 +680,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRelativeRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -713,7 +713,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRelativeRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -760,7 +760,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostNonRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -807,7 +807,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostNonRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -854,7 +854,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202NonRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -901,7 +901,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202NonRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -948,7 +948,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRelativeRetry400ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -995,7 +995,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRelativeRetry400Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1055,7 +1055,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1115,7 +1115,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutError201NoProvisioningStatePayloadImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1175,7 +1175,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1235,7 +1235,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetryNoStatusImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1295,7 +1295,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1355,7 +1355,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayloadImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1388,7 +1388,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete204SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1421,7 +1421,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete204SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1454,7 +1454,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryNoStatusImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1487,7 +1487,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRelativeRetryNoStatusImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1534,7 +1534,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202NoLocationImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1581,7 +1581,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202NoLocationImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1628,7 +1628,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRelativeRetryNoPayloadImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1675,7 +1675,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRelativeRetryNoPayloadImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1735,7 +1735,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put200InvalidJsonImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1795,7 +1795,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put200InvalidJsonImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1855,7 +1855,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1915,7 +1915,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetryInvalidHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1975,7 +1975,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2035,7 +2035,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPollingImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2068,7 +2068,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete202RetryInvalidHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2101,7 +2101,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete202RetryInvalidHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2134,7 +2134,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2167,7 +2167,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRelativeRetryInvalidHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2200,7 +2200,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidJsonPollingImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2233,7 +2233,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRelativeRetryInvalidJsonPollingImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2280,7 +2280,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202RetryInvalidHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2327,7 +2327,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202RetryInvalidHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2374,7 +2374,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2421,7 +2421,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRelativeRetryInvalidHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2468,7 +2468,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidJsonPollingImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2515,7 +2515,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRelativeRetryInvalidJsonPollingImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {

@@ -95,7 +95,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put201CreatingSucceeded200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -155,7 +155,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put201CreatingSucceeded200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -215,7 +215,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRelativeRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRelativeRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -321,7 +321,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -367,7 +367,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteProvisioning202Accepted200SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -400,7 +400,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete202Retry200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -433,7 +433,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete202Retry200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -466,7 +466,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRelativeRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -499,7 +499,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRelativeRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -546,7 +546,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202Retry200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -593,7 +593,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202Retry200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -640,7 +640,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRelativeRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -687,7 +687,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRelativeRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {

@@ -1309,7 +1309,7 @@ namespace Azure.AI.DocumentTranslation
 
         private async Task<Operation<BinaryData>> StartTranslationImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1400,7 +1400,7 @@ namespace Azure.AI.DocumentTranslation
 
         private Operation<BinaryData> StartTranslationImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {

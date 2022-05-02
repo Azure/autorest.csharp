@@ -95,7 +95,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put200SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -155,7 +155,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put200SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -215,7 +215,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Patch200SucceededIgnoreHeadersImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -275,7 +275,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Patch200SucceededIgnoreHeadersImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -335,7 +335,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Patch201RetryWithAsyncHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch201RetryWithAsyncHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -395,7 +395,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Patch201RetryWithAsyncHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch201RetryWithAsyncHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -455,7 +455,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Patch202RetryWithAsyncAndLocationHeaderImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch202RetryWithAsyncAndLocationHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -515,7 +515,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Patch202RetryWithAsyncAndLocationHeaderImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch202RetryWithAsyncAndLocationHeader");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -575,7 +575,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put201SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -635,7 +635,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put201SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -681,7 +681,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202ListImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -727,7 +727,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202ListImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -787,7 +787,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put200SucceededNoStateImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -847,7 +847,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put200SucceededNoStateImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -907,7 +907,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put202Retry200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -967,7 +967,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put202Retry200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1027,7 +1027,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put201CreatingSucceeded200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1087,7 +1087,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put201CreatingSucceeded200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1147,7 +1147,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put200UpdatingSucceeded204ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1207,7 +1207,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put200UpdatingSucceeded204Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1267,7 +1267,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put201CreatingFailed200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1327,7 +1327,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put201CreatingFailed200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1387,7 +1387,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Put200Acceptedcanceled200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1447,7 +1447,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Put200Acceptedcanceled200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1507,7 +1507,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutNoHeaderInRetryImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1567,7 +1567,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutNoHeaderInRetryImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1627,7 +1627,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1687,7 +1687,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1747,7 +1747,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncNoRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1807,7 +1807,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncNoRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1867,7 +1867,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncRetryFailedImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1927,7 +1927,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncRetryFailedImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -1987,7 +1987,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncNoRetrycanceledImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2047,7 +2047,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncNoRetrycanceledImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2107,7 +2107,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncNoHeaderInRetryImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2167,7 +2167,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncNoHeaderInRetryImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2213,7 +2213,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutNonResourceImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNonResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2259,7 +2259,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutNonResourceImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNonResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2305,7 +2305,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncNonResourceImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2351,7 +2351,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncNonResourceImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2403,7 +2403,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutSubResourceImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutSubResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2455,7 +2455,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutSubResourceImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutSubResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2507,7 +2507,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PutAsyncSubResourceImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2559,7 +2559,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PutAsyncSubResourceImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2605,7 +2605,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2651,7 +2651,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteProvisioning202Accepted200SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2697,7 +2697,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2743,7 +2743,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteProvisioning202DeletingFailed200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2789,7 +2789,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2835,7 +2835,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteProvisioning202Deletingcanceled200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2868,7 +2868,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete204SucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2901,7 +2901,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete204SucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2947,7 +2947,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete202Retry200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -2993,7 +2993,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete202Retry200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3039,7 +3039,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Delete202NoRetry204ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3085,7 +3085,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Delete202NoRetry204Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3118,7 +3118,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteNoHeaderInRetryImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3151,7 +3151,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteNoHeaderInRetryImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3184,7 +3184,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncNoHeaderInRetryImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3217,7 +3217,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncNoHeaderInRetryImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3250,7 +3250,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3283,7 +3283,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3316,7 +3316,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncNoRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3349,7 +3349,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncNoRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3382,7 +3382,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRetryFailedImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3415,7 +3415,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRetryFailedImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3448,7 +3448,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> DeleteAsyncRetrycanceledImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3481,7 +3481,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> DeleteAsyncRetrycanceledImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3520,7 +3520,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post200WithPayloadImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3559,7 +3559,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post200WithPayloadImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3606,7 +3606,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202Retry200ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3653,7 +3653,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202Retry200Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202Retry200");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3713,7 +3713,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> Post202NoRetry204ImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3773,7 +3773,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> Post202NoRetry204Implementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3819,7 +3819,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3865,7 +3865,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostDoubleHeadersFinalLocationGetImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3911,7 +3911,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -3957,7 +3957,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4003,7 +4003,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4049,7 +4049,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefaultImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4109,7 +4109,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4169,7 +4169,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4229,7 +4229,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncNoRetrySucceededImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4289,7 +4289,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncNoRetrySucceededImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4336,7 +4336,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRetryFailedImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4383,7 +4383,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRetryFailedImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4430,7 +4430,7 @@ namespace lro_LowLevel
 
         private async Task<Operation<BinaryData>> PostAsyncRetrycanceledImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -4477,7 +4477,7 @@ namespace lro_LowLevel
 
         private Operation<BinaryData> PostAsyncRetrycanceledImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
