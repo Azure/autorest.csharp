@@ -61,6 +61,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task HandwrittenModelLro() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            await lro.WaitForCompletionAsync();
+            Assert.AreEqual("model", $"{lro.Value.Received}");
+        });
+
+        [Test]
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);

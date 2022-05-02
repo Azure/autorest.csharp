@@ -286,12 +286,17 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
+            return await LroImplementationAsync("DPGClient.Lro", waitUntil, mode, context).ConfigureAwait(false);
+        }
+
+        private async Task<Operation<BinaryData>> LroImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, string mode, RequestContext context)
+        {
             using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, diagnosticsScopeName, OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,12 +323,17 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
+            return LroImplementation("DPGClient.Lro", waitUntil, mode, context);
+        }
+
+        private Operation<BinaryData> LroImplementation(string diagnosticsScopeName, WaitUntil waitUntil, string mode, RequestContext context)
+        {
             using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, diagnosticsScopeName, OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

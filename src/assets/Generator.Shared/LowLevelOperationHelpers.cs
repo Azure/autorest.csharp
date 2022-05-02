@@ -13,6 +13,8 @@ namespace Azure.Core
 {
     internal static class LowLevelOperationHelpers
     {
+        public static Operation<T> Cast<T>(Operation<BinaryData> operation, Func<Response, T> convertFunc) where T : notnull => new OperationWrapper<T, BinaryData>(operation, convertFunc);
+
         public static ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
             => ProcessMessageAsync(pipeline, message, clientDiagnostics, scopeName, finalStateVia, requestContext, waitUntil, r => r.Content);
 
@@ -61,6 +63,51 @@ namespace Azure.Core
                 operation.WaitForCompletion(requestContext?.CancellationToken ?? default);
             }
             return operation;
+        }
+
+        private class OperationWrapper<T, U> : Operation<T>
+            where U : notnull
+            where T : notnull
+        {
+            private readonly Operation<U> _operation;
+            private readonly Func<Response, T> _convertFunc;
+            private Response<T>? _response;
+
+            public OperationWrapper(Operation<U> operation, Func<Response, T> convertFunc)
+            {
+                _operation = operation;
+                _convertFunc = convertFunc;
+                _response = null;
+            }
+
+            public override string Id => _operation.Id;
+            public override T Value => GetOrCreateValue();
+            public override bool HasValue => _operation.HasValue;
+            public override bool HasCompleted => _operation.HasCompleted;
+            public override Response GetRawResponse() => _operation.GetRawResponse();
+            public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
+            public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
+            public override Response<T> WaitForCompletion(CancellationToken cancellationToken = default) => GetOrCreateResponse(_operation.WaitForCompletion(cancellationToken));
+            public override Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken) => GetOrCreateResponse(_operation.WaitForCompletion(pollingInterval, cancellationToken));
+            public override async ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => GetOrCreateResponse(await _operation.WaitForCompletionAsync(cancellationToken));
+            public override async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => GetOrCreateResponse(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+
+            private T GetOrCreateValue() => GetOrCreateResponse(GetRawResponse()).Value;
+
+            private Response<T> GetOrCreateResponse(Response<U> response) => GetOrCreateResponse(response.GetRawResponse());
+
+            private Response<T> GetOrCreateResponse(Response rawResponse)
+            {
+                if (_response != null)
+                {
+                    return _response;
+                }
+
+                var value = _convertFunc(rawResponse);
+                var response = Response.FromValue(value, rawResponse);
+                Interlocked.CompareExchange(ref _response, response, null);
+                return _response;
+            }
         }
     }
 }

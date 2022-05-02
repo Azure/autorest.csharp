@@ -230,9 +230,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
-            var method = clientMethod.RequestMethod;
-            var pagingInfo = clientMethod.PagingInfo!;
-            var nextPageMethod = pagingInfo.NextPageMethod;
             var privateMethodSignature = (clientMethod.Signature with
             {
                 Name = $"{clientMethod.Signature.Name}Implementation",
@@ -252,6 +249,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.WriteMethodDeclaration(privateMethodSignature))
             {
+                var method = clientMethod.RequestMethod;
+                var pagingInfo = clientMethod.PagingInfo!;
+                var nextPageMethod = pagingInfo.NextPageMethod;
                 var createEnumerableMethodSignature = new MethodSignature("CreateEnumerable", null, None, typeof(IEnumerable<Page<BinaryData>>), null, new[] { NextLinkParameter, PageSizeHintParameter }).WithAsync(async);
                 var createEnumerableMethod = new CodeWriterDeclaration(createEnumerableMethodSignature.Name);
 
@@ -308,6 +308,15 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var pagingInfo = clientMethod.PagingInfo;
             var nextPageMethod = pagingInfo?.NextPageMethod;
+            var privateMethodSignature = (clientMethod.Signature with
+            {
+                Name = $"{clientMethod.Signature.Name}Implementation",
+                Modifiers = Private,
+                Description = null,
+                Parameters = clientMethod.Signature.Parameters
+                    .Select(p => p with { DefaultValue = null })
+                    .Prepend(ScopeNameParameter).ToArray()
+            }).WithAsync(async);
 
             if (pagingInfo != null && nextPageMethod != null)
             {
@@ -315,26 +324,42 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                var startMethod = clientMethod.RequestMethod;
-                var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
-                var scopeName = clientMethod.Diagnostic.ScopeName;
-
-                using (WriteClientMethodDeclaration(writer, clientMethod, async))
-                {
-                    using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
-                    {
-                        var messageVariable = new CodeWriterDeclaration("message");
-                        var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
-
-                        writer
-                            .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
-                            .AppendRaw("return ")
-                            .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
-                    }
-                }
+                WriteLongRunningOperationMethod(writer, clientMethod, privateMethodSignature, fields, async);
             }
 
             writer.Line();
+        }
+
+        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature privateMethodSignature, ClientFields fields, bool async)
+        {
+            using (WriteClientMethodDeclaration(writer, clientMethod, async))
+            {
+                writer
+                    .AppendRaw("return ")
+                    .AppendRawIf("await ", async)
+                    .Append($"{privateMethodSignature.Name}({clientMethod.Diagnostic.ScopeName:L}, {clientMethod.Signature.Parameters.GetIdentifiersFormattable()})")
+                    .AppendIf($".{nameof(Task.ConfigureAwait)}(false)", async)
+                    .LineRaw(";");
+            }
+
+            writer.Line();
+
+            var startMethod = clientMethod.RequestMethod;
+            var finalStateVia = startMethod.Operation.LongRunningFinalStateVia;
+
+            using (writer.WriteMethodDeclaration(privateMethodSignature))
+            {
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+                {
+                    var messageVariable = new CodeWriterDeclaration("message");
+                    var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {ScopeNameParameter.Name:I}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
+
+                    writer
+                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                        .AppendRaw("return ")
+                        .WriteMethodCall(async, LroProcessMessageMethodAsyncName, LroProcessMessageMethodName, processMessageParameters);
+                }
+            }
         }
 
         public static void WritePageableLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, LowLevelPagingInfo pagingInfo, RestClientMethod nextPageMethod, bool async)

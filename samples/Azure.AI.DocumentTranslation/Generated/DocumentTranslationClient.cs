@@ -1304,12 +1304,17 @@ namespace Azure.AI.DocumentTranslation
         {
             Argument.AssertNotNull(content, nameof(content));
 
+            return await StartTranslationImplementationAsync("DocumentTranslationClient.StartTranslation", waitUntil, content, contentType, context).ConfigureAwait(false);
+        }
+
+        private async Task<Operation<BinaryData>> StartTranslationImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context)
+        {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, diagnosticsScopeName, OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1390,12 +1395,17 @@ namespace Azure.AI.DocumentTranslation
         {
             Argument.AssertNotNull(content, nameof(content));
 
+            return StartTranslationImplementation("DocumentTranslationClient.StartTranslation", waitUntil, content, contentType, context);
+        }
+
+        private Operation<BinaryData> StartTranslationImplementation(string diagnosticsScopeName, WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context)
+        {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, diagnosticsScopeName, OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
