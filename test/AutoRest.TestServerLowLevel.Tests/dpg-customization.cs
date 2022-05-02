@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
             Assert.AreEqual(1, diagnosticListener.Scopes.Count);
             Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
 
@@ -74,6 +74,9 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, diagnosticListener.Scopes.Count);
             Assert.AreEqual("model", $"{lro.Value.Received}");
             Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[1].Name);
+
+            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
+            Assert.IsTrue(diagnosticListener.Scopes[1].IsCompleted);
         });
 
         [Test]
@@ -82,9 +85,10 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
             Assert.AreEqual(1, diagnosticListener.Scopes.Count);
             Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
+            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
 
             var updatesCount = 0;
             while (!lro.HasCompleted)
@@ -92,6 +96,7 @@ namespace AutoRest.TestServer.Tests
                 await lro.UpdateStatusAsync();
                 updatesCount++;
                 Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[updatesCount].Name);
+                Assert.IsTrue(diagnosticListener.Scopes[updatesCount].IsCompleted);
             }
 
             // +1 due to the first scope being created by LroValueAsync
@@ -104,10 +109,12 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
             Assert.AreEqual(2, diagnosticListener.Scopes.Count);
             Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
             Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[1].Name);
+            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
+            Assert.IsTrue(diagnosticListener.Scopes[1].IsCompleted);
             Assert.AreEqual("model", $"{lro.Value.Received}");
         });
 
