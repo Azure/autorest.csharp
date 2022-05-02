@@ -67,7 +67,47 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Assert.AreEqual(1, diagnosticListener.Scopes.Count);
+            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
+
             await lro.WaitForCompletionAsync();
+            Assert.AreEqual(2, diagnosticListener.Scopes.Count);
+            Assert.AreEqual("model", $"{lro.Value.Received}");
+            Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[1].Name);
+        });
+
+        [Test]
+        public Task HandwrittenModelLro_ManualIteration() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Assert.AreEqual(1, diagnosticListener.Scopes.Count);
+            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
+
+            var updatesCount = 0;
+            while (!lro.HasCompleted)
+            {
+                await lro.UpdateStatusAsync();
+                updatesCount++;
+                Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[updatesCount].Name);
+            }
+
+            // +1 due to the first scope being created by LroValueAsync
+            Assert.AreEqual(updatesCount + 1, diagnosticListener.Scopes.Count);
+        });
+
+        [Test]
+        public Task HandwrittenModelLro_WaitUntilCompleted() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            var lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
+            Assert.AreEqual(2, diagnosticListener.Scopes.Count);
+            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
+            Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[1].Name);
             Assert.AreEqual("model", $"{lro.Value.Received}");
         });
 

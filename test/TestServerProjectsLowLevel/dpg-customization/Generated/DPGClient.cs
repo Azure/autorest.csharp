@@ -291,7 +291,7 @@ namespace dpg_customization_LowLevel
 
         private async Task<Operation<BinaryData>> LroImplementationAsync(string diagnosticsScopeName, WaitUntil waitUntil, string mode, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace dpg_customization_LowLevel
 
         private Operation<BinaryData> LroImplementation(string diagnosticsScopeName, WaitUntil waitUntil, string mode, RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
+            using var scope = ClientDiagnostics.CreateScope(diagnosticsScopeName);
             scope.Start();
             try
             {

@@ -33,9 +33,12 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         }
 
         protected static IDisposable WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam)
+            => WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsParam, $"{diagnostic.ScopeName:L}");
+
+        protected static IDisposable WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, FormattableString scopeName)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
-            writer.Line($"using var {scopeVariable:D} = {clientDiagnosticsParam}.CreateScope({diagnostic.ScopeName:L});");
+            writer.Line($"using var {scopeVariable:D} = {clientDiagnosticsParam}.CreateScope({scopeName});");
             foreach (DiagnosticAttribute diagnosticScopeAttributes in diagnostic.Attributes)
             {
                 writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");

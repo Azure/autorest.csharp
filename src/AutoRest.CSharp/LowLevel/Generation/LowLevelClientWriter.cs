@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.WriteMethodDeclaration(privateMethodSignature))
             {
-                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name, $"{ScopeNameParameter.Name:I}"))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {ScopeNameParameter.Name:I}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
