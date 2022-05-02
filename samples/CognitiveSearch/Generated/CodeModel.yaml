@@ -9628,7 +9628,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: SearchDocumentsResultValue
                 description: The sequence of results returned by the query.
             protocol: !Protocols {}
           readOnly: true
@@ -9709,7 +9709,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: SuggestDocumentsResultValue
                 description: The sequence of results returned by the query.
             protocol: !Protocols {}
           readOnly: true
@@ -9907,7 +9907,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Actions
+                name: IndexBatchValue
                 description: The actions in the batch.
             protocol: !Protocols {}
           required: true
@@ -10002,7 +10002,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: IndexDocumentsResultValue
                 description: The list of status information for each document in the indexing request.
             protocol: !Protocols {}
           readOnly: true
@@ -10084,7 +10084,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: AutocompleteResultValue
                 description: The list of returned Autocompleted items.
             protocol: !Protocols {}
           readOnly: true
@@ -10612,7 +10612,7 @@ schemas: !Schemas
             elementType: *ref_136
             language: !Languages 
               default:
-                name: DataSources
+                name: ListDataSourcesResultValue
                 description: The datasources in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -10947,7 +10947,7 @@ schemas: !Schemas
             elementType: *ref_158
             language: !Languages 
               default:
-                name: Indexers
+                name: ListIndexersResultValue
                 description: The indexers in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -12351,7 +12351,7 @@ schemas: !Schemas
             elementType: *ref_246
             language: !Languages 
               default:
-                name: Skillsets
+                name: ListSkillsetsResultValue
                 description: The skillsets defined in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -12543,7 +12543,7 @@ schemas: !Schemas
             elementType: *ref_258
             language: !Languages 
               default:
-                name: SynonymMaps
+                name: ListSynonymMapsResultValue
                 description: The synonym maps in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -16073,7 +16073,7 @@ schemas: !Schemas
             elementType: *ref_465
             language: !Languages 
               default:
-                name: Indexes
+                name: ListIndexesResultValue
                 description: The indexes in the Search service.
             protocol: !Protocols {}
           readOnly: true
