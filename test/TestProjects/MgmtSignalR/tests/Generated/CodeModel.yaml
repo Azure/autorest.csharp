@@ -9016,7 +9016,7 @@ testModel:
         operation: *ref_375
         operationGroup: *ref_376
   scenarioTests:
-    - &ref_390
+    - &ref_389
       _filePath: scenarios\signalR.yaml
       cleanUpSteps: []
       prepareSteps: []
@@ -12158,100 +12158,6 @@ testModel:
               variables: {}
             - &ref_388
               type: restCall
-              operationId: Operations_List
-              exampleFile: ../examples/Operations_List.json
-              exampleModel:
-                name: Operations_List
-                clientParameters:
-                  - exampleValue:
-                      schema: *ref_139
-                      rawValue: 2020-07-01-preview
-                      language: *ref_192
-                    parameter: *ref_141
-                methodParameters: []
-                operation: *ref_204
-                operationGroup: *ref_205
-                originalFile: ''
-                responses:
-                  '200':
-                    body:
-                      schema: *ref_143
-                      parentsValue: {}
-                      properties:
-                        nextLink:
-                          schema: *ref_24
-                          rawValue: providers/Microsoft.SignalRService?$skipToken={opaqueString}
-                          language: *ref_203
-                        value:
-                          schema: *ref_127
-                          elements:
-                            - schema: *ref_25
-                              parentsValue: {}
-                              properties:
-                                name:
-                                  schema: *ref_4
-                                  rawValue: Microsoft.SignalRService/SignalR/read
-                                  language: *ref_195
-                                display:
-                                  schema: *ref_26
-                                  parentsValue: {}
-                                  properties:
-                                    description:
-                                      schema: *ref_9
-                                      rawValue: View the SignalR's settings and configurations in the management portal or through API
-                                      language: *ref_201
-                                    operation:
-                                      schema: *ref_8
-                                      rawValue: Manage SignalR (read-only)
-                                      language: *ref_200
-                                    provider:
-                                      schema: *ref_6
-                                      rawValue: Microsoft.SignalRService
-                                      language: *ref_198
-                                    resource:
-                                      schema: *ref_7
-                                      rawValue: SignalR
-                                      language: *ref_199
-                                  language: *ref_197
-                                isDataAction:
-                                  schema: *ref_5
-                                  rawValue: false
-                                  language: *ref_196
-                                properties:
-                                  schema: *ref_27
-                                  parentsValue: {}
-                                  properties: {}
-                                  language: *ref_202
-                          language: *ref_194
-                      language: *ref_193
-                    headers: {}
-              exampleName: Operations_List
-              expectedResponse:
-                nextLink: providers/Microsoft.SignalRService?$skipToken={opaqueString}
-                value:
-                  - name: Microsoft.SignalRService/SignalR/read
-                    display:
-                      description: View the SignalR's settings and configurations in the management portal or through API
-                      operation: Manage SignalR (read-only)
-                      provider: Microsoft.SignalRService
-                      resource: SignalR
-                    isDataAction: false
-                    properties: {}
-              outputVariables: {}
-              outputVariablesModel: {}
-              requestParameters:
-                api-version: 2020-07-01-preview
-              requestUpdate: []
-              requiredVariables: []
-              requiredVariablesDefault: {}
-              resourceUpdate: []
-              responseUpdate: []
-              secretVariables: []
-              statusCode: 200
-              step: Operations_List
-              variables: {}
-            - &ref_389
-              type: restCall
               operationId: SignalR_Delete
               exampleFile: ../examples/SignalR_Delete.json
               exampleModel:
@@ -12300,7 +12206,7 @@ testModel:
               statusCode: 200
               step: SignalR_Delete
               variables: {}
-          _scenarioDef: *ref_390
+          _scenarioDef: *ref_389
           requiredVariables:
             - subscriptionId
             - location
@@ -12322,7 +12228,6 @@ testModel:
             - *ref_386
             - *ref_387
             - *ref_388
-            - *ref_389
           variables:
             name: $(name)
             resourceName: $(resourceName)

@@ -26,7 +26,5 @@ scenarios:
         exampleFile: ../examples/SignalR_ListByResourceGroup.json
       - step: SignalR_ListBySubscription
         exampleFile: ../examples/SignalR_ListBySubscription.json
-      - step: Operations_List
-        exampleFile: ../examples/Operations_List.json
       - step: SignalR_Delete
         exampleFile: ../examples/SignalR_Delete.json

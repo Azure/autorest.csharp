@@ -241,12 +241,6 @@ namespace MgmtSignalR.Tests.Scenario
             }
 
             {
-                // Step: Operations_List
-
-                // Operation is not implemented for this Step!
-            }
-
-            {
                 // Step: SignalR_Delete
 
                 var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
