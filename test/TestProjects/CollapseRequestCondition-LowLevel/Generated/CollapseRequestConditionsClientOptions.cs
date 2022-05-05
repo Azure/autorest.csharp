@@ -27,7 +27,6 @@ namespace CollapseRequestCondition_LowLevel
         /// <summary> Initializes new instance of CollapseRequestConditionsClientOptions. </summary>
         public CollapseRequestConditionsClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

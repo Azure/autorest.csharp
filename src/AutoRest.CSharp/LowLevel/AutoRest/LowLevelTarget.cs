@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var optionsWriter = new CodeWriter();
-            ClientOptionsWriter.WriteClientOptions(optionsWriter, context.Library.ClientOptions, true);
+            ClientOptionsWriter.WriteClientOptions(optionsWriter, context.Library.ClientOptions);
             project.AddGeneratedFile($"{context.Library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
         }
     }

@@ -18,7 +18,7 @@ $files = @('ClientDiagnostics.cs', 'DiagnosticScope.cs', 'DiagnosticScopeFactory
     'OperationInternalBase.cs', 'OperationInternal.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'ConstantDelayStrategy.cs', 'DelayStrategy.cs', 'ExponentialDelayStrategy.cs', 'OperationPoller.cs', 'RetryAfterDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs')
+    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs')
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/core/Azure.Core/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
 

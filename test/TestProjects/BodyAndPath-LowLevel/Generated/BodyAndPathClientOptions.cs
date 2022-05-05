@@ -27,7 +27,6 @@ namespace BodyAndPath_LowLevel
         /// <summary> Initializes new instance of BodyAndPathClientOptions. </summary>
         public BodyAndPathClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V2014_04_01_preview => "2014-04-01-preview",

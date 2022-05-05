@@ -27,7 +27,6 @@ namespace url_LowLevel
         /// <summary> Initializes new instance of AutoRestUrlTestServiceClientOptions. </summary>
         public AutoRestUrlTestServiceClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

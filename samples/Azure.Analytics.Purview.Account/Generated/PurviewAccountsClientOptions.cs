@@ -27,7 +27,6 @@ namespace Azure.Analytics.Purview.Account
         /// <summary> Initializes new instance of PurviewAccountsClientOptions. </summary>
         public PurviewAccountsClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V2019_11_01_preview => "2019-11-01-preview",

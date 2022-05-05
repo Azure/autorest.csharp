@@ -27,7 +27,6 @@ namespace lro_LowLevel
         /// <summary> Initializes new instance of AutoRestLongRunningOperationTestServiceClientOptions. </summary>
         public AutoRestLongRunningOperationTestServiceClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

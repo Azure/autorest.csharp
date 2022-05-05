@@ -36,23 +36,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task GetHandwrittenModelWithNestedSpans() => Test(async (host) =>
-        {
-            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
-            var scopes = diagnosticListener.Scopes;
-            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
-
-            DPGClientOptions options = new();
-            options.Diagnostics.SuppressNestedClientSpans = false;
-            Response<Product> result = await new DPGClient(Key, host, options).GetModelValueAsync("model");
-            Assert.AreEqual(2, scopes.Count);
-            Assert.AreEqual("DPGClient.GetModelValue", scopes[0].Name);
-            Assert.AreEqual("DPGClient.GetModel", scopes[1].Name);
-            Assert.IsTrue(scopes.TrueForAll(s => s.IsCompleted));
-            Assert.AreEqual("model", $"{result.Value.Received}");
-        }, true);
-
-        [Test]
         public Task PostRawModel() => Test(async (host) =>
         {
             var value = new

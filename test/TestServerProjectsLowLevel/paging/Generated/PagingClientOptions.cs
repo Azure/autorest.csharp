@@ -27,7 +27,6 @@ namespace paging_LowLevel
         /// <summary> Initializes new instance of PagingClientOptions. </summary>
         public PagingClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V1_0_0 => "1.0.0",

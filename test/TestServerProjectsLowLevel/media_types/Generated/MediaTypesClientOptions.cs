@@ -27,7 +27,6 @@ namespace media_types_LowLevel
         /// <summary> Initializes new instance of MediaTypesClientOptions. </summary>
         public MediaTypesClientOptions(ServiceVersion version = LatestVersion)
         {
-            Diagnostics.SuppressNestedClientSpans = true;
             Version = version switch
             {
                 ServiceVersion.V2_0_preview => "2.0-preview",
