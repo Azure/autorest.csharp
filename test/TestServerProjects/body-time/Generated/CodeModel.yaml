@@ -33,7 +33,7 @@ schemas: !Schemas
           name: ErrorMessage
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -130,7 +130,6 @@ operationGroups:
     $key: time
     operations:
       - !Operation 
-        operationId: time_get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -204,14 +203,13 @@ operationGroups:
             description: Get time value "11:34:56"
         protocol: !Protocols {}
       - !Operation 
-        operationId: time_put
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requestMediaTypes:
-          application/json: !Request &ref_9
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -265,12 +263,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_9
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''

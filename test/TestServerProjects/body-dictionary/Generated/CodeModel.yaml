@@ -185,6 +185,14 @@ schemas: !Schemas
           name: DictionaryOfString
           description: The empty dictionary value {}
       protocol: !Protocols {}
+    - !DictionarySchema &ref_42
+      type: dictionary
+      elementType: *ref_2
+      language: !Languages 
+        default:
+          name: DictionaryOfString
+          description: Dictionary of <string>
+      protocol: !Protocols {}
     - !DictionarySchema &ref_43
       type: dictionary
       elementType: *ref_2
@@ -211,11 +219,11 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !DictionarySchema &ref_46
       type: dictionary
-      elementType: *ref_2
+      elementType: *ref_3
       language: !Languages 
         default:
-          name: DictionaryOfString
-          description: Dictionary of <string>
+          name: DictionaryOfBoolean
+          description: 'The dictionary value {"0": true, "1": false, "2": false, "3": true }'
       protocol: !Protocols {}
     - !DictionarySchema &ref_47
       type: dictionary
@@ -225,15 +233,7 @@ schemas: !Schemas
           name: DictionaryOfBoolean
           description: 'The dictionary value {"0": true, "1": false, "2": false, "3": true }'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_48
-      type: dictionary
-      elementType: *ref_3
-      language: !Languages 
-        default:
-          name: DictionaryOfBoolean
-          description: 'The dictionary value {"0": true, "1": false, "2": false, "3": true }'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_51
+    - !DictionarySchema &ref_49
       type: dictionary
       elementType: *ref_3
       language: !Languages 
@@ -241,7 +241,7 @@ schemas: !Schemas
           name: DictionaryOfBoolean
           description: 'The dictionary value {"0": true, "1": null, "2": false }'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_52
+    - !DictionarySchema &ref_50
       type: dictionary
       elementType: *ref_3
       language: !Languages 
@@ -249,7 +249,15 @@ schemas: !Schemas
           name: DictionaryOfBoolean
           description: The dictionary value [true, 'boolean', false]
       protocol: !Protocols {}
-    - !DictionarySchema &ref_53
+    - !DictionarySchema &ref_51
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: DictionaryOfInteger
+          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_52
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -263,23 +271,31 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: DictionaryOfInteger
-          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_57
-      type: dictionary
-      elementType: *ref_1
-      language: !Languages 
-        default:
-          name: DictionaryOfInteger
           description: 'The dictionary value {"0": 1, "1": null, "2": 0}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_58
+    - !DictionarySchema &ref_55
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
           name: DictionaryOfInteger
           description: 'The dictionary value {"0": 1, "1": "integer", "2": 0}'
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_56
+      type: dictionary
+      elementType: *ref_4
+      language: !Languages 
+        default:
+          name: DictionaryOfInteger
+          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_57
+      type: dictionary
+      elementType: *ref_4
+      language: !Languages 
+        default:
+          name: DictionaryOfInteger
+          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_59
       type: dictionary
@@ -287,7 +303,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: DictionaryOfInteger
-          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
+          description: 'The dictionary value {"0": 1, "1": null, "2": 0}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_60
       type: dictionary
@@ -295,23 +311,31 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: DictionaryOfInteger
-          description: 'The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
+          description: 'The dictionary value {"0": 1, "1": "integer", "2": 0}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_63
+    - !DictionarySchema &ref_61
       type: dictionary
-      elementType: *ref_4
+      elementType: *ref_5
       language: !Languages 
         default:
-          name: DictionaryOfInteger
-          description: 'The dictionary value {"0": 1, "1": null, "2": 0}'
+          name: DictionaryOfNumber
+          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_62
+      type: dictionary
+      elementType: *ref_5
+      language: !Languages 
+        default:
+          name: DictionaryOfNumber
+          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_64
       type: dictionary
-      elementType: *ref_4
+      elementType: *ref_5
       language: !Languages 
         default:
-          name: DictionaryOfInteger
-          description: 'The dictionary value {"0": 1, "1": "integer", "2": 0}'
+          name: DictionaryOfNumber
+          description: 'The dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_65
       type: dictionary
@@ -319,11 +343,19 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: DictionaryOfNumber
-          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
+          description: 'The dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_66
       type: dictionary
-      elementType: *ref_5
+      elementType: *ref_6
+      language: !Languages 
+        default:
+          name: DictionaryOfNumber
+          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_67
+      type: dictionary
+      elementType: *ref_6
       language: !Languages 
         default:
           name: DictionaryOfNumber
@@ -331,7 +363,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !DictionarySchema &ref_69
       type: dictionary
-      elementType: *ref_5
+      elementType: *ref_6
       language: !Languages 
         default:
           name: DictionaryOfNumber
@@ -339,7 +371,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !DictionarySchema &ref_70
       type: dictionary
-      elementType: *ref_5
+      elementType: *ref_6
       language: !Languages 
         default:
           name: DictionaryOfNumber
@@ -347,53 +379,21 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !DictionarySchema &ref_71
       type: dictionary
-      elementType: *ref_6
+      elementType: *ref_2
       language: !Languages 
         default:
-          name: DictionaryOfNumber
-          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
+          name: DictionaryOfString
+          description: 'The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
       protocol: !Protocols {}
     - !DictionarySchema &ref_72
       type: dictionary
-      elementType: *ref_6
-      language: !Languages 
-        default:
-          name: DictionaryOfNumber
-          description: 'The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_75
-      type: dictionary
-      elementType: *ref_6
-      language: !Languages 
-        default:
-          name: DictionaryOfNumber
-          description: 'The dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_76
-      type: dictionary
-      elementType: *ref_6
-      language: !Languages 
-        default:
-          name: DictionaryOfNumber
-          description: 'The dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_77
-      type: dictionary
       elementType: *ref_2
       language: !Languages 
         default:
           name: DictionaryOfString
           description: 'The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_78
-      type: dictionary
-      elementType: *ref_2
-      language: !Languages 
-        default:
-          name: DictionaryOfString
-          description: 'The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_81
+    - !DictionarySchema &ref_74
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -401,7 +401,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: 'The dictionary value {"0": "foo", "1": null, "2": "foo2"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_82
+    - !DictionarySchema &ref_75
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -409,7 +409,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: 'The dictionary value {"0": "foo", "1": 123, "2": "foo2"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_83
+    - !DictionarySchema &ref_76
       type: dictionary
       elementType: !DateSchema &ref_7
         type: date
@@ -426,7 +426,7 @@ schemas: !Schemas
           name: DictionaryOfDate
           description: 'The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_84
+    - !DictionarySchema &ref_77
       type: dictionary
       elementType: *ref_7
       language: !Languages 
@@ -434,7 +434,7 @@ schemas: !Schemas
           name: DictionaryOfDate
           description: 'The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_87
+    - !DictionarySchema &ref_79
       type: dictionary
       elementType: *ref_7
       language: !Languages 
@@ -442,7 +442,7 @@ schemas: !Schemas
           name: DictionaryOfDate
           description: 'The dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_88
+    - !DictionarySchema &ref_80
       type: dictionary
       elementType: *ref_7
       language: !Languages 
@@ -450,7 +450,7 @@ schemas: !Schemas
           name: DictionaryOfDate
           description: 'The dictionary value {"0": "2011-03-22", "1": "date"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_89
+    - !DictionarySchema &ref_81
       type: dictionary
       elementType: !DateTimeSchema &ref_8
         type: date-time
@@ -468,7 +468,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_90
+    - !DictionarySchema &ref_82
       type: dictionary
       elementType: *ref_8
       language: !Languages 
@@ -476,7 +476,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_93
+    - !DictionarySchema &ref_84
       type: dictionary
       elementType: *ref_8
       language: !Languages 
@@ -484,7 +484,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_94
+    - !DictionarySchema &ref_85
       type: dictionary
       elementType: *ref_8
       language: !Languages 
@@ -492,7 +492,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_95
+    - !DictionarySchema &ref_86
       type: dictionary
       elementType: !DateTimeSchema &ref_9
         type: date-time
@@ -510,7 +510,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_96
+    - !DictionarySchema &ref_87
       type: dictionary
       elementType: *ref_9
       language: !Languages 
@@ -518,7 +518,7 @@ schemas: !Schemas
           name: DictionaryOfDateTime
           description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_99
+    - !DictionarySchema &ref_89
       type: dictionary
       elementType: !DurationSchema &ref_10
         type: duration
@@ -535,7 +535,7 @@ schemas: !Schemas
           name: DictionaryOfDuration
           description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_100
+    - !DictionarySchema &ref_90
       type: dictionary
       elementType: *ref_10
       language: !Languages 
@@ -543,7 +543,7 @@ schemas: !Schemas
           name: DictionaryOfDuration
           description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_103
+    - !DictionarySchema &ref_92
       type: dictionary
       elementType: !ByteArraySchema &ref_22
         type: byte-array
@@ -561,7 +561,7 @@ schemas: !Schemas
           name: DictionaryOfByteArray
           description: 'The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_104
+    - !DictionarySchema &ref_93
       type: dictionary
       elementType: !ByteArraySchema &ref_23
         type: byte-array
@@ -579,7 +579,7 @@ schemas: !Schemas
           name: DictionaryOfByteArray
           description: 'The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_107
+    - !DictionarySchema &ref_95
       type: dictionary
       elementType: !ByteArraySchema &ref_24
         type: byte-array
@@ -597,7 +597,7 @@ schemas: !Schemas
           name: DictionaryOfByteArray
           description: 'The byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_108
+    - !DictionarySchema &ref_96
       type: dictionary
       elementType: !ByteArraySchema &ref_25
         type: byte-array
@@ -615,7 +615,7 @@ schemas: !Schemas
           name: DictionaryOfByteArray
           description: 'The base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_109
+    - !DictionarySchema &ref_97
       type: dictionary
       elementType: !ObjectSchema &ref_13
         type: object
@@ -655,7 +655,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: Dictionary of complex type with null value
       protocol: !Protocols {}
-    - !DictionarySchema &ref_110
+    - !DictionarySchema &ref_98
       type: dictionary
       elementType: *ref_13
       language: !Languages 
@@ -663,7 +663,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: Empty dictionary of complex type {}
       protocol: !Protocols {}
-    - !DictionarySchema &ref_111
+    - !DictionarySchema &ref_99
       type: dictionary
       elementType: *ref_13
       nullableItems: true
@@ -672,7 +672,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: 'Dictionary of complex type with null item [{''integer'': 1 ''string'': ''2''}, null, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_112
+    - !DictionarySchema &ref_100
       type: dictionary
       elementType: *ref_13
       language: !Languages 
@@ -680,7 +680,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: 'Dictionary of complex type with empty item [{''integer'': 1 ''string'': ''2''}, {}, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_113
+    - !DictionarySchema &ref_101
       type: dictionary
       elementType: *ref_13
       language: !Languages 
@@ -688,7 +688,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: 'Dictionary of complex type with [{''integer'': 1 ''string'': ''2''}, {''integer'': 3, ''string'': ''4''}, {''integer'': 5, ''string'': ''6''}]'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_114
+    - !DictionarySchema &ref_102
       type: dictionary
       elementType: *ref_13
       language: !Languages 
@@ -696,7 +696,7 @@ schemas: !Schemas
           name: DictionaryOfWidget
           description: 'Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_117
+    - !DictionarySchema &ref_104
       type: dictionary
       elementType: !ArraySchema &ref_28
         type: array
@@ -714,7 +714,7 @@ schemas: !Schemas
           name: DictionaryOfpaths1Y9Iid6DictionaryArrayNullGetResponses200ContentApplicationJsonSchemaAdditionalproperties
           description: a null array
       protocol: !Protocols {}
-    - !DictionarySchema &ref_118
+    - !DictionarySchema &ref_105
       type: dictionary
       elementType: !ArraySchema &ref_29
         type: array
@@ -732,7 +732,7 @@ schemas: !Schemas
           name: DictionaryOfpathsAfa1HvDictionaryArrayEmptyGetResponses200ContentApplicationJsonSchemaAdditionalproperties
           description: An empty dictionary {}
       protocol: !Protocols {}
-    - !DictionarySchema &ref_119
+    - !DictionarySchema &ref_106
       type: dictionary
       elementType: !ArraySchema &ref_30
         type: array
@@ -751,7 +751,7 @@ schemas: !Schemas
           name: DictionaryOfpaths1Xk9Za9DictionaryArrayItemnullGetResponses200ContentApplicationJsonSchemaAdditionalproperties
           description: 'An array of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_120
+    - !DictionarySchema &ref_107
       type: dictionary
       elementType: !ArraySchema &ref_31
         type: array
@@ -769,7 +769,7 @@ schemas: !Schemas
           name: DictionaryOfpaths3Bo0LmDictionaryArrayItememptyGetResponses200ContentApplicationJsonSchemaAdditionalproperties
           description: 'An array of array of strings {"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_121
+    - !DictionarySchema &ref_108
       type: dictionary
       elementType: !ArraySchema &ref_32
         type: array
@@ -787,7 +787,7 @@ schemas: !Schemas
           name: DictionaryOfpathsEx22ApDictionaryArrayValidGetResponses200ContentApplicationJsonSchemaAdditionalproperties
           description: 'An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
       protocol: !Protocols {}
-    - !DictionarySchema &ref_122
+    - !DictionarySchema &ref_109
       type: dictionary
       elementType: !ArraySchema &ref_33
         type: array
@@ -813,7 +813,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_125
+    - !DictionarySchema &ref_111
       type: dictionary
       elementType: *ref_16
       language: !Languages 
@@ -829,7 +829,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_126
+    - !DictionarySchema &ref_112
       type: dictionary
       elementType: *ref_17
       language: !Languages 
@@ -845,7 +845,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_127
+    - !DictionarySchema &ref_113
       type: dictionary
       elementType: *ref_18
       nullableItems: true
@@ -862,7 +862,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_128
+    - !DictionarySchema &ref_114
       type: dictionary
       elementType: *ref_19
       language: !Languages 
@@ -878,7 +878,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_129
+    - !DictionarySchema &ref_115
       type: dictionary
       elementType: *ref_20
       language: !Languages 
@@ -894,7 +894,7 @@ schemas: !Schemas
           name: DictionaryOfString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_130
+    - !DictionarySchema &ref_116
       type: dictionary
       elementType: *ref_21
       language: !Languages 
@@ -977,7 +977,6 @@ operationGroups:
     $key: dictionary
     operations:
       - !Operation 
-        operationId: dictionary_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1044,7 +1043,6 @@ operationGroups:
             description: Get null dictionary value
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1111,14 +1109,13 @@ operationGroups:
             description: Get empty dictionary value {}
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_42
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -1172,8 +1169,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_42
         signatureParameters: []
         responses:
           - !Response 
@@ -1205,7 +1200,6 @@ operationGroups:
             description: Set dictionary value empty {}
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getNullValue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1240,7 +1234,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_43
+            schema: *ref_42
             language: !Languages 
               default:
                 name: ''
@@ -1272,7 +1266,6 @@ operationGroups:
             description: Get Dictionary with null value
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getNullKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1307,7 +1300,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1339,7 +1332,6 @@ operationGroups:
             description: Get Dictionary with null key
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getEmptyStringKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1374,7 +1366,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -1406,7 +1398,6 @@ operationGroups:
             description: Get Dictionary with key as empty string
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1441,7 +1432,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_46
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -1473,7 +1464,6 @@ operationGroups:
             description: Get invalid Dictionary value
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getBooleanTfft
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1508,7 +1498,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -1540,14 +1530,13 @@ operationGroups:
             description: 'Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putBooleanTfft
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_50
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -1562,8 +1551,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_49
-                schema: *ref_48
+              - !Parameter &ref_48
+                schema: *ref_47
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1588,7 +1577,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_49
+              - *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -1601,8 +1590,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_50
         signatureParameters: []
         responses:
           - !Response 
@@ -1634,7 +1621,6 @@ operationGroups:
             description: 'Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getBooleanInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1669,7 +1655,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1701,7 +1687,6 @@ operationGroups:
             description: 'Get boolean dictionary value {"0": true, "1": null, "2": false }'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getBooleanInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1736,7 +1721,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_52
+            schema: *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1768,7 +1753,6 @@ operationGroups:
             description: 'Get boolean dictionary value ''{"0": true, "1": "boolean", "2": false}'''
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getIntegerValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1803,7 +1787,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1835,14 +1819,13 @@ operationGroups:
             description: 'Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putIntegerValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_56
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -1857,8 +1840,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
-                schema: *ref_54
+              - !Parameter &ref_53
+                schema: *ref_52
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1883,7 +1866,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -1896,8 +1879,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_56
         signatureParameters: []
         responses:
           - !Response 
@@ -1929,7 +1910,6 @@ operationGroups:
             description: 'Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getIntInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1964,7 +1944,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_57
+            schema: *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1996,7 +1976,6 @@ operationGroups:
             description: 'Get integer dictionary value {"0": 1, "1": null, "2": 0}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getIntInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2031,7 +2010,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_58
+            schema: *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -2063,7 +2042,6 @@ operationGroups:
             description: 'Get integer dictionary value {"0": 1, "1": "integer", "2": 0}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getLongValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2098,7 +2076,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_59
+            schema: *ref_56
             language: !Languages 
               default:
                 name: ''
@@ -2130,14 +2108,13 @@ operationGroups:
             description: 'Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putLongValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_62
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -2152,8 +2129,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_61
-                schema: *ref_60
+              - !Parameter &ref_58
+                schema: *ref_57
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2178,7 +2155,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_61
+              - *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -2191,8 +2168,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_62
         signatureParameters: []
         responses:
           - !Response 
@@ -2224,7 +2199,6 @@ operationGroups:
             description: 'Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getLongInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2259,7 +2233,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_63
+            schema: *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -2291,7 +2265,6 @@ operationGroups:
             description: 'Get long dictionary value {"0": 1, "1": null, "2": 0}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getLongInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2326,7 +2299,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_64
+            schema: *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -2358,7 +2331,6 @@ operationGroups:
             description: 'Get long dictionary value {"0": 1, "1": "integer", "2": 0}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getFloatValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2393,7 +2365,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_65
+            schema: *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -2425,14 +2397,13 @@ operationGroups:
             description: 'Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putFloatValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_68
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -2447,8 +2418,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_67
-                schema: *ref_66
+              - !Parameter &ref_63
+                schema: *ref_62
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2473,7 +2444,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_67
+              - *ref_63
             language: !Languages 
               default:
                 name: ''
@@ -2486,8 +2457,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_68
         signatureParameters: []
         responses:
           - !Response 
@@ -2519,7 +2488,6 @@ operationGroups:
             description: 'Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getFloatInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2554,7 +2522,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_69
+            schema: *ref_64
             language: !Languages 
               default:
                 name: ''
@@ -2586,7 +2554,6 @@ operationGroups:
             description: 'Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getFloatInvalidString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2621,7 +2588,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_70
+            schema: *ref_65
             language: !Languages 
               default:
                 name: ''
@@ -2653,7 +2620,6 @@ operationGroups:
             description: 'Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDoubleValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2688,7 +2654,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_71
+            schema: *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -2720,14 +2686,302 @@ operationGroups:
             description: 'Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putDoubleValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_74
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_68
+                schema: *ref_67
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_68
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /dictionary/prim/double/0--0.01-1.2e20
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDoubleValid
+            description: 'Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/double/0.0-null-1.2e20
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_69
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDoubleInvalidNull
+            description: 'Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/double/1.number.0
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_70
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDoubleInvalidString
+            description: 'Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/string/foo1.foo2.foo3
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_71
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetStringValid
+            description: 'Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -2775,309 +3029,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /dictionary/prim/double/0--0.01-1.2e20
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_74
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDoubleValid
-            description: 'Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDoubleInvalidNull
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/double/0.0-null-1.2e20
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_75
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDoubleInvalidNull
-            description: 'Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDoubleInvalidString
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/double/1.number.0
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_76
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDoubleInvalidString
-            description: 'Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getStringValid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/string/foo1.foo2.foo3
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_77
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetStringValid
-            description: 'Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_putStringValid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_80
-            parameters:
-              - !Parameter 
-                schema: *ref_39
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_79
-                schema: *ref_78
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_79
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /dictionary/prim/string/foo1.foo2.foo3
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_80
         signatureParameters: []
         responses:
           - !Response 
@@ -3109,7 +3066,6 @@ operationGroups:
             description: 'Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getStringWithNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3144,7 +3100,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_81
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -3176,7 +3132,6 @@ operationGroups:
             description: 'Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getStringWithInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3211,7 +3166,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_82
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -3243,7 +3198,6 @@ operationGroups:
             description: 'Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3278,7 +3232,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_83
+            schema: *ref_76
             language: !Languages 
               default:
                 name: ''
@@ -3310,14 +3264,13 @@ operationGroups:
             description: 'Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putDateValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_86
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -3332,8 +3285,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_85
-                schema: *ref_84
+              - !Parameter &ref_78
+                schema: *ref_77
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3358,7 +3311,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_85
+              - *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -3371,8 +3324,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_86
         signatureParameters: []
         responses:
           - !Response 
@@ -3404,7 +3355,6 @@ operationGroups:
             description: 'Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDateInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3439,7 +3389,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_87
+            schema: *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -3471,7 +3421,6 @@ operationGroups:
             description: 'Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDateInvalidChars
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3506,7 +3455,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_88
+            schema: *ref_80
             language: !Languages 
               default:
                 name: ''
@@ -3538,7 +3487,6 @@ operationGroups:
             description: 'Get date dictionary value {"0": "2011-03-22", "1": "date"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDateTimeValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3573,7 +3521,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_89
+            schema: *ref_81
             language: !Languages 
               default:
                 name: ''
@@ -3605,14 +3553,459 @@ operationGroups:
             description: 'Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putDateTimeValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_92
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_83
+                schema: *ref_82
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /dictionary/prim/date-time/valid
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDateTimeValid
+            description: 'Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/date-time/invalidnull
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_84
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeInvalidNull
+            description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/date-time/invalidchars
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_85
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeInvalidChars
+            description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/date-time-rfc1123/valid
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_86
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDateTimeRfc1123Valid
+            description: 'Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_88
+                schema: *ref_87
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: arrayBody
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_88
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /dictionary/prim/date-time-rfc1123/valid
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutDateTimeRfc1123Valid
+            description: 'Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_35
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /dictionary/prim/duration/valid
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_89
+            language: !Languages 
+              default:
+                name: ''
+                description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetDurationValid
+            description: 'Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_34
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -3660,470 +4053,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /dictionary/prim/date-time/valid
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_92
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDateTimeValid
-            description: 'Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDateTimeInvalidNull
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/date-time/invalidnull
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTimeInvalidNull
-            description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDateTimeInvalidChars
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/date-time/invalidchars
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_94
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTimeInvalidChars
-            description: 'Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDateTimeRfc1123Valid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/date-time-rfc1123/valid
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_95
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDateTimeRfc1123Valid
-            description: 'Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_putDateTimeRfc1123Valid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_98
-            parameters:
-              - !Parameter 
-                schema: *ref_39
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_97
-                schema: *ref_96
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_97
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /dictionary/prim/date-time-rfc1123/valid
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_98
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Empty Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutDateTimeRfc1123Valid
-            description: 'Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_getDurationValid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /dictionary/prim/duration/valid
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_99
-            language: !Languages 
-              default:
-                name: ''
-                description: 'The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: GetDurationValid
-            description: 'Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: dictionary_putDurationValid
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_102
-            parameters:
-              - !Parameter 
-                schema: *ref_39
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_101
-                schema: *ref_100
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: arrayBody
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_101
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /dictionary/prim/duration/valid
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_102
         signatureParameters: []
         responses:
           - !Response 
@@ -4155,7 +4090,6 @@ operationGroups:
             description: 'Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getByteValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4190,7 +4124,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_103
+            schema: *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -4222,14 +4156,13 @@ operationGroups:
             description: 'Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putByteValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_106
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -4244,8 +4177,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_105
-                schema: *ref_104
+              - !Parameter &ref_94
+                schema: *ref_93
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4270,7 +4203,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_105
+              - *ref_94
             language: !Languages 
               default:
                 name: ''
@@ -4283,8 +4216,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_106
         signatureParameters: []
         responses:
           - !Response 
@@ -4316,7 +4247,6 @@ operationGroups:
             description: 'Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getByteInvalidNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4351,7 +4281,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_107
+            schema: *ref_95
             language: !Languages 
               default:
                 name: ''
@@ -4383,7 +4313,6 @@ operationGroups:
             description: 'Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getBase64Url
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4418,7 +4347,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_108
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -4450,7 +4379,6 @@ operationGroups:
             description: 'Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getComplexNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4485,7 +4413,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_109
+            schema: *ref_97
             nullable: true
             language: !Languages 
               default:
@@ -4518,7 +4446,6 @@ operationGroups:
             description: Get dictionary of complex type null value
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getComplexEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4553,7 +4480,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_110
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -4585,7 +4512,6 @@ operationGroups:
             description: Get empty dictionary of complex type {}
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getComplexItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4620,7 +4546,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_111
+            schema: *ref_99
             language: !Languages 
               default:
                 name: ''
@@ -4652,7 +4578,6 @@ operationGroups:
             description: 'Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getComplexItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4687,7 +4612,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_100
             language: !Languages 
               default:
                 name: ''
@@ -4719,7 +4644,6 @@ operationGroups:
             description: 'Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getComplexValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4754,7 +4678,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_113
+            schema: *ref_101
             language: !Languages 
               default:
                 name: ''
@@ -4786,14 +4710,13 @@ operationGroups:
             description: 'Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putComplexValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_116
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -4808,8 +4731,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_115
-                schema: *ref_114
+              - !Parameter &ref_103
+                schema: *ref_102
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4834,7 +4757,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_115
+              - *ref_103
             language: !Languages 
               default:
                 name: ''
@@ -4847,8 +4770,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_116
         signatureParameters: []
         responses:
           - !Response 
@@ -4880,7 +4801,6 @@ operationGroups:
             description: 'Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getArrayNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4915,7 +4835,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_104
             nullable: true
             language: !Languages 
               default:
@@ -4948,7 +4868,6 @@ operationGroups:
             description: Get a null array
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getArrayEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4983,7 +4902,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_105
             language: !Languages 
               default:
                 name: ''
@@ -5015,7 +4934,6 @@ operationGroups:
             description: Get an empty dictionary {}
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getArrayItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5050,7 +4968,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_119
+            schema: *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -5082,7 +5000,6 @@ operationGroups:
             description: 'Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getArrayItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5117,7 +5034,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -5149,7 +5066,6 @@ operationGroups:
             description: 'Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getArrayValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5184,7 +5100,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_121
+            schema: *ref_108
             language: !Languages 
               default:
                 name: ''
@@ -5216,14 +5132,13 @@ operationGroups:
             description: 'Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putArrayValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_124
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -5238,8 +5153,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_123
-                schema: *ref_122
+              - !Parameter &ref_110
+                schema: *ref_109
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5264,7 +5179,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_123
+              - *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -5277,8 +5192,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_124
         signatureParameters: []
         responses:
           - !Response 
@@ -5310,7 +5223,6 @@ operationGroups:
             description: 'Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDictionaryNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5345,7 +5257,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_125
+            schema: *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -5377,7 +5289,6 @@ operationGroups:
             description: Get an dictionaries of dictionaries with value null
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDictionaryEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5412,7 +5323,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_126
+            schema: *ref_112
             language: !Languages 
               default:
                 name: ''
@@ -5444,7 +5355,6 @@ operationGroups:
             description: Get an dictionaries of dictionaries of type <string, string> with value {}
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDictionaryItemNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5479,7 +5389,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_127
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -5511,7 +5421,6 @@ operationGroups:
             description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDictionaryItemEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5546,7 +5455,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_128
+            schema: *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -5578,7 +5487,6 @@ operationGroups:
             description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_getDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5613,7 +5521,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_129
+            schema: *ref_115
             language: !Languages 
               default:
                 name: ''
@@ -5645,14 +5553,13 @@ operationGroups:
             description: 'Get an dictionaries of dictionaries of type <string, string> with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: dictionary_putDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_132
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_39
@@ -5667,8 +5574,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
-                schema: *ref_130
+              - !Parameter &ref_117
+                schema: *ref_116
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5693,7 +5600,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_131
+              - *ref_117
             language: !Languages 
               default:
                 name: ''
@@ -5706,8 +5613,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_132
         signatureParameters: []
         responses:
           - !Response 

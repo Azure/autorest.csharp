@@ -65,14 +65,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requestMediaTypes:
-          application/json: !Request &ref_6
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -126,8 +125,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_6
         signatureParameters: []
         responses:
           - !BinaryResponse 

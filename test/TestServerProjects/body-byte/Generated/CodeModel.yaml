@@ -99,7 +99,7 @@ schemas: !Schemas
           name: ByteArray
           description: Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
       protocol: !Protocols {}
-    - !ByteArraySchema &ref_13
+    - !ByteArraySchema &ref_12
       type: byte-array
       format: byte
       apiVersions:
@@ -165,7 +165,6 @@ operationGroups:
     $key: byte
     operations:
       - !Operation 
-        operationId: byte_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -238,7 +237,6 @@ operationGroups:
             description: Get null byte value
         protocol: !Protocols {}
       - !Operation 
-        operationId: byte_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -305,7 +303,6 @@ operationGroups:
             description: Get empty byte value ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: byte_getNonAscii
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -372,14 +369,13 @@ operationGroups:
             description: Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         protocol: !Protocols {}
       - !Operation 
-        operationId: byte_putNonAscii
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requestMediaTypes:
-          application/json: !Request &ref_12
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -433,8 +429,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_12
         signatureParameters: []
         responses:
           - !Response 
@@ -466,7 +460,6 @@ operationGroups:
             description: Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         protocol: !Protocols {}
       - !Operation 
-        operationId: byte_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -501,7 +494,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''

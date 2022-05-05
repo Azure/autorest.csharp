@@ -149,7 +149,6 @@ operationGroups:
     $key: paths
     operations:
       - !Operation 
-        operationId: paths_getEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -283,10 +282,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Fake-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: AutoRestParameterizedCustomHostTestClient

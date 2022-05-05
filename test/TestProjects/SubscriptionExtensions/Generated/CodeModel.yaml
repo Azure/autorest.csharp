@@ -302,7 +302,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_9
-    - !ObjectSchema &ref_33
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
@@ -466,7 +466,6 @@ operationGroups:
     $key: Toasters
     operations:
       - !Operation 
-        operationId: Toasters_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -521,13 +520,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: Toasters_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_21
-          - !Parameter &ref_29
+          - !Parameter &ref_28
             schema: *ref_1
             implementation: Method
             required: true
@@ -541,8 +539,8 @@ operationGroups:
                 in: path
           - *ref_22
           - *ref_23
-        requestMediaTypes:
-          application/json: !Request &ref_28
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_26
@@ -596,10 +594,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_28
         signatureParameters:
-          - *ref_29
+          - *ref_28
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -620,13 +616,12 @@ operationGroups:
             description: Create or update an availability set.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Toasters_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_21
-          - !Parameter &ref_30
+          - !Parameter &ref_29
             schema: *ref_1
             implementation: Method
             required: true
@@ -667,7 +662,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_30
+          - *ref_29
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -696,13 +691,12 @@ operationGroups:
     $key: Ovens
     operations:
       - !Operation 
-        operationId: Ovens_ListAll
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_21
-          - !Parameter &ref_31
+          - !Parameter &ref_30
             schema: *ref_1
             implementation: Method
             required: true
@@ -716,7 +710,7 @@ operationGroups:
                 in: path
           - *ref_22
           - *ref_23
-          - !Parameter &ref_32
+          - !Parameter &ref_31
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -754,11 +748,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_30
           - *ref_31
-          - *ref_32
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -781,13 +775,12 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Ovens_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_21
-          - !Parameter &ref_36
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             required: true
@@ -799,7 +792,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_37
+          - !Parameter &ref_35
             schema: *ref_1
             implementation: Method
             required: true
@@ -813,8 +806,8 @@ operationGroups:
                 in: path
           - *ref_22
           - *ref_23
-        requestMediaTypes:
-          application/json: !Request &ref_35
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_26
@@ -829,7 +822,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_34
+              - !Parameter &ref_33
                 schema: *ref_17
                 implementation: Method
                 required: true
@@ -855,7 +848,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_34
+              - *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -868,11 +861,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_35
         signatureParameters:
-          - *ref_36
-          - *ref_37
+          - *ref_34
+          - *ref_35
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -908,13 +899,12 @@ operationGroups:
             description: The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Ovens_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_21
-          - !Parameter &ref_38
+          - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
@@ -926,7 +916,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
+          - !Parameter &ref_37
             schema: *ref_1
             implementation: Method
             required: true
@@ -967,8 +957,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_38
-          - *ref_39
+          - *ref_36
+          - *ref_37
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -996,8 +986,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 
