@@ -21,11 +21,19 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual async Task<Response<Product>> GetModelValueAsync(string mode, CancellationToken cancellationToken = default)
         {
-            RequestContext requestContext = new RequestContext();
-            requestContext.CancellationToken = cancellationToken;
-
-            Response response = await GetModelAsync(mode, requestContext);
-            return Response.FromValue((Product)response, response);
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModelValue");
+            scope.Start();
+            try
+            {
+                RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
+                Response response = await GetModelAsync(mode, requestContext);
+                return Response.FromValue((Product)response, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get models that you will either return to end users as a raw body, or with a model added during grow up. </summary>
@@ -34,11 +42,19 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual Response<Product> GetModelValue(string mode, CancellationToken cancellationToken = default)
         {
-            RequestContext requestContext = new RequestContext();
-            requestContext.CancellationToken = cancellationToken;
-
-            Response response = GetModel(mode, requestContext);
-            return Response.FromValue((Product)response, response);
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModelValue");
+            scope.Start();
+            try
+            {
+                RequestContext requestContext = new RequestContext {CancellationToken = cancellationToken};
+                Response response = GetModel(mode, requestContext);
+                return Response.FromValue((Product)response, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post either raw response as a model and pass in &apos;raw&apos; for mode, or grow up your operation to take a model instead, and put in &apos;model&apos; as mode. </summary>

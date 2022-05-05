@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
 
             Response<Product> result = await new DPGClient(Key, host).GetModelValueAsync("model");
             Assert.AreEqual(1, scopes.Count);
-            Assert.AreEqual("DPGClient.GetModel", scopes[0].Name);
+            Assert.AreEqual("DPGClient.GetModelValue", scopes[0].Name);
             Assert.True(scopes[0].IsCompleted);
             Assert.AreEqual("model", $"{result.Value.Received}");
         });
