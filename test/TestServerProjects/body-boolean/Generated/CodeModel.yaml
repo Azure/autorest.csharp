@@ -11,7 +11,7 @@ schemas: !Schemas
           name: Bool
           description: simple boolean
       protocol: !Protocols {}
-    - !BooleanSchema &ref_12
+    - !BooleanSchema &ref_10
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -111,7 +111,7 @@ schemas: !Schemas
           name: Constant4
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_10
+    - !ConstantSchema &ref_9
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -179,7 +179,6 @@ operationGroups:
     $key: bool
     operations:
       - !Operation 
-        operationId: bool_getTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -253,14 +252,13 @@ operationGroups:
             description: Get true Boolean value
         protocol: !Protocols {}
       - !Operation 
-        operationId: bool_putTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_9
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -313,8 +311,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -353,7 +349,6 @@ operationGroups:
             description: Set Boolean value true
         protocol: !Protocols {}
       - !Operation 
-        operationId: bool_getFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -427,14 +422,13 @@ operationGroups:
             description: Get false Boolean value
         protocol: !Protocols {}
       - !Operation 
-        operationId: bool_putFalse
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -450,7 +444,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_10
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -487,8 +481,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -527,7 +519,6 @@ operationGroups:
             description: Set Boolean value false
         protocol: !Protocols {}
       - !Operation 
-        operationId: bool_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -562,7 +553,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_10
             nullable: true
             language: !Languages 
               default:
@@ -601,7 +592,6 @@ operationGroups:
             description: Get null Boolean value
         protocol: !Protocols {}
       - !Operation 
-        operationId: bool_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -636,7 +626,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''

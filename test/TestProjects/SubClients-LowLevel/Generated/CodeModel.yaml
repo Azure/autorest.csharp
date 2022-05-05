@@ -67,7 +67,6 @@ operationGroups:
     $key: Root
     operations:
       - !Operation 
-        operationId: Root_GetCachedParameter
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -129,7 +128,6 @@ operationGroups:
     $key: Parameter
     operations:
       - !Operation 
-        operationId: Parameter_GetSubParameter
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -202,10 +200,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Fake-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: LlcSubClients

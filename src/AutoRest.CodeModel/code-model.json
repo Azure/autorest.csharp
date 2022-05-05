@@ -866,10 +866,6 @@
       "description": "represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)",
       "type": "object",
       "properties": {
-        "operationId": {
-          "description": "Original Operation ID if present.\nThis can be used to identify the original id of an operation before it is styled.\nTHIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this",
-          "type": "string"
-        },
         "parameters": {
           "description": "common parameters when there are multiple requests",
           "type": "array",
@@ -882,17 +878,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Parameter"
-          }
-        },
-        "requestMediaTypes": {
-          "$ref": "#/definitions/Record<string,Request>",
-          "description": "Mapping of all the content types available for this operation to the coresponding request."
-        },
-        "specialHeaders": {
-          "description": "List of headers that parameters should not handle as parameters but with special logic.\nSee https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.",
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         },
         "requests": {
@@ -2254,85 +2239,6 @@
         "type"
       ]
     },
-    "OAuth2SecurityScheme": {
-      "type": "object",
-      "properties": {
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "scopes",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecurityScheme"
-        }
-      ]
-    },
-    "KeySecurityScheme": {
-      "type": "object",
-      "properties": {
-        "in": {
-          "type": "string",
-          "enum": [
-            "header"
-          ]
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "in",
-        "name",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/SecurityScheme"
-        }
-      ]
-    },
-    "ValueOrFactory": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/ApiVersion"
-        },
-        {
-          "type": "object",
-          "defaultProperties": [],
-          "additionalProperties": false
-        }
-      ]
-    },
-    "Example": {
-      "description": "example data [UNFINISHED]",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "value": {},
-        "externalValue": {
-          "description": "an URI",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
-    },
     "AADTokenSecurityScheme": {
       "type": "object",
       "properties": {
@@ -2373,6 +2279,37 @@
           "$ref": "#/definitions/SecurityScheme"
         }
       ]
+    },
+    "ValueOrFactory": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ApiVersion"
+        },
+        {
+          "type": "object",
+          "defaultProperties": [],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Example": {
+      "description": "example data [UNFINISHED]",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {},
+        "externalValue": {
+          "description": "an URI",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
     },
     "HttpMethod": {
       "description": "standard HTTP protocol methods",
@@ -2557,6 +2494,33 @@
       "additionalProperties": false,
       "required": [
         "scheme",
+        "type"
+      ]
+    },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "$ref": "#/definitions/OAuthFlows"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "flows",
         "type"
       ]
     },
@@ -3134,11 +3098,6 @@
       "additionalProperties": {
         "type": "object"
       }
-    },
-    "Record<string,Request>": {
-      "type": "object",
-      "defaultProperties": [],
-      "additionalProperties": false
     },
     "Record<string,ApiVersion>": {
       "type": "object",

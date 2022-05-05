@@ -180,7 +180,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_19
+    - !ObjectSchema &ref_18
       type: object
       apiVersions:
         - !ApiVersion 
@@ -212,7 +212,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_20
+    - !ObjectSchema &ref_19
       type: object
       apiVersions:
         - !ApiVersion 
@@ -242,7 +242,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_21
+    - !ObjectSchema &ref_20
       type: object
       apiVersions:
         - !ApiVersion 
@@ -272,7 +272,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_24
+    - !ObjectSchema &ref_22
       type: object
       apiVersions:
         - !ApiVersion 
@@ -324,14 +324,13 @@ operationGroups:
     $key: AP
     operations:
       - !Operation 
-        operationId: AP_writeOnly
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_13
-        requestMediaTypes:
-          application/json: !Request &ref_18
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -385,8 +384,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_18
         signatureParameters: []
         responses:
           - !Response 
@@ -400,7 +397,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -418,7 +415,6 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AP_readOnly
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -453,7 +449,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_20
+            schema: *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -467,7 +463,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -485,14 +481,13 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AP_writeOnlyStruct
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_13
-        requestMediaTypes:
-          application/json: !Request &ref_23
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -507,8 +502,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_22
-                schema: *ref_21
+              - !Parameter &ref_21
+                schema: *ref_20
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -533,7 +528,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_22
+              - *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -546,8 +541,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_23
         signatureParameters: []
         responses:
           - !Response 
@@ -561,7 +554,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -579,7 +572,6 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AP_readOnlyStruct
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -614,7 +606,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -628,7 +620,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_18
             language: !Languages 
               default:
                 name: ''

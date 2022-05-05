@@ -62,7 +62,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: get
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -129,14 +128,13 @@ operationGroups:
             description: 'Basic get that returns an object. Returns object { ''message'': ''An object was successfully returned'' }'
         protocol: !Protocols {}
       - !Operation 
-        operationId: put
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requestMediaTypes:
-          application/json: !Request &ref_6
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -190,8 +188,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_6
         signatureParameters: []
         responses:
           - !Response 

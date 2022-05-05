@@ -284,13 +284,12 @@ operationGroups:
     $key: formdataurlencoded
     operations:
       - !Operation 
-        operationId: formdataurlencoded_updatePetWithForm
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_9
-          - !Parameter &ref_18
+          - !Parameter &ref_17
             schema: *ref_10
             implementation: Method
             required: true
@@ -302,8 +301,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requestMediaTypes:
-          application/x-www-form-urlencoded: !Request &ref_17
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_11
@@ -399,10 +398,8 @@ operationGroups:
                 mediaTypes:
                   - application/x-www-form-urlencoded
                 uri: '{$host}'
-        requests:
-          - *ref_17
         signatureParameters:
-          - *ref_18
+          - *ref_17
         responses:
           - !Response 
             language: !Languages 
@@ -429,14 +426,13 @@ operationGroups:
             summary: Updates a pet in the store with form data
         protocol: !Protocols {}
       - !Operation 
-        operationId: formdataurlencoded_partialConstantBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_9
-        requestMediaTypes:
-          application/x-www-form-urlencoded: !Request &ref_22
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_11
@@ -451,7 +447,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_19
+              - !Parameter &ref_18
                 schema: *ref_6
                 implementation: Method
                 isPartialBody: true
@@ -464,7 +460,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_20
+              - !Parameter &ref_19
                 schema: *ref_7
                 implementation: Method
                 isPartialBody: true
@@ -477,7 +473,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_21
+              - !Parameter &ref_20
                 schema: *ref_8
                 implementation: Method
                 isPartialBody: true
@@ -491,9 +487,9 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
             signatureParameters:
+              - *ref_18
               - *ref_19
               - *ref_20
-              - *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -506,8 +502,6 @@ operationGroups:
                 mediaTypes:
                   - application/x-www-form-urlencoded
                 uri: '{$host}'
-        requests:
-          - *ref_22
         signatureParameters: []
         responses:
           - !Response 

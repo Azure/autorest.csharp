@@ -427,7 +427,7 @@ schemas: !Schemas
     - *ref_1
     - *ref_12
     - *ref_2
-    - !ObjectSchema &ref_37
+    - !ObjectSchema &ref_36
       type: object
       apiVersions:
         - !ApiVersion 
@@ -473,7 +473,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_5
     - *ref_14
-    - !ObjectSchema &ref_45
+    - !ObjectSchema &ref_43
       type: object
       apiVersions:
         - !ApiVersion 
@@ -573,7 +573,6 @@ operationGroups:
     $key: NoTypeReplacementModel1s
     operations:
       - !Operation 
-        operationId: NoTypeReplacementModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -641,13 +640,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_32
+          - !Parameter &ref_31
             schema: *ref_21
             implementation: Method
             required: true
@@ -659,7 +657,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_33
+          - !Parameter &ref_32
             schema: *ref_21
             implementation: Method
             required: true
@@ -673,8 +671,8 @@ operationGroups:
                 in: path
           - *ref_24
           - *ref_25
-        requestMediaTypes:
-          application/json: !Request &ref_31
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -728,11 +726,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_31
         signatureParameters:
+          - *ref_31
           - *ref_32
-          - *ref_33
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -753,13 +749,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_34
+          - !Parameter &ref_33
             schema: *ref_21
             implementation: Method
             required: true
@@ -771,7 +766,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_35
+          - !Parameter &ref_34
             schema: *ref_21
             implementation: Method
             required: true
@@ -812,8 +807,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_33
           - *ref_34
-          - *ref_35
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -842,13 +837,12 @@ operationGroups:
     $key: NoTypeReplacementModel2s
     operations:
       - !Operation 
-        operationId: NoTypeReplacementModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_36
+          - !Parameter &ref_35
             schema: *ref_21
             implementation: Method
             required: true
@@ -889,10 +883,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_36
+          - *ref_35
         responses:
           - !SchemaResponse 
-            schema: *ref_37
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -910,13 +904,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_40
+          - !Parameter &ref_38
             schema: *ref_21
             implementation: Method
             required: true
@@ -928,7 +921,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_39
             schema: *ref_21
             implementation: Method
             required: true
@@ -942,8 +935,8 @@ operationGroups:
                 in: path
           - *ref_24
           - *ref_25
-        requestMediaTypes:
-          application/json: !Request &ref_39
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -958,7 +951,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_38
+              - !Parameter &ref_37
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -984,7 +977,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_38
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -997,11 +990,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_39
         signatureParameters:
-          - *ref_40
-          - *ref_41
+          - *ref_38
+          - *ref_39
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1022,13 +1013,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_42
+          - !Parameter &ref_40
             schema: *ref_21
             implementation: Method
             required: true
@@ -1040,7 +1030,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_43
+          - !Parameter &ref_41
             schema: *ref_21
             implementation: Method
             required: true
@@ -1081,8 +1071,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_42
-          - *ref_43
+          - *ref_40
+          - *ref_41
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1111,13 +1101,12 @@ operationGroups:
     $key: NoTypeReplacementModel3s
     operations:
       - !Operation 
-        operationId: NoTypeReplacementModel3s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_44
+          - !Parameter &ref_42
             schema: *ref_21
             implementation: Method
             required: true
@@ -1158,10 +1147,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_44
+          - *ref_42
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1179,13 +1168,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel3s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_48
+          - !Parameter &ref_45
             schema: *ref_21
             implementation: Method
             required: true
@@ -1197,7 +1185,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
+          - !Parameter &ref_46
             schema: *ref_21
             implementation: Method
             required: true
@@ -1211,8 +1199,8 @@ operationGroups:
                 in: path
           - *ref_24
           - *ref_25
-        requestMediaTypes:
-          application/json: !Request &ref_47
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -1227,7 +1215,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_46
+              - !Parameter &ref_44
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -1253,7 +1241,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_46
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -1266,11 +1254,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_47
         signatureParameters:
-          - *ref_48
-          - *ref_49
+          - *ref_45
+          - *ref_46
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -1291,13 +1277,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: NoTypeReplacementModel3s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_23
-          - !Parameter &ref_50
+          - !Parameter &ref_47
             schema: *ref_21
             implementation: Method
             required: true
@@ -1309,7 +1294,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
+          - !Parameter &ref_48
             schema: *ref_21
             implementation: Method
             required: true
@@ -1350,8 +1335,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
-          - *ref_51
+          - *ref_47
+          - *ref_48
         responses:
           - !SchemaResponse 
             schema: *ref_6
@@ -1379,8 +1364,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

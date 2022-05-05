@@ -336,7 +336,7 @@ schemas: !Schemas
           description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_36
+    - !ObjectSchema &ref_35
       type: object
       apiVersions:
         - !ApiVersion 
@@ -485,7 +485,6 @@ operationGroups:
     $key: BillingAccounts
     operations:
       - !Operation 
-        operationId: BillingAccounts_List
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
@@ -565,7 +564,6 @@ operationGroups:
             description: Gets a billing account by its ID.
         protocol: !Protocols {}
       - !Operation 
-        operationId: BillingAccounts_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
@@ -658,14 +656,13 @@ operationGroups:
             description: Gets a billing account by its ID.
         protocol: !Protocols {}
       - !Operation 
-        operationId: BillingAccounts_Create
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
           - *ref_22
           - *ref_23
-          - !Parameter &ref_33
+          - !Parameter &ref_32
             schema: *ref_1
             implementation: Method
             required: true
@@ -677,8 +674,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requestMediaTypes:
-          application/json: !Request &ref_32
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_30
@@ -732,10 +729,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_32
         signatureParameters:
-          - *ref_33
+          - *ref_32
         responses:
           - !SchemaResponse 
             schema: *ref_9
@@ -791,14 +786,13 @@ operationGroups:
     $key: Agreements
     operations:
       - !Operation 
-        operationId: Agreements_List
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
           - *ref_22
           - *ref_23
-          - !Parameter &ref_34
+          - !Parameter &ref_33
             schema: *ref_1
             implementation: Method
             required: true
@@ -810,7 +804,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_35
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -848,11 +842,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_33
           - *ref_34
-          - *ref_35
         responses:
           - !SchemaResponse 
-            schema: *ref_36
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -884,14 +878,13 @@ operationGroups:
             description: Gets an agreement by ID.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Agreements_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
           - *ref_22
           - *ref_23
-          - !Parameter &ref_37
+          - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
@@ -903,7 +896,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_38
+          - !Parameter &ref_37
             schema: *ref_1
             implementation: Method
             required: true
@@ -915,7 +908,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
+          - !Parameter &ref_38
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -953,9 +946,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_36
           - *ref_37
           - *ref_38
-          - *ref_39
         responses:
           - !SchemaResponse 
             schema: *ref_18
@@ -997,8 +990,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

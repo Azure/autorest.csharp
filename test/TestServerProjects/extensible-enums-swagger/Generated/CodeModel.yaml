@@ -205,7 +205,6 @@ operationGroups:
     $key: Pet
     operations:
       - !Operation 
-        operationId: Pet_GetByPetId
         apiVersions:
           - !ApiVersion 
             version: '2016-07-07'
@@ -282,14 +281,13 @@ operationGroups:
             description: get pet by id
         protocol: !Protocols {}
       - !Operation 
-        operationId: Pet_AddPet
         apiVersions:
           - !ApiVersion 
             version: '2016-07-07'
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -343,8 +341,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_11
         signatureParameters: []
         responses:
           - !SchemaResponse 

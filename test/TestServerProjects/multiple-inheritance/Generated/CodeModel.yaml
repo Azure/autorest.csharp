@@ -51,7 +51,7 @@ schemas: !Schemas
           name: ErrorMessage
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -309,7 +309,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: getHorse
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
@@ -376,14 +375,13 @@ operationGroups:
             description: Get a horse with name 'Fred' and isAShowHorse true
         protocol: !Protocols {}
       - !Operation 
-        operationId: putHorse
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
         parameters:
           - *ref_10
-        requestMediaTypes:
-          application/json: !Request &ref_15
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_13
@@ -437,12 +435,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_15
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -460,7 +456,6 @@ operationGroups:
             description: Put a horse with name 'General' and isAShowHorse false
         protocol: !Protocols {}
       - !Operation 
-        operationId: getPet
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
@@ -527,14 +522,13 @@ operationGroups:
             description: Get a pet with name 'Peanut'
         protocol: !Protocols {}
       - !Operation 
-        operationId: putPet
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
         parameters:
           - *ref_10
-        requestMediaTypes:
-          application/json: !Request &ref_18
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_13
@@ -549,7 +543,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_17
+              - !Parameter &ref_16
                 schema: *ref_3
                 implementation: Method
                 required: true
@@ -575,7 +569,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_17
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -588,12 +582,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_18
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -611,7 +603,6 @@ operationGroups:
             description: Put a pet with name 'Butter'
         protocol: !Protocols {}
       - !Operation 
-        operationId: getFeline
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
@@ -678,14 +669,13 @@ operationGroups:
             description: Get a feline where meows and hisses are true
         protocol: !Protocols {}
       - !Operation 
-        operationId: putFeline
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
         parameters:
           - *ref_10
-        requestMediaTypes:
-          application/json: !Request &ref_20
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_13
@@ -700,7 +690,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_19
+              - !Parameter &ref_17
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -726,7 +716,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_19
+              - *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -739,12 +729,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_20
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -762,7 +750,6 @@ operationGroups:
             description: Put a feline who hisses and doesn't meow
         protocol: !Protocols {}
       - !Operation 
-        operationId: getCat
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
@@ -829,14 +816,13 @@ operationGroups:
             description: Get a cat with name 'Whiskers' where likesMilk, meows, and hisses is true
         protocol: !Protocols {}
       - !Operation 
-        operationId: putCat
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
         parameters:
           - *ref_10
-        requestMediaTypes:
-          application/json: !Request &ref_22
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_13
@@ -851,7 +837,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_21
+              - !Parameter &ref_18
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -877,7 +863,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_21
+              - *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -890,12 +876,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_22
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -913,7 +897,6 @@ operationGroups:
             description: Put a cat with name 'Boots' where likesMilk and hisses is false, meows is true
         protocol: !Protocols {}
       - !Operation 
-        operationId: getKitten
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
@@ -980,14 +963,13 @@ operationGroups:
             description: Get a kitten with name 'Gatito' where likesMilk and meows is true, and hisses and eatsMiceYet is false
         protocol: !Protocols {}
       - !Operation 
-        operationId: putKitten
         apiVersions:
           - !ApiVersion 
             version: 3.0.0
         parameters:
           - *ref_10
-        requestMediaTypes:
-          application/json: !Request &ref_24
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_13
@@ -1002,7 +984,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_23
+              - !Parameter &ref_19
                 schema: *ref_4
                 implementation: Method
                 required: true
@@ -1028,7 +1010,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_23
+              - *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -1041,12 +1023,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_24
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_16
+            schema: *ref_15
             language: !Languages 
               default:
                 name: ''

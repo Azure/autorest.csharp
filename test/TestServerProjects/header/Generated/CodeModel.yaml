@@ -307,7 +307,6 @@ operationGroups:
     $key: header
     operations:
       - !Operation 
-        operationId: header_paramExistingKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -383,7 +382,6 @@ operationGroups:
             description: 'Send a post request with header value "User-Agent": "overwrite"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseExistingKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -454,7 +452,6 @@ operationGroups:
             description: 'Get a response with header value "User-Agent": "overwrite"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramProtectedKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -530,7 +527,6 @@ operationGroups:
             description: 'Send a post request with header value "Content-Type": "text/html"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseProtectedKey
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -601,7 +597,6 @@ operationGroups:
             description: 'Get a response with header value "Content-Type": "text/html"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramInteger
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -690,7 +685,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2 '
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseInteger
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -774,7 +768,6 @@ operationGroups:
             description: 'Get a response with header value "value": 1 or -2'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramLong
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -863,7 +856,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2 '
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseLong
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -947,7 +939,6 @@ operationGroups:
             description: 'Get a response with header value "value": 105 or -2'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1036,7 +1027,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1120,7 +1110,6 @@ operationGroups:
             description: 'Get a response with header value "value": 0.07 or -3.0'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1209,7 +1198,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1293,7 +1281,6 @@ operationGroups:
             description: 'Get a response with header value "value": 7e120 or -3.0'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramBool
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1382,7 +1369,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseBool
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1466,7 +1452,6 @@ operationGroups:
             description: 'Get a response with header value "value": true or false'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1554,7 +1539,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": ""'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1638,7 +1622,6 @@ operationGroups:
             description: Get a response with header values "The quick brown fox jumps over the lazy dog" or null or ""
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1727,7 +1710,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1811,7 +1793,6 @@ operationGroups:
             description: Get a response with header values "2010-01-01" or "0001-01-01"
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramDatetime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1900,7 +1881,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseDatetime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1984,7 +1964,6 @@ operationGroups:
             description: Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramDatetimeRfc1123
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2072,7 +2051,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseDatetimeRfc1123
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2156,7 +2134,6 @@ operationGroups:
             description: Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramDuration
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2245,7 +2222,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseDuration
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2329,7 +2305,6 @@ operationGroups:
             description: Get a response with header values "P123DT22H14M12.011S"
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramByte
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2418,7 +2393,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩"'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseByte
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2502,7 +2476,6 @@ operationGroups:
             description: Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_paramEnum
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2590,7 +2563,6 @@ operationGroups:
             description: 'Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null'
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_responseEnum
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2674,7 +2646,6 @@ operationGroups:
             description: Get a response with header values "GREY" or null
         protocol: !Protocols {}
       - !Operation 
-        operationId: header_customRequestId
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
