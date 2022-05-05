@@ -559,7 +559,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_11
-    - !ObjectSchema &ref_72
+    - !ObjectSchema &ref_71
       type: object
       apiVersions:
         - !ApiVersion 
@@ -772,7 +772,7 @@ schemas: !Schemas
           description: SubResource type has the following read-only properties.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_80
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
@@ -902,7 +902,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_26
     - *ref_23
-    - !ObjectSchema &ref_88
+    - !ObjectSchema &ref_85
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1006,7 +1006,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_32
-    - !ObjectSchema &ref_96
+    - !ObjectSchema &ref_92
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1024,7 +1024,7 @@ schemas: !Schemas
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
-                - !Property &ref_98
+                - !Property &ref_94
                   schema: *ref_33
                   serializedName: foo
                   language: !Languages 
@@ -1113,7 +1113,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_35
-    - !ObjectSchema &ref_106
+    - !ObjectSchema &ref_101
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1186,7 +1186,7 @@ schemas: !Schemas
                 immediate:
                   - *ref_40
               properties:
-                - !Property &ref_108
+                - !Property &ref_103
                   schema: *ref_41
                   serializedName: foo
                   language: !Languages 
@@ -1238,7 +1238,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_36
     - *ref_40
-    - !ObjectSchema &ref_116
+    - !ObjectSchema &ref_110
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1417,7 +1417,6 @@ operationGroups:
     $key: AzureResourceFlattenModel1s
     operations:
       - !Operation 
-        operationId: AzureResourceFlattenModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1485,13 +1484,12 @@ operationGroups:
             description: Get an AzureResourceFlattenModel1.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_67
+          - !Parameter &ref_66
             schema: *ref_1
             implementation: Method
             required: true
@@ -1503,7 +1501,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_68
+          - !Parameter &ref_67
             schema: *ref_1
             implementation: Method
             required: true
@@ -1517,8 +1515,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_66
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -1572,11 +1570,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_66
         signatureParameters:
+          - *ref_66
           - *ref_67
-          - *ref_68
         responses:
           - !SchemaResponse 
             schema: *ref_11
@@ -1597,13 +1593,12 @@ operationGroups:
             description: Create or update an AzureResourceFlattenModel1.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_69
+          - !Parameter &ref_68
             schema: *ref_1
             implementation: Method
             required: true
@@ -1615,7 +1610,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_70
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1656,8 +1651,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_68
           - *ref_69
-          - *ref_70
         responses:
           - !SchemaResponse 
             schema: *ref_11
@@ -1686,13 +1681,12 @@ operationGroups:
     $key: AzureResourceFlattenModel2s
     operations:
       - !Operation 
-        operationId: AzureResourceFlattenModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_71
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1733,10 +1727,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
+          - *ref_70
         responses:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_71
             language: !Languages 
               default:
                 name: ''
@@ -1754,13 +1748,12 @@ operationGroups:
             description: Get an AzureResourceFlattenModel2.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_75
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -1772,7 +1765,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_76
+          - !Parameter &ref_74
             schema: *ref_1
             implementation: Method
             required: true
@@ -1786,8 +1779,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_74
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -1802,7 +1795,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_73
+              - !Parameter &ref_72
                 schema: *ref_19
                 implementation: Method
                 required: true
@@ -1828,7 +1821,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_73
+              - *ref_72
             language: !Languages 
               default:
                 name: ''
@@ -1841,11 +1834,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_74
         signatureParameters:
-          - *ref_75
-          - *ref_76
+          - *ref_73
+          - *ref_74
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -1866,13 +1857,12 @@ operationGroups:
             description: Create or update an AzureResourceFlattenModel2.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_77
+          - !Parameter &ref_75
             schema: *ref_1
             implementation: Method
             required: true
@@ -1884,7 +1874,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_78
+          - !Parameter &ref_76
             schema: *ref_1
             implementation: Method
             required: true
@@ -1925,8 +1915,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
-          - *ref_78
+          - *ref_75
+          - *ref_76
         responses:
           - !SchemaResponse 
             schema: *ref_19
@@ -1955,13 +1945,12 @@ operationGroups:
     $key: AzureResourceFlattenModel3s
     operations:
       - !Operation 
-        operationId: AzureResourceFlattenModel3s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_79
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
@@ -2002,10 +1991,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_79
+          - *ref_77
         responses:
           - !SchemaResponse 
-            schema: *ref_80
+            schema: *ref_78
             language: !Languages 
               default:
                 name: ''
@@ -2023,13 +2012,12 @@ operationGroups:
             description: Get an AzureResourceFlattenModel3.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel3s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_83
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -2041,7 +2029,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_84
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -2055,8 +2043,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_82
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -2071,7 +2059,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_81
+              - !Parameter &ref_79
                 schema: *ref_26
                 implementation: Method
                 required: true
@@ -2097,7 +2085,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_81
+              - *ref_79
             language: !Languages 
               default:
                 name: ''
@@ -2110,11 +2098,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_82
         signatureParameters:
-          - *ref_83
-          - *ref_84
+          - *ref_80
+          - *ref_81
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -2135,13 +2121,12 @@ operationGroups:
             description: Create or update an AzureResourceFlattenModel3.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel3s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_85
+          - !Parameter &ref_82
             schema: *ref_1
             implementation: Method
             required: true
@@ -2153,7 +2138,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_86
+          - !Parameter &ref_83
             schema: *ref_1
             implementation: Method
             required: true
@@ -2194,8 +2179,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_85
-          - *ref_86
+          - *ref_82
+          - *ref_83
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -2224,13 +2209,12 @@ operationGroups:
     $key: AzureResourceFlattenModel4s
     operations:
       - !Operation 
-        operationId: AzureResourceFlattenModel4s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_87
+          - !Parameter &ref_84
             schema: *ref_1
             implementation: Method
             required: true
@@ -2271,10 +2255,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_87
+          - *ref_84
         responses:
           - !SchemaResponse 
-            schema: *ref_88
+            schema: *ref_85
             language: !Languages 
               default:
                 name: ''
@@ -2292,13 +2276,12 @@ operationGroups:
             description: Get an AzureResourceFlattenModel4.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel4s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_91
+          - !Parameter &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -2310,7 +2293,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -2324,8 +2307,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_90
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -2340,7 +2323,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_89
+              - !Parameter &ref_86
                 schema: *ref_32
                 implementation: Method
                 required: true
@@ -2366,7 +2349,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_89
+              - *ref_86
             language: !Languages 
               default:
                 name: ''
@@ -2379,11 +2362,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_90
         signatureParameters:
-          - *ref_91
-          - *ref_92
+          - *ref_87
+          - *ref_88
         responses:
           - !SchemaResponse 
             schema: *ref_32
@@ -2404,13 +2385,12 @@ operationGroups:
             description: Create or update an AzureResourceFlattenModel4.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel4s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_93
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -2422,7 +2402,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -2463,8 +2443,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_93
-          - *ref_94
+          - *ref_89
+          - *ref_90
         responses:
           - !SchemaResponse 
             schema: *ref_32
@@ -2493,13 +2473,12 @@ operationGroups:
     $key: AzureResourceFlattenModel5s
     operations:
       - !Operation 
-        operationId: AzureResourceFlattenModel5s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_95
+          - !Parameter &ref_91
             schema: *ref_1
             implementation: Method
             required: true
@@ -2540,10 +2519,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_95
+          - *ref_91
         responses:
           - !SchemaResponse 
-            schema: *ref_96
+            schema: *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -2561,13 +2540,12 @@ operationGroups:
             description: Get an AzureResourceFlattenModel5.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel5s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_101
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2579,7 +2557,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_102
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2593,8 +2571,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_100
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -2609,7 +2587,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_97
+              - !Parameter &ref_93
                 schema: *ref_35
                 flattened: true
                 implementation: Method
@@ -2635,19 +2613,19 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_99
+              - !VirtualParameter &ref_95
                 schema: *ref_33
                 implementation: Method
-                originalParameter: *ref_97
+                originalParameter: *ref_93
                 pathToProperty: []
-                targetProperty: *ref_98
+                targetProperty: *ref_94
                 language: !Languages 
                   default:
                     name: foo
                     description: New property
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_99
+              - *ref_95
             language: !Languages 
               default:
                 name: ''
@@ -2660,11 +2638,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_100
         signatureParameters:
-          - *ref_101
-          - *ref_102
+          - *ref_96
+          - *ref_97
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -2685,13 +2661,12 @@ operationGroups:
             description: Create or update an AzureResourceFlattenModel5.
         protocol: !Protocols {}
       - !Operation 
-        operationId: AzureResourceFlattenModel5s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_103
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2703,7 +2678,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_104
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -2744,8 +2719,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_103
-          - *ref_104
+          - *ref_98
+          - *ref_99
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -2774,13 +2749,12 @@ operationGroups:
     $key: CustomModel2s
     operations:
       - !Operation 
-        operationId: CustomModel2s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_105
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -2821,10 +2795,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_105
+          - *ref_100
         responses:
           - !SchemaResponse 
-            schema: *ref_106
+            schema: *ref_101
             language: !Languages 
               default:
                 name: ''
@@ -2842,13 +2816,12 @@ operationGroups:
             description: Get an CustomModel2s.
         protocol: !Protocols {}
       - !Operation 
-        operationId: CustomModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_111
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -2860,7 +2833,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_112
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -2874,8 +2847,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_110
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -2890,7 +2863,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_107
+              - !Parameter &ref_102
                 schema: *ref_36
                 flattened: true
                 implementation: Method
@@ -2916,19 +2889,19 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_109
+              - !VirtualParameter &ref_104
                 schema: *ref_41
                 implementation: Method
-                originalParameter: *ref_107
+                originalParameter: *ref_102
                 pathToProperty: []
-                targetProperty: *ref_108
+                targetProperty: *ref_103
                 language: !Languages 
                   default:
                     name: foo
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_109
+              - *ref_104
             language: !Languages 
               default:
                 name: ''
@@ -2941,11 +2914,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_110
         signatureParameters:
-          - *ref_111
-          - *ref_112
+          - *ref_105
+          - *ref_106
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -2966,13 +2937,12 @@ operationGroups:
             description: Create or update an CustomModel2.
         protocol: !Protocols {}
       - !Operation 
-        operationId: CustomModel2s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_113
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -2984,7 +2954,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_114
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -3025,8 +2995,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_113
-          - *ref_114
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -3055,13 +3025,12 @@ operationGroups:
     $key: CustomModel3s
     operations:
       - !Operation 
-        operationId: CustomModel3s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_115
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -3102,10 +3071,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_115
+          - *ref_109
         responses:
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -3123,13 +3092,12 @@ operationGroups:
             description: Get an CustomModel3s.
         protocol: !Protocols {}
       - !Operation 
-        operationId: CustomModel3s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_119
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -3141,7 +3109,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_120
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -3155,8 +3123,8 @@ operationGroups:
                 in: path
           - *ref_59
           - *ref_60
-        requestMediaTypes:
-          application/json: !Request &ref_118
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_64
@@ -3171,7 +3139,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_117
+              - !Parameter &ref_111
                 schema: *ref_43
                 implementation: Method
                 required: true
@@ -3197,7 +3165,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_117
+              - *ref_111
             language: !Languages 
               default:
                 name: ''
@@ -3210,11 +3178,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_118
         signatureParameters:
-          - *ref_119
-          - *ref_120
+          - *ref_112
+          - *ref_113
         responses:
           - !SchemaResponse 
             schema: *ref_43
@@ -3235,13 +3201,12 @@ operationGroups:
             description: Create or update an CustomModel3.
         protocol: !Protocols {}
       - !Operation 
-        operationId: CustomModel3s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_58
-          - !Parameter &ref_121
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -3253,7 +3218,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_122
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -3294,8 +3259,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_121
-          - *ref_122
+          - *ref_114
+          - *ref_115
         responses:
           - !SchemaResponse 
             schema: *ref_43
@@ -3323,8 +3288,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

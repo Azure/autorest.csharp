@@ -3,7 +3,7 @@ info: !Info
   title: Azure.AI.DocumentTranslation
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_80
+    - !NumberSchema &ref_79
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -16,7 +16,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_81
+    - !NumberSchema &ref_80
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -30,7 +30,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_82
+    - !NumberSchema &ref_81
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -44,7 +44,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_96
+    - !NumberSchema &ref_95
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -133,7 +133,7 @@ schemas: !Schemas
           name: StatusSummaryTotalCharacterCharged
           description: Total characters charged by the API
       protocol: !Protocols {}
-    - !NumberSchema &ref_100
+    - !NumberSchema &ref_99
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -169,7 +169,7 @@ schemas: !Schemas
           name: DocumentStatusCharacterCharged
           description: Character charged by the API
       protocol: !Protocols {}
-    - !NumberSchema &ref_103
+    - !NumberSchema &ref_102
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -181,7 +181,19 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_119
+    - !NumberSchema &ref_118
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !NumberSchema &ref_121
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -205,19 +217,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_123
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: v1.0-preview.1
-      precision: 32
-      language: !Languages 
-        default:
-          name: Integer
-          description: ''
-          header: Retry-After
-      protocol: !Protocols {}
-    - !NumberSchema &ref_125
+    - !NumberSchema &ref_124
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -337,7 +337,7 @@ schemas: !Schemas
           name: GlossaryVersion
           description: Optional Version.  If not specified, default is used.
       protocol: !Protocols {}
-    - !StringSchema &ref_78
+    - !StringSchema &ref_77
       type: string
       apiVersions:
         - !ApiVersion 
@@ -418,7 +418,7 @@ schemas: !Schemas
           name: Get7ItemsItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_97
+    - !StringSchema &ref_96
       type: string
       apiVersions:
         - !ApiVersion 
@@ -439,7 +439,7 @@ schemas: !Schemas
           name: TranslationsStatusNextLink
           description: Url for the next page.  Null if no more pages available
       protocol: !Protocols {}
-    - !StringSchema &ref_101
+    - !StringSchema &ref_100
       type: string
       apiVersions:
         - !ApiVersion 
@@ -480,7 +480,7 @@ schemas: !Schemas
           name: DocumentStatusTo
           description: To language
       protocol: !Protocols {}
-    - !StringSchema &ref_104
+    - !StringSchema &ref_103
       type: string
       apiVersions:
         - !ApiVersion 
@@ -511,7 +511,7 @@ schemas: !Schemas
           name: Get8ItemsItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_120
+    - !StringSchema &ref_119
       type: string
       apiVersions:
         - !ApiVersion 
@@ -755,7 +755,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dateTimes:
-    - !DateTimeSchema &ref_85
+    - !DateTimeSchema &ref_84
       type: date-time
       format: date-time
       apiVersions:
@@ -1147,7 +1147,7 @@ schemas: !Schemas
     - *ref_15
     - *ref_16
     - *ref_17
-    - !ObjectSchema &ref_79
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1279,7 +1279,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_25
     - *ref_24
-    - !ObjectSchema &ref_95
+    - !ObjectSchema &ref_94
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1578,7 +1578,7 @@ schemas: !Schemas
           description: Document Status Response
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_118
+    - !ObjectSchema &ref_117
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1622,7 +1622,7 @@ schemas: !Schemas
           description: Documents Status Response
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_121
+    - !ObjectSchema &ref_120
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1748,7 +1748,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_55
-    - !ObjectSchema &ref_124
+    - !ObjectSchema &ref_123
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1787,7 +1787,7 @@ schemas: !Schemas
     - *ref_56
     - *ref_57
     - *ref_58
-    - !ArraySchema &ref_83
+    - !ArraySchema &ref_82
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1798,7 +1798,7 @@ schemas: !Schemas
           name: ArrayOfGet3ItemsItem
           description: Array of Get3ItemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_84
+    - !ArraySchema &ref_83
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1809,7 +1809,7 @@ schemas: !Schemas
           name: ArrayOfGet4ItemsItem
           description: Array of Get4ItemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_86
+    - !ArraySchema &ref_85
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1821,7 +1821,7 @@ schemas: !Schemas
           description: Array of Get7ItemsItem
       protocol: !Protocols {}
     - *ref_62
-    - !ArraySchema &ref_106
+    - !ArraySchema &ref_105
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1832,7 +1832,7 @@ schemas: !Schemas
           name: ArrayOfUuid
           description: Array of Uuid
       protocol: !Protocols {}
-    - !ArraySchema &ref_107
+    - !ArraySchema &ref_106
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1843,7 +1843,7 @@ schemas: !Schemas
           name: ArrayOfGet5ItemsItem
           description: Array of Get5ItemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_108
+    - !ArraySchema &ref_107
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1884,14 +1884,13 @@ operationGroups:
     $key: DocumentTranslation
     operations:
       - !Operation 
-        operationId: DocumentTranslation_StartTranslation
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-        requestMediaTypes:
-          application/*+json: !Request &ref_77
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_73
@@ -1947,10 +1946,6 @@ operationGroups:
                   - text/json
                   - application/*+json
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
-          application/json: *ref_77
-          text/json: *ref_77
-        requests:
-          - *ref_77
         signatureParameters: []
         responses:
           - !Response 
@@ -1962,7 +1957,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_78
+                    schema: *ref_77
                     header: Operation-Location
                     language:
                       default:
@@ -1972,7 +1967,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -1987,7 +1982,7 @@ operationGroups:
                 statusCodes:
                   - '400'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2002,7 +1997,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2017,7 +2012,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2032,7 +2027,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2137,14 +2132,13 @@ operationGroups:
             summary: Submit a document translation request to the Document Translation service
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetTranslationsStatus
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-          - !Parameter &ref_87
-            schema: *ref_80
+          - !Parameter &ref_86
+            schema: *ref_79
             implementation: Method
             language: !Languages 
               default:
@@ -2154,8 +2148,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_88
-            schema: *ref_81
+          - !Parameter &ref_87
+            schema: *ref_80
             implementation: Method
             language: !Languages 
               default:
@@ -2165,8 +2159,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_89
-            schema: *ref_82
+          - !Parameter &ref_88
+            schema: *ref_81
             implementation: Method
             language: !Languages 
               default:
@@ -2176,8 +2170,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_90
-            schema: *ref_83
+          - !Parameter &ref_89
+            schema: *ref_82
             implementation: Method
             language: !Languages 
               default:
@@ -2188,8 +2182,8 @@ operationGroups:
               http: !HttpParameter 
                 in: query
                 style: form
-          - !Parameter &ref_91
-            schema: *ref_84
+          - !Parameter &ref_90
+            schema: *ref_83
             implementation: Method
             language: !Languages 
               default:
@@ -2200,8 +2194,8 @@ operationGroups:
               http: !HttpParameter 
                 in: query
                 style: form
-          - !Parameter &ref_92
-            schema: *ref_85
+          - !Parameter &ref_91
+            schema: *ref_84
             implementation: Method
             language: !Languages 
               default:
@@ -2211,8 +2205,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_93
-            schema: *ref_85
+          - !Parameter &ref_92
+            schema: *ref_84
             implementation: Method
             language: !Languages 
               default:
@@ -2222,8 +2216,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_94
-            schema: *ref_86
+          - !Parameter &ref_93
+            schema: *ref_85
             implementation: Method
             language: !Languages 
               default:
@@ -2261,6 +2255,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
         signatureParameters:
+          - *ref_86
           - *ref_87
           - *ref_88
           - *ref_89
@@ -2268,10 +2263,9 @@ operationGroups:
           - *ref_91
           - *ref_92
           - *ref_93
-          - *ref_94
         responses:
           - !SchemaResponse 
-            schema: *ref_95
+            schema: *ref_94
             language: !Languages 
               default:
                 name: ''
@@ -2280,14 +2274,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_96
+                    schema: *ref_95
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: Indicates how long to wait before making a new request.
                   - !HttpHeader 
-                    schema: *ref_97
+                    schema: *ref_96
                     header: ETag
                     language:
                       default:
@@ -2300,7 +2294,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2315,7 +2309,7 @@ operationGroups:
                 statusCodes:
                   - '400'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2330,7 +2324,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2345,7 +2339,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2360,7 +2354,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2473,13 +2467,12 @@ operationGroups:
             summary: Returns a list of batch requests submitted and the status for each request
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetDocumentStatus
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-          - !Parameter &ref_98
+          - !Parameter &ref_97
             schema: *ref_63
             implementation: Method
             required: true
@@ -2491,7 +2484,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_99
+          - !Parameter &ref_98
             schema: *ref_63
             implementation: Method
             required: true
@@ -2530,8 +2523,8 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
         signatureParameters:
+          - *ref_97
           - *ref_98
-          - *ref_99
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -2543,14 +2536,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_100
+                    schema: *ref_99
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: Indicates how long to wait before making a new request.
                   - !HttpHeader 
-                    schema: *ref_101
+                    schema: *ref_100
                     header: ETag
                     language:
                       default:
@@ -2563,7 +2556,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2578,7 +2571,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2593,7 +2586,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2608,7 +2601,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2623,7 +2616,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2720,13 +2713,12 @@ operationGroups:
             summary: Returns the status for a specific document
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetTranslationStatus
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-          - !Parameter &ref_102
+          - !Parameter &ref_101
             schema: *ref_63
             implementation: Method
             required: true
@@ -2765,7 +2757,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
         signatureParameters:
-          - *ref_102
+          - *ref_101
         responses:
           - !SchemaResponse 
             schema: *ref_38
@@ -2777,14 +2769,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_103
+                    schema: *ref_102
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: Indicates how long to wait before making a new request.
                   - !HttpHeader 
-                    schema: *ref_104
+                    schema: *ref_103
                     header: ETag
                     language:
                       default:
@@ -2797,7 +2789,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2812,7 +2804,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2827,7 +2819,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2842,7 +2834,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2857,7 +2849,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -2956,13 +2948,12 @@ operationGroups:
             summary: Returns the status for a document translation request
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_CancelTranslation
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-          - !Parameter &ref_105
+          - !Parameter &ref_104
             schema: *ref_63
             implementation: Method
             required: true
@@ -3001,7 +2992,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
         signatureParameters:
-          - *ref_105
+          - *ref_104
         responses:
           - !SchemaResponse 
             schema: *ref_38
@@ -3018,7 +3009,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3033,7 +3024,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3048,7 +3039,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3063,7 +3054,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3078,7 +3069,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3175,13 +3166,12 @@ operationGroups:
             summary: Cancel a currently processing or queued translation
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetDocumentsStatus
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
         parameters:
           - *ref_72
-          - !Parameter &ref_109
+          - !Parameter &ref_108
             schema: *ref_63
             implementation: Method
             required: true
@@ -3193,8 +3183,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_110
-            schema: *ref_80
+          - !Parameter &ref_109
+            schema: *ref_79
             implementation: Method
             language: !Languages 
               default:
@@ -3204,8 +3194,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_111
-            schema: *ref_81
+          - !Parameter &ref_110
+            schema: *ref_80
             implementation: Method
             language: !Languages 
               default:
@@ -3215,8 +3205,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_112
-            schema: *ref_82
+          - !Parameter &ref_111
+            schema: *ref_81
             implementation: Method
             language: !Languages 
               default:
@@ -3226,8 +3216,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_113
-            schema: *ref_106
+          - !Parameter &ref_112
+            schema: *ref_105
             implementation: Method
             language: !Languages 
               default:
@@ -3238,8 +3228,8 @@ operationGroups:
               http: !HttpParameter 
                 in: query
                 style: form
-          - !Parameter &ref_114
-            schema: *ref_107
+          - !Parameter &ref_113
+            schema: *ref_106
             implementation: Method
             language: !Languages 
               default:
@@ -3250,8 +3240,8 @@ operationGroups:
               http: !HttpParameter 
                 in: query
                 style: form
-          - !Parameter &ref_115
-            schema: *ref_85
+          - !Parameter &ref_114
+            schema: *ref_84
             implementation: Method
             language: !Languages 
               default:
@@ -3261,8 +3251,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_116
-            schema: *ref_85
+          - !Parameter &ref_115
+            schema: *ref_84
             implementation: Method
             language: !Languages 
               default:
@@ -3272,8 +3262,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_117
-            schema: *ref_108
+          - !Parameter &ref_116
+            schema: *ref_107
             implementation: Method
             language: !Languages 
               default:
@@ -3311,6 +3301,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/translator/text/batch/v1.0-preview.1'
         signatureParameters:
+          - *ref_108
           - *ref_109
           - *ref_110
           - *ref_111
@@ -3319,10 +3310,9 @@ operationGroups:
           - *ref_114
           - *ref_115
           - *ref_116
-          - *ref_117
         responses:
           - !SchemaResponse 
-            schema: *ref_118
+            schema: *ref_117
             language: !Languages 
               default:
                 name: ''
@@ -3331,14 +3321,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_119
+                    schema: *ref_118
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: Indicates how long to wait before making a new request.
                   - !HttpHeader 
-                    schema: *ref_120
+                    schema: *ref_119
                     header: ETag
                     language:
                       default:
@@ -3351,7 +3341,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3366,7 +3356,7 @@ operationGroups:
                 statusCodes:
                   - '400'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3381,7 +3371,7 @@ operationGroups:
                 statusCodes:
                   - '401'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3396,7 +3386,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3411,7 +3401,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3426,7 +3416,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3550,7 +3540,6 @@ operationGroups:
             summary: Returns the status for all documents in a batch document translation request
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetSupportedDocumentFormats
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
@@ -3585,7 +3574,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_121
+            schema: *ref_120
             language: !Languages 
               default:
                 name: ''
@@ -3594,7 +3583,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_122
+                    schema: *ref_121
                     header: Retry-After
                     language:
                       default:
@@ -3607,7 +3596,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3622,7 +3611,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3637,7 +3626,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3732,7 +3721,6 @@ operationGroups:
             summary: Returns a list of supported document formats
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetSupportedGlossaryFormats
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
@@ -3767,7 +3755,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_121
+            schema: *ref_120
             language: !Languages 
               default:
                 name: ''
@@ -3776,7 +3764,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_123
+                    schema: *ref_122
                     header: Retry-After
                     language:
                       default:
@@ -3789,7 +3777,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3804,7 +3792,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3819,7 +3807,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3903,7 +3891,6 @@ operationGroups:
             summary: Returns the list of supported glossary formats
         protocol: !Protocols {}
       - !Operation 
-        operationId: DocumentTranslation_GetSupportedStorageSources
         apiVersions:
           - !ApiVersion 
             version: v1.0-preview.1
@@ -3938,7 +3925,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3947,7 +3934,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_125
+                    schema: *ref_124
                     header: Retry-After
                     language:
                       default:
@@ -3960,7 +3947,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3975,7 +3962,7 @@ operationGroups:
                 statusCodes:
                   - '429'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -3990,7 +3977,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !SchemaResponse 
-            schema: *ref_79
+            schema: *ref_78
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -4062,10 +4049,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Ocp-Apim-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Ocp-Apim-Subscription-Key
 language: !Languages 
   default:
     name: AzureAIDocumentTranslation

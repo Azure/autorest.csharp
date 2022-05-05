@@ -21,7 +21,7 @@ schemas: !Schemas
             assignment scope.
       protocol: !Protocols {}
   numbers:
-    - !NumberSchema &ref_59
+    - !NumberSchema &ref_56
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -443,6 +443,9 @@ schemas: !Schemas
               usage:
                 - input
                 - output
+              extensions:
+                x-internal-autorest-anonymous-schema:
+                  anonymous: true
               language: !Languages 
                 default:
                   name: ParameterDefinitionsValueMetadata
@@ -748,7 +751,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_24
     - *ref_25
-    - !ObjectSchema &ref_62
+    - !ObjectSchema &ref_59
       type: object
       apiVersions:
         - !ApiVersion 
@@ -842,7 +845,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: CheckDnsNameAvailability
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -945,7 +947,6 @@ operationGroups:
     $key: SubSingletons
     operations:
       - !Operation 
-        operationId: SubSingletons_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1015,7 +1016,6 @@ operationGroups:
             summary: Singleton that belongs to a subscription.
         protocol: !Protocols {}
       - !Operation 
-        operationId: SubSingletons_Execute
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1089,7 +1089,6 @@ operationGroups:
     $key: OrphanedPost
     operations:
       - !Operation 
-        operationId: OrphanedPost_ValidateSomething
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1097,8 +1096,8 @@ operationGroups:
           - *ref_32
           - *ref_34
           - *ref_33
-        requestMediaTypes:
-          application/json: !Request &ref_44
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1152,8 +1151,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_44
         signatureParameters: []
         responses:
           - !Response 
@@ -1194,13 +1191,12 @@ operationGroups:
     $key: PolicyDefinitions
     operations:
       - !Operation 
-        operationId: PolicyDefinitions_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_47
+          - !Parameter &ref_45
             schema: *ref_30
             implementation: Method
             required: true
@@ -1214,8 +1210,8 @@ operationGroups:
                 in: path
           - *ref_33
           - *ref_34
-        requestMediaTypes:
-          application/json: !Request &ref_46
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1230,7 +1226,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_45
+              - !Parameter &ref_44
                 schema: *ref_26
                 implementation: Method
                 required: true
@@ -1256,7 +1252,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_45
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -1269,10 +1265,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_46
         signatureParameters:
-          - *ref_47
+          - *ref_45
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -1308,13 +1302,12 @@ operationGroups:
             summary: Creates or updates a policy definition in a subscription.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_48
+          - !Parameter &ref_46
             schema: *ref_30
             implementation: Method
             required: true
@@ -1355,7 +1348,7 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
+          - *ref_46
         responses:
           - !Response 
             language: !Languages 
@@ -1396,13 +1389,12 @@ operationGroups:
             summary: Deletes a policy definition in a subscription.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_49
+          - !Parameter &ref_47
             schema: *ref_30
             implementation: Method
             required: true
@@ -1443,7 +1435,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
+          - *ref_47
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -1479,13 +1471,12 @@ operationGroups:
             summary: Retrieves a policy definition in a subscription.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_GetBuiltIn
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_50
+          - !Parameter &ref_48
             schema: *ref_30
             implementation: Method
             required: true
@@ -1525,7 +1516,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
+          - *ref_48
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -1561,13 +1552,12 @@ operationGroups:
             summary: Retrieves a built-in policy definition.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_CreateOrUpdateAtManagementGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_53
+          - !Parameter &ref_50
             schema: *ref_30
             implementation: Method
             required: true
@@ -1580,7 +1570,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_33
-          - !Parameter &ref_54
+          - !Parameter &ref_51
             schema: *ref_30
             implementation: Method
             required: true
@@ -1592,8 +1582,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requestMediaTypes:
-          application/json: !Request &ref_52
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_41
@@ -1608,7 +1598,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_51
+              - !Parameter &ref_49
                 schema: *ref_26
                 implementation: Method
                 required: true
@@ -1634,7 +1624,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_51
+              - *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1647,11 +1637,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_52
         signatureParameters:
-          - *ref_53
-          - *ref_54
+          - *ref_50
+          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -1687,13 +1675,12 @@ operationGroups:
             summary: Creates or updates a policy definition in a management group.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_DeleteAtManagementGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_55
+          - !Parameter &ref_52
             schema: *ref_30
             implementation: Method
             required: true
@@ -1706,7 +1693,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_33
-          - !Parameter &ref_56
+          - !Parameter &ref_53
             schema: *ref_30
             implementation: Method
             required: true
@@ -1745,8 +1732,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_55
-          - *ref_56
+          - *ref_52
+          - *ref_53
         responses:
           - !Response 
             language: !Languages 
@@ -1787,13 +1774,12 @@ operationGroups:
             summary: Deletes a policy definition in a management group.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_GetAtManagementGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
-          - !Parameter &ref_57
+          - !Parameter &ref_54
             schema: *ref_30
             implementation: Method
             required: true
@@ -1806,7 +1792,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_33
-          - !Parameter &ref_58
+          - !Parameter &ref_55
             schema: *ref_30
             implementation: Method
             required: true
@@ -1845,8 +1831,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_57
-          - *ref_58
+          - *ref_54
+          - *ref_55
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -1882,7 +1868,6 @@ operationGroups:
             summary: Retrieve a policy definition in a management group.
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_List
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -1890,7 +1875,7 @@ operationGroups:
           - *ref_32
           - *ref_33
           - *ref_34
-          - !Parameter &ref_60
+          - !Parameter &ref_57
             schema: *ref_30
             implementation: Method
             extensions:
@@ -1906,8 +1891,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_61
-            schema: *ref_59
+          - !Parameter &ref_58
+            schema: *ref_56
             implementation: Method
             language: !Languages 
               default:
@@ -1944,11 +1929,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_60
-          - *ref_61
+          - *ref_57
+          - *ref_58
         responses:
           - !SchemaResponse 
-            schema: *ref_62
+            schema: *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -1991,14 +1976,13 @@ operationGroups:
             summary: Retrieves policy definitions in a subscription
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_ListBuiltIn
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
           - *ref_33
-          - !Parameter &ref_63
+          - !Parameter &ref_60
             schema: *ref_30
             implementation: Method
             extensions:
@@ -2014,8 +1998,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_64
-            schema: *ref_59
+          - !Parameter &ref_61
+            schema: *ref_56
             implementation: Method
             language: !Languages 
               default:
@@ -2052,11 +2036,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
-          - *ref_64
+          - *ref_60
+          - *ref_61
         responses:
           - !SchemaResponse 
-            schema: *ref_62
+            schema: *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -2097,14 +2081,13 @@ operationGroups:
             summary: Retrieve built-in policy definitions
         protocol: !Protocols {}
       - !Operation 
-        operationId: PolicyDefinitions_ListByManagementGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_32
           - *ref_33
-          - !Parameter &ref_65
+          - !Parameter &ref_62
             schema: *ref_30
             implementation: Method
             required: true
@@ -2116,7 +2099,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_66
+          - !Parameter &ref_63
             schema: *ref_30
             implementation: Method
             extensions:
@@ -2132,8 +2115,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_67
-            schema: *ref_59
+          - !Parameter &ref_64
+            schema: *ref_56
             implementation: Method
             language: !Languages 
               default:
@@ -2170,12 +2153,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_65
-          - *ref_66
-          - *ref_67
+          - *ref_62
+          - *ref_63
+          - *ref_64
         responses:
           - !SchemaResponse 
-            schema: *ref_62
+            schema: *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -2225,8 +2208,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

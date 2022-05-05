@@ -146,14 +146,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: Operation1
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_8
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_5
@@ -194,8 +193,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: https://{source}.fakeendpoint.azure.com
-        requests:
-          - *ref_8
         signatureParameters: []
         responses:
           - !Response 
@@ -213,14 +210,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: Operation2
         apiVersions:
           - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_10
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_5
@@ -235,7 +231,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_9
+              - !Parameter &ref_8
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -248,7 +244,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_9
+              - *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -261,8 +257,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: https://{source}.fakeendpoint.azure.com
-        requests:
-          - *ref_10
         signatureParameters: []
         responses:
           - !Response 
@@ -287,22 +281,20 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://fakeendpoint.azure.com/.default
-    - !KeySecurityScheme 
-      name: subscription-key
-      type: Key
-      in: header
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: subscription-key
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://fakeendpoint.azure.com/.default
-    - !KeySecurityScheme 
-      name: subscription-key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: subscription-key
 language: !Languages 
   default:
     name: MultipleInputFiles

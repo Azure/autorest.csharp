@@ -342,7 +342,7 @@ schemas: !Schemas
           name: AppleBarrelBadApplesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_130
+    - !StringSchema &ref_126
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1102,7 +1102,7 @@ schemas: !Schemas
           name: ApplicationXml
           description: Content Type 'application/xml'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_149
+    - !ConstantSchema &ref_139
       type: constant
       value: !ConstantValue 
         value: list
@@ -1112,7 +1112,7 @@ schemas: !Schemas
           name: Constant10
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_151
+    - !ConstantSchema &ref_141
       type: constant
       value: !ConstantValue 
         value: properties
@@ -1122,7 +1122,7 @@ schemas: !Schemas
           name: Constant11
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_152
+    - !ConstantSchema &ref_142
       type: constant
       value: !ConstantValue 
         value: service
@@ -1132,7 +1132,7 @@ schemas: !Schemas
           name: Constant12
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_156
+    - !ConstantSchema &ref_145
       type: constant
       value: !ConstantValue 
         value: acl
@@ -1142,7 +1142,7 @@ schemas: !Schemas
           name: Constant13
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_157
+    - !ConstantSchema &ref_146
       type: constant
       value: !ConstantValue 
         value: container
@@ -1152,7 +1152,7 @@ schemas: !Schemas
           name: Constant14
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_162
+    - !ConstantSchema &ref_150
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1162,7 +1162,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_166
+    - !ConstantSchema &ref_153
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -1347,7 +1347,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_4
-    - !ObjectSchema &ref_120
+    - !ObjectSchema &ref_119
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1411,7 +1411,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_7
-    - !ObjectSchema &ref_123
+    - !ObjectSchema &ref_121
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1533,7 +1533,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_14
-    - !ObjectSchema &ref_124
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1565,7 +1565,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_127
+    - !ObjectSchema &ref_124
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1675,7 +1675,7 @@ schemas: !Schemas
           description: A banana.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_150
+    - !ObjectSchema &ref_140
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1879,7 +1879,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_35
     - *ref_36
-    - !ObjectSchema &ref_153
+    - !ObjectSchema &ref_143
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2266,7 +2266,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_60
-    - !ObjectSchema &ref_161
+    - !ObjectSchema &ref_149
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2772,7 +2772,7 @@ schemas: !Schemas
     - *ref_95
     - *ref_96
     - *ref_97
-    - !ObjectSchema &ref_163
+    - !ObjectSchema &ref_151
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2796,7 +2796,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_167
+    - !ObjectSchema &ref_154
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2820,7 +2820,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_168
+    - !ObjectSchema &ref_155
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2858,7 +2858,7 @@ schemas: !Schemas
           description: 'Contans property '
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_169
+    - !ObjectSchema &ref_156
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2883,7 +2883,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_172
+    - !ObjectSchema &ref_158
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2913,6 +2913,74 @@ schemas: !Schemas
     - *ref_105
     - *ref_106
     - *ref_107
+    - !ArraySchema &ref_129
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_108
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: false
+      language: !Languages 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !Protocols {}
+    - !ArraySchema &ref_130
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_108
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: true
+      language: !Languages 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !Protocols {}
+    - !ArraySchema &ref_132
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_108
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: false
+      language: !Languages 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !Protocols {}
+    - !ArraySchema &ref_133
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_108
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: true
+      language: !Languages 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !Protocols {}
     - !ArraySchema &ref_135
       type: array
       apiVersions:
@@ -2947,77 +3015,9 @@ schemas: !Schemas
           name: ArrayOfBanana
           description: Array of Banana
       protocol: !Protocols {}
-    - !ArraySchema &ref_139
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_108
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: false
-      language: !Languages 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !Protocols {}
-    - !ArraySchema &ref_140
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_108
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: true
-      language: !Languages 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !Protocols {}
-    - !ArraySchema &ref_143
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_108
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: false
-      language: !Languages 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !Protocols {}
-    - !ArraySchema &ref_144
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_108
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: true
-      language: !Languages 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !Protocols {}
     - *ref_109
     - *ref_110
-    - !ArraySchema &ref_158
+    - !ArraySchema &ref_147
       type: array
       apiVersions:
         - !ApiVersion 
@@ -3058,7 +3058,6 @@ operationGroups:
     $key: xml
     operations:
       - !Operation 
-        operationId: xml_getComplexTypeRefNoMeta
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3111,14 +3110,13 @@ operationGroups:
             description: Get a complex type that has a ref to a complex type with no XML node
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putComplexTypeRefNoMeta
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_119
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3159,8 +3157,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_119
         signatureParameters: []
         responses:
           - !Response 
@@ -3178,7 +3174,6 @@ operationGroups:
             description: Puts a complex type that has a ref to a complex type with no XML node
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getComplexTypeRefWithMeta
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3213,7 +3208,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_119
             language: !Languages 
               default:
                 name: ''
@@ -3231,14 +3226,13 @@ operationGroups:
             description: Get a complex type that has a ref to a complex type with XML node
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putComplexTypeRefWithMeta
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_122
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3253,8 +3247,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_121
-                schema: *ref_120
+              - !Parameter &ref_120
+                schema: *ref_119
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3266,7 +3260,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_121
+              - *ref_120
             language: !Languages 
               default:
                 name: ''
@@ -3279,8 +3273,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_122
         signatureParameters: []
         responses:
           - !Response 
@@ -3298,7 +3290,6 @@ operationGroups:
             description: Puts a complex type that has a ref to a complex type with XML node
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getSimple
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3333,7 +3324,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_123
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -3347,7 +3338,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -3365,14 +3356,156 @@ operationGroups:
             description: Get a simple XML document
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putSimple
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_126
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_117
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_123
+                schema: *ref_121
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: slideshow
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: xml
+              - !Parameter 
+                schema: *ref_115
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_123
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /xml/simple
+                method: put
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Indicates success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_122
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: PutSimple
+            description: Put a simple XML document
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_115
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /xml/wrapped-lists
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_124
+            language: !Languages 
+              default:
+                name: ''
+                description: The XML document with multiple wrapped lists
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GetWrappedLists
+            description: Get an XML document with multiple wrapped lists
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3388,12 +3521,12 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_125
-                schema: *ref_123
+                schema: *ref_124
                 implementation: Method
                 required: true
                 language: !Languages 
                   default:
-                    name: slideshow
+                    name: wrappedLists
                     description: ''
                 protocol: !Protocols 
                   http: !HttpParameter 
@@ -3420,14 +3553,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /xml/simple
+                path: /xml/wrapped-lists
                 method: put
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_126
         signatureParameters: []
         responses:
           - !Response 
@@ -3441,154 +3572,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: PutSimple
-            description: Put a simple XML document
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_getWrappedLists
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_115
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /xml/wrapped-lists
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_127
-            language: !Languages 
-              default:
-                name: ''
-                description: The XML document with multiple wrapped lists
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: GetWrappedLists
-            description: Get an XML document with multiple wrapped lists
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_putWrappedLists
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_129
-            parameters:
-              - !Parameter 
-                schema: *ref_117
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_128
-                schema: *ref_127
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: wrappedLists
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: xml
-              - !Parameter 
-                schema: *ref_115
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_128
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /xml/wrapped-lists
-                method: put
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                uri: '{$host}'
-        requests:
-          - *ref_129
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Indicates success
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -3606,7 +3590,6 @@ operationGroups:
             description: Put an XML document with multiple wrapped lists
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getHeaders
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3634,7 +3617,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_130
+                    schema: *ref_126
                     header: Custom-Header
                     language:
                       default:
@@ -3648,7 +3631,6 @@ operationGroups:
             description: Get strongly-typed response headers.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getEmptyList
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3683,7 +3665,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_123
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -3701,14 +3683,13 @@ operationGroups:
             description: Get an empty list.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putEmptyList
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_132
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3723,8 +3704,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
-                schema: *ref_123
+              - !Parameter &ref_127
+                schema: *ref_121
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3736,7 +3717,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_131
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3749,8 +3730,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_132
         signatureParameters: []
         responses:
           - !Response 
@@ -3768,7 +3747,6 @@ operationGroups:
             description: Puts an empty list.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getEmptyWrappedLists
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3803,7 +3781,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_127
+            schema: *ref_124
             language: !Languages 
               default:
                 name: ''
@@ -3821,14 +3799,13 @@ operationGroups:
             description: Gets some empty wrapped lists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putEmptyWrappedLists
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_134
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3843,8 +3820,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_133
-                schema: *ref_127
+              - !Parameter &ref_128
+                schema: *ref_124
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3856,7 +3833,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_133
+              - *ref_128
             language: !Languages 
               default:
                 name: ''
@@ -3869,8 +3846,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_134
         signatureParameters: []
         responses:
           - !Response 
@@ -3888,7 +3863,6 @@ operationGroups:
             description: Puts some empty wrapped lists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getRootList
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3923,7 +3897,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_129
             language: !Languages 
               default:
                 name: ''
@@ -3941,14 +3915,245 @@ operationGroups:
             description: Gets a list as the root element.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putRootList
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_138
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_117
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_131
+                schema: *ref_130
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bananas
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: xml
+            signatureParameters:
+              - *ref_131
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /xml/root-list
+                method: put
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Indicates success.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '201'
+        language: !Languages 
+          default:
+            name: PutRootList
+            description: Puts a list as the root element.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_115
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /xml/root-list-single-item
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_132
+            language: !Languages 
+              default:
+                name: ''
+                description: The root list.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GetRootListSingleItem
+            description: Gets a list with a single item.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_117
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_134
+                schema: *ref_133
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bananas
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: xml
+            signatureParameters:
+              - *ref_134
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /xml/root-list-single-item
+                method: put
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Indicates success.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '201'
+        language: !Languages 
+          default:
+            name: PutRootListSingleItem
+            description: Puts a list with a single item.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_115
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /xml/empty-root-list
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_135
+            language: !Languages 
+              default:
+                name: ''
+                description: The root list.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: xml
+                mediaTypes:
+                  - application/xml
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: GetEmptyRootList
+            description: Gets an empty list as the root element.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_114
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -3983,254 +4188,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /xml/root-list
-                method: put
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                uri: '{$host}'
-        requests:
-          - *ref_138
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Indicates success.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '201'
-        language: !Languages 
-          default:
-            name: PutRootList
-            description: Puts a list as the root element.
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_getRootListSingleItem
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_115
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /xml/root-list-single-item
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_139
-            language: !Languages 
-              default:
-                name: ''
-                description: The root list.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: GetRootListSingleItem
-            description: Gets a list with a single item.
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_putRootListSingleItem
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_142
-            parameters:
-              - !Parameter 
-                schema: *ref_117
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_141
-                schema: *ref_140
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: bananas
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: xml
-            signatureParameters:
-              - *ref_141
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /xml/root-list-single-item
-                method: put
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                uri: '{$host}'
-        requests:
-          - *ref_142
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Indicates success.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '201'
-        language: !Languages 
-          default:
-            name: PutRootListSingleItem
-            description: Puts a list with a single item.
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_getEmptyRootList
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_115
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /xml/empty-root-list
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_143
-            language: !Languages 
-              default:
-                name: ''
-                description: The root list.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: GetEmptyRootList
-            description: Gets an empty list as the root element.
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: xml_putEmptyRootList
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_146
-            parameters:
-              - !Parameter 
-                schema: *ref_117
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_145
-                schema: *ref_144
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: bananas
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: xml
-            signatureParameters:
-              - *ref_145
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /xml/empty-root-list
                 method: put
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_146
         signatureParameters: []
         responses:
           - !Response 
@@ -4248,7 +4211,6 @@ operationGroups:
             description: Puts an empty list as the root element.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getEmptyChildElement
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4301,14 +4263,13 @@ operationGroups:
             description: Gets an XML document with an empty child element.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putEmptyChildElement
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_148
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -4323,7 +4284,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_147
+              - !Parameter &ref_138
                 schema: *ref_108
                 implementation: Method
                 required: true
@@ -4336,7 +4297,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_147
+              - *ref_138
             language: !Languages 
               default:
                 name: ''
@@ -4349,8 +4310,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_148
         signatureParameters: []
         responses:
           - !Response 
@@ -4368,14 +4327,13 @@ operationGroups:
             description: Puts a value with an empty child element.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_listContainers
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_149
+            schema: *ref_139
             implementation: Method
             required: true
             language: !Languages 
@@ -4415,7 +4373,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_150
+            schema: *ref_140
             language: !Languages 
               default:
                 name: ''
@@ -4433,14 +4391,13 @@ operationGroups:
             description: Lists containers in a storage account.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getServiceProperties
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_151
+            schema: *ref_141
             implementation: Method
             required: true
             language: !Languages 
@@ -4452,7 +4409,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_152
+            schema: *ref_142
             implementation: Method
             required: true
             language: !Languages 
@@ -4492,7 +4449,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_153
+            schema: *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -4510,14 +4467,13 @@ operationGroups:
             description: Gets storage service properties.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putServiceProperties
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_151
+            schema: *ref_141
             implementation: Method
             required: true
             language: !Languages 
@@ -4529,7 +4485,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_152
+            schema: *ref_142
             implementation: Method
             required: true
             language: !Languages 
@@ -4540,8 +4496,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/xml: !Request &ref_155
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -4556,8 +4512,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_154
-                schema: *ref_153
+              - !Parameter &ref_144
+                schema: *ref_143
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4569,7 +4525,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_154
+              - *ref_144
             language: !Languages 
               default:
                 name: ''
@@ -4582,8 +4538,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_155
         signatureParameters: []
         responses:
           - !Response 
@@ -4601,14 +4555,13 @@ operationGroups:
             description: Puts storage service properties.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getAcls
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_156
+            schema: *ref_145
             implementation: Method
             required: true
             language: !Languages 
@@ -4620,7 +4573,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_157
+            schema: *ref_146
             implementation: Method
             required: true
             language: !Languages 
@@ -4660,7 +4613,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_158
+            schema: *ref_147
             language: !Languages 
               default:
                 name: ''
@@ -4678,14 +4631,13 @@ operationGroups:
             description: Gets storage ACLs for a container.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putAcls
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_156
+            schema: *ref_145
             implementation: Method
             required: true
             language: !Languages 
@@ -4697,7 +4649,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_157
+            schema: *ref_146
             implementation: Method
             required: true
             language: !Languages 
@@ -4708,8 +4660,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/xml: !Request &ref_160
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -4724,8 +4676,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_159
-                schema: *ref_158
+              - !Parameter &ref_148
+                schema: *ref_147
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4737,7 +4689,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_159
+              - *ref_148
             language: !Languages 
               default:
                 name: ''
@@ -4750,8 +4702,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_160
         signatureParameters: []
         responses:
           - !Response 
@@ -4769,14 +4719,13 @@ operationGroups:
             description: Puts storage ACLs for a container.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_listBlobs
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
           - !Parameter 
-            schema: *ref_149
+            schema: *ref_139
             implementation: Method
             required: true
             language: !Languages 
@@ -4788,7 +4737,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_157
+            schema: *ref_146
             implementation: Method
             required: true
             language: !Languages 
@@ -4828,7 +4777,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_161
+            schema: *ref_149
             language: !Languages 
               default:
                 name: ''
@@ -4846,17 +4795,16 @@ operationGroups:
             description: Lists blobs in a storage container.
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_jsonInput
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/json: !Request &ref_165
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_162
+                schema: *ref_150
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -4868,8 +4816,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_164
-                schema: *ref_163
+              - !Parameter &ref_152
+                schema: *ref_151
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4881,7 +4829,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_164
+              - *ref_152
             language: !Languages 
               default:
                 name: ''
@@ -4894,8 +4842,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_165
         signatureParameters: []
         responses:
           - !Response 
@@ -4913,7 +4859,6 @@ operationGroups:
             description: A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_jsonOutput
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4923,7 +4868,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_166
+                schema: *ref_153
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -4948,7 +4893,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_167
+            schema: *ref_154
             language: !Languages 
               default:
                 name: ''
@@ -4966,7 +4911,6 @@ operationGroups:
             description: A Swagger with XML that has one operation that returns JSON. ID number 42
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_GetXMsText
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5001,7 +4945,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_168
+            schema: *ref_155
             language: !Languages 
               default:
                 name: ''
@@ -5019,7 +4963,6 @@ operationGroups:
             description: Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getBytes
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5054,7 +4997,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_156
             language: !Languages 
               default:
                 name: ''
@@ -5068,7 +5011,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -5086,14 +5029,13 @@ operationGroups:
             description: Get an XML document with binary property
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putBinary
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_171
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -5108,8 +5050,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_170
-                schema: *ref_169
+              - !Parameter &ref_157
+                schema: *ref_156
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5134,7 +5076,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_170
+              - *ref_157
             language: !Languages 
               default:
                 name: ''
@@ -5147,8 +5089,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_171
         signatureParameters: []
         responses:
           - !Response 
@@ -5162,7 +5102,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -5180,7 +5120,6 @@ operationGroups:
             description: Put an XML document with binary property
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_getUri
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5215,7 +5154,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_172
+            schema: *ref_158
             language: !Languages 
               default:
                 name: ''
@@ -5229,7 +5168,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -5247,14 +5186,13 @@ operationGroups:
             description: Get an XML document with uri property
         protocol: !Protocols {}
       - !Operation 
-        operationId: xml_putUri
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_114
-        requestMediaTypes:
-          application/xml: !Request &ref_174
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_117
@@ -5269,8 +5207,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_173
-                schema: *ref_172
+              - !Parameter &ref_159
+                schema: *ref_158
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5295,7 +5233,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_173
+              - *ref_159
             language: !Languages 
               default:
                 name: ''
@@ -5308,8 +5246,6 @@ operationGroups:
                 mediaTypes:
                   - application/xml
                 uri: '{$host}'
-        requests:
-          - *ref_174
         signatureParameters: []
         responses:
           - !Response 
@@ -5323,7 +5259,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''

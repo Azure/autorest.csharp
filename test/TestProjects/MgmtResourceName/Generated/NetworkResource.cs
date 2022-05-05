@@ -89,7 +89,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: networkResources_Get
+        /// Operation Id: NetworkResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NetworkResource>> GetAsync(CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: networkResources_Get
+        /// Operation Id: NetworkResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NetworkResource> Get(CancellationToken cancellationToken = default)

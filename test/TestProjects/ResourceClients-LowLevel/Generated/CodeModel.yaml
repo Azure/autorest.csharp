@@ -86,7 +86,6 @@ operationGroups:
     $key: Service
     operations:
       - !Operation 
-        operationId: Service_GetParameters
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -147,7 +146,6 @@ operationGroups:
     $key: Group
     operations:
       - !Operation 
-        operationId: Group_ListGroups
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -200,7 +198,6 @@ operationGroups:
             description: Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Group_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -262,7 +259,6 @@ operationGroups:
     $key: Item
     operations:
       - !Operation 
-        operationId: Item_ListAllItems
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -320,7 +316,6 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Item_ListItems
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -379,7 +374,6 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Item_Get
         apiVersions:
           - !ApiVersion 
             version: '2021-10-19'
@@ -441,10 +435,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Fake-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: LlcResourceClients

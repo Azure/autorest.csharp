@@ -178,7 +178,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_27
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: application/octet-stream
@@ -189,7 +189,17 @@ schemas: !Schemas
           description: Content Type 'application/octet-stream'
       protocol: !Protocols {}
   binaries:
-    - !BinarySchema &ref_28
+    - !BinarySchema &ref_27
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
+    - !BinarySchema &ref_32
       type: binary
       apiVersions:
         - !ApiVersion 
@@ -200,16 +210,6 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
     - !BinarySchema &ref_34
-      type: binary
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: binary
-          description: ''
-      protocol: !Protocols {}
-    - !BinarySchema &ref_37
       type: binary
       apiVersions:
         - !ApiVersion 
@@ -252,7 +252,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_44
+    - !ObjectSchema &ref_38
       type: object
       apiVersions:
         - !ApiVersion 
@@ -277,7 +277,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_47
+    - !ObjectSchema &ref_40
       type: object
       apiVersions:
         - !ApiVersion 
@@ -301,7 +301,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_56
+    - !ObjectSchema &ref_46
       type: object
       apiVersions:
         - !ApiVersion 
@@ -326,7 +326,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_59
+    - !ObjectSchema &ref_48
       type: object
       apiVersions:
         - !ApiVersion 
@@ -384,7 +384,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_68
+    - !ObjectSchema &ref_54
       type: object
       apiVersions:
         - !ApiVersion 
@@ -409,7 +409,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_71
+    - !ObjectSchema &ref_56
       type: object
       apiVersions:
         - !ApiVersion 
@@ -433,7 +433,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_80
+    - !ObjectSchema &ref_62
       type: object
       apiVersions:
         - !ApiVersion 
@@ -468,7 +468,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_83
+    - !ObjectSchema &ref_64
       type: object
       apiVersions:
         - !ApiVersion 
@@ -503,7 +503,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - !ArraySchema &ref_74
+    - !ArraySchema &ref_58
       type: array
       apiVersions:
         - !ApiVersion 
@@ -514,7 +514,7 @@ schemas: !Schemas
           name: ArrayOfPostContentSchemaItem
           description: Array of PostContentSchemaItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_77
+    - !ArraySchema &ref_60
       type: array
       apiVersions:
         - !ApiVersion 
@@ -527,7 +527,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_14
     - *ref_15
-    - !ArraySchema &ref_86
+    - !ArraySchema &ref_66
       type: array
       apiVersions:
         - !ApiVersion 
@@ -538,7 +538,7 @@ schemas: !Schemas
           name: ArrayOfPost0ItemsItem
           description: Array of Post0ItemsItem
       protocol: !Protocols {}
-    - !ArraySchema &ref_88
+    - !ArraySchema &ref_68
       type: array
       apiVersions:
         - !ApiVersion 
@@ -550,7 +550,7 @@ schemas: !Schemas
           description: Array of String
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_31
+  - !Parameter &ref_29
     schema: *ref_13
     implementation: Client
     required: true
@@ -564,7 +564,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_32
+  - !Parameter &ref_30
     schema: *ref_13
     implementation: Client
     required: true
@@ -578,7 +578,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: query
-  - !Parameter &ref_33
+  - !Parameter &ref_31
     schema: *ref_17
     implementation: Client
     extensions:
@@ -612,7 +612,6 @@ operationGroups:
     $key: implicit
     operations:
       - !Operation 
-        operationId: implicit_getRequiredPath
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -688,7 +687,6 @@ operationGroups:
             description: Test implicitly required path parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_putOptionalQuery
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -763,7 +761,6 @@ operationGroups:
             description: Test implicitly optional query parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_putOptionalHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -838,14 +835,13 @@ operationGroups:
             description: Test implicitly optional header parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_putOptionalBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_26
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -899,8 +895,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_26
         signatureParameters: []
         responses:
           - !Response 
@@ -932,17 +926,16 @@ operationGroups:
             description: Test implicitly optional body parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_putOptionalBinaryBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/octet-stream: !Request &ref_30
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_27
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -954,8 +947,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_29
-                schema: *ref_28
+              - !Parameter &ref_28
+                schema: *ref_27
                 implementation: Method
                 language: !Languages 
                   default:
@@ -979,7 +972,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_29
+              - *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -993,8 +986,6 @@ operationGroups:
                 mediaTypes:
                   - application/octet-stream
                 uri: '{$host}'
-        requests:
-          - *ref_30
         signatureParameters: []
         responses:
           - !Response 
@@ -1026,13 +1017,12 @@ operationGroups:
             description: Test implicitly optional body parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_getRequiredGlobalPath
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
@@ -1090,13 +1080,12 @@ operationGroups:
             description: Test implicitly required path parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_getRequiredGlobalQuery
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - *ref_32
+          - *ref_30
         requests:
           - !Request 
             parameters:
@@ -1154,13 +1143,12 @@ operationGroups:
             description: Test implicitly required query parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: implicit_getOptionalGlobalQuery
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - *ref_33
+          - *ref_31
         requests:
           - !Request 
             parameters:
@@ -1226,17 +1214,16 @@ operationGroups:
     $key: explicit
     operations:
       - !Operation 
-        operationId: explicit_putOptionalBinaryBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/octet-stream: !Request &ref_36
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_27
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1248,8 +1235,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_35
-                schema: *ref_34
+              - !Parameter &ref_33
+                schema: *ref_32
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1274,7 +1261,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_35
+              - *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -1288,8 +1275,6 @@ operationGroups:
                 mediaTypes:
                   - application/octet-stream
                 uri: '{$host}'
-        requests:
-          - *ref_36
         signatureParameters: []
         responses:
           - !Response 
@@ -1321,17 +1306,16 @@ operationGroups:
             description: Test explicitly optional body parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_putRequiredBinaryBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/octet-stream: !Request &ref_39
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_27
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1343,8 +1327,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_38
-                schema: *ref_37
+              - !Parameter &ref_35
+                schema: *ref_34
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1369,7 +1353,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_38
+              - *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -1383,8 +1367,6 @@ operationGroups:
                 mediaTypes:
                   - application/octet-stream
                 uri: '{$host}'
-        requests:
-          - *ref_39
         signatureParameters: []
         responses:
           - !Response 
@@ -1416,14 +1398,13 @@ operationGroups:
             description: Test explicitly required body parameter
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredIntegerParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_41
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -1438,7 +1419,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_40
+              - !Parameter &ref_36
                 schema: *ref_17
                 implementation: Method
                 required: true
@@ -1464,7 +1445,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_40
+              - *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -1477,8 +1458,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_41
         signatureParameters: []
         responses:
           - !Response 
@@ -1510,14 +1489,13 @@ operationGroups:
             description: Test explicitly required integer. Please put null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalIntegerParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_43
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -1532,7 +1510,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_42
+              - !Parameter &ref_37
                 schema: *ref_17
                 implementation: Method
                 required: false
@@ -1558,7 +1536,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_42
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -1571,8 +1549,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_43
         signatureParameters: []
         responses:
           - !Response 
@@ -1604,14 +1580,13 @@ operationGroups:
             description: Test explicitly optional integer. Please put null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredIntegerProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_46
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -1626,8 +1601,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_45
-                schema: *ref_44
+              - !Parameter &ref_39
+                schema: *ref_38
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1652,7 +1627,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_45
+              - *ref_39
             language: !Languages 
               default:
                 name: ''
@@ -1665,8 +1640,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_46
         signatureParameters: []
         responses:
           - !Response 
@@ -1698,14 +1671,13 @@ operationGroups:
             description: Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalIntegerProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_49
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -1720,8 +1692,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_48
-                schema: *ref_47
+              - !Parameter &ref_41
+                schema: *ref_40
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1746,7 +1718,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_48
+              - *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1759,8 +1731,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_49
         signatureParameters: []
         responses:
           - !Response 
@@ -1792,13 +1762,12 @@ operationGroups:
             description: Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredIntegerHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_50
+          - !Parameter &ref_42
             schema: *ref_17
             implementation: Method
             required: true
@@ -1837,7 +1806,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
+          - *ref_42
         responses:
           - !Response 
             language: !Languages 
@@ -1868,13 +1837,12 @@ operationGroups:
             description: Test explicitly required integer. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalIntegerHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_51
+          - !Parameter &ref_43
             schema: *ref_17
             implementation: Method
             language: !Languages 
@@ -1912,7 +1880,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_51
+          - *ref_43
         responses:
           - !Response 
             language: !Languages 
@@ -1943,14 +1911,13 @@ operationGroups:
             description: Test explicitly optional integer. Please put a header 'headerParameter' => null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredStringParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_53
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -1965,7 +1932,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_52
+              - !Parameter &ref_44
                 schema: *ref_13
                 implementation: Method
                 required: true
@@ -1991,7 +1958,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_52
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -2004,8 +1971,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_53
         signatureParameters: []
         responses:
           - !Response 
@@ -2037,14 +2002,13 @@ operationGroups:
             description: Test explicitly required string. Please put null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalStringParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_55
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2059,7 +2023,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_45
                 schema: *ref_13
                 implementation: Method
                 required: false
@@ -2085,7 +2049,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -2098,8 +2062,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_55
         signatureParameters: []
         responses:
           - !Response 
@@ -2131,14 +2093,13 @@ operationGroups:
             description: Test explicitly optional string. Please put null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredStringProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_58
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2153,8 +2114,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_57
-                schema: *ref_56
+              - !Parameter &ref_47
+                schema: *ref_46
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2179,7 +2140,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_57
+              - *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -2192,8 +2153,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_58
         signatureParameters: []
         responses:
           - !Response 
@@ -2225,14 +2184,13 @@ operationGroups:
             description: Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalStringProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_61
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2247,8 +2205,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_60
-                schema: *ref_59
+              - !Parameter &ref_49
+                schema: *ref_48
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2273,7 +2231,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_60
+              - *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -2286,8 +2244,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_61
         signatureParameters: []
         responses:
           - !Response 
@@ -2319,13 +2275,12 @@ operationGroups:
             description: Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredStringHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_62
+          - !Parameter &ref_50
             schema: *ref_13
             implementation: Method
             required: true
@@ -2364,7 +2319,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_62
+          - *ref_50
         responses:
           - !Response 
             language: !Languages 
@@ -2395,13 +2350,12 @@ operationGroups:
             description: Test explicitly required string. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalStringHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_63
+          - !Parameter &ref_51
             schema: *ref_13
             implementation: Method
             language: !Languages 
@@ -2439,7 +2393,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
+          - *ref_51
         responses:
           - !Response 
             language: !Languages 
@@ -2470,14 +2424,13 @@ operationGroups:
             description: Test explicitly optional string. Please put a header 'headerParameter' => null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredClassParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_65
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2492,7 +2445,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_64
+              - !Parameter &ref_52
                 schema: *ref_9
                 implementation: Method
                 required: true
@@ -2518,7 +2471,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_64
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -2531,8 +2484,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_65
         signatureParameters: []
         responses:
           - !Response 
@@ -2564,14 +2515,13 @@ operationGroups:
             description: Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalClassParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_67
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2586,7 +2536,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_66
+              - !Parameter &ref_53
                 schema: *ref_9
                 implementation: Method
                 required: false
@@ -2612,7 +2562,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_66
+              - *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -2625,8 +2575,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_67
         signatureParameters: []
         responses:
           - !Response 
@@ -2658,14 +2606,13 @@ operationGroups:
             description: Test explicitly optional complex object. Please put null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredClassProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_70
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2680,8 +2627,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_69
-                schema: *ref_68
+              - !Parameter &ref_55
+                schema: *ref_54
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2706,7 +2653,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_69
+              - *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -2719,8 +2666,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_70
         signatureParameters: []
         responses:
           - !Response 
@@ -2752,14 +2697,13 @@ operationGroups:
             description: Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalClassProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_73
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2774,8 +2718,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_72
-                schema: *ref_71
+              - !Parameter &ref_57
+                schema: *ref_56
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2800,7 +2744,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_72
+              - *ref_57
             language: !Languages 
               default:
                 name: ''
@@ -2813,8 +2757,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_73
         signatureParameters: []
         responses:
           - !Response 
@@ -2846,14 +2788,13 @@ operationGroups:
             description: Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredArrayParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_76
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2868,8 +2809,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_75
-                schema: *ref_74
+              - !Parameter &ref_59
+                schema: *ref_58
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2894,7 +2835,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_75
+              - *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -2907,8 +2848,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_76
         signatureParameters: []
         responses:
           - !Response 
@@ -2940,14 +2879,13 @@ operationGroups:
             description: Test explicitly required array. Please put null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalArrayParameter
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_79
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -2962,8 +2900,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_78
-                schema: *ref_77
+              - !Parameter &ref_61
+                schema: *ref_60
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2988,7 +2926,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_78
+              - *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -3001,8 +2939,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_79
         signatureParameters: []
         responses:
           - !Response 
@@ -3034,14 +2970,13 @@ operationGroups:
             description: Test explicitly optional array. Please put null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredArrayProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_82
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -3056,8 +2991,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_81
-                schema: *ref_80
+              - !Parameter &ref_63
+                schema: *ref_62
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3082,7 +3017,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_81
+              - *ref_63
             language: !Languages 
               default:
                 name: ''
@@ -3095,8 +3030,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_82
         signatureParameters: []
         responses:
           - !Response 
@@ -3128,14 +3061,13 @@ operationGroups:
             description: Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalArrayProperty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-        requestMediaTypes:
-          application/json: !Request &ref_85
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_24
@@ -3150,8 +3082,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_84
-                schema: *ref_83
+              - !Parameter &ref_65
+                schema: *ref_64
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -3176,7 +3108,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_84
+              - *ref_65
             language: !Languages 
               default:
                 name: ''
@@ -3189,8 +3121,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_85
         signatureParameters: []
         responses:
           - !Response 
@@ -3222,14 +3152,13 @@ operationGroups:
             description: Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postRequiredArrayHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_87
-            schema: *ref_86
+          - !Parameter &ref_67
+            schema: *ref_66
             implementation: Method
             required: true
             language: !Languages 
@@ -3268,7 +3197,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_87
+          - *ref_67
         responses:
           - !Response 
             language: !Languages 
@@ -3299,14 +3228,13 @@ operationGroups:
             description: Test explicitly required array. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.
         protocol: !Protocols {}
       - !Operation 
-        operationId: explicit_postOptionalArrayHeader
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_18
-          - !Parameter &ref_89
-            schema: *ref_88
+          - !Parameter &ref_69
+            schema: *ref_68
             implementation: Method
             language: !Languages 
               default:
@@ -3344,7 +3272,7 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_89
+          - *ref_69
         responses:
           - !Response 
             language: !Languages 
