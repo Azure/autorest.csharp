@@ -4,12 +4,10 @@
 #nullable enable
 
 using System;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
@@ -33,8 +31,7 @@ namespace Azure.Core
 
         public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
-            TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion);
-            string? apiVersionStr = (apiVersion == null ? null : apiVersion.ToString());
+            string? apiVersionStr = TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null;
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
@@ -48,6 +45,12 @@ namespace Azure.Core
                     : (false, null);
 
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
+        }
+
+        public static IOperation<T> Create<T>(IOperationSource<T> operationSource, HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        {
+            var operation = Create(pipeline, requestMethod, startRequestUri, response, finalStateVia);
+            return new OperationToOperationOfT<T>(operationSource, operation);
         }
 
         private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
@@ -163,7 +166,7 @@ namespace Azure.Core
 
         internal static bool TryGetApiVersion(Uri startRequestUri, out ReadOnlySpan<char> apiVersion)
         {
-            apiVersion = null;
+            apiVersion = default;
             ReadOnlySpan<char> uriSpan = startRequestUri.Query.AsSpan();
             int startIndex = uriSpan.IndexOf(ApiVersionParam.AsSpan());
             if (startIndex == -1)
@@ -356,6 +359,38 @@ namespace Azure.Core
             }
 
             public ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken) => new(_operationState);
+        }
+
+        private sealed class OperationToOperationOfT<T> : IOperation<T>
+        {
+            private readonly IOperationSource<T> _operationSource;
+            private readonly IOperation _operation;
+
+            public OperationToOperationOfT(IOperationSource<T> operationSource, IOperation operation)
+            {
+                _operationSource = operationSource;
+                _operation = operation;
+            }
+
+            public async ValueTask<OperationState<T>> UpdateStateAsync(bool async, CancellationToken cancellationToken)
+            {
+                var state = await _operation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
+                if (state.HasSucceeded)
+                {
+                    var result = async
+                        ? await _operationSource.CreateResultAsync(state.RawResponse, cancellationToken).ConfigureAwait(false)
+                        : _operationSource.CreateResult(state.RawResponse, cancellationToken);
+
+                    return OperationState<T>.Success(state.RawResponse, result);
+                }
+
+                if (state.HasCompleted)
+                {
+                    return OperationState<T>.Failure(state.RawResponse, state.OperationFailedException);
+                }
+
+                return OperationState<T>.Pending(state.RawResponse);
+            }
         }
     }
 }
