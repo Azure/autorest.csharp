@@ -18,8 +18,6 @@ using Azure.Core;
 using Operation = AutoRest.CSharp.Input.Operation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Runtime.CompilerServices;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -224,7 +222,8 @@ namespace AutoRest.CSharp.Output.Models
                 "A credential used to authenticate to an Azure Service.",
                 type,
                 null,
-                true);
+                ValidationType.AssertNotNull,
+                null);
         }
 
         private ConstructorSignature CreateMockingConstructor()
