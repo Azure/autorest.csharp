@@ -154,7 +154,6 @@ operationGroups:
     $key: queries
     operations:
       - !Operation 
-        operationId: queries_ArrayStringMultiNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -239,7 +238,6 @@ operationGroups:
             description: Get a null array of string using the multi-array format
         protocol: !Protocols {}
       - !Operation 
-        operationId: queries_ArrayStringMultiEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -323,7 +321,6 @@ operationGroups:
             description: Get an empty array [] of string using the multi-array format
         protocol: !Protocols {}
       - !Operation 
-        operationId: queries_ArrayStringMultiValid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

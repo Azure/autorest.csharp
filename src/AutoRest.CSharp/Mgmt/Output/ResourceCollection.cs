@@ -172,7 +172,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
+            var operationId = operation.OperationId();
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operationId, out var positions))
             {
                 return positions.Contains(Position);
             }

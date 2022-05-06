@@ -64,7 +64,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/octet-stream, application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_14
+    - !ConstantSchema &ref_13
       type: constant
       value: !ConstantValue 
         value: application/octet-stream
@@ -85,7 +85,7 @@ schemas: !Schemas
           name: binary
           description: File to upload.
       protocol: !Protocols {}
-    - !BinarySchema &ref_15
+    - !BinarySchema &ref_14
       type: binary
       apiVersions:
         - !ApiVersion 
@@ -106,7 +106,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_13
+    - !ObjectSchema &ref_12
       type: object
       apiVersions:
         - !ApiVersion 
@@ -223,14 +223,13 @@ operationGroups:
     $key: formdata
     operations:
       - !Operation 
-        operationId: formdata_UploadFile
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requestMediaTypes:
-          multipart/form-data: !Request &ref_12
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -300,8 +299,6 @@ operationGroups:
                   - multipart/form-data
                 multipart: true
                 uri: '{$host}'
-        requests:
-          - *ref_12
         signatureParameters: []
         responses:
           - !BinaryResponse 
@@ -320,7 +317,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -338,17 +335,16 @@ operationGroups:
             description: Upload file
         protocol: !Protocols {}
       - !Operation 
-        operationId: formdata_UploadFileViaBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requestMediaTypes:
-          application/octet-stream: !Request &ref_17
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_13
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -360,8 +356,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_16
-                schema: *ref_15
+              - !Parameter &ref_15
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -386,7 +382,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_16
+              - *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -400,8 +396,6 @@ operationGroups:
                 mediaTypes:
                   - application/octet-stream
                 uri: '{$host}'
-        requests:
-          - *ref_17
         signatureParameters: []
         responses:
           - !BinaryResponse 
@@ -420,7 +414,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -438,14 +432,13 @@ operationGroups:
             description: Upload file
         protocol: !Protocols {}
       - !Operation 
-        operationId: formdata_UploadFiles
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_7
-        requestMediaTypes:
-          multipart/form-data: !Request &ref_19
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -460,7 +453,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_18
+              - !Parameter &ref_16
                 schema: *ref_6
                 implementation: Method
                 isPartialBody: true
@@ -487,7 +480,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_18
+              - *ref_16
             language: !Languages 
               default:
                 name: ''
@@ -501,8 +494,6 @@ operationGroups:
                   - multipart/form-data
                 multipart: true
                 uri: '{$host}'
-        requests:
-          - *ref_19
         signatureParameters: []
         responses:
           - !BinaryResponse 
@@ -521,7 +512,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''

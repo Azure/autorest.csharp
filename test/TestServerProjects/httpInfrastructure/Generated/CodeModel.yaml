@@ -190,7 +190,7 @@ schemas: !Schemas
           name: Constant7
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_17
+    - !ConstantSchema &ref_16
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -203,7 +203,7 @@ schemas: !Schemas
           name: Constant8
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_19
+    - !ConstantSchema &ref_17
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -216,7 +216,7 @@ schemas: !Schemas
           name: Constant9
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_21
+    - !ConstantSchema &ref_18
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -229,7 +229,7 @@ schemas: !Schemas
           name: Constant10
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_19
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -242,7 +242,7 @@ schemas: !Schemas
           name: Constant11
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_25
+    - !ConstantSchema &ref_20
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -255,7 +255,7 @@ schemas: !Schemas
           name: Constant12
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_27
+    - !ConstantSchema &ref_21
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -268,7 +268,7 @@ schemas: !Schemas
           name: Constant13
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_29
+    - !ConstantSchema &ref_22
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -281,7 +281,7 @@ schemas: !Schemas
           name: Constant14
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_31
+    - !ConstantSchema &ref_23
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -294,7 +294,7 @@ schemas: !Schemas
           name: Constant15
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_33
+    - !ConstantSchema &ref_24
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -307,7 +307,7 @@ schemas: !Schemas
           name: Constant16
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_35
+    - !ConstantSchema &ref_25
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -320,7 +320,7 @@ schemas: !Schemas
           name: Constant17
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_37
+    - !ConstantSchema &ref_26
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -333,7 +333,7 @@ schemas: !Schemas
           name: Constant18
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_39
+    - !ConstantSchema &ref_27
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -346,7 +346,7 @@ schemas: !Schemas
           name: Constant19
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_41
+    - !ConstantSchema &ref_28
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -359,7 +359,7 @@ schemas: !Schemas
           name: Constant20
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_43
+    - !ConstantSchema &ref_29
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -373,7 +373,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_45
+    - !ConstantSchema &ref_31
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -387,7 +387,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_46
+    - !ConstantSchema &ref_32
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -401,7 +401,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_47
+    - !ConstantSchema &ref_33
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -415,7 +415,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_48
+    - !ConstantSchema &ref_34
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -428,7 +428,7 @@ schemas: !Schemas
           name: Constant25
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_50
+    - !ConstantSchema &ref_35
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -442,7 +442,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_51
+    - !ConstantSchema &ref_36
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -456,7 +456,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_52
+    - !ConstantSchema &ref_37
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -470,7 +470,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_53
+    - !ConstantSchema &ref_38
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -483,7 +483,7 @@ schemas: !Schemas
           name: Constant29
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_55
+    - !ConstantSchema &ref_39
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -497,7 +497,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_56
+    - !ConstantSchema &ref_40
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -510,7 +510,7 @@ schemas: !Schemas
           name: Constant31
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_58
+    - !ConstantSchema &ref_41
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -524,7 +524,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_59
+    - !ConstantSchema &ref_42
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -538,7 +538,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_60
+    - !ConstantSchema &ref_43
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -552,7 +552,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_61
+    - !ConstantSchema &ref_44
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -566,7 +566,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_62
+    - !ConstantSchema &ref_45
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -579,7 +579,7 @@ schemas: !Schemas
           name: Constant36
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_64
+    - !ConstantSchema &ref_46
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -593,7 +593,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_65
+    - !ConstantSchema &ref_47
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -606,7 +606,7 @@ schemas: !Schemas
           name: Constant38
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_67
+    - !ConstantSchema &ref_48
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -620,7 +620,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_68
+    - !ConstantSchema &ref_49
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -633,7 +633,7 @@ schemas: !Schemas
           name: Constant40
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_70
+    - !ConstantSchema &ref_50
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -647,7 +647,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_71
+    - !ConstantSchema &ref_51
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -660,7 +660,7 @@ schemas: !Schemas
           name: Constant42
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_73
+    - !ConstantSchema &ref_52
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -674,7 +674,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !ConstantSchema &ref_74
+    - !ConstantSchema &ref_53
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -687,7 +687,7 @@ schemas: !Schemas
           name: Constant44
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_76
+    - !ConstantSchema &ref_54
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -700,7 +700,7 @@ schemas: !Schemas
           name: Constant45
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_78
+    - !ConstantSchema &ref_55
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -713,7 +713,7 @@ schemas: !Schemas
           name: Constant46
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_80
+    - !ConstantSchema &ref_56
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -726,7 +726,7 @@ schemas: !Schemas
           name: Constant47
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_82
+    - !ConstantSchema &ref_57
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -739,7 +739,7 @@ schemas: !Schemas
           name: Constant48
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_84
+    - !ConstantSchema &ref_58
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -752,7 +752,7 @@ schemas: !Schemas
           name: Constant49
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_86
+    - !ConstantSchema &ref_59
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -765,7 +765,7 @@ schemas: !Schemas
           name: Constant50
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_88
+    - !ConstantSchema &ref_60
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -778,7 +778,7 @@ schemas: !Schemas
           name: Constant51
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_90
+    - !ConstantSchema &ref_61
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -791,7 +791,7 @@ schemas: !Schemas
           name: Constant52
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_92
+    - !ConstantSchema &ref_62
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -804,7 +804,7 @@ schemas: !Schemas
           name: Constant53
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_94
+    - !ConstantSchema &ref_63
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -817,7 +817,7 @@ schemas: !Schemas
           name: Constant54
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_96
+    - !ConstantSchema &ref_64
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -830,7 +830,7 @@ schemas: !Schemas
           name: Constant55
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_98
+    - !ConstantSchema &ref_65
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -843,7 +843,7 @@ schemas: !Schemas
           name: Constant56
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_100
+    - !ConstantSchema &ref_66
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -856,7 +856,7 @@ schemas: !Schemas
           name: Constant57
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_102
+    - !ConstantSchema &ref_67
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -869,7 +869,7 @@ schemas: !Schemas
           name: Constant58
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_104
+    - !ConstantSchema &ref_68
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -882,7 +882,7 @@ schemas: !Schemas
           name: Constant59
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_106
+    - !ConstantSchema &ref_69
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -908,7 +908,7 @@ schemas: !Schemas
           name: Constant61
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_108
+    - !ConstantSchema &ref_70
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -921,7 +921,7 @@ schemas: !Schemas
           name: Constant62
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_110
+    - !ConstantSchema &ref_71
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -934,7 +934,7 @@ schemas: !Schemas
           name: Constant63
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_112
+    - !ConstantSchema &ref_72
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -947,7 +947,7 @@ schemas: !Schemas
           name: Constant64
           description: Simple boolean value true
       protocol: !Protocols {}
-    - !ConstantSchema &ref_114
+    - !ConstantSchema &ref_73
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -1053,7 +1053,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_6
-    - !ObjectSchema &ref_116
+    - !ObjectSchema &ref_74
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1077,7 +1077,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_117
+    - !ObjectSchema &ref_75
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1102,7 +1102,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - !ArraySchema &ref_44
+    - !ArraySchema &ref_30
       type: array
       apiVersions:
         - !ApiVersion 
@@ -1135,7 +1135,6 @@ operationGroups:
     $key: httpFailure
     operations:
       - !Operation 
-        operationId: httpFailure_getEmptyError
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1202,7 +1201,6 @@ operationGroups:
             description: Get empty error form server
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpFailure_getNoModelError
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1255,7 +1253,6 @@ operationGroups:
             description: Get empty error form server
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpFailure_getNoModelEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1316,7 +1313,6 @@ operationGroups:
     $key: httpSuccess
     operations:
       - !Operation 
-        operationId: httpSuccess_head200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1379,7 +1375,6 @@ operationGroups:
             description: Return 200 status code if successful
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_get200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1446,7 +1441,6 @@ operationGroups:
             description: Get 200 success
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_options200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1513,14 +1507,13 @@ operationGroups:
             description: Options 200 success
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_put200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_16
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -1573,8 +1566,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_16
         signatureParameters: []
         responses:
           - !Response 
@@ -1606,14 +1597,103 @@ operationGroups:
             description: Put boolean value true returning 200 success
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_patch200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_18
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter 
+                schema: *ref_16
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: booleanValue
+                    description: Simple boolean value true
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_12
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /http/success/200
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully received the boolean true value
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Patch200
+            description: Patch true Boolean value in request returning 200
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -1661,13 +1741,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
                 path: /http/success/200
-                method: patch
+                method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_18
         signatureParameters: []
         responses:
           - !Response 
@@ -1695,18 +1773,107 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: Patch200
-            description: Patch true Boolean value in request returning 200
+            name: Post200
+            description: Post bollean value true in request that returns a 200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_post200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_20
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: booleanValue
+                    description: Simple boolean value true
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_12
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /http/success/200
+                method: delete
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully received the boolean true value
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Delete200
+            description: Delete simple boolean value true returns 200
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -1753,14 +1920,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /http/success/200
-                method: post
+                path: /http/success/201
+                method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_20
         signatureParameters: []
         responses:
           - !Response 
@@ -1771,7 +1936,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - '201'
         exceptions:
           - !SchemaResponse 
             schema: *ref_13
@@ -1788,18 +1953,107 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: Post200
-            description: Post bollean value true in request that returns a 200
+            name: Put201
+            description: Put true Boolean value in request returns 201
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_delete200
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_22
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: booleanValue
+                    description: Simple boolean value true
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_12
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /http/success/201
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully received the boolean true value
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Post201
+            description: Post true Boolean value in request returns 201 (Created)
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -1846,14 +2100,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /http/success/200
-                method: delete
+                path: /http/success/202
+                method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_22
         signatureParameters: []
         responses:
           - !Response 
@@ -1864,7 +2116,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpResponse 
                 statusCodes:
-                  - '200'
+                  - '202'
         exceptions:
           - !SchemaResponse 
             schema: *ref_13
@@ -1881,18 +2133,107 @@ operationGroups:
                   - default
         language: !Languages 
           default:
-            name: Delete200
-            description: Delete simple boolean value true returns 200
+            name: Put202
+            description: Put true Boolean value in request returns 202 (Accepted)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_put201
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter 
+                schema: *ref_22
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: booleanValue
+                    description: Simple boolean value true
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_12
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /http/success/202
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully received the boolean true value
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Patch202
+            description: Patch true Boolean value in request returns 202
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -1939,386 +2280,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /http/success/201
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_24
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Successfully received the boolean true value
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_13
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Put201
-            description: Put true Boolean value in request returns 201
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: httpSuccess_post201
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_26
-            parameters:
-              - !Parameter 
-                schema: *ref_14
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: booleanValue
-                    description: Simple boolean value true
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_12
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /http/success/201
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_26
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Successfully received the boolean true value
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_13
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Post201
-            description: Post true Boolean value in request returns 201 (Created)
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: httpSuccess_put202
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_28
-            parameters:
-              - !Parameter 
-                schema: *ref_14
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter 
-                schema: *ref_27
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: booleanValue
-                    description: Simple boolean value true
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_12
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /http/success/202
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_28
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Successfully received the boolean true value
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_13
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Put202
-            description: Put true Boolean value in request returns 202 (Accepted)
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: httpSuccess_patch202
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_30
-            parameters:
-              - !Parameter 
-                schema: *ref_14
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter 
-                schema: *ref_29
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: booleanValue
-                    description: Simple boolean value true
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_12
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /http/success/202
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_30
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Successfully received the boolean true value
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_13
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Patch202
-            description: Patch true Boolean value in request returns 202
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: httpSuccess_post202
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_32
-            parameters:
-              - !Parameter 
-                schema: *ref_14
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter 
-                schema: *ref_31
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: booleanValue
-                    description: Simple boolean value true
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_12
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /http/success/202
                 method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_32
         signatureParameters: []
         responses:
           - !Response 
@@ -2350,14 +2317,13 @@ operationGroups:
             description: Post true Boolean value in request returns 202 (Accepted)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_delete202
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_34
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -2373,7 +2339,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_33
+                schema: *ref_24
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2410,8 +2376,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_34
         signatureParameters: []
         responses:
           - !Response 
@@ -2443,7 +2407,6 @@ operationGroups:
             description: Delete true Boolean value in request returns 202 (accepted)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_head204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2506,14 +2469,13 @@ operationGroups:
             description: Return 204 status code if successful
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_put204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_36
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -2529,7 +2491,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_35
+                schema: *ref_25
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2566,8 +2528,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_36
         signatureParameters: []
         responses:
           - !Response 
@@ -2599,14 +2559,13 @@ operationGroups:
             description: Put true Boolean value in request returns 204 (no content)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_patch204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_38
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -2622,7 +2581,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_37
+                schema: *ref_26
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2659,8 +2618,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_38
         signatureParameters: []
         responses:
           - !Response 
@@ -2692,14 +2649,13 @@ operationGroups:
             description: Patch true Boolean value in request returns 204 (no content)
         protocol: !Protocols {}
       - !Operation 
-        operationId: HttpSuccess_post204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_40
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -2715,7 +2671,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_27
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2752,8 +2708,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_40
         signatureParameters: []
         responses:
           - !Response 
@@ -2785,14 +2739,13 @@ operationGroups:
             description: Post true Boolean value in request returns 204 (no content)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_delete204
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_42
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -2808,7 +2761,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_28
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -2845,8 +2798,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_42
         signatureParameters: []
         responses:
           - !Response 
@@ -2878,7 +2829,6 @@ operationGroups:
             description: Delete true Boolean value in request returns 204 (no content)
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpSuccess_head404
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2958,7 +2908,6 @@ operationGroups:
     $key: httpRedirects
     operations:
       - !Operation 
-        operationId: httpRedirects_head300
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3010,7 +2959,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_43
+                    schema: *ref_29
                     header: Location
                     language:
                       default:
@@ -3038,7 +2987,6 @@ operationGroups:
             description: Return 300 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_get300
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3082,7 +3030,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -3091,7 +3039,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_45
+                    schema: *ref_31
                     header: Location
                     language:
                       default:
@@ -3122,7 +3070,6 @@ operationGroups:
             description: Return 300 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_head301
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3174,7 +3121,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_46
+                    schema: *ref_32
                     header: Location
                     language:
                       default:
@@ -3202,7 +3149,6 @@ operationGroups:
             description: Return 301 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_get301
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3254,7 +3200,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_47
+                    schema: *ref_33
                     header: Location
                     language:
                       default:
@@ -3282,14 +3228,13 @@ operationGroups:
             description: Return 301 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_put301
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_49
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -3305,7 +3250,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_48
+                schema: *ref_34
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -3342,8 +3287,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_49
         signatureParameters: []
         responses:
           - !Response 
@@ -3355,7 +3298,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_50
+                    schema: *ref_35
                     header: Location
                     language:
                       default:
@@ -3383,7 +3326,6 @@ operationGroups:
             description: Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_head302
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3435,7 +3377,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_51
+                    schema: *ref_36
                     header: Location
                     language:
                       default:
@@ -3463,7 +3405,6 @@ operationGroups:
             description: Return 302 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_get302
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3515,7 +3456,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_52
+                    schema: *ref_37
                     header: Location
                     language:
                       default:
@@ -3543,14 +3484,13 @@ operationGroups:
             description: Return 302 status code and redirect to /http/success/200
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_patch302
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_54
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -3566,7 +3506,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_38
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -3603,8 +3543,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_54
         signatureParameters: []
         responses:
           - !Response 
@@ -3616,7 +3554,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_55
+                    schema: *ref_39
                     header: Location
                     language:
                       default:
@@ -3644,14 +3582,13 @@ operationGroups:
             description: Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_post303
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_57
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -3667,7 +3604,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_56
+                schema: *ref_40
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -3704,8 +3641,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_57
         signatureParameters: []
         responses:
           - !Response 
@@ -3726,7 +3661,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_58
+                    schema: *ref_41
                     header: Location
                     language:
                       default:
@@ -3754,7 +3689,6 @@ operationGroups:
             description: Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_head307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3806,7 +3740,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_59
+                    schema: *ref_42
                     header: Location
                     language:
                       default:
@@ -3834,7 +3768,6 @@ operationGroups:
             description: Redirect with 307, resulting in a 200 success
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_get307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3886,7 +3819,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_60
+                    schema: *ref_43
                     header: Location
                     language:
                       default:
@@ -3914,7 +3847,6 @@ operationGroups:
             description: Redirect get with 307, resulting in a 200 success
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_options307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -3966,7 +3898,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_61
+                    schema: *ref_44
                     header: Location
                     language:
                       default:
@@ -3994,14 +3926,13 @@ operationGroups:
             description: options redirected with 307, resulting in a 200 after redirect
         protocol: !Protocols {}
       - !Operation 
-        operationId: HttpRedirects_put307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_63
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4017,7 +3948,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_62
+                schema: *ref_45
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4054,8 +3985,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_63
         signatureParameters: []
         responses:
           - !Response 
@@ -4076,7 +4005,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_64
+                    schema: *ref_46
                     header: Location
                     language:
                       default:
@@ -4104,14 +4033,13 @@ operationGroups:
             description: Put redirected with 307, resulting in a 200 after redirect
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_patch307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_66
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4127,7 +4055,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_65
+                schema: *ref_47
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4164,8 +4092,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_66
         signatureParameters: []
         responses:
           - !Response 
@@ -4186,7 +4112,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_67
+                    schema: *ref_48
                     header: Location
                     language:
                       default:
@@ -4214,14 +4140,13 @@ operationGroups:
             description: Patch redirected with 307, resulting in a 200 after redirect
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_post307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_69
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4237,7 +4162,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_68
+                schema: *ref_49
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4274,8 +4199,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_69
         signatureParameters: []
         responses:
           - !Response 
@@ -4296,7 +4219,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_70
+                    schema: *ref_50
                     header: Location
                     language:
                       default:
@@ -4324,14 +4247,13 @@ operationGroups:
             description: Post redirected with 307, resulting in a 200 after redirect
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRedirects_delete307
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_72
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4347,7 +4269,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_71
+                schema: *ref_51
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4384,8 +4306,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_72
         signatureParameters: []
         responses:
           - !Response 
@@ -4406,7 +4326,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_73
+                    schema: *ref_52
                     header: Location
                     language:
                       default:
@@ -4442,7 +4362,6 @@ operationGroups:
     $key: httpClientFailure
     operations:
       - !Operation 
-        operationId: httpClientFailure_head400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4495,7 +4414,6 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4548,7 +4466,6 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_options400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4601,14 +4518,13 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_put400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_75
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4624,7 +4540,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_74
+                schema: *ref_53
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4661,8 +4577,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_75
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -4684,14 +4598,13 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_patch400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_77
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4707,7 +4620,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_76
+                schema: *ref_54
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4744,8 +4657,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_77
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -4767,14 +4678,13 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_post400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_79
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4790,7 +4700,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_78
+                schema: *ref_55
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4827,8 +4737,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_79
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -4850,14 +4758,13 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_delete400
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_81
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -4873,7 +4780,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_80
+                schema: *ref_56
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4910,8 +4817,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_81
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -4933,7 +4838,6 @@ operationGroups:
             description: Return 400 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_head401
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -4986,7 +4890,6 @@ operationGroups:
             description: Return 401 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get402
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5039,7 +4942,6 @@ operationGroups:
             description: Return 402 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_options403
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5092,7 +4994,6 @@ operationGroups:
             description: Return 403 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get403
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5145,14 +5046,13 @@ operationGroups:
             description: Return 403 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_put404
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_83
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5168,7 +5068,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_82
+                schema: *ref_57
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5205,8 +5105,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_83
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5228,14 +5126,13 @@ operationGroups:
             description: Return 404 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_patch405
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_85
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5251,7 +5148,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_84
+                schema: *ref_58
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5288,8 +5185,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_85
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5311,14 +5206,13 @@ operationGroups:
             description: Return 405 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_post406
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_87
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5334,7 +5228,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_86
+                schema: *ref_59
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5371,8 +5265,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_87
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5394,14 +5286,13 @@ operationGroups:
             description: Return 406 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_delete407
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_89
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5417,7 +5308,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_88
+                schema: *ref_60
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5454,8 +5345,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_89
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5477,14 +5366,13 @@ operationGroups:
             description: Return 407 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_put409
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_91
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5500,7 +5388,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_90
+                schema: *ref_61
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5537,8 +5425,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_91
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5560,7 +5446,6 @@ operationGroups:
             description: Return 409 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_head410
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5613,7 +5498,6 @@ operationGroups:
             description: Return 410 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get411
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5666,7 +5550,6 @@ operationGroups:
             description: Return 411 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_options412
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5719,7 +5602,6 @@ operationGroups:
             description: Return 412 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get412
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -5772,14 +5654,13 @@ operationGroups:
             description: Return 412 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_put413
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_93
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5795,7 +5676,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_92
+                schema: *ref_62
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5832,8 +5713,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_93
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5855,14 +5734,13 @@ operationGroups:
             description: Return 413 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_patch414
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_95
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5878,7 +5756,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_94
+                schema: *ref_63
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5915,8 +5793,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_95
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -5938,14 +5814,13 @@ operationGroups:
             description: Return 414 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_post415
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_97
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -5961,7 +5836,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_96
+                schema: *ref_64
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -5998,8 +5873,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_97
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -6021,7 +5894,6 @@ operationGroups:
             description: Return 415 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_get416
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6074,14 +5946,13 @@ operationGroups:
             description: Return 416 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_delete417
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_99
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6097,7 +5968,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_98
+                schema: *ref_65
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6134,8 +6005,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_99
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -6157,7 +6026,6 @@ operationGroups:
             description: Return 417 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpClientFailure_head429
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6218,7 +6086,6 @@ operationGroups:
     $key: httpServerFailure
     operations:
       - !Operation 
-        operationId: httpServerFailure_head501
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6271,7 +6138,6 @@ operationGroups:
             description: Return 501 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpServerFailure_get501
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6324,14 +6190,13 @@ operationGroups:
             description: Return 501 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpServerFailure_post505
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_101
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6347,7 +6212,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_100
+                schema: *ref_66
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6384,8 +6249,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_101
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -6407,14 +6270,13 @@ operationGroups:
             description: Return 505 status code - should be represented in the client as an error
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpServerFailure_delete505
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_103
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6430,7 +6292,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_102
+                schema: *ref_67
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6467,8 +6329,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_103
         signatureParameters: []
         exceptions:
           - !SchemaResponse 
@@ -6498,7 +6358,6 @@ operationGroups:
     $key: httpRetry
     operations:
       - !Operation 
-        operationId: httpRetry_head408
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6561,14 +6420,13 @@ operationGroups:
             description: Return 408 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_put500
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_105
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6584,7 +6442,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_104
+                schema: *ref_68
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6621,8 +6479,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_105
         signatureParameters: []
         responses:
           - !Response 
@@ -6654,14 +6510,13 @@ operationGroups:
             description: Return 500 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_patch500
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_107
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6677,7 +6532,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_106
+                schema: *ref_69
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6714,8 +6569,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_107
         signatureParameters: []
         responses:
           - !Response 
@@ -6747,7 +6600,6 @@ operationGroups:
             description: Return 500 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_get502
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6810,7 +6662,6 @@ operationGroups:
             description: Return 502 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_options502
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -6877,14 +6728,13 @@ operationGroups:
             description: Return 502 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_post503
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_109
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6900,7 +6750,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_108
+                schema: *ref_70
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -6937,8 +6787,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_109
         signatureParameters: []
         responses:
           - !Response 
@@ -6970,14 +6818,13 @@ operationGroups:
             description: Return 503 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_delete503
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_111
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -6993,7 +6840,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_110
+                schema: *ref_71
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -7030,8 +6877,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_111
         signatureParameters: []
         responses:
           - !Response 
@@ -7063,14 +6908,13 @@ operationGroups:
             description: Return 503 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_put504
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_113
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -7086,7 +6930,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_112
+                schema: *ref_72
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -7123,8 +6967,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_113
         signatureParameters: []
         responses:
           - !Response 
@@ -7156,14 +6998,13 @@ operationGroups:
             description: Return 504 status code, then 200 after retry
         protocol: !Protocols {}
       - !Operation 
-        operationId: httpRetry_patch504
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_11
-        requestMediaTypes:
-          application/json: !Request &ref_115
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_14
@@ -7179,7 +7020,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_114
+                schema: *ref_73
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -7216,8 +7057,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_115
         signatureParameters: []
         responses:
           - !Response 
@@ -7257,7 +7096,6 @@ operationGroups:
     $key: multipleResponses
     operations:
       - !Operation 
-        operationId: multipleResponses_get200Model204NoModelDefaultError200Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7333,7 +7171,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model204NoModelDefaultError204Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7409,7 +7246,6 @@ operationGroups:
             description: Send a 204 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model204NoModelDefaultError201Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7485,7 +7321,6 @@ operationGroups:
             description: 'Send a 201 response with valid payload: {''statusCode'': ''201''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model204NoModelDefaultError202None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7561,7 +7396,6 @@ operationGroups:
             description: 'Send a 202 response with no payload:'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model204NoModelDefaultError400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7637,7 +7471,6 @@ operationGroups:
             description: 'Send a 400 response with valid error payload: {''status'': 400, ''message'': ''client error''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model201ModelDefaultError200Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7717,7 +7550,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model201ModelDefaultError201Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7797,7 +7629,6 @@ operationGroups:
             description: 'Send a 201 response with valid payload: {''statusCode'': ''201'', ''textStatusCode'': ''Created''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200Model201ModelDefaultError400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7877,7 +7708,6 @@ operationGroups:
             description: 'Send a 400 response with valid payload: {''code'': ''400'', ''message'': ''client error''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA201ModelC404ModelDDefaultError200Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -7925,7 +7755,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -7938,7 +7768,7 @@ operationGroups:
                 statusCodes:
                   - '201'
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -7970,7 +7800,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA201ModelC404ModelDDefaultError201Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8018,7 +7847,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -8031,7 +7860,7 @@ operationGroups:
                 statusCodes:
                   - '201'
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -8063,7 +7892,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''httpCode'': ''201''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA201ModelC404ModelDDefaultError404Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8111,7 +7939,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -8124,7 +7952,7 @@ operationGroups:
                 statusCodes:
                   - '201'
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -8156,7 +7984,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''httpStatusCode'': ''404''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA201ModelC404ModelDDefaultError400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8204,7 +8031,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_74
             language: !Languages 
               default:
                 name: ''
@@ -8217,7 +8044,7 @@ operationGroups:
                 statusCodes:
                   - '201'
           - !SchemaResponse 
-            schema: *ref_117
+            schema: *ref_75
             language: !Languages 
               default:
                 name: ''
@@ -8249,7 +8076,6 @@ operationGroups:
             description: 'Send a 400 response with valid payload: {''code'': ''400'', ''message'': ''client error''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultError202None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8321,7 +8147,6 @@ operationGroups:
             description: Send a 202 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultError204None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8393,7 +8218,6 @@ operationGroups:
             description: Send a 204 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultError400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8465,7 +8289,6 @@ operationGroups:
             description: 'Send a 400 response with valid payload: {''code'': ''400'', ''message'': ''client error''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultNone202Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8518,7 +8341,6 @@ operationGroups:
             description: 'Send a 202 response with an unexpected payload {''property'': ''value''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultNone204None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8571,7 +8393,6 @@ operationGroups:
             description: Send a 204 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultNone400None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8624,7 +8445,6 @@ operationGroups:
             description: Send a 400 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get202None204NoneDefaultNone400Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8677,7 +8497,6 @@ operationGroups:
             description: 'Send a 400 response with an unexpected payload {''property'': ''value''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultModelA200Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8730,7 +8549,6 @@ operationGroups:
             description: 'Send a 200 response with valid payload: {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultModelA200None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8783,7 +8601,6 @@ operationGroups:
             description: Send a 200 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultModelA400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8846,7 +8663,6 @@ operationGroups:
             description: 'Send a 400 response with valid payload: {''statusCode'': ''400''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultModelA400None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8909,7 +8725,6 @@ operationGroups:
             description: Send a 400 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultNone200Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8943,7 +8758,6 @@ operationGroups:
             description: 'Send a 200 response with invalid payload: {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultNone200None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -8977,7 +8791,6 @@ operationGroups:
             description: Send a 200 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultNone400Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9021,7 +8834,6 @@ operationGroups:
             description: 'Send a 400 response with valid payload: {''statusCode'': ''400''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_getDefaultNone400None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9065,7 +8877,6 @@ operationGroups:
             description: Send a 400 response with no payload
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA200None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9118,7 +8929,6 @@ operationGroups:
             description: Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA200Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9171,7 +8981,6 @@ operationGroups:
             description: 'Send a 200 response with payload {''statusCode'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA200Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9224,7 +9033,6 @@ operationGroups:
             description: 'Send a 200 response with invalid payload {''statusCodeInvalid'': ''200''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA400None
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9277,7 +9085,6 @@ operationGroups:
             description: Send a 400 response with no payload client should treat as an http error with no error model
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA400Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9330,7 +9137,6 @@ operationGroups:
             description: 'Send a 200 response with payload {''statusCode'': ''400''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA400Invalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -9383,7 +9189,6 @@ operationGroups:
             description: 'Send a 200 response with invalid payload {''statusCodeInvalid'': ''400''}'
         protocol: !Protocols {}
       - !Operation 
-        operationId: multipleResponses_get200ModelA202Valid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

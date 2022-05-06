@@ -34,7 +34,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -87,7 +87,7 @@ schemas: !Schemas
           name: IntEnum
           description: List of integer enums
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_10
+    - !ChoiceSchema &ref_9
       choices:
         - !ChoiceValue 
           value: 200.4
@@ -172,14 +172,13 @@ operationGroups:
     $key: Int
     operations:
       - !Operation 
-        operationId: Int_put
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_3
-        requestMediaTypes:
-          application/json: !Request &ref_8
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -233,12 +232,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_8
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -264,7 +261,6 @@ operationGroups:
             description: Put an int enum
         protocol: !Protocols {}
       - !Operation 
-        operationId: Int_get
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
@@ -332,14 +328,13 @@ operationGroups:
     $key: Float
     operations:
       - !Operation 
-        operationId: Float_put
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_3
-        requestMediaTypes:
-          application/json: !Request &ref_12
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_4
@@ -354,8 +349,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
-                schema: *ref_10
+              - !Parameter &ref_10
+                schema: *ref_9
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -380,7 +375,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_11
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -393,12 +388,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_12
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -424,7 +417,6 @@ operationGroups:
             description: Put a float enum
         protocol: !Protocols {}
       - !Operation 
-        operationId: Float_Get
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
@@ -459,7 +451,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''

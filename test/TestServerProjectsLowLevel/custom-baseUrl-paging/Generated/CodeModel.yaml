@@ -142,6 +142,9 @@ schemas: !Schemas
                       - json
                     usage:
                       - output
+                    extensions:
+                      x-internal-autorest-anonymous-schema:
+                        anonymous: true
                     language: !Languages 
                       default:
                         name: ProductProperties
@@ -251,7 +254,6 @@ operationGroups:
     $key: Paging
     operations:
       - !Operation 
-        operationId: Paging_getPagesPartialUrl
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -352,7 +354,6 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Paging_getPagesPartialUrlOperation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -455,7 +456,6 @@ operationGroups:
               member: GetPagesPartialUrlOperationNext
               nextLinkName: nextLink
               nextLinkOperation: !Operation &ref_17
-                operationId: Paging_getPagesPartialUrlOperationNext
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
@@ -572,10 +572,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Fake-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: AutoRestParameterizedHostTestPagingClient
