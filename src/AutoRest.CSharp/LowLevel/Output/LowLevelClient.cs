@@ -165,7 +165,10 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var optionalToRequired = optionalParameters.Select(parameter => parameter with { DefaultValue = null }).ToArray();
+            var optionalToRequired = optionalParameters.Select(parameter =>
+                ClientOptions.Type.EqualsIgnoreNullable(parameter.Type) ?
+                parameter with { DefaultValue = null, Validation = ValidationType.None } :
+                Parameter.FromOptionalToRequired(parameter)).ToArray();
             if (Fields.CredentialFields.Count == 0)
             {
                 yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
@@ -187,7 +190,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var optionalParametersArguments = optionalParameters
-                .Select(p => p.Type.EqualsIgnoreNullable(typeof(Uri)) ? $"new {typeof(Uri):I}({p.DefaultValue!.Value.GetConstantFormattable()})" : p.DefaultValue!.Value.GetConstantFormattable())
+                .Select(p => p.Initializer ?? Parameter.GetParameterInitializer(p.Type, p.DefaultValue!.Value)!)
                 .ToArray();
 
             if (Fields.CredentialFields.Count == 0)

@@ -56,6 +56,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
+        public static Parameter FromOptionalToRequired(in Parameter parameter)
+        {
+            var validation = parameter.Initializer == null && parameter.Validation == ValidationType.None ? ValidationType.None : GetValidation(parameter.Type, parameter.RequestLocation, parameter.SkipUrlEncoding);
+            return parameter with { DefaultValue = null, Validation = validation};
+        }
+
         public static FormattableString? GetParameterInitializer(CSharpType parameterType, Constant? defaultValue)
         {
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))

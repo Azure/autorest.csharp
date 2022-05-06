@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static CodeWriter WriteParameterValidation(this CodeWriter writer, Parameter parameter)
         {
-            if (parameter.Initializer != null)
+            if (parameter.Validation == ValidationType.None && parameter.Initializer != null)
             {
                 return writer.Line($"{parameter.Name:I} ??= {parameter.Initializer};");
             }
