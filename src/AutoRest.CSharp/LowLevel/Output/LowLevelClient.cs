@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -17,7 +18,6 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Operation = AutoRest.CSharp.Input.Operation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models
 {
