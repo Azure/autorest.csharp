@@ -548,7 +548,7 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="parameters">Parameters to sort</param>
         /// <returns></returns>
-        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptional).ToArray();
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
 
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
@@ -682,10 +682,10 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)
-            => parameters.Where(parameter => !parameter.IsOptional).ToList();
+            => parameters.Where(parameter => !parameter.IsOptionalInSignature).ToList();
 
         public static IEnumerable<Parameter> GetOptionalParameters(IEnumerable<Parameter> parameters, bool includeAPIVersion = false)
-            => parameters.Where(parameter => parameter.IsOptional && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
+            => parameters.Where(parameter => parameter.IsOptionalInSignature && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
 
         public static IReadOnlyCollection<Parameter> GetConstructorParameters(IReadOnlyList<Parameter> parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {

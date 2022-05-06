@@ -232,7 +232,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)
                 {
-                    if (p.IsOptional)
+                    if (p.IsOptionalInSignature)
                         continue;
                     var targetProperty = c.FindPropertyInitializedByParameter(p);
                     if (targetProperty is null)

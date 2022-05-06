@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var value = GetFieldReference(fields, queryParameter.Value);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
-            using (parameter != null && parameter.IsOptional ? null : WriteValueNullCheck(writer, value))
+            using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value))
             {
                 if (explode)
                 {

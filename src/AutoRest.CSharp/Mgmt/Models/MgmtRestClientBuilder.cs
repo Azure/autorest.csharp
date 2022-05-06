@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     {
                         bodyParameters.Add(parameter);
                     }
-                    else if (parameter.IsOptional)
+                    else if (parameter.IsOptionalInSignature)
                     {
                         optionalParameters.Add(parameter);
                     }
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
 
-            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptional)); // move required body parameters at the beginning
+            requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptionalInSignature)); // move required body parameters at the beginning
             requiredParameters.AddRange(optionalParameters);
 
             return requiredParameters.ToArray();
