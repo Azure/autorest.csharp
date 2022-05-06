@@ -90,20 +90,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 d = d.ToUniversalTime();
                 return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
             }
-            else if (frameworkType == typeof(byte[]))
+
+            if (frameworkType == typeof(byte[]))
             {
                 var bytes = (byte[])constant.Value;
                 var joinedBytes = string.Join(", ", bytes);
                 return $"new byte[] {{{joinedBytes}}}";
             }
-            else if (frameworkType == typeof(ResourceType))
+
+            if (frameworkType == typeof(ResourceType))
             {
                 return $"{((ResourceType)constant.Value).ToString():L}";
             }
-            else
-            {
-                return $"{constant.Value:L}";
-            }
+
+            return $"{constant.Value:L}";
         }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)
