@@ -88,7 +88,7 @@ namespace AutoRest.TestServer.Tests
             await lro.WaitForCompletionAsync();
             Assert.AreEqual(2, diagnosticListener.Scopes.Count);
             Assert.AreEqual("model", $"{lro.Value.Received}");
-            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[1].Name);
+            Assert.AreEqual("DPGClient.LroValue.WaitForCompletion", diagnosticListener.Scopes[1].Name);
             Assert.IsTrue(diagnosticListener.Scopes[1].IsCompleted);
         });
 

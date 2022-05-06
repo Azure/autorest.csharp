@@ -13,7 +13,7 @@ namespace Azure.Core
 {
     internal static class LowLevelOperationHelpers
     {
-        public static Operation<TTo> Convert<TFrom, TTo>(Operation<TFrom> operation, ClientDiagnostics diagnostics, string scopeName, Func<Response, TTo> convertFunc)
+        public static Operation<TTo> Convert<TFrom, TTo>(Operation<TFrom> operation, Func<Response, TTo> convertFunc, ClientDiagnostics diagnostics, string scopeName)
             where TFrom : notnull
             where TTo : notnull
             => new ConvertOperation<TFrom, TTo>(operation, diagnostics, scopeName, convertFunc);
@@ -74,7 +74,7 @@ namespace Azure.Core
         {
             private readonly Operation<TFrom> _operation;
             private readonly ClientDiagnostics _diagnostics;
-            private readonly string _operationName;
+            private readonly string _waitForCompletionScopeName;
             private readonly string _updateStatusScopeName;
             private readonly Func<Response, TTo> _convertFunc;
             private Response<TTo>? _response;
@@ -83,8 +83,8 @@ namespace Azure.Core
             {
                 _operation = operation;
                 _diagnostics = diagnostics;
-                _operationName = operationName;
-                _updateStatusScopeName = $"{operationName}.UpdateStatus";
+                _waitForCompletionScopeName = $"{operationName}.{nameof(WaitForCompletion)}";
+                _updateStatusScopeName = $"{operationName}.{nameof(UpdateStatus)}";
                 _convertFunc = convertFunc;
                 _response = null;
             }
@@ -140,7 +140,7 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_operationName);
+                using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
                     var result = _operation.WaitForCompletion(cancellationToken);
@@ -160,7 +160,7 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_operationName);
+                using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
                     var result = _operation.WaitForCompletion(pollingInterval, cancellationToken);
@@ -180,7 +180,7 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_operationName);
+                using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
                     var result = await _operation.WaitForCompletionAsync(cancellationToken);
@@ -200,7 +200,7 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_operationName);
+                using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
                     var result = await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);

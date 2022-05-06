@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using dpg_customization_LowLevel.Models;
 
 namespace dpg_customization_LowLevel
@@ -46,7 +45,7 @@ namespace dpg_customization_LowLevel
             scope.Start();
             try
             {
-                RequestContext requestContext = new RequestContext {CancellationToken = cancellationToken};
+                RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
                 Response response = GetModel(mode, requestContext);
                 return Response.FromValue((Product)response, response);
             }
@@ -96,13 +95,13 @@ namespace dpg_customization_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         public virtual async Task<Operation<Product>> LroValueAsync(WaitUntil waitUntil, string mode, CancellationToken cancellationToken = default)
         {
-            var requestContext = new RequestContext {CancellationToken = cancellationToken};
+            var requestContext = new RequestContext { CancellationToken = cancellationToken };
             using var scope = ClientDiagnostics.CreateScope("DPGClient.LroValue");
             scope.Start();
             try
             {
                 var lro = await LroAsync(waitUntil, mode, requestContext).ConfigureAwait(false);
-                return LowLevelOperationHelpers.Convert(lro, ClientDiagnostics, "DPGClient.LroValue", r => (Product)r);
+                return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -124,7 +123,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 var lro = Lro(waitUntil, mode, requestContext);
-                return LowLevelOperationHelpers.Convert(lro, ClientDiagnostics, "DPGClient.LroValue", r => (Product)r);
+                return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -141,7 +140,7 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            var context = new RequestContext {CancellationToken = cancellationToken};
+            var context = new RequestContext { CancellationToken = cancellationToken };
 
             AsyncPageable<BinaryData> pageableBindaryData = GetPagesImplementationAsync("DPGClient.GetPagesValues", mode, context);
             return PageableHelpers.Select(pageableBindaryData, response => ((ProductResult)response).Values);
