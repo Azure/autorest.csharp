@@ -121,7 +121,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     property.Description,
                     type,
                     null,
-                    false
+                    ValidationType.None,
+                    null
                 );
 
                 ownsDiscriminatorProperty |= property == Discriminator?.Property;
@@ -213,12 +214,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
+                    var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.Description,
                         inputType,
                         defaultParameterValue,
-                        property.SchemaProperty?.Nullable != true
+                        validate,
+                        null
                     );
 
                     defaultCtorParameters.Add(defaultCtorParameter);

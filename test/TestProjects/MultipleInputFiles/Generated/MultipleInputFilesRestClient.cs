@@ -28,7 +28,7 @@ namespace MultipleInputFiles
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="source"> source - server parameter. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        public MultipleInputFilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
+        public MultipleInputFilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = null)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));

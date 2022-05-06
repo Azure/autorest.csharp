@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private static readonly Parameter ScopeNameParameter = new("diagnosticsScopeName", null, new CSharpType(typeof(string)), null, false);
-        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
-        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
-        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
+        private static readonly Parameter ScopeNameParameter = new("diagnosticsScopeName", null, new CSharpType(typeof(string)), null, ValidationType.None, null);
+        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, ValidationType.None, null);
+        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, ValidationType.None, null);
 
         private static readonly FormattableString PageableProcessMessageMethodName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessage)}";
         private static readonly FormattableString PageableProcessMessageMethodAsyncName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessageAsync)}";

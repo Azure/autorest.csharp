@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -70,12 +70,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
-            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentNullException), parameters.Where(CodeWriterExtensions.HasNullCheck).ToArray(), " is null.");
+            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentNullException), parameters.Where(p => p.Validation is AssertNotNull or AssertNotNullOrEmpty).ToArray(), " is null.");
         }
 
         public static CodeWriter WriteXmlDocumentationNonEmptyParametersException(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
-            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentException), parameters.Where(CodeWriterExtensions.HasEmptyCheck).ToArray(), " is an empty string, and was expected to be non-empty.");
+            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentException), parameters.Where(p => p.Validation == AssertNotNullOrEmpty).ToArray(), " is an empty string, and was expected to be non-empty.");
         }
 
         private static CodeWriter WriteXmlDocumentationParametersExceptions(this CodeWriter writer, Type exceptionType, IReadOnlyCollection<Parameter> parameters, string reason)
