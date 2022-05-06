@@ -81,15 +81,13 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
-            Assert.AreEqual(1, diagnosticListener.Scopes.Count);
-            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
-            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             await lro.WaitForCompletionAsync();
-            Assert.AreEqual(2, diagnosticListener.Scopes.Count);
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletion");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
-            Assert.AreEqual("DPGClient.LroValue.WaitForCompletion", diagnosticListener.Scopes[1].Name);
-            Assert.IsTrue(diagnosticListener.Scopes[1].IsCompleted);
         });
 
         [Test]
@@ -99,21 +97,15 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
-            Assert.AreEqual(1, diagnosticListener.Scopes.Count);
-            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
-            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            var updatesCount = 0;
             while (!lro.HasCompleted)
             {
                 await lro.UpdateStatusAsync();
-                updatesCount++;
-                Assert.AreEqual("DPGClient.LroValue.UpdateStatus", diagnosticListener.Scopes[updatesCount].Name);
-                Assert.IsTrue(diagnosticListener.Scopes[updatesCount].IsCompleted);
+                diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             }
-
-            // +1 due to the first scope being created by LroValueAsync
-            Assert.AreEqual(updatesCount + 1, diagnosticListener.Scopes.Count);
         });
 
         [Test]
@@ -123,9 +115,8 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
-            Assert.AreEqual(1, diagnosticListener.Scopes.Count);
-            Assert.AreEqual("DPGClient.LroValue", diagnosticListener.Scopes[0].Name);
-            Assert.IsTrue(diagnosticListener.Scopes[0].IsCompleted);
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
         });
 
