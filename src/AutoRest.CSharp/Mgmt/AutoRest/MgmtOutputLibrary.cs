@@ -109,6 +109,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
+            MgmtContext.CodeModel.VerifyApiVersions();
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
             UrlToUri.UpdateSuffix(_allSchemas);
