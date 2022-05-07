@@ -95,12 +95,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static Parameter BuildOptionalParameter(ObjectSchema schema)
         {
             CSharpType type = new MgmtObjectType(schema).Type;
-            var defaultValue = Constant.NewInstanceOf(type);
+            //var defaultValue = Constant.NewInstanceOf(type);
             return new Parameter(
                 "options",
                 schema.Language.Default.Description,
                 TypeFactory.GetInputType(type),
-                defaultValue,
+                null,
                 false,
                 IsApiVersionParameter: false,
                 IsResourceIdentifier: false,
