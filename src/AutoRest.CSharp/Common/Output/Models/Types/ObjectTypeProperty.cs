@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
+        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator == true;
         public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
         {
             innerProperty = null;
@@ -48,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
 
             var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
-            bool isSingleProperty = properties.Count() == 1;
+            bool isSingleProperty = properties.Count() == 1 && !properties.First().IsDiscriminator();
 
             if (isSingleProperty)
                 innerProperty = properties.First();
