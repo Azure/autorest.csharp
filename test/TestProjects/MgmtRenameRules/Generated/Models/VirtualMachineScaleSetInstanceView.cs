@@ -39,7 +39,7 @@ namespace MgmtRenameRules.Models
         /// <summary> The extensions information. </summary>
         public IReadOnlyList<VirtualMachineStatusCodeCount> VirtualMachineStatusesSummary
         {
-            get => VirtualMachine.StatusesSummary;
+            get => VirtualMachine?.StatusesSummary;
         }
 
         /// <summary> The extensions information. </summary>

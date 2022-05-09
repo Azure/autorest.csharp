@@ -139,10 +139,9 @@ namespace Azure.Management.Storage
         /// <summary> KeyPolicy assigned to the storage account. </summary>
         internal KeyPolicy KeyPolicy { get; }
         /// <summary> The key expiration period in days. </summary>
-        public int KeyExpirationPeriodInDays
+        public int? KeyExpirationPeriodInDays
         {
-            get => KeyPolicy.KeyExpirationPeriodInDays;
-            set => KeyPolicy.KeyExpirationPeriodInDays = value;
+            get => KeyPolicy?.KeyExpirationPeriodInDays;
         }
 
         /// <summary> Storage account keys creation time. </summary>
