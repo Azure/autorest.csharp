@@ -109,12 +109,12 @@ namespace AutoRest.CSharp.Generation.Writers
                                 }
                                 else
                                 {
-                                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName);
+                                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
                                 }
                             }
                             else if (HasCtorWithSingleParam(property, innerProperty))
                             {
-                                WriteGetWithDefault(writer, property, innerProperty, childPropertyName);
+                                WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
                                 WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
                             }
                             else
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
                         {
-                            WriteGetWithDefault(writer, property, innerProperty, childPropertyName);
+                            WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
                             if (HasDefaultPublicCtor(property))
                             {
                                 WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
@@ -191,9 +191,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteGetWithDefault(CodeWriter writer, ObjectTypeProperty property, ObjectTypeProperty innerProperty, string childPropertyName)
+        private static void WriteGetWithDefault(CodeWriter writer, ObjectTypeProperty property, ObjectTypeProperty innerProperty, string childPropertyName, bool isOverridenValueType)
         {
-            writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+            FormattableString defaultType = isOverridenValueType ? (FormattableString)$"{innerProperty.Declaration.Type}?" : (FormattableString)$"{innerProperty.Declaration.Type}";
+            writer.Line($"get => {property.Declaration.Name:D} is null ? default({defaultType}) : {property.Declaration.Name:D}.{childPropertyName};");
         }
 
         private static void WriteSetWithSingleParamCtor(CodeWriter writer, ObjectTypeProperty property, bool isOverridenValueType)

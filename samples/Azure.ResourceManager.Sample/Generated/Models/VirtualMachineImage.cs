@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The operating system of the osDiskImage. </summary>
         public OperatingSystemTypes? OsDiskImageOperatingSystem
         {
-            get => OsDiskImage is null ? default : OsDiskImage.OperatingSystem;
+            get => OsDiskImage is null ? default(OperatingSystemTypes?) : OsDiskImage.OperatingSystem;
             set
             {
                 OsDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
         public bool? AutomaticOSUpgradeSupported
         {
-            get => AutomaticOSUpgradeProperties is null ? default : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
+            get => AutomaticOSUpgradeProperties is null ? default(bool?) : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
             set
             {
                 AutomaticOSUpgradeProperties = value.HasValue ? new AutomaticOSUpgradeProperties(value.Value) : null;
