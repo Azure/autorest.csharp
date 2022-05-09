@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
 
-        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator == true;
+        private bool IsDiscriminator() => SchemaProperty?.IsDiscriminator is true;
         public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
         {
             innerProperty = null;
