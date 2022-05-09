@@ -124,7 +124,7 @@ namespace Azure.Core
                 using var scope = CreateScope(_updateStatusScopeName);
                 try
                 {
-                    return await _operation.UpdateStatusAsync(cancellationToken);
+                    return await _operation.UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
@@ -183,7 +183,7 @@ namespace Azure.Core
                 using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
-                    var result = await _operation.WaitForCompletionAsync(cancellationToken);
+                    var result = await _operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return CreateResponseOfTTo(result);
                 }
                 catch (Exception e)
@@ -203,7 +203,7 @@ namespace Azure.Core
                 using var scope = CreateScope(_waitForCompletionScopeName);
                 try
                 {
-                    var result = await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+                    var result = await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
                     return CreateResponseOfTTo(result);
                 }
                 catch (Exception e)
