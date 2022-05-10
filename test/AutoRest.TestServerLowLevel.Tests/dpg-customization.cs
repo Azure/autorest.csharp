@@ -75,6 +75,52 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task HandwrittenModelLro() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            await lro.WaitForCompletionAsync();
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletion");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            Assert.AreEqual("model", $"{lro.Value.Received}");
+        });
+
+        [Test]
+        public Task HandwrittenModelLro_ManualIteration() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            while (!lro.HasCompleted)
+            {
+                await lro.UpdateStatusAsync();
+                diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.UpdateStatus");
+                CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            }
+        });
+
+        [Test]
+        public Task HandwrittenModelLro_WaitUntilCompleted() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            Assert.AreEqual("model", $"{lro.Value.Received}");
+        });
+
+        [Test]
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);

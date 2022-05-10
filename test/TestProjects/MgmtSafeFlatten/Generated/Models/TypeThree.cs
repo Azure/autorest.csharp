@@ -22,8 +22,7 @@ namespace MgmtSafeFlatten.Models
         /// <summary> MyProp description. </summary>
         public string LayerTwoSingleMyProp
         {
-            get => Properties.MyProp;
-            set => Properties.MyProp = value;
+            get => Properties?.MyProp;
         }
     }
 }
