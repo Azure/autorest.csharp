@@ -95,8 +95,16 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RawLRO() => Test(async (host) =>
         {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
             Operation<BinaryData> result = await new DPGClient(Key, host).LroAsync(WaitUntil.Started, "raw");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
             await result.WaitForCompletionAsync();
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletion");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
