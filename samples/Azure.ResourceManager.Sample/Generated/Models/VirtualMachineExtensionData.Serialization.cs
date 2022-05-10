@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = (AzureLocation)property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = (ResourceType)property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
