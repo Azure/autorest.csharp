@@ -80,7 +80,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Operation<Product> lro = await new DPGClient(Key, host, null).LroValueAsync(WaitUntil.Started, "model");
             diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
@@ -96,7 +96,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Started, "model");
+            Operation<Product> lro = await new DPGClient(Key, host, null).LroValueAsync(WaitUntil.Started, "model");
             diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
@@ -114,7 +114,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            Operation<Product> lro = await new DPGClient(Key, host).LroValueAsync(WaitUntil.Completed, "model");
+            Operation<Product> lro = await new DPGClient(Key, host, null).LroValueAsync(WaitUntil.Completed, "model");
             diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
