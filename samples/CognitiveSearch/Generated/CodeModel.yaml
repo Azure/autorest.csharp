@@ -2892,7 +2892,7 @@ schemas: !Schemas
           description: The method for the http request.
       protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_634
+    - !ChoiceSchema &ref_630
       choices:
         - !ChoiceValue 
           value: return=representation
@@ -7192,9 +7192,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_584
+            - !Parameter &ref_583
               schema: *ref_8
-              groupedBy: !Parameter &ref_585
+              groupedBy: !Parameter &ref_584
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7213,9 +7213,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_597
+            - !Parameter &ref_596
               schema: *ref_8
-              groupedBy: !Parameter &ref_598
+              groupedBy: !Parameter &ref_597
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7234,9 +7234,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_602
+            - !Parameter &ref_601
               schema: *ref_8
-              groupedBy: !Parameter &ref_604
+              groupedBy: !Parameter &ref_603
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7255,9 +7255,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_607
+            - !Parameter &ref_605
               schema: *ref_8
-              groupedBy: !Parameter &ref_609
+              groupedBy: !Parameter &ref_607
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7276,9 +7276,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_613
+            - !Parameter &ref_610
               schema: *ref_8
-              groupedBy: !Parameter &ref_622
+              groupedBy: !Parameter &ref_619
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7297,9 +7297,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_626
+            - !Parameter &ref_623
               schema: *ref_8
-              groupedBy: !Parameter &ref_628
+              groupedBy: !Parameter &ref_625
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7318,9 +7318,30 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_631
+            - !Parameter &ref_627
               schema: *ref_8
-              groupedBy: !Parameter &ref_635
+              groupedBy: !Parameter &ref_631
+                schema: *ref_9
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: requestOptions
+                    description: Parameter group
+                protocol: !Protocols {}
+              implementation: Method
+              extensions:
+                x-ms-client-request-id: true
+              language: !Languages 
+                default:
+                  name: xMsClientRequestId
+                  description: The tracking ID sent with the request to help with debugging.
+                  serializedName: x-ms-client-request-id
+              protocol: !Protocols 
+                http: !HttpParameter 
+                  in: header
+            - !Parameter &ref_635
+              schema: *ref_8
+              groupedBy: !Parameter &ref_638
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7341,7 +7362,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_640
               schema: *ref_8
-              groupedBy: !Parameter &ref_643
+              groupedBy: !Parameter &ref_641
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7360,9 +7381,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_645
+            - !Parameter &ref_643
               schema: *ref_8
-              groupedBy: !Parameter &ref_646
+              groupedBy: !Parameter &ref_644
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7381,9 +7402,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_648
+            - !Parameter &ref_647
               schema: *ref_8
-              groupedBy: !Parameter &ref_649
+              groupedBy: !Parameter &ref_648
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7402,9 +7423,30 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_652
+            - !Parameter &ref_650
               schema: *ref_8
-              groupedBy: !Parameter &ref_653
+              groupedBy: !Parameter &ref_651
+                schema: *ref_9
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: requestOptions
+                    description: Parameter group
+                protocol: !Protocols {}
+              implementation: Method
+              extensions:
+                x-ms-client-request-id: true
+              language: !Languages 
+                default:
+                  name: xMsClientRequestId
+                  description: The tracking ID sent with the request to help with debugging.
+                  serializedName: x-ms-client-request-id
+              protocol: !Protocols 
+                http: !HttpParameter 
+                  in: header
+            - !Parameter &ref_653
+              schema: *ref_8
+              groupedBy: !Parameter &ref_654
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7425,7 +7467,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_656
               schema: *ref_8
-              groupedBy: !Parameter &ref_657
+              groupedBy: !Parameter &ref_659
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7444,9 +7486,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_659
+            - !Parameter &ref_663
               schema: *ref_8
-              groupedBy: !Parameter &ref_660
+              groupedBy: !Parameter &ref_666
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7465,9 +7507,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_662
+            - !Parameter &ref_668
               schema: *ref_8
-              groupedBy: !Parameter &ref_665
+              groupedBy: !Parameter &ref_669
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7486,9 +7528,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_670
+            - !Parameter &ref_671
               schema: *ref_8
-              groupedBy: !Parameter &ref_673
+              groupedBy: !Parameter &ref_672
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7551,7 +7593,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_682
               schema: *ref_8
-              groupedBy: !Parameter &ref_683
+              groupedBy: !Parameter &ref_685
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7570,9 +7612,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_686
+            - !Parameter &ref_689
               schema: *ref_8
-              groupedBy: !Parameter &ref_687
+              groupedBy: !Parameter &ref_692
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7591,9 +7633,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_690
+            - !Parameter &ref_694
               schema: *ref_8
-              groupedBy: !Parameter &ref_693
+              groupedBy: !Parameter &ref_695
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7612,9 +7654,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_698
+            - !Parameter &ref_697
               schema: *ref_8
-              groupedBy: !Parameter &ref_701
+              groupedBy: !Parameter &ref_698
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7633,9 +7675,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_703
+            - !Parameter &ref_701
               schema: *ref_8
-              groupedBy: !Parameter &ref_704
+              groupedBy: !Parameter &ref_702
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7654,7 +7696,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_706
+            - !Parameter &ref_704
               schema: *ref_8
               groupedBy: !Parameter &ref_707
                 schema: *ref_9
@@ -7675,9 +7717,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_710
+            - !Parameter &ref_711
               schema: *ref_8
-              groupedBy: !Parameter &ref_711
+              groupedBy: !Parameter &ref_714
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7696,7 +7738,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_714
+            - !Parameter &ref_716
               schema: *ref_8
               groupedBy: !Parameter &ref_717
                 schema: *ref_9
@@ -7717,9 +7759,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_722
+            - !Parameter &ref_719
               schema: *ref_8
-              groupedBy: !Parameter &ref_725
+              groupedBy: !Parameter &ref_720
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7738,9 +7780,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_727
+            - !Parameter &ref_723
               schema: *ref_8
-              groupedBy: !Parameter &ref_728
+              groupedBy: !Parameter &ref_724
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7759,9 +7801,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_730
+            - !Parameter &ref_726
               schema: *ref_8
-              groupedBy: !Parameter &ref_731
+              groupedBy: !Parameter &ref_727
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7780,9 +7822,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_734
+            - !Parameter &ref_729
               schema: *ref_8
-              groupedBy: !Parameter &ref_735
+              groupedBy: !Parameter &ref_730
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7801,9 +7843,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_738
+            - !Parameter &ref_733
               schema: *ref_8
-              groupedBy: !Parameter &ref_739
+              groupedBy: !Parameter &ref_736
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7822,9 +7864,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_742
+            - !Parameter &ref_741
               schema: *ref_8
-              groupedBy: !Parameter &ref_743
+              groupedBy: !Parameter &ref_744
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7845,7 +7887,7 @@ schemas: !Schemas
                   in: header
             - !Parameter &ref_746
               schema: *ref_8
-              groupedBy: !Parameter &ref_749
+              groupedBy: !Parameter &ref_747
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7864,9 +7906,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_755
+            - !Parameter &ref_749
               schema: *ref_8
-              groupedBy: !Parameter &ref_758
+              groupedBy: !Parameter &ref_750
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7885,9 +7927,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_760
+            - !Parameter &ref_753
               schema: *ref_8
-              groupedBy: !Parameter &ref_761
+              groupedBy: !Parameter &ref_755
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -7906,51 +7948,9 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_763
+            - !Parameter &ref_759
               schema: *ref_8
-              groupedBy: !Parameter &ref_764
-                schema: *ref_9
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: requestOptions
-                    description: Parameter group
-                protocol: !Protocols {}
-              implementation: Method
-              extensions:
-                x-ms-client-request-id: true
-              language: !Languages 
-                default:
-                  name: xMsClientRequestId
-                  description: The tracking ID sent with the request to help with debugging.
-                  serializedName: x-ms-client-request-id
-              protocol: !Protocols 
-                http: !HttpParameter 
-                  in: header
-            - !Parameter &ref_767
-              schema: *ref_8
-              groupedBy: !Parameter &ref_769
-                schema: *ref_9
-                implementation: Method
-                language: !Languages 
-                  default:
-                    name: requestOptions
-                    description: Parameter group
-                protocol: !Protocols {}
-              implementation: Method
-              extensions:
-                x-ms-client-request-id: true
-              language: !Languages 
-                default:
-                  name: xMsClientRequestId
-                  description: The tracking ID sent with the request to help with debugging.
-                  serializedName: x-ms-client-request-id
-              protocol: !Protocols 
-                http: !HttpParameter 
-                  in: header
-            - !Parameter &ref_774
-              schema: *ref_8
-              groupedBy: !Parameter &ref_775
+              groupedBy: !Parameter &ref_760
                 schema: *ref_9
                 implementation: Method
                 language: !Languages 
@@ -8454,7 +8454,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_588
+            - !Parameter &ref_587
               schema: *ref_7
               groupedBy: !Parameter &ref_29
                 schema: *ref_28
@@ -8483,7 +8483,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_10
           originalParameter:
-            - !Parameter &ref_589
+            - !Parameter &ref_588
               schema: *ref_10
               groupedBy: *ref_29
               implementation: Method
@@ -8510,7 +8510,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_590
+            - !Parameter &ref_589
               schema: *ref_7
               groupedBy: *ref_29
               implementation: Method
@@ -8532,7 +8532,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_591
+            - !Parameter &ref_590
               schema: *ref_7
               groupedBy: *ref_29
               implementation: Method
@@ -8554,7 +8554,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_6
           originalParameter:
-            - !Parameter &ref_592
+            - !Parameter &ref_591
               schema: *ref_6
               groupedBy: *ref_29
               implementation: Method
@@ -8590,7 +8590,7 @@ schemas: !Schemas
                 description: Array of Get7ItemsItem
             protocol: !Protocols {}
           originalParameter:
-            - !Parameter &ref_593
+            - !Parameter &ref_592
               schema: *ref_31
               groupedBy: *ref_29
               implementation: Method
@@ -8629,7 +8629,7 @@ schemas: !Schemas
                 description: Array of String
             protocol: !Protocols {}
           originalParameter:
-            - !Parameter &ref_594
+            - !Parameter &ref_593
               schema: *ref_32
               groupedBy: *ref_29
               implementation: Method
@@ -8662,7 +8662,7 @@ schemas: !Schemas
                 description: Array of Get9ItemsItem
             protocol: !Protocols {}
           originalParameter:
-            - !Parameter &ref_595
+            - !Parameter &ref_594
               schema: *ref_34
               groupedBy: *ref_29
               implementation: Method
@@ -8685,7 +8685,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_27
           originalParameter:
-            - !Parameter &ref_596
+            - !Parameter &ref_595
               schema: *ref_27
               groupedBy: *ref_29
               implementation: Method
@@ -8717,7 +8717,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_35
           originalParameter:
-            - !Parameter &ref_614
+            - !Parameter &ref_611
               schema: *ref_35
               groupedBy: !Parameter &ref_37
                 schema: *ref_36
@@ -8747,7 +8747,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_615
+            - !Parameter &ref_612
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
@@ -8769,7 +8769,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_10
           originalParameter:
-            - !Parameter &ref_616
+            - !Parameter &ref_613
               schema: *ref_10
               groupedBy: *ref_37
               implementation: Method
@@ -8795,7 +8795,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_617
+            - !Parameter &ref_614
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
@@ -8817,7 +8817,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_618
+            - !Parameter &ref_615
               schema: *ref_7
               groupedBy: *ref_37
               implementation: Method
@@ -8839,7 +8839,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_6
           originalParameter:
-            - !Parameter &ref_619
+            - !Parameter &ref_616
               schema: *ref_6
               groupedBy: *ref_37
               implementation: Method
@@ -8875,7 +8875,7 @@ schemas: !Schemas
                 description: Array of String
             protocol: !Protocols {}
           originalParameter:
-            - !Parameter &ref_620
+            - !Parameter &ref_617
               schema: *ref_38
               groupedBy: *ref_37
               implementation: Method
@@ -8898,7 +8898,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_27
           originalParameter:
-            - !Parameter &ref_621
+            - !Parameter &ref_618
               schema: *ref_27
               groupedBy: *ref_37
               implementation: Method
@@ -8930,7 +8930,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_632
+            - !Parameter &ref_628
               schema: *ref_7
               groupedBy: !Parameter &ref_40
                 schema: *ref_39
@@ -8950,7 +8950,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_641
+            - !Parameter &ref_636
               schema: *ref_7
               groupedBy: !Parameter &ref_41
                 schema: *ref_39
@@ -8970,7 +8970,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_663
+            - !Parameter &ref_657
               schema: *ref_7
               groupedBy: !Parameter &ref_42
                 schema: *ref_39
@@ -8990,7 +8990,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_671
+            - !Parameter &ref_664
               schema: *ref_7
               groupedBy: !Parameter &ref_43
                 schema: *ref_39
@@ -9010,7 +9010,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_691
+            - !Parameter &ref_683
               schema: *ref_7
               groupedBy: !Parameter &ref_44
                 schema: *ref_39
@@ -9030,7 +9030,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_699
+            - !Parameter &ref_690
               schema: *ref_7
               groupedBy: !Parameter &ref_45
                 schema: *ref_39
@@ -9050,7 +9050,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_715
+            - !Parameter &ref_705
               schema: *ref_7
               groupedBy: !Parameter &ref_46
                 schema: *ref_39
@@ -9070,7 +9070,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_723
+            - !Parameter &ref_712
               schema: *ref_7
               groupedBy: !Parameter &ref_47
                 schema: *ref_39
@@ -9090,7 +9090,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_747
+            - !Parameter &ref_734
               schema: *ref_7
               groupedBy: !Parameter &ref_48
                 schema: *ref_39
@@ -9110,7 +9110,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_756
+            - !Parameter &ref_742
               schema: *ref_7
               groupedBy: !Parameter &ref_49
                 schema: *ref_39
@@ -9139,7 +9139,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_7
           originalParameter:
-            - !Parameter &ref_633
+            - !Parameter &ref_629
               schema: *ref_7
               groupedBy: *ref_40
               implementation: Method
@@ -9152,7 +9152,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_642
+            - !Parameter &ref_637
               schema: *ref_7
               groupedBy: *ref_41
               implementation: Method
@@ -9165,7 +9165,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_664
+            - !Parameter &ref_658
               schema: *ref_7
               groupedBy: *ref_42
               implementation: Method
@@ -9178,7 +9178,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_672
+            - !Parameter &ref_665
               schema: *ref_7
               groupedBy: *ref_43
               implementation: Method
@@ -9191,7 +9191,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_692
+            - !Parameter &ref_684
               schema: *ref_7
               groupedBy: *ref_44
               implementation: Method
@@ -9204,7 +9204,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_700
+            - !Parameter &ref_691
               schema: *ref_7
               groupedBy: *ref_45
               implementation: Method
@@ -9217,7 +9217,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_716
+            - !Parameter &ref_706
               schema: *ref_7
               groupedBy: *ref_46
               implementation: Method
@@ -9230,7 +9230,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_724
+            - !Parameter &ref_713
               schema: *ref_7
               groupedBy: *ref_47
               implementation: Method
@@ -9243,7 +9243,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_748
+            - !Parameter &ref_735
               schema: *ref_7
               groupedBy: *ref_48
               implementation: Method
@@ -9256,7 +9256,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_757
+            - !Parameter &ref_743
               schema: *ref_7
               groupedBy: *ref_49
               implementation: Method
@@ -9628,7 +9628,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: SearchDocumentsResultValue
                 description: The sequence of results returned by the query.
             protocol: !Protocols {}
           readOnly: true
@@ -9664,7 +9664,7 @@ schemas: !Schemas
     - *ref_75
     - *ref_76
     - *ref_77
-    - !ObjectSchema &ref_601
+    - !ObjectSchema &ref_600
       type: object
       apiVersions:
         - !ApiVersion 
@@ -9709,7 +9709,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: SuggestDocumentsResultValue
                 description: The sequence of results returned by the query.
             protocol: !Protocols {}
           readOnly: true
@@ -9741,7 +9741,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_81
-    - !ObjectSchema &ref_603
+    - !ObjectSchema &ref_602
       type: object
       apiVersions:
         - !ApiVersion 
@@ -9863,7 +9863,7 @@ schemas: !Schemas
           description: Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_608
+    - !ObjectSchema &ref_606
       type: object
       apiVersions:
         - !ApiVersion 
@@ -9907,7 +9907,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Actions
+                name: IndexBatchValue
                 description: The actions in the batch.
             protocol: !Protocols {}
           required: true
@@ -9928,7 +9928,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_95
-    - !ObjectSchema &ref_612
+    - !ObjectSchema &ref_609
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10002,7 +10002,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: IndexDocumentsResultValue
                 description: The list of status information for each document in the indexing request.
             protocol: !Protocols {}
           readOnly: true
@@ -10024,7 +10024,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_100
-    - !ObjectSchema &ref_625
+    - !ObjectSchema &ref_622
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10084,7 +10084,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: Results
+                name: AutocompleteResultValue
                 description: The list of returned Autocompleted items.
             protocol: !Protocols {}
           readOnly: true
@@ -10106,7 +10106,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_104
-    - !ObjectSchema &ref_627
+    - !ObjectSchema &ref_624
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10597,7 +10597,7 @@ schemas: !Schemas
           description: Describes an error condition for the Azure Cognitive Search API.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_651
+    - !ObjectSchema &ref_646
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10612,7 +10612,7 @@ schemas: !Schemas
             elementType: *ref_136
             language: !Languages 
               default:
-                name: DataSources
+                name: ListDataSourcesResultValue
                 description: The datasources in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -10932,7 +10932,7 @@ schemas: !Schemas
     - *ref_156
     - *ref_152
     - *ref_157
-    - !ObjectSchema &ref_681
+    - !ObjectSchema &ref_674
       type: object
       apiVersions:
         - !ApiVersion 
@@ -10947,7 +10947,7 @@ schemas: !Schemas
             elementType: *ref_158
             language: !Languages 
               default:
-                name: Indexers
+                name: ListIndexersResultValue
                 description: The indexers in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -10968,7 +10968,7 @@ schemas: !Schemas
           description: Response from a List Indexers request. If successful, it includes the full definitions of all indexers.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_689
+    - !ObjectSchema &ref_681
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12336,7 +12336,7 @@ schemas: !Schemas
     - *ref_234
     - *ref_245
     - *ref_237
-    - !ObjectSchema &ref_709
+    - !ObjectSchema &ref_700
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12351,7 +12351,7 @@ schemas: !Schemas
             elementType: *ref_246
             language: !Languages 
               default:
-                name: Skillsets
+                name: ListSkillsetsResultValue
                 description: The skillsets defined in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -12528,7 +12528,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_256
     - *ref_257
-    - !ObjectSchema &ref_733
+    - !ObjectSchema &ref_722
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12543,7 +12543,7 @@ schemas: !Schemas
             elementType: *ref_258
             language: !Languages 
               default:
-                name: SynonymMaps
+                name: ListSynonymMapsResultValue
                 description: The synonym maps in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -16058,7 +16058,7 @@ schemas: !Schemas
     - *ref_353
     - *ref_444
     - *ref_453
-    - !ObjectSchema &ref_745
+    - !ObjectSchema &ref_732
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16073,7 +16073,7 @@ schemas: !Schemas
             elementType: *ref_465
             language: !Languages 
               default:
-                name: Indexes
+                name: ListIndexesResultValue
                 description: The indexes in the Search service.
             protocol: !Protocols {}
           readOnly: true
@@ -16094,7 +16094,7 @@ schemas: !Schemas
           description: Response from a List Indexes request. If successful, it includes the full definitions of all indexes.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_766
+    - !ObjectSchema &ref_752
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16132,7 +16132,7 @@ schemas: !Schemas
           description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_768
+    - !ObjectSchema &ref_754
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16213,7 +16213,7 @@ schemas: !Schemas
           description: Specifies some text and analysis components used to break that text into tokens.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_773
+    - !ObjectSchema &ref_758
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16309,7 +16309,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_473
-    - !ObjectSchema &ref_776
+    - !ObjectSchema &ref_761
       type: object
       apiVersions:
         - !ApiVersion 
@@ -16593,7 +16593,7 @@ schemas: !Schemas
     - *ref_490
     - *ref_491
     - *ref_492
-    - !ArraySchema &ref_583
+    - !ArraySchema &ref_582
       type: array
       apiVersions:
         - !ApiVersion 
@@ -16721,7 +16721,6 @@ operationGroups:
     $key: Documents
     operations:
       - !Operation 
-        operationId: Documents_Count
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
@@ -16804,7 +16803,6 @@ operationGroups:
             description: Queries the number of documents in the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_SearchGet
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
@@ -16967,7 +16965,6 @@ operationGroups:
             description: Searches for documents in the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_SearchPost
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
@@ -16976,8 +16973,8 @@ operationGroups:
           - *ref_552
           - *ref_554
           - *ref_578
-        requestMediaTypes:
-          application/json: !Request &ref_582
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -17033,8 +17030,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/indexes(''{indexName}'')'
-        requests:
-          - *ref_582
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -17144,14 +17139,13 @@ operationGroups:
             description: Searches for documents in the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
           - *ref_552
-          - !Parameter &ref_586
+          - !Parameter &ref_585
             schema: *ref_7
             implementation: Method
             required: true
@@ -17163,8 +17157,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_587
-            schema: *ref_583
+          - !Parameter &ref_586
+            schema: *ref_582
             implementation: Method
             language: !Languages 
               default:
@@ -17176,7 +17170,7 @@ operationGroups:
                 in: query
                 style: form
           - *ref_554
-          - *ref_584
+          - *ref_583
         requests:
           - !Request 
             parameters:
@@ -17193,9 +17187,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_585
+              - *ref_584
             signatureParameters:
-              - *ref_585
+              - *ref_584
             language: !Languages 
               default:
                 name: ''
@@ -17206,8 +17200,8 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/indexes(''{indexName}'')'
         signatureParameters:
+          - *ref_585
           - *ref_586
-          - *ref_587
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -17260,14 +17254,13 @@ operationGroups:
             description: Retrieves a document from the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_SuggestGet
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
           - *ref_552
-          - !Parameter &ref_599
+          - !Parameter &ref_598
             schema: *ref_7
             implementation: Method
             required: true
@@ -17279,7 +17272,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_600
+          - !Parameter &ref_599
             schema: *ref_7
             implementation: Method
             required: true
@@ -17291,6 +17284,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - *ref_587
           - *ref_588
           - *ref_589
           - *ref_590
@@ -17299,9 +17293,8 @@ operationGroups:
           - *ref_593
           - *ref_594
           - *ref_595
-          - *ref_596
           - *ref_554
-          - *ref_597
+          - *ref_596
         requests:
           - !Request 
             parameters:
@@ -17319,10 +17312,10 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - *ref_29
-              - *ref_598
+              - *ref_597
             signatureParameters:
               - *ref_29
-              - *ref_598
+              - *ref_597
             language: !Languages 
               default:
                 name: ''
@@ -17333,11 +17326,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/indexes(''{indexName}'')'
         signatureParameters:
+          - *ref_598
           - *ref_599
-          - *ref_600
         responses:
           - !SchemaResponse 
-            schema: *ref_601
+            schema: *ref_600
             language: !Languages 
               default:
                 name: ''
@@ -17406,7 +17399,6 @@ operationGroups:
             description: Suggests documents in the index that match the given partial query text.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_SuggestPost
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
@@ -17414,9 +17406,9 @@ operationGroups:
           - *ref_551
           - *ref_552
           - *ref_554
-          - *ref_602
-        requestMediaTypes:
-          application/json: !Request &ref_606
+          - *ref_601
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -17431,8 +17423,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_605
-                schema: *ref_603
+              - !Parameter &ref_604
+                schema: *ref_602
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -17456,10 +17448,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_604
+              - *ref_603
             signatureParameters:
-              - *ref_605
               - *ref_604
+              - *ref_603
             language: !Languages 
               default:
                 name: ''
@@ -17472,12 +17464,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/indexes(''{indexName}'')'
-        requests:
-          - *ref_606
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_601
+            schema: *ref_600
             language: !Languages 
               default:
                 name: ''
@@ -17540,7 +17530,6 @@ operationGroups:
             description: Suggests documents in the index that match the given partial query text.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_Index
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
@@ -17548,9 +17537,9 @@ operationGroups:
           - *ref_551
           - *ref_552
           - *ref_554
-          - *ref_607
-        requestMediaTypes:
-          application/json: !Request &ref_611
+          - *ref_605
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -17565,8 +17554,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_610
-                schema: *ref_608
+              - !Parameter &ref_608
+                schema: *ref_606
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -17590,10 +17579,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_609
+              - *ref_607
             signatureParameters:
-              - *ref_610
-              - *ref_609
+              - *ref_608
+              - *ref_607
             language: !Languages 
               default:
                 name: ''
@@ -17606,12 +17595,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/indexes(''{indexName}'')'
-        requests:
-          - *ref_611
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_612
+            schema: *ref_609
             language: !Languages 
               default:
                 name: ''
@@ -17624,7 +17611,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_612
+            schema: *ref_609
             language: !Languages 
               default:
                 name: ''
@@ -17717,16 +17704,15 @@ operationGroups:
             description: Sends a batch of document write actions to the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_AutocompleteGet
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
           - *ref_552
-          - *ref_613
+          - *ref_610
           - *ref_554
-          - !Parameter &ref_623
+          - !Parameter &ref_620
             schema: *ref_7
             implementation: Method
             required: true
@@ -17738,7 +17724,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_624
+          - !Parameter &ref_621
             schema: *ref_7
             implementation: Method
             required: true
@@ -17750,14 +17736,14 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
+          - *ref_611
+          - *ref_612
+          - *ref_613
           - *ref_614
           - *ref_615
           - *ref_616
           - *ref_617
           - *ref_618
-          - *ref_619
-          - *ref_620
-          - *ref_621
         requests:
           - !Request 
             parameters:
@@ -17774,10 +17760,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_622
+              - *ref_619
               - *ref_37
             signatureParameters:
-              - *ref_622
+              - *ref_619
               - *ref_37
             language: !Languages 
               default:
@@ -17789,11 +17775,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/indexes(''{indexName}'')'
         signatureParameters:
-          - *ref_623
-          - *ref_624
+          - *ref_620
+          - *ref_621
         responses:
           - !SchemaResponse 
-            schema: *ref_625
+            schema: *ref_622
             language: !Languages 
               default:
                 name: ''
@@ -17854,17 +17840,16 @@ operationGroups:
             description: Autocompletes incomplete query terms based on input text and matching terms in the index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Documents_AutocompletePost
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
           - *ref_552
-          - *ref_626
+          - *ref_623
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_630
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -17879,8 +17864,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_629
-                schema: *ref_627
+              - !Parameter &ref_626
+                schema: *ref_624
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -17904,10 +17889,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_628
+              - *ref_625
             signatureParameters:
-              - *ref_629
-              - *ref_628
+              - *ref_626
+              - *ref_625
             language: !Languages 
               default:
                 name: ''
@@ -17920,12 +17905,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}/indexes(''{indexName}'')'
-        requests:
-          - *ref_630
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_625
+            schema: *ref_622
             language: !Languages 
               default:
                 name: ''
@@ -17992,13 +17975,12 @@ operationGroups:
     $key: DataSources
     operations:
       - !Operation 
-        operationId: DataSources_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_638
+          - !Parameter &ref_633
             schema: *ref_7
             implementation: Method
             required: true
@@ -18010,11 +17992,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_631
-          - *ref_632
-          - *ref_633
-          - !Parameter &ref_639
-            schema: *ref_634
+          - *ref_627
+          - *ref_628
+          - *ref_629
+          - !Parameter &ref_634
+            schema: *ref_630
             implementation: Method
             required: true
             language: !Languages 
@@ -18026,8 +18008,8 @@ operationGroups:
               http: !HttpParameter 
                 in: header
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_637
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -18042,7 +18024,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_636
+              - !Parameter &ref_632
                 schema: *ref_136
                 implementation: Method
                 required: true
@@ -18067,11 +18049,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_635
+              - *ref_631
               - *ref_40
             signatureParameters:
-              - *ref_636
-              - *ref_635
+              - *ref_632
+              - *ref_631
               - *ref_40
             language: !Languages 
               default:
@@ -18085,11 +18067,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_637
         signatureParameters:
-          - *ref_638
-          - *ref_639
+          - *ref_633
+          - *ref_634
         responses:
           - !SchemaResponse 
             schema: *ref_136
@@ -18197,13 +18177,12 @@ operationGroups:
             description: Creates a new datasource or updates a datasource if it already exists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DataSources_Delete
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_644
+          - !Parameter &ref_639
             schema: *ref_7
             implementation: Method
             required: true
@@ -18215,9 +18194,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_640
-          - *ref_641
-          - *ref_642
+          - *ref_635
+          - *ref_636
+          - *ref_637
           - *ref_554
         requests:
           - !Request 
@@ -18235,10 +18214,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_643
+              - *ref_638
               - *ref_41
             signatureParameters:
-              - *ref_643
+              - *ref_638
               - *ref_41
             language: !Languages 
               default:
@@ -18250,7 +18229,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_644
+          - *ref_639
         responses:
           - !Response 
             language: !Languages 
@@ -18301,13 +18280,12 @@ operationGroups:
             description: Deletes a datasource.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DataSources_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_647
+          - !Parameter &ref_642
             schema: *ref_7
             implementation: Method
             required: true
@@ -18319,7 +18297,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_645
+          - *ref_640
           - *ref_554
         requests:
           - !Request 
@@ -18337,9 +18315,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_646
+              - *ref_641
             signatureParameters:
-              - *ref_646
+              - *ref_641
             language: !Languages 
               default:
                 name: ''
@@ -18350,7 +18328,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_647
+          - *ref_642
         responses:
           - !SchemaResponse 
             schema: *ref_136
@@ -18411,13 +18389,12 @@ operationGroups:
             description: Retrieves a datasource definition.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DataSources_List
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_650
+          - !Parameter &ref_645
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -18428,7 +18405,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_648
+          - *ref_643
           - *ref_554
         requests:
           - !Request 
@@ -18446,9 +18423,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_649
+              - *ref_644
             signatureParameters:
-              - *ref_649
+              - *ref_644
             language: !Languages 
               default:
                 name: ''
@@ -18459,10 +18436,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_650
+          - *ref_645
         responses:
           - !SchemaResponse 
-            schema: *ref_651
+            schema: *ref_646
             language: !Languages 
               default:
                 name: ''
@@ -18521,16 +18498,15 @@ operationGroups:
             description: Lists all datasources available for a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DataSources_Create
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_652
+          - *ref_647
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_655
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -18545,7 +18521,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_654
+              - !Parameter &ref_649
                 schema: *ref_136
                 implementation: Method
                 required: true
@@ -18570,10 +18546,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_653
+              - *ref_648
             signatureParameters:
-              - *ref_654
-              - *ref_653
+              - *ref_649
+              - *ref_648
             language: !Languages 
               default:
                 name: ''
@@ -18586,8 +18562,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_655
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -18672,13 +18646,12 @@ operationGroups:
     $key: Indexers
     operations:
       - !Operation 
-        operationId: Indexers_Reset
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_658
+          - !Parameter &ref_652
             schema: *ref_7
             implementation: Method
             required: true
@@ -18690,7 +18663,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_656
+          - *ref_650
           - *ref_554
         requests:
           - !Request 
@@ -18708,9 +18681,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_657
+              - *ref_651
             signatureParameters:
-              - *ref_657
+              - *ref_651
             language: !Languages 
               default:
                 name: ''
@@ -18721,7 +18694,7 @@ operationGroups:
                 method: post
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_658
+          - *ref_652
         responses:
           - !Response 
             language: !Languages 
@@ -18762,13 +18735,12 @@ operationGroups:
             description: Resets the change tracking state associated with an indexer.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_Run
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_661
+          - !Parameter &ref_655
             schema: *ref_7
             implementation: Method
             required: true
@@ -18780,7 +18752,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_659
+          - *ref_653
           - *ref_554
         requests:
           - !Request 
@@ -18798,9 +18770,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_660
+              - *ref_654
             signatureParameters:
-              - *ref_660
+              - *ref_654
             language: !Languages 
               default:
                 name: ''
@@ -18811,7 +18783,7 @@ operationGroups:
                 method: post
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_661
+          - *ref_655
         responses:
           - !Response 
             language: !Languages 
@@ -18852,13 +18824,12 @@ operationGroups:
             description: Runs an indexer on-demand.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_668
+          - !Parameter &ref_661
             schema: *ref_7
             implementation: Method
             required: true
@@ -18870,11 +18841,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_662
-          - *ref_663
-          - *ref_664
-          - !Parameter &ref_669
-            schema: *ref_634
+          - *ref_656
+          - *ref_657
+          - *ref_658
+          - !Parameter &ref_662
+            schema: *ref_630
             implementation: Method
             required: true
             language: !Languages 
@@ -18886,8 +18857,8 @@ operationGroups:
               http: !HttpParameter 
                 in: header
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_667
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -18902,7 +18873,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_666
+              - !Parameter &ref_660
                 schema: *ref_158
                 implementation: Method
                 required: true
@@ -18927,11 +18898,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_665
+              - *ref_659
               - *ref_42
             signatureParameters:
-              - *ref_666
-              - *ref_665
+              - *ref_660
+              - *ref_659
               - *ref_42
             language: !Languages 
               default:
@@ -18945,11 +18916,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_667
         signatureParameters:
-          - *ref_668
-          - *ref_669
+          - *ref_661
+          - *ref_662
         responses:
           - !SchemaResponse 
             schema: *ref_158
@@ -19046,13 +19015,12 @@ operationGroups:
             description: Creates a new indexer or updates an indexer if it already exists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_Delete
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_674
+          - !Parameter &ref_667
             schema: *ref_7
             implementation: Method
             required: true
@@ -19064,9 +19032,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_670
-          - *ref_671
-          - *ref_672
+          - *ref_663
+          - *ref_664
+          - *ref_665
           - *ref_554
         requests:
           - !Request 
@@ -19084,10 +19052,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_673
+              - *ref_666
               - *ref_43
             signatureParameters:
-              - *ref_673
+              - *ref_666
               - *ref_43
             language: !Languages 
               default:
@@ -19099,7 +19067,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_674
+          - *ref_667
         responses:
           - !Response 
             language: !Languages 
@@ -19150,13 +19118,12 @@ operationGroups:
             description: Deletes an indexer.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_677
+          - !Parameter &ref_670
             schema: *ref_7
             implementation: Method
             required: true
@@ -19168,7 +19135,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_675
+          - *ref_668
           - *ref_554
         requests:
           - !Request 
@@ -19186,9 +19153,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_676
+              - *ref_669
             signatureParameters:
-              - *ref_676
+              - *ref_669
             language: !Languages 
               default:
                 name: ''
@@ -19199,7 +19166,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_677
+          - *ref_670
         responses:
           - !SchemaResponse 
             schema: *ref_158
@@ -19257,13 +19224,12 @@ operationGroups:
             description: Retrieves an indexer definition.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_List
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_680
+          - !Parameter &ref_673
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -19274,7 +19240,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_678
+          - *ref_671
           - *ref_554
         requests:
           - !Request 
@@ -19292,9 +19258,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_679
+              - *ref_672
             signatureParameters:
-              - *ref_679
+              - *ref_672
             language: !Languages 
               default:
                 name: ''
@@ -19305,10 +19271,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_680
+          - *ref_673
         responses:
           - !SchemaResponse 
-            schema: *ref_681
+            schema: *ref_674
             language: !Languages 
               default:
                 name: ''
@@ -19388,16 +19354,15 @@ operationGroups:
             description: Lists all indexers available for a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_Create
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_682
+          - *ref_675
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_685
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -19412,7 +19377,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_684
+              - !Parameter &ref_677
                 schema: *ref_158
                 implementation: Method
                 required: true
@@ -19437,10 +19402,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_683
+              - *ref_676
             signatureParameters:
-              - *ref_684
-              - *ref_683
+              - *ref_677
+              - *ref_676
             language: !Languages 
               default:
                 name: ''
@@ -19453,8 +19418,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_685
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -19523,13 +19486,12 @@ operationGroups:
             description: Creates a new indexer.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexers_GetStatus
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_688
+          - !Parameter &ref_680
             schema: *ref_7
             implementation: Method
             required: true
@@ -19541,7 +19503,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_686
+          - *ref_678
           - *ref_554
         requests:
           - !Request 
@@ -19559,9 +19521,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_687
+              - *ref_679
             signatureParameters:
-              - *ref_687
+              - *ref_679
             language: !Languages 
               default:
                 name: ''
@@ -19572,10 +19534,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_688
+          - *ref_680
         responses:
           - !SchemaResponse 
-            schema: *ref_689
+            schema: *ref_681
             language: !Languages 
               default:
                 name: ''
@@ -19685,13 +19647,12 @@ operationGroups:
     $key: Skillsets
     operations:
       - !Operation 
-        operationId: Skillsets_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_696
+          - !Parameter &ref_687
             schema: *ref_7
             implementation: Method
             required: true
@@ -19703,11 +19664,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_690
-          - *ref_691
-          - *ref_692
-          - !Parameter &ref_697
-            schema: *ref_634
+          - *ref_682
+          - *ref_683
+          - *ref_684
+          - !Parameter &ref_688
+            schema: *ref_630
             implementation: Method
             required: true
             language: !Languages 
@@ -19719,8 +19680,8 @@ operationGroups:
               http: !HttpParameter 
                 in: header
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_695
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -19735,7 +19696,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_694
+              - !Parameter &ref_686
                 schema: *ref_246
                 implementation: Method
                 required: true
@@ -19760,11 +19721,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_693
+              - *ref_685
               - *ref_44
             signatureParameters:
-              - *ref_694
-              - *ref_693
+              - *ref_686
+              - *ref_685
               - *ref_44
             language: !Languages 
               default:
@@ -19778,11 +19739,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_695
         signatureParameters:
-          - *ref_696
-          - *ref_697
+          - *ref_687
+          - *ref_688
         responses:
           - !SchemaResponse 
             schema: *ref_246
@@ -20050,13 +20009,12 @@ operationGroups:
             description: Creates a new skillset in a search service or updates the skillset if it already exists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Skillsets_Delete
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_702
+          - !Parameter &ref_693
             schema: *ref_7
             implementation: Method
             required: true
@@ -20068,9 +20026,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_698
-          - *ref_699
-          - *ref_700
+          - *ref_689
+          - *ref_690
+          - *ref_691
           - *ref_554
         requests:
           - !Request 
@@ -20088,10 +20046,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_701
+              - *ref_692
               - *ref_45
             signatureParameters:
-              - *ref_701
+              - *ref_692
               - *ref_45
             language: !Languages 
               default:
@@ -20103,7 +20061,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_702
+          - *ref_693
         responses:
           - !Response 
             language: !Languages 
@@ -20154,13 +20112,12 @@ operationGroups:
             description: Deletes a skillset in a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Skillsets_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_705
+          - !Parameter &ref_696
             schema: *ref_7
             implementation: Method
             required: true
@@ -20172,7 +20129,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_703
+          - *ref_694
           - *ref_554
         requests:
           - !Request 
@@ -20190,9 +20147,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_704
+              - *ref_695
             signatureParameters:
-              - *ref_704
+              - *ref_695
             language: !Languages 
               default:
                 name: ''
@@ -20203,7 +20160,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_705
+          - *ref_696
         responses:
           - !SchemaResponse 
             schema: *ref_246
@@ -20323,13 +20280,12 @@ operationGroups:
             description: Retrieves a skillset in a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Skillsets_List
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_708
+          - !Parameter &ref_699
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -20340,7 +20296,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_706
+          - *ref_697
           - *ref_554
         requests:
           - !Request 
@@ -20358,9 +20314,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_707
+              - *ref_698
             signatureParameters:
-              - *ref_707
+              - *ref_698
             language: !Languages 
               default:
                 name: ''
@@ -20371,10 +20327,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_708
+          - *ref_699
         responses:
           - !SchemaResponse 
-            schema: *ref_709
+            schema: *ref_700
             language: !Languages 
               default:
                 name: ''
@@ -20492,16 +20448,15 @@ operationGroups:
             description: List all skillsets in a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Skillsets_Create
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_710
+          - *ref_701
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_713
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -20516,7 +20471,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_712
+              - !Parameter &ref_703
                 schema: *ref_246
                 implementation: Method
                 required: true
@@ -20541,10 +20496,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_711
+              - *ref_702
             signatureParameters:
-              - *ref_712
-              - *ref_711
+              - *ref_703
+              - *ref_702
             language: !Languages 
               default:
                 name: ''
@@ -20557,8 +20512,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_713
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -20746,13 +20699,12 @@ operationGroups:
     $key: SynonymMaps
     operations:
       - !Operation 
-        operationId: SynonymMaps_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_720
+          - !Parameter &ref_709
             schema: *ref_7
             implementation: Method
             required: true
@@ -20764,11 +20716,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_714
-          - *ref_715
-          - *ref_716
-          - !Parameter &ref_721
-            schema: *ref_634
+          - *ref_704
+          - *ref_705
+          - *ref_706
+          - !Parameter &ref_710
+            schema: *ref_630
             implementation: Method
             required: true
             language: !Languages 
@@ -20780,8 +20732,8 @@ operationGroups:
               http: !HttpParameter 
                 in: header
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_719
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -20796,7 +20748,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_718
+              - !Parameter &ref_708
                 schema: *ref_258
                 implementation: Method
                 required: true
@@ -20821,11 +20773,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_717
+              - *ref_707
               - *ref_46
             signatureParameters:
-              - *ref_718
-              - *ref_717
+              - *ref_708
+              - *ref_707
               - *ref_46
             language: !Languages 
               default:
@@ -20839,11 +20791,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_719
         signatureParameters:
-          - *ref_720
-          - *ref_721
+          - *ref_709
+          - *ref_710
         responses:
           - !SchemaResponse 
             schema: *ref_258
@@ -20936,13 +20886,12 @@ operationGroups:
             description: Creates a new synonym map or updates a synonym map if it already exists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: SynonymMaps_Delete
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_726
+          - !Parameter &ref_715
             schema: *ref_7
             implementation: Method
             required: true
@@ -20954,9 +20903,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_722
-          - *ref_723
-          - *ref_724
+          - *ref_711
+          - *ref_712
+          - *ref_713
           - *ref_554
         requests:
           - !Request 
@@ -20974,10 +20923,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_725
+              - *ref_714
               - *ref_47
             signatureParameters:
-              - *ref_725
+              - *ref_714
               - *ref_47
             language: !Languages 
               default:
@@ -20989,7 +20938,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_726
+          - *ref_715
         responses:
           - !Response 
             language: !Languages 
@@ -21040,13 +20989,12 @@ operationGroups:
             description: Deletes a synonym map.
         protocol: !Protocols {}
       - !Operation 
-        operationId: SynonymMaps_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_729
+          - !Parameter &ref_718
             schema: *ref_7
             implementation: Method
             required: true
@@ -21058,7 +21006,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_727
+          - *ref_716
           - *ref_554
         requests:
           - !Request 
@@ -21076,9 +21024,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_728
+              - *ref_717
             signatureParameters:
-              - *ref_728
+              - *ref_717
             language: !Languages 
               default:
                 name: ''
@@ -21089,7 +21037,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_729
+          - *ref_718
         responses:
           - !SchemaResponse 
             schema: *ref_258
@@ -21147,13 +21095,12 @@ operationGroups:
             description: Retrieves a synonym map definition.
         protocol: !Protocols {}
       - !Operation 
-        operationId: SynonymMaps_List
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_732
+          - !Parameter &ref_721
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -21164,7 +21111,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_730
+          - *ref_719
           - *ref_554
         requests:
           - !Request 
@@ -21182,9 +21129,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_731
+              - *ref_720
             signatureParameters:
-              - *ref_731
+              - *ref_720
             language: !Languages 
               default:
                 name: ''
@@ -21195,10 +21142,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_732
+          - *ref_721
         responses:
           - !SchemaResponse 
-            schema: *ref_733
+            schema: *ref_722
             language: !Languages 
               default:
                 name: ''
@@ -21258,16 +21205,15 @@ operationGroups:
             description: Lists all synonym maps available for a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: SynonymMaps_Create
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_734
+          - *ref_723
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_737
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -21282,7 +21228,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_736
+              - !Parameter &ref_725
                 schema: *ref_258
                 implementation: Method
                 required: true
@@ -21307,10 +21253,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_735
+              - *ref_724
             signatureParameters:
-              - *ref_736
-              - *ref_735
+              - *ref_725
+              - *ref_724
             language: !Languages 
               default:
                 name: ''
@@ -21323,8 +21269,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_737
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -21403,16 +21347,15 @@ operationGroups:
     $key: Indexes
     operations:
       - !Operation 
-        operationId: Indexes_Create
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_738
+          - *ref_726
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_741
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -21427,7 +21370,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_740
+              - !Parameter &ref_728
                 schema: *ref_465
                 implementation: Method
                 required: true
@@ -21452,10 +21395,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_739
+              - *ref_727
             signatureParameters:
-              - *ref_740
-              - *ref_739
+              - *ref_728
+              - *ref_727
             language: !Languages 
               default:
                 name: ''
@@ -21468,8 +21411,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_741
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -21781,13 +21722,12 @@ operationGroups:
             description: Creates a new search index.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_List
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_744
+          - !Parameter &ref_731
             schema: *ref_7
             implementation: Method
             language: !Languages 
@@ -21798,7 +21738,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_742
+          - *ref_729
           - *ref_554
         requests:
           - !Request 
@@ -21816,9 +21756,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_743
+              - *ref_730
             signatureParameters:
-              - *ref_743
+              - *ref_730
             language: !Languages 
               default:
                 name: ''
@@ -21829,10 +21769,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_744
+          - *ref_731
         responses:
           - !SchemaResponse 
-            schema: *ref_745
+            schema: *ref_732
             language: !Languages 
               default:
                 name: ''
@@ -22094,13 +22034,12 @@ operationGroups:
             description: Lists all indexes available for a search service.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_752
+          - !Parameter &ref_738
             schema: *ref_7
             implementation: Method
             required: true
@@ -22112,7 +22051,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_753
+          - !Parameter &ref_739
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -22125,11 +22064,11 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_746
-          - *ref_747
-          - *ref_748
-          - !Parameter &ref_754
-            schema: *ref_634
+          - *ref_733
+          - *ref_734
+          - *ref_735
+          - !Parameter &ref_740
+            schema: *ref_630
             implementation: Method
             required: true
             language: !Languages 
@@ -22141,8 +22080,8 @@ operationGroups:
               http: !HttpParameter 
                 in: header
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_751
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -22157,7 +22096,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_750
+              - !Parameter &ref_737
                 schema: *ref_465
                 implementation: Method
                 required: true
@@ -22182,11 +22121,11 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_749
+              - *ref_736
               - *ref_48
             signatureParameters:
-              - *ref_750
-              - *ref_749
+              - *ref_737
+              - *ref_736
               - *ref_48
             language: !Languages 
               default:
@@ -22200,12 +22139,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_751
         signatureParameters:
-          - *ref_752
-          - *ref_753
-          - *ref_754
+          - *ref_738
+          - *ref_739
+          - *ref_740
         responses:
           - !SchemaResponse 
             schema: *ref_465
@@ -22709,13 +22646,12 @@ operationGroups:
             description: Creates a new search index or updates an index if it already exists.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_Delete
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_759
+          - !Parameter &ref_745
             schema: *ref_7
             implementation: Method
             required: true
@@ -22727,9 +22663,9 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_755
-          - *ref_756
-          - *ref_757
+          - *ref_741
+          - *ref_742
+          - *ref_743
           - *ref_554
         requests:
           - !Request 
@@ -22747,10 +22683,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_758
+              - *ref_744
               - *ref_49
             signatureParameters:
-              - *ref_758
+              - *ref_744
               - *ref_49
             language: !Languages 
               default:
@@ -22762,7 +22698,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_759
+          - *ref_745
         responses:
           - !Response 
             language: !Languages 
@@ -22813,13 +22749,12 @@ operationGroups:
             description: Deletes a search index and all the documents it contains.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_Get
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_762
+          - !Parameter &ref_748
             schema: *ref_7
             implementation: Method
             required: true
@@ -22831,7 +22766,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_760
+          - *ref_746
           - *ref_554
         requests:
           - !Request 
@@ -22849,9 +22784,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_761
+              - *ref_747
             signatureParameters:
-              - *ref_761
+              - *ref_747
             language: !Languages 
               default:
                 name: ''
@@ -22862,7 +22797,7 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_762
+          - *ref_748
         responses:
           - !SchemaResponse 
             schema: *ref_465
@@ -23093,13 +23028,12 @@ operationGroups:
             description: Retrieves an index definition.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_GetStatistics
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_765
+          - !Parameter &ref_751
             schema: *ref_7
             implementation: Method
             required: true
@@ -23111,7 +23045,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_763
+          - *ref_749
           - *ref_554
         requests:
           - !Request 
@@ -23129,9 +23063,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_764
+              - *ref_750
             signatureParameters:
-              - *ref_764
+              - *ref_750
             language: !Languages 
               default:
                 name: ''
@@ -23142,10 +23076,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
-          - *ref_765
+          - *ref_751
         responses:
           - !SchemaResponse 
-            schema: *ref_766
+            schema: *ref_752
             language: !Languages 
               default:
                 name: ''
@@ -23190,13 +23124,12 @@ operationGroups:
             description: Returns statistics for the given index, including a document count and storage usage.
         protocol: !Protocols {}
       - !Operation 
-        operationId: Indexes_Analyze
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - !Parameter &ref_772
+          - !Parameter &ref_757
             schema: *ref_7
             implementation: Method
             required: true
@@ -23208,10 +23141,10 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_767
+          - *ref_753
           - *ref_554
-        requestMediaTypes:
-          application/json: !Request &ref_771
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_579
@@ -23226,8 +23159,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_770
-                schema: *ref_768
+              - !Parameter &ref_756
+                schema: *ref_754
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -23251,10 +23184,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_769
+              - *ref_755
             signatureParameters:
-              - *ref_770
-              - *ref_769
+              - *ref_756
+              - *ref_755
             language: !Languages 
               default:
                 name: ''
@@ -23267,13 +23200,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{endpoint}'
-        requests:
-          - *ref_771
         signatureParameters:
-          - *ref_772
+          - *ref_757
         responses:
           - !SchemaResponse 
-            schema: *ref_773
+            schema: *ref_758
             language: !Languages 
               default:
                 name: ''
@@ -23340,13 +23271,12 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: GetServiceStatistics
         apiVersions:
           - !ApiVersion 
             version: 2019-05-06-Preview
         parameters:
           - *ref_551
-          - *ref_774
+          - *ref_759
           - *ref_554
         requests:
           - !Request 
@@ -23364,9 +23294,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_775
+              - *ref_760
             signatureParameters:
-              - *ref_775
+              - *ref_760
             language: !Languages 
               default:
                 name: ''
@@ -23379,7 +23309,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_776
+            schema: *ref_761
             language: !Languages 
               default:
                 name: ''

@@ -182,7 +182,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_18
+    - !ObjectSchema &ref_17
       type: object
       apiVersions:
         - !ApiVersion 
@@ -249,7 +249,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: getModel
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -317,13 +316,12 @@ operationGroups:
             description: Get models that you will either return to end users as a raw body, or with a model added during grow up.
         protocol: !Protocols {}
       - !Operation 
-        operationId: postModel
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_8
-          - !Parameter &ref_16
+          - !Parameter &ref_15
             schema: *ref_9
             implementation: Method
             required: true
@@ -337,8 +335,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requestMediaTypes:
-          application/json: !Request &ref_15
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_12
@@ -392,10 +390,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_15
         signatureParameters:
-          - *ref_16
+          - *ref_15
         responses:
           - !SchemaResponse 
             schema: *ref_1
@@ -416,13 +412,12 @@ operationGroups:
             description: 'Post either raw response as a model and pass in ''raw'' for mode, or grow up your operation to take a model instead, and put in ''model'' as mode. '
         protocol: !Protocols {}
       - !Operation 
-        operationId: getPages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_8
-          - !Parameter &ref_17
+          - !Parameter &ref_16
             schema: *ref_9
             implementation: Method
             required: true
@@ -463,10 +458,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_17
+          - *ref_16
         responses:
           - !SchemaResponse 
-            schema: *ref_18
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -491,13 +486,12 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: lro
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_8
-          - !Parameter &ref_19
+          - !Parameter &ref_18
             schema: *ref_9
             implementation: Method
             required: true
@@ -538,7 +532,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_19
+          - *ref_18
         responses:
           - !SchemaResponse 
             schema: *ref_3
@@ -568,10 +562,9 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: Fake-Subscription-Key
-      type: Key
-      in: header
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: DPGClient

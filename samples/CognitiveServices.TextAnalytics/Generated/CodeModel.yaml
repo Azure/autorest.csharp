@@ -900,7 +900,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_5
-    - !ObjectSchema &ref_113
+    - !ObjectSchema &ref_112
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1411,7 +1411,7 @@ schemas: !Schemas
     - *ref_27
     - *ref_26
     - *ref_38
-    - !ObjectSchema &ref_114
+    - !ObjectSchema &ref_113
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1436,7 +1436,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_119
+    - !ObjectSchema &ref_117
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1712,7 +1712,7 @@ schemas: !Schemas
     - *ref_50
     - *ref_51
     - *ref_52
-    - !ObjectSchema &ref_124
+    - !ObjectSchema &ref_121
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1856,7 +1856,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_56
-    - !ObjectSchema &ref_125
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1934,7 +1934,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_60
-    - !ObjectSchema &ref_130
+    - !ObjectSchema &ref_126
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2111,7 +2111,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_66
     - *ref_67
-    - !ObjectSchema &ref_135
+    - !ObjectSchema &ref_130
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2426,13 +2426,12 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: EntitiesRecognitionGeneral
         apiVersions:
           - !ApiVersion 
             version: v3.0
         parameters:
           - *ref_104
-          - !Parameter &ref_111
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2443,7 +2442,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_112
+          - !Parameter &ref_111
             schema: *ref_105
             implementation: Method
             language: !Languages 
@@ -2454,8 +2453,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/json: !Request &ref_110
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_106
@@ -2510,15 +2509,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_110
-        requests:
-          - *ref_110
         signatureParameters:
+          - *ref_110
           - *ref_111
-          - *ref_112
         responses:
           - !SchemaResponse 
-            schema: *ref_113
+            schema: *ref_112
             language: !Languages 
               default:
                 name: ''
@@ -2533,7 +2529,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2615,13 +2611,12 @@ operationGroups:
             summary: Named Entity Recognition
         protocol: !Protocols {}
       - !Operation 
-        operationId: EntitiesLinking
         apiVersions:
           - !ApiVersion 
             version: v3.0
         parameters:
           - *ref_104
-          - !Parameter &ref_117
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2632,7 +2627,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_118
+          - !Parameter &ref_116
             schema: *ref_105
             implementation: Method
             language: !Languages 
@@ -2643,8 +2638,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/json: !Request &ref_116
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_106
@@ -2659,7 +2654,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_115
+              - !Parameter &ref_114
                 schema: *ref_107
                 implementation: Method
                 required: true
@@ -2685,7 +2680,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_115
+              - *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -2699,15 +2694,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_116
-        requests:
-          - *ref_116
         signatureParameters:
-          - *ref_117
-          - *ref_118
+          - *ref_115
+          - *ref_116
         responses:
           - !SchemaResponse 
-            schema: *ref_119
+            schema: *ref_117
             language: !Languages 
               default:
                 name: ''
@@ -2722,7 +2714,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2805,13 +2797,12 @@ operationGroups:
             summary: Linked entities from a well-known knowledge base
         protocol: !Protocols {}
       - !Operation 
-        operationId: KeyPhrases
         apiVersions:
           - !ApiVersion 
             version: v3.0
         parameters:
           - *ref_104
-          - !Parameter &ref_122
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2822,7 +2813,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_123
+          - !Parameter &ref_120
             schema: *ref_105
             implementation: Method
             language: !Languages 
@@ -2833,8 +2824,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/json: !Request &ref_121
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_106
@@ -2849,7 +2840,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_120
+              - !Parameter &ref_118
                 schema: *ref_107
                 implementation: Method
                 required: true
@@ -2875,7 +2866,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_120
+              - *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -2889,15 +2880,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_121
-        requests:
-          - *ref_121
         signatureParameters:
-          - *ref_122
-          - *ref_123
+          - *ref_119
+          - *ref_120
         responses:
           - !SchemaResponse 
-            schema: *ref_124
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -2912,7 +2900,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2971,13 +2959,12 @@ operationGroups:
             summary: Key Phrases
         protocol: !Protocols {}
       - !Operation 
-        operationId: Languages
         apiVersions:
           - !ApiVersion 
             version: v3.0
         parameters:
           - *ref_104
-          - !Parameter &ref_128
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2988,7 +2975,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_129
+          - !Parameter &ref_125
             schema: *ref_105
             implementation: Method
             language: !Languages 
@@ -2999,8 +2986,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/json: !Request &ref_127
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_106
@@ -3015,8 +3002,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_126
-                schema: *ref_125
+              - !Parameter &ref_123
+                schema: *ref_122
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3041,7 +3028,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_126
+              - *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3055,15 +3042,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_127
-        requests:
-          - *ref_127
         signatureParameters:
-          - *ref_128
-          - *ref_129
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
-            schema: *ref_130
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -3078,7 +3062,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -3140,13 +3124,12 @@ operationGroups:
             summary: Detect Language
         protocol: !Protocols {}
       - !Operation 
-        operationId: Sentiment
         apiVersions:
           - !ApiVersion 
             version: v3.0
         parameters:
           - *ref_104
-          - !Parameter &ref_133
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3157,7 +3140,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_134
+          - !Parameter &ref_129
             schema: *ref_105
             implementation: Method
             language: !Languages 
@@ -3168,8 +3151,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requestMediaTypes:
-          application/json: !Request &ref_132
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_106
@@ -3184,7 +3167,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
+              - !Parameter &ref_127
                 schema: *ref_107
                 implementation: Method
                 required: true
@@ -3210,7 +3193,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_131
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3224,15 +3207,12 @@ operationGroups:
                   - application/json
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0'
-          text/json: *ref_132
-        requests:
-          - *ref_132
         signatureParameters:
-          - *ref_133
-          - *ref_134
+          - *ref_128
+          - *ref_129
         responses:
           - !SchemaResponse 
-            schema: *ref_135
+            schema: *ref_130
             language: !Languages 
               default:
                 name: ''
@@ -3247,7 +3227,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_114
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -3363,11 +3343,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
-  schemes:
-    - !KeySecurityScheme 
-      name: Ocp-Apim-Subscription-Key
-      type: Key
-      in: header
+  schemes: []
 language: !Languages 
   default:
     name: CognitiveServicesTextAnalytics

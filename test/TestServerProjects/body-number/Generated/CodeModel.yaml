@@ -113,7 +113,7 @@ schemas: !Schemas
           name: Constant3
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_14
+    - !ConstantSchema &ref_12
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -139,7 +139,7 @@ schemas: !Schemas
           name: Constant5
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_16
+    - !ConstantSchema &ref_13
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -178,7 +178,7 @@ schemas: !Schemas
           name: Constant8
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_20
+    - !ConstantSchema &ref_15
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -204,7 +204,7 @@ schemas: !Schemas
           name: Constant10
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_22
+    - !ConstantSchema &ref_16
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -324,7 +324,6 @@ operationGroups:
     $key: number
     operations:
       - !Operation 
-        operationId: number_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -399,7 +398,6 @@ operationGroups:
             description: Get null Number value
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getInvalidFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -466,7 +464,6 @@ operationGroups:
             description: Get invalid float Number value
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getInvalidDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -533,7 +530,6 @@ operationGroups:
             description: Get invalid double Number value
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getInvalidDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -600,14 +596,13 @@ operationGroups:
             description: Get invalid decimal Number value
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -661,8 +656,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -701,7 +694,6 @@ operationGroups:
             description: Put big float value 3.402823e+20
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -775,14 +767,13 @@ operationGroups:
             description: Get big float value 3.402823e+20
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_13
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -797,7 +788,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_12
+              - !Parameter &ref_11
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -823,7 +814,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_12
+              - *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -836,8 +827,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_13
         signatureParameters: []
         responses:
           - !Response 
@@ -876,7 +865,6 @@ operationGroups:
             description: Put big double value 2.5976931e+101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -950,14 +938,13 @@ operationGroups:
             description: Get big double value 2.5976931e+101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDoublePositiveDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_15
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -973,7 +960,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_14
+                schema: *ref_12
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1010,8 +997,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_15
         signatureParameters: []
         responses:
           - !Response 
@@ -1050,7 +1035,6 @@ operationGroups:
             description: Put big double value 99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDoublePositiveDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1124,14 +1108,13 @@ operationGroups:
             description: Get big double value 99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDoubleNegativeDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_17
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1147,7 +1130,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_16
+                schema: *ref_13
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1184,8 +1167,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_17
         signatureParameters: []
         responses:
           - !Response 
@@ -1224,7 +1205,6 @@ operationGroups:
             description: Put big double value -99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDoubleNegativeDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1298,14 +1278,13 @@ operationGroups:
             description: Get big double value -99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_19
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1320,7 +1299,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_18
+              - !Parameter &ref_14
                 schema: *ref_3
                 implementation: Method
                 required: true
@@ -1346,7 +1325,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_18
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1359,8 +1338,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_19
         signatureParameters: []
         responses:
           - !Response 
@@ -1399,7 +1376,6 @@ operationGroups:
             description: Put big decimal value 2.5976931e+101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1473,14 +1449,13 @@ operationGroups:
             description: Get big decimal value 2.5976931e+101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDecimalPositiveDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_21
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1496,7 +1471,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_20
+                schema: *ref_15
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1533,8 +1508,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_21
         signatureParameters: []
         responses:
           - !Response 
@@ -1573,7 +1546,6 @@ operationGroups:
             description: Put big decimal value 99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDecimalPositiveDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1647,14 +1619,13 @@ operationGroups:
             description: Get big decimal value 99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putBigDecimalNegativeDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_23
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1670,7 +1641,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_16
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1707,8 +1678,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_23
         signatureParameters: []
         responses:
           - !Response 
@@ -1747,7 +1716,6 @@ operationGroups:
             description: Put big decimal value -99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getBigDecimalNegativeDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1821,14 +1789,13 @@ operationGroups:
             description: Get big decimal value -99999999.99
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putSmallFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_25
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -1843,7 +1810,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
+              - !Parameter &ref_17
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -1869,7 +1836,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_24
+              - *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -1882,8 +1849,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_25
         signatureParameters: []
         responses:
           - !Response 
@@ -1922,7 +1887,6 @@ operationGroups:
             description: Put small float value 3.402823e-20
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getSmallFloat
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1996,14 +1960,13 @@ operationGroups:
             description: Get big double value 3.402823e-20
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putSmallDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_27
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -2018,7 +1981,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_26
+              - !Parameter &ref_18
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -2044,7 +2007,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_26
+              - *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -2057,8 +2020,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_27
         signatureParameters: []
         responses:
           - !Response 
@@ -2097,7 +2058,6 @@ operationGroups:
             description: Put small double value 2.5976931e-101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getSmallDouble
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -2171,14 +2131,13 @@ operationGroups:
             description: Get big double value 2.5976931e-101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_putSmallDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_6
-        requestMediaTypes:
-          application/json: !Request &ref_29
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -2193,7 +2152,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_28
+              - !Parameter &ref_19
                 schema: *ref_3
                 implementation: Method
                 required: true
@@ -2219,7 +2178,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_28
+              - *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -2232,8 +2191,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_29
         signatureParameters: []
         responses:
           - !Response 
@@ -2272,7 +2229,6 @@ operationGroups:
             description: Put small decimal value 2.5976931e-101
         protocol: !Protocols {}
       - !Operation 
-        operationId: number_getSmallDecimal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

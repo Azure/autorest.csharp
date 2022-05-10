@@ -213,7 +213,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_43
+    - !ConstantSchema &ref_42
       type: constant
       value: !ConstantValue 
         value: current
@@ -329,7 +329,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_7
-    - !ObjectSchema &ref_42
+    - !ObjectSchema &ref_41
       type: object
       apiVersions:
         - !ApiVersion 
@@ -549,7 +549,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_14
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_49
       type: object
       apiVersions:
         - !ApiVersion 
@@ -647,7 +647,6 @@ operationGroups:
     $key: Cars
     operations:
       - !Operation 
-        operationId: Cars_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -715,13 +714,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: Cars_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
-          - !Parameter &ref_36
+          - !Parameter &ref_35
             schema: *ref_1
             implementation: Method
             required: true
@@ -733,7 +731,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_37
+          - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
@@ -747,8 +745,8 @@ operationGroups:
                 in: path
           - *ref_28
           - *ref_29
-        requestMediaTypes:
-          application/json: !Request &ref_35
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_33
@@ -802,11 +800,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_35
         signatureParameters:
+          - *ref_35
           - *ref_36
-          - *ref_37
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -827,13 +823,12 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: Cars_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
-          - !Parameter &ref_38
+          - !Parameter &ref_37
             schema: *ref_1
             implementation: Method
             required: true
@@ -845,7 +840,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
+          - !Parameter &ref_38
             schema: *ref_1
             implementation: Method
             required: true
@@ -886,8 +881,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_37
           - *ref_38
-          - *ref_39
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -916,13 +911,12 @@ operationGroups:
     $key: Ignitions
     operations:
       - !Operation 
-        operationId: Ignitions_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
-          - !Parameter &ref_40
+          - !Parameter &ref_39
             schema: *ref_1
             implementation: Method
             required: true
@@ -934,7 +928,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
@@ -975,11 +969,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_39
           - *ref_40
-          - *ref_41
         responses:
           - !SchemaResponse 
-            schema: *ref_42
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1005,7 +999,127 @@ operationGroups:
     $key: SingletonResources
     operations:
       - !Operation 
-        operationId: SingletonResources_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_27
+          - *ref_29
+          - !Parameter &ref_44
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_45
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: ''
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_42
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceName
+                description: ''
+                serializedName: resourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_43
+                schema: *ref_12
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_30
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_44
+          - *ref_45
+        responses:
+          - !SchemaResponse 
+            schema: *ref_12
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Singleton non-resource test example with a single-value enum name parameter.
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1037,131 +1151,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_43
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceName
-                description: ''
-                serializedName: resourceName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_28
-        requestMediaTypes:
-          application/json: !Request &ref_45
-            parameters:
-              - !Parameter 
-                schema: *ref_33
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_44
-                schema: *ref_12
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_30
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_44
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/{resourceName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_45
-        signatureParameters:
-          - *ref_46
-          - *ref_47
-        responses:
-          - !SchemaResponse 
-            schema: *ref_12
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: CreateOrUpdate
-            description: Singleton non-resource test example with a single-value enum name parameter.
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: SingletonResources_Get
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_27
-          - *ref_29
-          - !Parameter &ref_48
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_49
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: parentName
-                description: ''
-                serializedName: parentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter 
-            schema: *ref_43
+            schema: *ref_42
             implementation: Method
             required: true
             language: !Languages 
@@ -1200,8 +1190,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
-          - *ref_49
+          - *ref_46
+          - *ref_47
         responses:
           - !SchemaResponse 
             schema: *ref_12
@@ -1230,14 +1220,13 @@ operationGroups:
     $key: ParentResources
     operations:
       - !Operation 
-        operationId: ParentResources_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
           - *ref_29
-          - !Parameter &ref_50
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -1277,10 +1266,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
+          - *ref_48
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1298,14 +1287,13 @@ operationGroups:
             description: Singleton Test Parent Example.
         protocol: !Protocols {}
       - !Operation 
-        operationId: ParentResources_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
           - *ref_29
-          - !Parameter &ref_52
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             required: true
@@ -1317,7 +1305,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1357,8 +1345,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
-          - *ref_53
+          - *ref_50
+          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -1379,14 +1367,13 @@ operationGroups:
             description: Singleton Test Parent Example.
         protocol: !Protocols {}
       - !Operation 
-        operationId: ParentResources_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
           - *ref_29
-          - !Parameter &ref_56
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -1398,7 +1385,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -1411,8 +1398,8 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_28
-        requestMediaTypes:
-          application/json: !Request &ref_55
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_33
@@ -1427,7 +1414,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_52
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1453,7 +1440,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1466,11 +1453,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_55
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_53
+          - *ref_54
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -1498,8 +1483,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

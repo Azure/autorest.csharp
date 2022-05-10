@@ -271,7 +271,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_36
+    - !ConstantSchema &ref_35
       type: constant
       value: !ConstantValue 
         value: constant
@@ -544,7 +544,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: validationOfMethodParameters
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -640,14 +639,13 @@ operationGroups:
             summary: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: validationOfBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_20
           - *ref_21
-          - !Parameter &ref_34
+          - !Parameter &ref_33
             schema: *ref_30
             implementation: Method
             required: true
@@ -659,7 +657,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_35
+          - !Parameter &ref_34
             schema: *ref_23
             implementation: Method
             required: true
@@ -672,8 +670,8 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_24
-        requestMediaTypes:
-          application/json: !Request &ref_33
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_31
@@ -727,11 +725,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_33
         signatureParameters:
+          - *ref_33
           - *ref_34
-          - *ref_35
         responses:
           - !SchemaResponse 
             schema: *ref_28
@@ -767,14 +763,13 @@ operationGroups:
             summary: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: getWithConstantInPath
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_20
           - !Parameter 
-            schema: *ref_36
+            schema: *ref_35
             implementation: Method
             required: true
             language: !Languages 
@@ -813,14 +808,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: postWithConstantInBody
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_20
           - !Parameter 
-            schema: *ref_36
+            schema: *ref_35
             implementation: Method
             required: true
             language: !Languages 
@@ -831,8 +825,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requestMediaTypes:
-          application/json: !Request &ref_38
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_31
@@ -847,7 +841,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_37
+              - !Parameter &ref_36
                 schema: *ref_28
                 implementation: Method
                 required: false
@@ -873,7 +867,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_37
+              - *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -886,8 +880,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_38
         signatureParameters: []
         responses:
           - !SchemaResponse 

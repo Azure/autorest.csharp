@@ -180,7 +180,6 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -189,8 +188,8 @@ operationGroups:
           - *ref_7
           - *ref_8
           - *ref_9
-        requestMediaTypes:
-          application/json: !Request &ref_13
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_10
@@ -231,8 +230,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{Endpoint}/publicclientctor/1.0.0'
-        requests:
-          - *ref_13
         signatureParameters: []
         responses:
           - !Response 
@@ -257,12 +254,11 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !KeySecurityScheme 
-      name: fake-key
-      type: Key
-      in: header
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: fake-key
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://fakeendpoint.azure.com/.default
         - https://dummyendpoint.azure.com/.default

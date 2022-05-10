@@ -1138,8 +1138,6 @@ schemas: !Schemas
                                               protocol: !Protocols {}
                                             required: true
                                             serializedName: originGroup
-                                            extensions:
-                                              x-ms-azure-resource: true
                                             language: !Languages 
                                               default:
                                                 name: originGroup
@@ -1587,8 +1585,6 @@ schemas: !Schemas
                                                 - !Property 
                                                   schema: *ref_36
                                                   serializedName: originGroup
-                                                  extensions:
-                                                    x-ms-azure-resource: true
                                                   language: !Languages 
                                                     default:
                                                       name: originGroup
@@ -1727,6 +1723,9 @@ schemas: !Schemas
                     usage:
                       - output
                       - input
+                    extensions:
+                      x-internal-autorest-anonymous-schema:
+                        anonymous: true
                     language: !Languages 
                       default:
                         name: DeliveryRuleProperties
@@ -2003,7 +2002,6 @@ operationGroups:
     $key: DeliveryRules
     operations:
       - !Operation 
-        operationId: DeliveryRules_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -2085,7 +2083,6 @@ operationGroups:
             description: Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DeliveryRules_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -2180,13 +2177,12 @@ operationGroups:
             description: Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DeliveryRules_Create
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_74
-          - !Parameter &ref_87
+          - !Parameter &ref_86
             schema: *ref_75
             implementation: Method
             required: true
@@ -2198,7 +2194,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_88
+          - !Parameter &ref_87
             schema: *ref_72
             implementation: Method
             required: true
@@ -2212,8 +2208,8 @@ operationGroups:
                 in: path
           - *ref_76
           - *ref_77
-        requestMediaTypes:
-          application/json: !Request &ref_86
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_84
@@ -2267,11 +2263,9 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_86
         signatureParameters:
+          - *ref_86
           - *ref_87
-          - *ref_88
         responses:
           - !SchemaResponse 
             schema: *ref_49
@@ -2334,13 +2328,12 @@ operationGroups:
             description: Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
         protocol: !Protocols {}
       - !Operation 
-        operationId: DeliveryRules_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_74
-          - !Parameter &ref_89
+          - !Parameter &ref_88
             schema: *ref_75
             implementation: Method
             required: true
@@ -2352,7 +2345,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_89
             schema: *ref_72
             implementation: Method
             required: true
@@ -2393,8 +2386,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
+          - *ref_88
           - *ref_89
-          - *ref_90
         responses:
           - !Response 
             language: !Languages 
@@ -2452,8 +2445,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !OAuth2SecurityScheme 
-      type: OAuth2
+    - !AADTokenSecurityScheme 
+      type: AADToken
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

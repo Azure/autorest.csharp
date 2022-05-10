@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -83,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(serviceRequest.Parameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
 
-            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters, operation.RequestMediaTypes?.Keys);
+            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
             Request request = BuildRequest(httpRequest, buildContext);
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
@@ -192,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ICollection<string>? requestMediaTypes)
+        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
         {
             var pathParameters = new Dictionary<string, RequestParameter>();
             var requiredRequestParameters = new List<RequestParameter>();
@@ -244,7 +245,7 @@ namespace AutoRest.CSharp.Output.Models
             parameters.AddUriOrPathParameters(httpRequest.Uri, pathParameters);
             parameters.AddUriOrPathParameters(httpRequest.Path, pathParameters);
             parameters.AddQueryOrHeaderParameters(requiredRequestParameters);
-            parameters.AddBody(bodyParameter, contentTypeRequestParameter, requestMediaTypes);
+            parameters.AddBody(bodyParameter, contentTypeRequestParameter);
             parameters.AddQueryOrHeaderParameters(optionalRequestParameters);
             parameters.AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter);
             parameters.AddRequestContext();
@@ -330,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models
             Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new();
             foreach (var (_, (requestParameter, value)) in allParameters)
             {
-                if (requestParameter is { In: HttpParameterIn.Body })
+                if (requestParameter is {In: HttpParameterIn.Body})
                 {
                     bodyParameters[requestParameter] = value;
                 }
@@ -434,7 +435,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (requestParameter.Implementation != ImplementationLocation.Method)
             {
-                return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
+                return (ReferenceOrConstant) _parameters[requestParameter.Language.Default.Name];
             }
 
             if (requestParameter.Schema is ConstantSchema constant)
@@ -547,7 +548,7 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="parameters">Parameters to sort</param>
         /// <returns></returns>
-        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
 
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
@@ -580,19 +581,20 @@ namespace AutoRest.CSharp.Output.Models
         public virtual Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
             var parameter = BuildParameter(requestParameter);
-            if (IsEndpointParameter(requestParameter))
+            if (!IsEndpointParameter(requestParameter))
             {
-                parameter = new Parameter(
-                    "endpoint",
-                    parameter.Description,
-                    typeof(Uri),
-                    parameter.DefaultValue,
-                    parameter.Validate,
-                    RequestLocation: GetRequestLocation(requestParameter)
-                );
+                return parameter;
             }
 
-            return parameter;
+            var name = "endpoint";
+            var type = new CSharpType(typeof(Uri));
+            var defaultValue = parameter.DefaultValue;
+            var description = parameter.Description;
+            var location = parameter.RequestLocation;
+
+            return defaultValue != null
+                ? new Parameter(name, description, type, Constant.Default(type.WithNullable(true)), ValidationType.None, $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})", RequestLocation: location)
+                : new Parameter(name, description, type, null, parameter.Validation, null, RequestLocation: location);
         }
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
@@ -613,87 +615,21 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
         }
 
-        private Parameter BuildParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
+        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null)
         {
-            CSharpType type = frameworkParameterType != null
-                ? new CSharpType(frameworkParameterType, requestParameter.IsNullable || !requestParameter.IsRequired)
-                : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
+            var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
+            CSharpType type = typeOverride != null
+                ? new CSharpType(typeOverride, isNullable)
+                : _context.TypeFactory.CreateType(requestParameter.Schema, isNullable);
 
-            var defaultValue = ParseConstant(requestParameter);
-
-            if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
-            {
-                type = type.WithNullable(true);
-            }
-
-            if (!requestParameter.IsRequired && defaultValue == null)
-            {
-                defaultValue = Constant.Default(type);
-            }
-
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescription(requestParameter, type),
-                TypeFactory.GetInputType(type),
-                defaultValue,
-                requestParameter.IsRequired,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                RequestLocation: GetRequestLocation(requestParameter));
+            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>
             BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
-        protected Constant? ParseConstant(RequestParameter parameter)
-        {
-            if (parameter.ClientDefaultValue != null)
-            {
-                CSharpType constantTypeReference = _context.TypeFactory.CreateType(parameter.Schema, parameter.IsNullable);
-                return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
-            }
-
-            if (parameter.Schema is ConstantSchema constantSchema)
-            {
-                return ParseConstant(constantSchema);
-            }
-
-            return null;
-        }
-
         private static bool HasDefaultValue(RequestParameter parameter)
             => parameter.ClientDefaultValue != null || parameter.Schema is ConstantSchema;
-
-        private static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
-        {
-            return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"The {clientPrefix} service client." :
-                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
-        }
-
-        protected static string CreateDescription(RequestParameter requestParameter, CSharpType type)
-        {
-            var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
-
-            return requestParameter.Schema switch
-            {
-                ChoiceSchema choiceSchema when type.IsFrameworkType => AddAllowedValues(description, choiceSchema.Choices),
-                SealedChoiceSchema sealedChoiceSchema when type.IsFrameworkType => AddAllowedValues(description, sealedChoiceSchema.Choices),
-                _ => description
-            };
-
-            static string AddAllowedValues(string description, ICollection<ChoiceValue> choices)
-            {
-                var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
-
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
-            }
-        }
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
@@ -702,7 +638,8 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                Validate: true);
+                ValidationType.AssertNotNull,
+                null);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -745,14 +682,14 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)
-            => parameters.Where(parameter => parameter.DefaultValue == null).ToList();
+            => parameters.Where(parameter => !parameter.IsOptionalInSignature).ToList();
 
         public static IEnumerable<Parameter> GetOptionalParameters(IEnumerable<Parameter> parameters, bool includeAPIVersion = false)
-            => parameters.Where(parameter => parameter.DefaultValue != null && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
+            => parameters.Where(parameter => parameter.IsOptionalInSignature && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
 
         public static IReadOnlyCollection<Parameter> GetConstructorParameters(IReadOnlyList<Parameter> parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {
-            List<Parameter> constructorParameters = new List<Parameter>();
+            var constructorParameters = new List<Parameter>();
 
             constructorParameters.AddRange(GetRequiredParameters(parameters));
 
@@ -761,9 +698,10 @@ namespace AutoRest.CSharp.Output.Models
                 var credentialParam = new Parameter(
                     "credential",
                     "A credential used to authenticate to an Azure Service.",
-                    credentialType!,
+                    credentialType,
                     null,
-                    true);
+                    ValidationType.AssertNotNull,
+                    null);
                 constructorParameters.Add(credentialParam);
             }
 
@@ -833,21 +771,14 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            public void AddBody(Parameter? bodyParameter, RequestParameter? contentTypeRequestParameter, ICollection<string>? requestMediaTypes = null)
+            public void AddBody(Parameter? bodyParameter, RequestParameter? contentTypeRequestParameter)
             {
                 if (bodyParameter != null)
                 {
                     _parameters.Add(bodyParameter);
                     if (contentTypeRequestParameter != null)
                     {
-                        if (requestMediaTypes?.Count > 1)
-                        {
-                            AddContentTypeRequestParameter(contentTypeRequestParameter, requestMediaTypes);
-                        }
-                        else
-                        {
-                            AddRequestParameter(contentTypeRequestParameter, typeof(ContentType));
-                        }
+                        AddRequestParameter(contentTypeRequestParameter, typeof(ContentType));
                     }
                 }
             }
@@ -879,28 +810,6 @@ namespace AutoRest.CSharp.Output.Models
             public void AddRequestContext()
             {
                 _parameters.Add(KnownParameters.RequestContext);
-            }
-
-            private void AddContentTypeRequestParameter(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
-            {
-                var name = requestParameter.CSharpName();
-                var description = CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes);
-                var parameter = new Parameter(name, description, typeof(ContentType), null, requestParameter.IsRequired, RequestLocation: RequestLocation.Header);
-
-                _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
-                _parameters.Add(parameter);
-            }
-
-            private string CreateDescriptionWithMediaTypes(RequestParameter requestParameter, ICollection<string> requestMediaTypes)
-            {
-                var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                    $"The {requestParameter.Schema.Name} to use." :
-                    BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
-                var allowedValues = string.Join(" | ", requestMediaTypes.Select(v => $"\"{v}\""));
-
-                return string.IsNullOrEmpty(allowedValues)
-                    ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDescription(allowedValues)}";
             }
 
             private void AddRequestParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)

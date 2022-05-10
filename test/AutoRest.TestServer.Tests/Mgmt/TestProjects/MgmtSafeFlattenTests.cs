@@ -25,5 +25,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(originalProperty.CanWrite, newProperty.CanWrite, $"Expected {originalName} to have consistent setter, {newName} ({newProperty.CanWrite}) and {originalName} ({originalProperty.CanWrite})");
             Assert.AreEqual(originalProperty.PropertyType, newProperty.PropertyType, $"Expected {originalName} to have consistent type, {newName} ({newProperty.PropertyType.Name}) and {originalName} ({originalProperty.PropertyType.Name})");
         }
+
+        [TestCase(typeof(TypeOneData), typeof(LayerOneBaseType), "LayerOneType")]
+        public void ValidatePropertyUnfaltten(Type type, Type targetType, string propertyName)
+        {
+            var targetProperty = type.GetProperty(propertyName);
+            Assert.IsNotNull(targetProperty, $"Property {propertyName} was not found on {type.Name}");
+            Assert.AreEqual(targetType, targetProperty.PropertyType, $"Expected {propertyName} to be of type {targetProperty.Name})");
+        }
     }
 }

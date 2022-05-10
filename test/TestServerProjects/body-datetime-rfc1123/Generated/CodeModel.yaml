@@ -134,7 +134,6 @@ operationGroups:
     $key: datetimerfc1123
     operations:
       - !Operation 
-        operationId: datetimerfc1123_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -209,7 +208,6 @@ operationGroups:
             description: Get null datetime value
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -276,7 +274,6 @@ operationGroups:
             description: Get invalid datetime value
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getOverflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -343,7 +340,6 @@ operationGroups:
             description: Get overflow datetime value
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getUnderflow
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -410,14 +406,13 @@ operationGroups:
             description: Get underflow datetime value
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_putUtcMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_9
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -471,8 +466,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -504,7 +497,6 @@ operationGroups:
             description: Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getUtcLowercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -571,7 +563,6 @@ operationGroups:
             description: Get max datetime value fri, 31 dec 9999 23:59:59 gmt
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getUtcUppercaseMaxDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -638,14 +629,13 @@ operationGroups:
             description: Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_putUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requestMediaTypes:
-          application/json: !Request &ref_11
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -660,7 +650,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_10
+              - !Parameter &ref_9
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -686,7 +676,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_10
+              - *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -699,8 +689,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -732,7 +720,6 @@ operationGroups:
             description: Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
         protocol: !Protocols {}
       - !Operation 
-        operationId: datetimerfc1123_getUtcMinDateTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

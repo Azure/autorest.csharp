@@ -49,58 +49,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var ctorParameter = ctor.Parameters[i];
                 var inputType = TypeFactory.GetInputType(ctorParameter.Type);
-                var implementationType = ctorParameter.DefaultValue?.Type ?? TypeFactory.GetImplementationType(inputType);
                 if (!inputType.IsValueType)
                 {
                     inputType = inputType.WithNullable(true);
                 }
 
-                var defaultValue = GetDefaultValue(inputType, implementationType, ctorParameter.DefaultValue);
-
-                var methodParameter = new Parameter(
-                    ctorParameter.Name,
-                    ctorParameter.Description,
-                    inputType,
-                    defaultValue,
-                    ctorParameter.Validate,
-                    IsApiVersionParameter: ctorParameter.IsApiVersionParameter
-                );
-
-                methodParameters[i] = methodParameter;
+                methodParameters[i] = ctorParameter with
+                {
+                    Type = inputType,
+                    DefaultValue = Constant.Default(inputType),
+                    Initializer = Parameter.GetParameterInitializer(inputType, ctorParameter.DefaultValue)
+                };
             }
 
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
             return new MethodSignature(ctor.Name, ctor.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
-
-            static Constant GetDefaultValue(CSharpType inputType, CSharpType implementationType, Constant? defaultValue)
-            {
-                // Special case for strings
-                if (inputType.Equals(typeof(string)))
-                {
-                    return Constant.Default(inputType.WithNullable(true));
-                }
-
-                // Use default value if it is provided
-                if (defaultValue != null)
-                {
-                    return defaultValue.Value;
-                }
-
-                // Non-null value types must be instantiated
-                if (inputType.IsValueType && !inputType.IsNullable)
-                {
-                    return Constant.NewInstanceOf(implementationType);
-                }
-
-                // Collections must be instantiated
-                if (TypeFactory.IsCollectionType(inputType))
-                {
-                    return Constant.NewInstanceOf(implementationType.WithNullable(false));
-                }
-
-                // Return typed null for everything else
-                return Constant.Default(implementationType.WithNullable(true));
-            }
         }
 
         private static bool RequiresModelFactory(SchemaObjectType model)

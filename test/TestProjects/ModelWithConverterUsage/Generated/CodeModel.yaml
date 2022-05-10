@@ -185,7 +185,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_4
-    - !ObjectSchema &ref_14
+    - !ObjectSchema &ref_13
       type: object
       apiVersions:
         - !ApiVersion 
@@ -278,14 +278,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: OperationModel
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_8
-        requestMediaTypes:
-          application/json: !Request &ref_13
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -339,8 +338,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_13
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -362,14 +359,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: OperationStruct
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_8
-        requestMediaTypes:
-          application/json: !Request &ref_16
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_9
@@ -384,8 +380,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_15
-                schema: *ref_14
+              - !Parameter &ref_14
+                schema: *ref_13
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -410,7 +406,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_15
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -423,12 +419,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_16
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_14
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''

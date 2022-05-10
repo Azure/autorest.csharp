@@ -204,7 +204,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_26
+            - !Parameter &ref_25
               schema: *ref_1
               groupedBy: !Parameter &ref_7
                 schema: *ref_6
@@ -233,7 +233,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_27
+            - !Parameter &ref_26
               schema: *ref_3
               groupedBy: *ref_7
               implementation: Method
@@ -265,7 +265,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_28
+            - !Parameter &ref_27
               schema: *ref_1
               groupedBy: !Parameter &ref_9
                 schema: *ref_8
@@ -294,7 +294,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_29
+            - !Parameter &ref_28
               schema: *ref_1
               groupedBy: *ref_9
               implementation: Method
@@ -326,7 +326,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_30
+            - !Parameter &ref_29
               schema: *ref_1
               groupedBy: !Parameter &ref_11
                 schema: *ref_10
@@ -346,7 +346,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_34
+            - !Parameter &ref_33
               schema: *ref_1
               groupedBy: !Parameter &ref_12
                 schema: *ref_10
@@ -375,7 +375,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_31
+            - !Parameter &ref_30
               schema: *ref_3
               groupedBy: *ref_11
               implementation: Method
@@ -388,7 +388,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: query
-            - !Parameter &ref_35
+            - !Parameter &ref_34
               schema: *ref_3
               groupedBy: *ref_12
               implementation: Method
@@ -420,7 +420,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_32
+            - !Parameter &ref_31
               schema: *ref_1
               groupedBy: !Parameter &ref_14
                 schema: *ref_13
@@ -449,7 +449,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_33
+            - !Parameter &ref_32
               schema: *ref_3
               groupedBy: *ref_14
               implementation: Method
@@ -476,7 +476,7 @@ schemas: !Schemas
           description: Parameter group
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_25
+    - !ObjectSchema &ref_24
       type: object
       apiVersions:
         - !ApiVersion 
@@ -530,7 +530,6 @@ operationGroups:
     $key: parameterGrouping
     operations:
       - !Operation 
-        operationId: parameterGrouping_postRequired
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -539,8 +538,8 @@ operationGroups:
           - *ref_18
           - *ref_19
           - *ref_20
-        requestMediaTypes:
-          application/json: !Request &ref_24
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_21
@@ -584,8 +583,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_24
         signatureParameters: []
         responses:
           - !Response 
@@ -599,7 +596,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -617,14 +614,13 @@ operationGroups:
             description: Post a bunch of required parameters grouped
         protocol: !Protocols {}
       - !Operation 
-        operationId: parameterGrouping_postOptional
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_17
+          - *ref_25
           - *ref_26
-          - *ref_27
         requests:
           - !Request 
             parameters:
@@ -666,7 +662,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -684,14 +680,13 @@ operationGroups:
             description: Post a bunch of optional parameters grouped
         protocol: !Protocols {}
       - !Operation 
-        operationId: parameterGrouping_postReservedWords
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_17
+          - *ref_27
           - *ref_28
-          - *ref_29
         requests:
           - !Request 
             parameters:
@@ -733,7 +728,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -751,16 +746,15 @@ operationGroups:
             description: Post a grouped parameters with reserved words
         protocol: !Protocols {}
       - !Operation 
-        operationId: parameterGrouping_postMultiParamGroups
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_17
+          - *ref_29
           - *ref_30
           - *ref_31
           - *ref_32
-          - *ref_33
         requests:
           - !Request 
             parameters:
@@ -804,7 +798,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -822,14 +816,13 @@ operationGroups:
             description: Post parameters from multiple different parameter groups
         protocol: !Protocols {}
       - !Operation 
-        operationId: parameterGrouping_postSharedParameterGroupObject
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_17
+          - *ref_33
           - *ref_34
-          - *ref_35
         requests:
           - !Request 
             parameters:
@@ -871,7 +864,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_24
             language: !Languages 
               default:
                 name: ''

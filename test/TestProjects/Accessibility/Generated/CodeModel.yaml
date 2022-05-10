@@ -54,14 +54,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
-        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requestMediaTypes:
-          application/json: !Request &ref_5
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -102,8 +101,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_5
         signatureParameters: []
         responses:
           - !Response 
@@ -121,14 +118,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
-        operationId: OperationInternal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requestMediaTypes:
-          application/json: !Request &ref_7
+        requests:
+          - !Request 
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -143,7 +139,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_6
+              - !Parameter &ref_5
                 schema: *ref_3
                 implementation: Method
                 required: false
@@ -156,7 +152,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_6
+              - *ref_5
             language: !Languages 
               default:
                 name: ''
@@ -169,8 +165,6 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        requests:
-          - *ref_7
         signatureParameters: []
         responses:
           - !Response 
