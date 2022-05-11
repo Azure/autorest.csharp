@@ -13,28 +13,28 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 
-namespace MgmtExtensionResource
+namespace NoTypeReplacement
 {
 #pragma warning disable SA1649 // File name should match first type name
-    internal class MgmtExtensionResourceArmOperation : ArmOperation
+    internal class NoTypeReplacementArmOperation : ArmOperation
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternal _operation;
 
-        /// <summary> Initializes a new instance of MgmtExtensionResourceArmOperation for mocking. </summary>
-        protected MgmtExtensionResourceArmOperation()
+        /// <summary> Initializes a new instance of NoTypeReplacementArmOperation for mocking. </summary>
+        protected NoTypeReplacementArmOperation()
         {
         }
 
-        internal MgmtExtensionResourceArmOperation(Response response)
+        internal NoTypeReplacementArmOperation(Response response)
         {
             _operation = OperationInternal.Succeeded(response);
         }
 
-        internal MgmtExtensionResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal NoTypeReplacementArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "MgmtExtensionResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "NoTypeReplacementArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />

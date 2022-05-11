@@ -102,10 +102,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
-            WriteEmptyConstructor(writer, client);
-            foreach (var constructor in client.PublicConstructors)
+            foreach (var constructor in client.SecondaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor);
+                WriteSecondaryPublicConstructor(writer, constructor);
+            }
+
+            foreach (var constructor in client.PrimaryConstructors)
+            {
+                WritePrimaryPublicConstructor(writer, client, constructor);
             }
 
             if (client.IsSubClient)
@@ -114,16 +118,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteEmptyConstructor(CodeWriter writer, TypeProvider client)
+        private static void WriteSecondaryPublicConstructor(CodeWriter writer, ConstructorSignature signature)
         {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
-            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
             {
             }
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
+        private static void WritePrimaryPublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))

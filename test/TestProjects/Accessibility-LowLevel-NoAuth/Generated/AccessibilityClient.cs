@@ -25,17 +25,18 @@ namespace Accessibility_LowLevel_NoAuth
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
-        protected AccessibilityClient()
+        /// <summary> Initializes a new instance of AccessibilityClient. </summary>
+        public AccessibilityClient() : this(new Uri("http://localhost:3000"), new AccessibilityClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public AccessibilityClient(Uri endpoint = null, AccessibilityClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public AccessibilityClient(Uri endpoint, AccessibilityClientOptions options)
         {
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);

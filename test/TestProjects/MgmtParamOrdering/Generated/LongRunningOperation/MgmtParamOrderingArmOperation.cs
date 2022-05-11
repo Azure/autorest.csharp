@@ -19,7 +19,7 @@ namespace MgmtParamOrdering
     internal class MgmtParamOrderingArmOperation : ArmOperation
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly OperationOrResponseInternals _operation;
+        private readonly OperationInternal _operation;
 
         /// <summary> Initializes a new instance of MgmtParamOrderingArmOperation for mocking. </summary>
         protected MgmtParamOrderingArmOperation()
@@ -28,22 +28,25 @@ namespace MgmtParamOrdering
 
         internal MgmtParamOrderingArmOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals(response);
+            _operation = OperationInternal.Succeeded(response);
         }
 
         internal MgmtParamOrderingArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtParamOrderingArmOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "MgmtParamOrderingArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
