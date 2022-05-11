@@ -135,7 +135,7 @@ public partial class AvailabilitySetResource : ArmResource
 }
 ```
 
-Once an operation set is marked as a resource, resource type is able to calculate. In general, the resource type of a resource is calculated in this way:
+Once an operation set is marked as a resource, the generator is able to determine its resource type. In general, the resource type of a resource is calculated in this way:
 
 1. Take everything after the last `providers` segment. Anything before the last `providers` segment is regarded as the `scope` of this resource. For instance, for request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`, we get `providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`
 1. Take the provider namespace as the namespace of the resource type, in this case, we get `Microsoft.Compute`, and we have `hostGroups/{groupName}/hosts/{hostName}` left.
@@ -613,11 +613,7 @@ list-exception:
 
 Some resources are scope resources, which means that these resources can be created under different scopes, like subscriptions, resource groups, management groups, etc. In the swagger, we currently do not have an extension which assigns which type of resources can be the scope of this resource, therefore we add a configuration in our generator `request-path-to-scope-resource-types` for this new information.
 
-By default, the generator recognizes the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator generates the resource assuming the scope can be anything. For instance, if we have a request path like this:
-```
-/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
-```
-and we should have a resource generated like this:
+By default, the generator recognizes the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator generates the resource assuming the scope can be anything. For instance, if we have a request path like `/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}` and you should have a resource generated like this:
 ```csharp
 public partial class DeploymentResource : ArmResource
 {
@@ -677,13 +673,29 @@ public static partial class ResourcesExtension
 }
 ```
 
+### Rename rules
+
+A mechanism of renaming is introduced in the generator to unify the casing of some words.
+
+```yaml
+rename-rules:
+  Ip: IP
+  Ips: IPs
+```
+
+The above configuration will search case sensitively in the public API of generated resources/collections/models, and replace the occurrences to the corresponding value to keep the casing of some acronyms unified across the generated SDK.
+
 ### Management debug options
 
 A debug configuration is also introduced to show some extra information in the generated code. Usage:
 
-```
+```yaml
 mgmt-debug:
   suppress-list-exception: true
 ```
 
 The configuration `suppress-list-exception` suppresses all the exceptions about the collection class without a `GetAll` method.
+
+### Directives from AutoRest core module
+
+The directives brought by AutoRest core module works fine with all the configuration above. Please refer [this document](https://github.com/Azure/autorest/blob/main/docs/generate/directives.md) for more details and usages.
