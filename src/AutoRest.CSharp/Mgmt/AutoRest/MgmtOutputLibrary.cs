@@ -89,6 +89,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
+            OperationsListRemover.RemoveListOperations();
             OmitOperationGroups.RemoveOperationGroups();
             MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();

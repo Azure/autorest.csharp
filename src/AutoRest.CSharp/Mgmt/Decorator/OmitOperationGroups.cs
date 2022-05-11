@@ -13,10 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void RemoveOperationGroups()
         {
             var omitSet = Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
-            if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
-            {
-                omitSet.Add("Operations");
-            }
             if (omitSet.Count > 0)
             {
                 var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
