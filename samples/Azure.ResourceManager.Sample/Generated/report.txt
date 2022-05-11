@@ -1,0 +1,148 @@
+[Information] Operation Group Operations is removed
+[Information] ObjectSchema ComputeOperationListResult is removed
+[Information] ObjectSchema ComputeOperationValue is removed
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter SubscriptionId in operation `AvailabilitySets_CreateOrUpdate` has been changed to Method
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_ListBySubscription` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `AvailabilitySets_ListAvailableSizes` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_ListBySubscription` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `ProximityPlacementGroups_ListByResourceGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_ListByResourceGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHostGroups_ListBySubscription` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHosts_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHosts_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHosts_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHosts_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `DedicatedHosts_ListByHostGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_ListBySubscription` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_ListByResourceGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_Create` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `SshPublicKeys_GenerateKeyPair` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensionImages_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensionImages_ListTypes` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensionImages_ListVersions` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensions_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensions_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensions_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensions_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineExtensions_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineImages_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineImages_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineImages_ListOffers` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineImages_ListPublishers` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineImages_ListSkus` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Usage_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_ListByLocation` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Capture` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_InstanceView` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_ConvertToManagedDisks` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Deallocate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Generalize` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_ListAll` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_ListAvailableSizes` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_PowerOff` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Reapply` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Restart` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Start` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Redeploy` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_Reimage` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_RetrieveBootDiagnosticsData` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_PerformMaintenance` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_SimulateEviction` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachines_AssessPatches` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineSizes_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_ListByResourceGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `Images_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Deallocate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_DeleteInstances` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_GetInstanceView` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_ListAll` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_ListSkus` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_GetOSUpgradeHistory` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_PowerOff` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Restart` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Start` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Redeploy` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_PerformMaintenance` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_UpdateInstances` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_Reimage` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_ReimageAll` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_ConvertToSinglePlacementGroup` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSets_SetOrchestrationServiceState` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetExtensions_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetExtensions_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetExtensions_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetExtensions_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetExtensions_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetRollingUpgrades_Cancel` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetRollingUpgrades_GetLatest` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMExtensions_CreateOrUpdate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMExtensions_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMExtensions_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMExtensions_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMExtensions_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Reimage` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_ReimageAll` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Deallocate` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Update` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Delete` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Get` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_GetInstanceView` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_List` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_PowerOff` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Restart` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Start` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_Redeploy` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_PerformMaintenance` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `VirtualMachineScaleSetVMs_SimulateEviction` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `LogAnalytics_ExportRequestRateByInterval` has been changed to Client
+[Information] The implementation location of parameter apiVersion in operation `LogAnalytics_ExportThrottledRequests` has been changed to Client
+[Information] A property name has been changed from `secretUrl` to `secretUri` in schema `KeyVaultSecretReference`
+[Information] A property name has been changed from `keyUrl` to `keyUri` in schema `KeyVaultKeyReference`
+[Information] A property name has been changed from `certificateUrl` to `certificateUri` in schema `WinRMListener`
+[Information] A property name has been changed from `certificateUrl` to `certificateUri` in schema `VaultCertificate`
+[Information] The type of property `secretUri` in schema `KeyVaultSecretReference` has been changed to Uri
+[Information] The type of property `keyUri` in schema `KeyVaultKeyReference` has been changed to Uri
+[Information] The type of property `uri` in schema `VirtualHardDisk` has been changed to Uri
+[Information] The type of property `certificateUri` in schema `WinRMListener` has been changed to Uri
+[Information] The type of property `certificateUri` in schema `VaultCertificate` has been changed to Uri
+[Information] The type of property `storageUri` in schema `BootDiagnostics` has been changed to Uri
+[Information] The type of property `consoleScreenshotBlobUri` in schema `BootDiagnosticsInstanceView` has been changed to Uri
+[Information] The type of property `serialConsoleLogBlobUri` in schema `BootDiagnosticsInstanceView` has been changed to Uri
+[Information] The type of property `blobUri` in schema `ImageDisk` has been changed to Uri
+[Information] The type of property `consoleScreenshotBlobUri` in schema `RetrieveBootDiagnosticsDataResult` has been changed to Uri
+[Information] The type of property `serialConsoleLogBlobUri` in schema `RetrieveBootDiagnosticsDataResult` has been changed to Uri
+[Information] The type of property `blobContainerSasUri` in schema `LogAnalyticsInputBase` has been changed to Uri

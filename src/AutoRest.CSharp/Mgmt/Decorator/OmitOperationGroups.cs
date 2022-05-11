@@ -22,6 +22,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
                 var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
+                foreach (var og in omittedOGs)
+                {
+                    MgmtContext.Report.Add(ReportLevel.Information, $"Operation Group {og.Key} is removed");
+                }
+
                 MgmtContext.CodeModel.OperationGroups = nonOmittedOGs;
                 var schemasToOmit = new HashSet<Schema>();
                 var schemasToKeep = new HashSet<Schema>();
@@ -48,15 +53,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (schema is ObjectSchema objSchema && !schemasToKeep.Contains(objSchema))
                 {
                     MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
+                    MgmtContext.Report.Add(ReportLevel.Information, $"ObjectSchema {schema.Name} is removed");
                     RemoveRelations(objSchema);
                 }
                 else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.Contains(choiceSchema))
                 {
                     MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                    MgmtContext.Report.Add(ReportLevel.Information, $"ChoiceSchema {schema.Name} is removed");
                 }
                 else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.Contains(sealChoiceSchema))
                 {
                     MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
+                    MgmtContext.Report.Add(ReportLevel.Information, $"SealedChoiceSchema {schema.Name} is removed");
                 }
             }
         }

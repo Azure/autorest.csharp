@@ -16,11 +16,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static CodeModel CodeModel => Context.CodeModel;
 
+        private static Report? _report;
+        public static Report Report => _report ?? throw new InvalidOperationException("MgmtContext was not initialized");
+
         public static bool IsInitialized => _context is not null;
 
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)
         {
             _context = context;
+            _report = new Report();
         }
     }
 }
