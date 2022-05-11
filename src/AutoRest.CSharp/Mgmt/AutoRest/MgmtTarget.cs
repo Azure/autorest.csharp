@@ -175,12 +175,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
-            // TODO -- The includeArmCore parameter should also be removed in FindForType() then.
-            if (!Configuration.MgmtConfiguration.IsArmCore && MgmtContext.Context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
-            {
-                return true;
-            }
-
             if (model is SchemaObjectType objSchema)
             {
                 if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
