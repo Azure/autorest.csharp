@@ -34,21 +34,24 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The key for the tag.",
             typeof(string),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         private static readonly Parameter TagValueParameter = new Parameter(
             "value",
             "The value for the tag.",
             typeof(string),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         private static readonly Parameter TagSetParameter = new Parameter(
             "tags",
             "The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         /// <summary>
         /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
@@ -187,8 +190,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
-            var requestPath = operation.GetHttpPath();
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            var operationId = operation.OperationId();
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operationId, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -206,8 +209,24 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(GetOperation);
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
-            if (UpdateOperation != null)
+            if (UpdateOperation is null)
+            {
+                if (ResourceCollection?.CreateOperation is not null)
+                {
+                    var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
+                    result.Add(MgmtClientOperation.FromOperation(
+                        new MgmtRestOperation(
+                            createOrUpdateOperation,
+                            "Update",
+                            createOrUpdateOperation.MgmtReturnType,
+                            createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
+                            createOrUpdateOperation.RequestPath)));
+                }
+            }
+            else
+            {
                 result.Add(UpdateOperation);
+            }
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);
@@ -356,13 +375,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = this.Parent().First();
-            var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : this.Parent().First();
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
             lines.Add($"If you have a <see cref=\"{typeof(ResourceIdentifier)}\" /> you can construct {an} <see cref=\"{Type}\" />");
             lines.Add($"from an instance of <see cref=\"{typeof(ArmClient)}\" /> using the Get{DefaultName} method.");
-            lines.Add($"Otherwise you can get one from its parent resource <see cref=\"{parentType}\" /> using the Get{ResourceName} method.");
+            if (parent is not null)
+            {
+                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+                lines.Add($"Otherwise you can get one from its parent resource <see cref=\"{parentType}\" /> using the Get{ResourceName} method.");
+            }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
         }
@@ -379,7 +401,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray());
+                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, ValidationType.AssertNotNull, null)).ToArray());
         }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
@@ -396,9 +418,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.ArmResource), DefaultValue: null, Validate: false);
-        public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
+        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
+        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
     }
 }

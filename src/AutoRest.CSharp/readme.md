@@ -18,7 +18,7 @@ output-scope:
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
 ```
 
-```yaml !$(data-plane)
+```yaml $(generation1-convenience-client) || $(azure-arm)
 modelerfour:
   flatten-models: true
   flatten-payloads: true
@@ -37,7 +37,7 @@ pipeline:
 ```yaml $(testmodeler)
 use-extension:
   # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
-  "@autorest/testmodeler": "2.2.0"
+  "@autorest/testmodeler": "2.2.3"
 
 
 pipeline:
@@ -55,6 +55,7 @@ modelerfour:
 testmodeler:
   use-parents-value: true
   split-parents-value: false
+  add-armtemplate-payload-string: true
 ```
 
 ## Help

@@ -4,7 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -12,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Operation = AutoRest.CSharp.Input.Operation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -27,7 +31,8 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
-        public ConstructorSignature[] PublicConstructors { get; }
+        public ConstructorSignature[] PrimaryConstructors { get; }
+        public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients;
@@ -59,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, context);
 
-            PublicConstructors = BuildPublicConstructors().ToArray();
+            (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
             var clientMethods = BuildMethods(builder, serviceRequests, Declaration.Name).ToArray();
 
@@ -89,22 +94,23 @@ namespace AutoRest.CSharp.Output.Models
                 requestMethods.Add(serviceRequest, builder.BuildRequestMethod(operation, serviceRequest, httpRequest));
             }
 
-            foreach (var (request, method) in requestMethods)
+            foreach (var (request, requestMethod) in requestMethods)
             {
-                var operation = method.Operation;
+                var operation = requestMethod.Operation;
                 var paging = operation.Language.Default.Paging;
                 Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
                 Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                 Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
                 var operationSchemas = new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema);
-                var diagnostic = new Diagnostic($"{clientName}.{method.Name}");
+                var diagnostic = new Diagnostic($"{clientName}.{requestMethod.Name}");
 
                 LowLevelPagingInfo? pagingInfo = null;
+                CSharpType returnType;
                 if (paging != null)
                 {
-                    if (!operation.IsLongRunning && method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
+                    if (!operation.IsLongRunning && requestMethod.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody)
                     {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
+                        throw new InvalidOperationException($"Method {requestMethod.Name} has to have a return value");
                     }
 
                     var nextLinkOperation = paging.NextLinkOperation;
@@ -112,42 +118,130 @@ namespace AutoRest.CSharp.Output.Models
 
                     RestClientMethod? nextPageMethod = nextLinkOperation != null
                         ? requestMethods[nextLinkOperation.Requests.Single()]
-                        : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(method) : null;
+                        : nextLinkName != null ? RestClientBuilder.BuildNextPageMethod(requestMethod) : null;
 
                     pagingInfo = new LowLevelPagingInfo(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
+                    returnType = operation.IsLongRunning
+                        ? typeof(Azure.Operation<Azure.Pageable<BinaryData>>)
+                        : typeof(Azure.Pageable<BinaryData>);
+                }
+                else
+                {
+                    var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
+                    returnType = operation.IsLongRunning
+                        ? typeof(Azure.Operation<BinaryData>)
+                        : headAsBoolean
+                            ? typeof(Azure.Response<bool>)
+                            : typeof(Azure.Response);
                 }
 
-                yield return new LowLevelClientMethod(method, operationSchemas, diagnostic, pagingInfo, operation.IsLongRunning);
+                var parameters = operation.IsLongRunning
+                    ? requestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
+                    : requestMethod.Parameters;
+                var methodSignature = new MethodSignature(requestMethod.Name, requestMethod.Description, requestMethod.Accessibility | Virtual, returnType, null, parameters);
+
+                yield return new LowLevelClientMethod(methodSignature, requestMethod, operationSchemas, diagnostic, pagingInfo, operation.IsLongRunning);
             }
         }
 
-        private IEnumerable<ConstructorSignature> BuildPublicConstructors()
-        {
-            if (!_hasPublicConstructors)
-            {
-                yield break;
-            }
 
-            var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            var clientOptionsParameter = new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.NewInstanceOf(clientOptionsType), false);
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
+        {
+            if (!IsSubClient)
+            {
+                var requiredParameters = RestClientBuilder.GetRequiredParameters(orderedParameters).ToArray();
+                var optionalParameters = RestClientBuilder.GetOptionalParameters(orderedParameters).Append(CreateOptionsParameter()).ToArray();
+
+                return (
+                    BuildPrimaryConstructors(requiredParameters, optionalParameters).ToArray(),
+                    BuildSecondaryConstructors(requiredParameters, optionalParameters).ToArray()
+                );
+            }
+            else
+            {
+                return (Array.Empty<ConstructorSignature>(), new[] { CreateMockingConstructor() });
+            }
+        }
+
+        private IEnumerable<ConstructorSignature> BuildPrimaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
+        {
+            var optionalToRequired = optionalParameters
+                .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
+                ? parameter with { DefaultValue = null, Validation = ValidationType.None }
+                : parameter with
+                {
+                    DefaultValue = null,
+                    Validation = parameter.Initializer != null ? Parameter.GetValidation(parameter.Type, parameter.RequestLocation, parameter.SkipUrlEncoding) : parameter.Validation,
+                    Initializer = null
+                }).ToArray();
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return BuildPublicConstructor(null, clientOptionsParameter);
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return BuildPublicConstructor(credentialField, clientOptionsParameter);
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray());
                 }
             }
         }
 
-        private ConstructorSignature BuildPublicConstructor(FieldDeclaration? credentialField, Parameter clientOptionsParameter)
+        private IEnumerable<ConstructorSignature> BuildSecondaryConstructors(IReadOnlyList<Parameter> requiredParameters, IReadOnlyList<Parameter> optionalParameters)
         {
-            var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, constructorParameters);
+            if (requiredParameters.Any() || Fields.CredentialFields.Any())
+            {
+                yield return CreateMockingConstructor();
+            }
+
+            var optionalParametersArguments = optionalParameters
+                .Select(p => p.Initializer ?? Parameter.GetParameterInitializer(p.Type, p.DefaultValue!.Value)!)
+                .ToArray();
+
+            if (Fields.CredentialFields.Count == 0)
+            {
+                yield return CreateSecondaryConstructor(requiredParameters, optionalParametersArguments);
+            }
+            else
+            {
+                foreach (var credentialField in Fields.CredentialFields)
+                {
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), optionalParametersArguments);
+                }
+            }
+        }
+
+        private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
+            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, parameters);
+
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
+        {
+            var arguments = parameters
+                .Select<Parameter, FormattableString>(p => $"{p.Name}")
+                .Concat(optionalParametersArguments)
+                .ToArray();
+            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, parameters, new ConstructorInitializer(false, arguments));
+        }
+
+        private Parameter CreateCredentialParameter(CSharpType type)
+        {
+            return new Parameter(
+                "credential",
+                "A credential used to authenticate to an Azure Service.",
+                type,
+                null,
+                ValidationType.AssertNotNull,
+                null);
+        }
+
+        private ConstructorSignature CreateMockingConstructor()
+            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", Protected, Array.Empty<Parameter>());
+
+        private Parameter CreateOptionsParameter()
+        {
+            var clientOptionsType = ClientOptions.Type.WithNullable(true);
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
@@ -178,14 +272,14 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = GetSubClientFactoryMethodParameters(this)
-                .Select(p => p with {DefaultValue = null, Validate = false})
+                .Select(p => p with {DefaultValue = null, Validation = ValidationType.None, Initializer = null})
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Internal, constructorParameters);
         }
 
         private static IEnumerable<Parameter> GetSubClientFactoryMethodParameters(LowLevelClient subClient)
-            => new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
+            => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(subClient.Parameters, null, includeAPIVersion: true))
                 .Where(p => subClient.Fields.GetFieldByParameter(p) != null);
     }

@@ -178,6 +178,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
+        public static void UpdateAcronym(Schema schema)
+        {
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+                return;
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+            var wordCache = new ConcurrentDictionary<string, string>();
+            UpdateAcronyms(new Schema[] { schema }, transformer, wordCache);
+        }
+
         public static void UpdateAcronyms(this CodeModel codeModel)
         {
             if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
@@ -280,6 +289,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (var property in objSchema.Properties)
             {
                 TransformLanguage(property.Language, transformer, wordCache);
+            }
+        }
+
+        public static void VerifyApiVersions(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                VerifyApiVersionsWithinOperationGroup(operationGroup);
+            }
+        }
+
+        // Operations within an operation group should use the same API version.
+        // TODO: this might be able to be removed after https://github.com/Azure/autorest.csharp/issues/1917 is resolved.
+        private static void VerifyApiVersionsWithinOperationGroup(OperationGroup operationGroup)
+        {
+            var apiVersionValues = operationGroup.Operations
+                .SelectMany(op => op.Parameters.Where(p => p.Origin == "modelerfour:synthesized/api-version").Select(p => ((ConstantSchema)p.Schema).Value.Value))
+                .ToHashSet();
+            if (apiVersionValues.Count > 1)
+            {
+                throw new InvalidOperationException($"Multiple api-version values found in the operation group: {operationGroup.Key}. Please rename the operation group for some operations so that all operations in one operation group share the same API version.");
             }
         }
     }

@@ -37,16 +37,23 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new TopLevelClientWithOperationClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of TopLevelClientWithOperationClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint = null, TopLevelClientWithOperationClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public TopLevelClientWithOperationClient(AzureKeyCredential credential, Uri endpoint, TopLevelClientWithOperationClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new TopLevelClientWithOperationClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -94,7 +101,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementationAsync("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private AsyncPageable<BinaryData> GetAllImplementationAsync(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -117,7 +129,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
+            return GetAllImplementation("TopLevelClientWithOperationClient.GetAll", filter, context);
+        }
+
+        private Pageable<BinaryData> GetAllImplementation(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

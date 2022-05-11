@@ -5,6 +5,7 @@
 
 ``` yaml
 title: Azure.Storage.Tables
+generation1-convenience-client: true
 require: $(this-folder)/../../readme.md
 #branch:tablesSwagger
 input-file:

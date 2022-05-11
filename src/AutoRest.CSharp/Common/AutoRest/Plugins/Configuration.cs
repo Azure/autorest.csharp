@@ -22,14 +22,14 @@ namespace AutoRest.CSharp.Input
             public const string ModelNamespace = "model-namespace";
             public const string HeadAsBoolean = "head-as-boolean";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
-            public const string DataPlane = "data-plane";
+            public const string Generation1ConvenienceClient = "generation1-convenience-client";
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
             public const string ProjectFolder = "project-folder";
             public const string ProtocolMethodList = "protocol-method-list";
         }
 
-        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool generation1ConvenienceClient, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Input
             ModelNamespace = azureArm || modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
-            DataPlane = dataplane;
+            Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
             _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
             _protocolMethodList = protocolMethodList;
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Input
         public static bool ModelNamespace { get; private set; }
         public static bool HeadAsBoolean { get; private set; }
         public static bool SkipCSProjPackageReference { get; private set; }
-        public static bool DataPlane { get; private set; }
+        public static bool Generation1ConvenienceClient { get; private set; }
         public static bool SingleTopLevelClient { get; private set; }
 
         private static string[]? _protocolMethodList;
@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Input
                 modelNamespace: GetOptionValue(autoRest, Options.ModelNamespace),
                 headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
-                dataplane: GetOptionValue(autoRest, Options.DataPlane),
+                generation1ConvenienceClient: GetOptionValue(autoRest, Options.Generation1ConvenienceClient),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
                 projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.SkipCSProjPackageReference:
                     return false;
-                case Options.DataPlane:
+                case Options.Generation1ConvenienceClient:
                     return false;
                 case Options.SingleTopLevelClient:
                     return false;

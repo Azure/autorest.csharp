@@ -93,7 +93,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return await GetResourceLinks(tenantResource, scope).GetAsync(cancellationToken).ConfigureAwait(false);
+            return await tenantResource.GetResourceLinks(scope).GetAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinks(tenantResource, scope).Get(cancellationToken);
+            return tenantResource.GetResourceLinks(scope).Get(cancellationToken);
         }
 
         /// <summary>

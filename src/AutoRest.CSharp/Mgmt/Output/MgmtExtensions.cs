@@ -53,7 +53,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                false);
+                ValidationType.None,
+                null);
         }
 
         protected virtual string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();

@@ -276,11 +276,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
-            //TODO we need to figure out why Tenant is a child of Tenant, this shouldn't happen but this work around
-            //will keep us from trying to make a call to [Resource]Collection inside [Resource]
-            if (resourceCollection.ResourceName == This.ResourceName)
-                return;
-
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
@@ -904,7 +899,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
+                        if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

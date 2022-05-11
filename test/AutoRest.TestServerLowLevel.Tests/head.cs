@@ -15,21 +15,21 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpSuccess200Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head200Async();
+            var response = await new HttpSuccessClient(Key, host, null).Head200Async();
             Assert.AreEqual(200, response.Status);
         });
 
         [Test]
         public Task HttpSuccess204Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head204Async();
+            var response = await new HttpSuccessClient(Key, host, null).Head204Async();
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task HttpSuccess404Head() => Test(async (host) =>
         {
-            var response = await new HttpSuccessClient(Key, host).Head404Async();
+            var response = await new HttpSuccessClient(Key, host, null).Head404Async();
             Assert.AreEqual(404, response.Status);
         });
 

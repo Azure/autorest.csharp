@@ -27,7 +27,7 @@ namespace MgmtLRO.Models
         /// <summary> Bar property. </summary>
         public string FakePostResultBar
         {
-            get => Properties.Bar;
+            get => Properties?.Bar;
         }
     }
 }

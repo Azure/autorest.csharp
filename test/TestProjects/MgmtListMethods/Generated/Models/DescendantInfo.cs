@@ -26,7 +26,7 @@ namespace MgmtListMethods.Models
         /// <summary> Gets Id. </summary>
         public ResourceIdentifier ParentId
         {
-            get => Parent.Id;
+            get => Parent?.Id;
         }
     }
 }

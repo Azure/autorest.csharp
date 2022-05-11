@@ -37,16 +37,23 @@ namespace paging_LowLevel
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new PagingClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, Uri endpoint = null, PagingClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public PagingClient(AzureKeyCredential credential, Uri endpoint, PagingClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new PagingClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -65,7 +72,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return GetNoItemNamePagesImplementationAsync("PagingClient.GetNoItemNamePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetNoItemNamePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -93,7 +105,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return GetNoItemNamePagesImplementation("PagingClient.GetNoItemNamePages", context);
+        }
+
+        private Pageable<BinaryData> GetNoItemNamePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -128,7 +145,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return GetNullNextLinkNamePagesImplementationAsync("PagingClient.GetNullNextLinkNamePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetNullNextLinkNamePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
@@ -136,6 +158,7 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
@@ -156,7 +179,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return GetNullNextLinkNamePagesImplementation("PagingClient.GetNullNextLinkNamePages", context);
+        }
+
+        private Pageable<BinaryData> GetNullNextLinkNamePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
@@ -164,6 +192,7 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
@@ -184,7 +213,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePages");
+            return GetSinglePagesImplementationAsync("PagingClient.GetSinglePages", context);
+        }
+
+        private AsyncPageable<BinaryData> GetSinglePagesImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -219,7 +253,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetSinglePages(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePages");
+            return GetSinglePagesImplementation("PagingClient.GetSinglePages", context);
+        }
+
+        private Pageable<BinaryData> GetSinglePagesImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -247,7 +286,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return FirstResponseEmptyImplementationAsync("PagingClient.FirstResponseEmpty", context);
+        }
+
+        private AsyncPageable<BinaryData> FirstResponseEmptyImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -275,7 +319,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return FirstResponseEmptyImplementation("PagingClient.FirstResponseEmpty", context);
+        }
+
+        private Pageable<BinaryData> FirstResponseEmptyImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -313,7 +362,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePages");
+            return GetMultiplePagesImplementationAsync("PagingClient.GetMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesImplementationAsync(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -351,7 +405,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePages");
+            return GetMultiplePagesImplementation("PagingClient.GetMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesImplementation(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -387,7 +446,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetWithQueryParams");
+            return GetWithQueryParamsImplementationAsync("PagingClient.GetWithQueryParams", requiredQueryParameter, context);
+        }
+
+        private AsyncPageable<BinaryData> GetWithQueryParamsImplementationAsync(string diagnosticsScopeName, int requiredQueryParameter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -423,7 +487,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetWithQueryParams");
+            return GetWithQueryParamsImplementation("PagingClient.GetWithQueryParams", requiredQueryParameter, context);
+        }
+
+        private Pageable<BinaryData> GetWithQueryParamsImplementation(string diagnosticsScopeName, int requiredQueryParameter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -459,7 +528,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> DuplicateParamsAsync(string filter = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.DuplicateParams");
+            return DuplicateParamsImplementationAsync("PagingClient.DuplicateParams", filter, context);
+        }
+
+        private AsyncPageable<BinaryData> DuplicateParamsImplementationAsync(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -495,7 +569,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> DuplicateParams(string filter = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.DuplicateParams");
+            return DuplicateParamsImplementation("PagingClient.DuplicateParams", filter, context);
+        }
+
+        private Pageable<BinaryData> DuplicateParamsImplementation(string diagnosticsScopeName, string filter, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -530,7 +609,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return NextOperationWithQueryParamsImplementationAsync("PagingClient.NextOperationWithQueryParams", context);
+        }
+
+        private AsyncPageable<BinaryData> NextOperationWithQueryParamsImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
@@ -538,6 +622,7 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
@@ -558,7 +643,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return NextOperationWithQueryParamsImplementation("PagingClient.NextOperationWithQueryParams", context);
+        }
+
+        private Pageable<BinaryData> NextOperationWithQueryParamsImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
@@ -566,6 +656,7 @@ namespace paging_LowLevel
                 yield return page;
             }
         }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -589,7 +680,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return GetOdataMultiplePagesImplementationAsync("PagingClient.GetOdataMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetOdataMultiplePagesImplementationAsync(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -627,7 +723,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return GetOdataMultiplePagesImplementation("PagingClient.GetOdataMultiplePages", clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetOdataMultiplePagesImplementation(string diagnosticsScopeName, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -666,7 +767,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return GetMultiplePagesWithOffsetImplementationAsync("PagingClient.GetMultiplePagesWithOffset", offset, clientRequestId, maxresults, timeout, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesWithOffsetImplementationAsync(string diagnosticsScopeName, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -705,7 +811,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return GetMultiplePagesWithOffsetImplementation("PagingClient.GetMultiplePagesWithOffset", offset, clientRequestId, maxresults, timeout, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesWithOffsetImplementation(string diagnosticsScopeName, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -740,7 +851,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return GetMultiplePagesRetryFirstImplementationAsync("PagingClient.GetMultiplePagesRetryFirst", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesRetryFirstImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -775,7 +891,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return GetMultiplePagesRetryFirstImplementation("PagingClient.GetMultiplePagesRetryFirst", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesRetryFirstImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -810,7 +931,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return GetMultiplePagesRetrySecondImplementationAsync("PagingClient.GetMultiplePagesRetrySecond", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesRetrySecondImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -845,7 +971,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return GetMultiplePagesRetrySecondImplementation("PagingClient.GetMultiplePagesRetrySecond", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesRetrySecondImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -880,7 +1011,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return GetSinglePagesFailureImplementationAsync("PagingClient.GetSinglePagesFailure", context);
+        }
+
+        private AsyncPageable<BinaryData> GetSinglePagesFailureImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -915,7 +1051,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return GetSinglePagesFailureImplementation("PagingClient.GetSinglePagesFailure", context);
+        }
+
+        private Pageable<BinaryData> GetSinglePagesFailureImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -950,7 +1091,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return GetMultiplePagesFailureImplementationAsync("PagingClient.GetMultiplePagesFailure", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFailureImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -985,7 +1131,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return GetMultiplePagesFailureImplementation("PagingClient.GetMultiplePagesFailure", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFailureImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1020,7 +1171,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return GetMultiplePagesFailureUriImplementationAsync("PagingClient.GetMultiplePagesFailureUri", context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFailureUriImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1055,7 +1211,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return GetMultiplePagesFailureUriImplementation("PagingClient.GetMultiplePagesFailureUri", context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFailureUriImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1097,7 +1258,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return GetMultiplePagesFragmentNextLinkImplementationAsync("PagingClient.GetMultiplePagesFragmentNextLink", tenant, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkImplementationAsync(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1139,7 +1305,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return GetMultiplePagesFragmentNextLinkImplementation("PagingClient.GetMultiplePagesFragmentNextLink", tenant, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFragmentNextLinkImplementation(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1181,7 +1352,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return GetMultiplePagesFragmentWithGroupingNextLinkImplementationAsync("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", tenant, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkImplementationAsync(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1223,7 +1399,12 @@ namespace paging_LowLevel
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return GetMultiplePagesFragmentWithGroupingNextLinkImplementation("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", tenant, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkImplementation(string diagnosticsScopeName, string tenant, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1267,7 +1448,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragment");
+            return NextFragmentImplementationAsync("PagingClient.NextFragment", tenant, nextLink, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> NextFragmentImplementationAsync(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1309,7 +1495,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragment");
+            return NextFragmentImplementation("PagingClient.NextFragment", tenant, nextLink, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> NextFragmentImplementation(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1351,7 +1542,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return NextFragmentWithGroupingImplementationAsync("PagingClient.NextFragmentWithGrouping", tenant, nextLink, apiVersion, context);
+        }
+
+        private AsyncPageable<BinaryData> NextFragmentWithGroupingImplementationAsync(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1393,7 +1589,12 @@ namespace paging_LowLevel
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return NextFragmentWithGroupingImplementation("PagingClient.NextFragmentWithGrouping", tenant, nextLink, apiVersion, context);
+        }
+
+        private Pageable<BinaryData> NextFragmentWithGroupingImplementation(string diagnosticsScopeName, string tenant, string nextLink, string apiVersion, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1426,7 +1627,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return GetPagingModelWithItemNameWithXMSClientNameImplementationAsync("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
+        }
+
+        private AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1461,7 +1667,12 @@ namespace paging_LowLevel
         /// </remarks>
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return GetPagingModelWithItemNameWithXMSClientNameImplementation("PagingClient.GetPagingModelWithItemNameWithXMSClientName", context);
+        }
+
+        private Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1477,7 +1688,7 @@ namespace paging_LowLevel
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
@@ -1533,7 +1744,7 @@ namespace paging_LowLevel
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>

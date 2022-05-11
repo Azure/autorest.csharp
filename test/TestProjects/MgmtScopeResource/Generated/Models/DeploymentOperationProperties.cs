@@ -63,7 +63,7 @@ namespace MgmtScopeResource.Models
         /// <summary> HTTP message content. </summary>
         public BinaryData RequestContent
         {
-            get => Request.Content;
+            get => Request?.Content;
         }
 
         /// <summary> The HTTP response message. </summary>
@@ -71,7 +71,7 @@ namespace MgmtScopeResource.Models
         /// <summary> HTTP message content. </summary>
         public BinaryData ResponseContent
         {
-            get => Response.Content;
+            get => Response?.Content;
         }
     }
 }

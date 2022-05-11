@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
         /// <summary> The details of the error. </summary>
         public string Error
         {
-            get => ErrorResponse.Error;
+            get => ErrorResponse?.Error;
         }
     }
 }
