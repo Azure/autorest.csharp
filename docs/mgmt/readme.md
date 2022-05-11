@@ -26,9 +26,37 @@ This class contains operations for a resource collection that belongs to a speci
 | Contains | `Exists(string name)` |
 | TryGet | `GetIfExists(string name)` |
 
-The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces, therefore the `GetAll()` method with no required parameters are required on this class for the generator. In rare cases, this rule is violated and a `list-exception` configuration will be required to temporarily solve this. See see [List exception](#list-exception) section for details.
+The `[Resource]Collection` class is designed to implement `IEnumerable<[Resource]Resource>` and `IAsyncEnumerable<[Resource]Resource>` interfaces.
+The implementation method `IEnumerable<[Resource]Resource>.GetEnumerator()` calls `GetAll().GetEnumerator()`, therefore all the `[Resource]Collection` class must have a `GetAll()` method with no required parameters, otherwise the generator throws an exception complaining about this.
 
-The parent resource of this resource will carry all the methods to get its child resources by returning its corresponding collection. For instance, on the resource of `VirtualNetworkResource`, you will find a method `GetSubnets` which returns a `SubnetCollection` to represent a collection of `SubnetResource`:
+```csharp
+public partial class AvailabilitySetCollection : ArmCollection, IEnumerable<AvailabilitySetResource>, IAsyncEnumerable<AvailabilitySetResource>
+{
+    IEnumerator<AvailabilitySetResource> IEnumerable<AvailabilitySetResource>.GetEnumerator()
+    {
+        return GetAll().GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetAll().GetEnumerator();
+    }
+
+    IAsyncEnumerator<AvailabilitySetResource> IAsyncEnumerable<AvailabilitySetResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
+    {
+        return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+    }
+}
+```
+
+In addition, ARM has several rules about "List" operations of resources:
+- [R4014 NestedResourcesMustHaveListOperation](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/openapi-authoring-automated-guidelines.md#r4015-nestedresourcesmusthavelistoperation)
+- [R4016 TopLevelResourcesListByResourceGroup](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/openapi-authoring-automated-guidelines.md#r4016)
+- [R4017 TopLevelResourcesListBySubscription](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/openapi-authoring-automated-guidelines.md#r4017)
+
+In rare cases, this rule is violated and a `list-exception` configuration is required to temporarily solve this. Please see [List exception](#list-exception) section for details.
+
+The parent resource of this resource carries all the methods to get its child resources by returning its corresponding collection. For instance, on the resource of `VirtualNetworkResource`, you should find a method `GetSubnets` which returns a `SubnetCollection` to represent a collection of `SubnetResource`:
 ```csharp
 public partial class VirtualNetworkResource : ArmResource
 {
@@ -39,7 +67,7 @@ public partial class VirtualNetworkResource : ArmResource
 }
 ```
 
-For the cases that the parent resource is not in the same RP, the "get child resource method" will be put in an extension class. For instance, the parent resource of `VirtualNetworkResource` is the resource group, and you will find an extension method of `ResourceGroupResource` in the `Azure.ResourceManager.Network` package returning `VirtualNetworkCollection` like this:
+For the cases that the parent resource is not in the same RP, the "get child resource method" is put in an extension class. For instance, the parent resource of `VirtualNetworkResource` is the resource group, and you should find an extension method of `ResourceGroupResource` in the `Azure.ResourceManager.Network` package returning `VirtualNetworkCollection` like this:
 ```csharp
 public static partial class NetworkExtensions
 {
@@ -52,11 +80,11 @@ public static partial class NetworkExtensions
 
 ## How does the generator identify a resource
 
-The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the code generator will generate everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how the generator identifies the resource classes as well as the hierarchy.
+The management .Net SDK generates the resources with hierarchy, therefore the code generator makes quite a few modification on the code model input from the `modelerfour`. To better recognize the hierarchical structure of resources, the code generator generates everything from the point of view of request paths, instead of operation groups. Therefore quite a few new configurations are introduced to tweak the behavior how the generator identifies the resource classes as well as the hierarchy.
 
-The management generator will first go through all the operations and categorize them by resources, then calculate hierarchical structures on them.
+The management generator first goes through all the operations and categorize them by resources, then calculate hierarchical structures on them.
 
-The management generator does not categorize the operations by operation groups, instead, it categorizes the operations by "operation sets". An operation set is a set of operations with the same request path. For instance, all the operations under the request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` will be an operation set.
+The management generator does not categorize the operations by operation groups, instead, it categorizes the operations by "operation sets". An operation set is a set of operations with the same request path. For instance, all the operations under the request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}` assemble into an operation set.
 
 An operation set is marked as a resource, only when the following conditions meet:
 
@@ -64,7 +92,7 @@ An operation set is marked as a resource, only when the following conditions mee
 1. The operation set must have a GET request.
 1. The schema of `200` response of the GET request is compatible to ARM's resource definition - it must have `id`, `type` and `name` (all of them are strings).
 
-If all the above conditions are met, this operation set will be marked as a "resource" by management generator, and the schema of the `200` response of the GET request will be its corresponding `ResourceData`.
+If all the above conditions are met, this operation set is marked as a "resource" by management generator, and the schema of the `200` response of the GET request is its corresponding `ResourceData`.
 
 There are multiple ways to tweak the criteria of identifying resources, please see [change the criteria of ARM resources](#change-the-criteria-of-arm-resources) and [change resource data](#change-resource-data) section.
 
@@ -84,14 +112,15 @@ Despite the package `Azure.ResourceManager` is also mostly generated by the same
 1. `Azure.ResourceManager.ManagementGroup`
 1. `Azure.ResourceManager.ArmResource`
 
-For each operation set, the management generator will try to find its parent, by going through all the existing resources to see if the request path of another resource is the prefix of this operation set. After going through all of the resources, we should get a list of candidates of resources that can be the parent or grand parent of this operation set, it will take the longest path as its direct parent. If none found, the generator will try the 5 built-in resources in this order:
+For each operation set, the management generator tries to find its parent, by going through all the existing resources to see if the request path of another resource is the prefix of this operation set. After going through all of the resources, we should get a list of candidates of resources that can be the parent or grand parent of this operation set, it takes the longest path as its direct parent. If none found, the generator tries the 5 built-in resources in this order:
 1. `ResourceGroup`
 1. `Subscription`
 1. `ManagementGroup`
 1. `ArmResource`
 1. `Tenant`
+Please note that the path of `Tenant` is `/` which makes it could be a parent of any resource.
 
-Now every operation set (and it corresponds to a resource) will have a parent and only have one parent, the resource hierarchy has been built.
+Now every operation set (and it corresponds to a resource) has a parent and only has one parent, the resource hierarchy is built.
 
 There is a way to change the hierarchical structure of resources by the configuration, please see [change the parent of request paths](#change-parent-of-request-paths) section.
 
@@ -108,14 +137,14 @@ public partial class AvailabilitySetResource : ArmResource
 
 Once an operation set is marked as a resource, resource type is able to calculate. In general, the resource type of a resource is calculated in this way:
 
-1. Take everything after the last `providers` segment. Anything before the last `providers` segment will be regarded as the `scope` of this resource. For instance, for request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`, we get `providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`
+1. Take everything after the last `providers` segment. Anything before the last `providers` segment is regarded as the `scope` of this resource. For instance, for request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`, we get `providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`
 1. Take the provider namespace as the namespace of the resource type, in this case, we get `Microsoft.Compute`, and we have `hostGroups/{groupName}/hosts/{hostName}` left.
 1. Take all the segments with even indices in whatever left in last step. In this case, we get `hostGroups` and `hosts`.
 1. Put them all together and we get the resource type of this resource, `Microsoft.Compute/hostGroups/hosts`.
 
-In the design of .Net management SDK, one resource must only have one constant resource type, therefore the generator will check if the resource type which it calculates is a constant, if the resource type is not a constant, it means that the swagger might be using one request path to represent a set of similar resources with different resource types. If this happens, the generator will try to expand the resource types into multiple constant resource types.
+In the design of .Net management SDK, one resource must only have one constant resource type, therefore the generator checks if the resource type which it calculates is a constant, if the resource type is not a constant, it means that the swagger might be using one request path to represent a set of similar resources with different resource types. If this happens, the generator tries to expand the resource types into multiple constant resource types.
 
-For instance, if the above procedure is applied on this request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}`, it produces the resource type `Microsoft.Network/dnsZones/{recordType}` which contains a variable in it and is not a constant. If this happens, the generator will try to expand it into multiple constant resource types. This requires the variables in the resulted resource type to be an enum type, if this condition is not met, the generator will throw exceptions for you to resolve by adding configuration/directives.
+For instance, if the above procedure is applied on this request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}`, it produces the resource type `Microsoft.Network/dnsZones/{recordType}` which contains a variable in it and is not a constant. If this happens, the generator tries to expand it into multiple constant resource types. This requires the variables in the resulted resource type to be an enum type, if this condition is not met, the generator throws exceptions for you to resolve by adding configuration/directives.
 
 We have some ways to change the resource type of a resource, please see [change the resource type](#change-the-resource-type) section.
 
@@ -123,9 +152,9 @@ We have some ways to change the resource type of a resource, please see [change 
 
 Some resources are recognized as singleton resources automatically by the generator, for instance, a request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` is a singleton resource with the name `default` and its parent is `StorageAccountResource`.
 
-The generator will mark a resource as a singleton, when its request path subtracted by the request path of its parent is a constant. For example, the resource with request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` has a parent of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}`, if you subtract them, you will get `blobServices/default` which is a constant, therefore the resource `BlobServiceResource` is a singleton resource.
+The generator marks a resource as a singleton, when its request path subtracted by the request path of its parent is a constant. For example, the resource with request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}/blobServices/default` has a parent of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccount/{accountName}`, if you subtract them, you should get `blobServices/default` which is a constant, therefore the resource `BlobServiceResource` is a singleton resource.
 
-When a resource is marked as a singleton resource, it will not have its corresponding `[Resource]Collection` class, only have `[Resource]Resource` class and `[Resource]Data` class. The method to get a singleton resource on its parent will be called as `Get[Resource]` in singular form, like
+When a resource is marked as a singleton resource, it does not have its corresponding `[Resource]Collection` class, only has the `[Resource]Resource` class and the `[Resource]Data` class. The method to get a singleton resource on its parent is called as `Get[Resource]` in singular form, like
 
 ```csharp
 public partial class StorageAccountResource : ArmResource
@@ -148,8 +177,8 @@ The configurations for management plane generator should be written in the `read
 The configuration `request-path-to-resource-data` is a dictionary, its key is a request path, and the corresponding value is a schema name.
 
 This configuration has two functionalities:
-1. If the request path is not a resource, the generator will mark it as a resource.
-1. The corresponding resource data will be the schema specified by the value.
+1. If the request path is not a resource, the generator marks it as a resource.
+1. The corresponding resource data is set to be the schema specified by the value.
 
 #### Change the resource data to another schema
 
@@ -248,13 +277,13 @@ For instance, if we have this swagger:
 }
 ```
 
-The generated code will have a resource `DatabaseAccountResource`, `DatabaseAccountCollection`, and `DatabaseAccountData`. And if you want to assign another schema in these request as a resource data, you could add this configuration:
+The generated code has a resource `DatabaseAccountResource`, `DatabaseAccountCollection`, and `DatabaseAccountData`. And if you want to assign another schema in these request as a resource data, you could add this configuration:
 ```yaml
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}: DatabaseAccountCreateUpdateParameters
 ```
 
-As a result, the resource will name after the new resource data, and now you will have `DatabaseAccountCreateUpdateParametersResource`, `DatabaseAccountCreateUpdateParametersCollection`, and `DatabaseAccountCreateUpdateParametersData`.
+As a result, the resource now names after the new resource data, and now you should have `DatabaseAccountCreateUpdateParametersResource`, `DatabaseAccountCreateUpdateParametersCollection`, and `DatabaseAccountCreateUpdateParametersData`.
 
 </details>
 
@@ -303,7 +332,7 @@ You can mark a non-resource request path as a resource, for instance, if we have
     }
 }
 ```
-This request path looks like a resource, but unfortunately its corresponding schema `SharedGallery` does not have all the three properties required by a resource, `id`, `type` and `name`. Since this is a non-resource, this operation will be generated into the extension class, like this:
+This request path looks like a resource, but unfortunately its corresponding schema `SharedGallery` does not have all the three properties required by a resource, `id`, `type` and `name`. Since this is a non-resource, this operation is generated into the extension class, like this:
 ```csharp
 public static partial class ComputeExtensions
 {
@@ -319,13 +348,13 @@ But we still could add the `request-path-to-resource-data` configuration:
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}: SharedGallery
 ```
-to mark it as a resource, and assign the schema `SharedGallery` as its resource data. In this way, we will get the `SharedGalleryResource`, `SharedGalleryCollection` and `SharedGalleryData` (which is the model generated from schema `SharedGallery`) like normal resources. In this way, the Id of this non-resource will be automatically constructed by the SDK using its own request path.
+to mark it as a resource, and assign the schema `SharedGallery` as its resource data. In this way, you should get the `SharedGalleryResource`, `SharedGalleryCollection` and `SharedGalleryData` (which is the model generated from schema `SharedGallery`) like normal resources. In this way, the Id of this non-resource is automatically constructed by the SDK using its own request path.
 
 </details>
 
 ### Change resource name
 
-In most cases, a resource class will share the same name as the resource data class, and you will have the triplet of `[Resource]Resource`, `[Resource]Collection`, and `[Resource]Data`.
+In most cases, a resource class shares the same name as the resource data class, and you should have a triplet of `[Resource]Resource`, `[Resource]Collection`, and `[Resource]Data`.
 
 But if the RP is complicated, there might be multiple resources sharing the same resource data schema. If this happens, the generator has multiple strategies to generate unique names for all those resources in order to make sure the generated code could properly compile. These auto-generated names might not be ideal, and you might need the `request-path-to-resource-name` configuration to customize the resource names.
 
@@ -334,7 +363,7 @@ For instance, we have a resource `AvailabilitySetResource`, `AvailabilitySetColl
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Something
 ```
-Now you will have `SomethingResource` instead of `AvailabilitySetResource`, `SomethingCollection` instead of `AvailabilitySetCollection`, but still have the original resource data `AvailabilitySetData` because this configuration only change the corresponding resource name and the collection name (if it has a collection).
+Now you should have `SomethingResource` instead of `AvailabilitySetResource`, `SomethingCollection` instead of `AvailabilitySetCollection`, but still have the original resource data `AvailabilitySetData` because this configuration only change the corresponding resource name and the collection name (if it has a collection).
 
 ### Change the criteria of ARM resources
 
@@ -346,7 +375,7 @@ For instance
 resource-model-requires-type: false
 ```
 
-This configuration will globally change the criteria of a resource model to only have `id` and `name`.
+This configuration globally changes the criteria of a resource model to only require `id` and `name`.
 
 ### Change the resource type
 
@@ -367,7 +396,7 @@ and if we have this configuration
 request-path-to-resource-type:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}: Microsoft.Compute/availabilitysets
 ```
-Then we will have the following changes in `AvailabilitySetResource` class
+Then you should have the following changes in `AvailabilitySetResource` class
 ```diff
 public partial class AvailabilitySetResource : ArmResource
 {
@@ -379,11 +408,11 @@ public partial class AvailabilitySetResource : ArmResource
 
 </details>
 
-There are also some special request paths which is not possible to derive resource type from, for instance, `/{linkId}`. When this happens, the generator will throw exception and require the user to provide a `request-path-to-resource-type` for it, or mark it as a non-resource using `request-path-is-non-resource` configuration. Please see [mark a request path is non-resource](#mark-a-request-path-is-a-non-resource) section.
+There are also some special request paths which is not possible to derive resource type from, for instance, `/{linkId}`. When this happens, the generator throws exception and require the user to provide a `request-path-to-resource-type` for it, or mark it as a non-resource using `request-path-is-non-resource` configuration. Please see [mark a request path is non-resource](#mark-a-request-path-is-a-non-resource) section.
 
 ### Mark a request path is a non-resource
 
-By default the generator will mark all the request paths that meet the criteria as resources. If there is a path you suppose it should be pure data instead of an ARM resource, you can use the `request-path-is-non-resource` configuration.
+By default the generator marks all the request paths that meet the criteria as resources. If there is a path you suppose it should be pure data instead of an ARM resource, you can use the `request-path-is-non-resource` configuration.
 
 For instance,
 
@@ -392,11 +421,11 @@ request-path-is-non-resource:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{name}
 ```
 
-This configuration will mark the availability set request paths as a non-resource. The operations of non-resources will append to their corresponding parent.
+This configuration marks the availability set request paths as a non-resource, therefore the operations of non-resources append to their corresponding parent.
 
 ### Change parent of request paths
 
-By default, the generator will automatically find the parent of a request path, and append the operations of a non-resource to their corresponding parents.
+By default, the generator automatically finds the parent of a request path, and append the operations of a non-resource to their corresponding parents.
 
 You can manually assign the parent of an operation using the configuration `request-path-to-parent` which is a dictionary from the request path of you want to change, to the request path you want to be the new parent. 
 
@@ -404,7 +433,7 @@ For instance, `Subnet` is the child resource of `VirtualNetwork`, and `VirtualNe
 - Subnet: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}`
 - VirtualNetwork: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}`
 
-And we will have these in the generated code:
+And you should have these in the generated code:
 ```csharp
 public partial static class NetworkExtensions
 {
@@ -436,7 +465,7 @@ if you manually assign the parent of subnet to resource group, using the followi
 request-path-to-parent:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
 ```
-You will have the following changes which shows that now the parent of resource `SubnetResource` is `ResourceGroupResource`:
+You should have the following changes which shows that now the parent of resource `SubnetResource` is `ResourceGroupResource`:
 ```diff
 public partial static class NetworkExtensions
 {
@@ -471,9 +500,9 @@ public partial class SubnetResource: ArmResource
 
 ### Change singleton resources
 
-Some resources are automatically recognized as singleton resources. If a resource is generated as a singleton resource, it will not have a corresponding collection class.
+Some resources are automatically recognized as singleton resources. If a resource is generated as a singleton resource, it does not have a corresponding collection class.
 
-By default the generator will make a resource as a singleton, if it finds the extra part of its request path comparing to its parent is a constant.
+By default the generator makes a resource as a singleton, if it finds the extra part of its request path comparing to its parent is a constant.
 
 Sometimes, you might need to manually make a resource singleton due to some issues in the swagger, you need to add the corresponding entries into the `request-path-to-singleton-resource` configuration. This configuration is a map from the request path to the extra segments of the resource identifier of the singleton resource.
 
@@ -509,7 +538,7 @@ if you want to correct this, you could try the following configuration:
 request-path-to-singleton-resource:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}: managementPolicies/default
 ```
-This will mark the resource with path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}` as singleton resource, and its Id will be its parent's Id appending `managementPolicies/default`. This produces the following diff:
+This marks the resource with path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}` as singleton resource, and its `Id` is its parent's Id appending `managementPolicies/default`. This produces the following diff:
 ```diff
 public partial class StorageAccountResource : ArmResource
 {
@@ -555,7 +584,7 @@ public partial class VirtualMachineResource : ArmResource
 
 ### List exception
 
-If the generator finds a case that a collection class does not have a `GetAll` method, the following error message will be thrown:
+If the generator finds a case that a collection class does not have a `GetAll` method, the following error message is thrown:
 ```
 fatal   | The ResourceCollection AvailabilitySetCollection (RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}) does not have a GetAll method
 ```
@@ -584,7 +613,7 @@ list-exception:
 
 Some resources are scope resources, which means that these resources can be created under different scopes, like subscriptions, resource groups, management groups, etc. In the swagger, we currently do not have an extension which assigns which type of resources can be the scope of this resource, therefore we add a configuration in our generator `request-path-to-scope-resource-types` for this new information.
 
-By default, the generator will recognize the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator will generate the resource assuming the scope can be anything. For instance, if we have a request path like this:
+By default, the generator recognizes the first parameter in request path as a scope parameter if the parameter has `x-ms-skip-url-encoding: true` on it, and the generator generates the resource assuming the scope can be anything. For instance, if we have a request path like this:
 ```
 /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
 ```
@@ -605,7 +634,7 @@ public partial class DeploymentData
     /* ... */
 }
 ```
-and since it is a scope resource without any configuration, its parent will be marked as anything, and we should have the following extension method:
+and since it is a scope resource without any configuration, its parent is anything, and you should have the following extension method:
 ```csharp
 public static partial class ResourcesExtension
 {
@@ -625,7 +654,7 @@ request-path-to-scope-resource-types:
     - managementGroups
 ```
 
-After we applied this configuration, we will have the following changes:
+After we applied this configuration, you should have the following changes:
 ```diff
 public static partial class ResourcesExtension
 {
@@ -657,4 +686,4 @@ mgmt-debug:
   suppress-list-exception: true
 ```
 
-The configuration `suppress-list-exception` will suppress all the exceptions about the collection class without a `GetAll` method.
+The configuration `suppress-list-exception` suppresses all the exceptions about the collection class without a `GetAll` method.
