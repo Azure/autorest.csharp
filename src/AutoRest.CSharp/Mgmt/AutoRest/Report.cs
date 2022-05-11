@@ -26,6 +26,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 HasError = true;
         }
 
+        public void AddInfo(string message)
+        {
+            Add(ReportLevel.Information, message);
+        }
+
+        public void AddChange<T>(string target, string? scope, T from, T to)
+        {
+            var prefix = string.IsNullOrEmpty(scope) ? string.Empty : $"[{scope}] ";
+            if (from != null && !from.Equals(to))
+            {
+                _items.Add(new ReportItem(ReportLevel.Information, $"{prefix}{target} has been changed from {from} to {to}"));
+            }
+            else if (to != null && !to.Equals(from))
+            {
+                _items.Add(new ReportItem(ReportLevel.Information, $"{prefix}{target} has been changed from {from} to {to}"));
+            }
+        }
+
+        public void AddChange<T>(string target, T from, T to)
+        {
+            AddChange(target, null, from, to);
+        }
+
+        public void AddError(string message)
+        {
+            Add(ReportLevel.Error, message);
+        }
+
         public override string ToString()
         {
             return String.Join('\n', _items.Select(item => $"[{item.Level}] {item.Message}"));

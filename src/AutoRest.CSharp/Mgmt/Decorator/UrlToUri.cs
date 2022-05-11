@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (schemaName.EndsWith("Url", StringComparison.Ordinal))
                 {
                     schema.Language.Default.Name = schemaName.Substring(0, schemaName.Length - 1) + LowerCaseI;
-                    MgmtContext.Report.Add(ReportLevel.Information, $"A schema name has been changed from `{schemaName}` to `{schema.Language.Default.Name}`");
+                    MgmtContext.Report.AddChange($"A schema name", schemaName, schema.Language.Default.Name);
                 }
 
                 foreach (var property in objSchema.Properties)
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (propertyName.EndsWith("Url", StringComparison.Ordinal))
                     {
                         property.Language.Default.Name = propertyName.Substring(0, propertyName.Length - 1) + LowerCaseI;
-                        MgmtContext.Report.Add(ReportLevel.Information, $"A property name has been changed from `{propertyName}` to `{property.Language.Default.Name}` in schema `{objSchema.Language.Default.Name}`");
+                        MgmtContext.Report.AddChange($"A property name in schema `{objSchema.Language.Default.Name}`", propertyName, property.Language.Default.Name);
                     }
                 }
             }

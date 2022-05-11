@@ -61,11 +61,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (operation.GetHttpMethod() == HttpMethod.Patch)
                     {
                         var bodyParameter = operation.GetBodyParameter();
-                        if (bodyParameter != null && bodyParameter.Required is not true)
+                        if (bodyParameter != null)
                         {
-                            bodyParameter.Required = true;
                             // TODO -- use operation.OperationId directly after it is available.
-                            MgmtContext.Report.Add(ReportLevel.Information, $"Body parameter of `{operationGroup.Key}_{operation.Language.Default.Name}` has been changed to required");
+                            MgmtContext.Report.AddChange($"Body parameter of `{operationGroup.Key}_{operation.Language.Default.Name}` requiredness", bodyParameter.Required, true);
+                            bodyParameter.Required = true;
                         }
                     }
                 }
@@ -81,19 +81,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.CSharpName().EndsWith("Uri", StringComparison.Ordinal) && property.Schema.Type != AllSchemaTypes.Uri)
+                    if (property.CSharpName().EndsWith("Uri", StringComparison.Ordinal))
                     {
+                        MgmtContext.Report.AddChange($"The type of property `{property.Language.Default.Name}` in schema `{objSchema.Name}`", property.Schema.Type, AllSchemaTypes.Uri);
                         property.Schema.Type = AllSchemaTypes.Uri;
-                        MgmtContext.Report.Add(ReportLevel.Information, $"The type of property `{property.Language.Default.Name}` in schema `{objSchema.Name}` has been changed to Uri");
                     }
-                    if (property.CSharpName().EndsWith("Uris", StringComparison.Ordinal) && property.Schema is ArraySchema arraySchema && arraySchema.ElementType.Type != AllSchemaTypes.Uri)
+                    if (property.CSharpName().EndsWith("Uris", StringComparison.Ordinal) && property.Schema is ArraySchema arraySchema)
                     {
+                        MgmtContext.Report.AddChange($"The element type of property `{property.Language.Default.Name}` in schema `{objSchema.Name}`", arraySchema.ElementType.Type, AllSchemaTypes.Uri);
                         arraySchema.ElementType.Type = AllSchemaTypes.Uri;
-                        MgmtContext.Report.Add(ReportLevel.Information, $"The element type of property `{property.Language.Default.Name}` in schema `{objSchema.Name}` has been changed to Uri");
                     }
                     if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String && property.Schema.Extensions?.Format == null)
                     {
-                        MgmtContext.Report.Add(ReportLevel.Error, $"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add \"x-ms-format\": \"{XMsFormat.DurationConstant}\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
+                        MgmtContext.Report.AddError($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add \"x-ms-format\": \"{XMsFormat.DurationConstant}\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
                     }
                     // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
                     if (property.CSharpName().Equals("Type", StringComparison.Ordinal))
@@ -184,17 +184,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         // update the first subscriptionId parameter to be 'method' parameter
                         if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
+                            // TODO -- change the operation name to `op.OperationId` when it is ready
+                            MgmtContext.Report.AddChange($"The implementation location of parameter {p.Language.Default.Name} in operation `{operationGroup.Key}_{op.Language.Default.Name}`", p.Implementation, ImplementationLocation.Method);
                             setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
-                            // TODO -- change the operation name to `op.OperationId` when it is ready
-                            MgmtContext.Report.Add(ReportLevel.Information, $"The implementation location of parameter {p.Language.Default.Name} in operation `{operationGroup.Key}_{op.Language.Default.Name}` has been changed to Method");
                         }
                         // update the apiVersion parameter to be 'client' method
                         if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
                         {
-                            p.Implementation = ImplementationLocation.Client;
                             // TODO -- change the operation name to `op.OperationId` when it is ready
-                            MgmtContext.Report.Add(ReportLevel.Information, $"The implementation location of parameter {p.Language.Default.Name} in operation `{operationGroup.Key}_{op.Language.Default.Name}` has been changed to Client");
+                            MgmtContext.Report.AddChange($"The implementation location of parameter {p.Language.Default.Name} in operation `{operationGroup.Key}_{op.Language.Default.Name}`", p.Implementation, ImplementationLocation.Client);
+                            p.Implementation = ImplementationLocation.Client;
                         }
                     }
                 }
@@ -303,8 +303,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             result = transformer.EnsureNameCase(originalName);
             languages.Default.Name = result;
             wordCache.TryAdd(originalName, result);
-            if (originalName != result)
-                MgmtContext.Report.Add(ReportLevel.Information, $"A name has been changed from {originalName} to {result} based on `rename-rules`");
+            MgmtContext.Report.AddChange("A name", "rename-rules", originalName, result);
         }
 
         private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
@@ -334,7 +333,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 .ToHashSet();
             if (apiVersionValues.Count > 1)
             {
-                MgmtContext.Report.Add(ReportLevel.Error, $"Multiple api-version values found in the operation group: {operationGroup.Key}. Please rename the operation group for some operations so that all operations in one operation group share the same API version.");
+                MgmtContext.Report.AddError($"Multiple api-version values found in the operation group: {operationGroup.Key}. Please rename the operation group for some operations so that all operations in one operation group share the same API version.");
             }
         }
     }
