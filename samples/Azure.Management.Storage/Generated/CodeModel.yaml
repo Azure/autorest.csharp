@@ -10721,8 +10721,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -10848,8 +10846,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error
