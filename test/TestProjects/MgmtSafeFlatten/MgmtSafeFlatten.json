@@ -390,6 +390,10 @@
                     "$ref": "#/definitions/LayerOneSingle",
                     "description": "The single value prop."
                 },
+                "layerOneType": {
+                    "$ref": "#/definitions/LayerOneBaseType",
+                    "description": "The single value prop with discriminator."
+                },
                 "layerOneConflict": {
                     "$ref": "#/definitions/LayerOneSingleConflict",
                     "description": "The single value prop with conflict."
@@ -500,6 +504,59 @@
                 "location"
             ],
             "x-ms-azure-resource": true
+        },
+        "LayerOneBaseType": {
+            "discriminator": "name",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "LayerOneFoo",
+                        "LayerOneBar"
+                    ],
+                    "x-ms-enum": {
+                        "name": "LayerOneTypeName",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "LayerOneFooType": {
+            "x-ms-discriminator-value": "LayerOneFoo",
+            "allOf": [
+              {
+                "$ref": "#/definitions/LayerOneBaseType"
+              }
+            ],
+            "required": [
+              "parameters"
+            ],
+            "properties": {
+              "parameters": {
+                "description": "Defines the parameters for the type.",
+                "type": "string"
+              }
+            }
+        },
+        "LayerOneBarType": {
+            "x-ms-discriminator-value": "LayerOneBar",
+            "allOf": [
+              {
+                "$ref": "#/definitions/LayerOneBaseType"
+              }
+            ],
+            "required": [
+              "parameters"
+            ],
+            "properties": {
+              "parameters": {
+                "description": "Defines the parameters for the type.",
+                "type": "string"
+              }
+            }
         }
     },
     "parameters": {

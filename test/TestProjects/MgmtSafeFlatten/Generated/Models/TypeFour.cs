@@ -22,7 +22,7 @@ namespace MgmtSafeFlatten.Models
         /// <summary> The id of layer one. </summary>
         public string LayerOneUniqueId
         {
-            get => Properties.UniqueId;
+            get => Properties?.UniqueId;
         }
     }
 }

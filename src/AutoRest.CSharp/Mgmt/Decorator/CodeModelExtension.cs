@@ -291,5 +291,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 TransformLanguage(property.Language, transformer, wordCache);
             }
         }
+
+        public static void VerifyApiVersions(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                VerifyApiVersionsWithinOperationGroup(operationGroup);
+            }
+        }
+
+        // Operations within an operation group should use the same API version.
+        // TODO: this might be able to be removed after https://github.com/Azure/autorest.csharp/issues/1917 is resolved.
+        private static void VerifyApiVersionsWithinOperationGroup(OperationGroup operationGroup)
+        {
+            var apiVersionValues = operationGroup.Operations
+                .SelectMany(op => op.Parameters.Where(p => p.Origin == "modelerfour:synthesized/api-version").Select(p => ((ConstantSchema)p.Schema).Value.Value))
+                .ToHashSet();
+            if (apiVersionValues.Count > 1)
+            {
+                throw new InvalidOperationException($"Multiple api-version values found in the operation group: {operationGroup.Key}. Please rename the operation group for some operations so that all operations in one operation group share the same API version.");
+            }
+        }
     }
 }

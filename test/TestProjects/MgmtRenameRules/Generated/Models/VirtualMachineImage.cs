@@ -58,10 +58,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Contains the os disk image information. </summary>
         internal OSDiskImage OSDiskImage { get; set; }
         /// <summary> The operating system of the osDiskImage. </summary>
-        public OperatingSystemTypes OSDiskImageOperatingSystem
+        public OperatingSystemTypes? OSDiskImageOperatingSystem
         {
-            get => OSDiskImage is null ? default : OSDiskImage.OperatingSystem;
-            set => OSDiskImage = new OSDiskImage(value);
+            get => OSDiskImage is null ? default(OperatingSystemTypes?) : OSDiskImage.OperatingSystem;
+            set
+            {
+                OSDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
+            }
         }
 
         /// <summary> Gets the data disk images. </summary>
@@ -69,10 +72,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Describes automatic OS upgrade properties on the image. </summary>
         internal AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }
         /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
-        public bool AutomaticOSUpgradeSupported
+        public bool? AutomaticOSUpgradeSupported
         {
-            get => AutomaticOSUpgradeProperties is null ? default : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
-            set => AutomaticOSUpgradeProperties = new AutomaticOSUpgradeProperties(value);
+            get => AutomaticOSUpgradeProperties is null ? default(bool?) : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
+            set
+            {
+                AutomaticOSUpgradeProperties = value.HasValue ? new AutomaticOSUpgradeProperties(value.Value) : null;
+            }
         }
 
         /// <summary> Specifies the HyperVGeneration Type. </summary>

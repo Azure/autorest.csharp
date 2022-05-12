@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return null;
         }
 
-        private static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
+        public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
         {
             if (requestLocation is RequestLocation.Uri or RequestLocation.Path or RequestLocation.Body && type.EqualsIgnoreNullable(typeof(string)) && !skipUrlEncoding)
             {

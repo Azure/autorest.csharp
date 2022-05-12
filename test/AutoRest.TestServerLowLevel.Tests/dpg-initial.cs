@@ -19,17 +19,17 @@ namespace AutoRest.TestServer.Tests
 
         internal virtual async Task DpgAddOptionalInput_NoParams(Uri host)
         {
-            var result = await new ParamsClient(Key, host).HeadNoParamsAsync();
+            var result = await new ParamsClient(Key, host, null).HeadNoParamsAsync();
             Assert.IsEmpty(result.Content.ToArray());
             Assert.AreEqual(200, result.Status);
             Assert.AreEqual(123, result.Headers.ContentLength);
 
-            var result2 = await new ParamsClient(Key, host).HeadNoParamsAsync(new Azure.RequestContext());
+            var result2 = await new ParamsClient(Key, host, null).HeadNoParamsAsync(new Azure.RequestContext());
             Assert.IsEmpty(result2.Content.ToArray());
             Assert.AreEqual(200, result2.Status);
             Assert.AreEqual(123, result2.Headers.ContentLength);
 
-            var result3 = await new ParamsClient(Key, host).HeadNoParamsAsync(default);
+            var result3 = await new ParamsClient(Key, host, null).HeadNoParamsAsync(default);
             Assert.IsEmpty(result3.Content.ToArray());
             Assert.AreEqual(200, result3.Status);
             Assert.AreEqual(123, result3.Headers.ContentLength);
@@ -41,15 +41,15 @@ namespace AutoRest.TestServer.Tests
 
         internal virtual async Task DpgAddOptionalInput(Uri host)
         {
-            var result = await new ParamsClient(Key, host).GetRequiredAsync("param");
+            var result = await new ParamsClient(Key, host, null).GetRequiredAsync("param");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
 
-            var result2 = await new ParamsClient(Key, host).GetRequiredAsync("param", default);
+            var result2 = await new ParamsClient(Key, host, null).GetRequiredAsync("param", default);
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: ErrorOptions.NoThrow);
+            var result3 = await new ParamsClient(Key, host, null).GetRequiredAsync("param", context: ErrorOptions.NoThrow);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
         }
@@ -60,22 +60,22 @@ namespace AutoRest.TestServer.Tests
 
         internal virtual async Task DpgAddOptionalInput_RequiredOptionalParam(Uri host)
         {
-            var result = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam");
+            var result = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
 
-            var result2 = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam", "optionalParam");
+            var result2 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", "optionalParam");
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam", "optionalParam", ErrorOptions.NoThrow);
+            var result3 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", "optionalParam", ErrorOptions.NoThrow);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
 
-            var result4 = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam", context: new Azure.RequestContext());
+            var result4 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", context: new Azure.RequestContext());
             var responseBody4 = JsonData.FromBytes(result4.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody4["message"]);
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await new ParamsClient(Key, host).PutRequiredOptionalAsync(null));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new ParamsClient(Key, host, null).PutRequiredOptionalAsync(null));
         }
 
         [Test]
@@ -84,19 +84,19 @@ namespace AutoRest.TestServer.Tests
 
         internal virtual async Task DpgAddOptionalInput_OptionalParam(Uri host)
         {
-            var result = await new ParamsClient(Key, host).GetOptionalAsync();
+            var result = await new ParamsClient(Key, host, null).GetOptionalAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
 
-            var result2 = await new ParamsClient(Key, host).GetOptionalAsync("optionalParam");
+            var result2 = await new ParamsClient(Key, host, null).GetOptionalAsync("optionalParam");
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).GetOptionalAsync("optionalParam", default);
+            var result3 = await new ParamsClient(Key, host, null).GetOptionalAsync("optionalParam", default);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
 
-            var result4 = await new ParamsClient(Key, host).GetOptionalAsync(context: new Azure.RequestContext());
+            var result4 = await new ParamsClient(Key, host, null).GetOptionalAsync(context: new Azure.RequestContext());
             var responseBody4 = JsonData.FromBytes(result4.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody4["message"]);
         }
@@ -111,13 +111,13 @@ namespace AutoRest.TestServer.Tests
             {
                 url = "http://example.org/myimage.jpeg"
             };
-            var result = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value));
+            var result = await new ParamsClient(Key, host, null).PostParametersAsync(RequestContent.Create(value));
             Assert.AreEqual(200, result.Status);
 
-            var result2 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), default);
+            var result2 = await new ParamsClient(Key, host, null).PostParametersAsync(RequestContent.Create(value), default);
             Assert.AreEqual(200, result2.Status);
 
-            var result3 = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), context: ErrorOptions.Default);
+            var result3 = await new ParamsClient(Key, host, null).PostParametersAsync(RequestContent.Create(value), context: ErrorOptions.Default);
             Assert.AreEqual(200, result3.Status);
         }
     }
