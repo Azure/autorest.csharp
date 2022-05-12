@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -57,6 +59,52 @@ namespace AutoRest.CSharp.Generation.Writers
                 1 => $"{identifiers.First():I}",
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
             };
+
+        public static FormattableString GetConstantFormattable(this Constant constant)
+        {
+            if (constant.Value == null)
+            {
+                // Cast helps the overload resolution
+                return $"({constant.Type}){null:L}";
+            }
+
+            if (constant.IsNewInstanceSentinel)
+            {
+                return $"new {constant.Type}()";
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            {
+                return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            {
+                return $"new {constant.Type}({enumValue:L})";
+            }
+
+            Type frameworkType = constant.Type.FrameworkType;
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                var d = (DateTimeOffset)constant.Value;
+                d = d.ToUniversalTime();
+                return $"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})";
+            }
+
+            if (frameworkType == typeof(byte[]))
+            {
+                var bytes = (byte[])constant.Value;
+                var joinedBytes = string.Join(", ", bytes);
+                return $"new byte[] {{{joinedBytes}}}";
+            }
+
+            if (frameworkType == typeof(ResourceType))
+            {
+                return $"{((ResourceType)constant.Value).ToString():L}";
+            }
+
+            return $"{constant.Value:L}";
+        }
 
         private static string GetNamesForMethodCallFormat(int parametersCount, char format)
         {

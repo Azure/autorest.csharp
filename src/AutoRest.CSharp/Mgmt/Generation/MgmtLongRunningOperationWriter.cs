@@ -25,8 +25,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private readonly string _waitMethod;
         private readonly Type _operationType;
         private readonly Type _responseType;
-        private readonly Type _operationOrResponseType;
+        private readonly Type _operationInternalType;
         private readonly FormattableString _operationSourceString;
+        private readonly string _responseString;
         private readonly string _sourceString;
 
         public string Filename { get; }
@@ -41,8 +42,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _waitMethod = isGeneric ? "WaitForCompletion" : "WaitForCompletionResponse";
             _operationType = isGeneric ? typeof(ArmOperation<>) : typeof(ArmOperation);
             _responseType = isGeneric ? typeof(Response<>) : typeof(Response);
-            _operationOrResponseType = isGeneric ? typeof(OperationOrResponseInternals<>) : typeof(OperationOrResponseInternals);
+            _operationInternalType = isGeneric ? typeof(OperationInternal<>) : typeof(OperationInternal);
             _operationSourceString = isGeneric ? (FormattableString)$"{typeof(IOperationSource<>)} source, " : (FormattableString)$"";
+            _responseString = isGeneric ? "response.GetRawResponse(), response.Value" : "response";
             _sourceString = isGeneric ? "source, " : string.Empty;
         }
 
@@ -55,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"#pragma warning restore SA1649 // File name should match first type name");
                 using (_writer.Scope())
                 {
-                    _writer.Line($"private readonly {_operationOrResponseType} _operation;");
+                    _writer.Line($"private readonly {_operationInternalType} _operation;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
@@ -66,19 +68,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     using (_writer.Scope($"internal {_name}({_responseType} response)"))
                     {
-                        _writer.Line($"_operation = new {_operationOrResponseType}(response);");
+                        _writer.Line($"_operation = {_operationInternalType}.Succeeded({_responseString});");
                     }
                     _writer.Line();
 
                     using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
-                        _writer.Line($"_operation = new {_operationOrResponseType}({_sourceString}clientDiagnostics, pipeline, request, response, finalStateVia, \"{_name}\");");
+                        var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
+                        _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);");
+                        _writer.Line($"_operation = new {_operationInternalType}(clientDiagnostics, {nextLinkOperation}, response, {_name:L}, fallbackStrategy: new {typeof(ExponentialDelayStrategy)}());");
                     }
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override string Id => _operation.Id;");
-                    _writer.Line();
+                    _writer
+                        .LineRaw("#pragma warning disable CA1822")
+                        .LineRaw("public override string Id => throw new NotImplementedException();")
+                        .LineRaw("#pragma warning restore CA1822")
+                        .Line();
 
                     if (_isGeneric)
                     {
@@ -96,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
+                    _writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.RawResponse;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
