@@ -823,7 +823,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var name = requestParameter.CSharpName();
                 var description = CreateDescriptionWithMediaTypes(requestParameter, requestMediaTypes);
-                var parameter = new Parameter(name, description, typeof(ContentType), null, requestParameter.IsRequired, RequestLocation: RequestLocation.Header);
+                var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
 
                 _referencesByName[GetRequestParameterName(requestParameter)] = new ParameterInfo(requestParameter, parameter);
                 _parameters.Add(parameter);
