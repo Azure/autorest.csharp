@@ -512,9 +512,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
-                var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
-                foreach ((var operationSet, var operations) in resourceOperationsList)
+                foreach (var operationSet in operationSets)
                 {
+                    var operations = GetChildOperations(operationSet.RequestPath);
                     var isSingleton = operationSet.IsSingletonResource();
                     // get the corresponding resource data
                     var originalResourcePath = operationSet.GetRequestPath();
@@ -661,13 +661,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private Dictionary<OperationSet, IEnumerable<Operation>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
-        {
-            return resourceOperationSets.ToDictionary(
-                operationSet => operationSet,
-                operationSet => GetChildOperations(operationSet.RequestPath));
-        }
-
         public IEnumerable<Operation> GetChildOperations(string requestPath)
         {
             if (requestPath == RequestPath.Any)
@@ -798,6 +791,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
+            // TODO -- add virtual resources here
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {

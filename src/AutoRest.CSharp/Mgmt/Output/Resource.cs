@@ -20,9 +20,12 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class Resource : VirtualResource
+    internal class Resource : MgmtTypeProvider
     {
+        protected static readonly string ResourcePosition = "resource";
+        protected static readonly string CollectionPosition = "collection";
         private const string DataFieldName = "_data";
+        protected readonly Parameter[] _armClientCtorParameters;
 
         private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
@@ -50,7 +53,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             ValidationType.AssertNotNull,
             null);
 
+        /// <summary>
+        /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
+        /// There is a configuration in <see cref="MgmtConfiguration"/> which assign values to operations.
+        /// </summary>
+        protected string Position { get; }
+
+        public OperationSet OperationSet { get; }
+
         protected IEnumerable<Operation> _clientOperations;
+
+        private RequestPath? _requestPath;
+        public RequestPath RequestPath => _requestPath ??= OperationSet.GetRequestPath(ResourceType);
 
         /// <summary>
         /// </summary>
@@ -61,8 +75,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
         protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
-            : base(operationSet, operations, resourceName, resourceType, position)
+            : base(resourceName)
         {
+            _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
+            OperationSet = operationSet;
+            ResourceType = resourceType;
             ResourceData = resourceData;
 
             if (OperationSet.TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
@@ -71,6 +88,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientOperations = GetClientOperations(operationSet, operations);
 
             IsById = OperationSet.IsById;
+            Position = position;
+        }
+
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
+              Name: Type.Name,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: Internal,
+              Parameters: _armClientCtorParameters,
+              Initializer: new(
+                  isBase: true,
+                  arguments: _armClientCtorParameters));
         }
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
@@ -84,6 +114,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     IsBase: false,
                     Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
         }
+
+        public override CSharpType? BaseType => typeof(ArmResource);
 
         public override Resource? DefaultResource => this;
 
@@ -335,6 +367,26 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private MgmtRestClient? _myRestClient;
         public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
+
+        public ResourceTypeSegment ResourceType { get; }
+
+        protected virtual FormattableString CreateDescription(string clientPrefix)
+        {
+            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            List<FormattableString> lines = new List<FormattableString>();
+            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : this.Parent().First();
+
+            lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
+            lines.Add($"If you have a <see cref=\"{typeof(ResourceIdentifier)}\" /> you can construct {an} <see cref=\"{Type}\" />");
+            lines.Add($"from an instance of <see cref=\"{typeof(ArmClient)}\" /> using the Get{DefaultName} method.");
+            if (parent is not null)
+            {
+                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+                lines.Add($"Otherwise you can get one from its parent resource <see cref=\"{parentType}\" /> using the Get{ResourceName} method.");
+            }
+
+            return FormattableStringHelpers.Join(lines, "\r\n");
+        }
 
         /// <summary>
         /// Returns the different method signature for different base path of this resource

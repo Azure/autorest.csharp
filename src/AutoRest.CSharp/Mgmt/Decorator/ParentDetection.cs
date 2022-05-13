@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="resource"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static IEnumerable<MgmtTypeProvider> Parent(this VirtualResource resource)
+        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentList;
         }
 
-        private static IEnumerable<MgmtTypeProvider> GetParent(this VirtualResource resource)
+        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
             return resource.OperationSet.GetParent();
         }
