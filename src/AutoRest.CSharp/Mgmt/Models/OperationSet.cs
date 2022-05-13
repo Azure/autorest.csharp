@@ -99,6 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return hint.HasValue ? NonHintRequestPath.ApplyHint(hint.Value) : NonHintRequestPath;
         }
 
+        // TODO -- potentially needs to modify, if this operation set does not have a operation in it
         private RequestPath? _nonHintRequestPath;
         public RequestPath NonHintRequestPath => _nonHintRequestPath ??= GetNonHintRequestPath();
         private RequestPath GetNonHintRequestPath()
