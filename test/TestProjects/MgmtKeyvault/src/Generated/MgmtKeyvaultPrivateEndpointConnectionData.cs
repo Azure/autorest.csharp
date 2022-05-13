@@ -30,13 +30,13 @@ namespace MgmtKeyvault
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
-        /// <param name="connectionState"> Approval state of the private link connection. </param>
+        /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
+        internal MgmtKeyvaultPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IReadOnlyDictionary<string, string> tags, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData, location, tags)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
-            ConnectionState = connectionState;
+            PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
         }
 
@@ -51,7 +51,7 @@ namespace MgmtKeyvault
         }
 
         /// <summary> Approval state of the private link connection. </summary>
-        public MgmtKeyvaultPrivateLinkServiceConnectionState ConnectionState { get; set; }
+        public MgmtKeyvaultPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public MgmtKeyvaultPrivateEndpointConnectionProvisioningState? ProvisioningState { get; set; }
     }

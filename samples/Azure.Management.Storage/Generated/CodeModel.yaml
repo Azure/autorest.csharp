@@ -6877,7 +6877,7 @@ schemas: !Schemas
                               serializedName: privateLinkServiceConnectionState
                               language: !Languages 
                                 default:
-                                  name: connectionState
+                                  name: privateLinkServiceConnectionState
                                   description: A collection of information about the state of the connection between service consumer and provider.
                               protocol: !Protocols {}
                             - !Property 

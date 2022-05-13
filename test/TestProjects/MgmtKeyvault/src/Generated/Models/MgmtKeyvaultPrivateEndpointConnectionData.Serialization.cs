@@ -31,10 +31,10 @@ namespace MgmtKeyvault
                 writer.WritePropertyName("privateEndpoint");
                 JsonSerializer.Serialize(writer, PrivateEndpoint);
             }
-            if (Optional.IsDefined(ConnectionState))
+            if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState");
-                writer.WriteObjectValue(ConnectionState);
+                writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             if (Optional.IsDefined(ProvisioningState))
             {

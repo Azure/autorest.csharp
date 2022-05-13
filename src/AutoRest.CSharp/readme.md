@@ -58,16 +58,6 @@ testmodeler:
   add-armtemplate-payload-string: true
 ```
 
-## Customization
-
-```yaml
-directive:
-  - from: swagger-document
-    where: $.definitions.PrivateEndpointConnectionProperties
-    transform: >
-      $.properties.privateLinkServiceConnectionState["x-ms-client-name"] = "connectionState";   
-```
-
 ## Help
 ```yaml
 help-content:

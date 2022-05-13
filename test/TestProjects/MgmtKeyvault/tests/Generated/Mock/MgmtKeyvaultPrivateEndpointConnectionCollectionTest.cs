@@ -33,7 +33,7 @@ namespace MgmtKeyvault.Tests.Mock
             MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionData data = new MgmtKeyvault.MgmtKeyvaultPrivateEndpointConnectionData()
             {
                 Etag = "",
-                ConnectionState = new MgmtKeyvault.Models.MgmtKeyvaultPrivateLinkServiceConnectionState()
+                PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MgmtKeyvaultPrivateLinkServiceConnectionState()
                 {
                     Status = new MgmtKeyvault.Models.MgmtKeyvaultPrivateEndpointServiceConnectionStatus("Approved"),
                     Description = "My name is Joe and I'm approving this.",
