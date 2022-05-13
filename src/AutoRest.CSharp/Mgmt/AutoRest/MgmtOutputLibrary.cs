@@ -515,25 +515,40 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var operationSet in operationSets)
                 {
                     var operations = GetChildOperations(operationSet.RequestPath);
-                    var isSingleton = operationSet.IsSingletonResource();
                     // get the corresponding resource data
                     var originalResourcePath = operationSet.GetRequestPath();
                     var resourceData = GetResourceData(originalResourcePath);
-                    // we calculate the resource type of the resource
-                    var resourcePaths = originalResourcePath.Expand();
-                    foreach (var resourcePath in resourcePaths)
-                    {
-                        var resourceType = resourcePath.GetResourceType();
-                        var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
-                        var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
-                        resource.ResourceCollection = collection;
-
-                        requestPathToResources.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
-                    }
+                    if (operationSet.Count > 0)
+                        BuildResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
+                    else
+                        BuildVirtualResource(requestPathToResources, resourceDataSchemaName, operationSet, operations, originalResourcePath, resourceData);
                 }
             }
 
             return requestPathToResources;
+        }
+
+        private void BuildResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData resourceData)
+        {
+            var isSingleton = operationSet.IsSingletonResource();
+            // we calculate the resource type of the resource
+            var resourcePaths = originalResourcePath.Expand();
+            foreach (var resourcePath in resourcePaths)
+            {
+                var resourceType = resourcePath.GetResourceType();
+                var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
+                var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
+                resource.ResourceCollection = collection;
+
+                result.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
+            }
+        }
+
+        private void BuildVirtualResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<Operation> operations, RequestPath originalResourcePath, ResourceData resourceData)
+        {
+            var resourceType = originalResourcePath.GetResourceType();
+            var resource = new VirtualResource(operationSet, operations, resourceDataSchemaName, resourceType, resourceData);
+            result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), resourceData, resource, null));
         }
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
@@ -791,21 +806,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
-            // TODO -- add virtual resources here
             Dictionary<string, HashSet<OperationSet>> resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
                 if (operationSet.TryGetResourceDataSchemaName(out var resourceDataSchemaName))
                 {
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out HashSet<OperationSet>? result))
-                    {
-                        result = new HashSet<OperationSet>();
-                        resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
-                    }
-                    result.Add(operationSet);
+                    if (!resourceDataSchemaNameToOperationSets.ContainsKey(resourceDataSchemaName))
+                        resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, new HashSet<OperationSet>());
+                    resourceDataSchemaNameToOperationSets[resourceDataSchemaName].Add(operationSet);
                 }
             }
+
+            // add the path of virtual resources here
+            foreach ((var virtualResourcePath, var virtualResourceDataSchemaName) in Configuration.MgmtConfiguration.VirtualResources)
+            {
+                if (!resourceDataSchemaNameToOperationSets.ContainsKey(virtualResourceDataSchemaName))
+                    resourceDataSchemaNameToOperationSets.Add(virtualResourceDataSchemaName, new HashSet<OperationSet>());
+                // add an empty operationSet
+                resourceDataSchemaNameToOperationSets[virtualResourceDataSchemaName].Add(new OperationSet(virtualResourcePath));
+            }
+
             return resourceDataSchemaNameToOperationSets;
         }
 

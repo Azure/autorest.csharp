@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class VirtualResource : Resource
     {
-        protected internal VirtualResource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position) : base(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
+        protected internal VirtualResource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData) : base(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
         {
         }
 
