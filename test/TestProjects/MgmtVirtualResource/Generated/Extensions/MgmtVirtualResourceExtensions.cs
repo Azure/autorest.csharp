@@ -104,42 +104,6 @@ namespace MgmtVirtualResource
             return resourceGroupResource.GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
         }
 
-        /// <summary>
-        /// Gets information about all public IP addresses on a virtual machine scale set level.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses
-        /// Operation Id: PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses
-        /// </summary>
-        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="virtualMachineScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesByMicrosoftComputeVirtualMachineScaleSetPublicipaddressAsync(this ResourceGroupResource resourceGroupResource, string virtualMachineScaleSetName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(virtualMachineScaleSetName, nameof(virtualMachineScaleSetName));
-
-            return GetExtensionClient(resourceGroupResource).GetPublicIPAddressesByMicrosoftComputeVirtualMachineScaleSetPublicipaddressAsync(virtualMachineScaleSetName, cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets information about all public IP addresses on a virtual machine scale set level.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses
-        /// Operation Id: PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses
-        /// </summary>
-        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="virtualMachineScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<PublicIPAddressResource> GetPublicIPAddressesByMicrosoftComputeVirtualMachineScaleSetPublicipaddress(this ResourceGroupResource resourceGroupResource, string virtualMachineScaleSetName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(virtualMachineScaleSetName, nameof(virtualMachineScaleSetName));
-
-            return GetExtensionClient(resourceGroupResource).GetPublicIPAddressesByMicrosoftComputeVirtualMachineScaleSetPublicipaddress(virtualMachineScaleSetName, cancellationToken);
-        }
-
         #region PublicIPAddressResource
         /// <summary>
         /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
@@ -154,6 +118,25 @@ namespace MgmtVirtualResource
             {
                 PublicIPAddressResource.ValidateResourceId(id);
                 return new PublicIPAddressResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetMgmtVirtualResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetMgmtVirtualResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetMgmtVirtualResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetMgmtVirtualResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetMgmtVirtualResource" /> object. </returns>
+        public static VirtualMachineScaleSetMgmtVirtualResource GetVirtualMachineScaleSetMgmtVirtualResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetMgmtVirtualResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetMgmtVirtualResource(client, id);
             }
             );
         }

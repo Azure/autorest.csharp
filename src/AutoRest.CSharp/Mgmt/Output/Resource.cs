@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override FieldModifiers FieldModifiers => base.FieldModifiers | FieldModifiers.ReadOnly;
 
-        protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
+        protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
         {
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
@@ -288,7 +288,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var result = new Dictionary<string, List<MgmtRestOperation>>();
             var resourceRequestPath = OperationSet.GetRequestPath();
-            var resourceRestClient = MgmtContext.Library.GetRestClient(OperationSet.First());
+            var resourceRestClient = OperationSet.Any() ? MgmtContext.Library.GetRestClient(OperationSet.First()) : null;
             // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
             foreach (var operation in _clientOperations)
             {
@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var methodName = IsListOperation(operation, OperationSet) ?
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
-                    GetOperationName(operation, resourceRestClient.OperationGroup.Key);
+                    GetOperationName(operation, resourceRestClient?.OperationGroup.Key ?? string.Empty);
                 // get the MgmtRestOperation with a proper name
                 var restClient = MgmtContext.Library.GetRestClient(operation);
                 var restOperation = new MgmtRestOperation(

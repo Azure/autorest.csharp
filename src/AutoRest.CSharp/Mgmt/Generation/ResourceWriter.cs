@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -60,18 +61,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
-            _writer.Line($"public virtual bool HasData {{ get; }}");
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
-            _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
-            using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
+            if (This is not VirtualResource)
             {
-                using (_writer.Scope($"get"))
+                _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
+                _writer.Line($"public virtual bool HasData {{ get; }}");
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Gets the data representing this Feature.");
+                _writer.WriteXmlDocumentationException(typeof(InvalidOperationException), $"Throws if there is no data loaded in the current instance.");
+                using (_writer.Scope($"public virtual {This.ResourceData.Type} Data"))
                 {
-                    _writer.Line($"if (!HasData)");
-                    _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
-                    _writer.Line($"return _data;");
+                    using (_writer.Scope($"get"))
+                    {
+                        _writer.Line($"if (!HasData)");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
+                        _writer.Line($"return _data;");
+                    }
                 }
             }
 

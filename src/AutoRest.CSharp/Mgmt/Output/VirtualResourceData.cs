@@ -10,7 +10,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class VirtualResourceData : ResourceData
     {
-        public VirtualResourceData() : base(new ObjectSchema())
+        private static ObjectSchema GetEmptyObjectSchemaWithName(string name)
+        {
+            return new ObjectSchema
+            {
+                Language = new Languages
+                {
+                    Default = new Language
+                    {
+                        Name = name,
+                    }
+                }
+            };
+        }
+
+        public VirtualResourceData(string name) : base(GetEmptyObjectSchemaWithName(name))
         {
         }
     }

@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// This is a map from raw request path to their corresponding <see cref="OperationSet"/>,
         /// which is a collection of the operations with the same raw request path
         /// </summary>
-        private CachedDictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
+        internal CachedDictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
 
         /// <summary>
         /// This is a map from operation to its corresponding operation group
@@ -392,7 +392,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
-        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Where(data => data is not VirtualResourceData).Distinct();
 
         private IEnumerable<MgmtRestClient>? _restClients;
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= RawRequestPathToRestClient.Values.SelectMany(v => v).Distinct();
@@ -681,7 +681,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (requestPath == RequestPath.Any)
                 return Enumerable.Empty<Operation>();
 
-            if (EnsureResourceChildOperations().TryGetValue(requestPath, out var operations))
+            if (ChildOperations.TryGetValue(requestPath, out var operations))
                 return operations;
 
             return Enumerable.Empty<Operation>();
@@ -710,13 +710,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, ResourceData> EnsureRequestPathToResourceData()
         {
             var rawRequestPathToResourceData = new Dictionary<string, ResourceData>();
-            foreach (var entry in ResourceSchemaMap)
+            foreach ((var schema, var model) in ResourceSchemaMap)
             {
-                var schema = entry.Key;
                 if (ResourceDataSchemaNameToOperationSets.TryGetValue(schema.Name, out var operationSets))
                 {
                     // we are iterating over the ResourceSchemaMap, the value can only be [ResourceData]s
-                    var resourceData = (ResourceData)entry.Value;
+                    var resourceData = (ResourceData)model;
                     foreach (var operationSet in operationSets)
                     {
                         if (!rawRequestPathToResourceData.ContainsKey(operationSet.RequestPath))
@@ -725,6 +724,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         }
                     }
                 }
+            }
+
+            // add virtual resource data here
+            foreach ((var requestPath, var resourceDataSchemaName) in Configuration.MgmtConfiguration.VirtualResources)
+            {
+                rawRequestPathToResourceData.Add(requestPath, new VirtualResourceData(resourceDataSchemaName));
             }
 
             return rawRequestPathToResourceData;
@@ -818,15 +823,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // add the path of virtual resources here
-            foreach ((var virtualResourcePath, var virtualResourceDataSchemaName) in Configuration.MgmtConfiguration.VirtualResources)
-            {
-                if (!resourceDataSchemaNameToOperationSets.ContainsKey(virtualResourceDataSchemaName))
-                    resourceDataSchemaNameToOperationSets.Add(virtualResourceDataSchemaName, new HashSet<OperationSet>());
-                // add an empty operationSet
-                resourceDataSchemaNameToOperationSets[virtualResourceDataSchemaName].Add(new OperationSet(virtualResourcePath));
-            }
-
             return resourceDataSchemaNameToOperationSets;
         }
 
@@ -855,6 +851,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
+
+            // add virtual operation set here
+            foreach (var path in Configuration.MgmtConfiguration.VirtualResources.Keys)
+            {
+                rawRequestPathToOperationSets.Add(path, new OperationSet(path));
+            }
+
             return rawRequestPathToOperationSets;
         }
 

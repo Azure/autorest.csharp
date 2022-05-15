@@ -3,18 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using Azure.ResourceManager;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,17 +23,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         // TODO -- change this to a virtual resource description
         public override FormattableString Description => CreateDescription(ResourceName);
 
-        protected override string DefaultName => throw new NotImplementedException();
-
-        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
-        {
-            throw new NotImplementedException();
-        }
+        protected override string DefaultName => $"{ResourceName}{MgmtContext.RPName}".AddResourceSuffixToResourceName();
 
         protected override ConstructorSignature? EnsureResourceDataCtor()
         {
             // virtual resource does not have this constructor
             return null;
+        }
+
+        protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
+        {
+            yield break;
         }
     }
 }
