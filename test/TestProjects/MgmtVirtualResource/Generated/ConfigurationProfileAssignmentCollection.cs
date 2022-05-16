@@ -16,20 +16,18 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtVirtualResource
 {
     /// <summary>
     /// A class representing a collection of <see cref="ConfigurationProfileAssignmentResource" /> and their operations.
-    /// Each <see cref="ConfigurationProfileAssignmentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ConfigurationProfileAssignmentCollection" /> instance call the GetConfigurationProfileAssignments method from an instance of <see cref="ResourceGroupResource" />.
+    /// Each <see cref="ConfigurationProfileAssignmentResource" /> in the collection will belong to the same instance of <see cref="VirtualMachineMgmtVirtualResource" />.
+    /// To get a <see cref="ConfigurationProfileAssignmentCollection" /> instance call the GetConfigurationProfileAssignments method from an instance of <see cref="VirtualMachineMgmtVirtualResource" />.
     /// </summary>
     public partial class ConfigurationProfileAssignmentCollection : ArmCollection, IEnumerable<ConfigurationProfileAssignmentResource>, IAsyncEnumerable<ConfigurationProfileAssignmentResource>
     {
         private readonly ClientDiagnostics _configurationProfileAssignmentClientDiagnostics;
         private readonly ConfigurationProfileAssignmentsRestOperations _configurationProfileAssignmentRestClient;
-        private readonly string _vmName;
 
         /// <summary> Initializes a new instance of the <see cref="ConfigurationProfileAssignmentCollection"/> class for mocking. </summary>
         protected ConfigurationProfileAssignmentCollection()
@@ -39,12 +37,8 @@ namespace MgmtVirtualResource
         /// <summary> Initializes a new instance of the <see cref="ConfigurationProfileAssignmentCollection"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
-        /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
-        internal ConfigurationProfileAssignmentCollection(ArmClient client, ResourceIdentifier id, string vmName) : base(client, id)
+        internal ConfigurationProfileAssignmentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _vmName = vmName;
             _configurationProfileAssignmentClientDiagnostics = new ClientDiagnostics("MgmtVirtualResource", ConfigurationProfileAssignmentResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(ConfigurationProfileAssignmentResource.ResourceType, out string configurationProfileAssignmentApiVersion);
             _configurationProfileAssignmentRestClient = new ConfigurationProfileAssignmentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, configurationProfileAssignmentApiVersion);
@@ -55,8 +49,8 @@ namespace MgmtVirtualResource
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroupResource.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
+            if (id.ResourceType != VirtualMachineMgmtVirtualResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, VirtualMachineMgmtVirtualResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -79,7 +73,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = await _configurationProfileAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, data, cancellationToken).ConfigureAwait(false);
+                var response = await _configurationProfileAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtVirtualResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -112,7 +106,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = _configurationProfileAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, data, cancellationToken);
+                var response = _configurationProfileAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken);
                 var operation = new MgmtVirtualResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
@@ -142,7 +136,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = await _configurationProfileAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, cancellationToken).ConfigureAwait(false);
+                var response = await _configurationProfileAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value), response.GetRawResponse());
@@ -171,7 +165,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = _configurationProfileAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, cancellationToken);
+                var response = _configurationProfileAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value), response.GetRawResponse());
@@ -198,7 +192,7 @@ namespace MgmtVirtualResource
                 scope.Start();
                 try
                 {
-                    var response = await _configurationProfileAssignmentRestClient.ListByVirtualMachinesAsync(Id.SubscriptionId, Id.ResourceGroupName, _vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _configurationProfileAssignmentRestClient.ListByVirtualMachinesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ConfigurationProfileAssignmentResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -225,7 +219,7 @@ namespace MgmtVirtualResource
                 scope.Start();
                 try
                 {
-                    var response = _configurationProfileAssignmentRestClient.ListByVirtualMachines(Id.SubscriptionId, Id.ResourceGroupName, _vmName, cancellationToken: cancellationToken);
+                    var response = _configurationProfileAssignmentRestClient.ListByVirtualMachines(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ConfigurationProfileAssignmentResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -254,7 +248,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = await _configurationProfileAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _configurationProfileAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -281,7 +275,7 @@ namespace MgmtVirtualResource
             scope.Start();
             try
             {
-                var response = _configurationProfileAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, _vmName, configurationProfileAssignmentName, cancellationToken: cancellationToken);
+                var response = _configurationProfileAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

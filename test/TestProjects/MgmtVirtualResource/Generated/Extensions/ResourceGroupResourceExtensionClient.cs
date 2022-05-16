@@ -37,13 +37,5 @@ namespace MgmtVirtualResource
         {
             return GetCachedClient(Client => new PublicIPAddressCollection(Client, Id));
         }
-
-        /// <summary> Gets a collection of ConfigurationProfileAssignmentResources in the ResourceGroupResource. </summary>
-        /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <returns> An object representing collection of ConfigurationProfileAssignmentResources and their operations over a ConfigurationProfileAssignmentResource. </returns>
-        public virtual ConfigurationProfileAssignmentCollection GetConfigurationProfileAssignments(string vmName)
-        {
-            return new ConfigurationProfileAssignmentCollection(Client, Id, vmName);
-        }
     }
 }
