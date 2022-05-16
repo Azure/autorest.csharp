@@ -19,8 +19,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static string DefaultNamespace => Context.DefaultNamespace;
 
-        private static string? _rpName;
-        public static string RPName => _rpName ??= DefaultNamespace.Split('.').Last();
+        public static string RPName => DefaultNamespace.Split('.').Last();
 
         public static bool IsInitialized => _context is not null;
 
