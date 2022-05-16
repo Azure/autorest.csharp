@@ -104,6 +104,53 @@ namespace MgmtVirtualResource
             return resourceGroupResource.GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
         }
 
+        /// <summary> Gets a collection of ConfigurationProfileAssignmentResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        /// <returns> An object representing collection of ConfigurationProfileAssignmentResources and their operations over a ConfigurationProfileAssignmentResource. </returns>
+        public static ConfigurationProfileAssignmentCollection GetConfigurationProfileAssignments(this ResourceGroupResource resourceGroupResource, string vmName)
+        {
+            Argument.AssertNotNullOrEmpty(vmName, nameof(vmName));
+
+            return GetExtensionClient(resourceGroupResource).GetConfigurationProfileAssignments(vmName);
+        }
+
+        /// <summary>
+        /// Get information about a configuration profile assignment
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}
+        /// Operation Id: ConfigurationProfileAssignments_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> or <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="configurationProfileAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<ConfigurationProfileAssignmentResource>> GetConfigurationProfileAssignmentAsync(this ResourceGroupResource resourceGroupResource, string vmName, string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroupResource.GetConfigurationProfileAssignments(vmName).GetAsync(configurationProfileAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get information about a configuration profile assignment
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}
+        /// Operation Id: ConfigurationProfileAssignments_Get
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> or <paramref name="configurationProfileAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="configurationProfileAssignmentName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<ConfigurationProfileAssignmentResource> GetConfigurationProfileAssignment(this ResourceGroupResource resourceGroupResource, string vmName, string configurationProfileAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetConfigurationProfileAssignments(vmName).Get(configurationProfileAssignmentName, cancellationToken);
+        }
+
         #region PublicIPAddressResource
         /// <summary>
         /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
@@ -118,6 +165,25 @@ namespace MgmtVirtualResource
             {
                 PublicIPAddressResource.ValidateResourceId(id);
                 return new PublicIPAddressResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ConfigurationProfileAssignmentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ConfigurationProfileAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ConfigurationProfileAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="ConfigurationProfileAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
+        public static ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ConfigurationProfileAssignmentResource.ValidateResourceId(id);
+                return new ConfigurationProfileAssignmentResource(client, id);
             }
             );
         }
