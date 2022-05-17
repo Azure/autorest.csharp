@@ -183,8 +183,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var resource in FindAllResources())
             {
-                VerifyMethodReturnType(resource, resource, "Get");
                 var resourceData = GetResourceDataByResource(resource);
+                if (resourceData == null)
+                {
+                    continue;
+                }
+                VerifyMethodReturnType(resource, resource, "Get");
                 if (typeof(TrackedResourceData).IsAssignableFrom(resourceData))
                 {
                     VerifyMethodReturnType(resource, resource, "AddTag");
@@ -387,7 +391,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
                 }
@@ -418,7 +422,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
                 }
@@ -439,7 +443,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsInheritFromTrackedResource(resourceData))
+                if (resourceData == null || !IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
                 }
