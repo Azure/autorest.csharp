@@ -70,11 +70,11 @@ namespace MgmtVirtualResource
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PublicIPAddressResource> GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddressesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<PublicIPAddressResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -89,7 +89,7 @@ namespace MgmtVirtualResource
             }
             async Task<Page<PublicIPAddressResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -112,11 +112,11 @@ namespace MgmtVirtualResource
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PublicIPAddressResource> GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddresses(CancellationToken cancellationToken = default)
+        public virtual Pageable<PublicIPAddressResource> GetPublicIPAddresses(CancellationToken cancellationToken = default)
         {
             Page<PublicIPAddressResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {
@@ -131,7 +131,7 @@ namespace MgmtVirtualResource
             }
             Page<PublicIPAddressResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetVirtualMachineScaleSetPublicIPAddressesPublicIPAddresses");
+                using var scope = _publicIPAddressClientDiagnostics.CreateScope("VirtualMachineScaleSetMgmtVirtualResource.GetPublicIPAddresses");
                 scope.Start();
                 try
                 {

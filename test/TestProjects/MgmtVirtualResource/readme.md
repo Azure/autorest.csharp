@@ -15,4 +15,7 @@ namespace: MgmtVirtualResource
 virtual-resources:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}: VirtualMachineScaleSet
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}: VirtualMachine
+
+override-operation-name:
+  PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses: GetPublicIPAddresses
 ```

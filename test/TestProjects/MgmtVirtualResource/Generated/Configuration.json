@@ -10,6 +10,9 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "OverrideOperationName": {
+    "PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses": "GetPublicIPAddresses"
+  },
   "VirtualResources": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}": "VirtualMachineScaleSet",
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": "VirtualMachine"

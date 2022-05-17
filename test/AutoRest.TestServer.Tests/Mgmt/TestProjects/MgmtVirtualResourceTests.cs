@@ -14,6 +14,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(true, "VirtualMachineMgmtVirtualResource", "GetConfigurationProfileAssignments")]
         [TestCase(true, "VirtualMachineMgmtVirtualResource", "GetConfigurationProfileAssignment")]
         [TestCase(true, "VirtualMachineMgmtVirtualResource", "GetConfigurationProfileAssignmentAsync")]
+        [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "Get")]
+        [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "GetAsync")]
+        [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "Delete")]
+        [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "DeleteAsync")]
+        [TestCase(true, "VirtualMachineScaleSetMgmtVirtualResource", "GetPublicIPAddresses")]
+        [TestCase(true, "VirtualMachineScaleSetMgmtVirtualResource", "GetPublicIPAddressesAsync")]
+        [TestCase(true, "MgmtVirtualResourceExtensions", "GetVirtualMachineMgmtVirtualResource")]
+        [TestCase(true, "MgmtVirtualResourceExtensions", "GetVirtualMachineScaleSetMgmtVirtualResource")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtVirtualResource.{className}");
@@ -25,17 +33,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(false, "VirtualMachineMgmtVirtualResource", "HasData")]
         [TestCase(false, "VirtualMachineMgmtVirtualResource", "Data")]
-        [TestCase(false, "VirtualMachineMgmtVirtualResource", "ResourceType")]
         [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "HasData")]
         [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "Data")]
-        [TestCase(false, "VirtualMachineScaleSetMgmtVirtualResource", "ResourceType")]
         public void ValidateProperty(bool exist, string className, string propertyName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtVirtualResource.{className}");
             Assert.NotNull(resource, $"Class {className} not found");
 
-            var method = resource.GetProperty(propertyName);
-            Assert.AreEqual(exist, method != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist on class {className}");
+            var property = resource.GetProperty(propertyName);
+            Assert.AreEqual(exist, property != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist on class {className}");
         }
     }
 }
