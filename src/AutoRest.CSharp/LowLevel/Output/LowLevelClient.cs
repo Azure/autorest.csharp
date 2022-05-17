@@ -129,7 +129,8 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     var headAsBoolean = requestMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
                     returnType = operation.IsLongRunning
-                        ? typeof(Azure.Operation<BinaryData>)
+                        ? ((responseSchema != null) ? typeof(Azure.Operation<BinaryData>) : typeof(Azure.Operation<VoidValue>))
+                        //? typeof(Azure.Operation<BinaryData>)
                         : headAsBoolean
                             ? typeof(Azure.Response<bool>)
                             : typeof(Azure.Response);
