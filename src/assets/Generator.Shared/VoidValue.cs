@@ -6,15 +6,5 @@ using System.Text.Json;
 
 namespace Azure.Core
 {
-    public struct VoidValue {
-        internal static VoidValue DeserializeVoidValue(JsonElement element)
-        {
-            return new VoidValue();
-        }
-
-        public static explicit operator VoidValue(BinaryData v)
-        {
-            return new VoidValue();
-        }
-    }
+    internal struct VoidValue { }
 }
