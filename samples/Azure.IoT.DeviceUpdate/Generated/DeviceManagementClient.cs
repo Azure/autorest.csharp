@@ -3679,7 +3679,7 @@ namespace Azure.IoT.DeviceUpdate
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<VoidValue>> ImportDevicesAsync(WaitUntil waitUntil, string action, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> ImportDevicesAsync(WaitUntil waitUntil, string action, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
             Argument.AssertNotNull(content, nameof(content));
@@ -3724,7 +3724,7 @@ namespace Azure.IoT.DeviceUpdate
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<VoidValue> ImportDevices(WaitUntil waitUntil, string action, RequestContent content, RequestContext context = null)
+        public virtual Operation ImportDevices(WaitUntil waitUntil, string action, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(action, nameof(action));
             Argument.AssertNotNull(content, nameof(content));
