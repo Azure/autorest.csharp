@@ -30,7 +30,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType CreateType(Schema schema, bool isNullable) => CreateType(schema, schema.Extensions, isNullable);
 
-        public CSharpType CreateType(Schema schema, RecordOfStringAndAny? schemaExtensions, bool isNullable) => schema switch
+        // This function provide the capability to support the extensions is coming from outside, like parameter.
+        public CSharpType CreateType(Schema schema, RecordOfStringAndAny? extensions, bool isNullable) => schema switch
         {
             ConstantSchema constantSchema => ToXMsFormatType(constantSchema.Extensions?.Format) is Type type ? new CSharpType(type, isNullable) : CreateType(constantSchema.ValueType, isNullable),
             BinarySchema _ => new CSharpType(typeof(Stream), isNullable),
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Types
                 new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
-            _ when ToFrameworkType(schema, schemaExtensions) is Type type => new CSharpType(type, isNullable),
+            _ when ToFrameworkType(schema, extensions) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
@@ -181,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static Type? ToFrameworkType(Schema schema) => ToFrameworkType(schema, schema.Extensions);
 
-        internal static Type? ToFrameworkType(Schema schema, RecordOfStringAndAny? schemaExtensions) => schema.Type switch
+        internal static Type? ToFrameworkType(Schema schema, RecordOfStringAndAny? extensions) => schema.Type switch
         {
             AllSchemaTypes.Boolean => typeof(bool),
             AllSchemaTypes.ByteArray => null,
@@ -190,7 +191,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.DateTime => typeof(DateTimeOffset),
             AllSchemaTypes.Duration => typeof(TimeSpan),
             AllSchemaTypes.OdataQuery => typeof(string),
-            AllSchemaTypes.String => ToXMsFormatType(schemaExtensions?.Format) ?? typeof(string),
+            AllSchemaTypes.String => ToXMsFormatType(extensions?.Format) ?? typeof(string),
             AllSchemaTypes.Time => typeof(TimeSpan),
             AllSchemaTypes.Unixtime => typeof(DateTimeOffset),
             AllSchemaTypes.Uri => typeof(Uri),
