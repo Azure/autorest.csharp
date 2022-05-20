@@ -2848,7 +2848,7 @@ schemas: !Schemas
                         serializedName: privateLinkServiceConnectionState
                         language: !Languages 
                           default:
-                            name: privateLinkServiceConnectionState
+                            name: connectionState
                             description: Approval state of the private link connection.
                         protocol: !Protocols {}
                       - !Property 
@@ -3867,7 +3867,7 @@ schemas: !Schemas
           serializedName: privateLinkServiceConnectionState
           language: !Languages 
             default:
-              name: privateLinkServiceConnectionState
+              name: connectionState
               description: Approval state of the private link connection.
           protocol: !Protocols {}
         - !Property 

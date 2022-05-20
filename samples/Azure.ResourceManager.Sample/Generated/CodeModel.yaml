@@ -20127,6 +20127,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -20234,6 +20236,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -20315,6 +20319,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21024,6 +21030,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21144,6 +21152,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21287,6 +21297,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21368,6 +21380,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21436,6 +21450,8 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21538,6 +21554,8 @@ operationGroups:
             schema: *ref_765
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -21619,6 +21637,8 @@ operationGroups:
             schema: *ref_765
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -23654,6 +23674,8 @@ operationGroups:
             schema: *ref_765
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -29573,6 +29595,8 @@ operationGroups:
             schema: *ref_765
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location
@@ -29685,6 +29709,8 @@ operationGroups:
             schema: *ref_765
             implementation: Method
             required: true
+            extensions:
+              x-ms-format: azure-location
             language: !Languages 
               default:
                 name: location

@@ -75,6 +75,43 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task GetHandwrittenModelPages() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPagesValuesAsync("model");
+            var pagesCount = 0;
+            await foreach (Page<Product> page in allPages.AsPages())
+            {
+                pagesCount++;
+                Assert.AreEqual("model", $"{page.Values.First().Received}");
+            }
+
+            // +1 due to the last iteration of enumeration that doesn't make a call
+            Assert.AreEqual(pagesCount + 1, diagnosticListener.Scopes.Count);
+        });
+
+        [Test]
+        public Task RawLRO() => Test(async (host) =>
+        {
+            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            Operation<BinaryData> result = await new DPGClient(Key, host, null).LroAsync(WaitUntil.Started, "raw");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            await result.WaitForCompletionAsync();
+            // TO-DO: we will add the assert back after fix https://github.com/Azure/autorest.csharp/issues/2236
+            // diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletion");
+            // CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+
+            JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
+            Assert.AreEqual("raw", (string)responseBody["received"]);
+        });
+
+        [Test]
         public Task HandwrittenModelLro() => Test(async (host) =>
         {
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
@@ -118,24 +155,6 @@ namespace AutoRest.TestServer.Tests
             diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
-        });
-
-        [Test]
-        public Task GetHandwrittenModelPages() => Test(async (host) =>
-        {
-            using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
-            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
-
-            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPagesValuesAsync("model");
-            var pagesCount = 0;
-            await foreach (Page<Product> page in allPages.AsPages())
-            {
-                pagesCount++;
-                Assert.AreEqual("model", $"{page.Values.First().Received}");
-            }
-
-            // +1 due to the last iteration of enumeration that doesn't make a call
-            Assert.AreEqual(pagesCount + 1, diagnosticListener.Scopes.Count);
         });
 
         [Test]
