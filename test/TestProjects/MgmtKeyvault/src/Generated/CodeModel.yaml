@@ -165,7 +165,7 @@ schemas: !Schemas
           name: VaultPatchPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_249
+    - !NumberSchema &ref_252
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -177,7 +177,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_272
+    - !NumberSchema &ref_277
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -201,7 +201,7 @@ schemas: !Schemas
           name: ManagedHsmPropertiesSoftDeleteRetentionInDays
           description: softDelete data retention days. It accepts >=7 and <=90.
       protocol: !Protocols {}
-    - !NumberSchema &ref_291
+    - !NumberSchema &ref_298
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -213,7 +213,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_315
+    - !NumberSchema &ref_323
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -615,7 +615,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Azure location of the key vault resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_273
+    - !StringSchema &ref_278
       type: string
       apiVersions:
         - !ApiVersion 
@@ -901,7 +901,7 @@ schemas: !Schemas
           name: DeletedManagedHsmListResultNextLink
           description: The URL to get the next set of deleted managed HSM Pools.
       protocol: !Protocols {}
-    - !StringSchema &ref_311
+    - !StringSchema &ref_319
       type: string
       apiVersions:
         - !ApiVersion 
@@ -912,7 +912,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_316
+    - !StringSchema &ref_324
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1934,7 +1934,7 @@ schemas: !Schemas
           name: CreateMode
           description: The vault's create mode to indicate whether the vault need to be recovered or not.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_243
+    - !SealedChoiceSchema &ref_245
       choices:
         - !ChoiceValue 
           value: add
@@ -3076,7 +3076,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_58
-    - !ObjectSchema &ref_234
+    - !ObjectSchema &ref_235
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3136,7 +3136,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_61
-    - !ObjectSchema &ref_235
+    - !ObjectSchema &ref_236
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3297,7 +3297,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_67
-    - !ObjectSchema &ref_244
+    - !ObjectSchema &ref_246
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3401,7 +3401,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_72
-    - !ObjectSchema &ref_252
+    - !ObjectSchema &ref_255
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3443,7 +3443,7 @@ schemas: !Schemas
           description: List of vaults
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_254
+    - !ObjectSchema &ref_257
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3606,7 +3606,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_85
     - *ref_86
-    - !ObjectSchema &ref_259
+    - !ObjectSchema &ref_262
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3640,7 +3640,7 @@ schemas: !Schemas
           description: The parameters used to check the availability of the vault name.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_261
+    - !ObjectSchema &ref_265
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3895,7 +3895,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_93
-    - !ObjectSchema &ref_276
+    - !ObjectSchema &ref_281
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3937,7 +3937,7 @@ schemas: !Schemas
           description: List of private endpoint connections.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_279
+    - !ObjectSchema &ref_284
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4657,7 +4657,7 @@ schemas: !Schemas
     - *ref_133
     - *ref_106
     - *ref_141
-    - !ObjectSchema &ref_283
+    - !ObjectSchema &ref_289
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4725,7 +4725,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_144
-    - !ObjectSchema &ref_294
+    - !ObjectSchema &ref_301
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4767,7 +4767,7 @@ schemas: !Schemas
           description: List of managed HSM Pools
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_303
+    - !ObjectSchema &ref_310
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4810,7 +4810,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_113
-    - !ObjectSchema &ref_296
+    - !ObjectSchema &ref_303
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4973,7 +4973,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_157
     - *ref_158
-    - !ObjectSchema &ref_319
+    - !ObjectSchema &ref_327
       type: object
       apiVersions:
         - !ApiVersion 
@@ -5008,7 +5008,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_114
-    - !ObjectSchema &ref_320
+    - !ObjectSchema &ref_328
       type: object
       apiVersions:
         - !ApiVersion 
@@ -5077,9 +5077,6 @@ schemas: !Schemas
                       - json
                     usage:
                       - output
-                    extensions:
-                      x-internal-autorest-anonymous-schema:
-                        anonymous: true
                     language: !Languages 
                       default:
                         name: OperationDisplay
@@ -5547,12 +5544,13 @@ operationGroups:
     $key: Vaults
     operations:
       - !Operation 
+        operationId: Vaults_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_232
+          - !Parameter &ref_233
             schema: *ref_1
             implementation: Method
             required: true
@@ -5564,7 +5562,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_233
+          - !Parameter &ref_234
             schema: *ref_225
             implementation: Method
             required: true
@@ -5578,8 +5576,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_232
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -5633,9 +5631,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_232
+        signatureParameters:
           - *ref_233
+          - *ref_234
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -5665,7 +5665,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -5995,12 +5995,13 @@ operationGroups:
             description: Create or update a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Update
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_237
+          - !Parameter &ref_239
             schema: *ref_1
             implementation: Method
             required: true
@@ -6012,7 +6013,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_238
+          - !Parameter &ref_240
             schema: *ref_225
             implementation: Method
             required: true
@@ -6026,8 +6027,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_238
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -6042,8 +6043,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_236
-                schema: *ref_235
+              - !Parameter &ref_237
+                schema: *ref_236
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6068,7 +6069,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_236
+              - *ref_237
             language: !Languages 
               default:
                 name: ''
@@ -6081,9 +6082,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_237
+        requests:
           - *ref_238
+        signatureParameters:
+          - *ref_239
+          - *ref_240
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -6113,7 +6116,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6351,12 +6354,13 @@ operationGroups:
             description: Update a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_239
+          - !Parameter &ref_241
             schema: *ref_1
             implementation: Method
             required: true
@@ -6368,7 +6372,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_240
+          - !Parameter &ref_242
             schema: *ref_1
             implementation: Method
             required: true
@@ -6409,8 +6413,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_239
-          - *ref_240
+          - *ref_241
+          - *ref_242
         responses:
           - !Response 
             language: !Languages 
@@ -6432,7 +6436,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6463,12 +6467,13 @@ operationGroups:
             description: Deletes the specified Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_241
+          - !Parameter &ref_243
             schema: *ref_1
             implementation: Method
             required: true
@@ -6480,7 +6485,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_242
+          - !Parameter &ref_244
             schema: *ref_1
             implementation: Method
             required: true
@@ -6521,8 +6526,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_241
-          - *ref_242
+          - *ref_243
+          - *ref_244
         responses:
           - !SchemaResponse 
             schema: *ref_73
@@ -6539,7 +6544,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6636,12 +6641,13 @@ operationGroups:
             description: Gets the specified Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_UpdateAccessPolicy
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_246
+          - !Parameter &ref_249
             schema: *ref_1
             implementation: Method
             required: true
@@ -6653,7 +6659,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_247
+          - !Parameter &ref_250
             schema: *ref_225
             implementation: Method
             required: true
@@ -6665,8 +6671,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_248
-            schema: *ref_243
+          - !Parameter &ref_251
+            schema: *ref_245
             implementation: Method
             required: true
             language: !Languages 
@@ -6679,8 +6685,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_248
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -6695,8 +6701,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_245
-                schema: *ref_244
+              - !Parameter &ref_247
+                schema: *ref_246
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -6721,7 +6727,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_245
+              - *ref_247
             language: !Languages 
               default:
                 name: ''
@@ -6734,13 +6740,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_246
-          - *ref_247
+        requests:
           - *ref_248
+        signatureParameters:
+          - *ref_249
+          - *ref_250
+          - *ref_251
         responses:
           - !SchemaResponse 
-            schema: *ref_244
+            schema: *ref_246
             language: !Languages 
               default:
                 name: ''
@@ -6753,7 +6761,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_244
+            schema: *ref_246
             language: !Languages 
               default:
                 name: ''
@@ -6767,7 +6775,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -6782,7 +6790,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -6858,12 +6866,13 @@ operationGroups:
             description: Update access policies in a key vault in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_250
+          - !Parameter &ref_253
             schema: *ref_1
             implementation: Method
             required: true
@@ -6875,8 +6884,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_251
-            schema: *ref_249
+          - !Parameter &ref_254
+            schema: *ref_252
             implementation: Method
             language: !Languages 
               default:
@@ -6915,11 +6924,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_250
-          - *ref_251
+          - *ref_253
+          - *ref_254
         responses:
           - !SchemaResponse 
-            schema: *ref_252
+            schema: *ref_255
             language: !Languages 
               default:
                 name: ''
@@ -6933,7 +6942,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7037,13 +7046,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_253
-            schema: *ref_249
+          - !Parameter &ref_256
+            schema: *ref_252
             implementation: Method
             language: !Languages 
               default:
@@ -7082,10 +7092,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_253
+          - *ref_256
         responses:
           - !SchemaResponse 
-            schema: *ref_252
+            schema: *ref_255
             language: !Languages 
               default:
                 name: ''
@@ -7099,7 +7109,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7202,6 +7212,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_ListDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7238,7 +7249,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_254
+            schema: *ref_257
             language: !Languages 
               default:
                 name: ''
@@ -7252,7 +7263,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7297,12 +7308,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_GetDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_255
+          - !Parameter &ref_258
             schema: *ref_1
             implementation: Method
             required: true
@@ -7314,7 +7326,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_256
+          - !Parameter &ref_259
             schema: *ref_1
             implementation: Method
             required: true
@@ -7355,8 +7367,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_255
-          - *ref_256
+          - *ref_258
+          - *ref_259
         responses:
           - !SchemaResponse 
             schema: *ref_85
@@ -7373,7 +7385,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7413,12 +7425,13 @@ operationGroups:
             description: Gets the deleted Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_PurgeDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_257
+          - !Parameter &ref_260
             schema: *ref_1
             implementation: Method
             required: true
@@ -7430,7 +7443,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_258
+          - !Parameter &ref_261
             schema: *ref_1
             implementation: Method
             required: true
@@ -7471,8 +7484,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_257
-          - *ref_258
+          - *ref_260
+          - *ref_261
         responses:
           - !Response 
             language: !Languages 
@@ -7494,7 +7507,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             extensions:
               x-ms-error-response: true
             language: !Languages 
@@ -7509,7 +7522,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7547,6 +7560,7 @@ operationGroups:
             description: Permanently deletes the specified vault. aka Purges the deleted Azure key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Vaults_CheckNameAvailability
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7554,8 +7568,8 @@ operationGroups:
           - *ref_224
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_264
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -7570,8 +7584,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_260
-                schema: *ref_259
+              - !Parameter &ref_263
+                schema: *ref_262
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -7596,7 +7610,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_260
+              - *ref_263
             language: !Languages 
               default:
                 name: ''
@@ -7609,10 +7623,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_264
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_261
+            schema: *ref_265
             language: !Languages 
               default:
                 name: ''
@@ -7626,7 +7642,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7665,148 +7681,7 @@ operationGroups:
     $key: PrivateEndpointConnections
     operations:
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 2021-04-01-preview
-        parameters:
-          - *ref_224
-          - *ref_227
-          - !Parameter &ref_262
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: Name of the resource group that contains the key vault.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_263
-            schema: *ref_225
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vaultName
-                description: The name of the key vault.
-                serializedName: vaultName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_264
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: privateEndpointConnectionName
-                description: Name of the private endpoint connection associated with the key vault.
-                serializedName: privateEndpointConnectionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_226
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_230
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_262
-          - *ref_263
-          - *ref_264
-        responses:
-          - !SchemaResponse 
-            schema: *ref_92
-            language: !Languages 
-              default:
-                name: ''
-                description: Private endpoint connection successfully returned.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: The private endpoint connection does not exist.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '204'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_234
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            KeyVaultGetPrivateEndpointConnection:
-              parameters:
-                api-version: '2018-02-14'
-                privateEndpointConnectionName: sample-pec
-                resourceGroupName: sample-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
-              responses:
-                '200':
-                  body:
-                    name: sample-pec
-                    type: Microsoft.KeyVault/vaults/privateEndpointConnections
-                    etag: ''
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                      privateLinkServiceConnectionState:
-                        description: This was automatically approved by user1234@contoso.com
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
-                '204':
-                  headers: {}
-        language: !Languages 
-          default:
-            name: Get
-            description: Gets the specified private endpoint connection associated with the key vault.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: PrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -7854,6 +7729,149 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
+                schema: *ref_230
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_266
+          - *ref_267
+          - *ref_268
+        responses:
+          - !SchemaResponse 
+            schema: *ref_92
+            language: !Languages 
+              default:
+                name: ''
+                description: Private endpoint connection successfully returned.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The private endpoint connection does not exist.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_235
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            KeyVaultGetPrivateEndpointConnection:
+              parameters:
+                api-version: '2018-02-14'
+                privateEndpointConnectionName: sample-pec
+                resourceGroupName: sample-group
+                subscriptionId: 00000000-0000-0000-0000-000000000000
+                vaultName: sample-vault
+              responses:
+                '200':
+                  body:
+                    name: sample-pec
+                    type: Microsoft.KeyVault/vaults/privateEndpointConnections
+                    etag: ''
+                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec
+                    properties:
+                      privateEndpoint:
+                        id: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
+                      privateLinkServiceConnectionState:
+                        description: This was automatically approved by user1234@contoso.com
+                        actionsRequired: None
+                        status: Approved
+                      provisioningState: Succeeded
+                '204':
+                  headers: {}
+        language: !Languages 
+          default:
+            name: Get
+            description: Gets the specified private endpoint connection associated with the key vault.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: PrivateEndpointConnections_Put
+        apiVersions:
+          - !ApiVersion 
+            version: 2021-04-01-preview
+        parameters:
+          - *ref_224
+          - *ref_227
+          - !Parameter &ref_271
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group that contains the key vault.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_272
+            schema: *ref_225
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vaultName
+                description: The name of the key vault.
+                serializedName: vaultName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_273
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: privateEndpointConnectionName
+                description: Name of the private endpoint connection associated with the key vault.
+                serializedName: privateEndpointConnectionName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_226
+        requestMediaTypes:
+          application/json: !Request &ref_270
+            parameters:
+              - !Parameter 
                 schema: *ref_228
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
@@ -7866,7 +7884,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_265
+              - !Parameter &ref_269
                 schema: *ref_92
                 implementation: Method
                 required: true
@@ -7892,7 +7910,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_265
+              - *ref_269
             language: !Languages 
               default:
                 name: ''
@@ -7905,10 +7923,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_270
         signatureParameters:
-          - *ref_266
-          - *ref_267
-          - *ref_268
+          - *ref_271
+          - *ref_272
+          - *ref_273
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -7920,7 +7940,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_249
+                    schema: *ref_252
                     header: Retry-After
                     language:
                       default:
@@ -7940,7 +7960,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -7988,13 +8008,14 @@ operationGroups:
             description: Updates the specified private endpoint connection associated with the key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_269
+          - !Parameter &ref_274
             schema: *ref_1
             implementation: Method
             required: true
@@ -8006,7 +8027,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_270
+          - !Parameter &ref_275
             schema: *ref_225
             implementation: Method
             required: true
@@ -8018,7 +8039,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_271
+          - !Parameter &ref_276
             schema: *ref_1
             implementation: Method
             required: true
@@ -8058,9 +8079,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_269
-          - *ref_270
-          - *ref_271
+          - *ref_274
+          - *ref_275
+          - *ref_276
         responses:
           - !SchemaResponse 
             schema: *ref_92
@@ -8084,14 +8105,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_272
+                    schema: *ref_277
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_273
+                    schema: *ref_278
                     header: Location
                     language:
                       default:
@@ -8110,7 +8131,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8151,13 +8172,14 @@ operationGroups:
             description: Deletes the specified private endpoint connection associated with the key vault.
         protocol: !Protocols {}
       - !Operation 
+        operationId: PrivateEndpointConnections_ListByResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_274
+          - !Parameter &ref_279
             schema: *ref_1
             implementation: Method
             required: true
@@ -8169,7 +8191,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_275
+          - !Parameter &ref_280
             schema: *ref_225
             implementation: Method
             required: true
@@ -8209,11 +8231,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_274
-          - *ref_275
+          - *ref_279
+          - *ref_280
         responses:
           - !SchemaResponse 
-            schema: *ref_276
+            schema: *ref_281
             language: !Languages 
               default:
                 name: ''
@@ -8227,7 +8249,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8294,13 +8316,14 @@ operationGroups:
     $key: PrivateLinkResources
     operations:
       - !Operation 
+        operationId: PrivateLinkResources_ListByVault
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_277
+          - !Parameter &ref_282
             schema: *ref_1
             implementation: Method
             required: true
@@ -8312,7 +8335,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_278
+          - !Parameter &ref_283
             schema: *ref_225
             implementation: Method
             required: true
@@ -8352,11 +8375,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_277
-          - *ref_278
+          - *ref_282
+          - *ref_283
         responses:
           - !SchemaResponse 
-            schema: *ref_279
+            schema: *ref_284
             language: !Languages 
               default:
                 name: ''
@@ -8370,7 +8393,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -8417,12 +8440,13 @@ operationGroups:
     $key: ManagedHsms
     operations:
       - !Operation 
+        operationId: ManagedHsms_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_281
+          - !Parameter &ref_287
             schema: *ref_2
             implementation: Method
             required: true
@@ -8434,7 +8458,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_282
+          - !Parameter &ref_288
             schema: *ref_2
             implementation: Method
             required: true
@@ -8448,8 +8472,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_286
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -8464,7 +8488,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_280
+              - !Parameter &ref_285
                 schema: *ref_105
                 implementation: Method
                 required: true
@@ -8490,7 +8514,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_280
+              - *ref_285
             language: !Languages 
               default:
                 name: ''
@@ -8503,9 +8527,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_286
         signatureParameters:
-          - *ref_281
-          - *ref_282
+          - *ref_287
+          - *ref_288
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -8535,7 +8561,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8622,12 +8648,13 @@ operationGroups:
             description: Create or update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Update
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_285
+          - !Parameter &ref_292
             schema: *ref_2
             implementation: Method
             required: true
@@ -8639,7 +8666,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_286
+          - !Parameter &ref_293
             schema: *ref_2
             implementation: Method
             required: true
@@ -8653,8 +8680,8 @@ operationGroups:
                 in: path
           - *ref_226
           - *ref_227
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_291
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -8669,7 +8696,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_284
+              - !Parameter &ref_290
                 schema: *ref_105
                 implementation: Method
                 required: true
@@ -8695,7 +8722,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_284
+              - *ref_290
             language: !Languages 
               default:
                 name: ''
@@ -8708,9 +8735,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_291
         signatureParameters:
-          - *ref_285
-          - *ref_286
+          - *ref_292
+          - *ref_293
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -8740,7 +8769,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8819,12 +8848,13 @@ operationGroups:
             description: Update a managed HSM Pool in the specified subscription.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_287
+          - !Parameter &ref_294
             schema: *ref_2
             implementation: Method
             required: true
@@ -8836,7 +8866,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_288
+          - !Parameter &ref_295
             schema: *ref_2
             implementation: Method
             required: true
@@ -8877,8 +8907,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_287
-          - *ref_288
+          - *ref_294
+          - *ref_295
         responses:
           - !Response 
             language: !Languages 
@@ -8909,7 +8939,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -8940,12 +8970,13 @@ operationGroups:
             description: Deletes the specified managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_289
+          - !Parameter &ref_296
             schema: *ref_2
             implementation: Method
             required: true
@@ -8957,7 +8988,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_290
+          - !Parameter &ref_297
             schema: *ref_2
             implementation: Method
             required: true
@@ -8998,8 +9029,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_289
-          - *ref_290
+          - *ref_296
+          - *ref_297
         responses:
           - !SchemaResponse 
             schema: *ref_105
@@ -9034,7 +9065,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9089,12 +9120,13 @@ operationGroups:
             description: Gets the specified managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_292
+          - !Parameter &ref_299
             schema: *ref_2
             implementation: Method
             required: true
@@ -9106,8 +9138,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_293
-            schema: *ref_291
+          - !Parameter &ref_300
+            schema: *ref_298
             implementation: Method
             language: !Languages 
               default:
@@ -9146,11 +9178,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_292
-          - *ref_293
+          - *ref_299
+          - *ref_300
         responses:
           - !SchemaResponse 
-            schema: *ref_294
+            schema: *ref_301
             language: !Languages 
               default:
                 name: ''
@@ -9164,7 +9196,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9239,13 +9271,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_295
-            schema: *ref_291
+          - !Parameter &ref_302
+            schema: *ref_298
             implementation: Method
             language: !Languages 
               default:
@@ -9284,10 +9317,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_295
+          - *ref_302
         responses:
           - !SchemaResponse 
-            schema: *ref_294
+            schema: *ref_301
             language: !Languages 
               default:
                 name: ''
@@ -9301,7 +9334,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9374,6 +9407,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_ListDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -9410,7 +9444,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_296
+            schema: *ref_303
             language: !Languages 
               default:
                 name: ''
@@ -9424,7 +9458,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9481,12 +9515,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_GetDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_297
+          - !Parameter &ref_304
             schema: *ref_2
             implementation: Method
             required: true
@@ -9498,7 +9533,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_298
+          - !Parameter &ref_305
             schema: *ref_2
             implementation: Method
             required: true
@@ -9539,8 +9574,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_297
-          - *ref_298
+          - *ref_304
+          - *ref_305
         responses:
           - !SchemaResponse 
             schema: *ref_157
@@ -9557,7 +9592,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9598,12 +9633,13 @@ operationGroups:
             description: Gets the specified deleted managed HSM.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ManagedHsms_PurgeDeleted
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
-          - !Parameter &ref_299
+          - !Parameter &ref_306
             schema: *ref_2
             implementation: Method
             required: true
@@ -9615,7 +9651,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_300
+          - !Parameter &ref_307
             schema: *ref_2
             implementation: Method
             required: true
@@ -9656,8 +9692,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_299
-          - *ref_300
+          - *ref_306
+          - *ref_307
         responses:
           - !Response 
             language: !Languages 
@@ -9670,7 +9706,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9707,6 +9743,7 @@ operationGroups:
     $key: MHSMPrivateEndpointConnections
     operations:
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_ListByResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -9714,7 +9751,7 @@ operationGroups:
           - *ref_224
           - *ref_226
           - *ref_227
-          - !Parameter &ref_301
+          - !Parameter &ref_308
             schema: *ref_2
             implementation: Method
             required: true
@@ -9726,7 +9763,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_302
+          - !Parameter &ref_309
             schema: *ref_2
             implementation: Method
             required: true
@@ -9765,11 +9802,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_301
-          - *ref_302
+          - *ref_308
+          - *ref_309
         responses:
           - !SchemaResponse 
-            schema: *ref_303
+            schema: *ref_310
             language: !Languages 
               default:
                 name: ''
@@ -9783,7 +9820,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9842,13 +9879,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Get
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_304
+          - !Parameter &ref_311
             schema: *ref_2
             implementation: Method
             required: true
@@ -9860,7 +9898,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_305
+          - !Parameter &ref_312
             schema: *ref_2
             implementation: Method
             required: true
@@ -9872,7 +9910,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_306
+          - !Parameter &ref_313
             schema: *ref_2
             implementation: Method
             required: true
@@ -9912,9 +9950,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_304
-          - *ref_305
-          - *ref_306
+          - *ref_311
+          - *ref_312
+          - *ref_313
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -9931,7 +9969,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_283
+            schema: *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9973,13 +10011,14 @@ operationGroups:
             description: Gets the specified private endpoint connection associated with the managed HSM Pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Put
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_308
+          - !Parameter &ref_316
             schema: *ref_2
             implementation: Method
             required: true
@@ -9991,7 +10030,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_309
+          - !Parameter &ref_317
             schema: *ref_2
             implementation: Method
             required: true
@@ -10003,7 +10042,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_310
+          - !Parameter &ref_318
             schema: *ref_2
             implementation: Method
             required: true
@@ -10016,8 +10055,8 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_226
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_315
             parameters:
               - !Parameter 
                 schema: *ref_228
@@ -10032,7 +10071,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_307
+              - !Parameter &ref_314
                 schema: *ref_113
                 implementation: Method
                 required: true
@@ -10058,7 +10097,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_307
+              - *ref_314
             language: !Languages 
               default:
                 name: ''
@@ -10071,10 +10110,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_315
         signatureParameters:
-          - *ref_308
-          - *ref_309
-          - *ref_310
+          - *ref_316
+          - *ref_317
+          - *ref_318
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -10086,7 +10127,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_291
+                    schema: *ref_298
                     header: Retry-After
                     language:
                       default:
@@ -10106,7 +10147,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10152,13 +10193,14 @@ operationGroups:
             description: Updates the specified private endpoint connection associated with the managed hsm pool.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MHSMPrivateEndpointConnections_Delete
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_312
+          - !Parameter &ref_320
             schema: *ref_2
             implementation: Method
             required: true
@@ -10170,8 +10212,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_313
-            schema: *ref_311
+          - !Parameter &ref_321
+            schema: *ref_319
             implementation: Method
             required: true
             language: !Languages 
@@ -10182,7 +10224,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_314
+          - !Parameter &ref_322
             schema: *ref_2
             implementation: Method
             required: true
@@ -10222,9 +10264,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_312
-          - *ref_313
-          - *ref_314
+          - *ref_320
+          - *ref_321
+          - *ref_322
         responses:
           - !SchemaResponse 
             schema: *ref_113
@@ -10248,14 +10290,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_315
+                    schema: *ref_323
                     header: Retry-After
                     language:
                       default:
                         name: RetryAfter
                         description: The recommended number of seconds to wait before calling the URI specified in the location header.
                   - !HttpHeader 
-                    schema: *ref_311
+                    schema: *ref_319
                     header: Location
                     language:
                       default:
@@ -10274,7 +10316,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10323,13 +10365,14 @@ operationGroups:
     $key: MHSMPrivateLinkResources
     operations:
       - !Operation 
+        operationId: MHSMPrivateLinkResources_ListByMHSMResource
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
         parameters:
           - *ref_224
           - *ref_227
-          - !Parameter &ref_317
+          - !Parameter &ref_325
             schema: *ref_2
             implementation: Method
             required: true
@@ -10341,8 +10384,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_318
-            schema: *ref_316
+          - !Parameter &ref_326
+            schema: *ref_324
             implementation: Method
             required: true
             language: !Languages 
@@ -10381,11 +10424,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_317
-          - *ref_318
+          - *ref_325
+          - *ref_326
         responses:
           - !SchemaResponse 
-            schema: *ref_319
+            schema: *ref_327
             language: !Languages 
               default:
                 name: ''
@@ -10399,7 +10442,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10446,6 +10489,7 @@ operationGroups:
     $key: Operations
     operations:
       - !Operation 
+        operationId: Operations_List
         apiVersions:
           - !ApiVersion 
             version: 2021-04-01-preview
@@ -10481,7 +10525,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_320
+            schema: *ref_328
             language: !Languages 
               default:
                 name: ''
@@ -10495,7 +10539,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_234
+            schema: *ref_235
             language: !Languages 
               default:
                 name: ''
@@ -10755,8 +10799,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

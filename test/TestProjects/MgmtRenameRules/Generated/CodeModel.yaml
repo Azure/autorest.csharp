@@ -129,7 +129,7 @@ schemas: !Schemas
           name: Boolean
           description: Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_547
+    - !BooleanSchema &ref_550
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -139,7 +139,7 @@ schemas: !Schemas
           name: Boolean
           description: ''
       protocol: !Protocols {}
-    - !BooleanSchema &ref_561
+    - !BooleanSchema &ref_564
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -582,7 +582,7 @@ schemas: !Schemas
           name: VirtualMachineSizeMaxDataDiskCount
           description: The maximum number of data disks that can be attached to the virtual machine size.
       protocol: !Protocols {}
-    - !NumberSchema &ref_577
+    - !NumberSchema &ref_581
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -4815,7 +4815,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_551
+    - !ConstantSchema &ref_554
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -12855,7 +12855,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_334
-    - !ObjectSchema &ref_601
+    - !ObjectSchema &ref_607
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12944,7 +12944,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_70
     - *ref_347
-    - !ObjectSchema &ref_560
+    - !ObjectSchema &ref_563
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13042,7 +13042,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_360
-    - !ObjectSchema &ref_567
+    - !ObjectSchema &ref_570
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13161,7 +13161,7 @@ schemas: !Schemas
           description: 'Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged'
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_581
+    - !ObjectSchema &ref_585
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13195,7 +13195,7 @@ schemas: !Schemas
           description: The SAS URIs of the console screenshot and serial log blobs.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_588
+    - !ObjectSchema &ref_592
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13446,7 +13446,7 @@ schemas: !Schemas
     - *ref_72
     - *ref_48
     - *ref_398
-    - !ObjectSchema &ref_612
+    - !ObjectSchema &ref_620
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13480,7 +13480,7 @@ schemas: !Schemas
           description: Specifies a list of virtual machine instance IDs from the VM scale set.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_616
+    - !ObjectSchema &ref_625
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13515,7 +13515,7 @@ schemas: !Schemas
           description: Specifies a list of virtual machine instance IDs from the VM scale set.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_622
+    - !ObjectSchema &ref_632
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13743,7 +13743,7 @@ schemas: !Schemas
     - *ref_404
     - *ref_408
     - *ref_409
-    - !ObjectSchema &ref_624
+    - !ObjectSchema &ref_634
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13788,7 +13788,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_154
-    - !ObjectSchema &ref_686
+    - !ObjectSchema &ref_708
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13832,7 +13832,7 @@ schemas: !Schemas
           description: The List VM scale set extension operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_625
+    - !ObjectSchema &ref_635
       type: object
       apiVersions:
         - !ApiVersion 
@@ -13876,7 +13876,7 @@ schemas: !Schemas
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_628
+    - !ObjectSchema &ref_638
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14015,7 +14015,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_419
     - *ref_420
-    - !ObjectSchema &ref_631
+    - !ObjectSchema &ref_641
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14265,7 +14265,7 @@ schemas: !Schemas
     - *ref_361
     - *ref_256
     - *ref_435
-    - !ObjectSchema &ref_660
+    - !ObjectSchema &ref_678
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14299,7 +14299,7 @@ schemas: !Schemas
           description: Response after calling a manual recovery walk
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_661
+    - !ObjectSchema &ref_679
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14325,7 +14325,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_665
+    - !ObjectSchema &ref_684
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14363,7 +14363,7 @@ schemas: !Schemas
     - *ref_440
     - *ref_441
     - *ref_442
-    - !ObjectSchema &ref_723
+    - !ObjectSchema &ref_747
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14533,7 +14533,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_445
-    - !ObjectSchema &ref_749
+    - !ObjectSchema &ref_774
       type: object
       apiVersions:
         - !ApiVersion 
@@ -14710,6 +14710,7 @@ operationGroups:
     $key: Operations
     operations:
       - !Operation 
+        operationId: Operations_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -14776,6 +14777,7 @@ operationGroups:
     $key: VirtualMachines
     operations:
       - !Operation 
+        operationId: VirtualMachines_ListByLocation
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -14848,12 +14850,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Capture
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_539
+          - !Parameter &ref_540
             schema: *ref_3
             implementation: Method
             required: true
@@ -14865,7 +14868,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_540
+          - !Parameter &ref_541
             schema: *ref_3
             implementation: Method
             required: true
@@ -14879,8 +14882,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_539
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -14934,9 +14937,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_539
+        signatureParameters:
           - *ref_540
+          - *ref_541
         responses:
           - !SchemaResponse 
             schema: *ref_70
@@ -14970,12 +14975,13 @@ operationGroups:
             description: Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_542
+          - !Parameter &ref_544
             schema: *ref_3
             implementation: Method
             required: true
@@ -14987,7 +14993,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_543
+          - !Parameter &ref_545
             schema: *ref_3
             implementation: Method
             required: true
@@ -15001,8 +15007,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_543
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -15017,7 +15023,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_541
+              - !Parameter &ref_542
                 schema: *ref_12
                 implementation: Method
                 required: true
@@ -15043,7 +15049,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_541
+              - *ref_542
             language: !Languages 
               default:
                 name: ''
@@ -15056,9 +15062,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_542
+        requests:
           - *ref_543
+        signatureParameters:
+          - *ref_544
+          - *ref_545
         responses:
           - !SchemaResponse 
             schema: *ref_12
@@ -15094,12 +15102,13 @@ operationGroups:
             description: The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_545
+          - !Parameter &ref_548
             schema: *ref_3
             implementation: Method
             required: true
@@ -15111,7 +15120,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_546
+          - !Parameter &ref_549
             schema: *ref_3
             implementation: Method
             required: true
@@ -15125,8 +15134,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_547
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -15141,7 +15150,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_544
+              - !Parameter &ref_546
                 schema: *ref_347
                 implementation: Method
                 required: true
@@ -15167,7 +15176,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_544
+              - *ref_546
             language: !Languages 
               default:
                 name: ''
@@ -15180,9 +15189,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_547
         signatureParameters:
-          - *ref_545
-          - *ref_546
+          - *ref_548
+          - *ref_549
         responses:
           - !SchemaResponse 
             schema: *ref_12
@@ -15218,12 +15229,13 @@ operationGroups:
             description: The operation to update a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_548
+          - !Parameter &ref_551
             schema: *ref_3
             implementation: Method
             required: true
@@ -15235,7 +15247,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_549
+          - !Parameter &ref_552
             schema: *ref_3
             implementation: Method
             required: true
@@ -15247,8 +15259,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_550
-            schema: *ref_547
+          - !Parameter &ref_553
+            schema: *ref_550
             implementation: Method
             language: !Languages 
               default:
@@ -15272,9 +15284,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_548
-          - *ref_549
-          - *ref_550
+          - *ref_551
+          - *ref_552
+          - *ref_553
         responses:
           - !Response 
             language: !Languages 
@@ -15311,12 +15323,13 @@ operationGroups:
             description: The operation to delete a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_552
+          - !Parameter &ref_555
             schema: *ref_3
             implementation: Method
             required: true
@@ -15328,7 +15341,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_553
+          - !Parameter &ref_556
             schema: *ref_3
             implementation: Method
             required: true
@@ -15341,7 +15354,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_551
+            schema: *ref_554
             implementation: Method
             language: !Languages 
               default:
@@ -15380,8 +15393,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_552
-          - *ref_553
+          - *ref_555
+          - *ref_556
         responses:
           - !SchemaResponse 
             schema: *ref_12
@@ -15402,12 +15415,13 @@ operationGroups:
             description: Retrieves information about the model view or the instance view of a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_InstanceView
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_554
+          - !Parameter &ref_557
             schema: *ref_3
             implementation: Method
             required: true
@@ -15419,7 +15433,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_555
+          - !Parameter &ref_558
             schema: *ref_3
             implementation: Method
             required: true
@@ -15460,8 +15474,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_554
-          - *ref_555
+          - *ref_557
+          - *ref_558
         responses:
           - !SchemaResponse 
             schema: *ref_323
@@ -15482,12 +15496,13 @@ operationGroups:
             description: Retrieves information about the run-time state of a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_556
+          - !Parameter &ref_559
             schema: *ref_3
             implementation: Method
             required: true
@@ -15528,7 +15543,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_556
+          - *ref_559
         responses:
           - !SchemaResponse 
             schema: *ref_535
@@ -15554,6 +15569,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_ListAll
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -15561,7 +15577,7 @@ operationGroups:
           - *ref_528
           - *ref_529
           - *ref_533
-          - !Parameter &ref_557
+          - !Parameter &ref_560
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -15599,7 +15615,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_557
+          - *ref_560
         responses:
           - !SchemaResponse 
             schema: *ref_535
@@ -15625,12 +15641,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_ListAvailableSizes
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_558
+          - !Parameter &ref_561
             schema: *ref_3
             implementation: Method
             required: true
@@ -15642,7 +15659,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_559
+          - !Parameter &ref_562
             schema: *ref_3
             implementation: Method
             required: true
@@ -15683,11 +15700,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_558
-          - *ref_559
+          - *ref_561
+          - *ref_562
         responses:
           - !SchemaResponse 
-            schema: *ref_560
+            schema: *ref_563
             language: !Languages 
               default:
                 name: ''
@@ -15710,12 +15727,13 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_PowerOff
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_562
+          - !Parameter &ref_565
             schema: *ref_3
             implementation: Method
             required: true
@@ -15727,7 +15745,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_563
+          - !Parameter &ref_566
             schema: *ref_3
             implementation: Method
             required: true
@@ -15739,8 +15757,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_564
-            schema: *ref_561
+          - !Parameter &ref_567
+            schema: *ref_564
             implementation: Method
             language: !Languages 
               default:
@@ -15764,9 +15782,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_562
-          - *ref_563
-          - *ref_564
+          - *ref_565
+          - *ref_566
+          - *ref_567
         responses:
           - !Response 
             language: !Languages 
@@ -15794,12 +15812,13 @@ operationGroups:
             description: The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Reapply
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_565
+          - !Parameter &ref_568
             schema: *ref_3
             implementation: Method
             required: true
@@ -15811,7 +15830,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_566
+          - !Parameter &ref_569
             schema: *ref_3
             implementation: Method
             required: true
@@ -15852,8 +15871,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_565
-          - *ref_566
+          - *ref_568
+          - *ref_569
         responses:
           - !Response 
             language: !Languages 
@@ -15875,7 +15894,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_567
+            schema: *ref_570
             language: !Languages 
               default:
                 name: ''
@@ -15895,12 +15914,13 @@ operationGroups:
             description: The operation to reapply a virtual machine's state.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Restart
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_568
+          - !Parameter &ref_571
             schema: *ref_3
             implementation: Method
             required: true
@@ -15912,7 +15932,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_569
+          - !Parameter &ref_572
             schema: *ref_3
             implementation: Method
             required: true
@@ -15938,8 +15958,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_568
-          - *ref_569
+          - *ref_571
+          - *ref_572
         responses:
           - !Response 
             language: !Languages 
@@ -15967,12 +15987,13 @@ operationGroups:
             description: The operation to restart a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Start
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_570
+          - !Parameter &ref_573
             schema: *ref_3
             implementation: Method
             required: true
@@ -15984,7 +16005,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_571
+          - !Parameter &ref_574
             schema: *ref_3
             implementation: Method
             required: true
@@ -16010,8 +16031,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_570
-          - *ref_571
+          - *ref_573
+          - *ref_574
         responses:
           - !Response 
             language: !Languages 
@@ -16039,78 +16060,7 @@ operationGroups:
             description: The operation to start a virtual machine.
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_572
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_573
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmName
-                description: The name of the virtual machine.
-                serializedName: vmName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
-        requests:
-          - !Request 
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy
-                method: post
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_572
-          - *ref_573
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Redeploy
-            description: Shuts down the virtual machine, moves it to a new node, and powers it back on.
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: VirtualMachines_Redeploy
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -16144,45 +16094,14 @@ operationGroups:
           - *ref_533
         requests:
           - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_574
-                schema: *ref_362
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the Reimage Virtual Machine operation.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_574
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy
                 method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
                 uri: '{$host}'
         signatureParameters:
           - *ref_575
@@ -16210,16 +16129,17 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: Reimage
-            description: Reimages the virtual machine which has an ephemeral OS disk back to its initial state.
+            name: Redeploy
+            description: Shuts down the virtual machine, moves it to a new node, and powers it back on.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_Reimage
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_578
+          - !Parameter &ref_579
             schema: *ref_3
             implementation: Method
             required: true
@@ -16231,7 +16151,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_579
+          - !Parameter &ref_580
             schema: *ref_3
             implementation: Method
             required: true
@@ -16243,8 +16163,114 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_580
-            schema: *ref_577
+          - *ref_529
+          - *ref_533
+        requestMediaTypes:
+          application/json: !Request &ref_578
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_577
+                schema: *ref_362
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Reimage Virtual Machine operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_577
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_578
+        signatureParameters:
+          - *ref_579
+          - *ref_580
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Reimage
+            description: Reimages the virtual machine which has an ephemeral OS disk back to its initial state.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachines_RetrieveBootDiagnosticsData
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_582
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_583
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmName
+                description: The name of the virtual machine.
+                serializedName: vmName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_584
+            schema: *ref_581
             implementation: Method
             language: !Languages 
               default:
@@ -16283,12 +16309,12 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_578
-          - *ref_579
-          - *ref_580
+          - *ref_582
+          - *ref_583
+          - *ref_584
         responses:
           - !SchemaResponse 
-            schema: *ref_581
+            schema: *ref_585
             language: !Languages 
               default:
                 name: ''
@@ -16302,7 +16328,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_567
+            schema: *ref_570
             language: !Languages 
               default:
                 name: ''
@@ -16322,12 +16348,13 @@ operationGroups:
             description: The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_PerformMaintenance
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_582
+          - !Parameter &ref_586
             schema: *ref_3
             implementation: Method
             required: true
@@ -16339,7 +16366,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_583
+          - !Parameter &ref_587
             schema: *ref_3
             implementation: Method
             required: true
@@ -16365,8 +16392,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_582
-          - *ref_583
+          - *ref_586
+          - *ref_587
         responses:
           - !Response 
             language: !Languages 
@@ -16394,12 +16421,13 @@ operationGroups:
             description: The operation to perform maintenance on a virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_SimulateEviction
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_584
+          - !Parameter &ref_588
             schema: *ref_3
             implementation: Method
             required: true
@@ -16411,7 +16439,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_585
+          - !Parameter &ref_589
             schema: *ref_3
             implementation: Method
             required: true
@@ -16437,8 +16465,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_584
-          - *ref_585
+          - *ref_588
+          - *ref_589
         responses:
           - !Response 
             language: !Languages 
@@ -16457,12 +16485,13 @@ operationGroups:
             description: The operation to simulate the eviction of spot virtual machine.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachines_AssessPatches
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_586
+          - !Parameter &ref_590
             schema: *ref_3
             implementation: Method
             required: true
@@ -16474,7 +16503,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_587
+          - !Parameter &ref_591
             schema: *ref_3
             implementation: Method
             required: true
@@ -16515,11 +16544,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_586
-          - *ref_587
+          - *ref_590
+          - *ref_591
         responses:
           - !SchemaResponse 
-            schema: *ref_588
+            schema: *ref_592
             language: !Languages 
               default:
                 name: ''
@@ -16542,7 +16571,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_567
+            schema: *ref_570
             language: !Languages 
               default:
                 name: ''
@@ -16572,12 +16601,13 @@ operationGroups:
     $key: Images
     operations:
       - !Operation 
+        operationId: Images_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_590
+          - !Parameter &ref_595
             schema: *ref_3
             implementation: Method
             required: true
@@ -16589,7 +16619,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_591
+          - !Parameter &ref_596
             schema: *ref_3
             implementation: Method
             required: true
@@ -16603,8 +16633,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_594
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -16619,7 +16649,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_589
+              - !Parameter &ref_593
                 schema: *ref_254
                 implementation: Method
                 required: true
@@ -16645,7 +16675,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_589
+              - *ref_593
             language: !Languages 
               default:
                 name: ''
@@ -16658,9 +16688,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_594
         signatureParameters:
-          - *ref_590
-          - *ref_591
+          - *ref_595
+          - *ref_596
         responses:
           - !SchemaResponse 
             schema: *ref_254
@@ -16696,12 +16728,13 @@ operationGroups:
             description: Create or update an image.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Images_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_593
+          - !Parameter &ref_599
             schema: *ref_3
             implementation: Method
             required: true
@@ -16713,7 +16746,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_594
+          - !Parameter &ref_600
             schema: *ref_3
             implementation: Method
             required: true
@@ -16727,8 +16760,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_598
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -16743,7 +16776,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_592
+              - !Parameter &ref_597
                 schema: *ref_333
                 implementation: Method
                 required: true
@@ -16769,7 +16802,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_592
+              - *ref_597
             language: !Languages 
               default:
                 name: ''
@@ -16782,9 +16815,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_598
         signatureParameters:
-          - *ref_593
-          - *ref_594
+          - *ref_599
+          - *ref_600
         responses:
           - !SchemaResponse 
             schema: *ref_254
@@ -16820,12 +16855,13 @@ operationGroups:
             description: Update an image.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Images_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_595
+          - !Parameter &ref_601
             schema: *ref_3
             implementation: Method
             required: true
@@ -16837,7 +16873,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_596
+          - !Parameter &ref_602
             schema: *ref_3
             implementation: Method
             required: true
@@ -16863,8 +16899,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_595
-          - *ref_596
+          - *ref_601
+          - *ref_602
         responses:
           - !Response 
             language: !Languages 
@@ -16901,12 +16937,13 @@ operationGroups:
             description: Deletes an Image.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Images_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_597
+          - !Parameter &ref_603
             schema: *ref_3
             implementation: Method
             required: true
@@ -16918,7 +16955,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_598
+          - !Parameter &ref_604
             schema: *ref_3
             implementation: Method
             required: true
@@ -16930,7 +16967,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_599
+          - !Parameter &ref_605
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -16970,9 +17007,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_597
-          - *ref_598
-          - *ref_599
+          - *ref_603
+          - *ref_604
+          - *ref_605
         responses:
           - !SchemaResponse 
             schema: *ref_254
@@ -16993,12 +17030,13 @@ operationGroups:
             description: Gets an image.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Images_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_600
+          - !Parameter &ref_606
             schema: *ref_3
             implementation: Method
             required: true
@@ -17039,10 +17077,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_600
+          - *ref_606
         responses:
           - !SchemaResponse 
-            schema: *ref_601
+            schema: *ref_607
             language: !Languages 
               default:
                 name: ''
@@ -17065,6 +17103,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Images_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -17101,7 +17140,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_601
+            schema: *ref_607
             language: !Languages 
               default:
                 name: ''
@@ -17132,12 +17171,13 @@ operationGroups:
     $key: VirtualMachineScaleSets
     operations:
       - !Operation 
+        operationId: VirtualMachineScaleSets_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_603
+          - !Parameter &ref_610
             schema: *ref_3
             implementation: Method
             required: true
@@ -17149,7 +17189,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_604
+          - !Parameter &ref_611
             schema: *ref_3
             implementation: Method
             required: true
@@ -17163,8 +17203,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_609
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -17179,7 +17219,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_602
+              - !Parameter &ref_608
                 schema: *ref_255
                 implementation: Method
                 required: true
@@ -17205,7 +17245,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_602
+              - *ref_608
             language: !Languages 
               default:
                 name: ''
@@ -17218,9 +17258,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_609
         signatureParameters:
-          - *ref_603
-          - *ref_604
+          - *ref_610
+          - *ref_611
         responses:
           - !SchemaResponse 
             schema: *ref_255
@@ -17256,12 +17298,13 @@ operationGroups:
             description: Create or update a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_606
+          - !Parameter &ref_614
             schema: *ref_3
             implementation: Method
             required: true
@@ -17273,7 +17316,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_607
+          - !Parameter &ref_615
             schema: *ref_3
             implementation: Method
             required: true
@@ -17287,8 +17330,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_613
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -17303,7 +17346,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_605
+              - !Parameter &ref_612
                 schema: *ref_348
                 implementation: Method
                 required: true
@@ -17329,7 +17372,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_605
+              - *ref_612
             language: !Languages 
               default:
                 name: ''
@@ -17342,9 +17385,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_613
         signatureParameters:
-          - *ref_606
-          - *ref_607
+          - *ref_614
+          - *ref_615
         responses:
           - !SchemaResponse 
             schema: *ref_255
@@ -17367,12 +17412,13 @@ operationGroups:
             description: Update a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_608
+          - !Parameter &ref_616
             schema: *ref_3
             implementation: Method
             required: true
@@ -17384,7 +17430,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_609
+          - !Parameter &ref_617
             schema: *ref_3
             implementation: Method
             required: true
@@ -17410,8 +17456,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_608
-          - *ref_609
+          - *ref_616
+          - *ref_617
         responses:
           - !Response 
             language: !Languages 
@@ -17448,12 +17494,13 @@ operationGroups:
             description: Deletes a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_610
+          - !Parameter &ref_618
             schema: *ref_3
             implementation: Method
             required: true
@@ -17465,7 +17512,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_611
+          - !Parameter &ref_619
             schema: *ref_3
             implementation: Method
             required: true
@@ -17506,8 +17553,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_610
-          - *ref_611
+          - *ref_618
+          - *ref_619
         responses:
           - !SchemaResponse 
             schema: *ref_255
@@ -17528,12 +17575,13 @@ operationGroups:
             description: Display information about a virtual machine scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Deallocate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_614
+          - !Parameter &ref_623
             schema: *ref_3
             implementation: Method
             required: true
@@ -17545,7 +17593,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_615
+          - !Parameter &ref_624
             schema: *ref_3
             implementation: Method
             required: true
@@ -17559,8 +17607,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_622
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -17575,8 +17623,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_613
-                schema: *ref_612
+              - !Parameter &ref_621
+                schema: *ref_620
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -17588,7 +17636,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_613
+              - *ref_621
             language: !Languages 
               default:
                 name: ''
@@ -17601,9 +17649,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_622
         signatureParameters:
-          - *ref_614
-          - *ref_615
+          - *ref_623
+          - *ref_624
         responses:
           - !Response 
             language: !Languages 
@@ -17631,12 +17681,13 @@ operationGroups:
             description: Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_DeleteInstances
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_618
+          - !Parameter &ref_628
             schema: *ref_3
             implementation: Method
             required: true
@@ -17648,7 +17699,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_619
+          - !Parameter &ref_629
             schema: *ref_3
             implementation: Method
             required: true
@@ -17662,8 +17713,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_627
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -17678,8 +17729,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_617
-                schema: *ref_616
+              - !Parameter &ref_626
+                schema: *ref_625
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -17691,7 +17742,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_617
+              - *ref_626
             language: !Languages 
               default:
                 name: ''
@@ -17704,9 +17755,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_627
         signatureParameters:
-          - *ref_618
-          - *ref_619
+          - *ref_628
+          - *ref_629
         responses:
           - !Response 
             language: !Languages 
@@ -17734,12 +17787,13 @@ operationGroups:
             description: Deletes virtual machines in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_GetInstanceView
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_620
+          - !Parameter &ref_630
             schema: *ref_3
             implementation: Method
             required: true
@@ -17751,7 +17805,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_621
+          - !Parameter &ref_631
             schema: *ref_3
             implementation: Method
             required: true
@@ -17792,11 +17846,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_620
-          - *ref_621
+          - *ref_630
+          - *ref_631
         responses:
           - !SchemaResponse 
-            schema: *ref_622
+            schema: *ref_632
             language: !Languages 
               default:
                 name: ''
@@ -17814,12 +17868,13 @@ operationGroups:
             description: Gets the status of a VM scale set instance.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_623
+          - !Parameter &ref_633
             schema: *ref_3
             implementation: Method
             required: true
@@ -17860,10 +17915,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_623
+          - *ref_633
         responses:
           - !SchemaResponse 
-            schema: *ref_624
+            schema: *ref_634
             language: !Languages 
               default:
                 name: ''
@@ -17886,6 +17941,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_ListAll
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -17922,7 +17978,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_625
+            schema: *ref_635
             language: !Languages 
               default:
                 name: ''
@@ -17947,12 +18003,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_ListSkus
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_626
+          - !Parameter &ref_636
             schema: *ref_3
             implementation: Method
             required: true
@@ -17964,7 +18021,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_627
+          - !Parameter &ref_637
             schema: *ref_3
             implementation: Method
             required: true
@@ -18005,11 +18062,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_626
-          - *ref_627
+          - *ref_636
+          - *ref_637
         responses:
           - !SchemaResponse 
-            schema: *ref_628
+            schema: *ref_638
             language: !Languages 
               default:
                 name: ''
@@ -18032,12 +18089,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_GetOSUpgradeHistory
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_629
+          - !Parameter &ref_639
             schema: *ref_3
             implementation: Method
             required: true
@@ -18049,7 +18107,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_630
+          - !Parameter &ref_640
             schema: *ref_3
             implementation: Method
             required: true
@@ -18090,11 +18148,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_629
-          - *ref_630
+          - *ref_639
+          - *ref_640
         responses:
           - !SchemaResponse 
-            schema: *ref_631
+            schema: *ref_641
             language: !Languages 
               default:
                 name: ''
@@ -18117,12 +18175,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_PowerOff
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_633
+          - !Parameter &ref_644
             schema: *ref_3
             implementation: Method
             required: true
@@ -18134,7 +18193,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_634
+          - !Parameter &ref_645
             schema: *ref_3
             implementation: Method
             required: true
@@ -18146,8 +18205,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_635
-            schema: *ref_561
+          - !Parameter &ref_646
+            schema: *ref_564
             implementation: Method
             language: !Languages 
               default:
@@ -18159,8 +18218,8 @@ operationGroups:
                 in: query
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_643
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -18175,8 +18234,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_632
-                schema: *ref_612
+              - !Parameter &ref_642
+                schema: *ref_620
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -18188,7 +18247,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_632
+              - *ref_642
             language: !Languages 
               default:
                 name: ''
@@ -18201,10 +18260,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_643
         signatureParameters:
-          - *ref_633
-          - *ref_634
-          - *ref_635
+          - *ref_644
+          - *ref_645
+          - *ref_646
         responses:
           - !Response 
             language: !Languages 
@@ -18232,420 +18293,7 @@ operationGroups:
             description: Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
         protocol: !Protocols {}
       - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_637
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_638
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_636
-                schema: *ref_612
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: vmInstanceIDs
-                    description: A list of virtual machine instance IDs from the VM scale set.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_636
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_637
-          - *ref_638
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Restart
-            description: Restarts one or more virtual machines in a VM scale set.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_640
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_641
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_639
-                schema: *ref_612
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: vmInstanceIDs
-                    description: A list of virtual machine instance IDs from the VM scale set.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_639
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_640
-          - *ref_641
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Start
-            description: Starts one or more virtual machines in a VM scale set.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_643
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_644
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_642
-                schema: *ref_612
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: vmInstanceIDs
-                    description: A list of virtual machine instance IDs from the VM scale set.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_642
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_643
-          - *ref_644
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Redeploy
-            description: Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_646
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_647
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_645
-                schema: *ref_612
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: vmInstanceIDs
-                    description: A list of virtual machine instance IDs from the VM scale set.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_645
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_646
-          - *ref_647
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: PerformMaintenance
-            description: >-
-              Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details:
-              https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
-        protocol: !Protocols {}
-      - !Operation 
+        operationId: VirtualMachineScaleSets_Restart
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -18677,8 +18325,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_648
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -18693,10 +18341,10 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_648
-                schema: *ref_616
+              - !Parameter &ref_647
+                schema: *ref_620
                 implementation: Method
-                required: true
+                required: false
                 language: !Languages 
                   default:
                     name: vmInstanceIDs
@@ -18706,19 +18354,21 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_648
+              - *ref_647
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart
                 method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_648
         signatureParameters:
           - *ref_649
           - *ref_650
@@ -18745,16 +18395,17 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: UpdateInstances
-            description: Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
+            name: Restart
+            description: Restarts one or more virtual machines in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Start
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_652
+          - !Parameter &ref_653
             schema: *ref_3
             implementation: Method
             required: true
@@ -18766,7 +18417,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_653
+          - !Parameter &ref_654
             schema: *ref_3
             implementation: Method
             required: true
@@ -18780,8 +18431,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_652
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -18797,13 +18448,13 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_651
-                schema: *ref_364
+                schema: *ref_620
                 implementation: Method
                 required: false
                 language: !Languages 
                   default:
-                    name: vmScaleSetReimageInput
-                    description: Parameters for Reimaging VM ScaleSet.
+                    name: vmInstanceIDs
+                    description: A list of virtual machine instance IDs from the VM scale set.
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
@@ -18816,118 +18467,17 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start
                 method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_652
-          - *ref_653
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Reimage
-            description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_528
-          - !Parameter &ref_655
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_656
-            schema: *ref_3
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: vmScaleSetName
-                description: The name of the VM scale set.
-                serializedName: vmScaleSetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_529
-          - *ref_533
         requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_536
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_654
-                schema: *ref_612
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: vmInstanceIDs
-                    description: A list of virtual machine instance IDs from the VM scale set.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_654
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
+          - *ref_652
         signatureParameters:
-          - *ref_655
-          - *ref_656
+          - *ref_653
+          - *ref_654
         responses:
           - !Response 
             language: !Languages 
@@ -18951,10 +18501,11 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: ReimageAll
-            description: Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
+            name: Start
+            description: Starts one or more virtual machines in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_Redeploy
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -18986,8 +18537,540 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-          - !Parameter &ref_659
-            schema: *ref_577
+        requestMediaTypes:
+          application/json: !Request &ref_656
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_655
+                schema: *ref_620
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: vmInstanceIDs
+                    description: A list of virtual machine instance IDs from the VM scale set.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_655
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_656
+        signatureParameters:
+          - *ref_657
+          - *ref_658
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Redeploy
+            description: Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachineScaleSets_PerformMaintenance
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_661
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_662
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_529
+          - *ref_533
+        requestMediaTypes:
+          application/json: !Request &ref_660
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_659
+                schema: *ref_620
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: vmInstanceIDs
+                    description: A list of virtual machine instance IDs from the VM scale set.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_659
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_660
+        signatureParameters:
+          - *ref_661
+          - *ref_662
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: PerformMaintenance
+            description: >-
+              Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details:
+              https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachineScaleSets_UpdateInstances
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_665
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_666
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_529
+          - *ref_533
+        requestMediaTypes:
+          application/json: !Request &ref_664
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_663
+                schema: *ref_625
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: vmInstanceIDs
+                    description: A list of virtual machine instance IDs from the VM scale set.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_663
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_664
+        signatureParameters:
+          - *ref_665
+          - *ref_666
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: UpdateInstances
+            description: Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachineScaleSets_Reimage
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_669
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_670
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_529
+          - *ref_533
+        requestMediaTypes:
+          application/json: !Request &ref_668
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_667
+                schema: *ref_364
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: vmScaleSetReimageInput
+                    description: Parameters for Reimaging VM ScaleSet.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_667
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_668
+        signatureParameters:
+          - *ref_669
+          - *ref_670
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Reimage
+            description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachineScaleSets_ReimageAll
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_673
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_674
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_529
+          - *ref_533
+        requestMediaTypes:
+          application/json: !Request &ref_672
+            parameters:
+              - !Parameter 
+                schema: *ref_536
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_671
+                schema: *ref_620
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: vmInstanceIDs
+                    description: A list of virtual machine instance IDs from the VM scale set.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_671
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_672
+        signatureParameters:
+          - *ref_673
+          - *ref_674
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: ReimageAll
+            description: Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_528
+          - !Parameter &ref_675
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_676
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmScaleSetName
+                description: The name of the VM scale set.
+                serializedName: vmScaleSetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_529
+          - *ref_533
+          - !Parameter &ref_677
+            schema: *ref_581
             implementation: Method
             required: true
             language: !Languages 
@@ -19025,12 +19108,12 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_657
-          - *ref_658
-          - *ref_659
+          - *ref_675
+          - *ref_676
+          - *ref_677
         responses:
           - !SchemaResponse 
-            schema: *ref_660
+            schema: *ref_678
             language: !Languages 
               default:
                 name: ''
@@ -19048,12 +19131,13 @@ operationGroups:
             description: Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_ConvertToSinglePlacementGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_663
+          - !Parameter &ref_682
             schema: *ref_3
             implementation: Method
             required: true
@@ -19065,7 +19149,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_664
+          - !Parameter &ref_683
             schema: *ref_3
             implementation: Method
             required: true
@@ -19079,8 +19163,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_681
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -19095,8 +19179,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_662
-                schema: *ref_661
+              - !Parameter &ref_680
+                schema: *ref_679
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -19108,7 +19192,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_662
+              - *ref_680
             language: !Languages 
               default:
                 name: ''
@@ -19121,9 +19205,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_681
         signatureParameters:
-          - *ref_663
-          - *ref_664
+          - *ref_682
+          - *ref_683
         responses:
           - !Response 
             language: !Languages 
@@ -19140,12 +19226,13 @@ operationGroups:
             description: Converts SinglePlacementGroup property to false for a existing virtual machine scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSets_SetOrchestrationServiceState
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_667
+          - !Parameter &ref_687
             schema: *ref_3
             implementation: Method
             required: true
@@ -19157,7 +19244,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_668
+          - !Parameter &ref_688
             schema: *ref_3
             implementation: Method
             required: true
@@ -19171,8 +19258,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_686
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -19187,8 +19274,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_666
-                schema: *ref_665
+              - !Parameter &ref_685
+                schema: *ref_684
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -19200,7 +19287,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_666
+              - *ref_685
             language: !Languages 
               default:
                 name: ''
@@ -19213,9 +19300,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_686
         signatureParameters:
-          - *ref_667
-          - *ref_668
+          - *ref_687
+          - *ref_688
         responses:
           - !Response 
             language: !Languages 
@@ -19251,12 +19340,13 @@ operationGroups:
     $key: VirtualMachineScaleSetExtensions
     operations:
       - !Operation 
+        operationId: VirtualMachineScaleSetExtensions_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_670
+          - !Parameter &ref_691
             schema: *ref_3
             implementation: Method
             required: true
@@ -19268,7 +19358,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_671
+          - !Parameter &ref_692
             schema: *ref_3
             implementation: Method
             required: true
@@ -19280,7 +19370,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_672
+          - !Parameter &ref_693
             schema: *ref_3
             implementation: Method
             required: true
@@ -19294,8 +19384,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_690
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -19310,7 +19400,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_669
+              - !Parameter &ref_689
                 schema: *ref_142
                 implementation: Method
                 required: true
@@ -19336,7 +19426,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_669
+              - *ref_689
             language: !Languages 
               default:
                 name: ''
@@ -19349,10 +19439,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_690
         signatureParameters:
-          - *ref_670
-          - *ref_671
-          - *ref_672
+          - *ref_691
+          - *ref_692
+          - *ref_693
         responses:
           - !SchemaResponse 
             schema: *ref_142
@@ -19388,12 +19480,13 @@ operationGroups:
             description: The operation to create or update an extension.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetExtensions_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_674
+          - !Parameter &ref_696
             schema: *ref_3
             implementation: Method
             required: true
@@ -19405,7 +19498,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_675
+          - !Parameter &ref_697
             schema: *ref_3
             implementation: Method
             required: true
@@ -19417,7 +19510,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_676
+          - !Parameter &ref_698
             schema: *ref_3
             implementation: Method
             required: true
@@ -19431,8 +19524,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_695
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -19447,7 +19540,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_673
+              - !Parameter &ref_694
                 schema: *ref_154
                 implementation: Method
                 required: true
@@ -19473,7 +19566,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_673
+              - *ref_694
             language: !Languages 
               default:
                 name: ''
@@ -19486,10 +19579,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_695
         signatureParameters:
-          - *ref_674
-          - *ref_675
-          - *ref_676
+          - *ref_696
+          - *ref_697
+          - *ref_698
         responses:
           - !SchemaResponse 
             schema: *ref_142
@@ -19525,12 +19620,13 @@ operationGroups:
             description: The operation to update an extension.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetExtensions_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_677
+          - !Parameter &ref_699
             schema: *ref_3
             implementation: Method
             required: true
@@ -19542,7 +19638,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_678
+          - !Parameter &ref_700
             schema: *ref_3
             implementation: Method
             required: true
@@ -19554,7 +19650,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_679
+          - !Parameter &ref_701
             schema: *ref_3
             implementation: Method
             required: true
@@ -19580,9 +19676,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_677
-          - *ref_678
-          - *ref_679
+          - *ref_699
+          - *ref_700
+          - *ref_701
         responses:
           - !Response 
             language: !Languages 
@@ -19619,12 +19715,13 @@ operationGroups:
             description: The operation to delete the extension.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetExtensions_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_680
+          - !Parameter &ref_702
             schema: *ref_3
             implementation: Method
             required: true
@@ -19636,7 +19733,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_681
+          - !Parameter &ref_703
             schema: *ref_3
             implementation: Method
             required: true
@@ -19648,7 +19745,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_682
+          - !Parameter &ref_704
             schema: *ref_3
             implementation: Method
             required: true
@@ -19660,7 +19757,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_683
+          - !Parameter &ref_705
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -19700,10 +19797,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_680
-          - *ref_681
-          - *ref_682
-          - *ref_683
+          - *ref_702
+          - *ref_703
+          - *ref_704
+          - *ref_705
         responses:
           - !SchemaResponse 
             schema: *ref_142
@@ -19724,12 +19821,13 @@ operationGroups:
             description: The operation to get the extension.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetExtensions_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_684
+          - !Parameter &ref_706
             schema: *ref_3
             implementation: Method
             required: true
@@ -19741,7 +19839,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_685
+          - !Parameter &ref_707
             schema: *ref_3
             implementation: Method
             required: true
@@ -19782,11 +19880,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_684
-          - *ref_685
+          - *ref_706
+          - *ref_707
         responses:
           - !SchemaResponse 
-            schema: *ref_686
+            schema: *ref_708
             language: !Languages 
               default:
                 name: ''
@@ -19817,12 +19915,13 @@ operationGroups:
     $key: VirtualMachineScaleSetRollingUpgrades
     operations:
       - !Operation 
+        operationId: VirtualMachineScaleSetRollingUpgrades_Cancel
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_687
+          - !Parameter &ref_709
             schema: *ref_3
             implementation: Method
             required: true
@@ -19834,7 +19933,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_688
+          - !Parameter &ref_710
             schema: *ref_3
             implementation: Method
             required: true
@@ -19860,8 +19959,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_687
-          - *ref_688
+          - *ref_709
+          - *ref_710
         responses:
           - !Response 
             language: !Languages 
@@ -19889,12 +19988,13 @@ operationGroups:
             description: Cancels the current virtual machine scale set rolling upgrade.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_689
+          - !Parameter &ref_711
             schema: *ref_3
             implementation: Method
             required: true
@@ -19906,7 +20006,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_690
+          - !Parameter &ref_712
             schema: *ref_3
             implementation: Method
             required: true
@@ -19932,8 +20032,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_689
-          - *ref_690
+          - *ref_711
+          - *ref_712
         responses:
           - !Response 
             language: !Languages 
@@ -19961,12 +20061,13 @@ operationGroups:
             description: Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_691
+          - !Parameter &ref_713
             schema: *ref_3
             implementation: Method
             required: true
@@ -19978,7 +20079,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_692
+          - !Parameter &ref_714
             schema: *ref_3
             implementation: Method
             required: true
@@ -20004,8 +20105,8 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_691
-          - *ref_692
+          - *ref_713
+          - *ref_714
         responses:
           - !Response 
             language: !Languages 
@@ -20033,12 +20134,13 @@ operationGroups:
             description: Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetRollingUpgrades_GetLatest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_693
+          - !Parameter &ref_715
             schema: *ref_3
             implementation: Method
             required: true
@@ -20050,7 +20152,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_694
+          - !Parameter &ref_716
             schema: *ref_3
             implementation: Method
             required: true
@@ -20091,8 +20193,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_693
-          - *ref_694
+          - *ref_715
+          - *ref_716
         responses:
           - !SchemaResponse 
             schema: *ref_256
@@ -20121,12 +20223,13 @@ operationGroups:
     $key: VirtualMachineScaleSetVMs
     operations:
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Reimage
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_696
+          - !Parameter &ref_719
             schema: *ref_3
             implementation: Method
             required: true
@@ -20138,7 +20241,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_697
+          - !Parameter &ref_720
             schema: *ref_3
             implementation: Method
             required: true
@@ -20150,7 +20253,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_698
+          - !Parameter &ref_721
             schema: *ref_3
             implementation: Method
             required: true
@@ -20164,8 +20267,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_718
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -20180,7 +20283,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_695
+              - !Parameter &ref_717
                 schema: *ref_361
                 implementation: Method
                 required: false
@@ -20193,7 +20296,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_695
+              - *ref_717
             language: !Languages 
               default:
                 name: ''
@@ -20206,10 +20309,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_718
         signatureParameters:
-          - *ref_696
-          - *ref_697
-          - *ref_698
+          - *ref_719
+          - *ref_720
+          - *ref_721
         responses:
           - !Response 
             language: !Languages 
@@ -20237,12 +20342,13 @@ operationGroups:
             description: Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_ReimageAll
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_699
+          - !Parameter &ref_722
             schema: *ref_3
             implementation: Method
             required: true
@@ -20254,7 +20360,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_700
+          - !Parameter &ref_723
             schema: *ref_3
             implementation: Method
             required: true
@@ -20266,7 +20372,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_701
+          - !Parameter &ref_724
             schema: *ref_3
             implementation: Method
             required: true
@@ -20292,9 +20398,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_699
-          - *ref_700
-          - *ref_701
+          - *ref_722
+          - *ref_723
+          - *ref_724
         responses:
           - !Response 
             language: !Languages 
@@ -20322,12 +20428,13 @@ operationGroups:
             description: Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Deallocate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_702
+          - !Parameter &ref_725
             schema: *ref_3
             implementation: Method
             required: true
@@ -20339,7 +20446,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_703
+          - !Parameter &ref_726
             schema: *ref_3
             implementation: Method
             required: true
@@ -20351,7 +20458,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_704
+          - !Parameter &ref_727
             schema: *ref_3
             implementation: Method
             required: true
@@ -20377,9 +20484,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_702
-          - *ref_703
-          - *ref_704
+          - *ref_725
+          - *ref_726
+          - *ref_727
         responses:
           - !Response 
             language: !Languages 
@@ -20407,12 +20514,13 @@ operationGroups:
             description: Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_706
+          - !Parameter &ref_730
             schema: *ref_3
             implementation: Method
             required: true
@@ -20424,7 +20532,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_707
+          - !Parameter &ref_731
             schema: *ref_3
             implementation: Method
             required: true
@@ -20436,7 +20544,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_708
+          - !Parameter &ref_732
             schema: *ref_3
             implementation: Method
             required: true
@@ -20450,8 +20558,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_729
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -20466,7 +20574,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_705
+              - !Parameter &ref_728
                 schema: *ref_257
                 implementation: Method
                 required: true
@@ -20492,7 +20600,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_705
+              - *ref_728
             language: !Languages 
               default:
                 name: ''
@@ -20505,10 +20613,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_729
         signatureParameters:
-          - *ref_706
-          - *ref_707
-          - *ref_708
+          - *ref_730
+          - *ref_731
+          - *ref_732
         responses:
           - !SchemaResponse 
             schema: *ref_257
@@ -20544,12 +20654,13 @@ operationGroups:
             description: Updates a virtual machine of a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_709
+          - !Parameter &ref_733
             schema: *ref_3
             implementation: Method
             required: true
@@ -20561,7 +20672,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_710
+          - !Parameter &ref_734
             schema: *ref_3
             implementation: Method
             required: true
@@ -20573,7 +20684,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_711
+          - !Parameter &ref_735
             schema: *ref_3
             implementation: Method
             required: true
@@ -20599,9 +20710,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_709
-          - *ref_710
-          - *ref_711
+          - *ref_733
+          - *ref_734
+          - *ref_735
         responses:
           - !Response 
             language: !Languages 
@@ -20638,12 +20749,13 @@ operationGroups:
             description: Deletes a virtual machine from a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_712
+          - !Parameter &ref_736
             schema: *ref_3
             implementation: Method
             required: true
@@ -20655,7 +20767,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_713
+          - !Parameter &ref_737
             schema: *ref_3
             implementation: Method
             required: true
@@ -20667,7 +20779,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_714
+          - !Parameter &ref_738
             schema: *ref_3
             implementation: Method
             required: true
@@ -20680,7 +20792,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_551
+            schema: *ref_554
             implementation: Method
             language: !Languages 
               default:
@@ -20719,9 +20831,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_712
-          - *ref_713
-          - *ref_714
+          - *ref_736
+          - *ref_737
+          - *ref_738
         responses:
           - !SchemaResponse 
             schema: *ref_257
@@ -20742,12 +20854,13 @@ operationGroups:
             description: Gets a virtual machine from a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_GetInstanceView
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_715
+          - !Parameter &ref_739
             schema: *ref_3
             implementation: Method
             required: true
@@ -20759,7 +20872,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_716
+          - !Parameter &ref_740
             schema: *ref_3
             implementation: Method
             required: true
@@ -20771,7 +20884,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_717
+          - !Parameter &ref_741
             schema: *ref_3
             implementation: Method
             required: true
@@ -20812,9 +20925,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_715
-          - *ref_716
-          - *ref_717
+          - *ref_739
+          - *ref_740
+          - *ref_741
         responses:
           - !SchemaResponse 
             schema: *ref_440
@@ -20835,12 +20948,13 @@ operationGroups:
             description: Gets the status of a virtual machine from a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_718
+          - !Parameter &ref_742
             schema: *ref_3
             implementation: Method
             required: true
@@ -20852,7 +20966,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_719
+          - !Parameter &ref_743
             schema: *ref_3
             implementation: Method
             required: true
@@ -20864,7 +20978,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_720
+          - !Parameter &ref_744
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -20875,7 +20989,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_721
+          - !Parameter &ref_745
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -20886,7 +21000,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_722
+          - !Parameter &ref_746
             schema: *ref_3
             implementation: Method
             language: !Languages 
@@ -20926,14 +21040,14 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_718
-          - *ref_719
-          - *ref_720
-          - *ref_721
-          - *ref_722
+          - *ref_742
+          - *ref_743
+          - *ref_744
+          - *ref_745
+          - *ref_746
         responses:
           - !SchemaResponse 
-            schema: *ref_723
+            schema: *ref_747
             language: !Languages 
               default:
                 name: ''
@@ -20957,12 +21071,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_PowerOff
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_724
+          - !Parameter &ref_748
             schema: *ref_3
             implementation: Method
             required: true
@@ -20974,7 +21089,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_725
+          - !Parameter &ref_749
             schema: *ref_3
             implementation: Method
             required: true
@@ -20986,7 +21101,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_726
+          - !Parameter &ref_750
             schema: *ref_3
             implementation: Method
             required: true
@@ -20998,8 +21113,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_727
-            schema: *ref_561
+          - !Parameter &ref_751
+            schema: *ref_564
             implementation: Method
             language: !Languages 
               default:
@@ -21023,10 +21138,10 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_724
-          - *ref_725
-          - *ref_726
-          - *ref_727
+          - *ref_748
+          - *ref_749
+          - *ref_750
+          - *ref_751
         responses:
           - !Response 
             language: !Languages 
@@ -21054,12 +21169,13 @@ operationGroups:
             description: Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Restart
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_728
+          - !Parameter &ref_752
             schema: *ref_3
             implementation: Method
             required: true
@@ -21071,7 +21187,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_729
+          - !Parameter &ref_753
             schema: *ref_3
             implementation: Method
             required: true
@@ -21083,7 +21199,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_730
+          - !Parameter &ref_754
             schema: *ref_3
             implementation: Method
             required: true
@@ -21109,9 +21225,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_728
-          - *ref_729
-          - *ref_730
+          - *ref_752
+          - *ref_753
+          - *ref_754
         responses:
           - !Response 
             language: !Languages 
@@ -21139,12 +21255,13 @@ operationGroups:
             description: Restarts a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Start
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_731
+          - !Parameter &ref_755
             schema: *ref_3
             implementation: Method
             required: true
@@ -21156,7 +21273,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_732
+          - !Parameter &ref_756
             schema: *ref_3
             implementation: Method
             required: true
@@ -21168,7 +21285,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_733
+          - !Parameter &ref_757
             schema: *ref_3
             implementation: Method
             required: true
@@ -21194,9 +21311,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_731
-          - *ref_732
-          - *ref_733
+          - *ref_755
+          - *ref_756
+          - *ref_757
         responses:
           - !Response 
             language: !Languages 
@@ -21224,12 +21341,13 @@ operationGroups:
             description: Starts a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_Redeploy
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_734
+          - !Parameter &ref_758
             schema: *ref_3
             implementation: Method
             required: true
@@ -21241,7 +21359,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_735
+          - !Parameter &ref_759
             schema: *ref_3
             implementation: Method
             required: true
@@ -21253,7 +21371,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_736
+          - !Parameter &ref_760
             schema: *ref_3
             implementation: Method
             required: true
@@ -21279,9 +21397,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_734
-          - *ref_735
-          - *ref_736
+          - *ref_758
+          - *ref_759
+          - *ref_760
         responses:
           - !Response 
             language: !Languages 
@@ -21309,12 +21427,13 @@ operationGroups:
             description: Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_737
+          - !Parameter &ref_761
             schema: *ref_3
             implementation: Method
             required: true
@@ -21326,7 +21445,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_738
+          - !Parameter &ref_762
             schema: *ref_3
             implementation: Method
             required: true
@@ -21338,7 +21457,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_739
+          - !Parameter &ref_763
             schema: *ref_3
             implementation: Method
             required: true
@@ -21350,8 +21469,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_740
-            schema: *ref_577
+          - !Parameter &ref_764
+            schema: *ref_581
             implementation: Method
             language: !Languages 
               default:
@@ -21390,13 +21509,13 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_737
-          - *ref_738
-          - *ref_739
-          - *ref_740
+          - *ref_761
+          - *ref_762
+          - *ref_763
+          - *ref_764
         responses:
           - !SchemaResponse 
-            schema: *ref_581
+            schema: *ref_585
             language: !Languages 
               default:
                 name: ''
@@ -21410,7 +21529,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_567
+            schema: *ref_570
             language: !Languages 
               default:
                 name: ''
@@ -21430,12 +21549,13 @@ operationGroups:
             description: The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_PerformMaintenance
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_741
+          - !Parameter &ref_765
             schema: *ref_3
             implementation: Method
             required: true
@@ -21447,7 +21567,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_742
+          - !Parameter &ref_766
             schema: *ref_3
             implementation: Method
             required: true
@@ -21459,7 +21579,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_743
+          - !Parameter &ref_767
             schema: *ref_3
             implementation: Method
             required: true
@@ -21485,9 +21605,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_741
-          - *ref_742
-          - *ref_743
+          - *ref_765
+          - *ref_766
+          - *ref_767
         responses:
           - !Response 
             language: !Languages 
@@ -21515,12 +21635,13 @@ operationGroups:
             description: Performs maintenance on a virtual machine in a VM scale set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: VirtualMachineScaleSetVMs_SimulateEviction
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_744
+          - !Parameter &ref_768
             schema: *ref_3
             implementation: Method
             required: true
@@ -21532,7 +21653,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_745
+          - !Parameter &ref_769
             schema: *ref_3
             implementation: Method
             required: true
@@ -21544,7 +21665,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_746
+          - !Parameter &ref_770
             schema: *ref_3
             implementation: Method
             required: true
@@ -21570,9 +21691,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_744
-          - *ref_745
-          - *ref_746
+          - *ref_768
+          - *ref_769
+          - *ref_770
         responses:
           - !Response 
             language: !Languages 
@@ -21599,12 +21720,13 @@ operationGroups:
     $key: LogAnalytics
     operations:
       - !Operation 
+        operationId: LogAnalytics_ExportRequestRateByInterval
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_748
+          - !Parameter &ref_773
             schema: *ref_532
             implementation: Method
             required: true
@@ -21618,8 +21740,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_772
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -21634,7 +21756,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_747
+              - !Parameter &ref_771
                 schema: *ref_444
                 implementation: Method
                 required: true
@@ -21660,7 +21782,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_747
+              - *ref_771
             language: !Languages 
               default:
                 name: ''
@@ -21673,11 +21795,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_772
         signatureParameters:
-          - *ref_748
+          - *ref_773
         responses:
           - !SchemaResponse 
-            schema: *ref_749
+            schema: *ref_774
             language: !Languages 
               default:
                 name: ''
@@ -21708,12 +21832,13 @@ operationGroups:
             description: Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
         protocol: !Protocols {}
       - !Operation 
+        operationId: LogAnalytics_ExportThrottledRequests
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_528
-          - !Parameter &ref_751
+          - !Parameter &ref_777
             schema: *ref_532
             implementation: Method
             required: true
@@ -21727,8 +21852,8 @@ operationGroups:
                 in: path
           - *ref_529
           - *ref_533
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_776
             parameters:
               - !Parameter 
                 schema: *ref_536
@@ -21743,7 +21868,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_750
+              - !Parameter &ref_775
                 schema: *ref_446
                 implementation: Method
                 required: true
@@ -21769,7 +21894,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_750
+              - *ref_775
             language: !Languages 
               default:
                 name: ''
@@ -21782,11 +21907,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_776
         signatureParameters:
-          - *ref_751
+          - *ref_777
         responses:
           - !SchemaResponse 
-            schema: *ref_749
+            schema: *ref_774
             language: !Languages 
               default:
                 name: ''
@@ -21824,8 +21951,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

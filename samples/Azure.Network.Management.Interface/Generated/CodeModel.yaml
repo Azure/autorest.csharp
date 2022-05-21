@@ -7257,7 +7257,7 @@ schemas: !Schemas
     - *ref_147
     - *ref_219
     - *ref_220
-    - !ObjectSchema &ref_349
+    - !ObjectSchema &ref_350
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7281,7 +7281,7 @@ schemas: !Schemas
           description: Tags object for patch operations.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_353
+    - !ObjectSchema &ref_355
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7324,7 +7324,7 @@ schemas: !Schemas
           description: Response for the ListNetworkInterface API service call.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_357
+    - !ObjectSchema &ref_359
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7459,7 +7459,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_230
-    - !ObjectSchema &ref_360
+    - !ObjectSchema &ref_362
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7788,7 +7788,7 @@ schemas: !Schemas
     - *ref_246
     - *ref_247
     - *ref_248
-    - !ObjectSchema &ref_363
+    - !ObjectSchema &ref_365
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7831,7 +7831,7 @@ schemas: !Schemas
           description: Response for list ip configurations API service call.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_369
+    - !ObjectSchema &ref_371
       type: object
       apiVersions:
         - !ApiVersion 
@@ -7880,7 +7880,7 @@ schemas: !Schemas
     - *ref_178
     - *ref_179
     - *ref_180
-    - !ObjectSchema &ref_382
+    - !ObjectSchema &ref_385
       type: object
       apiVersions:
         - !ApiVersion 
@@ -8064,6 +8064,7 @@ operationGroups:
     $key: NetworkInterfaces
     operations:
       - !Operation 
+        operationId: NetworkInterfaces_Delete
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
@@ -8187,6 +8188,7 @@ operationGroups:
             description: Deletes the specified network interface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_Get
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
@@ -8335,12 +8337,13 @@ operationGroups:
             description: Gets information about the specified network interface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_347
+          - !Parameter &ref_348
             schema: *ref_1
             implementation: Method
             required: true
@@ -8352,7 +8355,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_348
+          - !Parameter &ref_349
             schema: *ref_1
             implementation: Method
             required: true
@@ -8366,8 +8369,8 @@ operationGroups:
                 in: path
           - *ref_336
           - *ref_337
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_347
             parameters:
               - !Parameter 
                 schema: *ref_345
@@ -8421,9 +8424,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_347
+        signatureParameters:
           - *ref_348
+          - *ref_349
         responses:
           - !SchemaResponse 
             schema: *ref_53
@@ -8546,12 +8551,13 @@ operationGroups:
             description: Creates or updates a network interface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_UpdateTags
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_351
+          - !Parameter &ref_353
             schema: *ref_1
             implementation: Method
             required: true
@@ -8563,7 +8569,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_352
+          - !Parameter &ref_354
             schema: *ref_1
             implementation: Method
             required: true
@@ -8577,8 +8583,8 @@ operationGroups:
                 in: path
           - *ref_336
           - *ref_337
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_352
             parameters:
               - !Parameter 
                 schema: *ref_345
@@ -8593,8 +8599,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_350
-                schema: *ref_349
+              - !Parameter &ref_351
+                schema: *ref_350
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -8619,7 +8625,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_350
+              - *ref_351
             language: !Languages 
               default:
                 name: ''
@@ -8632,9 +8638,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_351
+        requests:
           - *ref_352
+        signatureParameters:
+          - *ref_353
+          - *ref_354
         responses:
           - !SchemaResponse 
             schema: *ref_53
@@ -8711,6 +8719,7 @@ operationGroups:
             description: Updates a network interface tags.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_ListAll
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
@@ -8747,7 +8756,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_353
+            schema: *ref_355
             language: !Languages 
               default:
                 name: ''
@@ -8848,12 +8857,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_List
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_354
+          - !Parameter &ref_356
             schema: *ref_1
             implementation: Method
             required: true
@@ -8894,10 +8904,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_354
+          - *ref_356
         responses:
           - !SchemaResponse 
-            schema: *ref_353
+            schema: *ref_355
             language: !Languages 
               default:
                 name: ''
@@ -8999,12 +9009,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_GetEffectiveRouteTable
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_355
+          - !Parameter &ref_357
             schema: *ref_1
             implementation: Method
             required: true
@@ -9016,7 +9027,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_356
+          - !Parameter &ref_358
             schema: *ref_1
             implementation: Method
             required: true
@@ -9057,11 +9068,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_355
-          - *ref_356
+          - *ref_357
+          - *ref_358
         responses:
           - !SchemaResponse 
-            schema: *ref_357
+            schema: *ref_359
             language: !Languages 
               default:
                 name: ''
@@ -9154,12 +9165,13 @@ operationGroups:
             description: Gets all route tables applied to a network interface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaces_ListEffectiveNetworkSecurityGroups
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_358
+          - !Parameter &ref_360
             schema: *ref_1
             implementation: Method
             required: true
@@ -9171,7 +9183,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_359
+          - !Parameter &ref_361
             schema: *ref_1
             implementation: Method
             required: true
@@ -9212,11 +9224,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_358
-          - *ref_359
+          - *ref_360
+          - *ref_361
         responses:
           - !SchemaResponse 
-            schema: *ref_360
+            schema: *ref_362
             language: !Languages 
               default:
                 name: ''
@@ -9321,12 +9333,13 @@ operationGroups:
     $key: NetworkInterfaceIPConfigurations
     operations:
       - !Operation 
+        operationId: NetworkInterfaceIPConfigurations_List
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_361
+          - !Parameter &ref_363
             schema: *ref_1
             implementation: Method
             required: true
@@ -9338,7 +9351,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_362
+          - !Parameter &ref_364
             schema: *ref_1
             implementation: Method
             required: true
@@ -9379,11 +9392,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_361
-          - *ref_362
+          - *ref_363
+          - *ref_364
         responses:
           - !SchemaResponse 
-            schema: *ref_363
+            schema: *ref_365
             language: !Languages 
               default:
                 name: ''
@@ -9442,12 +9455,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaceIPConfigurations_Get
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_364
+          - !Parameter &ref_366
             schema: *ref_1
             implementation: Method
             required: true
@@ -9459,7 +9473,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_365
+          - !Parameter &ref_367
             schema: *ref_1
             implementation: Method
             required: true
@@ -9471,7 +9485,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_366
+          - !Parameter &ref_368
             schema: *ref_1
             implementation: Method
             required: true
@@ -9512,9 +9526,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_364
-          - *ref_365
           - *ref_366
+          - *ref_367
+          - *ref_368
         responses:
           - !SchemaResponse 
             schema: *ref_117
@@ -9586,12 +9600,13 @@ operationGroups:
     $key: NetworkInterfaceLoadBalancers
     operations:
       - !Operation 
+        operationId: NetworkInterfaceLoadBalancers_List
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_367
+          - !Parameter &ref_369
             schema: *ref_1
             implementation: Method
             required: true
@@ -9603,7 +9618,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_368
+          - !Parameter &ref_370
             schema: *ref_1
             implementation: Method
             required: true
@@ -9644,11 +9659,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_367
-          - *ref_368
+          - *ref_369
+          - *ref_370
         responses:
           - !SchemaResponse 
-            schema: *ref_369
+            schema: *ref_371
             language: !Languages 
               default:
                 name: ''
@@ -9783,12 +9798,13 @@ operationGroups:
     $key: NetworkInterfaceTapConfigurations
     operations:
       - !Operation 
+        operationId: NetworkInterfaceTapConfigurations_Delete
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_370
+          - !Parameter &ref_372
             schema: *ref_1
             implementation: Method
             required: true
@@ -9800,7 +9816,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_371
+          - !Parameter &ref_373
             schema: *ref_1
             implementation: Method
             required: true
@@ -9812,7 +9828,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_372
+          - !Parameter &ref_374
             schema: *ref_1
             implementation: Method
             required: true
@@ -9853,9 +9869,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_370
-          - *ref_371
           - *ref_372
+          - *ref_373
+          - *ref_374
         responses:
           - !Response 
             language: !Languages 
@@ -9920,12 +9936,13 @@ operationGroups:
             description: Deletes the specified tap configuration from the NetworkInterface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaceTapConfigurations_Get
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_373
+          - !Parameter &ref_375
             schema: *ref_1
             implementation: Method
             required: true
@@ -9937,7 +9954,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_374
+          - !Parameter &ref_376
             schema: *ref_1
             implementation: Method
             required: true
@@ -9949,7 +9966,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_375
+          - !Parameter &ref_377
             schema: *ref_1
             implementation: Method
             required: true
@@ -9990,9 +10007,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_373
-          - *ref_374
           - *ref_375
+          - *ref_376
+          - *ref_377
         responses:
           - !SchemaResponse 
             schema: *ref_109
@@ -10047,12 +10064,13 @@ operationGroups:
             description: Get the specified tap configuration on a network interface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaceTapConfigurations_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_377
+          - !Parameter &ref_380
             schema: *ref_1
             implementation: Method
             required: true
@@ -10064,7 +10082,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_378
+          - !Parameter &ref_381
             schema: *ref_1
             implementation: Method
             required: true
@@ -10076,7 +10094,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_379
+          - !Parameter &ref_382
             schema: *ref_1
             implementation: Method
             required: true
@@ -10090,8 +10108,8 @@ operationGroups:
                 in: path
           - *ref_336
           - *ref_337
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_379
             parameters:
               - !Parameter 
                 schema: *ref_345
@@ -10106,7 +10124,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_376
+              - !Parameter &ref_378
                 schema: *ref_109
                 implementation: Method
                 required: true
@@ -10132,7 +10150,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_376
+              - *ref_378
             language: !Languages 
               default:
                 name: ''
@@ -10145,10 +10163,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_377
-          - *ref_378
+        requests:
           - *ref_379
+        signatureParameters:
+          - *ref_380
+          - *ref_381
+          - *ref_382
         responses:
           - !SchemaResponse 
             schema: *ref_109
@@ -10233,12 +10253,13 @@ operationGroups:
             description: Creates or updates a Tap configuration in the specified NetworkInterface.
         protocol: !Protocols {}
       - !Operation 
+        operationId: NetworkInterfaceTapConfigurations_List
         apiVersions:
           - !ApiVersion 
             version: '2019-11-01'
         parameters:
           - *ref_335
-          - !Parameter &ref_380
+          - !Parameter &ref_383
             schema: *ref_1
             implementation: Method
             required: true
@@ -10250,7 +10271,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_381
+          - !Parameter &ref_384
             schema: *ref_1
             implementation: Method
             required: true
@@ -10291,11 +10312,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_380
-          - *ref_381
+          - *ref_383
+          - *ref_384
         responses:
           - !SchemaResponse 
-            schema: *ref_382
+            schema: *ref_385
             language: !Languages 
               default:
                 name: ''
@@ -10357,7 +10378,11 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
-  schemes: []
+  schemes:
+    - !OAuth2SecurityScheme 
+      type: OAuth2
+      scopes:
+        - user_impersonation
 language: !Languages 
   default:
     name: AzureNetworkManagementInterface
