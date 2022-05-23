@@ -1317,7 +1317,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutContentAsync(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1403,7 +1403,7 @@ namespace Azure.AI.DocumentTranslation
             try
             {
                 using HttpMessage message = CreateStartTranslationRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutContent(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

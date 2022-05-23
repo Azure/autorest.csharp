@@ -52,10 +52,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Analytics.Purview.Account\\Generated"
     },
-    "Azure.IoT.DeviceUpdate": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.IoT.DeviceUpdate\\Generated"
-    },
     "Azure.Management.Storage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\Generated"

@@ -377,7 +377,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutContentAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -405,7 +405,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete202Retry200Request(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutContent(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Delete202Retry200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -433,7 +433,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest(context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutContentAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -461,7 +461,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest(context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutContent(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -503,7 +503,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutContentAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -545,7 +545,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePost202Retry200Request(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutContent(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.Post202Retry200", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -587,7 +587,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageWithoutContentAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -629,7 +629,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessageWithoutContent(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessageWithoutResponseValue(_pipeline, message, ClientDiagnostics, "LRORetrysClient.PostAsyncRelativeRetrySucceeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

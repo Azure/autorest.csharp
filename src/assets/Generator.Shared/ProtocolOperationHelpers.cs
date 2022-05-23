@@ -18,10 +18,10 @@ namespace Azure.Core
             where TTo : notnull
             => new ConvertOperation<TFrom, TTo>(operation, diagnostics, scopeName, convertFunc);
 
-        public static ValueTask<Operation<VoidValue>> ProcessMessageWithoutContentAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
+        public static ValueTask<Operation<VoidValue>> ProcessMessageWithoutResponseValueAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
             => ProcessMessageAsync<VoidValue>(pipeline, message, clientDiagnostics, scopeName, finalStateVia, requestContext, waitUntil, r => new VoidValue());
 
-        public static Operation<VoidValue> ProcessMessageWithoutContent(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
+        public static Operation<VoidValue> ProcessMessageWithoutResponseValue(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
             => ProcessMessage<VoidValue>(pipeline, message, clientDiagnostics, scopeName, finalStateVia, requestContext, waitUntil, r => new VoidValue());
 
         public static ValueTask<Operation<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, RequestContext? requestContext, WaitUntil waitUntil)
