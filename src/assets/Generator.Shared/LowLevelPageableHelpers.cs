@@ -79,7 +79,12 @@ namespace Azure.Core
                 }
                 else if (r.TokenType == JsonTokenType.String)
                 {
-                    values.Add(new BinaryData(content.Slice((int)r.TokenStartIndex, r.ValueSpan.Length + 2 /* open and closing quotes are not captured in the value span */)));
+                    // We add two to r.ValueSpan.Length because for string tokens, the token includes
+                    // the quotes around the string value, whereas the ValueSpan property contains
+                    // only the string value without the quotes.
+                    // See: https://docs.microsoft.com/en-us/dotnet/api/system.text.json.utf8jsonreader.tokenstartindex?view=net-6.0#remarks
+                    int tokenEndIndex = r.ValueSpan.Length + 2;
+                    values.Add(new BinaryData(content.Slice((int)r.TokenStartIndex, tokenEndIndex)));
                 }
                 else
                 {
