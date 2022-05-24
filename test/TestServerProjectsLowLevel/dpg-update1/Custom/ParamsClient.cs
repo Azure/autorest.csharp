@@ -12,9 +12,6 @@ using Azure.Core;
 namespace dpg_update1_LowLevel
 {
     /// <summary> The Params service client. </summary>
-    [CodeGenSuppress("PostParametersAsync", typeof(RequestContent), typeof(RequestContext))]
-    [CodeGenSuppress("PostParameters", typeof(RequestContent), typeof(RequestContext))]
-    [CodeGenSuppress("CreatePostParametersRequest", typeof(RequestContent), typeof(RequestContext))]
     public partial class ParamsClient
     {
         /// <summary>
@@ -114,20 +111,8 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, RequestContext context)
         {
-            Argument.AssertNotNull(requiredParam, nameof(requiredParam));
-
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePutRequiredOptionalRequest(requiredParam, optionalParam, null, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var result = await PutRequiredOptionalAsync(requiredParam, optionalParam, null, context);
+            return result;
         }
 
         /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. Overload method to be compatible with dpg_initial where optional parameters become required. </summary>
@@ -257,66 +242,6 @@ namespace dpg_update1_LowLevel
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        // TODO: this method should be auto generated when https://github.com/Azure/autorest.csharp/issues/1746 is fixed.
-        /// <summary> POST a JSON or a JPEG. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response> PostParametersAsync(RequestContent content, ContentType contentType, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        // TODO: this method should be auto generated when https://github.com/Azure/autorest.csharp/issues/1746 is fixed.
-        /// <summary> POST a JSON or a JPEG. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response PostParameters(RequestContent content, ContentType contentType, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        // TODO: this method should be auto generated when https://github.com/Azure/autorest.csharp/issues/1746 is fixed.
-        internal HttpMessage CreatePostParametersRequest(RequestContent content, ContentType contentType, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/serviceDriven/parameters", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", contentType.ToString());
-            request.Content = content;
-            return message;
         }
     }
 }

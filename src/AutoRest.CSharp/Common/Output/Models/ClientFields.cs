@@ -55,8 +55,8 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     switch (scheme)
                     {
-                        case AzureKeySecurityScheme azureKeySecurityScheme:
-                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
+                        case KeySecurityScheme keySecurityScheme:
+                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{keySecurityScheme.Name:L}");
                             _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                             fields.Add(AuthorizationHeaderConstant);
@@ -64,8 +64,8 @@ namespace AutoRest.CSharp.Output.Models
                             credentialFields.Add(_keyAuthField);
                             parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                             break;
-                        case AADTokenSecurityScheme aadTokenSecurityScheme:
-                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
+                        case OAuth2SecurityScheme oAuth2SecurityScheme:
+                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {oAuth2SecurityScheme.Scopes.GetLiteralsFormattable()} }}");
                             _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                             fields.Add(ScopesConstant);

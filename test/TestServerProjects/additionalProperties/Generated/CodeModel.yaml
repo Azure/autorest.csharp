@@ -341,7 +341,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_30
+    - !ObjectSchema &ref_31
       type: object
       apiVersions:
         - !ApiVersion 
@@ -374,7 +374,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_7
-    - !ObjectSchema &ref_32
+    - !ObjectSchema &ref_34
       type: object
       apiVersions:
         - !ApiVersion 
@@ -424,7 +424,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_34
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
         - !ApiVersion 
@@ -474,7 +474,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_36
+    - !ObjectSchema &ref_40
       type: object
       apiVersions:
         - !ApiVersion 
@@ -528,7 +528,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_38
+    - !ObjectSchema &ref_43
       type: object
       apiVersions:
         - !ApiVersion 
@@ -618,13 +618,14 @@ operationGroups:
     $key: Pets
     operations:
       - !Operation 
+        operationId: Pets_CreateAPTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_26
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_30
             parameters:
               - !Parameter 
                 schema: *ref_27
@@ -678,6 +679,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_30
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -695,7 +698,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -713,13 +716,14 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pets_CreateCatAPTrue
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_26
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_33
             parameters:
               - !Parameter 
                 schema: *ref_27
@@ -734,7 +738,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_31
+              - !Parameter &ref_32
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -760,7 +764,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_31
+              - *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -773,6 +777,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_33
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -790,7 +796,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -808,108 +814,14 @@ operationGroups:
             description: Create a CatAPTrue which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pets_CreateAPObject
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_26
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_27
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_33
-                schema: *ref_32
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: createParameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_28
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_33
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /additionalProperties/type/object
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_32
-            language: !Languages 
-              default:
-                name: ''
-                description: A Pet which contains more properties than what is defined.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_30
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: CreateAPObject
-            description: Create a Pet which contains more properties than what is defined.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_26
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_36
             parameters:
               - !Parameter 
                 schema: *ref_27
@@ -957,12 +869,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /additionalProperties/type/string
+                path: /additionalProperties/type/object
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_36
         signatureParameters: []
         responses:
           - !SchemaResponse 
@@ -980,7 +894,105 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_31
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: CreateAPObject
+            description: Create a Pet which contains more properties than what is defined.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Pets_CreateAPString
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_26
+        requestMediaTypes:
+          application/json: !Request &ref_39
+            parameters:
+              - !Parameter 
+                schema: *ref_27
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_38
+                schema: *ref_37
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: createParameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_28
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /additionalProperties/type/string
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_39
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: A Pet which contains more properties than what is defined.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -998,13 +1010,14 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pets_CreateAPInProperties
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_26
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_42
             parameters:
               - !Parameter 
                 schema: *ref_27
@@ -1019,8 +1032,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_37
-                schema: *ref_36
+              - !Parameter &ref_41
+                schema: *ref_40
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1045,7 +1058,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_37
+              - *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1058,10 +1071,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_42
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_36
+            schema: *ref_40
             language: !Languages 
               default:
                 name: ''
@@ -1075,7 +1090,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -1093,13 +1108,14 @@ operationGroups:
             description: Create a Pet which contains more properties than what is defined.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pets_CreateAPInPropertiesWithAPString
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_26
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_45
             parameters:
               - !Parameter 
                 schema: *ref_27
@@ -1114,8 +1130,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_39
-                schema: *ref_38
+              - !Parameter &ref_44
+                schema: *ref_43
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1140,7 +1156,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_39
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -1153,10 +1169,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_45
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_38
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1170,7 +1188,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''

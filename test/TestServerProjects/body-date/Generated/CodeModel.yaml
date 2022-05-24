@@ -133,6 +133,7 @@ operationGroups:
     $key: date
     operations:
       - !Operation 
+        operationId: date_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -207,6 +208,7 @@ operationGroups:
             description: Get null date value
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_getInvalidDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -273,6 +275,7 @@ operationGroups:
             description: Get invalid date value
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_getOverflowDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -339,6 +342,7 @@ operationGroups:
             description: Get overflow date value
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_getUnderflowDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -405,13 +409,14 @@ operationGroups:
             description: Get underflow date value
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_putMaxDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -465,6 +470,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_9
         signatureParameters: []
         responses:
           - !Response 
@@ -503,6 +510,7 @@ operationGroups:
             description: Put max date value 9999-12-31
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_getMaxDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -576,13 +584,14 @@ operationGroups:
             description: Get max date value 9999-12-31
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_putMinDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_11
             parameters:
               - !Parameter 
                 schema: *ref_7
@@ -597,7 +606,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_9
+              - !Parameter &ref_10
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -623,7 +632,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_9
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -636,6 +645,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_11
         signatureParameters: []
         responses:
           - !Response 
@@ -674,6 +685,7 @@ operationGroups:
             description: Put min date value 0000-01-01
         protocol: !Protocols {}
       - !Operation 
+        operationId: date_getMinDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0

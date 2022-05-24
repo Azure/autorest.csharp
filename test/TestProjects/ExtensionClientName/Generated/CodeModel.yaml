@@ -121,12 +121,13 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: originalOperation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_4
-          - !Parameter &ref_9
+          - !Parameter &ref_10
             schema: *ref_1
             implementation: Method
             required: true
@@ -138,7 +139,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_10
+          - !Parameter &ref_11
             schema: *ref_1
             implementation: Method
             required: true
@@ -150,8 +151,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_9
             parameters:
               - !Parameter 
                 schema: *ref_5
@@ -205,9 +206,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_9
+        signatureParameters:
           - *ref_10
+          - *ref_11
         responses:
           - !SchemaResponse 
             schema: *ref_6

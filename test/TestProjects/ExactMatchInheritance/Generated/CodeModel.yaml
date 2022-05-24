@@ -580,7 +580,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_16
-    - !ObjectSchema &ref_62
+    - !ObjectSchema &ref_64
       type: object
       apiVersions:
         - !ApiVersion 
@@ -778,7 +778,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_29
-    - !ObjectSchema &ref_72
+    - !ObjectSchema &ref_76
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1002,6 +1002,7 @@ operationGroups:
     $key: ExactMatchModel1s
     operations:
       - !Operation 
+        operationId: ExactMatchModel1s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -1069,12 +1070,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel1s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_54
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1086,7 +1088,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_55
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1100,8 +1102,8 @@ operationGroups:
                 in: path
           - *ref_47
           - *ref_48
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_54
             parameters:
               - !Parameter 
                 schema: *ref_52
@@ -1155,9 +1157,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_54
+        signatureParameters:
           - *ref_55
+          - *ref_56
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1178,12 +1182,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel1s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_56
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1195,7 +1200,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1236,8 +1241,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
           - *ref_57
+          - *ref_58
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1266,12 +1271,13 @@ operationGroups:
     $key: ExactMatchModel2s
     operations:
       - !Operation 
+        operationId: ExactMatchModel2s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_59
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
             required: true
@@ -1283,7 +1289,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_60
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -1297,8 +1303,8 @@ operationGroups:
                 in: path
           - *ref_47
           - *ref_48
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_60
             parameters:
               - !Parameter 
                 schema: *ref_52
@@ -1313,7 +1319,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_58
+              - !Parameter &ref_59
                 schema: *ref_12
                 implementation: Method
                 required: true
@@ -1339,7 +1345,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_58
+              - *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -1352,9 +1358,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_59
+        requests:
           - *ref_60
+        signatureParameters:
+          - *ref_61
+          - *ref_62
         responses:
           - !SchemaResponse 
             schema: *ref_12
@@ -1383,12 +1391,13 @@ operationGroups:
     $key: ExactMatchModel3s
     operations:
       - !Operation 
+        operationId: ExactMatchModel3s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_61
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1429,10 +1438,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_61
+          - *ref_63
         responses:
           - !SchemaResponse 
-            schema: *ref_62
+            schema: *ref_64
             language: !Languages 
               default:
                 name: ''
@@ -1450,12 +1459,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel3s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_64
+          - !Parameter &ref_67
             schema: *ref_1
             implementation: Method
             required: true
@@ -1467,7 +1477,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_65
+          - !Parameter &ref_68
             schema: *ref_1
             implementation: Method
             required: true
@@ -1481,8 +1491,8 @@ operationGroups:
                 in: path
           - *ref_47
           - *ref_48
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_66
             parameters:
               - !Parameter 
                 schema: *ref_52
@@ -1497,7 +1507,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_63
+              - !Parameter &ref_65
                 schema: *ref_18
                 implementation: Method
                 required: true
@@ -1523,7 +1533,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_63
+              - *ref_65
             language: !Languages 
               default:
                 name: ''
@@ -1536,9 +1546,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_66
         signatureParameters:
-          - *ref_64
-          - *ref_65
+          - *ref_67
+          - *ref_68
         responses:
           - !SchemaResponse 
             schema: *ref_18
@@ -1559,12 +1571,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel3s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_66
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1576,7 +1589,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_67
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1617,8 +1630,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_66
-          - *ref_67
+          - *ref_69
+          - *ref_70
         responses:
           - !SchemaResponse 
             schema: *ref_18
@@ -1647,12 +1660,13 @@ operationGroups:
     $key: ExactMatchModel4s
     operations:
       - !Operation 
+        operationId: ExactMatchModel4s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_69
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
@@ -1664,7 +1678,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_70
+          - !Parameter &ref_74
             schema: *ref_1
             implementation: Method
             required: true
@@ -1678,8 +1692,8 @@ operationGroups:
                 in: path
           - *ref_47
           - *ref_48
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_72
             parameters:
               - !Parameter 
                 schema: *ref_52
@@ -1694,7 +1708,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_68
+              - !Parameter &ref_71
                 schema: *ref_25
                 implementation: Method
                 required: true
@@ -1720,7 +1734,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_68
+              - *ref_71
             language: !Languages 
               default:
                 name: ''
@@ -1733,9 +1747,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_72
         signatureParameters:
-          - *ref_69
-          - *ref_70
+          - *ref_73
+          - *ref_74
         responses:
           - !SchemaResponse 
             schema: *ref_25
@@ -1764,12 +1780,13 @@ operationGroups:
     $key: ExactMatchModel5s
     operations:
       - !Operation 
+        operationId: ExactMatchModel5s_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_71
+          - !Parameter &ref_75
             schema: *ref_1
             implementation: Method
             required: true
@@ -1810,10 +1827,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
+          - *ref_75
         responses:
           - !SchemaResponse 
-            schema: *ref_72
+            schema: *ref_76
             language: !Languages 
               default:
                 name: ''
@@ -1831,12 +1848,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel5s_Put
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_74
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
@@ -1848,7 +1866,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
@@ -1862,8 +1880,8 @@ operationGroups:
                 in: path
           - *ref_47
           - *ref_48
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_78
             parameters:
               - !Parameter 
                 schema: *ref_52
@@ -1878,7 +1896,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_73
+              - !Parameter &ref_77
                 schema: *ref_31
                 implementation: Method
                 required: true
@@ -1904,7 +1922,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_73
+              - *ref_77
             language: !Languages 
               default:
                 name: ''
@@ -1917,9 +1935,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_78
         signatureParameters:
-          - *ref_74
-          - *ref_75
+          - *ref_79
+          - *ref_80
         responses:
           - !SchemaResponse 
             schema: *ref_31
@@ -1940,12 +1960,13 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: ExactMatchModel5s_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_46
-          - !Parameter &ref_76
+          - !Parameter &ref_81
             schema: *ref_1
             implementation: Method
             required: true
@@ -1957,7 +1978,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_77
+          - !Parameter &ref_82
             schema: *ref_1
             implementation: Method
             required: true
@@ -1998,8 +2019,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_76
-          - *ref_77
+          - *ref_81
+          - *ref_82
         responses:
           - !SchemaResponse 
             schema: *ref_31
@@ -2027,8 +2048,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 
