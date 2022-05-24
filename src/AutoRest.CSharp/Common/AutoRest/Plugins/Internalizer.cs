@@ -17,7 +17,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Simplification;
 
-namespace AutoRest.CSharp.Common.AutoRest.Plugins
+namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal static class Internalizer
     {
@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             var compilation = await GetCompilationAsync(project);
 
             // first get all the declared models
-            var definitions = await GetAllPublicDeclaredModels(project, modelsToKeep);
+            var definitions = await GetModels(project, true);
             // get the root nodes
-            var rootNodes = await GetRootNodes(project);
+            var rootNodes = await GetRootNodes(project, modelsToKeep, true);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModelsAsync(compilation, project, rootNodes);
             await foreach (var model in publicModels)
@@ -44,11 +44,11 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return project;
         }
 
-        private static async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync(Compilation compilation, Project project, ImmutableHashSet<SyntaxNode> rootNodes)
+        private static async IAsyncEnumerable<BaseTypeDeclarationSyntax> TraverseAllPublicModelsAsync(Compilation compilation, Project project, ImmutableHashSet<BaseTypeDeclarationSyntax> rootNodes)
         {
-            var queue = new Queue<SyntaxNode>(rootNodes);
+            var queue = new Queue<BaseTypeDeclarationSyntax>(rootNodes);
             // traverse all the models starting from the root nodes
-            var visited = new HashSet<SyntaxNode>();
+            var visited = new HashSet<BaseTypeDeclarationSyntax>();
             while (queue.Count > 0)
             {
                 var node = queue.Dequeue();
@@ -65,17 +65,17 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             }
         }
 
-        private static async IAsyncEnumerable<SyntaxNode> GetReferencedTypes(Compilation compilation, Project project, SyntaxNode root)
+        private static async IAsyncEnumerable<BaseTypeDeclarationSyntax> GetReferencedTypes(Compilation compilation, Project project, SyntaxNode root)
         {
             var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
-            var publicMemberVisitor = new MemberVisitor(IsPublic);
+            var publicMemberVisitor = new MemberVisitor(true);
             publicMemberVisitor.Visit(root);
             foreach (var member in publicMemberVisitor.PublicMembers)
             {
                 var symbol = semanticModel.GetDeclaredSymbol(member);
                 if (symbol == null)
                     continue;
-                var list = new HashSet<SyntaxNode>();
+                var list = new HashSet<BaseTypeDeclarationSyntax>();
                 await ProcessSymbol(project, symbol, list);
                 foreach (var node in list)
                 {
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             }
         }
 
-        private static async Task ProcessSymbol(Project project, ISymbol? symbol, HashSet<SyntaxNode> result)
+        private static async Task ProcessSymbol(Project project, ISymbol? symbol, HashSet<BaseTypeDeclarationSyntax> result)
         {
             if (symbol == null || symbol.DeclaredAccessibility != Accessibility.Public)
                 return;
@@ -97,8 +97,10 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                         // short cut the recursive execution if this has already been in the result
                         if (result.Contains(node))
                             return;
-                        result.Add(node);
-                        if (HasDiscriminator(node, out var identifierCandidates))
+                        Debug.Assert(node is BaseTypeDeclarationSyntax);
+                        var declaration = (BaseTypeDeclarationSyntax)node;
+                        result.Add(declaration);
+                        if (HasDiscriminator(declaration, out var identifierCandidates))
                         {
                             // first find all the derived types from this type
                             foreach (var derivedTypeSymbol in await SymbolFinder.FindDerivedClassesAsync(typeSymbol, project.Solution))
@@ -131,7 +133,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             }
         }
 
-        private static bool HasDiscriminator(SyntaxNode node, [MaybeNullWhen(false)] out ImmutableHashSet<string> identifiers)
+        private static bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out ImmutableHashSet<string> identifiers)
         {
             identifiers = null;
             // only class models will have discriminators
@@ -161,24 +163,19 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return false;
         }
 
-        private static Project MarkInternal(Project project, SyntaxNode declarationNode)
+        private static Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode)
         {
-            var newNode = declarationNode switch
-            {
-                MemberDeclarationSyntax declaration => ChangeModifier(declaration, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword),
-                _ => throw new InvalidOperationException()
-            };
+            var newNode = ChangeModifier(declarationNode, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword);
             var tree = declarationNode.SyntaxTree;
             var document = project.GetDocument(tree)!;
             var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
-            //project = project.RemoveDocument(document.Id);
             document = document.WithSyntaxRoot(newRoot);
             project = document.Project;
 
             return project;
         }
 
-        private static MemberDeclarationSyntax ChangeModifier(MemberDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
+        private static BaseTypeDeclarationSyntax ChangeModifier(BaseTypeDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
         {
             var originalTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(from));
             var newToken = SyntaxFactory.Token(originalTokenInList.LeadingTrivia, to, originalTokenInList.TrailingTrivia);
@@ -193,13 +190,13 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return compilation;
         }
 
-        private static async Task<ImmutableHashSet<SyntaxNode>> GetAllPublicDeclaredModels(Project project, ImmutableHashSet<string> modelsToKeep)
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetModels(Project project, bool publicOnly)
         {
-            var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
+            var classVisitor = new DefinitionVisitor(publicOnly);
 
             foreach (var document in project.Documents)
             {
-                if (GeneratedCodeWorkspace.IsGeneratedDocument(document))
+                if (!GeneratedCodeWorkspace.IsSharedDocument(document))
                 {
                     var root = await document.GetSyntaxRootAsync();
                     classVisitor.Visit(root);
@@ -209,9 +206,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
-        private static async Task<ImmutableHashSet<SyntaxNode>> GetRootNodes(Project project)
+        public static async Task<ImmutableHashSet<BaseTypeDeclarationSyntax>> GetRootNodes(Project project, ImmutableHashSet<string> modelsToKeep, bool publicOnly)
         {
-            var classVisitor = new PublicDefinitionVisitor();
+            var classVisitor = new DefinitionVisitor(publicOnly);
             foreach (var document in project.Documents)
             {
                 var root = await document.GetSyntaxRootAsync();
@@ -219,7 +216,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
                 // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
                 // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
-                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document))
+                if (IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, modelsToKeep))
                 {
                     classVisitor.Visit(root);
                 }
@@ -257,6 +254,18 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             return false;
         }
 
+        private static bool ShouldKeepModel(SyntaxNode? root, ImmutableHashSet<string> modelsToKeep)
+        {
+            if (root is null)
+                return false;
+
+            // use `BaseTypeDeclarationSyntax` to also include enums because `EnumDeclarationSyntax` extends `BaseTypeDeclarationSyntax`
+            // `ClassDeclarationSyntax` and `StructDeclarationSyntax` both inherit `TypeDeclarationSyntax`
+            var typeNodes = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
+            // there is possibility that we have multiple types defined in the same document (for instance, custom code)
+            return typeNodes.Any(t => modelsToKeep.Contains(t.Identifier.Text));
+        }
+
         private static SyntaxList<AttributeListSyntax>? GetAttributeLists(SyntaxNode node)
         {
             if (node is StructDeclarationSyntax structDeclaration)
@@ -267,108 +276,5 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             return null;
         }
-
-        private class PublicDefinitionVisitor : CSharpSyntaxRewriter
-        {
-            public ImmutableHashSet<SyntaxNode> ModelDeclarations { get; private set; }
-            private readonly ImmutableHashSet<string> _modelsToKeep;
-
-            public PublicDefinitionVisitor(ImmutableHashSet<string> modelsToKeep)
-            {
-                _modelsToKeep = modelsToKeep;
-                ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
-            }
-
-            public PublicDefinitionVisitor()
-            {
-                _modelsToKeep = ImmutableHashSet<string>.Empty;
-                ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
-            }
-
-            public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
-            {
-                node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                {
-                    ModelDeclarations = ModelDeclarations.Add(node);
-                }
-
-                return node;
-            }
-
-            public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
-            {
-                node = (StructDeclarationSyntax)base.VisitStructDeclaration(node)!;
-
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                {
-                    ModelDeclarations = ModelDeclarations.Add(node);
-                }
-                return node;
-            }
-
-            public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
-            {
-                node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node)!;
-                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                {
-                    ModelDeclarations = ModelDeclarations.Add(node);
-                }
-                return node;
-            }
-        }
-
-        private class MemberVisitor : CSharpSyntaxRewriter
-        {
-            private List<SyntaxNode> _members = new();
-
-            public IEnumerable<SyntaxNode> PublicMembers => _members;
-
-            private Func<SyntaxTokenList, bool> _predicate;
-
-            public MemberVisitor(Func<SyntaxTokenList, bool> accessibility)
-            {
-                _predicate = accessibility;
-            }
-
-            public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
-            {
-                node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
-                if (_predicate(node.Modifiers))
-                {
-                    _members.Add(node);
-                }
-                return node;
-            }
-
-            public override SyntaxNode? VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-            {
-                node = (PropertyDeclarationSyntax)base.VisitPropertyDeclaration(node)!;
-                if (_predicate(node.Modifiers))
-                {
-                    _members.Add(node);
-                }
-                return node;
-            }
-
-            public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
-            {
-                node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
-                if (_predicate(node.Modifiers))
-                    _members.Add(node);
-                return node;
-            }
-
-            public override SyntaxNode? VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-            {
-                node = (ConstructorDeclarationSyntax)base.VisitConstructorDeclaration(node)!;
-                if (_predicate(node.Modifiers))
-                    _members.Add(node);
-                return node;
-            }
-        }
-
-        private static bool IsPublic(SyntaxTokenList tokenList)
-            => tokenList.Any(token => token.IsKind(SyntaxKind.PublicKeyword));
     }
 }

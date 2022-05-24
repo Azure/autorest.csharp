@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace SupersetInheritance.Models
 {
-    internal partial class SupersetModel5 : IUtf8JsonSerializable
+    public partial class SupersetModel5 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -74,7 +74,7 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -89,7 +89,7 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))

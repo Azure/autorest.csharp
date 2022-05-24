@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
-            return FindSimpleReplacements(originalType, frameworkType, context);
+            return FindSimpleReplacements(originalType, frameworkType);
         }
 
         public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
+        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, Type frameworkType)
         {
             //TODO for core generation this list is small enough we can simply define each of them here.
             //eventually we might want to come up with a more robust way of doing this
@@ -85,21 +85,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             bool isString = frameworkType == typeof(string);
 
             if (originalType.Declaration.Name == "Location" && (isString || frameworkType.Name == _locationType.Name))
-                return GetObjectTypeProperty(originalType, _locationType, context);
+                return GetObjectTypeProperty(originalType, _locationType);
 
             if (originalType.Declaration.Name == "ResourceType" && (isString || frameworkType.Name == _resourceTypeType.Name))
-                return GetObjectTypeProperty(originalType, _resourceTypeType, context);
+                return GetObjectTypeProperty(originalType, _resourceTypeType);
 
             if (originalType.Declaration.Name == "Id" && (isString || frameworkType.Name == _resourceIdentifierType.Name))
-                return GetObjectTypeProperty(originalType, _resourceIdentifierType, context);
+                return GetObjectTypeProperty(originalType, _resourceIdentifierType);
 
             return null;
-        }
-
-        private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, Type replacementType, BuildContext context)
-        {
-            var replacementCSharpType = CSharpType.FromSystemType(context, replacementType);
-            return GetObjectTypeProperty(originalType, replacementCSharpType);
         }
 
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)

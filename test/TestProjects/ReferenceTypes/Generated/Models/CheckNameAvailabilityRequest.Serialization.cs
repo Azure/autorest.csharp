@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Fake.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    type = (ResourceType)property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
             }

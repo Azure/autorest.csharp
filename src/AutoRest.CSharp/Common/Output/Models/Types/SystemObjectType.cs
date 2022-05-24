@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             "ResourceIdentifier" => type,
             "SystemData" => type,
-            _ => ReferenceTypes.IsMgmtReferenceType (type) ? typeof(string) : null,
+            _ => null,
         };
 
         internal IEnumerable<Attribute> GetCustomAttributes()
