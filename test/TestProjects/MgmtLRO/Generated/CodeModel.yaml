@@ -483,7 +483,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_15
-    - !ObjectSchema &ref_44
+    - !ObjectSchema &ref_46
       type: object
       apiVersions:
         - !ApiVersion 
@@ -527,7 +527,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_47
+    - !ObjectSchema &ref_49
       type: object
       apiVersions:
         - !ApiVersion 
@@ -575,7 +575,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_20
-    - !ObjectSchema &ref_49
+    - !ObjectSchema &ref_51
       type: object
       apiVersions:
         - !ApiVersion 
@@ -674,12 +674,13 @@ operationGroups:
     $key: Fakes
     operations:
       - !Operation 
+        operationId: Fakes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_32
+          - !Parameter &ref_33
             schema: *ref_1
             implementation: Method
             required: true
@@ -691,7 +692,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_33
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             required: true
@@ -705,8 +706,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_32
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -760,9 +761,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_32
+        signatureParameters:
           - *ref_33
+          - *ref_34
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -798,12 +801,13 @@ operationGroups:
             description: Create or update an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_35
+          - !Parameter &ref_37
             schema: *ref_1
             implementation: Method
             required: true
@@ -815,7 +819,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_36
+          - !Parameter &ref_38
             schema: *ref_1
             implementation: Method
             required: true
@@ -829,8 +833,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_36
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -845,7 +849,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_34
+              - !Parameter &ref_35
                 schema: *ref_14
                 implementation: Method
                 required: true
@@ -871,7 +875,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_34
+              - *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -884,9 +888,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_35
+        requests:
           - *ref_36
+        signatureParameters:
+          - *ref_37
+          - *ref_38
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -922,12 +928,13 @@ operationGroups:
             description: Update an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_37
+          - !Parameter &ref_39
             schema: *ref_1
             implementation: Method
             required: true
@@ -939,7 +946,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_38
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
@@ -965,8 +972,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_37
-          - *ref_38
+          - *ref_39
+          - *ref_40
         responses:
           - !Response 
             language: !Languages 
@@ -1001,12 +1008,13 @@ operationGroups:
             description: Delete an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_39
+          - !Parameter &ref_41
             schema: *ref_1
             implementation: Method
             required: true
@@ -1018,7 +1026,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_40
+          - !Parameter &ref_42
             schema: *ref_1
             implementation: Method
             required: true
@@ -1030,7 +1038,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_43
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1070,9 +1078,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_39
-          - *ref_40
           - *ref_41
+          - *ref_42
+          - *ref_43
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -1093,12 +1101,13 @@ operationGroups:
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_42
+          - !Parameter &ref_44
             schema: *ref_1
             implementation: Method
             required: true
@@ -1110,7 +1119,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_43
+          - !Parameter &ref_45
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1150,11 +1159,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_42
-          - *ref_43
+          - *ref_44
+          - *ref_45
         responses:
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -1172,12 +1181,13 @@ operationGroups:
             description: Lists all fakes in a resource group.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_DoSomethingLRO
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_45
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -1189,7 +1199,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_46
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -1230,11 +1240,11 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_45
-          - *ref_46
+          - *ref_47
+          - *ref_48
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1262,12 +1272,13 @@ operationGroups:
     $key: Bars
     operations:
       - !Operation 
+        operationId: Bars_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_48
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             required: true
@@ -1308,10 +1319,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
+          - *ref_50
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1329,12 +1340,13 @@ operationGroups:
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Bars_Create
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_51
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -1346,7 +1358,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1360,8 +1372,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_53
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -1376,7 +1388,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
+              - !Parameter &ref_52
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -1402,7 +1414,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1415,9 +1427,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_53
         signatureParameters:
-          - *ref_51
-          - *ref_52
+          - *ref_54
+          - *ref_55
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1453,12 +1467,13 @@ operationGroups:
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Bars_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_54
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1470,7 +1485,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_55
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1484,8 +1499,8 @@ operationGroups:
                 in: path
           - *ref_27
           - *ref_28
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_57
             parameters:
               - !Parameter 
                 schema: *ref_29
@@ -1500,7 +1515,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_53
+              - !Parameter &ref_56
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1526,7 +1541,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_53
+              - *ref_56
             language: !Languages 
               default:
                 name: ''
@@ -1539,9 +1554,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_57
         signatureParameters:
-          - *ref_54
-          - *ref_55
+          - *ref_58
+          - *ref_59
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1577,12 +1594,13 @@ operationGroups:
             description: Update an Bars.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Bars_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_56
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
             required: true
@@ -1594,7 +1612,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
             required: true
@@ -1635,8 +1653,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_60
+          - *ref_61
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1657,12 +1675,13 @@ operationGroups:
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Bars_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_58
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -1674,7 +1693,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_59
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1700,8 +1719,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_58
-          - *ref_59
+          - *ref_62
+          - *ref_63
         responses:
           - !Response 
             language: !Languages 
@@ -1745,8 +1764,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

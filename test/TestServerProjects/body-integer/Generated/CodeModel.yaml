@@ -77,7 +77,7 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   unixtimes:
-    - !UnixTimeSchema &ref_13
+    - !UnixTimeSchema &ref_17
       type: unixtime
       apiVersions:
         - !ApiVersion 
@@ -142,6 +142,7 @@ operationGroups:
     $key: int
     operations:
       - !Operation 
+        operationId: int_getNull
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -216,6 +217,7 @@ operationGroups:
             description: Get null Int value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getInvalid
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -282,6 +284,7 @@ operationGroups:
             description: Get invalid Int value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getOverflowInt32
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -348,6 +351,7 @@ operationGroups:
             description: Get overflow Int32 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getUnderflowInt32
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -414,6 +418,7 @@ operationGroups:
             description: Get underflow Int32 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getOverflowInt64
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -480,6 +485,7 @@ operationGroups:
             description: Get overflow Int64 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getUnderflowInt64
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -546,13 +552,14 @@ operationGroups:
             description: Get underflow Int64 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_putMax32
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_10
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -606,6 +613,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_10
         signatureParameters: []
         responses:
           - !Response 
@@ -644,13 +653,14 @@ operationGroups:
             description: Put max int32 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_putMax64
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_12
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -665,7 +675,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_10
+              - !Parameter &ref_11
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -691,7 +701,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_10
+              - *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -704,6 +714,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_12
         signatureParameters: []
         responses:
           - !Response 
@@ -742,13 +754,14 @@ operationGroups:
             description: Put max int64 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_putMin32
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_14
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -763,7 +776,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
+              - !Parameter &ref_13
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -789,7 +802,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_11
+              - *ref_13
             language: !Languages 
               default:
                 name: ''
@@ -802,6 +815,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_14
         signatureParameters: []
         responses:
           - !Response 
@@ -840,13 +855,14 @@ operationGroups:
             description: Put min int32 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_putMin64
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_16
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -861,7 +877,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_12
+              - !Parameter &ref_15
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -887,7 +903,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_12
+              - *ref_15
             language: !Languages 
               default:
                 name: ''
@@ -900,6 +916,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_16
         signatureParameters: []
         responses:
           - !Response 
@@ -938,6 +956,7 @@ operationGroups:
             description: Put min int64 value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getUnixTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -972,7 +991,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -1011,13 +1030,14 @@ operationGroups:
             description: Get datetime encoded as Unix time value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_putUnixTimeDate
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_3
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_19
             parameters:
               - !Parameter 
                 schema: *ref_8
@@ -1032,8 +1052,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
-                schema: *ref_13
+              - !Parameter &ref_18
+                schema: *ref_17
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1058,7 +1078,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_14
+              - *ref_18
             language: !Languages 
               default:
                 name: ''
@@ -1071,6 +1091,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_19
         signatureParameters: []
         responses:
           - !Response 
@@ -1102,6 +1124,7 @@ operationGroups:
             description: Put datetime encoded as Unix time
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getInvalidUnixTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1136,7 +1159,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -1168,6 +1191,7 @@ operationGroups:
             description: Get invalid Unix time value
         protocol: !Protocols {}
       - !Operation 
+        operationId: int_getNullUnixTime
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
@@ -1202,7 +1226,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_13
+            schema: *ref_17
             nullable: true
             language: !Languages 
               default:

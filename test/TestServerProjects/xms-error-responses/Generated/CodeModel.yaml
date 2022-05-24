@@ -558,6 +558,7 @@ operationGroups:
     $key: Pet
     operations:
       - !Operation 
+        operationId: Pet_GetPetById
         apiVersions:
           - !ApiVersion 
             version: 0.0.0
@@ -687,6 +688,7 @@ operationGroups:
             description: Gets pets by id.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pet_DoSomething
         apiVersions:
           - !ApiVersion 
             version: 0.0.0
@@ -781,6 +783,7 @@ operationGroups:
             description: Asks pet to do something
         protocol: !Protocols {}
       - !Operation 
+        operationId: Pet_HasModelsParam
         apiVersions:
           - !ApiVersion 
             version: 0.0.0

@@ -889,7 +889,7 @@ schemas: !Schemas
                 serializedName: privateLinkServiceConnectionState
                 language: !Languages 
                   default:
-                    name: privateLinkServiceConnectionState
+                    name: connectionState
                     description: A collection of information about the state of the connection between service consumer and provider.
                 protocol: !Protocols {}
               - !Property 
@@ -1590,8 +1590,8 @@ operationGroups: []
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 
