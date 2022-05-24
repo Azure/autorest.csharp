@@ -14,6 +14,7 @@ input-file:
  #  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/ac3be41ee22ada179ab7b970e98f1289188b3bae/specification/common-types/resource-management/v2/privatelinks.json
   - $(this-folder)/privatelinks.json
 namespace: Azure.ReferenceTypes
+keep-orphaned-models: ResourceNon # the remover will remove this since this is not internally used or a reference type if we do not have this configuration
 
 directive:
   - remove-model: "AzureEntityResource"

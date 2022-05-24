@@ -35,4 +35,8 @@ directive:
       $.VirtualMachineImageResource.properties.location["x-ms-format"] = "azure-location";
       $.VirtualMachineScaleSetListOSUpgradeHistory.properties.etag["x-ms-format"] = "etag";
       $.VirtualMachineScaleSetSku.properties.resourceType["x-ms-format"] = "resource-type";
+  - from: swagger-document
+    where: $.paths..parameters[?(@.name === "location")]
+    transform: >
+      $["x-ms-format"] = 'azure-location';
 ```

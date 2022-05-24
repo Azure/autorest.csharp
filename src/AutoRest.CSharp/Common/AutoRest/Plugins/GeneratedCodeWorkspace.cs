@@ -5,17 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.Common.AutoRest.Plugins;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -179,6 +175,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
             _project = await Internalizer.InternalizeAsync(_project, modelsToKeep);
+        }
+
+        public async Task RemoveUnusedModels(ImmutableHashSet<string> modelsToKeep)
+        {
+            _project = await Remover.RemoveUnusedAsync(_project, modelsToKeep);
         }
     }
 }

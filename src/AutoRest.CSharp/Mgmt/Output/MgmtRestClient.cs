@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtRestClient : RestClient
     {
-        public static readonly Parameter ApplicationIdParameter = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, false);
+        public static readonly Parameter ApplicationIdParameter = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, ValidationType.None, null);
 
         private readonly MgmtRestClientBuilder _clientBuilder;
         private readonly CachedDictionary<ServiceRequest, RestClientMethod> _updatedRequestMethods;

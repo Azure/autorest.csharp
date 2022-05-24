@@ -267,16 +267,5 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{collectionName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
             return true;
         }
-
-        public string GenExampleInstanceMethodName(string methodName, bool isAsync)
-        {
-            return $"{methodName}ExampleInstance{GetAsyncSuffix(isAsync)}";
-        }
-
-        public IEnumerable<Parameter> GenExampleInstanceMethodParameters(MgmtClientOperation clientOperation)
-        {
-            // var passThruParameters = parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter);
-            return clientOperation.MethodParameters.Where(p => p.Validate && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
-        }
     }
 }

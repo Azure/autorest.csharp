@@ -22,14 +22,14 @@ namespace MgmtKeyvault.Models
         /// <param name="id"> Id of private endpoint connection. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
-        /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
+        /// <param name="connectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal PrivateEndpointConnectionItem(string id, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState)
+        internal PrivateEndpointConnectionItem(string id, string etag, SubResource privateEndpoint, MgmtKeyvaultPrivateLinkServiceConnectionState connectionState, MgmtKeyvaultPrivateEndpointConnectionProvisioningState? provisioningState)
         {
             Id = id;
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
-            PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
+            ConnectionState = connectionState;
             ProvisioningState = provisioningState;
         }
 
@@ -42,11 +42,11 @@ namespace MgmtKeyvault.Models
         /// <summary> Gets Id. </summary>
         public ResourceIdentifier PrivateEndpointId
         {
-            get => PrivateEndpoint.Id;
+            get => PrivateEndpoint?.Id;
         }
 
         /// <summary> Approval state of the private link connection. </summary>
-        public MgmtKeyvaultPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; }
+        public MgmtKeyvaultPrivateLinkServiceConnectionState ConnectionState { get; }
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public MgmtKeyvaultPrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }

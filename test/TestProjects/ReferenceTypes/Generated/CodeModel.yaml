@@ -835,12 +835,6 @@ schemas: !Schemas
                   - properties
                   - privateEndpoint
                 serializedName: privateEndpoint
-                extensions:
-                  x-accessibility: public
-                  x-csharp-formats: json
-                  x-csharp-usage: model,input,output
-                  x-ms-mgmt-typeReferenceType: true
-                  x-namespace: Azure.ResourceManager.Fake.Models
                 language: !Languages 
                   default:
                     name: privateEndpoint
@@ -856,12 +850,6 @@ schemas: !Schemas
                     - !Property 
                       schema: *ref_9
                       serializedName: status
-                      extensions:
-                        x-accessibility: public
-                        x-csharp-formats: json
-                        x-csharp-usage: model,input,output
-                        x-ms-mgmt-typeReferenceType: true
-                        x-namespace: Azure.ResourceManager.Fake.Models
                       language: !Languages 
                         default:
                           name: status
@@ -899,15 +887,9 @@ schemas: !Schemas
                   - properties
                   - privateLinkServiceConnectionState
                 serializedName: privateLinkServiceConnectionState
-                extensions:
-                  x-accessibility: public
-                  x-csharp-formats: json
-                  x-csharp-usage: model,input,output
-                  x-ms-mgmt-typeReferenceType: true
-                  x-namespace: Azure.ResourceManager.Fake.Models
                 language: !Languages 
                   default:
-                    name: privateLinkServiceConnectionState
+                    name: connectionState
                     description: A collection of information about the state of the connection between service consumer and provider.
                 protocol: !Protocols {}
               - !Property 
@@ -917,12 +899,6 @@ schemas: !Schemas
                   - provisioningState
                 readOnly: true
                 serializedName: provisioningState
-                extensions:
-                  x-accessibility: public
-                  x-csharp-formats: json
-                  x-csharp-usage: model,input,output
-                  x-ms-mgmt-typeReferenceType: true
-                  x-namespace: Azure.ResourceManager.Fake.Models
                 language: !Languages 
                   default:
                     name: provisioningState
@@ -1247,13 +1223,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_32
           serializedName: error
-          extensions:
-            x-accessibility: public
-            x-csharp-formats: json
-            x-csharp-usage: model
-            x-ms-mgmt-propertyReferenceType: false
-            x-ms-mgmt-referenceType: false
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: error
@@ -1290,12 +1259,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_37
           serializedName: createdByType
-          extensions:
-            x-accessibility: public
-            x-csharp-formats: json
-            x-csharp-usage: model,input,output
-            x-ms-mgmt-propertyReferenceType: true
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: createdByType
@@ -1320,12 +1283,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_37
           serializedName: lastModifiedByType
-          extensions:
-            x-accessibility: public
-            x-csharp-formats: json
-            x-csharp-usage: model,input,output
-            x-ms-mgmt-propertyReferenceType: true
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: lastModifiedByType
@@ -1404,12 +1361,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: keyVaultProperties
-          extensions:
-            x-accessibility: public
-            x-csharp-formats: json
-            x-csharp-usage: model,input,output
-            x-ms-mgmt-propertyReferenceType: true
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: keyVaultProperties

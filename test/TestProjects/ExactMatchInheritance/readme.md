@@ -11,6 +11,10 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/ExactMatchInheritance.json
 namespace: ExactMatchInheritance
+# the remover will remove this since this is not internally used or a reference type if we do not have this configuration
+keep-orphaned-models:
+- ExactMatchModel11
+
 directive:
   - from: ExactMatchInheritance.json
     where: $.definitions.ExactMatchModel11.properties.type

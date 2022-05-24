@@ -1138,8 +1138,6 @@ schemas: !Schemas
                                               protocol: !Protocols {}
                                             required: true
                                             serializedName: originGroup
-                                            extensions:
-                                              x-ms-azure-resource: true
                                             language: !Languages 
                                               default:
                                                 name: originGroup
@@ -1587,8 +1585,6 @@ schemas: !Schemas
                                                 - !Property 
                                                   schema: *ref_36
                                                   serializedName: originGroup
-                                                  extensions:
-                                                    x-ms-azure-resource: true
                                                   language: !Languages 
                                                     default:
                                                       name: originGroup

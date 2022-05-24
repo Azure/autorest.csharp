@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ExactMatchInheritance.Models
 {
-    internal partial class ExactMatchModel11 : IUtf8JsonSerializable
+    public partial class ExactMatchModel11 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

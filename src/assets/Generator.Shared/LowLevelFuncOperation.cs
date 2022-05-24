@@ -24,9 +24,10 @@ namespace Azure.Core
         }
 
 #pragma warning disable CA1822
-        //TODO: This is currently unused.
+        // This scenario is currently unsupported.
+        // See: https://github.com/Azure/autorest.csharp/issues/2158.
         /// <inheritdoc />
-        public override string Id => throw new NotImplementedException();
+        public override string Id => throw new NotSupportedException();
 #pragma warning restore CA1822
 
         /// <inheritdoc />

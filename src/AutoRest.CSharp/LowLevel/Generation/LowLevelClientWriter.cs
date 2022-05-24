@@ -30,10 +30,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter : ClientWriter
     {
-        private static readonly Parameter ScopeNameParameter = new("diagnosticsScopeName", null, new CSharpType(typeof(string)), null, false);
-        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, false);
-        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, false);
-        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, false);
+        private static readonly Parameter ScopeNameParameter = new("diagnosticsScopeName", null, new CSharpType(typeof(string)), null, ValidationType.None, null);
+        private static readonly Parameter ResponseParameter = new("response", null, typeof(Response), null, ValidationType.None, null);
+        private static readonly Parameter NextLinkParameter = new("nextLink", null, new CSharpType(typeof(string), true), null, ValidationType.None, null);
+        private static readonly Parameter PageSizeHintParameter = new("pageSizeHint", null, new CSharpType(typeof(int), true), null, ValidationType.None, null);
 
         private static readonly FormattableString PageableProcessMessageMethodName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessage)}";
         private static readonly FormattableString PageableProcessMessageMethodAsyncName = $"{typeof(LowLevelPageableHelpers)}.{nameof(LowLevelPageableHelpers.ProcessMessageAsync)}";
@@ -102,10 +102,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConstructors(CodeWriter writer, LowLevelClient client)
         {
-            WriteEmptyConstructor(writer, client);
-            foreach (var constructor in client.PublicConstructors)
+            foreach (var constructor in client.SecondaryConstructors)
             {
-                WritePublicConstructor(writer, client, constructor);
+                WriteSecondaryPublicConstructor(writer, constructor);
+            }
+
+            foreach (var constructor in client.PrimaryConstructors)
+            {
+                WritePrimaryPublicConstructor(writer, client, constructor);
             }
 
             if (client.IsSubClient)
@@ -114,16 +118,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteEmptyConstructor(CodeWriter writer, TypeProvider client)
+        private static void WriteSecondaryPublicConstructor(CodeWriter writer, ConstructorSignature signature)
         {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
-            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            writer.WriteMethodDocumentation(signature);
+            using (writer.WriteMethodDeclaration(signature))
             {
             }
             writer.Line();
         }
 
-        private static void WritePublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
+        private static void WritePrimaryPublicConstructor(CodeWriter writer, LowLevelClient client, ConstructorSignature signature)
         {
             writer.WriteMethodDocumentation(signature);
             using (writer.WriteMethodDeclaration(signature))
@@ -132,7 +136,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(client.ClientOptions.Type));
-                writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I});");
+                writer.Line($"{client.Fields.ClientDiagnosticsProperty.Name:I} = new {client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
                 FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
                 FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
