@@ -12,11 +12,11 @@ namespace AutoRest.TestServer.Tests
     {
         [Test]
         public Task UrlPathItemGetAll() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
-                    globalStringQuery: "globalStringQuery",
+            await new AutoRestUrlTestServiceClient(
                     credential: Key,
                     endpoint: host,
-                    options: null)
+                    options: null).GetPathItemsClient(globalStringPath: "globalStringPath",
+                    globalStringQuery: "globalStringQuery")
                 .GetAllWithValuesAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: "pathItemStringQuery",
@@ -25,11 +25,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
-                    globalStringQuery: "globalStringQuery",
+            await new AutoRestUrlTestServiceClient(
                     credential: Key,
                     endpoint: host,
-                    options: null)
+                    options: null).GetPathItemsClient(globalStringPath: "globalStringPath",
+                    globalStringQuery: "globalStringQuery")
                 .GetLocalPathItemQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: null,
@@ -38,11 +38,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(globalStringPath: "globalStringPath",
-                    endpoint: host,
+            await new AutoRestUrlTestServiceClient(
                     credential: Key,
-                    globalStringQuery: null,
-                    options: null)
+                    endpoint: host,
+                    options: null).GetPathItemsClient(globalStringPath: "globalStringPath",
+                    globalStringQuery: null)
                 .GetGlobalQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: "pathItemStringQuery",
@@ -51,12 +51,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host) =>
-            await new PathItemsClient(
-                    globalStringPath: "globalStringPath",
-                    endpoint: host,
+            await new AutoRestUrlTestServiceClient(
                     credential: Key,
-                    globalStringQuery: null,
-                    options: null)
+                    endpoint: host,
+                    options: null).GetPathItemsClient(globalStringPath: "globalStringPath",
+                    globalStringQuery: null)
                 .GetGlobalAndLocalQueryNullAsync(
                 pathItemStringPath: "pathItemStringPath",
                 pathItemStringQuery: "pathItemStringQuery",

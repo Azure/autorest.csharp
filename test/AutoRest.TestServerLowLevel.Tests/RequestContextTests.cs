@@ -21,14 +21,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task RequestThrowsByDefault () => Test(host =>
         {
-            PathsClient paths = new PathsClient(Key, host, null);
+            Paths paths = new AutoRestUrlTestServiceClient(Key, host, null).GetPathsClient();
             Assert.ThrowsAsync<Azure.RequestFailedException>(async () => await paths.EnumValidAsync("no color"));
         }, ignoreScenario: true);
 
         [Test]
         public Task RequestThrowsCanBeDisabled () => Test(host =>
         {
-            PathsClient paths = new PathsClient(Key, host, null);
+            Paths paths = new AutoRestUrlTestServiceClient(Key, host, null).GetPathsClient();
             Assert.DoesNotThrowAsync(async () => await paths.EnumValidAsync("no color", ErrorOptions.NoThrow));
         }, ignoreScenario: true);
     }

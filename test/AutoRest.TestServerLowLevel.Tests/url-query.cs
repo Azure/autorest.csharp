@@ -13,109 +13,109 @@ namespace AutoRest.TestServer.Tests
     public class UrlQueryTests : TestServerLowLevelTestBase
     {
         [Test]
-        public Task UrlQueriesBoolTrue() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetBooleanTrueAsync());
+        public Task UrlQueriesBoolTrue() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetBooleanTrueAsync());
 
         [Test]
-        public Task UrlQueriesBoolFalse() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetBooleanFalseAsync());
+        public Task UrlQueriesBoolFalse() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetBooleanFalseAsync());
 
         [Test]
-        public Task UrlQueriesBoolNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetBooleanNullAsync( null));
+        public Task UrlQueriesBoolNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetBooleanNullAsync( null));
 
         [Test]
-        public Task UrlQueriesIntPositive() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetIntOneMillionAsync());
+        public Task UrlQueriesIntPositive() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetIntOneMillionAsync());
 
         [Test]
-        public Task UrlQueriesIntNegative() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetIntNegativeOneMillionAsync());
+        public Task UrlQueriesIntNegative() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetIntNegativeOneMillionAsync());
 
         [Test]
-        public Task UrlQueriesIntNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetIntNullAsync( null));
+        public Task UrlQueriesIntNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetIntNullAsync( null));
 
         [Test]
-        public Task UrlQueriesLongPositive() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetTenBillionAsync());
+        public Task UrlQueriesLongPositive() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetTenBillionAsync());
 
         [Test]
-        public Task UrlQueriesLongNegative() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetNegativeTenBillionAsync());
+        public Task UrlQueriesLongNegative() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetNegativeTenBillionAsync());
 
         [Test]
-        public Task UrlQueriesLongNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).GetLongNullAsync( null));
+        public Task UrlQueriesLongNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().GetLongNullAsync( null));
 
         [Test]
-        public Task UrlQueriesFloatPositive() => TestStatus(async (host) => await new QueriesClient(Key, host, null).FloatScientificPositiveAsync());
+        public Task UrlQueriesFloatPositive() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().FloatScientificPositiveAsync());
 
         [Test]
-        public Task UrlQueriesFloatNegative() => TestStatus(async (host) => await new QueriesClient(Key, host, null).FloatScientificNegativeAsync());
+        public Task UrlQueriesFloatNegative() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().FloatScientificNegativeAsync());
 
         [Test]
-        public Task UrlQueriesFloatNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).FloatNullAsync( null));
+        public Task UrlQueriesFloatNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().FloatNullAsync( null));
 
         [Test]
-        public Task UrlQueriesDoublePositive() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DoubleDecimalPositiveAsync());
+        public Task UrlQueriesDoublePositive() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DoubleDecimalPositiveAsync());
 
         [Test]
-        public Task UrlQueriesDoubleNegative() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DoubleDecimalNegativeAsync());
+        public Task UrlQueriesDoubleNegative() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DoubleDecimalNegativeAsync());
 
         [Test]
-        public Task UrlQueriesDoubleNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DoubleNullAsync( null));
+        public Task UrlQueriesDoubleNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DoubleNullAsync( null));
 
         [Test]
-        public Task UrlQueriesStringUnicode() => TestStatus(async (host) => await new QueriesClient(Key, host, null).StringUnicodeAsync());
+        public Task UrlQueriesStringUnicode() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().StringUnicodeAsync());
 
         [Test]
-        public Task UrlQueriesStringUrlEncoded() => TestStatus(async (host) => await new QueriesClient(Key, host, null).StringUrlEncodedAsync());
+        public Task UrlQueriesStringUrlEncoded() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().StringUrlEncodedAsync());
 
         [Test]
-        public Task UrlQueriesStringEmpty() => TestStatus(async (host) => await new QueriesClient(Key, host, null).StringEmptyAsync());
+        public Task UrlQueriesStringEmpty() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().StringEmptyAsync());
 
         [Test]
-        public Task UrlQueriesStringNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).StringNullAsync( null));
+        public Task UrlQueriesStringNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().StringNullAsync( null));
 
         [Test]
-        public Task UrlQueriesEnumValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).EnumValidAsync( "green color"));
+        public Task UrlQueriesEnumValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().EnumValidAsync( "green color"));
 
         [Test]
-        public Task UrlQueriesEnumNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).EnumNullAsync( null));
+        public Task UrlQueriesEnumNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().EnumNullAsync( null));
 
         [Test]
-        public Task UrlQueriesByteMultiByte() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteMultiByteAsync( TestConstants.ByteArray));
+        public Task UrlQueriesByteMultiByte() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ByteMultiByteAsync( TestConstants.ByteArray));
 
         [Test]
-        public Task UrlQueriesByteNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteNullAsync( null));
+        public Task UrlQueriesByteNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ByteNullAsync( null));
 
         [Test]
-        public Task UrlQueriesByteEmpty() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ByteEmptyAsync());
+        public Task UrlQueriesByteEmpty() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ByteEmptyAsync());
 
         [Test]
-        public Task UrlQueriesDateValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DateValidAsync());
+        public Task UrlQueriesDateValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DateValidAsync());
 
         [Test]
-        public Task UrlQueriesDateNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DateNullAsync( null));
+        public Task UrlQueriesDateNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DateNullAsync( null));
 
         [Test]
-        public Task UrlQueriesDateTimeValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DateTimeValidAsync());
+        public Task UrlQueriesDateTimeValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DateTimeValidAsync());
 
         [Test]
-        public Task UrlQueriesDateTimeNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).DateTimeNullAsync( null));
+        public Task UrlQueriesDateTimeNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().DateTimeNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
+        public Task UrlQueriesArrayCsvValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
 
         [Test]
-        public Task UrlQueriesArrayNoCollectionFormatValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringNoCollectionFormatEmptyAsync( new[] {"hello", "nihao", "bonjour"}));
+        public Task UrlQueriesArrayNoCollectionFormatValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringNoCollectionFormatEmptyAsync( new[] {"hello", "nihao", "bonjour"}));
 
         [Test]
-        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringCsvNullAsync( null));
+        public Task UrlQueriesArrayCsvNull() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringCsvNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringCsvEmptyAsync(Enumerable.Empty<string>()));
+        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringCsvEmptyAsync(Enumerable.Empty<string>()));
 
         [Test]
-        public Task UrlQueriesArraySsvValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringSsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArraySsvValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringSsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringTsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArrayTsvValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringTsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host) => await new QueriesClient(Key, host, null).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArrayPipesValid() => TestStatus(async (host) => await new AutoRestUrlTestServiceClient(Key, host, null).GetQueriesClient().ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
         public Task UrlQueriesArrayMultiNull() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host, null).ArrayStringMultiNullAsync( null));
