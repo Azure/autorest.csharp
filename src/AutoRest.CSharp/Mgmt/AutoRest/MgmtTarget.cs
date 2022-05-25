@@ -61,7 +61,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.Models)
             {
-                WriteModel(project, model, serializeWriter);
+                if (ShouldSkipModelGeneration(model))
+                    continue;
+
+                var codeWriter = new CodeWriter();
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+                var name = model.Type.Name;
+                AddGeneratedFile(project, $"Models/{name}.cs", codeWriter.ToString());
+
+                if (model is MgmtReferenceType mgmtReferenceType)
+                {
+                    var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                    if (extensions != null && extensions.MgmtReferenceType)
+                        continue;
+                }
+
+                var serializerCodeWriter = new CodeWriter();
+                serializeWriter.WriteSerialization(serializerCodeWriter, model);
+                AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
             foreach (var client in MgmtContext.Library.RestClients)
@@ -133,13 +150,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
-            // The models from the property bag are generated last
-            // thus ensuring that their names are of the form {Resource}{Method}Options
-            foreach (var model in MgmtContext.Library.OptionalModels.Distinct())
-            {
-                WriteModel(project, model, serializeWriter);
-            }
-
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
@@ -147,28 +157,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
 
             project.RemoveUnusedModels(modelsToKeep).GetAwaiter().GetResult();
-        }
-
-        private static void WriteModel(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter)
-        {
-            if (ShouldSkipModelGeneration(model))
-                return;
-
-            var codeWriter = new CodeWriter();
-            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            var name = model.Type.Name;
-            AddGeneratedFile(project, $"Models/{name}.cs", codeWriter.ToString());
-
-            if (model is MgmtReferenceType mgmtReferenceType)
-            {
-                var extensions = mgmtReferenceType.ObjectSchema.Extensions;
-                if (extensions != null && extensions.MgmtReferenceType)
-                    return;
-            }
-
-            var serializerCodeWriter = new CodeWriter();
-            serializeWriter.WriteSerialization(serializerCodeWriter, model);
-            AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)

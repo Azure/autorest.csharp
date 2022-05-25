@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         MgmtContext.Library.GetRestClient(operation),
                         operation.GetRequestPath(),
                         Extension.ContextualPath,
-                        operationName)).UpdateMgmtRestOperationParameters());
+                        operationName)));
             });
         }
 
