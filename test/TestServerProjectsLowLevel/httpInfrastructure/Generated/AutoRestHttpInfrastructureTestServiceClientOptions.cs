@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace httpInfrastructure_LowLevel
 {
-    /// <summary> Client options for AutoRestHttpInfrastructureTestService library clients. </summary>
+    /// <summary> Client options for AutoRestHttpInfrastructureTestServiceClient. </summary>
     public partial class AutoRestHttpInfrastructureTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

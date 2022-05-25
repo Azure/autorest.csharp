@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace CollapseRequestCondition_LowLevel
 {
     /// <summary> The RequestConditionCollapse service client. </summary>
-    public partial class RequestConditionCollapseClient
+    public partial class RequestConditionCollapse
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace CollapseRequestCondition_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of RequestConditionCollapseClient for mocking. </summary>
-        protected RequestConditionCollapseClient()
+        /// <summary> Initializes a new instance of RequestConditionCollapse for mocking. </summary>
+        protected RequestConditionCollapse()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestConditionCollapseClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public RequestConditionCollapseClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new CollapseRequestConditionsClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of RequestConditionCollapseClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of RequestConditionCollapse. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public RequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint, CollapseRequestConditionsClientOptions options)
+        internal RequestConditionCollapse(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new CollapseRequestConditionsClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -61,7 +50,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapsePut");
             scope.Start();
             try
             {
@@ -80,7 +69,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapsePut");
             scope.Start();
             try
             {
@@ -98,7 +87,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapseGet");
             scope.Start();
             try
             {
@@ -116,7 +105,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.CollapseGet");
             scope.Start();
             try
             {
@@ -136,7 +125,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfNoneMatchGet");
             scope.Start();
             try
             {
@@ -156,7 +145,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfNoneMatchGet");
             scope.Start();
             try
             {
@@ -176,7 +165,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfMatchGet");
             scope.Start();
             try
             {
@@ -196,7 +185,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfMatchGet");
             scope.Start();
             try
             {
@@ -216,7 +205,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfModifiedSinceGet");
             scope.Start();
             try
             {
@@ -236,7 +225,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfModifiedSinceGet");
             scope.Start();
             try
             {
@@ -256,7 +245,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfUnmodifiedSinceGet");
             scope.Start();
             try
             {
@@ -276,7 +265,7 @@ namespace CollapseRequestCondition_LowLevel
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfUnmodifiedSinceGet");
             scope.Start();
             try
             {
@@ -297,7 +286,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfMatchIfNoneMatchGet");
             scope.Start();
             try
             {
@@ -318,7 +307,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.MissIfMatchIfNoneMatchGet");
             scope.Start();
             try
             {
@@ -340,7 +329,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.IfModifiedSinceGet");
             scope.Start();
             try
             {
@@ -362,7 +351,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.IfModifiedSinceGet");
             scope.Start();
             try
             {
@@ -384,7 +373,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.IfUnmodifiedSinceGet");
             scope.Start();
             try
             {
@@ -406,7 +395,7 @@ namespace CollapseRequestCondition_LowLevel
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
 
-            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapse.IfUnmodifiedSinceGet");
             scope.Start();
             try
             {

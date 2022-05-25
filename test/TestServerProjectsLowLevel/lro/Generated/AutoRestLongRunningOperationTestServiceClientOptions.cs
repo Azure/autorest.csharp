@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro_LowLevel
 {
-    /// <summary> Client options for AutoRestLongRunningOperationTestService library clients. </summary>
+    /// <summary> Client options for AutoRestLongRunningOperationTestServiceClient. </summary>
     public partial class AutoRestLongRunningOperationTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

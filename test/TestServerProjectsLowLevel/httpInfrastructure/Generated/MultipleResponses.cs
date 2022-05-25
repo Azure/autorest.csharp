@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace httpInfrastructure_LowLevel
 {
     /// <summary> The MultipleResponses service client. </summary>
-    public partial class MultipleResponsesClient
+    public partial class MultipleResponses
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
-        protected MultipleResponsesClient()
+        /// <summary> Initializes a new instance of MultipleResponses for mocking. </summary>
+        protected MultipleResponses()
         {
         }
 
-        /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public MultipleResponsesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestHttpInfrastructureTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of MultipleResponses. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public MultipleResponsesClient(AzureKeyCredential credential, Uri endpoint, AutoRestHttpInfrastructureTestServiceClientOptions options)
+        internal MultipleResponses(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -74,7 +63,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
             {
@@ -106,7 +95,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
             {
@@ -138,7 +127,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
             {
@@ -170,7 +159,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
             {
@@ -202,7 +191,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
             {
@@ -234,7 +223,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
             {
@@ -266,7 +255,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
             {
@@ -298,7 +287,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
             {
@@ -330,7 +319,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
             {
@@ -362,7 +351,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
             {
@@ -394,7 +383,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
             {
@@ -426,7 +415,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
             {
@@ -458,7 +447,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
             {
@@ -490,7 +479,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
             {
@@ -522,7 +511,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
             {
@@ -554,7 +543,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
             {
@@ -586,7 +575,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
             {
@@ -618,7 +607,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
             {
@@ -650,7 +639,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
             {
@@ -682,7 +671,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
             {
@@ -714,7 +703,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
             {
@@ -746,7 +735,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
             {
@@ -778,7 +767,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
             {
@@ -810,7 +799,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
             {
@@ -837,7 +826,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError202None");
             scope.Start();
             try
             {
@@ -864,7 +853,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError202None");
             scope.Start();
             try
             {
@@ -891,7 +880,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError204None");
             scope.Start();
             try
             {
@@ -918,7 +907,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError204None");
             scope.Start();
             try
             {
@@ -945,7 +934,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
             {
@@ -972,7 +961,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
             {
@@ -990,7 +979,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> Get202None204NoneDefaultNone202InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
             {
@@ -1008,7 +997,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response Get202None204NoneDefaultNone202Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
             {
@@ -1026,7 +1015,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> Get202None204NoneDefaultNone204NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
             {
@@ -1044,7 +1033,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response Get202None204NoneDefaultNone204None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
             {
@@ -1062,7 +1051,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> Get202None204NoneDefaultNone400NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
             {
@@ -1080,7 +1069,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response Get202None204NoneDefaultNone400None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
             {
@@ -1098,7 +1087,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> Get202None204NoneDefaultNone400InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
             {
@@ -1116,7 +1105,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response Get202None204NoneDefaultNone400Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
             {
@@ -1142,7 +1131,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA200Valid");
             scope.Start();
             try
             {
@@ -1168,7 +1157,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA200Valid");
             scope.Start();
             try
             {
@@ -1194,7 +1183,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA200None");
             scope.Start();
             try
             {
@@ -1220,7 +1209,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response GetDefaultModelA200None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA200None");
             scope.Start();
             try
             {
@@ -1246,7 +1235,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA400Valid");
             scope.Start();
             try
             {
@@ -1272,7 +1261,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA400Valid");
             scope.Start();
             try
             {
@@ -1298,7 +1287,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA400None");
             scope.Start();
             try
             {
@@ -1324,7 +1313,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultModelA400None");
             scope.Start();
             try
             {
@@ -1342,7 +1331,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetDefaultNone200InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone200Invalid");
             scope.Start();
             try
             {
@@ -1360,7 +1349,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetDefaultNone200Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone200Invalid");
             scope.Start();
             try
             {
@@ -1378,7 +1367,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetDefaultNone200NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone200None");
             scope.Start();
             try
             {
@@ -1396,7 +1385,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetDefaultNone200None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone200None");
             scope.Start();
             try
             {
@@ -1414,7 +1403,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetDefaultNone400InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone400Invalid");
             scope.Start();
             try
             {
@@ -1432,7 +1421,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetDefaultNone400Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone400Invalid");
             scope.Start();
             try
             {
@@ -1450,7 +1439,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetDefaultNone400NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone400None");
             scope.Start();
             try
             {
@@ -1468,7 +1457,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetDefaultNone400None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.GetDefaultNone400None");
             scope.Start();
             try
             {
@@ -1494,7 +1483,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200None");
             scope.Start();
             try
             {
@@ -1520,7 +1509,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA200None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200None");
             scope.Start();
             try
             {
@@ -1546,7 +1535,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200Valid");
             scope.Start();
             try
             {
@@ -1572,7 +1561,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA200Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200Valid");
             scope.Start();
             try
             {
@@ -1598,7 +1587,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200Invalid");
             scope.Start();
             try
             {
@@ -1624,7 +1613,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA200Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA200Invalid");
             scope.Start();
             try
             {
@@ -1650,7 +1639,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400None");
             scope.Start();
             try
             {
@@ -1676,7 +1665,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA400None(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400None");
             scope.Start();
             try
             {
@@ -1702,7 +1691,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400Valid");
             scope.Start();
             try
             {
@@ -1728,7 +1717,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA400Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400Valid");
             scope.Start();
             try
             {
@@ -1754,7 +1743,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400Invalid");
             scope.Start();
             try
             {
@@ -1780,7 +1769,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA400Invalid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA400Invalid");
             scope.Start();
             try
             {
@@ -1806,7 +1795,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA202Valid");
             scope.Start();
             try
             {
@@ -1832,7 +1821,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get200ModelA202Valid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponses.Get200ModelA202Valid");
             scope.Start();
             try
             {

@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 namespace url_LowLevel
 {
     /// <summary> The Paths service client. </summary>
-    public partial class PathsClient
+    public partial class Paths
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -28,32 +28,21 @@ namespace url_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
-        protected PathsClient()
+        /// <summary> Initializes a new instance of Paths for mocking. </summary>
+        protected Paths()
         {
         }
 
-        /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestUrlTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of PathsClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of Paths. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public PathsClient(AzureKeyCredential credential, Uri endpoint, AutoRestUrlTestServiceClientOptions options)
+        internal Paths(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestUrlTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -70,7 +59,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanTrue");
             scope.Start();
             try
             {
@@ -97,7 +86,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanTrue");
             scope.Start();
             try
             {
@@ -124,7 +113,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanFalse");
             scope.Start();
             try
             {
@@ -151,7 +140,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetBooleanFalse");
             scope.Start();
             try
             {
@@ -178,7 +167,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetIntOneMillion");
             scope.Start();
             try
             {
@@ -205,7 +194,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetIntOneMillion");
             scope.Start();
             try
             {
@@ -232,7 +221,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
@@ -259,7 +248,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
@@ -286,7 +275,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetTenBillion");
             scope.Start();
             try
             {
@@ -313,7 +302,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetTenBillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetTenBillion");
             scope.Start();
             try
             {
@@ -340,7 +329,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetNegativeTenBillion");
             scope.Start();
             try
             {
@@ -367,7 +356,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Paths.GetNegativeTenBillion");
             scope.Start();
             try
             {
@@ -394,7 +383,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificPositive");
             scope.Start();
             try
             {
@@ -421,7 +410,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificPositive");
             scope.Start();
             try
             {
@@ -448,7 +437,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificNegative");
             scope.Start();
             try
             {
@@ -475,7 +464,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("Paths.FloatScientificNegative");
             scope.Start();
             try
             {
@@ -502,7 +491,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalPositive");
             scope.Start();
             try
             {
@@ -529,7 +518,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalPositive");
             scope.Start();
             try
             {
@@ -556,7 +545,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalNegative");
             scope.Start();
             try
             {
@@ -583,7 +572,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DoubleDecimalNegative");
             scope.Start();
             try
             {
@@ -610,7 +599,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUnicode");
             scope.Start();
             try
             {
@@ -637,7 +626,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringUnicode(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUnicode");
             scope.Start();
             try
             {
@@ -664,7 +653,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlEncoded");
             scope.Start();
             try
             {
@@ -691,7 +680,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlEncoded");
             scope.Start();
             try
             {
@@ -718,7 +707,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlNonEncoded");
             scope.Start();
             try
             {
@@ -745,7 +734,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringUrlNonEncoded");
             scope.Start();
             try
             {
@@ -772,7 +761,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringEmpty");
             scope.Start();
             try
             {
@@ -799,7 +788,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringEmpty");
             scope.Start();
             try
             {
@@ -831,7 +820,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringNull");
             scope.Start();
             try
             {
@@ -863,7 +852,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.StringNull");
             scope.Start();
             try
             {
@@ -895,7 +884,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.EnumValid");
             scope.Start();
             try
             {
@@ -927,7 +916,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.EnumValid");
             scope.Start();
             try
             {
@@ -959,7 +948,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.EnumNull");
             scope.Start();
             try
             {
@@ -991,7 +980,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.EnumNull");
             scope.Start();
             try
             {
@@ -1022,7 +1011,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteMultiByte");
             scope.Start();
             try
             {
@@ -1053,7 +1042,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteMultiByte");
             scope.Start();
             try
             {
@@ -1080,7 +1069,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteEmpty");
             scope.Start();
             try
             {
@@ -1107,7 +1096,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ByteEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteEmpty");
             scope.Start();
             try
             {
@@ -1138,7 +1127,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteNull");
             scope.Start();
             try
             {
@@ -1169,7 +1158,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ByteNull");
             scope.Start();
             try
             {
@@ -1196,7 +1185,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateValid");
             scope.Start();
             try
             {
@@ -1223,7 +1212,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateValid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateValid");
             scope.Start();
             try
             {
@@ -1251,7 +1240,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateNull");
             scope.Start();
             try
             {
@@ -1279,7 +1268,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateNull");
             scope.Start();
             try
             {
@@ -1306,7 +1295,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeValid");
             scope.Start();
             try
             {
@@ -1333,7 +1322,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateTimeValid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeValid");
             scope.Start();
             try
             {
@@ -1361,7 +1350,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeNull");
             scope.Start();
             try
             {
@@ -1389,7 +1378,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("Paths.DateTimeNull");
             scope.Start();
             try
             {
@@ -1420,7 +1409,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
+            using var scope = ClientDiagnostics.CreateScope("Paths.Base64Url");
             scope.Start();
             try
             {
@@ -1451,7 +1440,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
+            using var scope = ClientDiagnostics.CreateScope("Paths.Base64Url");
             scope.Start();
             try
             {
@@ -1482,7 +1471,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ArrayCsvInPath");
             scope.Start();
             try
             {
@@ -1513,7 +1502,7 @@ namespace url_LowLevel
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            using var scope = ClientDiagnostics.CreateScope("Paths.ArrayCsvInPath");
             scope.Start();
             try
             {
@@ -1541,7 +1530,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            using var scope = ClientDiagnostics.CreateScope("Paths.UnixTimeUrl");
             scope.Start();
             try
             {
@@ -1569,7 +1558,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            using var scope = ClientDiagnostics.CreateScope("Paths.UnixTimeUrl");
             scope.Start();
             try
             {

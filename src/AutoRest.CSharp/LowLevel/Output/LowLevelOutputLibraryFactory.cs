@@ -110,9 +110,18 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var topLevelClients = clientInfosByName.Values.Where(c => c.Parent == null).ToList();
-            if (!Configuration.SingleTopLevelClient || topLevelClients.Count == 1)
+            if (!Configuration.SingleTopLevelClient)
             {
                 return topLevelClients;
+            }
+            if ( topLevelClients.Count == 1)
+            {
+                var topClient = topLevelClients[0];
+                if (!topClient.ResourceParameters.Any() && !string.IsNullOrEmpty(topClient.OperationGroupKey))
+                {
+                    topClient.Name += ClientBuilder.GetClientSuffix(context);
+                    return topLevelClients;
+                }
             }
 
             var topLevelClientInfo = topLevelClients.FirstOrDefault(c => string.IsNullOrEmpty(c.OperationGroupKey));
@@ -229,7 +238,7 @@ namespace AutoRest.CSharp.Output.Models
         public class ClientInfo
         {
             public string OperationGroupKey { get; }
-            public string Name { get; }
+            public string Name { get; set; }
             public string Namespace { get; }
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }

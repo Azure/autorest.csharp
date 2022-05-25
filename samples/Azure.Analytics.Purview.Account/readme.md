@@ -6,6 +6,7 @@ namespace: Azure.Analytics.Purview.Account
 data-plane: true
 security: AADToken
 security-scopes:  https://purview.azure.net/.default
+single-top-level-client: false
 ```
 
 # Model endpoint parameter as a url, not a string.

@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Input
                 case Options.Generation1ConvenienceClient:
                     return false;
                 case Options.SingleTopLevelClient:
-                    return false;
+                    return true;
                 default:
                     return null;
             }

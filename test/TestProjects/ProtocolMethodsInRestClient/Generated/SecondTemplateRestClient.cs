@@ -255,7 +255,7 @@ namespace ProtocolMethodsInRestClient
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
-            using var scope = ClientDiagnostics.CreateScope("SecondTemplateClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("SecondTemplate.Get");
             scope.Start();
             try
             {
@@ -287,7 +287,7 @@ namespace ProtocolMethodsInRestClient
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
-            using var scope = ClientDiagnostics.CreateScope("SecondTemplateClient.Get");
+            using var scope = ClientDiagnostics.CreateScope("SecondTemplate.Get");
             scope.Start();
             try
             {

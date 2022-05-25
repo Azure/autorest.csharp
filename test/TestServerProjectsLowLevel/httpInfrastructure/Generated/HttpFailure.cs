@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace httpInfrastructure_LowLevel
 {
     /// <summary> The HttpFailure service client. </summary>
-    public partial class HttpFailureClient
+    public partial class HttpFailure
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of HttpFailureClient for mocking. </summary>
-        protected HttpFailureClient()
+        /// <summary> Initializes a new instance of HttpFailure for mocking. </summary>
+        protected HttpFailure()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpFailureClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpFailureClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestHttpInfrastructureTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of HttpFailureClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of HttpFailure. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public HttpFailureClient(AzureKeyCredential credential, Uri endpoint, AutoRestHttpInfrastructureTestServiceClientOptions options)
+        internal HttpFailure(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -69,7 +58,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetEmptyError");
             scope.Start();
             try
             {
@@ -96,7 +85,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response GetEmptyError(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetEmptyError");
             scope.Start();
             try
             {
@@ -114,7 +103,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetNoModelError");
             scope.Start();
             try
             {
@@ -132,7 +121,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetNoModelError(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetNoModelError");
             scope.Start();
             try
             {
@@ -150,7 +139,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetNoModelEmpty");
             scope.Start();
             try
             {
@@ -168,7 +157,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetNoModelEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            using var scope = ClientDiagnostics.CreateScope("HttpFailure.GetNoModelEmpty");
             scope.Start();
             try
             {

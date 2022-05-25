@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace httpInfrastructure_LowLevel
 {
     /// <summary> The HttpRetry service client. </summary>
-    public partial class HttpRetryClient
+    public partial class HttpRetry
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace httpInfrastructure_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
-        protected HttpRetryClient()
+        /// <summary> Initializes a new instance of HttpRetry for mocking. </summary>
+        protected HttpRetry()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpRetryClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpRetryClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestHttpInfrastructureTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of HttpRetryClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of HttpRetry. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public HttpRetryClient(AzureKeyCredential credential, Uri endpoint, AutoRestHttpInfrastructureTestServiceClientOptions options)
+        internal HttpRetry(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -69,7 +58,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Head408Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Head408");
             scope.Start();
             try
             {
@@ -96,7 +85,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Head408(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Head408");
             scope.Start();
             try
             {
@@ -124,7 +113,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Put500");
             scope.Start();
             try
             {
@@ -152,7 +141,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Put500(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Put500");
             scope.Start();
             try
             {
@@ -180,7 +169,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Patch500");
             scope.Start();
             try
             {
@@ -208,7 +197,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Patch500(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Patch500");
             scope.Start();
             try
             {
@@ -235,7 +224,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Get502Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Get502");
             scope.Start();
             try
             {
@@ -262,7 +251,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Get502(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Get502");
             scope.Start();
             try
             {
@@ -289,7 +278,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Options502Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Options502");
             scope.Start();
             try
             {
@@ -316,7 +305,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Options502(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Options502");
             scope.Start();
             try
             {
@@ -344,7 +333,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Post503");
             scope.Start();
             try
             {
@@ -372,7 +361,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Post503(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Post503");
             scope.Start();
             try
             {
@@ -400,7 +389,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Delete503");
             scope.Start();
             try
             {
@@ -428,7 +417,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Delete503(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Delete503");
             scope.Start();
             try
             {
@@ -456,7 +445,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Put504");
             scope.Start();
             try
             {
@@ -484,7 +473,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Put504(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Put504");
             scope.Start();
             try
             {
@@ -512,7 +501,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Patch504");
             scope.Start();
             try
             {
@@ -540,7 +529,7 @@ namespace httpInfrastructure_LowLevel
         /// </remarks>
         public virtual Response Patch504(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetry.Patch504");
             scope.Start();
             try
             {

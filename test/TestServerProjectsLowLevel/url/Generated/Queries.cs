@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 namespace url_LowLevel
 {
     /// <summary> The Queries service client. </summary>
-    public partial class QueriesClient
+    public partial class Queries
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -28,32 +28,21 @@ namespace url_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
-        protected QueriesClient()
+        /// <summary> Initializes a new instance of Queries for mocking. </summary>
+        protected Queries()
         {
         }
 
-        /// <summary> Initializes a new instance of QueriesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestUrlTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of QueriesClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of Queries. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public QueriesClient(AzureKeyCredential credential, Uri endpoint, AutoRestUrlTestServiceClientOptions options)
+        internal Queries(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestUrlTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -70,7 +59,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanTrue");
             scope.Start();
             try
             {
@@ -97,7 +86,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanTrue");
             scope.Start();
             try
             {
@@ -124,7 +113,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanFalse");
             scope.Start();
             try
             {
@@ -151,7 +140,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanFalse");
             scope.Start();
             try
             {
@@ -179,7 +168,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanNull");
             scope.Start();
             try
             {
@@ -207,7 +196,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetBooleanNull(bool? boolQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetBooleanNull");
             scope.Start();
             try
             {
@@ -234,7 +223,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntOneMillion");
             scope.Start();
             try
             {
@@ -261,7 +250,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntOneMillion");
             scope.Start();
             try
             {
@@ -288,7 +277,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
@@ -315,7 +304,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
@@ -343,7 +332,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntNull");
             scope.Start();
             try
             {
@@ -371,7 +360,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetIntNull(int? intQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetIntNull");
             scope.Start();
             try
             {
@@ -398,7 +387,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetTenBillion");
             scope.Start();
             try
             {
@@ -425,7 +414,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetTenBillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetTenBillion");
             scope.Start();
             try
             {
@@ -452,7 +441,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetNegativeTenBillion");
             scope.Start();
             try
             {
@@ -479,7 +468,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetNegativeTenBillion");
             scope.Start();
             try
             {
@@ -507,7 +496,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetLongNull");
             scope.Start();
             try
             {
@@ -535,7 +524,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response GetLongNull(long? longQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.GetLongNull");
             scope.Start();
             try
             {
@@ -562,7 +551,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatScientificPositive");
             scope.Start();
             try
             {
@@ -589,7 +578,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatScientificPositive");
             scope.Start();
             try
             {
@@ -616,7 +605,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatScientificNegative");
             scope.Start();
             try
             {
@@ -643,7 +632,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatScientificNegative");
             scope.Start();
             try
             {
@@ -671,7 +660,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatNull");
             scope.Start();
             try
             {
@@ -699,7 +688,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response FloatNull(float? floatQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.FloatNull");
             scope.Start();
             try
             {
@@ -726,7 +715,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleDecimalPositive");
             scope.Start();
             try
             {
@@ -753,7 +742,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleDecimalPositive");
             scope.Start();
             try
             {
@@ -780,7 +769,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleDecimalNegative");
             scope.Start();
             try
             {
@@ -807,7 +796,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleDecimalNegative");
             scope.Start();
             try
             {
@@ -835,7 +824,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleNull");
             scope.Start();
             try
             {
@@ -863,7 +852,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DoubleNull(double? doubleQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DoubleNull");
             scope.Start();
             try
             {
@@ -890,7 +879,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringUnicode");
             scope.Start();
             try
             {
@@ -917,7 +906,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringUnicode(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringUnicode");
             scope.Start();
             try
             {
@@ -944,7 +933,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringUrlEncoded");
             scope.Start();
             try
             {
@@ -971,7 +960,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringUrlEncoded");
             scope.Start();
             try
             {
@@ -998,7 +987,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringEmpty");
             scope.Start();
             try
             {
@@ -1025,7 +1014,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringEmpty");
             scope.Start();
             try
             {
@@ -1053,7 +1042,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringNull");
             scope.Start();
             try
             {
@@ -1081,7 +1070,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response StringNull(string stringQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.StringNull");
             scope.Start();
             try
             {
@@ -1109,7 +1098,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.EnumValid");
             scope.Start();
             try
             {
@@ -1137,7 +1126,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response EnumValid(string enumQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.EnumValid");
             scope.Start();
             try
             {
@@ -1165,7 +1154,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.EnumNull");
             scope.Start();
             try
             {
@@ -1193,7 +1182,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response EnumNull(string enumQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.EnumNull");
             scope.Start();
             try
             {
@@ -1221,7 +1210,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteMultiByte");
             scope.Start();
             try
             {
@@ -1249,7 +1238,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteMultiByte");
             scope.Start();
             try
             {
@@ -1276,7 +1265,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteEmpty");
             scope.Start();
             try
             {
@@ -1303,7 +1292,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ByteEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteEmpty");
             scope.Start();
             try
             {
@@ -1331,7 +1320,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteNull");
             scope.Start();
             try
             {
@@ -1359,7 +1348,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ByteNull(byte[] byteQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ByteNull");
             scope.Start();
             try
             {
@@ -1386,7 +1375,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateValid");
             scope.Start();
             try
             {
@@ -1413,7 +1402,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateValid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateValid");
             scope.Start();
             try
             {
@@ -1441,7 +1430,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateNull");
             scope.Start();
             try
             {
@@ -1469,7 +1458,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateNull");
             scope.Start();
             try
             {
@@ -1496,7 +1485,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateTimeValid");
             scope.Start();
             try
             {
@@ -1523,7 +1512,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateTimeValid(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateTimeValid");
             scope.Start();
             try
             {
@@ -1551,7 +1540,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateTimeNull");
             scope.Start();
             try
             {
@@ -1579,7 +1568,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.DateTimeNull");
             scope.Start();
             try
             {
@@ -1607,7 +1596,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvValid");
             scope.Start();
             try
             {
@@ -1635,7 +1624,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvValid");
             scope.Start();
             try
             {
@@ -1663,7 +1652,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvNull");
             scope.Start();
             try
             {
@@ -1691,7 +1680,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvNull");
             scope.Start();
             try
             {
@@ -1719,7 +1708,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvEmpty");
             scope.Start();
             try
             {
@@ -1747,7 +1736,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringCsvEmpty");
             scope.Start();
             try
             {
@@ -1775,7 +1764,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
             try
             {
@@ -1803,7 +1792,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
             try
             {
@@ -1831,7 +1820,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringSsvValid");
             scope.Start();
             try
             {
@@ -1859,7 +1848,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringSsvValid");
             scope.Start();
             try
             {
@@ -1887,7 +1876,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringTsvValid");
             scope.Start();
             try
             {
@@ -1915,7 +1904,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringTsvValid");
             scope.Start();
             try
             {
@@ -1943,7 +1932,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringPipesValid");
             scope.Start();
             try
             {
@@ -1971,7 +1960,7 @@ namespace url_LowLevel
         /// </remarks>
         public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            using var scope = ClientDiagnostics.CreateScope("Queries.ArrayStringPipesValid");
             scope.Start();
             try
             {

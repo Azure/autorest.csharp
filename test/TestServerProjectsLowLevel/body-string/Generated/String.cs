@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace body_string_LowLevel
 {
     /// <summary> The String service client. </summary>
-    public partial class StringClient
+    public partial class String
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace body_string_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of StringClient for mocking. </summary>
-        protected StringClient()
+        /// <summary> Initializes a new instance of String for mocking. </summary>
+        protected String()
         {
         }
 
-        /// <summary> Initializes a new instance of StringClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public StringClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestSwaggerBATServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of StringClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of String. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public StringClient(AzureKeyCredential credential, Uri endpoint, AutoRestSwaggerBATServiceClientOptions options)
+        internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestSwaggerBATServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -69,7 +58,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNull");
             scope.Start();
             try
             {
@@ -96,7 +85,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetNull(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNull");
             scope.Start();
             try
             {
@@ -124,7 +113,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> PutNullAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
+            using var scope = ClientDiagnostics.CreateScope("String.PutNull");
             scope.Start();
             try
             {
@@ -152,7 +141,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response PutNull(RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutNull");
+            using var scope = ClientDiagnostics.CreateScope("String.PutNull");
             scope.Start();
             try
             {
@@ -179,7 +168,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("String.GetEmpty");
             scope.Start();
             try
             {
@@ -206,7 +195,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetEmpty(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("String.GetEmpty");
             scope.Start();
             try
             {
@@ -237,7 +226,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("String.PutEmpty");
             scope.Start();
             try
             {
@@ -268,7 +257,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutEmpty");
+            using var scope = ClientDiagnostics.CreateScope("String.PutEmpty");
             scope.Start();
             try
             {
@@ -295,7 +284,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetMbcsAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
+            using var scope = ClientDiagnostics.CreateScope("String.GetMbcs");
             scope.Start();
             try
             {
@@ -322,7 +311,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetMbcs(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
+            using var scope = ClientDiagnostics.CreateScope("String.GetMbcs");
             scope.Start();
             try
             {
@@ -353,7 +342,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
+            using var scope = ClientDiagnostics.CreateScope("String.PutMbcs");
             scope.Start();
             try
             {
@@ -384,7 +373,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutMbcs");
+            using var scope = ClientDiagnostics.CreateScope("String.PutMbcs");
             scope.Start();
             try
             {
@@ -411,7 +400,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetWhitespaceAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("String.GetWhitespace");
             scope.Start();
             try
             {
@@ -438,7 +427,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetWhitespace(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("String.GetWhitespace");
             scope.Start();
             try
             {
@@ -469,7 +458,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("String.PutWhitespace");
             scope.Start();
             try
             {
@@ -500,7 +489,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutWhitespace");
+            using var scope = ClientDiagnostics.CreateScope("String.PutWhitespace");
             scope.Start();
             try
             {
@@ -527,7 +516,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNotProvided");
             scope.Start();
             try
             {
@@ -554,7 +543,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetNotProvided(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNotProvided");
             scope.Start();
             try
             {
@@ -581,7 +570,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetBase64Encoded");
             scope.Start();
             try
             {
@@ -608,7 +597,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetBase64Encoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetBase64Encoded");
             scope.Start();
             try
             {
@@ -635,7 +624,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetBase64UrlEncoded");
             scope.Start();
             try
             {
@@ -662,7 +651,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetBase64UrlEncoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetBase64UrlEncoded");
             scope.Start();
             try
             {
@@ -693,7 +682,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.PutBase64UrlEncoded");
             scope.Start();
             try
             {
@@ -724,7 +713,7 @@ namespace body_string_LowLevel
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.PutBase64UrlEncoded");
             scope.Start();
             try
             {
@@ -751,7 +740,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNullBase64UrlEncoded");
             scope.Start();
             try
             {
@@ -778,7 +767,7 @@ namespace body_string_LowLevel
         /// </remarks>
         public virtual Response GetNullBase64UrlEncoded(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("String.GetNullBase64UrlEncoded");
             scope.Start();
             try
             {

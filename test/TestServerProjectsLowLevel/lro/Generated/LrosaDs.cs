@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace lro_LowLevel
 {
     /// <summary> The LrosaDs service client. </summary>
-    public partial class LrosaDsClient
+    public partial class LrosaDs
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
@@ -27,32 +27,21 @@ namespace lro_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of LrosaDsClient for mocking. </summary>
-        protected LrosaDsClient()
+        /// <summary> Initializes a new instance of LrosaDs for mocking. </summary>
+        protected LrosaDs()
         {
         }
 
-        /// <summary> Initializes a new instance of LrosaDsClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public LrosaDsClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new AutoRestLongRunningOperationTestServiceClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of LrosaDsClient. </summary>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <summary> Initializes a new instance of LrosaDs. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
-        public LrosaDsClient(AzureKeyCredential credential, Uri endpoint, AutoRestLongRunningOperationTestServiceClientOptions options)
+        internal LrosaDs(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new AutoRestLongRunningOperationTestServiceClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+            _keyCredential = keyCredential;
             _endpoint = endpoint;
         }
 
@@ -97,12 +86,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,12 +141,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -207,12 +196,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry201Creating400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -262,12 +251,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutNonRetry201Creating400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry201Creating400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -317,12 +306,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -372,12 +361,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutNonRetry201Creating400InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -427,12 +416,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -482,12 +471,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -510,12 +499,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> DeleteNonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteNonRetry400Request(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -538,12 +527,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> DeleteNonRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteNonRetry400Request(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -566,12 +555,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Delete202NonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete202NonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202NonRetry400Request(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -594,12 +583,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Delete202NonRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete202NonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202NonRetry400Request(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -622,12 +611,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -650,12 +639,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> DeleteAsyncRelativeRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -692,12 +681,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PostNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostNonRetry400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -734,12 +723,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PostNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostNonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostNonRetry400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PostNonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -776,12 +765,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Post202NonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202NonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202NonRetry400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -818,12 +807,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Post202NonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202NonRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202NonRetry400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NonRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -860,12 +849,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -902,12 +891,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PostAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetry400");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetry400", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -957,12 +946,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1012,12 +1001,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutError201NoProvisioningStatePayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1067,12 +1056,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1122,12 +1111,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1177,12 +1166,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1232,12 +1221,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryNoStatusPayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1260,12 +1249,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete204Succeeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1288,12 +1277,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Delete204Succeeded(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete204Succeeded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete204SucceededRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete204Succeeded", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1316,12 +1305,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1344,12 +1333,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> DeleteAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryNoStatus", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1386,12 +1375,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Post202NoLocationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202NoLocation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202NoLocationRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1428,12 +1417,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Post202NoLocation(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202NoLocation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202NoLocationRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202NoLocation", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1470,12 +1459,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryNoPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1512,12 +1501,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PostAsyncRelativeRetryNoPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryNoPayload", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1567,12 +1556,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Put200InvalidJson");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1622,12 +1611,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Put200InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Put200InvalidJson");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut200InvalidJsonRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Put200InvalidJson", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1677,12 +1666,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1732,12 +1721,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1787,12 +1776,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1842,12 +1831,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PutAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1870,12 +1859,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Delete202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1898,12 +1887,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Delete202RetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Delete202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Delete202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1926,12 +1915,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1954,12 +1943,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -1982,12 +1971,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2010,12 +1999,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.DeleteAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2052,12 +2041,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> Post202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2094,12 +2083,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> Post202RetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.Post202RetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.Post202RetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2136,12 +2125,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2178,12 +2167,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
@@ -2220,12 +2209,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -2262,12 +2251,12 @@ namespace lro_LowLevel
         /// </remarks>
         public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+            using var scope = ClientDiagnostics.CreateScope("LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LrosaDs.PostAsyncRelativeRetryInvalidJsonPolling", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {
