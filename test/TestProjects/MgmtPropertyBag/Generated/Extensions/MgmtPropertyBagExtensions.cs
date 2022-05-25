@@ -33,9 +33,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Bar> GetWithSubscriptionBarsAsync(this SubscriptionResource subscriptionResource, BarGetWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Bar> GetWithSubscriptionBarsAsync(this SubscriptionResource subscriptionResource, BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new BarGetWithSubscriptionOptions();
+            options ??= new BarListWithSubscriptionOptions();
 
             return GetExtensionClient(subscriptionResource).GetWithSubscriptionBarsAsync(options, cancellationToken);
         }
@@ -49,9 +49,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Bar> GetWithSubscriptionBars(this SubscriptionResource subscriptionResource, BarGetWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public static Pageable<Bar> GetWithSubscriptionBars(this SubscriptionResource subscriptionResource, BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new BarGetWithSubscriptionOptions();
+            options ??= new BarListWithSubscriptionOptions();
 
             return GetExtensionClient(subscriptionResource).GetWithSubscriptionBars(options, cancellationToken);
         }
@@ -74,9 +74,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Foo> GetFoosAsync(this ResourceGroupResource resourceGroupResource, FooGetFoosOptions options, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Foo> GetFoosAsync(this ResourceGroupResource resourceGroupResource, FooGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetFoosOptions();
+            options ??= new FooGetAllOptions();
 
             return GetExtensionClient(resourceGroupResource).GetFoosAsync(options, cancellationToken);
         }
@@ -90,9 +90,9 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Foo> GetFoos(this ResourceGroupResource resourceGroupResource, FooGetFoosOptions options, CancellationToken cancellationToken = default)
+        public static Pageable<Foo> GetFoos(this ResourceGroupResource resourceGroupResource, FooGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetFoosOptions();
+            options ??= new FooGetAllOptions();
 
             return GetExtensionClient(resourceGroupResource).GetFoos(options, cancellationToken);
         }

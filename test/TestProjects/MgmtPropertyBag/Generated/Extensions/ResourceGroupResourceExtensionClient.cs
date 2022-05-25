@@ -55,7 +55,7 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Foo> GetFoosAsync(FooGetFoosOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Foo> GetFoosAsync(FooGetAllOptions options, CancellationToken cancellationToken = default)
         {
             async Task<Page<Foo>> FirstPageFunc(int? pageSizeHint)
             {
@@ -83,7 +83,7 @@ namespace MgmtPropertyBag
         /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Foo> GetFoos(FooGetFoosOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<Foo> GetFoos(FooGetAllOptions options, CancellationToken cancellationToken = default)
         {
             Page<Foo> FirstPageFunc(int? pageSizeHint)
             {

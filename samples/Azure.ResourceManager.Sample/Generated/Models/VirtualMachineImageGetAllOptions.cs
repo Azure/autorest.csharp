@@ -7,11 +7,11 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> A class representing the optional parameters in VirtualMachineImages GetVirtualMachineImages method. </summary>
-    public partial class VirtualMachineImagesGetVirtualMachineImagesOptions
+    /// <summary> A class representing the optional parameters in this method. </summary>
+    public partial class VirtualMachineImageGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineImagesGetVirtualMachineImagesOptions. </summary>
-        public VirtualMachineImagesGetVirtualMachineImagesOptions()
+        /// <summary> Initializes a new instance of VirtualMachineImageGetAllOptions. </summary>
+        public VirtualMachineImageGetAllOptions()
         {
         }
 

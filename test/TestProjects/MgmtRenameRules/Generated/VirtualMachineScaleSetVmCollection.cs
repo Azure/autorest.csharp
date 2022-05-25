@@ -183,12 +183,12 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in VirtualMachineScaleSetVm GetAll method. </param>
+        /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVmGetAllOptions();
+            options ??= new VirtualMachineScaleSetVMGetAllOptions();
 
             async Task<Page<VirtualMachineScaleSetVmResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -197,7 +197,7 @@ namespace MgmtRenameRules
                 try
                 {
                     var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -205,7 +205,22 @@ namespace MgmtRenameRules
                     throw;
                 }
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            async Task<Page<VirtualMachineScaleSetVmResource>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>
@@ -213,12 +228,12 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in VirtualMachineScaleSetVm GetAll method. </param>
+        /// <param name="options"> A class representing the optional parameters in this method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVmGetAllOptions();
+            options ??= new VirtualMachineScaleSetVMGetAllOptions();
 
             Page<VirtualMachineScaleSetVmResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -227,7 +242,7 @@ namespace MgmtRenameRules
                 try
                 {
                     var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -235,7 +250,22 @@ namespace MgmtRenameRules
                     throw;
                 }
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            Page<VirtualMachineScaleSetVmResource> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Filter, options.Select, options.Expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVmResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary>

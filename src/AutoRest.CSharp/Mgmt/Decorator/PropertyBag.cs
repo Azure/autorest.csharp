@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            var methodName = restClientMethod.Name.RenameGetMethod(optionsPrefix).RenameListToGet(optionsPrefix);
+            var methodName = restClientMethod.Name.Equals("List") ? "GetAll" : restClientMethod.Name;
             schema.Language.Default.Name = $"{optionsPrefix.LastWordToSingular()}{methodName}Options";
             schema.Language.Default.Description = $"A class representing the optional parameters in this method.";
         }

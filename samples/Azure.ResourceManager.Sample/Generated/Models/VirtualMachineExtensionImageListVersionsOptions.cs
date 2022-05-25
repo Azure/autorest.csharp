@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace MgmtParent.Models
+namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> A class representing the optional parameters in VirtualMachineExtensionImage GetAll method. </summary>
-    public partial class VirtualMachineExtensionImageGetAllOptions
+    /// <summary> A class representing the optional parameters in this method. </summary>
+    public partial class VirtualMachineExtensionImageListVersionsOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageGetAllOptions. </summary>
-        public VirtualMachineExtensionImageGetAllOptions()
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageListVersionsOptions. </summary>
+        public VirtualMachineExtensionImageListVersionsOptions()
         {
         }
 

@@ -7,11 +7,11 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> A class representing the optional parameters in VirtualMachineScaleSetVm GetAll method. </summary>
-    public partial class VirtualMachineScaleSetVmGetAllOptions
+    /// <summary> A class representing the optional parameters in this method. </summary>
+    public partial class VirtualMachineScaleSetVMGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmGetAllOptions. </summary>
-        public VirtualMachineScaleSetVmGetAllOptions()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMGetAllOptions. </summary>
+        public VirtualMachineScaleSetVMGetAllOptions()
         {
         }
 

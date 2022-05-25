@@ -8,10 +8,10 @@
 namespace MgmtPropertyBag.Models
 {
     /// <summary> A class representing the optional parameters in this method. </summary>
-    public partial class BarGetWithSubscriptionOptions
+    public partial class BarListWithSubscriptionOptions
     {
-        /// <summary> Initializes a new instance of BarGetWithSubscriptionOptions. </summary>
-        public BarGetWithSubscriptionOptions()
+        /// <summary> Initializes a new instance of BarListWithSubscriptionOptions. </summary>
+        public BarListWithSubscriptionOptions()
         {
         }
 

@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace MgmtPropertyBag.Models
+namespace MgmtParent.Models
 {
     /// <summary> A class representing the optional parameters in this method. </summary>
-    public partial class FooGetFoosOptions
+    public partial class VirtualMachineExtensionImageListVersionsOptions
     {
-        /// <summary> Initializes a new instance of FooGetFoosOptions. </summary>
-        public FooGetFoosOptions()
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageListVersionsOptions. </summary>
+        public VirtualMachineExtensionImageListVersionsOptions()
         {
         }
 
