@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        public static ObjectSchema UpdateMgmtRestClientParameters(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
+        public static ObjectSchema UpdateMgmtRestClientMethod(Operation operation, ref RestClientMethod restClientMethod, string optionsPrefix)
         {
             ObjectSchema schema = new ObjectSchema();
             var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null && p.RequestLocation != RequestLocation.Body).ToHashSet();
@@ -88,20 +88,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 });
             }
             var methodName = restClientMethod.Name == "List" ? "GetAll" : restClientMethod.Name;
-            schema.Language.Default.Name = $"{optionsPrefix.LastWordToSingular()}{methodName}Options"; // A better way to determine the schema name is needed
+            schema.Language.Default.Name = $"{optionsPrefix.LastWordToSingular()}{methodName}Options";
             schema.Language.Default.Description = $"A class representing the optional parameters in {optionsPrefix} {methodName} method.";
         }
 
         private static Parameter BuildOptionalParameter(ObjectSchema schema)
         {
             CSharpType type = new MgmtObjectType(schema).Type;
-            //var defaultValue = Constant.NewInstanceOf(type);
             return new Parameter(
                 "options",
                 schema.Language.Default.Description,
                 TypeFactory.GetInputType(type),
                 null,
-                false,
+                ValidationType.None,
+                $"new {type.Name}()",
                 IsApiVersionParameter: false,
                 IsResourceIdentifier: false,
                 SkipUrlEncoding: false);

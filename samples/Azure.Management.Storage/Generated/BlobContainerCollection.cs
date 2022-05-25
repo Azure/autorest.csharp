@@ -186,7 +186,7 @@ namespace Azure.Management.Storage
         /// <param name="options"> A class representing the optional parameters in BlobContainers GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BlobContainerResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<BlobContainerResource> GetAllAsync(BlobContainerGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<BlobContainerResource> GetAllAsync(BlobContainerGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new BlobContainerGetAllOptions();
 
@@ -231,7 +231,7 @@ namespace Azure.Management.Storage
         /// <param name="options"> A class representing the optional parameters in BlobContainers GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BlobContainerResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<BlobContainerResource> GetAll(BlobContainerGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<BlobContainerResource> GetAll(BlobContainerGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new BlobContainerGetAllOptions();
 
@@ -324,17 +324,17 @@ namespace Azure.Management.Storage
 
         IEnumerator<BlobContainerResource> IEnumerable<BlobContainerResource>.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IAsyncEnumerator<BlobContainerResource> IAsyncEnumerable<BlobContainerResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

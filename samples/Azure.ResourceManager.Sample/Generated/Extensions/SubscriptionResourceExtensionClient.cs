@@ -494,12 +494,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="options"> A class representing the optional parameters in VirtualMachineImages GetVirtualMachineImages method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(AzureLocation location, string publisherName, string offer, string skus, VirtualMachineImagesGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -507,7 +505,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await VirtualMachineImagesRestClient.ListAsync(Id.SubscriptionId, location, publisherName, offer, skus, expand, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await VirtualMachineImagesRestClient.ListAsync(Id.SubscriptionId, location, publisherName, offer, skus, options.Expand, options.Top, options.Orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -528,12 +526,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="options"> A class representing the optional parameters in VirtualMachineImages GetVirtualMachineImages method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(AzureLocation location, string publisherName, string offer, string skus, VirtualMachineImagesGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {
@@ -541,7 +537,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = VirtualMachineImagesRestClient.List(Id.SubscriptionId, location, publisherName, offer, skus, expand, top, orderby, cancellationToken: cancellationToken);
+                    var response = VirtualMachineImagesRestClient.List(Id.SubscriptionId, location, publisherName, offer, skus, options.Expand, options.Top, options.Orderby, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

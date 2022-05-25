@@ -189,7 +189,7 @@ namespace XmlDeserialization
         /// <param name="options"> A class representing the optional parameters in XmlInstance GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new XmlInstanceGetAllOptions();
 
@@ -219,7 +219,7 @@ namespace XmlDeserialization
         /// <param name="options"> A class representing the optional parameters in XmlInstance GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<XmlInstanceResource> GetAll(XmlInstanceGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new XmlInstanceGetAllOptions();
 
@@ -297,17 +297,17 @@ namespace XmlDeserialization
 
         IEnumerator<XmlInstanceResource> IEnumerable<XmlInstanceResource>.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IAsyncEnumerator<XmlInstanceResource> IAsyncEnumerable<XmlInstanceResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

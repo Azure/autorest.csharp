@@ -192,7 +192,7 @@ namespace Azure.Management.Storage
         /// <param name="options"> A class representing the optional parameters in FileShares GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FileShareResource> GetAllAsync(FileShareGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FileShareResource> GetAllAsync(FileShareGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new FileShareGetAllOptions();
 
@@ -237,7 +237,7 @@ namespace Azure.Management.Storage
         /// <param name="options"> A class representing the optional parameters in FileShares GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FileShareResource> GetAll(FileShareGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<FileShareResource> GetAll(FileShareGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new FileShareGetAllOptions();
 
@@ -334,17 +334,17 @@ namespace Azure.Management.Storage
 
         IEnumerator<FileShareResource> IEnumerable<FileShareResource>.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IAsyncEnumerator<FileShareResource> IAsyncEnumerable<FileShareResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }

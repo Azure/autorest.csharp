@@ -186,7 +186,7 @@ namespace MgmtRenameRules
         /// <param name="options"> A class representing the optional parameters in VirtualMachineScaleSetVm GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVmGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new VirtualMachineScaleSetVmGetAllOptions();
 
@@ -216,7 +216,7 @@ namespace MgmtRenameRules
         /// <param name="options"> A class representing the optional parameters in VirtualMachineScaleSetVm GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVmGetAllOptions options = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new VirtualMachineScaleSetVmGetAllOptions();
 
@@ -294,17 +294,17 @@ namespace MgmtRenameRules
 
         IEnumerator<VirtualMachineScaleSetVmResource> IEnumerable<VirtualMachineScaleSetVmResource>.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetAll().GetEnumerator();
+            return GetAll(null).GetEnumerator();
         }
 
         IAsyncEnumerator<VirtualMachineScaleSetVmResource> IAsyncEnumerable<VirtualMachineScaleSetVmResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
-            return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
+            return GetAllAsync(null, cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
     }
 }
