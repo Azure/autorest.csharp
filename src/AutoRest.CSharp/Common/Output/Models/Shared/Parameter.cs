@@ -135,6 +135,14 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             return ValidationType.None;
         }
+
+        public Parameter CloneWithRequired()
+        {
+            return this with
+            {
+                DefaultValue = null,
+            };
+        }
     }
 
     internal enum ValidationType

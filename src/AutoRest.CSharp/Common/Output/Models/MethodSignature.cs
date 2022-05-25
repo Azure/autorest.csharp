@@ -98,5 +98,19 @@ namespace AutoRest.CSharp.Output.Models
                     : null
             };
         }
+
+        public MethodSignature CloneWithAllParametersRequired()
+        {
+            var parameters = new List<Parameter>(Parameters.Count);
+            foreach (var parameter in Parameters)
+            {
+                parameters.Add(parameter.CloneWithRequired());
+            }
+
+            return this with
+            {
+                Parameters = parameters,
+            };
+        }
     }
 }

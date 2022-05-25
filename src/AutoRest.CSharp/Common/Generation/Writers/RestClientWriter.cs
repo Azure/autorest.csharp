@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
                 LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
             }
-            else if (protocolMethod.PagingInfo != null)
+            else if (protocolMethod.IsPaging)
             {
                 LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
                 LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);

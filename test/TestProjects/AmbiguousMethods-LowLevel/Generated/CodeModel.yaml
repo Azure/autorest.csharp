@@ -1,0 +1,1496 @@
+!CodeModel 
+info: !Info 
+  title: AmbiguousMethods_LowLevel
+schemas: !Schemas 
+  numbers:
+    - !NumberSchema &ref_5
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-19'
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-10-19'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_2
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+globalParameters:
+  - !Parameter &ref_1
+    schema: *ref_0
+    clientDefaultValue: http://localhost:3000
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+operationGroups:
+  - !OperationGroup 
+    $key: Ambiguous
+    operations:
+      - !Operation 
+        operationId: Ambiguous_NoParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/nonParam
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: NoParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_OneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_4
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/oneOptionalParam
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_4
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_TwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_6
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_7
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/twoOptionalParam
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_6
+          - *ref_7
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_OneRequiredParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_8
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/oneRequiredParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_8
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_OneRequiredParamAndOneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_9
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_10
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/oneRequiredParamAndOneOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_9
+          - *ref_10
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParamAndOneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_OneRequiredParamAndTwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_11
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_12
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_13
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/oneRequiredParamAndTwoOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_11
+          - *ref_12
+          - *ref_13
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParamAndTwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_TwoRequiredParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_14
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_15
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/twoRequiredParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_14
+          - *ref_15
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_TwoRequiredParamAndOneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_16
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_17
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_18
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/twoRequiredParamAndOneOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_16
+          - *ref_17
+          - *ref_18
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParamAndOneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Ambiguous_TwoRequiredParamAndTwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_19
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_20
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_21
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_22
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /ambiguous/twoRequiredParamAndTwoOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_19
+          - *ref_20
+          - *ref_21
+          - *ref_22
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParamAndTwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Ambiguous
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Unambiguous
+    operations:
+      - !Operation 
+        operationId: Unambiguous_NoParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/nonParam
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: NoParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_OneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_23
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/oneOptionalParam
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_23
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_TwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_24
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_25
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/twoOptionalParam
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_24
+          - *ref_25
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_OneRequiredParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_26
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/oneRequiredParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_26
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_OneRequiredParamAndOneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_27
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_28
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/oneRequiredParamAndOneOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+          - *ref_28
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParamAndOneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_OneRequiredParamAndTwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_29
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_30
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_31
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/oneRequiredParamAndTwoOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_29
+          - *ref_30
+          - *ref_31
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OneRequiredParamAndTwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_TwoRequiredParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_32
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_33
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/twoRequiredParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_32
+          - *ref_33
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_TwoRequiredParamAndOneOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_34
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_35
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_36
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/twoRequiredParamAndOneOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_34
+          - *ref_35
+          - *ref_36
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParamAndOneOptionalParam
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: Unambiguous_TwoRequiredParamAndTwoOptionalParam
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-10-19'
+        parameters:
+          - *ref_1
+          - !Parameter &ref_37
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamA
+                description: ''
+                serializedName: requiredParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_38
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: requiredParamB
+                description: ''
+                serializedName: requiredParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_39
+            schema: *ref_3
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamA
+                description: ''
+                serializedName: optionalParamA
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_40
+            schema: *ref_5
+            implementation: Method
+            language: !Languages 
+              default:
+                name: optionalParamB
+                description: ''
+                serializedName: optionalParamB
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_2
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /nonambiguous/twoRequiredParamAndTwoOptionalParam/{requiredParamA}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_37
+          - *ref_38
+          - *ref_39
+          - *ref_40
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: TwoRequiredParamAndTwoOptionalParam
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Unambiguous
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !KeySecurityScheme 
+      name: Fake-Subscription-Key
+      type: Key
+      in: header
+language: !Languages 
+  default:
+    name: AmbiguousMethodsLowLevel
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}

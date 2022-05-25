@@ -18,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Operation = AutoRest.CSharp.Input.Operation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.LowLevel.Decorator;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -67,6 +68,7 @@ namespace AutoRest.CSharp.Output.Models
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
             var clientMethods = BuildMethods(builder, serviceRequests, Declaration.Name).ToArray();
+            clientMethods = MethodAmbiguityResolver.ResolveClientMethods(clientMethods, ns, name, context.SourceInputModel!);
 
             ClientMethods = clientMethods
                 .OrderBy(m => m.IsLongRunning ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented

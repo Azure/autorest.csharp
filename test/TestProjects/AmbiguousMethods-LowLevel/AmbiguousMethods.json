@@ -1,0 +1,218 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2021-10-19",
+        "title": "AmbiguousMethods_LowLevel"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+        "http"
+    ],
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+        "/ambiguous/nonParam": {
+            "get": {
+                "operationId": "Ambiguous_NoParam",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/oneOptionalParam": {
+            "get": {
+                "operationId": "Ambiguous_OneOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/twoOptionalParam": {
+            "get": {
+                "operationId": "Ambiguous_TwoOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamB"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/oneRequiredParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_OneRequiredParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/oneRequiredParamAndOneOptionalParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_OneRequiredParamAndOneOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/oneRequiredParamAndTwoOptionalParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_OneRequiredParamAndTwoOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamB"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/twoRequiredParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_TwoRequiredParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/RequiredParamB"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/twoRequiredParamAndOneOptionalParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_TwoRequiredParamAndOneOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/RequiredParamB"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        },
+        "/ambiguous/twoRequiredParamAndTwoOptionalParam/{requiredParamA}": {
+            "get": {
+                "operationId": "Ambiguous_TwoRequiredParamAndTwoOptionalParam",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/RequiredParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/RequiredParamB"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamA"
+                    },
+                    {
+                        "$ref": "#/parameters/OptionalParamB"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/200"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {},
+    "parameters": {
+        "RequiredParamA": {
+            "required": true,
+            "name": "requiredParamA",
+            "type": "string",
+            "in": "path",
+            "x-ms-parameter-location":  "method"
+        },
+        "RequiredParamB": {
+            "required": true,
+            "name": "requiredParamB",
+            "type": "integer",
+            "in": "query",
+            "x-ms-parameter-location":  "method"
+        },
+        "OptionalParamA": {
+            "required": false,
+            "name": "optionalParamA",
+            "type": "string",
+            "in": "query",
+            "x-ms-parameter-location":  "method"
+        },
+        "OptionalParamB": {
+            "required": false,
+            "name": "optionalParamB",
+            "type": "integer",
+            "in": "query",
+            "x-ms-parameter-location":  "method"
+        }
+    },
+    "responses": {
+        "200": {
+            "description": "Success",
+            "schema": {
+                "type": "string"
+            }
+        }
+    },
+    "securityDefinitions": {},
+    "security": [],
+    "tags": []
+}
