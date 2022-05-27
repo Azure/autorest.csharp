@@ -20,7 +20,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action");
-                writer.WriteStringValue(Action);
+                writer.WriteStringValue(Action.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }
@@ -28,7 +28,7 @@ namespace Azure.Management.Storage.Models
         internal static IPRule DeserializeIPRule(JsonElement element)
         {
             string value = default;
-            Optional<string> action = default;
+            Optional<Action> action = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -38,11 +38,16 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("action"))
                 {
-                    action = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    action = property.Value.GetString().ToAction();
                     continue;
                 }
             }
-            return new IPRule(value, action.Value);
+            return new IPRule(value, Optional.ToNullable(action));
         }
     }
 }

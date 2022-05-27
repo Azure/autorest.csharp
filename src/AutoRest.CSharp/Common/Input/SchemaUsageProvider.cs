@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Input
         {
             if (parameter.Flattened == true)
             {
-                Apply(parameter.Schema, SchemaTypeUsage.FattenedParameters | SchemaTypeUsage.Input, recurse: false);
+                Apply(parameter.Schema, SchemaTypeUsage.FlattenedParameters | SchemaTypeUsage.Input, recurse: false);
             }
             else
             {
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Input
 
         Model = Output << 1,
         Error = Model << 1,
-        FattenedParameters = Error << 1,
-        Converter = FattenedParameters << 1
+        FlattenedParameters = Error << 1,
+        Converter = FlattenedParameters << 1
     }
 }

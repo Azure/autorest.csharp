@@ -90,6 +90,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary()
         {
             OmitOperationGroups.RemoveOperationGroups();
+            ConstantSchemaTransformer.TransformToSealedChoice();
             MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
