@@ -8,7 +8,7 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The ListKeyExpand. </summary>
-    internal enum ListKeyExpand
+    public enum ListKeyExpand
     {
         /// <summary> kerb. </summary>
         Kerb

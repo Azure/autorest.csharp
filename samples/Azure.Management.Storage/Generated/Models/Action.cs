@@ -8,7 +8,7 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The action of virtual network rule. </summary>
-    internal enum Action
+    public enum Action
     {
         /// <summary> Allow. </summary>
         Allow

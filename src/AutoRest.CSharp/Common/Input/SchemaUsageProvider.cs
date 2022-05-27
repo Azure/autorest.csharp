@@ -3,16 +3,25 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Input
 {
     internal class SchemaUsageProvider
     {
-        private readonly Dictionary<Schema, SchemaTypeUsage> _usages = new Dictionary<Schema, SchemaTypeUsage>();
+        private readonly CodeModel _codeModel;
+        private readonly CachedDictionary<Schema, SchemaTypeUsage> _usages;
 
         public SchemaUsageProvider(CodeModel codeModel)
         {
-            foreach (var objectSchema in codeModel.Schemas.Objects)
+            _codeModel = codeModel;
+            _usages = new CachedDictionary<Schema, SchemaTypeUsage>(EnsureUsages);
+        }
+
+        private Dictionary<Schema, SchemaTypeUsage> EnsureUsages()
+        {
+            var usages = new Dictionary<Schema, SchemaTypeUsage>();
+            foreach (var objectSchema in _codeModel.Schemas.Objects)
             {
                 var usage = objectSchema?.Extensions?.Usage;
 
@@ -22,14 +31,14 @@ namespace AutoRest.CSharp.Input
 
                     if (schemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
                     {
-                        Apply(objectSchema, SchemaTypeUsage.Converter, false);
+                        Apply(usages, objectSchema, SchemaTypeUsage.Converter, false);
                         schemaTypeUsage &= ~SchemaTypeUsage.Converter;
                     }
 
-                    Apply(objectSchema, schemaTypeUsage, true);
+                    Apply(usages, objectSchema, schemaTypeUsage, true);
                 }
             }
-            foreach (var operationGroup in codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -38,63 +47,65 @@ namespace AutoRest.CSharp.Input
                         var paging = operation.Language.Default.Paging;
                         if (paging != null && operationResponse.ResponseSchema is ObjectSchema objectSchema)
                         {
-                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Output);
+                            Apply(usages, operationResponse.ResponseSchema, SchemaTypeUsage.Output);
                             foreach (var property in objectSchema.Properties)
                             {
                                 var itemName = paging.ItemName ?? "value";
                                 if (property.SerializedName == itemName)
                                 {
-                                    Apply(property.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                                    Apply(usages, property.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
                                 }
                             }
                         }
                         else
                         {
-                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                            Apply(usages, operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
                         }
                     }
 
                     foreach (var operationResponse in operation.Exceptions)
                     {
-                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Error | SchemaTypeUsage.Output);
+                        Apply(usages, operationResponse.ResponseSchema, SchemaTypeUsage.Error | SchemaTypeUsage.Output);
                     }
 
                     foreach (var parameter in operation.Parameters)
                     {
-                        ApplyParameterSchema(parameter);
+                        ApplyParameterSchema(usages, parameter);
                     }
 
                     foreach (var serviceRequest in operation.Requests)
                     {
                         foreach (var parameter in serviceRequest.Parameters)
                         {
-                            ApplyParameterSchema(parameter);
+                            ApplyParameterSchema(usages, parameter);
                         }
                     }
                 }
             }
+
+            return usages;
         }
 
-        private void ApplyParameterSchema(RequestParameter parameter)
+        private void ApplyParameterSchema(Dictionary<Schema, SchemaTypeUsage> usages, RequestParameter parameter)
         {
             if (parameter.Flattened == true)
             {
-                Apply(parameter.Schema, SchemaTypeUsage.FlattenedParameters | SchemaTypeUsage.Input, recurse: false);
+                Apply(usages, parameter.Schema, SchemaTypeUsage.FlattenedParameters | SchemaTypeUsage.Input, recurse: false);
             }
             else
             {
-                Apply(parameter.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Input);
+                Apply(usages, parameter.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Input);
             }
         }
 
-        private void Apply(Schema? schema, SchemaTypeUsage usage, bool recurse = true)
+        private void Apply(Dictionary<Schema, SchemaTypeUsage> usages, Schema? schema, SchemaTypeUsage usage, bool recurse = true)
         {
             if (schema == null)
             {
                 return;
             }
 
-            _usages.TryGetValue(schema, out var currentUsage);
+            usages.TryGetValue(schema, out var currentUsage);
 
             var newUsage = currentUsage | usage;
             if (newUsage == currentUsage)
@@ -102,7 +113,7 @@ namespace AutoRest.CSharp.Input
                 return;
             }
 
-            _usages[schema] = newUsage;
+            usages[schema] = newUsage;
 
             if (!recurse)
             {
@@ -113,12 +124,12 @@ namespace AutoRest.CSharp.Input
             {
                 foreach (var parent in objectSchema.Parents!.All)
                 {
-                    Apply(parent, usage);
+                    Apply(usages, parent, usage);
                 }
 
                 foreach (var child in objectSchema.Children!.All)
                 {
-                    Apply(child, usage);
+                    Apply(usages, child, usage);
                 }
 
                 foreach (var schemaProperty in objectSchema.Properties)
@@ -130,16 +141,16 @@ namespace AutoRest.CSharp.Input
                         propertyUsage &= ~SchemaTypeUsage.Input;
                     }
 
-                    Apply(schemaProperty.Schema, propertyUsage);
+                    Apply(usages, schemaProperty.Schema, propertyUsage);
                 }
             }
             else if (schema is DictionarySchema dictionarySchema)
             {
-                Apply(dictionarySchema.ElementType, usage);
+                Apply(usages, dictionarySchema.ElementType, usage);
             }
             else if (schema is ArraySchema arraySchema)
             {
-                Apply(arraySchema.ElementType, usage);
+                Apply(usages, arraySchema.ElementType, usage);
             }
         }
 
