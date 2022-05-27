@@ -99,8 +99,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 foreach (var serviceRequest in operation.Requests)
                 {
-                    RestClientMethod method = Configuration.AzureArm ? ((MgmtRestClient)restClient).GetUpdatedOperationMethod(serviceRequest) : restClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = Configuration.AzureArm ? ((MgmtRestClient)restClient).GetUpdatedNextOperationMethod(serviceRequest) : restClient.GetNextOperationMethod(serviceRequest);
+                    RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
+                    RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
 
                     if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
                     {

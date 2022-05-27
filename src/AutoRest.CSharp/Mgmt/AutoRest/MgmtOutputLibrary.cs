@@ -120,6 +120,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             CommonSingleWordModels.Update(_allSchemas);
             NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
             RenameTimeToOn.UpdateNames(_allSchemas);
+            OptionalModels = new List<TypeProvider>();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -322,7 +323,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var restClientMethod in restClient.UpdatedMethods)
+                foreach (var restClientMethod in restClient.Methods)
                 {
                     // skip all internal methods
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
@@ -444,35 +445,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            List<TypeProvider> optionalModels = new List<TypeProvider>();
-
-            foreach (var model in OptionalObjectTypes)
-            {
-                optionalModels.Add(model);
-                _nameToTypeProvider.TryAdd(model.ObjectSchema.Name, model);
-            }
-
-            return models.Concat(optionalModels);
+            return models;
         }
 
-        private IEnumerable<MgmtObjectType>? _optionalObjectTypes;
-        public IEnumerable<MgmtObjectType> OptionalObjectTypes => _optionalObjectTypes ??= GetOptionalObjectTypes();
-
-        private IEnumerable<MgmtObjectType> GetOptionalObjectTypes()
-        {
-            HashSet<MgmtObjectType> types = new HashSet<MgmtObjectType>();
-            foreach (var restClient in RestClients)
-            {
-                foreach (var method in restClient.UpdatedMethods)
-                {
-                    if (restClient.ClientMethodToSchema?.TryGetValue(method, out ObjectSchema? schema) ?? false)
-                    {
-                        types.Add(new MgmtObjectType(schema));
-                    }
-                }
-            }
-            return types;
-        }
+        public IEnumerable<TypeProvider> OptionalModels { get; set; }
 
         public ResourceData GetResourceData(string requestPath)
         {

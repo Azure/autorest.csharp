@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private bool IsListOperation => _isListOperation ??= MgmtContext.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
         public CSharpType? OriginalReturnType { get; }
 
+        public RestClientMethod OriginalMethod { get; }
         /// <summary>
         /// The actual operation
         /// </summary>
@@ -103,12 +104,13 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
-            Method = method;
+            OriginalMethod = method;
             RestClient = restClient;
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             Name = methodName;
             Resource = GetResourceMatch(restClient, method, requestPath);
+            Method = method.UpdateMgmtRestClientMethod(Resource, Name, restClient.ClientPrefix);
             FinalStateVia = Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalStateVia : null;
             OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
@@ -124,6 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             //copy values from other method
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
+            OriginalMethod = other.OriginalMethod;
             Method = other.Method;
             RestClient = other.RestClient;
             RequestPath = other.RequestPath;
@@ -339,7 +342,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)
         {
-            MgmtContext.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
+            MgmtContext.Library.PagingMethods.TryGetValue(OriginalMethod, out var pagingMethod);
 
             if (pagingMethod is not null)
             {
@@ -395,8 +398,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private PagingMethodWrapper EnsurePagingMethodWrapper()
         {
-            MgmtContext.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
-            return pagingMethod is null ? new PagingMethodWrapper(Method) : new PagingMethodWrapper(pagingMethod);
+            MgmtContext.Library.PagingMethods.TryGetValue(OriginalMethod, out var pagingMethod);
+            return pagingMethod is null ? new PagingMethodWrapper(Method) : new PagingMethodWrapper(pagingMethod.UpdateMgmtPagingMethod(OriginalMethod, Method));
         }
 
         private Func<bool, FormattableString> EnsureReturnsDescription()

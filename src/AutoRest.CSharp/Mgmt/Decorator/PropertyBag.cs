@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -22,28 +23,53 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        public static RestClientMethod UpdateMgmtRestClientMethod(Operation operation, RestClientMethod restClientMethod, string optionsPrefix, out ObjectSchema schema)
+        public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, Resource? resource, string methodName, string clientPrefix)
         {
-            schema = new ObjectSchema();
-            var optionalParameters = restClientMethod.Parameters.Where(p => p.DefaultValue != null && p.RequestLocation != RequestLocation.Body).ToHashSet();
-            var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
-            var optionalRequestParameters = operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
-                Concat(operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
-            InitializeSchema(schema, optionalRequestParameters, restClientMethod, optionsPrefix);
-            var newParameter = BuildOptionalParameter(schema);
-            return UpdateRestClientMethod(restClientMethod, restClientMethod.Parameters.Where(p => !optionalParameters.Contains(p)).Append(newParameter));
+            if (method.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
+            {
+                ObjectSchema schema = new ObjectSchema();
+                var optionalParameters = method.Parameters.Where(p => p.DefaultValue != null && p.RequestLocation != RequestLocation.Body).ToHashSet();
+                var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
+                var optionalRequestParameters = method.Operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
+                    Concat(method.Operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
+                InitializeSchema(schema, optionalRequestParameters, resource, methodName, clientPrefix);
+                var newParameter = BuildOptionalParameter(schema);
+                MgmtContext.Library.OptionalModels = MgmtContext.Library.OptionalModels.Concat(new List<TypeProvider>() { new MgmtObjectType(schema) });
+                return UpdateRestClientMethod(method, method.Parameters.Where(p => !optionalParameters.Contains(p)).Append(newParameter));
+            }
+            return method;
+        }
+
+        public static PagingMethod UpdateMgmtPagingMethod(this PagingMethod pagingMethod, RestClientMethod originalMethod, RestClientMethod updatedMethod)
+        {
+            if (originalMethod.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
+            {
+                RestClientMethod? nextPageMethod = pagingMethod.NextPageMethod;
+                if (nextPageMethod is not null)
+                {
+                    nextPageMethod = RestClientBuilder.BuildNextPageMethod(updatedMethod);
+                }
+                return new PagingMethod(
+                    updatedMethod,
+                    nextPageMethod,
+                    pagingMethod.Name,
+                    pagingMethod.Diagnostics,
+                    pagingMethod.PagingResponse
+                    );
+            }
+            return pagingMethod;
         }
 
         public static bool IsPropertyBagParameter(Parameter parameter)
         {
-            if (!parameter.Type.IsFrameworkType && parameter.Type.Implementation is MgmtObjectType mgmtObject && MgmtContext.Library.OptionalObjectTypes.Contains(mgmtObject))
+            if (!parameter.Type.IsFrameworkType && parameter.Type.Implementation is MgmtObjectType mgmtObject && MgmtContext.Library.OptionalModels.Contains(mgmtObject))
             {
                 return true;
             }
             return false;
         }
 
-        private static void InitializeSchema(ObjectSchema schema, IEnumerable<RequestParameter> parameters, RestClientMethod restClientMethod, string optionsPrefix)
+        private static void InitializeSchema(ObjectSchema schema, IEnumerable<RequestParameter> parameters, Resource? resource, string methodName, string clientPrefix)
         {
             schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" } };
             schema.ApiVersions.Add(parameters.FirstOrDefault().Schema.ApiVersions.FirstOrDefault());
@@ -56,9 +82,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            var methodName = restClientMethod.Name.Equals("List") ? "GetAll" : restClientMethod.Name;
-            schema.Language.Default.Name = $"{optionsPrefix.LastWordToSingular()}{methodName}Options";
-            schema.Language.Default.Description = $"A class representing the optional parameters in this method.";
+            var resourcePrefix = resource is null ? clientPrefix.LastWordToSingular() : resource.Type.Name.ReplaceLast("Resource", "");
+            schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
+            schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }
 
         private static Parameter BuildOptionalParameter(ObjectSchema schema)
