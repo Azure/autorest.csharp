@@ -81,6 +81,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
-            => new[] { KnownParameters.Pipeline, ApplicationIdParameter }.Union(clientBuilder.GetOrderedParametersByRequired()).ToArray();
+            => new[] {KnownParameters.Pipeline, ApplicationIdParameter}.Union(clientBuilder.GetOrderedParametersByRequired()).ToArray();
     }
 }
