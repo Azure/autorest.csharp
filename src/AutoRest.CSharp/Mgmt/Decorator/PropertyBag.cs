@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // Handle the special case when the optional parameter is used in a list method in extension
                 candidateName = $"{resourcePrefix}GetAllOptions";
             }
-            schema.Language.Default.Name = nameTransformer?.EnsureNameCase(candidateName);
+            schema.Language.Default.Name = nameTransformer is null ? candidateName : nameTransformer.EnsureNameCase(candidateName);
             schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }
 
