@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return topLevelClients;
             }
-            if ( topLevelClients.Count == 1)
+            if (topLevelClients.Count == 1)
             {
                 var topClient = topLevelClients[0];
                 if (!topClient.ResourceParameters.Any() && !string.IsNullOrEmpty(topClient.OperationGroupKey))
