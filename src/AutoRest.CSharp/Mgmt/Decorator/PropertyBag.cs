@@ -23,6 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
+        private static NameTransformer? nameTransformer = Configuration.MgmtConfiguration.RenameRules.Count == 0 ?
+            null : new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+
         public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, Resource? resource, string methodName, string clientPrefix)
         {
             if (method.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
@@ -83,7 +86,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 });
             }
             var resourcePrefix = resource is null ? clientPrefix.LastWordToSingular() : resource.Type.Name.ReplaceLast("Resource", "");
-            schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
+            var candidateName = $"{resourcePrefix}{methodName}Options";
+            if (methodName.EndsWith(clientPrefix) && resourcePrefix == clientPrefix.LastWordToSingular())
+            {
+                // Handle the special case when the optional parameter is used in a list method in extension
+                candidateName = $"{resourcePrefix}GetAllOptions";
+            }
+            schema.Language.Default.Name = nameTransformer?.EnsureNameCase(candidateName);
             schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }
 
