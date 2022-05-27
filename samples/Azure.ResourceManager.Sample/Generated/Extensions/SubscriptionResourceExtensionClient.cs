@@ -497,7 +497,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> A class representing the optional parameters in GetVirtualMachineImages method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(AzureLocation location, string publisherName, string offer, string skus, VirtualMachineImageGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(AzureLocation location, string publisherName, string offer, string skus, SampleGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             async Task<Page<VirtualMachineImageResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -529,7 +529,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> A class representing the optional parameters in GetVirtualMachineImages method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(AzureLocation location, string publisherName, string offer, string skus, VirtualMachineImageGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(AzureLocation location, string publisherName, string offer, string skus, SampleGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Page<VirtualMachineImageResource> FirstPageFunc(int? pageSizeHint)
             {

@@ -18,14 +18,12 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        private static NameTransformer? nameTransformer = Configuration.MgmtConfiguration.RenameRules.Count == 0 ?
-            null : new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
-
         public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, Resource? resource, string methodName, string clientPrefix)
         {
             if (method.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
@@ -85,9 +83,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            var resourcePrefix = resource is null ? clientPrefix.LastWordToSingular() : resource.Type.Name.ReplaceLast("Resource", "");
-            var candidateName = $"{resourcePrefix}{methodName}Options";
-            schema.Language.Default.Name = nameTransformer is null ? candidateName : nameTransformer.EnsureNameCase(candidateName);
+            var resourcePrefix = resource is null ?
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.Context.DefaultNamespace.Split('.').Last() : resource.Type.Name.ReplaceLast("Resource", "");
+            schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
             schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }
 

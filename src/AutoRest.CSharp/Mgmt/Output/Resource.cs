@@ -309,12 +309,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                 // get the MgmtRestOperation with a proper name
                 var restClient = MgmtContext.Library.GetRestClient(operation);
-                var restOperation = (new MgmtRestOperation(
+                var restOperation = new MgmtRestOperation(
                     MgmtContext.Library.GetRestClientMethod(operation),
                     restClient,
                     requestPath,
                     contextualPath,
-                    methodName));
+                    methodName);
 
                 if (result.TryGetValue(key, out var list))
                 {
