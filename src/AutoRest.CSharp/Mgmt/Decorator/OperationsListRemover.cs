@@ -15,12 +15,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void RemoveListOperations()
         {
             var operationsToRemove = new Queue<Operation>();
+            // we have to remove the corresponding schemas here now, despite even if we generate them, the "remover" will remove them
+            // this is because that we have detections on the schemas (such like the duration check), which will cause the generation to fail if we do not omit them now and defer it to remover
+            var schemaToOmit = new HashSet<Schema>();
+            var schemaToKeep = new HashSet<Schema>();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
                     if (IsOperationsListOperation(operation))
+                    {
                         operationsToRemove.Enqueue(operation);
+                        OmitOperationGroups.DetectSchemas(operation, schemaToOmit);
+                    }
+                    else
+                    {
+                        OmitOperationGroups.DetectSchemas(operation, schemaToKeep);
+                    }
                 }
 
                 // remove the operations
@@ -29,6 +40,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     operationGroup.Operations.Remove(operationsToRemove.Dequeue());
                 }
             }
+
+            OmitOperationGroups.AddDependantSchemasRecursively(schemaToKeep);
+            OmitOperationGroups.AddDependantSchemasRecursively(schemaToOmit);
+            OmitOperationGroups.RemoveSchemas(schemaToOmit, schemaToKeep);
         }
 
         private static Regex operationsListPathRegex = new Regex(@"^/providers/[A-Za-z0-9]+\.[A-Za-z0-9]+/operations$");

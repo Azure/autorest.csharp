@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void RemoveSchemas(HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
+        internal static void RemoveSchemas(HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
         {
             foreach (var schema in schemasToOmit)
             {
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
+        internal static void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
         {
             Queue<Schema> sQueue = new Queue<Schema>(setToProcess);
             HashSet<Schema> handledSchemas = new HashSet<Schema>();
@@ -123,9 +123,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (var operation in operationGroup.Operations)
             {
-                AddResponseSchemas(operation, setToProcess);
-                AddRequestSchemas(operation, setToProcess);
+                DetectSchemas(operation, setToProcess);
             }
+        }
+
+        internal static void DetectSchemas(Operation operation, HashSet<Schema> setToProcess)
+        {
+            AddResponseSchemas(operation, setToProcess);
+            AddRequestSchemas(operation, setToProcess);
         }
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
