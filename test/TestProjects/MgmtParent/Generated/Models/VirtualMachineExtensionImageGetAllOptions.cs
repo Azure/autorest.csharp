@@ -7,11 +7,11 @@
 
 namespace MgmtParent.Models
 {
-    /// <summary> A class representing the optional parameters in this method. </summary>
-    public partial class VirtualMachineExtensionImageListVersionsOptions
+    /// <summary> A class representing the optional parameters in GetAll method. </summary>
+    public partial class VirtualMachineExtensionImageGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageListVersionsOptions. </summary>
-        public VirtualMachineExtensionImageListVersionsOptions()
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageGetAllOptions. </summary>
+        public VirtualMachineExtensionImageGetAllOptions()
         {
         }
 

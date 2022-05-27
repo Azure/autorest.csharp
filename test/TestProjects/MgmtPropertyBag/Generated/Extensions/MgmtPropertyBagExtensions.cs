@@ -30,12 +30,12 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_ListWithSubscription
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetWithSubscriptionBars method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Bar> GetWithSubscriptionBarsAsync(this SubscriptionResource subscriptionResource, BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Bar> GetWithSubscriptionBarsAsync(this SubscriptionResource subscriptionResource, BarGetWithSubscriptionBarsOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new BarListWithSubscriptionOptions();
+            options ??= new BarGetWithSubscriptionBarsOptions();
 
             return GetExtensionClient(subscriptionResource).GetWithSubscriptionBarsAsync(options, cancellationToken);
         }
@@ -46,12 +46,12 @@ namespace MgmtPropertyBag
         /// Operation Id: Bars_ListWithSubscription
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetWithSubscriptionBars method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Bar> GetWithSubscriptionBars(this SubscriptionResource subscriptionResource, BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public static Pageable<Bar> GetWithSubscriptionBars(this SubscriptionResource subscriptionResource, BarGetWithSubscriptionBarsOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new BarListWithSubscriptionOptions();
+            options ??= new BarGetWithSubscriptionBarsOptions();
 
             return GetExtensionClient(subscriptionResource).GetWithSubscriptionBars(options, cancellationToken);
         }
@@ -71,12 +71,12 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_List
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetFoos method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Foo> GetFoosAsync(this ResourceGroupResource resourceGroupResource, FooGetAllOptions options, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Foo> GetFoosAsync(this ResourceGroupResource resourceGroupResource, FooGetFoosOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetAllOptions();
+            options ??= new FooGetFoosOptions();
 
             return GetExtensionClient(resourceGroupResource).GetFoosAsync(options, cancellationToken);
         }
@@ -87,12 +87,12 @@ namespace MgmtPropertyBag
         /// Operation Id: Foos_List
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetFoos method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Foo" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Foo> GetFoos(this ResourceGroupResource resourceGroupResource, FooGetAllOptions options, CancellationToken cancellationToken = default)
+        public static Pageable<Foo> GetFoos(this ResourceGroupResource resourceGroupResource, FooGetFoosOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new FooGetAllOptions();
+            options ??= new FooGetFoosOptions();
 
             return GetExtensionClient(resourceGroupResource).GetFoos(options, cancellationToken);
         }

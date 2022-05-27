@@ -12,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtPropertyBagTests() : base("MgmtPropertyBag") { }
 
-        [TestCase("MgmtPropertyBagExtensions", "GetWithSubscriptionBars", true, typeof(SubscriptionResource), typeof(BarListWithSubscriptionOptions))]
-        [TestCase("MgmtPropertyBagExtensions", "GetFoos", true, typeof(ResourceGroupResource), typeof(FooGetAllOptions))]
+        [TestCase("MgmtPropertyBagExtensions", "GetWithSubscriptionBars", true, typeof(SubscriptionResource), typeof(BarGetWithSubscriptionBarsOptions))]
+        [TestCase("MgmtPropertyBagExtensions", "GetFoos", true, typeof(ResourceGroupResource), typeof(FooGetFoosOptions))]
         [TestCase("MgmtPropertyBagExtensions", "GetBars", true, typeof(ResourceGroupResource), typeof(string), typeof(int?))]
         public void ValidatePropertyBag(string className, string methodName, bool exist, params Type[] parameterTypes)
         {

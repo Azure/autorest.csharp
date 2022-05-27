@@ -87,11 +87,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             var resourcePrefix = resource is null ? clientPrefix.LastWordToSingular() : resource.Type.Name.ReplaceLast("Resource", "");
             var candidateName = $"{resourcePrefix}{methodName}Options";
-            if (methodName.EndsWith(clientPrefix) && resourcePrefix == clientPrefix.LastWordToSingular())
-            {
-                // Handle the special case when the optional parameter is used in a list method in extension
-                candidateName = $"{resourcePrefix}GetAllOptions";
-            }
             schema.Language.Default.Name = nameTransformer is null ? candidateName : nameTransformer.EnsureNameCase(candidateName);
             schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }

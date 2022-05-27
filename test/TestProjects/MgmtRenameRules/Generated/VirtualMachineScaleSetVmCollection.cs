@@ -183,12 +183,12 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetVmResource> GetAllAsync(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMGetAllOptions();
+            options ??= new VirtualMachineScaleSetVmGetAllOptions();
 
             async Task<Page<VirtualMachineScaleSetVmResource>> FirstPageFunc(int? pageSizeHint)
             {
@@ -228,12 +228,12 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines
         /// Operation Id: VirtualMachineScaleSetVMs_List
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetAll method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVmResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVMGetAllOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetVmResource> GetAll(VirtualMachineScaleSetVmGetAllOptions options, CancellationToken cancellationToken = default)
         {
-            options ??= new VirtualMachineScaleSetVMGetAllOptions();
+            options ??= new VirtualMachineScaleSetVmGetAllOptions();
 
             Page<VirtualMachineScaleSetVmResource> FirstPageFunc(int? pageSizeHint)
             {

@@ -48,10 +48,10 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_ListWithSubscription
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetWithSubscriptionBars method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Bar> GetWithSubscriptionBarsAsync(BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Bar> GetWithSubscriptionBarsAsync(BarGetWithSubscriptionBarsOptions options, CancellationToken cancellationToken = default)
         {
             async Task<Page<Bar>> FirstPageFunc(int? pageSizeHint)
             {
@@ -91,10 +91,10 @@ namespace MgmtPropertyBag
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars
         /// Operation Id: Bars_ListWithSubscription
         /// </summary>
-        /// <param name="options"> A class representing the optional parameters in this method. </param>
+        /// <param name="options"> A class representing the optional parameters in GetWithSubscriptionBars method. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Bar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Bar> GetWithSubscriptionBars(BarListWithSubscriptionOptions options, CancellationToken cancellationToken = default)
+        public virtual Pageable<Bar> GetWithSubscriptionBars(BarGetWithSubscriptionBarsOptions options, CancellationToken cancellationToken = default)
         {
             Page<Bar> FirstPageFunc(int? pageSizeHint)
             {

@@ -7,11 +7,11 @@
 
 namespace XmlDeserialization.Models
 {
-    /// <summary> A class representing the optional parameters in this method. </summary>
-    public partial class XmlDeserializationGetAllOptions
+    /// <summary> A class representing the optional parameters in GetAll method. </summary>
+    public partial class XmlInstanceGetAllOptions
     {
-        /// <summary> Initializes a new instance of XmlDeserializationGetAllOptions. </summary>
-        public XmlDeserializationGetAllOptions()
+        /// <summary> Initializes a new instance of XmlInstanceGetAllOptions. </summary>
+        public XmlInstanceGetAllOptions()
         {
         }
 

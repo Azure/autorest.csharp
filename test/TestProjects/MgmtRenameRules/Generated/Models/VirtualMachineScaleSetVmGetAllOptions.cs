@@ -5,13 +5,13 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtRenameRules.Models
 {
     /// <summary> A class representing the optional parameters in GetAll method. </summary>
-    public partial class VirtualMachineScaleSetVMGetAllOptions
+    public partial class VirtualMachineScaleSetVmGetAllOptions
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMGetAllOptions. </summary>
-        public VirtualMachineScaleSetVMGetAllOptions()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmGetAllOptions. </summary>
+        public VirtualMachineScaleSetVmGetAllOptions()
         {
         }
 
