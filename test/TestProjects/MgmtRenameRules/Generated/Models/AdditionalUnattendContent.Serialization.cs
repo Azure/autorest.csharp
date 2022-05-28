@@ -18,12 +18,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName");
-                writer.WriteStringValue(PassName);
+                writer.WriteStringValue(PassName.Value.ToSerialString());
             }
             if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName");
-                writer.WriteStringValue(ComponentName);
+                writer.WriteStringValue(ComponentName.Value.ToSerialString());
             }
             if (Optional.IsDefined(SettingName))
             {
@@ -40,20 +40,30 @@ namespace MgmtRenameRules.Models
 
         internal static AdditionalUnattendContent DeserializeAdditionalUnattendContent(JsonElement element)
         {
-            Optional<string> passName = default;
-            Optional<string> componentName = default;
+            Optional<PassNames> passName = default;
+            Optional<ComponentNames> componentName = default;
             Optional<SettingNames> settingName = default;
             Optional<string> content = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
                 {
-                    passName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    passName = property.Value.GetString().ToPassNames();
                     continue;
                 }
                 if (property.NameEquals("componentName"))
                 {
-                    componentName = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    componentName = property.Value.GetString().ToComponentNames();
                     continue;
                 }
                 if (property.NameEquals("settingName"))
@@ -72,7 +82,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new AdditionalUnattendContent(passName.Value, componentName.Value, Optional.ToNullable(settingName), content.Value);
+            return new AdditionalUnattendContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), content.Value);
         }
     }
 }
