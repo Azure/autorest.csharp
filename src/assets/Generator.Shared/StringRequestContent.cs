@@ -29,7 +29,11 @@ namespace Azure.Core
 
         public override void WriteTo(Stream stream, CancellationToken cancellation)
         {
+#if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER
+            stream.Write(_bytes.AsSpan());
+#else
             stream.Write(_bytes, 0, _bytes.Length);
+#endif
         }
 
         public override bool TryComputeLength(out long length)
