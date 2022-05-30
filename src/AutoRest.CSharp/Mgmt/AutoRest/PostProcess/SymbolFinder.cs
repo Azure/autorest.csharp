@@ -36,11 +36,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             => providers.Select(p => GetNullableTypeSymbol(compilation, p.Type));
 
         public static INamedTypeSymbol? GetNullableTypeSymbol(Compilation compilation, CSharpType type)
-            => compilation.GetTypeByMetadataName($"{type.Namespace}.{type.Name}");
+            => GetNullableTypeSymbol(compilation, type.Namespace, type.Name);
 
         public static INamedTypeSymbol GetTypeSymbol(Compilation compilation, CSharpType type)
         {
             var symbol = GetNullableTypeSymbol(compilation, type);
+            Debug.Assert(symbol != null);
+            return symbol;
+        }
+
+        public static INamedTypeSymbol? GetNullableTypeSymbol(Compilation compilation, string @namespace, string name)
+            => compilation.GetTypeByMetadataName($"{@namespace}.{name}");
+
+        public static INamedTypeSymbol GetTypeSymbol(Compilation compilation, string @namespace, string name)
+        {
+            var symbol = GetNullableTypeSymbol(compilation, @namespace, name);
             Debug.Assert(symbol != null);
             return symbol;
         }
