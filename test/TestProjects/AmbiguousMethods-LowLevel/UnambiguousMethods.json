@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "2021-10-19",
-        "title": "AmbiguousMethods_LowLevel"
+        "title": "UnambiguousMethods_LowLevel"
     },
     "host": "localhost:3000",
     "schemes": [
