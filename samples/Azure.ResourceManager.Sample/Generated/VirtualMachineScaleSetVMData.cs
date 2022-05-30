@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the VirtualMachineScaleSetVM data model. </summary>
     public partial class VirtualMachineScaleSetVMData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
         {
@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Virtual machine image resource information. </summary>
     public partial class VirtualMachineImageResource : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineImageResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImageResource"/>. </summary>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineImageResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImageResource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>

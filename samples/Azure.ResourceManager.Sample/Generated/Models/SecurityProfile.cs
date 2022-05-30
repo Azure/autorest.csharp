@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Specifies the Security profile settings for the virtual machine or virtual machine scale set. </summary>
     internal partial class SecurityProfile
     {
-        /// <summary> Initializes a new instance of SecurityProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecurityProfile"/>. </summary>
         public SecurityProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of SecurityProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecurityProfile"/>. </summary>
         /// <param name="encryptionAtHost"> This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource. </param>
         internal SecurityProfile(bool? encryptionAtHost)
         {

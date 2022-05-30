@@ -10,7 +10,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Specifies information about the proximity placement group. </summary>
     public partial class ProximityPlacementGroupPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupUpdate. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         public ProximityPlacementGroupPatch()
         {
         }

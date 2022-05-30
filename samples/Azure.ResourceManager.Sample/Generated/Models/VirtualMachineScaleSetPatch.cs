@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdate. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         public VirtualMachineScaleSetPatch()
         {
         }

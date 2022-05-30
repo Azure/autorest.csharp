@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The SubResourceWithColocationStatus. </summary>
     public partial class SubResourceWithColocationStatus : SubResource
     {
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceWithColocationStatus"/>. </summary>
         public SubResourceWithColocationStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceWithColocationStatus"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="colocationStatus"> Describes colocation status of a resource in the Proximity Placement Group. </param>
         internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
