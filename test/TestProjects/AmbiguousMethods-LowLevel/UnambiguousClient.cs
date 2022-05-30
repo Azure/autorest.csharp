@@ -15,6 +15,8 @@ using Azure.Core.Pipeline;
 namespace AmbiguousMethods_LowLevel
 {
     /// <summary> Existing Unambiguous service client. Methods are changed to intentionally have no ambiguity with DPG. </summary>
+    /// <remarks>Note that the parameter lists in the methods are not aligned with the method names. Only method name in the generated
+    /// protocol methods matter. Here we intentionally change the parameter lists to generate cases without ambiguity.</remarks>
     public partial class UnambiguousClient
     {
         private readonly HttpPipeline pipeline = HttpPipelineBuilder.Build(ClientOptions.Default);
