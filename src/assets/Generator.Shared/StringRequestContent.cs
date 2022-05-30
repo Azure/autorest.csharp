@@ -21,7 +21,7 @@ namespace Azure.Core
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
 #if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER
-            await stream.WriteAsync(_bytes.AsSpan(0, _bytes.Length), cancellation).ConfigureAwait(false);
+            await stream.WriteAsync(_bytes.AsMemory(), cancellation).ConfigureAwait(false);
 #else
             await stream.WriteAsync(_bytes, 0, _bytes.Length, cancellation).ConfigureAwait(false);
 #endif
