@@ -10,7 +10,7 @@ See MethodAmbiguityResolver.cs for details.
 ## Structure
 
 - The two clients under the root folder simulate existing HLC clients by providing "GA'ed" convenience APIs we don't want to change
-- The two clients under `Generated` folder are the LLC codes.
+- The two clients under `Generated` folder are the protocol clients
 
 ### AutoRest Configuration
 
