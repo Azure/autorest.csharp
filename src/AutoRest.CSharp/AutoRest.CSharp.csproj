@@ -27,6 +27,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <!-- Any stable version of System.Memory should work here. -->
+    <PackageReference Include="System.Memory" Version="*" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->
