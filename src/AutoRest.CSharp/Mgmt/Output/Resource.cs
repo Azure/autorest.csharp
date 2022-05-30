@@ -152,7 +152,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     contextualPath,
                     operationName,
                     isLongRunning,
-                    throwIfNull);
+                    throwIfNull,
+                    Type.Name);
                 result.Add(restOperation);
             }
 
@@ -314,7 +315,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     restClient,
                     requestPath,
                     contextualPath,
-                    methodName);
+                    methodName,
+                    resourceName: Type.Name);
 
                 if (result.TryGetValue(key, out var list))
                 {

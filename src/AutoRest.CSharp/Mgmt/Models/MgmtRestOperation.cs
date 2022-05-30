@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false, string? resourceName = null)
         {
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             ContextualPath = contextualPath;
             Name = methodName;
             Resource = GetResourceMatch(restClient, method, requestPath);
-            Method = method.UpdateMgmtRestClientMethod(Resource, Name, restClient.ClientPrefix);
+            Method = method.UpdateMgmtRestClientMethod(resourceName, Name);
             FinalStateVia = Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalStateVia : null;
             OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();

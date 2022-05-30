@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyBag
     {
-        public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, Resource? resource, string methodName, string clientPrefix)
+        public static RestClientMethod UpdateMgmtRestClientMethod(this RestClientMethod method, string? resourceName, string methodName)
         {
             if (method.Parameters.Where(p => p.DefaultValue != null).Count() > 2)
             {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var optionalParametersName = optionalParameters.Select(p => p.Name).ToHashSet();
                 var optionalRequestParameters = method.Operation.Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())).
                     Concat(method.Operation.Requests.FirstOrDefault().Parameters.Where(p => optionalParametersName.Contains(p.CSharpName())));
-                InitializeSchema(schema, optionalRequestParameters, resource, methodName, clientPrefix);
+                InitializeSchema(schema, optionalRequestParameters, resourceName, methodName);
                 var newParameter = BuildOptionalParameter(schema);
                 MgmtContext.Library.OptionalModels = MgmtContext.Library.OptionalModels.Concat(new List<TypeProvider>() { new MgmtObjectType(schema) });
                 return UpdateRestClientMethod(method, method.Parameters.Where(p => !optionalParameters.Contains(p)).Append(newParameter));
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return false;
         }
 
-        private static void InitializeSchema(ObjectSchema schema, IEnumerable<RequestParameter> parameters, Resource? resource, string methodName, string clientPrefix)
+        private static void InitializeSchema(ObjectSchema schema, IEnumerable<RequestParameter> parameters, string? resourceName, string methodName)
         {
             schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", "model,input" } };
             schema.ApiVersions.Add(parameters.FirstOrDefault().Schema.ApiVersions.FirstOrDefault());
@@ -83,8 +83,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     ReadOnly = false
                 });
             }
-            var resourcePrefix = resource is null ?
-                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.Context.DefaultNamespace.Split('.').Last() : resource.Type.Name.ReplaceLast("Resource", "");
+            var resourcePrefix = resourceName is null ?
+                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.Context.DefaultNamespace.Split('.').Last() :
+                resourceName.ReplaceLast("Resource", "").ReplaceLast("Collection", "");
             schema.Language.Default.Name = $"{resourcePrefix}{methodName}Options";
             schema.Language.Default.Description = $"A class representing the optional parameters in {methodName} method.";
         }
