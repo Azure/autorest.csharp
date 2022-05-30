@@ -25,9 +25,8 @@ namespace AmbiguousMethods_LowLevel
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
 
-        /// <param name="a"> The string to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual Response NoParam(string a = null, CancellationToken cancellationToken = default)
+        public virtual Response NoParam(CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
@@ -39,17 +38,17 @@ namespace AmbiguousMethods_LowLevel
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
 
-        /// <param name="a"> The string to use. </param>
-        /// <param name="optionalParamA"> The String to use. </param>
+        /// <param name="optionalParamA"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual Response OneOptionalParam(string a = null, string optionalParamA = null, CancellationToken cancellationToken = default)
+        public virtual Response OneOptionalParam(int? optionalParamA = null, CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
 
+        /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual async Task<Response> TwoOptionalParamAsync(int? optionalParamB = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> TwoOptionalParamAsync(string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
@@ -94,20 +93,22 @@ namespace AmbiguousMethods_LowLevel
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
+        /// <param name="optionalParamA"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response OneRequiredParamAndOneOptionalParam(string requiredParamA, CancellationToken cancellationToken = default)
+        public virtual Response OneRequiredParamAndOneOptionalParam(string requiredParamA, int? optionalParamA = null, CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
+        /// <param name="optionalParamB"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> OneRequiredParamAndTwoOptionalParamAsync(string requiredParamA, string optionalParamA = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> OneRequiredParamAndTwoOptionalParamAsync(string requiredParamA, string optionalParamA = null, string optionalParamB = null, CancellationToken cancellationToken = default)
         {
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
@@ -115,11 +116,10 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
-        /// <param name="a"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response OneRequiredParamAndTwoOptionalParam(string requiredParamA, string optionalParamA = null, int? optionalParamB = null, string a = null, CancellationToken cancellationToken = default)
+        public virtual Response OneRequiredParamAndTwoOptionalParam(string requiredParamA, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
@@ -147,10 +147,11 @@ namespace AmbiguousMethods_LowLevel
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
+        /// <param name="optionalParamA"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> TwoRequiredParamAndOneOptionalParamAsync(string requiredParamA, int requiredParamB, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> TwoRequiredParamAndOneOptionalParamAsync(string requiredParamA, int requiredParamB, int? optionalParamA = null, CancellationToken cancellationToken = default)
         {
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
@@ -158,11 +159,10 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
-        /// <param name="a"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response TwoRequiredParamAndOneOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA = null, string a = null, CancellationToken cancellationToken = default)
+        public virtual Response TwoRequiredParamAndOneOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA = null, CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
@@ -170,10 +170,11 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
+        /// <param name="optionalParamB"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> TwoRequiredParamAndTwoOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> TwoRequiredParamAndTwoOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA = null, string optionalParamB = null, CancellationToken cancellationToken = default)
         {
             return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
         }
@@ -182,11 +183,10 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
-        /// <param name="a"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response TwoRequiredParamAndTwoOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA = null, int? optionalParamB = null, string a = null, CancellationToken cancellationToken = default)
+        public virtual Response TwoRequiredParamAndTwoOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
             return pipeline.ProcessMessage(null, null);
         }
