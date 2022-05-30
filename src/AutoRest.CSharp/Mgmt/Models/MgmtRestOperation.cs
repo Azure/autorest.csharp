@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         public Operation Operation => Method.Operation;
 
         public string OperationId => Operation.OperationId!;
+
+        public HttpMethod HttpMethod => Operation.GetHttpMethod();
+
         /// <summary>
         /// The name of this operation
         /// </summary>

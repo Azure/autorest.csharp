@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, ResourceDataSchemaNameToOperationSets);
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
                         }
                         else
                         {
@@ -235,6 +235,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
             }
 
+#if false
             //this is where we update
             var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
@@ -285,6 +286,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _nameToTypeProvider[name] = replacedType;
                 resourceModels[schema] = replacedType;
             }
+#endif
 
             return resourceModels;
         }

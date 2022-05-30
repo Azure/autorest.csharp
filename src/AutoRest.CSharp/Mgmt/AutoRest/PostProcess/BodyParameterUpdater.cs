@@ -1,16 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Rename;
-using static Microsoft.CodeAnalysis.Rename.Renamer;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
@@ -18,21 +21,107 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
     {
         public static async Task<Project> Update(Project project)
         {
-            var compilation = await project.GetCompilationAsync();
-            if (compilation == null)
-                return project;
-            // TODO: prepare the symbols
-            // TODO: count the usages of the parameters
-            // TODO: rename the parameters that needed to be renamed
+            // get all the parameter types needed to change
+            var updatedModels = GetBodyParameterTypes();
+            // rename the parameters that needed to be renamed
+            project = await RenameParameterTypesAsync(project, updatedModels);
+            // TODO -- rename the body parameter names
+
             return project;
         }
 
-        private static async Task<Project> RenameSymbol(Project project, ISymbol symbolToRename, string newName)
+        private static Parameter? GetBodyParameter(MgmtClientOperation operation)
+            => operation.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
+
+        private static Dictionary<CSharpType, string> GetBodyParameterTypes()
+        {
+            var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
+                .Concat(MgmtContext.Library.ResourceCollections)
+                .Concat(MgmtContext.Library.ExtensionWrapper.Extensions);
+
+            // iterate all the client operations to get the usage of models in requests and responses
+            var usageCounts = new Dictionary<CSharpType, int>();
+            foreach (var mgmtTypeProvider in mgmtTypeProviders)
+            {
+                foreach (var operation in mgmtTypeProvider.AllOperations)
+                {
+                    // go through the body parameters
+                    var bodyParameter = GetBodyParameter(operation);
+                    if (bodyParameter != null && !bodyParameter.Type.IsFrameworkType)
+                        IncrementCount(usageCounts, bodyParameter.Type);
+                    // go through the return type
+                    var originalReturnType = operation.OriginalReturnType; // this is the undecerated return type of this operation
+                    if (originalReturnType != null && !originalReturnType.IsFrameworkType)
+                        IncrementCount(usageCounts, originalReturnType);
+                }
+            }
+
+            var newUpdatedModels = new Dictionary<CSharpType, string>();
+            foreach (var mgmtTypeProvider in mgmtTypeProviders)
+            {
+                foreach (var operation in mgmtTypeProvider.AllOperations)
+                {
+                    if (operation.HttpMethod != HttpMethod.Patch && operation.HttpMethod != HttpMethod.Put && operation.HttpMethod != HttpMethod.Post)
+                        continue;
+
+                    var bodyParameter = GetBodyParameter(operation);
+                    if (bodyParameter == null || bodyParameter.Type.IsFrameworkType)
+                        continue;
+
+                    if (!usageCounts.TryGetValue(bodyParameter.Type, out var count) || count != 1)
+                        continue;
+
+                    // only change the name of body parameter type when the count is 1
+                    // determine this is on a resource/collection, or on an extension
+                    // if this is on a resource or collection, we will rename it to PUT: [ResourceName]CreateOrUpdateContent, Patch: [ResourceName]Patch
+                    // if this is of other verb, or this is on an extension, we just replace some reserved words to `Content` in its name
+                    string newName = "";
+                    if (mgmtTypeProvider is MgmtExtensions)
+                    {
+                        newName = GetNewBodyParameterTypeName(bodyParameter.Type.Name);
+                    }
+                    else
+                    {
+                        newName = GetNewBodyParameterTypeName(operation.HttpMethod, mgmtTypeProvider.ResourceName, bodyParameter.Type.Name);
+                    }
+                    newUpdatedModels.Add(bodyParameter.Type, newName);
+                }
+            }
+
+            return newUpdatedModels;
+        }
+
+        private static void IncrementCount<T>(Dictionary<T, int> usageCounts, T item) where T : notnull
+        {
+            if (usageCounts.ContainsKey(item))
+            {
+                usageCounts[item]++;
+            }
+            else
+            {
+                usageCounts.Add(item, 1);
+            }
+        }
+
+        private static async Task<Project> RenameParameterTypesAsync(Project project, Dictionary<CSharpType, string> updatedTypes)
+        {
+            Compilation compilation;
+            foreach ((var typeToRename, var newName) in updatedTypes)
+            {
+                compilation = await GetCompilationAsync(project);
+                var symbolToRename = SymbolFinder.GetTypeSymbol(compilation, typeToRename);
+                project = await RenameSymbolAsync(project, symbolToRename, newName);
+            }
+
+            return project;
+        }
+
+        private static async Task<Project> RenameSymbolAsync(Project project, ISymbol symbolToRename, string newName)
         {
             var solution = project.Solution;
             var projectId = project.Id;
             // rename the containing document's name, which will automatically rename the containing symbol that matches the name of the document
-            var actions = new List<RenameDocumentActionSet>();
+            var actions = new List<Renamer.RenameDocumentActionSet>();
             foreach (var definition in symbolToRename.DeclaringSyntaxReferences)
             {
                 var document = project.GetDocument(definition.SyntaxTree);
@@ -49,6 +138,38 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             }
 
             return solution.GetProject(projectId)!;
+        }
+
+        private static async Task<Compilation> GetCompilationAsync(Project project)
+        {
+            var compilation = await project.GetCompilationAsync();
+            Debug.Assert(compilation != null);
+            return compilation;
+        }
+
+        private static readonly string Content = "Content";
+
+        public static string GetNewBodyParameterTypeName(HttpMethod method, string resourceName, string oldName) => method switch
+        {
+            HttpMethod.Put => $"{resourceName}CreateOrUpdateContent",
+            HttpMethod.Patch => $"{resourceName}Patch",
+            _ => GetNewBodyParameterTypeName(oldName),
+        };
+
+        public static string GetNewBodyParameterTypeName(string oldTypeName)
+        {
+            if (oldTypeName.EndsWith("Parameters", StringComparison.Ordinal))
+                return oldTypeName.ReplaceLast("Parameters", Content);
+            if (oldTypeName.EndsWith("Request", StringComparison.Ordinal))
+                return oldTypeName.ReplaceLast("Request", Content);
+            if (oldTypeName.EndsWith("Options", StringComparison.Ordinal))
+                return oldTypeName.ReplaceLast("Options", Content);
+            if (oldTypeName.EndsWith("Info", StringComparison.Ordinal))
+                return oldTypeName.ReplaceLast("Info", Content);
+            if (oldTypeName.EndsWith("Input", StringComparison.Ordinal))
+                return oldTypeName.ReplaceLast("Input", Content);
+
+            return oldTypeName;
         }
     }
 }

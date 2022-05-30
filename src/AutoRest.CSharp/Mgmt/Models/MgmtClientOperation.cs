@@ -128,6 +128,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => _operations.First().FinalResponseSchema;
 
+        public HttpMethod HttpMethod => _operations.First().HttpMethod;
+
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {
             return this.ToDictionary(

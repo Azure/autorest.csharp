@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 
             visited.Add(symbol);
 
-            foreach (var reference in await SymbolFinder.FindReferencesAsync(symbol, project.Solution))
+            foreach (var reference in await Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindReferencesAsync(symbol, project.Solution))
             {
                 foreach (var location in reference.Locations)
                 {
@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 
         /// <summary>
         /// Returns the node that defines <paramref name="node"/> inside the document under the syntax root of <paramref name="root"/>, which should be <see cref="ClassDeclarationSyntax"/>, <see cref="StructDeclarationSyntax"/> or <see cref="EnumDeclarationSyntax"/>
-        /// The <paramref name="node"/> here should come from the result of <see cref="SymbolFinder"/>, therefore a result is guaranteed
+        /// The <paramref name="node"/> here should come from the result of <see cref="Microsoft.CodeAnalysis.FindSymbols.SymbolFinder"/>, therefore a result is guaranteed
         /// </summary>
         /// <param name="root"></param>
         /// <param name="node"></param>

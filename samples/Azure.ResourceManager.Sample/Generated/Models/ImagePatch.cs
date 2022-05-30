@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The source user image virtual hard disk. Only tags may be updated. </summary>
     public partial class ImagePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ImagePatch. </summary>
+        /// <summary> Initializes a new instance of ImageUpdate. </summary>
         public ImagePatch()
         {
         }

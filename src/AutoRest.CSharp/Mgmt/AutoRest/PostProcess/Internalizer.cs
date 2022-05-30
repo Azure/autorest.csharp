@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                         if (HasDiscriminator(declaration, out var identifierCandidates))
                         {
                             // first find all the derived types from this type
-                            foreach (var derivedTypeSymbol in await SymbolFinder.FindDerivedClassesAsync(typeSymbol, project.Solution))
+                            foreach (var derivedTypeSymbol in await Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindDerivedClassesAsync(typeSymbol, project.Solution))
                             {
                                 if (identifierCandidates.Contains(derivedTypeSymbol.Name))
                                 {

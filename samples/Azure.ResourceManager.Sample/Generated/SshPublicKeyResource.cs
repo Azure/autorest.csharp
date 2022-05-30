@@ -194,18 +194,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
         /// Operation Id: SshPublicKeys_Update
         /// </summary>
-        /// <param name="patch"> Parameters supplied to update the SSH public key. </param>
+        /// <param name="sshPublicKeyUpdateResource"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual async Task<Response<SshPublicKeyResource>> UpdateAsync(SshPublicKeyPatch patch, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyUpdateResource"/> is null. </exception>
+        public virtual async Task<Response<SshPublicKeyResource>> UpdateAsync(SshPublicKeyPatch sshPublicKeyUpdateResource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(sshPublicKeyUpdateResource, nameof(sshPublicKeyUpdateResource));
 
             using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyResource.Update");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sshPublicKeyUpdateResource, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -220,18 +220,18 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
         /// Operation Id: SshPublicKeys_Update
         /// </summary>
-        /// <param name="patch"> Parameters supplied to update the SSH public key. </param>
+        /// <param name="sshPublicKeyUpdateResource"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual Response<SshPublicKeyResource> Update(SshPublicKeyPatch patch, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyUpdateResource"/> is null. </exception>
+        public virtual Response<SshPublicKeyResource> Update(SshPublicKeyPatch sshPublicKeyUpdateResource, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(patch, nameof(patch));
+            Argument.AssertNotNull(sshPublicKeyUpdateResource, nameof(sshPublicKeyUpdateResource));
 
             using var scope = _sshPublicKeyClientDiagnostics.CreateScope("SshPublicKeyResource.Update");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
+                var response = _sshPublicKeyRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, sshPublicKeyUpdateResource, cancellationToken);
                 return Response.FromValue(new SshPublicKeyResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
