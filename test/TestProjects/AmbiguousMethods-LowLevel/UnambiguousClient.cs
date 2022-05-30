@@ -21,102 +21,113 @@ namespace AmbiguousMethods_LowLevel
 
         /// <param name="a"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual async Task<Response> NoParamAsync(string a, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual async Task<Response<SuccessResponse>> NoParamAsync(string a, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="options"> UnambiguousOptions to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual Response NoParam(UnambiguousOptions options, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual Response<SuccessResponse> NoParam(UnambiguousOptions options, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return GetSuccessResponse();
         }
 
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="a"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual async Task<Response> OneOptionalParamAsync(string optionalParamA, string a, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual async Task<Response<SuccessResponse>> OneOptionalParamAsync(string optionalParamA, string a, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="optionalParamA"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual Response OneOptionalParam(int optionalParamA, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual Response<SuccessResponse> OneOptionalParam(int optionalParamA, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return GetSuccessResponse();
         }
 
         /// <param name="a"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual async Task<Response> TwoOptionalParamAsync(string a, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual async Task<Response<SuccessResponse>> TwoOptionalParamAsync(string a, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="b"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
-        public virtual Response TwoOptionalParam(int b, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        /// <returns>SuccessResponse</returns>
+        public virtual Response<SuccessResponse> TwoOptionalParam(int b, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
-            
-            return pipeline.ProcessMessage(null, null);
+
+            return GetSuccessResponse();
 
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="a"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> OneRequiredParamAsync(string requiredParamA, int a, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> OneRequiredParamAsync(string requiredParamA, int a, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response OneRequiredParam(string requiredParamA = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuccessResponse> OneRequiredParam(string requiredParamA = null, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return GetSuccessResponse();
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> OneRequiredParamAndOneOptionalParamAsync(int requiredParamA, string optionalParamA = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> OneRequiredParamAndOneOptionalParamAsync(int requiredParamA, string optionalParamA = null, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="b"> The String to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response OneRequiredParamAndOneOptionalParam(string requiredParamA, string b, string optionalParamA = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuccessResponse> OneRequiredParamAndOneOptionalParam(string requiredParamA, string b, string optionalParamA = null, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return GetSuccessResponse();
         }
 
         /// <param name="requiredParamA"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> OneRequiredParamAndTwoOptionalParamAsync(int requiredParamA, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> OneRequiredParamAndTwoOptionalParamAsync(int requiredParamA, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
@@ -124,76 +135,97 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response OneRequiredParamAndTwoOptionalParam(string requiredParamA, int b, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuccessResponse> OneRequiredParamAndTwoOptionalParam(string requiredParamA, int b, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return GetSuccessResponse();
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> TwoRequiredParamAsync(string requiredParamA, string requiredParamB, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> TwoRequiredParamAsync(string requiredParamA, string requiredParamB, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response TwoRequiredParam(string requiredParamA, int requiredParamB = 0, CancellationToken cancellationToken = default)
+        public virtual Response<SuccessResponse> TwoRequiredParam(string requiredParamA, int requiredParamB = 0, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
-        }
-
-        /// <param name="requiredParamA"> The String to use. </param>
-        /// <param name="requiredParamB"> The Integer to use. </param>
-        /// <param name="optionalParamA"> The String to use. </param>
-        /// <param name="cancellationToken"> CancellationToken to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> TwoRequiredParamAndOneOptionalParamAsync(string requiredParamA, string requiredParamB, string optionalParamA = null, CancellationToken cancellationToken = default)
-        {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return GetSuccessResponse();
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response TwoRequiredParamAndOneOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> TwoRequiredParamAndOneOptionalParamAsync(string requiredParamA, string requiredParamB, string optionalParamA = null, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
         /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
-        /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> TwoRequiredParamAndTwoOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuccessResponse> TwoRequiredParamAndOneOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA, CancellationToken cancellationToken = default)
         {
-            return await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            return GetSuccessResponse();
         }
 
         /// <param name="requiredParamA"> The String to use. </param>
+        /// <param name="requiredParamB"> The Integer to use. </param>
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response TwoRequiredParamAndTwoOptionalParam(string requiredParamA, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuccessResponse>> TwoRequiredParamAndTwoOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA, int? optionalParamB = null, CancellationToken cancellationToken = default)
         {
-            return pipeline.ProcessMessage(null, null);
+            return await GetSuccessResponseAsync().ConfigureAwait(false);
+        }
+
+        /// <param name="requiredParamA"> The String to use. </param>
+        /// <param name="optionalParamA"> The String to use. </param>
+        /// <param name="optionalParamB"> The Integer to use. </param>
+        /// <param name="cancellationToken"> CancellationToken to use. </param>
+        /// <returns>SuccessResponse</returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        public virtual Response<SuccessResponse> TwoRequiredParamAndTwoOptionalParam(string requiredParamA, string optionalParamA = null, int? optionalParamB = null, CancellationToken cancellationToken = default)
+        {
+            return GetSuccessResponse();
+        }
+
+        private async Task<Response<SuccessResponse>> GetSuccessResponseAsync()
+        {
+            Response response = await pipeline.ProcessMessageAsync(null, null).ConfigureAwait(false);
+            SuccessResponse value = SuccessResponse.FromResponse(response);
+            return Response.FromValue(value, response);
+        }
+
+        private Response<SuccessResponse> GetSuccessResponse()
+        {
+            Response response = pipeline.ProcessMessage(null, null);
+            SuccessResponse value = SuccessResponse.FromResponse(response);
+            return Response.FromValue(value, response);
         }
     }
 

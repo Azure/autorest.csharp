@@ -57,6 +57,14 @@ namespace AmbiguousMethods_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> NoParamAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.NoParam");
@@ -74,6 +82,14 @@ namespace AmbiguousMethods_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response NoParam(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.NoParam");
@@ -92,6 +108,14 @@ namespace AmbiguousMethods_LowLevel
 
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> OneOptionalParamAsync(string optionalParamA, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.OneOptionalParam");
@@ -110,6 +134,14 @@ namespace AmbiguousMethods_LowLevel
 
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response OneOptionalParam(string optionalParamA, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.OneOptionalParam");
@@ -129,6 +161,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TwoOptionalParamAsync(string optionalParamA, int? optionalParamB, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.TwoOptionalParam");
@@ -148,6 +188,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="optionalParamA"> The String to use. </param>
         /// <param name="optionalParamB"> The Integer to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TwoOptionalParam(string optionalParamA, int? optionalParamB, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("AmbiguousClient.TwoOptionalParam");
@@ -168,6 +216,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> OneRequiredParamAsync(string requiredParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -190,6 +246,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response OneRequiredParam(string requiredParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -213,6 +277,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> OneRequiredParamAndOneOptionalParamAsync(string requiredParamA, string optionalParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -236,6 +308,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response OneRequiredParamAndOneOptionalParam(string requiredParamA, string optionalParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -260,6 +340,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> OneRequiredParamAndTwoOptionalParamAsync(string requiredParamA, string optionalParamA, int? optionalParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -284,6 +372,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response OneRequiredParamAndTwoOptionalParam(string requiredParamA, string optionalParamA, int? optionalParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -307,6 +403,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TwoRequiredParamAsync(string requiredParamA, int requiredParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -330,6 +434,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TwoRequiredParam(string requiredParamA, int requiredParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -354,6 +466,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TwoRequiredParamAndOneOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -378,6 +498,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TwoRequiredParamAndOneOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -403,6 +531,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual async Task<Response> TwoRequiredParamAndTwoOptionalParamAsync(string requiredParamA, int requiredParamB, string optionalParamA, int? optionalParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
@@ -428,6 +564,14 @@ namespace AmbiguousMethods_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParamA"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="requiredParamA"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         public virtual Response TwoRequiredParamAndTwoOptionalParam(string requiredParamA, int requiredParamB, string optionalParamA, int? optionalParamB, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(requiredParamA, nameof(requiredParamA));
