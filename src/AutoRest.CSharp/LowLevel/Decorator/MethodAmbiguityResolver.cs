@@ -48,13 +48,18 @@ namespace AutoRest.CSharp.LowLevel.Decorator
         /// <returns>A LowLevelClientMethod which have been resolved to avoid ambiguity with the methods in the given client in existing codes.</returns>
         private static LowLevelClientMethod ResolveClientMethod(LowLevelClientMethod clientMethod, INamedTypeSymbol clientSourceModel)
         {
-            var clientMethodSourceModels = clientSourceModel.GetMembers().Where(s => s.Kind == SymbolKind.Method &&
-                s.Name == clientMethod.Signature.Name && s.DeclaredAccessibility == Accessibility.Public).Select(s => (IMethodSymbol)s).ToList();
-            if (clientMethodSourceModels.Count > 0)
+            IEnumerable<IMethodSymbol> clientMethodSourceModels = GetPublicMethodsFromSourceModelByName(clientMethod.Signature.Name, clientSourceModel);
+            if (clientMethodSourceModels.Any())
             {
                 return ResolveClientMethod(clientMethod, clientMethodSourceModels);
             }
             return clientMethod;
+        }
+
+        private static IEnumerable<IMethodSymbol> GetPublicMethodsFromSourceModelByName(string methodName, INamedTypeSymbol clientSourceModel)
+        {
+            return clientSourceModel.GetMembers().Where(s => s.Kind == SymbolKind.Method &&
+                s.Name == methodName && s.DeclaredAccessibility == Accessibility.Public).Select(s => (IMethodSymbol)s);
         }
 
         /// <summary>
@@ -63,7 +68,7 @@ namespace AutoRest.CSharp.LowLevel.Decorator
         /// <param name="clientMethod">Client method beloning to a DPG client.</param>
         /// <param name="clientMethodSourceModels">Roslyn model for a client method with the same name and the same parent client in existing codes.</param>
         /// <returns>A LowLevelClientMethod which have been resolved to avoid ambiguity with the given method in existing codes.</returns>
-        private static LowLevelClientMethod ResolveClientMethod(LowLevelClientMethod clientMethod, IReadOnlyList<IMethodSymbol> clientMethodSourceModels)
+        private static LowLevelClientMethod ResolveClientMethod(LowLevelClientMethod clientMethod, IEnumerable<IMethodSymbol> clientMethodSourceModels)
         {
             bool ambiguityFound = false;
             foreach (var clientMethodSourceModel in clientMethodSourceModels)
@@ -71,7 +76,7 @@ namespace AutoRest.CSharp.LowLevel.Decorator
                 if (IsAmbiguousMethod(clientMethod, clientMethodSourceModel))
                 {
                     // if two methods are identical, that means there should be some customization codes and we leave them to users to resolve
-                    if (IsSameMethod(clientMethod, clientMethodSourceModel))
+                    if (IsMethodSignatureSame(clientMethod, clientMethodSourceModel))
                     {
                         return clientMethod;
                     }
@@ -106,7 +111,7 @@ namespace AutoRest.CSharp.LowLevel.Decorator
 
             for (int i = 0; i < clientMethodRequiredParameters.Count; i++)
             {
-                if (!IsSameParameter(clientMethodRequiredParameters[i], requiredParameterSymbols[i]))
+                if (!IsParameterTypeAndDefaultValueSame(clientMethodRequiredParameters[i], requiredParameterSymbols[i]))
                 {
                     return false;
                 }
@@ -125,7 +130,7 @@ namespace AutoRest.CSharp.LowLevel.Decorator
         /// <param name="clientMethod"></param>
         /// <param name="clientMethodSourceModel"></param>
         /// <returns></returns>
-        private static bool IsSameMethod(LowLevelClientMethod clientMethod, IMethodSymbol clientMethodSourceModel)
+        private static bool IsMethodSignatureSame(LowLevelClientMethod clientMethod, IMethodSymbol clientMethodSourceModel)
         {
             if (clientMethod.Signature.Parameters.Count != clientMethodSourceModel.Parameters.Length)
             {
@@ -133,7 +138,7 @@ namespace AutoRest.CSharp.LowLevel.Decorator
             }
             for (int i = 0; i < clientMethod.Signature.Parameters.Count; i++)
             {
-                if (!IsSameParameter(clientMethod.Signature.Parameters[i], clientMethodSourceModel.Parameters[i]))
+                if (!IsParameterTypeAndDefaultValueSame(clientMethod.Signature.Parameters[i], clientMethodSourceModel.Parameters[i]))
                 {
                     return false;
                 }
@@ -142,12 +147,8 @@ namespace AutoRest.CSharp.LowLevel.Decorator
             return true;
         }
 
-        private static bool IsSameParameter(Parameter parameter, IParameterSymbol parameterSourceModel)
+        private static bool IsParameterTypeAndDefaultValueSame(Parameter parameter, IParameterSymbol parameterSourceModel)
         {
-            //if (parameter.Name != parameterSourceModel.Name)
-            //{
-            //    return false;
-            //}
             if (!IsSameType(parameter.Type, parameterSourceModel.Type))
             {
                 return false;
