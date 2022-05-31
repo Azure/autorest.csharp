@@ -21,7 +21,7 @@ namespace SubscriptionExtensions
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of SubscriptionExtensionsArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubscriptionExtensionsArmOperation{T}" /> for mocking. </summary>
         protected SubscriptionExtensionsArmOperation()
         {
         }

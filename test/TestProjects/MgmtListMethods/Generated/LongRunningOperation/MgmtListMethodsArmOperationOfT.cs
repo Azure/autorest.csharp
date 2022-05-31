@@ -21,7 +21,7 @@ namespace MgmtListMethods
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtListMethodsArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethodsArmOperation{T}" /> for mocking. </summary>
         protected MgmtListMethodsArmOperation()
         {
         }

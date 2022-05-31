@@ -21,7 +21,7 @@ namespace MgmtKeyvault
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtKeyvaultArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultArmOperation{T}" /> for mocking. </summary>
         protected MgmtKeyvaultArmOperation()
         {
         }
