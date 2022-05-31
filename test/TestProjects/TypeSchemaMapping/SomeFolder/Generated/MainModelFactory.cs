@@ -13,7 +13,7 @@ namespace TypeSchemaMapping.Models
     internal static partial class MainModelFactory
     {
 
-        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>
         public static ModelWithGuidProperty ModelWithGuidProperty(Guid? modelProperty = null)

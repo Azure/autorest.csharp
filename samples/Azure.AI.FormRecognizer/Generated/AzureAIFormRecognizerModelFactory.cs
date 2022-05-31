@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureAIFormRecognizerModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ErrorInformation"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
@@ -23,7 +23,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new ErrorInformation(code, message);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.Model"/>. </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <param name="keys"> Keys extracted by the custom model. </param>
         /// <param name="trainResult"> Custom model training result. </param>
@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new Model(modelInfo, keys, trainResult);
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ModelInfo"/>. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
@@ -44,7 +44,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
         }
 
-        /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
@@ -54,7 +54,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new KeysResult(clusters);
         }
 
-        /// <summary> Initializes a new instance of <see cref="TrainResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainResult"/>. </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
@@ -69,7 +69,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainingDocumentInfo"/>. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
@@ -82,7 +82,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status);
         }
 
-        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
@@ -91,7 +91,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new FormFieldsReport(fieldName, accuracy);
         }
 
-        /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.AnalyzeOperationResult"/>. </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
@@ -102,7 +102,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
         }
 
-        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
@@ -119,7 +119,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="ReadResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ReadResult"/>. </summary>
         /// <param name="page"> The 1-based page number in the input document. </param>
         /// <param name="angle"> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </param>
         /// <param name="width"> The width of the image/PDF in pixels/inches, respectively. </param>
@@ -135,7 +135,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new ReadResult(page, angle, width, height, unit, language, lines?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="TextLine"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TextLine"/>. </summary>
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
@@ -149,7 +149,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new TextLine(text, boundingBox?.ToList(), language, words?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="TextWord"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TextWord"/>. </summary>
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
         /// <param name="confidence"> Confidence value. </param>
@@ -161,7 +161,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new TextWord(text, boundingBox?.ToList(), confidence);
         }
 
-        /// <summary> Initializes a new instance of <see cref="PageResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.PageResult"/>. </summary>
         /// <param name="page"> Page number. </param>
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
@@ -175,7 +175,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="KeyValuePair"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeyValuePair"/>. </summary>
         /// <param name="label"> A user defined label for the key/value pair entry. </param>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
@@ -186,7 +186,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new KeyValuePair(label, key, value, confidence);
         }
 
-        /// <summary> Initializes a new instance of <see cref="KeyValueElement"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.KeyValueElement"/>. </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
@@ -199,7 +199,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="DataTable"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DataTable"/>. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
@@ -211,7 +211,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new DataTable(rows, columns, cells?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="DataTableCell"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DataTableCell"/>. </summary>
         /// <param name="rowIndex"> Row index of the cell. </param>
         /// <param name="columnIndex"> Column index of the cell. </param>
         /// <param name="rowSpan"> Number of rows spanned by this cell. </param>
@@ -231,7 +231,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter);
         }
 
-        /// <summary> Initializes a new instance of <see cref="DocumentResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.DocumentResult"/>. </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
@@ -244,7 +244,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new DocumentResult(docType, pageRange?.ToList(), fields);
         }
 
-        /// <summary> Initializes a new instance of <see cref="FieldValue"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.FieldValue"/>. </summary>
         /// <param name="type"> Type of field value. </param>
         /// <param name="valueString"> String value. </param>
         /// <param name="valueDate"> Date value. </param>
@@ -270,7 +270,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page);
         }
 
-        /// <summary> Initializes a new instance of <see cref="CopyOperationResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.CopyOperationResult"/>. </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the copy operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
@@ -281,7 +281,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
         }
 
-        /// <summary> Initializes a new instance of <see cref="CopyResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.CopyResult"/>. </summary>
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.CopyResult"/> instance for mocking. </returns>
@@ -292,7 +292,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new CopyResult(modelId, errors?.ToList());
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.Models"/>. </summary>
         /// <param name="summary"> Summary of all trained custom models. </param>
         /// <param name="modelList"> Collection of trained custom models. </param>
         /// <param name="nextLink"> Link to the next page of custom models. </param>
@@ -304,7 +304,7 @@ namespace Azure.AI.FormRecognizer.Models
             return new Models(summary, modelList?.ToList(), nextLink);
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelsSummary"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ModelsSummary"/>. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>

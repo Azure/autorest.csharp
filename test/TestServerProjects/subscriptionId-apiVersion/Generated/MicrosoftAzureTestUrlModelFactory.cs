@@ -10,7 +10,7 @@ namespace subscriptionId_apiVersion.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class MicrosoftAzureTestUrlModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name &apos;testgroup101&apos;. </param>
         /// <param name="location"> resource group location &apos;West US&apos;. </param>
         /// <returns> A new <see cref="Models.SampleResourceGroup"/> instance for mocking. </returns>
