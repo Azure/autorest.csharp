@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    MgmtTarget.Execute(project, codeModel, sourceInputModel);
+                    await MgmtTarget.Execute(project, codeModel, sourceInputModel);
                 }
             }
             else

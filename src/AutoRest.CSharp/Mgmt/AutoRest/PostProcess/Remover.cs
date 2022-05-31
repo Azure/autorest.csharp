@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Simplification;
 
-namespace AutoRest.CSharp.AutoRest.Plugins
+namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal static class Remover
     {

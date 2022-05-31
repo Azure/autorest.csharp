@@ -120,7 +120,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -148,7 +148,7 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -229,7 +229,7 @@ namespace MgmtResourceName
         /// <summary>
         /// Checks to see if the resource exists in azure.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -256,7 +256,7 @@ namespace MgmtResourceName
         /// <summary>
         /// Checks to see if the resource exists in azure.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
