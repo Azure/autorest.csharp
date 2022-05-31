@@ -12,12 +12,12 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment operation properties. </summary>
     public partial class DeploymentOperationProperties
     {
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         internal DeploymentOperationProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         /// <param name="provisioningOperation"> The name of the current provisioning operation. </param>
         /// <param name="provisioningState"> The state of the provisioning. </param>
         /// <param name="timestamp"> The date and time of the operation. </param>

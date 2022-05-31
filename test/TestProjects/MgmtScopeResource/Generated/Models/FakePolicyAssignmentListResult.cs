@@ -14,13 +14,13 @@ namespace MgmtScopeResource.Models
     /// <summary> List of policy assignments. </summary>
     internal partial class FakePolicyAssignmentListResult
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentListResult"/>. </summary>
         internal FakePolicyAssignmentListResult()
         {
             Value = new ChangeTrackingList<FakePolicyAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentListResult"/>. </summary>
         /// <param name="value"> An array of policy assignments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink)

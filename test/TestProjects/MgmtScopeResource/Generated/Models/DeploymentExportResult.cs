@@ -12,12 +12,12 @@ namespace MgmtScopeResource.Models
     /// <summary> The deployment export result. </summary>
     public partial class DeploymentExportResult
     {
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         internal DeploymentExportResult()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         /// <param name="template"> The template content. </param>
         internal DeploymentExportResult(BinaryData template)
         {

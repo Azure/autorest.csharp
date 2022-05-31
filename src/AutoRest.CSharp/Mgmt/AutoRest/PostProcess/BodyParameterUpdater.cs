@@ -34,8 +34,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
         private static Parameter? GetBodyParameter(MgmtClientOperation operation)
             => operation.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
 
-        private record struct BodyParameter(CSharpType Owner, string methodName, CSharpType ParameterType);
-
         private static Dictionary<CSharpType, string> GetBodyParameterTypes()
         {
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
@@ -148,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
                     {
                         // get the body parameter
                         var bodyParameter = GetBodyParameter(operation);
-                        if (bodyParameter == null)
+                        if (bodyParameter == null || bodyParameter.Type.IsFrameworkType)
                             continue;
 
                         var parameterSymbol = GetParameterSymbol(compilation, methodSymbol, GetModifiedTypeSymbol(compilation, bodyParameter.Type, updatedTypes));
