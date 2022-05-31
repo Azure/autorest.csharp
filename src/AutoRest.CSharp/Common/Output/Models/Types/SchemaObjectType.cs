@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsAbstract ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
@@ -255,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),

@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -11,11 +12,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
-        public ObjectTypeConstructor(string name, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(CSharpType type, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
         {
             Signature = new ConstructorSignature(
-                name,
-                $"Initializes a new instance of <see cref=\"{name}\"/>",
+                type.Name,
+                $"Initializes a new instance of <see cref=\"{type.Namespace}.{type.Name}\"/>",
                 modifiers,
                 parameters,
                 new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>()));
