@@ -13,7 +13,7 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> The InputAdditionalPropertiesModel. </summary>
     public partial class InputAdditionalPropertiesModel
     {
-        /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputAdditionalPropertiesModel"/>. </summary>
         /// <param name="id"></param>
         public InputAdditionalPropertiesModel(int id)
         {

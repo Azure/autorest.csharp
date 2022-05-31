@@ -10,12 +10,12 @@ namespace ProtocolMethodsInRestClient.Models
     /// <summary> . </summary>
     public partial class Resource
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
         internal Resource(string name, string id)

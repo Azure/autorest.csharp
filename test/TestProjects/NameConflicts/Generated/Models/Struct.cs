@@ -10,12 +10,12 @@ namespace NameConflicts.Models
     /// <summary> The Struct. </summary>
     public partial class Struct : Class
     {
-        /// <summary> Initializes a new instance of Struct. </summary>
+        /// <summary> Initializes a new instance of <see cref="Struct"/>. </summary>
         public Struct()
         {
         }
 
-        /// <summary> Initializes a new instance of Struct. </summary>
+        /// <summary> Initializes a new instance of <see cref="Struct"/>. </summary>
         /// <param name="abstract"></param>
         /// <param name="add"></param>
         /// <param name="alias"></param>

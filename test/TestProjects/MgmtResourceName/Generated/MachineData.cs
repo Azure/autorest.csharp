@@ -13,12 +13,12 @@ namespace MgmtResourceName
     /// <summary> A class representing the Machine data model. </summary>
     public partial class MachineData : ResourceData
     {
-        /// <summary> Initializes a new instance of MachineData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MachineData"/>. </summary>
         public MachineData()
         {
         }
 
-        /// <summary> Initializes a new instance of MachineData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

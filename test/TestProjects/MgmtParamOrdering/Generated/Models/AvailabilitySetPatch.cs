@@ -10,7 +10,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class AvailabilitySetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         public AvailabilitySetPatch()
         {
         }

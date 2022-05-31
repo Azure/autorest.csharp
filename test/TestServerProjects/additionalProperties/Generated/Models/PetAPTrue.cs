@@ -13,7 +13,7 @@ namespace additionalProperties.Models
     /// <summary> The PetAPTrue. </summary>
     public partial class PetAPTrue
     {
-        /// <summary> Initializes a new instance of PetAPTrue. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPTrue"/>. </summary>
         /// <param name="id"></param>
         public PetAPTrue(int id)
         {
@@ -21,7 +21,7 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
-        /// <summary> Initializes a new instance of PetAPTrue. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPTrue"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>

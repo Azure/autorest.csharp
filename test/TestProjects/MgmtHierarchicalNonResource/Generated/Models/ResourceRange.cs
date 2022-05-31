@@ -10,12 +10,12 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> Describes the resource range. </summary>
     public partial class ResourceRange
     {
-        /// <summary> Initializes a new instance of ResourceRange. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         internal ResourceRange()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceRange. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         /// <param name="min"> The minimum number of the resource. </param>
         /// <param name="max"> The maximum number of the resource. </param>
         internal ResourceRange(int? min, int? max)

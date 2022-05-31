@@ -14,7 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the origin group override action. </summary>
     public partial class OriginGroupOverrideActionParameters
     {
-        /// <summary> Initializes a new instance of OriginGroupOverrideActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="originGroup"/> is null. </exception>

@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a list Skillset request. If successful, it includes the full definitions of all skillsets. </summary>
     public partial class ListSkillsetsResult
     {
-        /// <summary> Initializes a new instance of ListSkillsetsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSkillsetsResult"/>. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsets"/> is null. </exception>
         internal ListSkillsetsResult(IEnumerable<Skillset> skillsets)
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             Skillsets = skillsets.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListSkillsetsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSkillsetsResult"/>. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         internal ListSkillsetsResult(IReadOnlyList<Skillset> skillsets)
         {

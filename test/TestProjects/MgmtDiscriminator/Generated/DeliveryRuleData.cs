@@ -14,12 +14,12 @@ namespace MgmtDiscriminator
     /// <summary> A class representing the DeliveryRule data model. </summary>
     public partial class DeliveryRuleData : ResourceData
     {
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
         public DeliveryRuleData()
         {
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

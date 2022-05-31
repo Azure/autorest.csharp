@@ -12,7 +12,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the request header action for the delivery rule. </summary>
     public partial class DeliveryRuleRequestHeaderAction : DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRequestHeaderAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleRequestHeaderAction(HeaderActionParameters parameters)
@@ -26,7 +26,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.ModifyRequestHeader;
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRequestHeaderAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         internal DeliveryRuleRequestHeaderAction(DeliveryRuleActionType name, HeaderActionParameters parameters) : base(name)

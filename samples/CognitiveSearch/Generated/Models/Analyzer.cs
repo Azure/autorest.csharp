@@ -12,7 +12,7 @@ namespace CognitiveSearch.Models
     /// <summary> Base type for analyzers. </summary>
     public partial class Analyzer
     {
-        /// <summary> Initializes a new instance of Analyzer. </summary>
+        /// <summary> Initializes a new instance of <see cref="Analyzer"/>. </summary>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Analyzer(string name)
@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of Analyzer. </summary>
+        /// <summary> Initializes a new instance of <see cref="Analyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal Analyzer(string odataType, string name)

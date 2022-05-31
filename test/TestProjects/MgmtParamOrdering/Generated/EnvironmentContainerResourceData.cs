@@ -16,7 +16,7 @@ namespace MgmtParamOrdering
     /// <summary> A class representing the EnvironmentContainerResource data model. </summary>
     public partial class EnvironmentContainerResourceData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/>. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
@@ -30,7 +30,7 @@ namespace MgmtParamOrdering
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

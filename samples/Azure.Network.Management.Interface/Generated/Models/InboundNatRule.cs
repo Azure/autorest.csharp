@@ -10,12 +10,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Inbound NAT rule of the load balancer. </summary>
     public partial class InboundNatRule : SubResource
     {
-        /// <summary> Initializes a new instance of InboundNatRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatRule"/>. </summary>
         public InboundNatRule()
         {
         }
 
-        /// <summary> Initializes a new instance of InboundNatRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

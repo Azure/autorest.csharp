@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The LongWrapper. </summary>
     public partial class LongWrapper
     {
-        /// <summary> Initializes a new instance of LongWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="LongWrapper"/>. </summary>
         public LongWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of LongWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="LongWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
         internal LongWrapper(long? field1, long? field2)

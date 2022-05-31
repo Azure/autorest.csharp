@@ -16,7 +16,7 @@ namespace MgmtKeyvault
     /// <summary> A class representing the Vault data model. </summary>
     public partial class VaultData : ResourceData
     {
-        /// <summary> Initializes a new instance of VaultData. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         internal VaultData(VaultProperties properties)
@@ -30,7 +30,7 @@ namespace MgmtKeyvault
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of VaultData. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

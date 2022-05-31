@@ -13,13 +13,13 @@ namespace paging.Models
     /// <summary> The ProductResultValueWithXMSClientName. </summary>
     internal partial class ProductResultValueWithXMSClientName
     {
-        /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         internal ProductResultValueWithXMSClientName()
         {
             Indexes = new ChangeTrackingList<Product>();
         }
 
-        /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         /// <param name="indexes"></param>
         /// <param name="nextLink"></param>
         internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink)

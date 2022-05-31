@@ -10,12 +10,12 @@ namespace httpInfrastructure.Models
     /// <summary> The C. </summary>
     public partial class C
     {
-        /// <summary> Initializes a new instance of C. </summary>
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         internal C()
         {
         }
 
-        /// <summary> Initializes a new instance of C. </summary>
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         /// <param name="httpCode"></param>
         internal C(string httpCode)
         {

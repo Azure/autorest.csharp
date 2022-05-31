@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the Url Signing action. </summary>
     public partial class UrlSigningActionParameters
     {
-        /// <summary> Initializes a new instance of UrlSigningActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         public UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName)
         {
@@ -21,7 +21,7 @@ namespace MgmtDiscriminator.Models
             ParameterNameOverride = new ChangeTrackingList<UrlSigningParamIdentifier>();
         }
 
-        /// <summary> Initializes a new instance of UrlSigningActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="algorithm"> Algorithm to use for URL signing. </param>
         /// <param name="parameterNameOverride"> Defines which query string parameters in the url to be considered for expires, key id etc. </param>

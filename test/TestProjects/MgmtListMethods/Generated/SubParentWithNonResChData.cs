@@ -14,13 +14,13 @@ namespace MgmtListMethods
     /// <summary> A class representing the SubParentWithNonResCh data model. </summary>
     public partial class SubParentWithNonResChData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of SubParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentWithNonResChData"/>. </summary>
         /// <param name="location"> The location. </param>
         public SubParentWithNonResChData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of SubParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

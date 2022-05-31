@@ -10,7 +10,7 @@ namespace lro.Models
     /// <summary> The OperationResult. </summary>
     internal partial class OperationResult
     {
-        /// <summary> Initializes a new instance of OperationResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         internal OperationResult()
         {
         }

@@ -12,7 +12,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment properties. </summary>
     public partial class DeploymentProperties
     {
-        /// <summary> Initializes a new instance of DeploymentProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentProperties"/>. </summary>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
         public DeploymentProperties(DeploymentMode mode)
         {

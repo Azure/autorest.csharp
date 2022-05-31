@@ -14,7 +14,7 @@ namespace xml_service.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory
     {
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
@@ -29,7 +29,7 @@ namespace xml_service.Models
             return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker);
         }
 
-        /// <summary> Initializes a new instance of Container. </summary>
+        /// <summary> Initializes a new instance of <see cref="Container"/>. </summary>
         /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
@@ -41,7 +41,7 @@ namespace xml_service.Models
             return new Container(name, properties, metadata);
         }
 
-        /// <summary> Initializes a new instance of ContainerProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ContainerProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="leaseStatus"></param>
@@ -54,7 +54,7 @@ namespace xml_service.Models
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
         }
 
-        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
@@ -69,7 +69,7 @@ namespace xml_service.Models
             return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
         }
 
-        /// <summary> Initializes a new instance of Blobs. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         /// <param name="blobPrefix"></param>
         /// <param name="blob"></param>
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
@@ -81,7 +81,7 @@ namespace xml_service.Models
             return new Blobs(blobPrefix?.ToList(), blob?.ToList());
         }
 
-        /// <summary> Initializes a new instance of BlobPrefix. </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobPrefix"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
         public static BlobPrefix BlobPrefix(string name = null)
@@ -89,7 +89,7 @@ namespace xml_service.Models
             return new BlobPrefix(name);
         }
 
-        /// <summary> Initializes a new instance of Blob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
@@ -103,7 +103,7 @@ namespace xml_service.Models
             return new Blob(name, deleted, snapshot, properties, metadata);
         }
 
-        /// <summary> Initializes a new instance of BlobProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>
@@ -138,7 +138,7 @@ namespace xml_service.Models
             return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
         }
 
-        /// <summary> Initializes a new instance of JsonOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonOutput"/>. </summary>
         /// <param name="id"></param>
         /// <returns> A new <see cref="Models.JsonOutput"/> instance for mocking. </returns>
         public static JsonOutput JsonOutput(int? id = null)
@@ -146,7 +146,7 @@ namespace xml_service.Models
             return new JsonOutput(id);
         }
 
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         /// <param name="language"> Returned value should be &apos;english&apos;. </param>
         /// <param name="content"> Returned value should be &apos;I am text&apos;. </param>
         /// <returns> A new <see cref="Models.ObjectWithXMsTextProperty"/> instance for mocking. </returns>

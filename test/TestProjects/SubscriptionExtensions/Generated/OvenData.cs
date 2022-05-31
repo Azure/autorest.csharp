@@ -14,13 +14,13 @@ namespace SubscriptionExtensions
     /// <summary> A class representing the Oven data model. </summary>
     public partial class OvenData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of OvenData. </summary>
+        /// <summary> Initializes a new instance of <see cref="OvenData"/>. </summary>
         /// <param name="location"> The location. </param>
         public OvenData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of OvenData. </summary>
+        /// <summary> Initializes a new instance of <see cref="OvenData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

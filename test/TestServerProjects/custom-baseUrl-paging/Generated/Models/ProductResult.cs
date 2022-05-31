@@ -13,13 +13,13 @@ namespace custom_baseUrl_paging.Models
     /// <summary> The ProductResult. </summary>
     internal partial class ProductResult
     {
-        /// <summary> Initializes a new instance of ProductResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResult"/>. </summary>
         internal ProductResult()
         {
             Values = new ChangeTrackingList<Product>();
         }
 
-        /// <summary> Initializes a new instance of ProductResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResult"/>. </summary>
         /// <param name="values"></param>
         /// <param name="nextLink"></param>
         internal ProductResult(IReadOnlyList<Product> values, string nextLink)

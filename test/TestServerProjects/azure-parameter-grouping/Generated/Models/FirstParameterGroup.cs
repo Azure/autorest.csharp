@@ -10,7 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class FirstParameterGroup
     {
-        /// <summary> Initializes a new instance of FirstParameterGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstParameterGroup"/>. </summary>
         public FirstParameterGroup()
         {
         }

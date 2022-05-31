@@ -13,12 +13,12 @@ namespace MgmtResourceName
     /// <summary> A class representing the Disk data model. </summary>
     public partial class DiskData : ResourceData
     {
-        /// <summary> Initializes a new instance of DiskData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskData"/>. </summary>
         public DiskData()
         {
         }
 
-        /// <summary> Initializes a new instance of DiskData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

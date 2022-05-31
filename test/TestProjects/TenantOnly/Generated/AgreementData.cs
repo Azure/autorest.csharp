@@ -14,13 +14,13 @@ namespace TenantOnly
     /// <summary> A class representing the Agreement data model. </summary>
     public partial class AgreementData : ResourceData
     {
-        /// <summary> Initializes a new instance of AgreementData. </summary>
+        /// <summary> Initializes a new instance of <see cref="AgreementData"/>. </summary>
         internal AgreementData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of AgreementData. </summary>
+        /// <summary> Initializes a new instance of <see cref="AgreementData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

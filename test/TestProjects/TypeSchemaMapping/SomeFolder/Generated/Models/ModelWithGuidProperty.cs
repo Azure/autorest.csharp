@@ -12,12 +12,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithGuidProperty. </summary>
     public partial class ModelWithGuidProperty
     {
-        /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         public ModelWithGuidProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         internal ModelWithGuidProperty(Guid? modelProperty)
         {

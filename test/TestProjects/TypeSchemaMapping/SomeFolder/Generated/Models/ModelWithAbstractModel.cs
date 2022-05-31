@@ -10,12 +10,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithAbstractModel. </summary>
     public partial class ModelWithAbstractModel
     {
-        /// <summary> Initializes a new instance of ModelWithAbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithAbstractModel"/>. </summary>
         internal ModelWithAbstractModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithAbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithAbstractModel"/>. </summary>
         /// <param name="abstractModelProperty"></param>
         internal ModelWithAbstractModel(AbstractModel abstractModelProperty)
         {

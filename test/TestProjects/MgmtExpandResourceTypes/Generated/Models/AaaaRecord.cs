@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An AAAA record. </summary>
     public partial class AaaaRecord
     {
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         public AaaaRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         /// <param name="ipv6Address"> The IPv6 address of this AAAA record. </param>
         internal AaaaRecord(string ipv6Address)
         {

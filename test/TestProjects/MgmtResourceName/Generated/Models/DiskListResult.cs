@@ -14,13 +14,13 @@ namespace MgmtResourceName.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class DiskListResult
     {
-        /// <summary> Initializes a new instance of DiskListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskListResult"/>. </summary>
         internal DiskListResult()
         {
             Value = new ChangeTrackingList<DiskData>();
         }
 
-        /// <summary> Initializes a new instance of DiskListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         internal DiskListResult(IReadOnlyList<DiskData> value, string nextLink)

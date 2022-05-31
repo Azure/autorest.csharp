@@ -10,7 +10,7 @@ namespace MgmtNonStringPathVariable.Models
     /// <summary> Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class FakePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of FakePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePatch"/>. </summary>
         public FakePatch()
         {
         }

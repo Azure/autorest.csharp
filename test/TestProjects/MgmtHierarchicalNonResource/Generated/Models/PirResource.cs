@@ -10,12 +10,12 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> The Resource model definition. </summary>
     public partial class PirResource
     {
-        /// <summary> Initializes a new instance of PirResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         internal PirResource()
         {
         }
 
-        /// <summary> Initializes a new instance of PirResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         internal PirResource(string name, string location)

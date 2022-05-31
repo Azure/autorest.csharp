@@ -10,12 +10,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> A load balancing rule for a load balancer. </summary>
     public partial class LoadBalancingRule : SubResource
     {
-        /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancingRule"/>. </summary>
         public LoadBalancingRule()
         {
         }
 
-        /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancingRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

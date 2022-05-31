@@ -13,13 +13,13 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> A TXT record. </summary>
     public partial class TxtRecord
     {
-        /// <summary> Initializes a new instance of TxtRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="TxtRecord"/>. </summary>
         public TxtRecord()
         {
             Value = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of TxtRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="TxtRecord"/>. </summary>
         /// <param name="value"> The text value of this TXT record. </param>
         internal TxtRecord(IList<string> value)
         {

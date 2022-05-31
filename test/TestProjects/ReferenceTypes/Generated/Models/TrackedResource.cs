@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Fake.Models
     [ReferenceType]
     public abstract partial class TrackedResource : ReferenceTypesResourceData
     {
-        /// <summary> Initializes a new instance of TrackedResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResource"/>. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [InitializationConstructor]
         protected TrackedResource(AzureLocation location)
@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Fake.Models
             Location = location;
         }
 
-        /// <summary> Initializes a new instance of TrackedResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResource"/>. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>

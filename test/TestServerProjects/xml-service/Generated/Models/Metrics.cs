@@ -10,14 +10,14 @@ namespace xml_service.Models
     /// <summary> The Metrics. </summary>
     public partial class Metrics
     {
-        /// <summary> Initializes a new instance of Metrics. </summary>
+        /// <summary> Initializes a new instance of <see cref="Metrics"/>. </summary>
         /// <param name="enabled"> Indicates whether metrics are enabled for the Blob service. </param>
         public Metrics(bool enabled)
         {
             Enabled = enabled;
         }
 
-        /// <summary> Initializes a new instance of Metrics. </summary>
+        /// <summary> Initializes a new instance of <see cref="Metrics"/>. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="enabled"> Indicates whether metrics are enabled for the Blob service. </param>
         /// <param name="includeAPIs"> Indicates whether metrics should generate summary statistics for called API operations. </param>

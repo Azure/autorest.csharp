@@ -13,7 +13,7 @@ namespace MgmtOperations.Models
     /// <summary> The update content of unpatchable resource. </summary>
     public partial class UnpatchableResourcePatch
     {
-        /// <summary> Initializes a new instance of UnpatchableResourcePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourcePatch"/>. </summary>
         public UnpatchableResourcePatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();

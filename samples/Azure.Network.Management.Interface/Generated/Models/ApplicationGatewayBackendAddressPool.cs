@@ -13,14 +13,14 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Backend Address Pool of an application gateway. </summary>
     public partial class ApplicationGatewayBackendAddressPool : SubResource
     {
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddressPool"/>. </summary>
         public ApplicationGatewayBackendAddressPool()
         {
             BackendIPConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
             BackendAddresses = new ChangeTrackingList<ApplicationGatewayBackendAddress>();
         }
 
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddressPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

@@ -10,12 +10,12 @@ namespace lro.Models
     /// <summary> The CloudError. </summary>
     internal partial class CloudError
     {
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         internal CloudError(int? code, string message)

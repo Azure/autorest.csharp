@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The instance view of a virtual machine scale set VM. </summary>
     public partial class VirtualMachineScaleSetVMInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceView"/>. </summary>
         internal VirtualMachineScaleSetVMInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain"> The Update Domain count. </param>
         /// <param name="platformFaultDomain"> The Fault Domain count. </param>
         /// <param name="rdpThumbPrint"> The Remote desktop certificate thumbprint. </param>

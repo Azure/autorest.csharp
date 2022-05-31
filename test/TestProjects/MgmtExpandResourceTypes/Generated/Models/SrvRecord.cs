@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An SRV record. </summary>
     public partial class SrvRecord
     {
-        /// <summary> Initializes a new instance of SrvRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="SrvRecord"/>. </summary>
         public SrvRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of SrvRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="SrvRecord"/>. </summary>
         /// <param name="priority"> The priority value for this SRV record. </param>
         /// <param name="weight"> The weight value for this SRV record. </param>
         /// <param name="port"> The port value for this SRV record. </param>

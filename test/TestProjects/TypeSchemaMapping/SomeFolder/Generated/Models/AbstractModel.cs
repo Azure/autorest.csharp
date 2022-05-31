@@ -10,12 +10,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The AbstractModel. </summary>
     public partial class AbstractModel
     {
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         internal AbstractModel()
         {
         }
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         internal AbstractModel(string discriminatorProperty)
         {

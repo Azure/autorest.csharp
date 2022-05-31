@@ -13,13 +13,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Specifies the network interfaces of the virtual machine. </summary>
     internal partial class NetworkProfile
     {
-        /// <summary> Initializes a new instance of NetworkProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkProfile"/>. </summary>
         public NetworkProfile()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterfaceReference>();
         }
 
-        /// <summary> Initializes a new instance of NetworkProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkProfile"/>. </summary>
         /// <param name="networkInterfaces"> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </param>
         internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces)
         {

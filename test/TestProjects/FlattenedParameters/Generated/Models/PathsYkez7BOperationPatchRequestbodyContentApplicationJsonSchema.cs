@@ -13,7 +13,7 @@ namespace FlattenedParameters.Models
     /// <summary> The PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();

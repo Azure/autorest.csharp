@@ -10,14 +10,14 @@ namespace extensible_enums_swagger.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="intEnum"></param>
         public Pet(IntEnum intEnum)
         {
             IntEnum = intEnum;
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"> name. </param>
         /// <param name="daysOfWeek"> Type of Pet. </param>
         /// <param name="intEnum"></param>

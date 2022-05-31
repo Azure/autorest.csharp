@@ -10,12 +10,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithCustomUsageViaAttribute. </summary>
     public partial class ModelWithCustomUsageViaAttribute
     {
-        /// <summary> Initializes a new instance of ModelWithCustomUsageViaAttribute. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsageViaAttribute"/>. </summary>
         public ModelWithCustomUsageViaAttribute()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithCustomUsageViaAttribute. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsageViaAttribute"/>. </summary>
         /// <param name="modelProperty"> . </param>
         internal ModelWithCustomUsageViaAttribute(string modelProperty)
         {

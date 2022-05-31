@@ -13,13 +13,13 @@ namespace ModelShapes.Models
     /// <summary> The MixedModelWithReadonlyProperty. </summary>
     public partial class MixedModelWithReadonlyProperty
     {
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         public MixedModelWithReadonlyProperty()
         {
             ReadonlyListProperty = new ChangeTrackingList<ReadonlyModel>();
         }
 
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
         internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty)

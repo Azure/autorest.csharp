@@ -10,12 +10,12 @@ namespace MgmtLRO.Models
     /// <summary> The FakePostResultProperties. </summary>
     internal partial class FakePostResultProperties
     {
-        /// <summary> Initializes a new instance of FakePostResultProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePostResultProperties"/>. </summary>
         internal FakePostResultProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of FakePostResultProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePostResultProperties"/>. </summary>
         /// <param name="bar"> Bar property. </param>
         internal FakePostResultProperties(string bar)
         {

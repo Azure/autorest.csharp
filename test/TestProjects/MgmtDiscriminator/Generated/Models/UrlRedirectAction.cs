@@ -12,7 +12,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the url redirect action for the delivery rule. </summary>
     public partial class UrlRedirectAction : DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public UrlRedirectAction(UrlRedirectActionParameters parameters)
@@ -26,7 +26,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.UrlRedirect;
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         internal UrlRedirectAction(DeliveryRuleActionType name, UrlRedirectActionParameters parameters) : base(name)

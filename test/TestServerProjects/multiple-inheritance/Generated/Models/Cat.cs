@@ -12,7 +12,7 @@ namespace multiple_inheritance.Models
     /// <summary> The Cat. </summary>
     public partial class Cat : Pet
     {
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Cat(string name) : base(name)
@@ -23,7 +23,7 @@ namespace multiple_inheritance.Models
             }
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="name"></param>
         /// <param name="likesMilk"></param>
         /// <param name="meows"></param>

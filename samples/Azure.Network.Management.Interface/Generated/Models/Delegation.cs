@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Details the service to which the subnet is delegated. </summary>
     public partial class Delegation : SubResource
     {
-        /// <summary> Initializes a new instance of Delegation. </summary>
+        /// <summary> Initializes a new instance of <see cref="Delegation"/>. </summary>
         public Delegation()
         {
             Actions = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of Delegation. </summary>
+        /// <summary> Initializes a new instance of <see cref="Delegation"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

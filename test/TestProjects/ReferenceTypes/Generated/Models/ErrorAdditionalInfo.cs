@@ -14,13 +14,13 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class ErrorAdditionalInfo
     {
-        /// <summary> Initializes a new instance of ErrorAdditionalInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorAdditionalInfo"/>. </summary>
         [InitializationConstructor]
         public ErrorAdditionalInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorAdditionalInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorAdditionalInfo"/>. </summary>
         /// <param name="errorAdditionalInfoType"> The additional info type. </param>
         /// <param name="info"> The additional info. </param>
         [SerializationConstructor]

@@ -10,12 +10,12 @@ namespace NameConflicts.Models
     /// <summary> The Response. </summary>
     public partial class Response
     {
-        /// <summary> Initializes a new instance of Response. </summary>
+        /// <summary> Initializes a new instance of <see cref="Response"/>. </summary>
         public Response()
         {
         }
 
-        /// <summary> Initializes a new instance of Response. </summary>
+        /// <summary> Initializes a new instance of <see cref="Response"/>. </summary>
         /// <param name="property"></param>
         internal Response(string property)
         {

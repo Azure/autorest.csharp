@@ -12,12 +12,12 @@ namespace xml_service.Models
     /// <summary> The ModelWithUrlProperty. </summary>
     public partial class ModelWithUrlProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         public ModelWithUrlProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         /// <param name="url"></param>
         internal ModelWithUrlProperty(Uri url)
         {

@@ -12,7 +12,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Parameter group. </summary>
     public partial class QueryOptions
     {
-        /// <summary> Initializes a new instance of QueryOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryOptions"/>. </summary>
         public QueryOptions()
         {
         }

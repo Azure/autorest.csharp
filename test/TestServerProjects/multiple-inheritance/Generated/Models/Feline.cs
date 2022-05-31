@@ -10,12 +10,12 @@ namespace multiple_inheritance.Models
     /// <summary> The Feline. </summary>
     public partial class Feline
     {
-        /// <summary> Initializes a new instance of Feline. </summary>
+        /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         public Feline()
         {
         }
 
-        /// <summary> Initializes a new instance of Feline. </summary>
+        /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
         internal Feline(bool? meows, bool? hisses)
