@@ -126,7 +126,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             // iterate all operations to get their body parameter
             foreach (var mgmtTypeProvider in mgmtTypeProviders)
             {
-                var typeSymbol = SymbolFinder.GetTypeSymbol(compilation, mgmtTypeProvider.Type);
+                var typeSymbol = SymbolFinder.GetNullableTypeSymbol(compilation, mgmtTypeProvider.Type);
+                if (typeSymbol == null) // sometimes we might do not have generated provider (it is empty for instance)
+                    continue;
 
                 // this has issues when there are method overloads
                 var clientOperations = new Dictionary<string, List<MgmtClientOperation>>();
