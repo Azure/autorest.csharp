@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -39,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
         {
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
-                .Concat(MgmtContext.Library.ExtensionWrapper.Extensions);
+                .Append(MgmtContext.Library.ExtensionWrapper);
 
             // iterate all the client operations to get the usage of models in requests and responses
             var usageCounts = new Dictionary<CSharpType, int>();
@@ -123,15 +124,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             var compilation = await GetCompilationAsync(project);
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
-                .Concat(MgmtContext.Library.ExtensionWrapper.Extensions); // TODO -- normalize the ChildOperations of ExtensionWrapper
+                .Append(MgmtContext.Library.ExtensionWrapper);
             // iterate all operations to get their body parameter
             foreach (var mgmtTypeProvider in mgmtTypeProviders)
             {
-                INamedTypeSymbol typeSymbol;
-                if (mgmtTypeProvider is MgmtExtensions)
-                    typeSymbol = SymbolFinder.GetTypeSymbol(compilation, MgmtContext.Library.ExtensionWrapper.Type);
-                else
-                    typeSymbol = SymbolFinder.GetTypeSymbol(compilation, mgmtTypeProvider.Type);
+                var typeSymbol = SymbolFinder.GetTypeSymbol(compilation, mgmtTypeProvider.Type);
 
                 // this has issues when there are method overloads
                 var clientOperations = new Dictionary<string, List<MgmtClientOperation>>();
