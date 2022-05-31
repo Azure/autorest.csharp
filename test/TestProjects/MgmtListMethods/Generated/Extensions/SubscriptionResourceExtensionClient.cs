@@ -991,10 +991,10 @@ namespace MgmtListMethods
         /// Operation Id: Quotas_Update
         /// </summary>
         /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="content"> Quota update parameters. </param>
+        /// <param name="quotaUpdateParameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateQuotasAsync(string location, QuotaUpdateContent quotaUpdateParameters, CancellationToken cancellationToken = default)
         {
             async Task<Page<UpdateWorkspaceQuotas>> FirstPageFunc(int? pageSizeHint)
             {
@@ -1002,7 +1002,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await QuotasRestClient.UpdateAsync(Id.SubscriptionId, location, content, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await QuotasRestClient.UpdateAsync(Id.SubscriptionId, location, quotaUpdateParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1020,10 +1020,10 @@ namespace MgmtListMethods
         /// Operation Id: Quotas_Update
         /// </summary>
         /// <param name="location"> The location for update quota is queried. </param>
-        /// <param name="content"> Quota update parameters. </param>
+        /// <param name="quotaUpdateParameters"> Quota update parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<UpdateWorkspaceQuotas> UpdateQuotas(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
+        public virtual Pageable<UpdateWorkspaceQuotas> UpdateQuotas(string location, QuotaUpdateContent quotaUpdateParameters, CancellationToken cancellationToken = default)
         {
             Page<UpdateWorkspaceQuotas> FirstPageFunc(int? pageSizeHint)
             {
@@ -1031,7 +1031,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = QuotasRestClient.Update(Id.SubscriptionId, location, content, cancellationToken: cancellationToken);
+                    var response = QuotasRestClient.Update(Id.SubscriptionId, location, quotaUpdateParameters, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

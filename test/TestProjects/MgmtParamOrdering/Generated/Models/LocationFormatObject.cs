@@ -12,7 +12,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> The LocationFormatObject. </summary>
     internal partial class LocationFormatObject
     {
-        /// <summary> Initializes a new instance of LocationFormatObject. </summary>
+        /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         internal LocationFormatObject()
         {
         }

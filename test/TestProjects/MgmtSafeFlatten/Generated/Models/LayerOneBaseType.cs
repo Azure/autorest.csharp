@@ -10,12 +10,12 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneBaseType. </summary>
     public partial class LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         public LayerOneBaseType()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         /// <param name="name"></param>
         internal LayerOneBaseType(LayerOneTypeName name)
         {

@@ -14,13 +14,13 @@ namespace AppConfiguration.Models
     /// <summary> The KeyValue. </summary>
     public partial class KeyValue
     {
-        /// <summary> Initializes a new instance of KeyValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValue"/>. </summary>
         public KeyValue()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of KeyValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValue"/>. </summary>
         /// <param name="key"></param>
         /// <param name="label"></param>
         /// <param name="contentType"></param>

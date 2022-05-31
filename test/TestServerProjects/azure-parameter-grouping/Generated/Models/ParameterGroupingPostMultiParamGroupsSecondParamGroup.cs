@@ -10,7 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroup
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostMultiParamGroupsSecondParamGroup"/>. </summary>
         public ParameterGroupingPostMultiParamGroupsSecondParamGroup()
         {
         }

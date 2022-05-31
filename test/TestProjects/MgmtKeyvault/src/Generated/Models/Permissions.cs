@@ -13,7 +13,7 @@ namespace MgmtKeyvault.Models
     /// <summary> Permissions the identity has for keys, secrets, certificates and storage. </summary>
     public partial class Permissions
     {
-        /// <summary> Initializes a new instance of Permissions. </summary>
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         public Permissions()
         {
             Keys = new ChangeTrackingList<KeyPermissions>();
@@ -22,7 +22,7 @@ namespace MgmtKeyvault.Models
             Storage = new ChangeTrackingList<StoragePermissions>();
         }
 
-        /// <summary> Initializes a new instance of Permissions. </summary>
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         /// <param name="keys"> Permissions to keys. </param>
         /// <param name="secrets"> Permissions to secrets. </param>
         /// <param name="certificates"> Permissions to certificates. </param>

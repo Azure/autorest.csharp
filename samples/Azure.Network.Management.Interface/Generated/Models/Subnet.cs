@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Subnet in a virtual network resource. </summary>
     public partial class Subnet : SubResource
     {
-        /// <summary> Initializes a new instance of Subnet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Subnet"/>. </summary>
         public Subnet()
         {
             AddressPrefixes = new ChangeTrackingList<string>();
@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             Delegations = new ChangeTrackingList<Delegation>();
         }
 
-        /// <summary> Initializes a new instance of Subnet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Subnet"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

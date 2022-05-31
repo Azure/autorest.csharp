@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The FloatWrapper. </summary>
     public partial class FloatWrapper
     {
-        /// <summary> Initializes a new instance of FloatWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatWrapper"/>. </summary>
         public FloatWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of FloatWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
         internal FloatWrapper(float? field1, float? field2)

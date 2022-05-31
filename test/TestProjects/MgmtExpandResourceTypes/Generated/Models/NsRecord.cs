@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An NS record. </summary>
     public partial class NsRecord
     {
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         public NsRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         /// <param name="nsdname"> The name server name for this NS record. </param>
         internal NsRecord(string nsdname)
         {

@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Specifies some text and analysis components used to break that text into tokens. </summary>
     public partial class AnalyzeRequest
     {
-        /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/>. </summary>
         /// <param name="text"> The text to break into tokens. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         public AnalyzeRequest(string text)

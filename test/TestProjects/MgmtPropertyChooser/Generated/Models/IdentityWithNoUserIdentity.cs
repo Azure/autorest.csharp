@@ -10,12 +10,12 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Identity for the virtual machine. </summary>
     public partial class IdentityWithNoUserIdentity
     {
-        /// <summary> Initializes a new instance of IdentityWithNoUserIdentity. </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithNoUserIdentity"/>. </summary>
         public IdentityWithNoUserIdentity()
         {
         }
 
-        /// <summary> Initializes a new instance of IdentityWithNoUserIdentity. </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithNoUserIdentity"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>

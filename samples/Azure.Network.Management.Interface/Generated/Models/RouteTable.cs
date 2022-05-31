@@ -13,14 +13,14 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Route table resource. </summary>
     public partial class RouteTable : Resource
     {
-        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteTable"/>. </summary>
         public RouteTable()
         {
             Routes = new ChangeTrackingList<Route>();
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteTable"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

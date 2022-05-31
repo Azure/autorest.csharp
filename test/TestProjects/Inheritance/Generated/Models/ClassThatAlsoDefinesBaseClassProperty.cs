@@ -10,7 +10,7 @@ namespace Inheritance.Models
     /// <summary> The ClassThatAlsoDefinesBaseClassProperty. </summary>
     internal partial class ClassThatAlsoDefinesBaseClassProperty
     {
-        /// <summary> Initializes a new instance of ClassThatAlsoDefinesBaseClassProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatAlsoDefinesBaseClassProperty"/>. </summary>
         internal ClassThatAlsoDefinesBaseClassProperty()
         {
         }

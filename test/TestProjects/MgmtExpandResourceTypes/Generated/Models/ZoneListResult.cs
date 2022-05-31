@@ -14,13 +14,13 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> The response to a Zone List or ListAll operation. </summary>
     internal partial class ZoneListResult
     {
-        /// <summary> Initializes a new instance of ZoneListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ZoneListResult"/>. </summary>
         internal ZoneListResult()
         {
             Value = new ChangeTrackingList<ZoneData>();
         }
 
-        /// <summary> Initializes a new instance of ZoneListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ZoneListResult"/>. </summary>
         /// <param name="value"> Information about the DNS zones. </param>
         /// <param name="nextLink"> The continuation token for the next page of results. </param>
         internal ZoneListResult(IReadOnlyList<ZoneData> value, string nextLink)

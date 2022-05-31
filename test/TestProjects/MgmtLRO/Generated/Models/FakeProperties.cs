@@ -10,12 +10,12 @@ namespace MgmtLRO.Models
     /// <summary> The instance view of a resource. </summary>
     public partial class FakeProperties
     {
-        /// <summary> Initializes a new instance of FakeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         public FakeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of FakeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
         internal FakeProperties(int? platformUpdateDomainCount, int? platformFaultDomainCount)

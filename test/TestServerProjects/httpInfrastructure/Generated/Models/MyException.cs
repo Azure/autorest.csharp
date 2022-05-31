@@ -10,12 +10,12 @@ namespace httpInfrastructure.Models
     /// <summary> The MyException. </summary>
     public partial class MyException
     {
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary> Initializes a new instance of <see cref="MyException"/>. </summary>
         internal MyException()
         {
         }
 
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary> Initializes a new instance of <see cref="MyException"/>. </summary>
         /// <param name="statusCode"></param>
         internal MyException(string statusCode)
         {

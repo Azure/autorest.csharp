@@ -10,14 +10,14 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the route configuration override action. </summary>
     public partial class RouteConfigurationOverrideActionParameters
     {
-        /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         public RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName)
         {
             TypeName = typeName;
         }
 
-        /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroupOverride"> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </param>
         internal RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName, OriginGroupOverride originGroupOverride)

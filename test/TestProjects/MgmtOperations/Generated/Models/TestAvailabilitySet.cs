@@ -10,12 +10,12 @@ namespace MgmtOperations.Models
     /// <summary> The TestAvailabilitySet. </summary>
     public partial class TestAvailabilitySet
     {
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         internal TestAvailabilitySet()
         {
         }
 
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
         internal TestAvailabilitySet(string bar)
         {

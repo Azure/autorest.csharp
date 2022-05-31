@@ -13,12 +13,12 @@ namespace MgmtResourceName
     /// <summary> A class representing the DisplayResource data model. </summary>
     public partial class DisplayResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DisplayResourceData"/>. </summary>
         public DisplayResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DisplayResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An SOA record. </summary>
     public partial class SoaRecord
     {
-        /// <summary> Initializes a new instance of SoaRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>
         public SoaRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of SoaRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>
         /// <param name="host"> The domain name of the authoritative name server for this SOA record. </param>
         /// <param name="email"> The email contact for this SOA record. </param>
         /// <param name="serialNumber"> The serial number for this SOA record. </param>

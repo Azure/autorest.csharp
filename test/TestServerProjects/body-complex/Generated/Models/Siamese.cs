@@ -12,12 +12,12 @@ namespace body_complex.Models
     /// <summary> The Siamese. </summary>
     public partial class Siamese : Cat
     {
-        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <summary> Initializes a new instance of <see cref="Siamese"/>. </summary>
         public Siamese()
         {
         }
 
-        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <summary> Initializes a new instance of <see cref="Siamese"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="color"></param>

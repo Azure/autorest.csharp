@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> A CNAME record. </summary>
     internal partial class CnameRecord
     {
-        /// <summary> Initializes a new instance of CnameRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="CnameRecord"/>. </summary>
         public CnameRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of CnameRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="CnameRecord"/>. </summary>
         /// <param name="cname"> The canonical name for this CNAME record. </param>
         internal CnameRecord(string cname)
         {

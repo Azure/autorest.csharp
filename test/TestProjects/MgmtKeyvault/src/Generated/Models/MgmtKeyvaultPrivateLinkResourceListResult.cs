@@ -13,13 +13,13 @@ namespace MgmtKeyvault.Models
     /// <summary> A list of private link resources. </summary>
     internal partial class MgmtKeyvaultPrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateLinkResourceListResult"/>. </summary>
         internal MgmtKeyvaultPrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MgmtKeyvaultPrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateLinkResourceListResult"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         internal MgmtKeyvaultPrivateLinkResourceListResult(IReadOnlyList<MgmtKeyvaultPrivateLinkResource> value)
         {

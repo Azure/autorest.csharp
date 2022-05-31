@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The IntWrapper. </summary>
     public partial class IntWrapper
     {
-        /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         public IntWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of IntWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
         internal IntWrapper(int? field1, int? field2)

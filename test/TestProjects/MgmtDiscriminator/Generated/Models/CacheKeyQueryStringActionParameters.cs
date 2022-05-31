@@ -10,7 +10,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the cache-key query string action. </summary>
     public partial class CacheKeyQueryStringActionParameters
     {
-        /// <summary> Initializes a new instance of CacheKeyQueryStringActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheKeyQueryStringActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="queryStringBehavior"> Caching behavior for the requests. </param>
         public CacheKeyQueryStringActionParameters(CacheKeyQueryStringActionParametersTypeName typeName, QueryStringBehavior queryStringBehavior)
@@ -19,7 +19,7 @@ namespace MgmtDiscriminator.Models
             QueryStringBehavior = queryStringBehavior;
         }
 
-        /// <summary> Initializes a new instance of CacheKeyQueryStringActionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheKeyQueryStringActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="queryStringBehavior"> Caching behavior for the requests. </param>
         /// <param name="queryParameters"> query parameters to include or exclude (comma separated). </param>

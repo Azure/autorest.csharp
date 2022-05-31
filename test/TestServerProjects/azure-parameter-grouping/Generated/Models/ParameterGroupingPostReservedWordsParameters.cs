@@ -10,7 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostReservedWordsParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
         }

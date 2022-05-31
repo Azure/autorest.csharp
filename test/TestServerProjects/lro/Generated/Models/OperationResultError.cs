@@ -10,7 +10,7 @@ namespace lro.Models
     /// <summary> The OperationResultError. </summary>
     internal partial class OperationResultError
     {
-        /// <summary> Initializes a new instance of OperationResultError. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>
         internal OperationResultError()
         {
         }

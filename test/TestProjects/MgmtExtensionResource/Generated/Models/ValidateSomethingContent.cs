@@ -10,7 +10,7 @@ namespace MgmtExtensionResource.Models
     /// <summary> Validate something options. </summary>
     public partial class ValidateSomethingContent
     {
-        /// <summary> Initializes a new instance of ValidateSomethingContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
         public ValidateSomethingContent()
         {
         }

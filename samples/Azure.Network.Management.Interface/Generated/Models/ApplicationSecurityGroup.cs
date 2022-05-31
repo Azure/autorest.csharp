@@ -12,12 +12,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> An application security group in a resource group. </summary>
     public partial class ApplicationSecurityGroup : Resource
     {
-        /// <summary> Initializes a new instance of ApplicationSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationSecurityGroup"/>. </summary>
         public ApplicationSecurityGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of ApplicationSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationSecurityGroup"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

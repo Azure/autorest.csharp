@@ -10,12 +10,12 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
     public partial class ClassThatInheritsFromBaseClassAndSomeProperties : BaseClass
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomeProperties"/>. </summary>
         public ClassThatInheritsFromBaseClassAndSomeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomeProperties"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
