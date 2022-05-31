@@ -93,7 +93,7 @@ namespace constants
             }
         }
 
-        internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequest(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input)
+        internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequest(NoModelAsStringNoRequiredTwoValueDefaultOpEnum input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -101,10 +101,7 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueDefault", false);
-            if (input != null)
-            {
-                uri.AppendQuery("input", input.Value.ToSerialString(), true);
-            }
+            uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }
@@ -112,7 +109,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutNoModelAsStringNoRequiredTwoValueDefaultAsync(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoModelAsStringNoRequiredTwoValueDefaultAsync(NoModelAsStringNoRequiredTwoValueDefaultOpEnum input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -128,7 +125,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
+        public Response PutNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum input = NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutNoModelAsStringNoRequiredTwoValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);

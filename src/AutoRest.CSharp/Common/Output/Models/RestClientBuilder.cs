@@ -621,6 +621,12 @@ namespace AutoRest.CSharp.Output.Models
             CSharpType type = typeOverride != null
                 ? new CSharpType(typeOverride, isNullable)
                 : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions, isNullable);
+
+            if (type.IsValueType && !requestParameter.IsNullable && requestParameter.ClientDefaultValue != null)
+            {
+                type = type.WithNullable(false);
+            }
+
             return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
         }
 
