@@ -21,7 +21,7 @@ namespace MgmtSafeFlatten
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtSafeFlattenArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSafeFlattenArmOperation{T}" /> for mocking. </summary>
         protected MgmtSafeFlattenArmOperation()
         {
         }

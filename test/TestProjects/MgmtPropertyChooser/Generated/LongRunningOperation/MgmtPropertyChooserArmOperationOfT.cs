@@ -21,7 +21,7 @@ namespace MgmtPropertyChooser
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtPropertyChooserArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserArmOperation{T}" /> for mocking. </summary>
         protected MgmtPropertyChooserArmOperation()
         {
         }

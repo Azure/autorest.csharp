@@ -13,13 +13,13 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class ReferenceTypesPrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of ReferenceTypesPrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
         [InitializationConstructor]
         public ReferenceTypesPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of ReferenceTypesPrivateLinkServiceConnectionState. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>

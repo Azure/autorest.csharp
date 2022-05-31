@@ -10,7 +10,7 @@ namespace ModelWithConverterUsage.Models
     /// <summary> The product documentation. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         public InputModel()
         {
         }

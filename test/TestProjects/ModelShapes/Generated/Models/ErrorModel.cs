@@ -10,12 +10,12 @@ namespace ModelShapes.Models
     /// <summary> The ErrorModel. </summary>
     internal partial class ErrorModel
     {
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorModel"/>. </summary>
         internal ErrorModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorModel"/>. </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
         internal ErrorModel(string code, string status)

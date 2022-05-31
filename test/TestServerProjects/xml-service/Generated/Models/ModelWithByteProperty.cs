@@ -12,12 +12,12 @@ namespace xml_service.Models
     /// <summary> The ModelWithByteProperty. </summary>
     public partial class ModelWithByteProperty
     {
-        /// <summary> Initializes a new instance of ModelWithByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         public ModelWithByteProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         /// <param name="bytes"></param>
         internal ModelWithByteProperty(byte[] bytes)
         {

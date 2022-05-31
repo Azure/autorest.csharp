@@ -13,13 +13,13 @@ namespace paging.Models
     /// <summary> The OdataProductResult. </summary>
     internal partial class OdataProductResult
     {
-        /// <summary> Initializes a new instance of OdataProductResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         internal OdataProductResult()
         {
             Values = new ChangeTrackingList<Product>();
         }
 
-        /// <summary> Initializes a new instance of OdataProductResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         /// <param name="values"></param>
         /// <param name="odataNextLink"></param>
         internal OdataProductResult(IReadOnlyList<Product> values, string odataNextLink)

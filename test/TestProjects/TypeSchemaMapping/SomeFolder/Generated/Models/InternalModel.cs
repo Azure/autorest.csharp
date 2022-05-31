@@ -10,12 +10,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The InternalModel. </summary>
     internal partial class InternalModel
     {
-        /// <summary> Initializes a new instance of InternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         internal InternalModel()
         {
         }
 
-        /// <summary> Initializes a new instance of InternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
         internal InternalModel(string stringProperty)
         {

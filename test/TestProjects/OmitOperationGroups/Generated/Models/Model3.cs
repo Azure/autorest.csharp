@@ -13,12 +13,12 @@ namespace OmitOperationGroups.Models
     /// <summary> The Model3. </summary>
     public partial class Model3 : ResourceData
     {
-        /// <summary> Initializes a new instance of Model3. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model3"/>. </summary>
         public Model3()
         {
         }
 
-        /// <summary> Initializes a new instance of Model3. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model3"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

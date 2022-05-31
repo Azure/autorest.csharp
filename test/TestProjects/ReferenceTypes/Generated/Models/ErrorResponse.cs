@@ -14,13 +14,13 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         [InitializationConstructor]
         public ErrorResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         /// <param name="error"> The error object. </param>
         [SerializationConstructor]
         internal ErrorResponse(ResponseError error)

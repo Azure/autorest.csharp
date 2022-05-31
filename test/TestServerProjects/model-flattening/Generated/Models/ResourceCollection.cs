@@ -13,14 +13,14 @@ namespace model_flattening.Models
     /// <summary> The ResourceCollection. </summary>
     public partial class ResourceCollection
     {
-        /// <summary> Initializes a new instance of ResourceCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCollection"/>. </summary>
         public ResourceCollection()
         {
             Arrayofresources = new ChangeTrackingList<FlattenedProduct>();
             Dictionaryofresources = new ChangeTrackingDictionary<string, FlattenedProduct>();
         }
 
-        /// <summary> Initializes a new instance of ResourceCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCollection"/>. </summary>
         /// <param name="productresource"> Flattened product. </param>
         /// <param name="arrayofresources"></param>
         /// <param name="dictionaryofresources"> Dictionary of &lt;FlattenedProduct&gt;. </param>

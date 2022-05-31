@@ -12,12 +12,12 @@ namespace xml_service.Models
     /// <summary> A banana. </summary>
     public partial class Banana
     {
-        /// <summary> Initializes a new instance of Banana. </summary>
+        /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         public Banana()
         {
         }
 
-        /// <summary> Initializes a new instance of Banana. </summary>
+        /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         /// <param name="name"></param>
         /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>

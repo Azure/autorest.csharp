@@ -12,12 +12,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithUriProperty. </summary>
     public partial class ModelWithUriProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUriProperty"/>. </summary>
         public ModelWithUriProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUriProperty"/>. </summary>
         /// <param name="uri"> . </param>
         internal ModelWithUriProperty(Uri uri)
         {

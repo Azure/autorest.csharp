@@ -13,12 +13,12 @@ namespace SupersetFlattenInheritance
     /// <summary> A class representing the ResourceModel1 data model. </summary>
     public partial class ResourceModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel1Data"/>. </summary>
         public ResourceModel1Data()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

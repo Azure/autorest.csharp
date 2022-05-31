@@ -10,7 +10,7 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class PagingGetOdataMultiplePagesOptions
     {
-        /// <summary> Initializes a new instance of PagingGetOdataMultiplePagesOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetOdataMultiplePagesOptions"/>. </summary>
         public PagingGetOdataMultiplePagesOptions()
         {
         }

@@ -21,7 +21,7 @@ namespace MgmtResourceName
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtResourceNameArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtResourceNameArmOperation{T}" /> for mocking. </summary>
         protected MgmtResourceNameArmOperation()
         {
         }

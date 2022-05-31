@@ -21,7 +21,7 @@ namespace MgmtParamOrdering
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtParamOrderingArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrderingArmOperation{T}" /> for mocking. </summary>
         protected MgmtParamOrderingArmOperation()
         {
         }

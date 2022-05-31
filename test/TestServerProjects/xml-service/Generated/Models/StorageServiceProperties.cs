@@ -13,13 +13,13 @@ namespace xml_service.Models
     /// <summary> Storage Service Properties. </summary>
     public partial class StorageServiceProperties
     {
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         public StorageServiceProperties()
         {
             Cors = new ChangeTrackingList<CorsRule>();
         }
 
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for blobs. </param>
         /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for blobs. </param>

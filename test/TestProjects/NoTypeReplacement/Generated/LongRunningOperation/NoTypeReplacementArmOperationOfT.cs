@@ -21,7 +21,7 @@ namespace NoTypeReplacement
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of NoTypeReplacementArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementArmOperation{T}" /> for mocking. </summary>
         protected NoTypeReplacementArmOperation()
         {
         }

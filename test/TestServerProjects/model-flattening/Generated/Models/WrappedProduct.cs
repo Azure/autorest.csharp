@@ -10,7 +10,7 @@ namespace model_flattening.Models
     /// <summary> The wrapped produc. </summary>
     public partial class WrappedProduct
     {
-        /// <summary> Initializes a new instance of WrappedProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="WrappedProduct"/>. </summary>
         public WrappedProduct()
         {
         }

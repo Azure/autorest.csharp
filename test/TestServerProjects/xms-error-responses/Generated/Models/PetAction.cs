@@ -10,12 +10,12 @@ namespace xms_error_responses.Models
     /// <summary> The PetAction. </summary>
     public partial class PetAction
     {
-        /// <summary> Initializes a new instance of PetAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAction"/>. </summary>
         internal PetAction()
         {
         }
 
-        /// <summary> Initializes a new instance of PetAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAction"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         internal PetAction(string actionResponse)
         {

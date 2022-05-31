@@ -12,12 +12,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The PublicModelWithInternalProperty. </summary>
     public partial class PublicModelWithInternalProperty
     {
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         internal PublicModelWithInternalProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         /// <param name="stringPropertyJson"></param>
         /// <param name="publicProperty"></param>
         internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty)

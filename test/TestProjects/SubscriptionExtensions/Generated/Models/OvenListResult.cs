@@ -15,7 +15,7 @@ namespace SubscriptionExtensions.Models
     /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class OvenListResult
     {
-        /// <summary> Initializes a new instance of OvenListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OvenListResult"/>. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal OvenListResult(IEnumerable<OvenData> value)
@@ -28,7 +28,7 @@ namespace SubscriptionExtensions.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of OvenListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OvenListResult"/>. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <param name="nextLink"> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </param>
         internal OvenListResult(IReadOnlyList<OvenData> value, string nextLink)

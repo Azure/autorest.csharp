@@ -14,13 +14,13 @@ namespace TenantOnly
     /// <summary> A class representing the BillingAccount data model. </summary>
     public partial class BillingAccountData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BillingAccountData"/>. </summary>
         /// <param name="location"> The location. </param>
         public BillingAccountData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BillingAccountData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

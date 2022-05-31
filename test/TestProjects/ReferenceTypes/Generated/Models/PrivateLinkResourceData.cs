@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateLinkResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceData"/>. </summary>
         [InitializationConstructor]
         public PrivateLinkResourceData()
         {
@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Fake.Models
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
