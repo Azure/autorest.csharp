@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace RequestContextAllOptional_LowLevel
 {
-    /// <summary> The RequestContextAllOptional service client. </summary>
+    /// <summary> Data plane generated client for RequestContextAllOptional. </summary>
     public partial class RequestContextAllOptionalClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace header_LowLevel
 {
-    /// <summary> The Header service client. </summary>
+    /// <summary> Data plane generated client for Header. </summary>
     public partial class HeaderClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

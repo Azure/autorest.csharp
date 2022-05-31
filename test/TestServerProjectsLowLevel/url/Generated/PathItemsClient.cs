@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace url_LowLevel
 {
-    /// <summary> The PathItems service client. </summary>
+    /// <summary> Data plane generated client for PathItems. </summary>
     public partial class PathItemsClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

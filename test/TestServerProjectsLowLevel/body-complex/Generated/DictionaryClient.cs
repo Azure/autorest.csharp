@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> The Dictionary service client. </summary>
+    /// <summary> Data plane generated client for Dictionary. </summary>
     public partial class DictionaryClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

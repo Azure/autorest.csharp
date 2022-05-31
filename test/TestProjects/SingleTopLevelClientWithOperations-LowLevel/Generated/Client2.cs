@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithOperations_LowLevel
 {
-    /// <summary> The Client2 service client. </summary>
+    /// <summary> Data plane generated client for Client2. </summary>
     public partial class Client2
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

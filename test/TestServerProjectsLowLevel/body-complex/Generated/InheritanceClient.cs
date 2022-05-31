@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> The Inheritance service client. </summary>
+    /// <summary> Data plane generated client for Inheritance. </summary>
     public partial class InheritanceClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

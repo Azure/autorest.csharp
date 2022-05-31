@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SubClients_LowLevel
 {
-    /// <summary> The Parameter service client. </summary>
+    /// <summary> Data plane generated client for Parameter. </summary>
     public partial class Parameter
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

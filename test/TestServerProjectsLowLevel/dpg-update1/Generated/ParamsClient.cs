@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace dpg_update1_LowLevel
 {
-    /// <summary> The Params service client. </summary>
+    /// <summary> Data plane generated client for Params. </summary>
     public partial class ParamsClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

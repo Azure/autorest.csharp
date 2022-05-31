@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace BodyAndPath_LowLevel
 {
-    /// <summary> The BodyAndPath service client. </summary>
+    /// <summary> Data plane generated client for BodyAndPath. </summary>
     public partial class BodyAndPathClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

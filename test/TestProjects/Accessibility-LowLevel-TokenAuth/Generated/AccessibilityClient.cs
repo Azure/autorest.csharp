@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Accessibility_LowLevel_TokenAuth
 {
-    /// <summary> The Accessibility service client. </summary>
+    /// <summary> Data plane generated client for Accessibility. </summary>
     public partial class AccessibilityClient
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };

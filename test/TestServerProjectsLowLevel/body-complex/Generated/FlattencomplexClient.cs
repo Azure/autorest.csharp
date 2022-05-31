@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    /// <summary> The Flattencomplex service client. </summary>
+    /// <summary> Data plane generated client for Flattencomplex. </summary>
     public partial class FlattencomplexClient
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";

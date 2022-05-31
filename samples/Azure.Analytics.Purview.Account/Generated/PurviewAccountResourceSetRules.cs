@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Analytics.Purview.Account
 {
-    /// <summary> The PurviewAccountResourceSetRules service client. </summary>
+    /// <summary> Data plane generated client for PurviewAccountResourceSetRules. </summary>
     public partial class PurviewAccountResourceSetRules
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };

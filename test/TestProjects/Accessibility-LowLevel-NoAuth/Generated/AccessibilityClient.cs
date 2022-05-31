@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Accessibility_LowLevel_NoAuth
 {
-    /// <summary> The Accessibility service client. </summary>
+    /// <summary> Data plane generated client for Accessibility. </summary>
     public partial class AccessibilityClient
     {
         private readonly HttpPipeline _pipeline;
