@@ -119,6 +119,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             CommonSingleWordModels.Update(_allSchemas);
             NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
             RenameTimeToOn.UpdateNames(_allSchemas);
+            _allSchemas.UpdateDescriptionWithDiscriminator();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
