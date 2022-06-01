@@ -51,9 +51,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteConstructor(writer, operation, pagingResponse, cs, helperType);
                     writer.Line();
 
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override string Id => _operation.Id;");
-                    writer.Line();
+                    writer
+                        .WriteXmlDocumentationInheritDoc()
+                        .Line($"#pragma warning disable CA1822")
+                        .Line($"public override string Id => throw new NotImplementedException();")
+                        .Line($"#pragma warning restore CA1822")
+                        .Line();
 
                     WriteValueProperty(writer, operation);
 
@@ -69,7 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
+                    writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.RawResponse;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -130,7 +133,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual CSharpType GetHelperType(LongRunningOperation operation)
         {
-            return operation.ResultType != null ? new CSharpType(typeof(OperationInternals<>), operation.ResultType) : new CSharpType(typeof(OperationInternals));
+            return operation.ResultType != null ? new CSharpType(typeof(OperationInternal<>), operation.ResultType) : new CSharpType(typeof(OperationInternal));
         }
 
         protected virtual void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
@@ -155,12 +158,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"_operation = new {helperType}(");
-                if (operation.ResultType != null)
-                {
-                    writer.Append($"this, ");
-                }
-                writer.Line($"clientDiagnostics, pipeline, request, response, { typeof(OperationFinalStateVia)}.{ operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
+                var nextLinkOperationVariable = new CodeWriterDeclaration("nextLinkOperation");
+                writer
+                    .Append($"var {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
+                    .AppendIf($"this, ", operation.ResultType != null)
+                    .Line($"pipeline, request.Method, request.Uri.ToUri(), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
+                    .Line($"_operation = new {helperType}(clientDiagnostics, nextLinkOperation, response, { operation.Diagnostics.ScopeName:L});");
 
                 if (pagingResponse != null)
                 {

@@ -18,7 +18,7 @@ namespace lro_parameterized_endpoints
     /// <summary> Poll with method and client level parameters in endpoint. </summary>
     public partial class LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation : Operation<string>, IOperationSource<string>
     {
-        private readonly OperationInternals<string> _operation;
+        private readonly OperationInternal<string> _operation;
 
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation for mocking. </summary>
         protected LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation()
@@ -27,11 +27,14 @@ namespace lro_parameterized_endpoints
 
         internal LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<string>(clientDiagnostics, nextLinkOperation, response, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override string Value => _operation.Value;
@@ -43,7 +46,7 @@ namespace lro_parameterized_endpoints
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

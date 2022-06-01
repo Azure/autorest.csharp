@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
     public partial class LROsDeleteAsyncNoHeaderInRetryOperation : Operation
     {
-        private readonly OperationInternals _operation;
+        private readonly OperationInternal _operation;
 
         /// <summary> Initializes a new instance of LROsDeleteAsyncNoHeaderInRetryOperation for mocking. </summary>
         protected LROsDeleteAsyncNoHeaderInRetryOperation()
@@ -26,17 +26,20 @@ namespace lro
 
         internal LROsDeleteAsyncNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LROsDeleteAsyncNoHeaderInRetryOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

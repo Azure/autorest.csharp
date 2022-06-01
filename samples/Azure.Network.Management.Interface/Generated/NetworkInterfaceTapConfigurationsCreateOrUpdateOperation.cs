@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
     public partial class NetworkInterfaceTapConfigurationsCreateOrUpdateOperation : Operation<NetworkInterfaceTapConfiguration>, IOperationSource<NetworkInterfaceTapConfiguration>
     {
-        private readonly OperationInternals<NetworkInterfaceTapConfiguration> _operation;
+        private readonly OperationInternal<NetworkInterfaceTapConfiguration> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsCreateOrUpdateOperation for mocking. </summary>
         protected NetworkInterfaceTapConfigurationsCreateOrUpdateOperation()
@@ -28,11 +28,14 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<NetworkInterfaceTapConfiguration>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.AzureAsyncOperation);
+            _operation = new OperationInternal<NetworkInterfaceTapConfiguration>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override NetworkInterfaceTapConfiguration Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace Azure.Network.Management.Interface
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
