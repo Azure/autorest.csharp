@@ -277,6 +277,22 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LRODeleteValueInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            var operation = await new LROsClient(Key, endpoint, null).DeleteValue204SucceededAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        }, true);
+
+        [Test]
+        public Task LRODeleteValueInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            var operation = new LROsClient(Key, endpoint, null).DeleteValue204Succeeded(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
+            return WaitForCompletion(operation, waitUntil);
+        }, true);
+
+        [Test]
         public Task LRODeleteProvisioningCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202Deletingcanceled200Async(waitUntil);

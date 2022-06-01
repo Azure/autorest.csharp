@@ -6,5 +6,5 @@ using System.Text.Json;
 
 namespace Azure.Core
 {
-    internal struct VoidValue { }
+    internal readonly struct VoidValue { }
 }
