@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                $"The {requestParameter.Schema.Name} to use." :
+                $"The <see cref=\"{requestParameter.Schema.Name}\"/> to use." :
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
 
             return requestParameter.Schema switch

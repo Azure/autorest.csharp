@@ -80,7 +80,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                 : Accessibility,
             IsPagingOperation
                 ? new CSharpType(typeof(Pageable<>), ReturnType)
-                : ReturnType, null, MethodParameters.ToArray());
+                : ReturnType,
+            null,
+            MethodParameters.ToArray());
 
         // TODO -- we need a better way to get the name of this
         public string Name => _operations.First().Name;
