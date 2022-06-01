@@ -89,7 +89,7 @@ namespace PublicClientCtor
             _pipeline = pipeline;
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(TestModel value, CancellationToken cancellationToken = default)
         {
@@ -106,7 +106,7 @@ namespace PublicClientCtor
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(TestModel value, CancellationToken cancellationToken = default)
         {

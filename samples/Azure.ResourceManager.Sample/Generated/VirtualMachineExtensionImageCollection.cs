@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
+        /// <param name="publisherName"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
         internal VirtualMachineExtensionImageCollection(ArmClient client, ResourceIdentifier id, AzureLocation location, string publisherName) : base(client, id)
@@ -67,8 +67,8 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
         /// Operation Id: VirtualMachineExtensionImages_Get
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
@@ -98,8 +98,8 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
         /// Operation Id: VirtualMachineExtensionImages_Get
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
@@ -183,10 +183,10 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="orderby"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
@@ -218,10 +218,10 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
         /// Operation Id: VirtualMachineExtensionImages_ListVersions
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="orderby"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
@@ -253,8 +253,8 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
         /// Operation Id: VirtualMachineExtensionImages_Get
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
@@ -282,8 +282,8 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
         /// Operation Id: VirtualMachineExtensionImages_Get
         /// </summary>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>

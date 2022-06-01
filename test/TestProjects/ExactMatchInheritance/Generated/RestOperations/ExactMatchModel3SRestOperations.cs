@@ -135,7 +135,7 @@ namespace ExactMatchInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -165,7 +165,7 @@ namespace ExactMatchInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>

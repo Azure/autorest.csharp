@@ -146,7 +146,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel1s_Put
         /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="customModel1"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The <see cref="CustomModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
@@ -169,7 +169,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel1s_Put
         /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
-        /// <param name="customModel1"> The CustomModel1 to use. </param>
+        /// <param name="customModel1"> The <see cref="CustomModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
@@ -288,7 +288,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel2s_Put
         /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="customModel2"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The <see cref="CustomModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
@@ -311,7 +311,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: CustomModel2s_Put
         /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
-        /// <param name="customModel2"> The CustomModel2 to use. </param>
+        /// <param name="customModel2"> The <see cref="CustomModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
@@ -430,7 +430,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel1s_Put
         /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The <see cref="SubResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
@@ -453,7 +453,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel1s_Put
         /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
-        /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
+        /// <param name="subResourceModel1"> The <see cref="SubResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
@@ -572,7 +572,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel2s_Put
         /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The <see cref="SubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -595,7 +595,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: SubResourceModel2s_Put
         /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
-        /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
+        /// <param name="subResourceModel2"> The <see cref="SubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -714,7 +714,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel1s_Put
         /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The <see cref="WritableSubResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
@@ -737,7 +737,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel1s_Put
         /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
+        /// <param name="writableSubResourceModel1"> The <see cref="WritableSubResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
@@ -856,7 +856,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel2s_Put
         /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The <see cref="WritableSubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -879,7 +879,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: WritableSubResourceModel2s_Put
         /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The <see cref="WritableSubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -998,7 +998,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel2s_Put
         /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The <see cref="ResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
@@ -1021,7 +1021,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel2s_Put
         /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
-        /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
+        /// <param name="resourceModel2"> The <see cref="ResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
@@ -1140,7 +1140,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel2s_Put
         /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The <see cref="TrackedResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -1163,7 +1163,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: TrackedResourceModel2s_Put
         /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
-        /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
+        /// <param name="trackedResourceModel2"> The <see cref="TrackedResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
@@ -1230,7 +1230,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: NonResourceModel1s_Put
         /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The <see cref="NonResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
@@ -1253,7 +1253,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: NonResourceModel1s_Put
         /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The <see cref="NonResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {

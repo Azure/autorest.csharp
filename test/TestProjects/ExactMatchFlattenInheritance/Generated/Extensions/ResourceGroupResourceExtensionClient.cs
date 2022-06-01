@@ -136,7 +136,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel2s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="azureResourceFlattenModel2"> The <see cref="AzureResourceFlattenModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
@@ -160,7 +160,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel2s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
+        /// <param name="azureResourceFlattenModel2"> The <see cref="AzureResourceFlattenModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
@@ -284,7 +284,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel3s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The <see cref="AzureResourceFlattenModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
@@ -308,7 +308,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel3s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
+        /// <param name="azureResourceFlattenModel3"> The <see cref="AzureResourceFlattenModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
@@ -432,7 +432,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel4s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
+        /// <param name="azureResourceFlattenModel4"> The <see cref="AzureResourceFlattenModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
@@ -456,7 +456,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: AzureResourceFlattenModel4s_Put
         /// </summary>
         /// <param name="name"> The String to use. </param>
-        /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
+        /// <param name="azureResourceFlattenModel4"> The <see cref="AzureResourceFlattenModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {

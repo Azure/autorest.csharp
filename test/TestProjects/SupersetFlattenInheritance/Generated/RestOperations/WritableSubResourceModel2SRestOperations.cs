@@ -135,7 +135,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The <see cref="WritableSubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -165,7 +165,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
-        /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
+        /// <param name="writableSubResourceModel2"> The <see cref="WritableSubResourceModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>

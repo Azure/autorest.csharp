@@ -73,7 +73,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
-        /// <param name="complexBody"> The ReadonlyObj to use. </param>
+        /// <param name="complexBody"> The <see cref="ReadonlyObj"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
@@ -91,7 +91,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
-        /// <param name="complexBody"> The ReadonlyObj to use. </param>
+        /// <param name="complexBody"> The <see cref="ReadonlyObj"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {

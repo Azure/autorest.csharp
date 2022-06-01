@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
+        /// <param name="publisherName"> The String to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/> is null. </exception>
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
@@ -49,9 +49,9 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
@@ -68,9 +68,9 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
-        /// <param name="type"> The <see cref="string"/> to use. </param>
-        /// <param name="version"> The <see cref="string"/> to use. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
@@ -245,8 +245,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="orderby"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is null. </exception>
@@ -271,8 +271,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The <see cref="int"/> to use. </param>
-        /// <param name="orderby"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/> or <paramref name="skus"/> is null. </exception>

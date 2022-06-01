@@ -66,7 +66,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="pipeline"> The String to use. </param>
         /// <param name="clientDiagnostics"> The String to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -122,7 +122,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="pipeline"> The String to use. </param>
         /// <param name="clientDiagnostics"> The String to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -292,7 +292,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -312,7 +312,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.HttpMessage> HttpMessage(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -352,7 +352,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
         {
@@ -372,7 +372,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Request> Request(Models.Request request = null, CancellationToken cancellationToken = default)
         {
@@ -412,7 +412,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
         {
@@ -432,7 +432,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)
         {

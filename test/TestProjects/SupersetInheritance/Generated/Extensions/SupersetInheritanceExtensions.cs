@@ -186,7 +186,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
+        /// <param name="supersetModel2"> The <see cref="SupersetModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
@@ -204,7 +204,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
+        /// <param name="supersetModel2"> The <see cref="SupersetModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
@@ -254,7 +254,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The <see cref="SupersetModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
@@ -272,7 +272,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
+        /// <param name="supersetModel3"> The <see cref="SupersetModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>

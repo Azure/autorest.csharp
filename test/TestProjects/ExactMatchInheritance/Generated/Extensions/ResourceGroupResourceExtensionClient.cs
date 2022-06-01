@@ -70,7 +70,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel2s_Put
         /// </summary>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The <see cref="ExactMatchModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
@@ -93,7 +93,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel2s_Put
         /// </summary>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2"> The <see cref="ExactMatchModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
@@ -168,7 +168,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel3s_Put
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
@@ -191,7 +191,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel3s_Put
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
@@ -258,7 +258,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel4s_Put
         /// </summary>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
@@ -281,7 +281,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel4s_Put
         /// </summary>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {

@@ -64,7 +64,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The <see cref="NonResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -94,7 +94,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
-        /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
+        /// <param name="nonResourceModel1"> The <see cref="NonResourceModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>

@@ -96,7 +96,7 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="model5"> The Model5 to use. </param>
+        /// <param name="model5"> The <see cref="Model5"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
@@ -114,7 +114,7 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="model5"> The Model5 to use. </param>
+        /// <param name="model5"> The <see cref="Model5"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>

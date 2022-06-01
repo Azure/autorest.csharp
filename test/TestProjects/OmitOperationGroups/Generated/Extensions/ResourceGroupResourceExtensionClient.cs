@@ -107,7 +107,7 @@ namespace OmitOperationGroups
         /// Operation Id: Model5s_CreateOrUpdate
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="model5"> The Model5 to use. </param>
+        /// <param name="model5"> The <see cref="Model5"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
@@ -130,7 +130,7 @@ namespace OmitOperationGroups
         /// Operation Id: Model5s_CreateOrUpdate
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
-        /// <param name="model5"> The Model5 to use. </param>
+        /// <param name="model5"> The <see cref="Model5"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {

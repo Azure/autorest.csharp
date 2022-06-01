@@ -76,7 +76,7 @@ namespace MultipleInputFiles
             _pipeline = pipeline;
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Operation1Async(TestModel value, CancellationToken cancellationToken = default)
         {
@@ -93,7 +93,7 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation1(TestModel value, CancellationToken cancellationToken = default)
         {
@@ -110,7 +110,7 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Operation2Async(TestModel value, CancellationToken cancellationToken = default)
         {
@@ -127,7 +127,7 @@ namespace MultipleInputFiles
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation2(TestModel value, CancellationToken cancellationToken = default)
         {

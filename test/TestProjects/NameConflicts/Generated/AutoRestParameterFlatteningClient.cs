@@ -45,7 +45,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="pipeline"> The String to use. </param>
         /// <param name="clientDiagnostics"> The String to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
@@ -68,7 +68,7 @@ namespace NameConflicts
         /// <param name="uri"> The String to use. </param>
         /// <param name="pipeline"> The String to use. </param>
         /// <param name="clientDiagnostics"> The String to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
@@ -85,7 +85,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<HttpMessage>> HttpMessageAsync(HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -102,7 +102,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<HttpMessage> HttpMessage(HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -119,7 +119,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Request>> RequestAsync(Request request = null, CancellationToken cancellationToken = default)
         {
@@ -136,7 +136,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Request> Request(Request request = null, CancellationToken cancellationToken = default)
         {
@@ -153,7 +153,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
         {
@@ -170,7 +170,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)
         {
