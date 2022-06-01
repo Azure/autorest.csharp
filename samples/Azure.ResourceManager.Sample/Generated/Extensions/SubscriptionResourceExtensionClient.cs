@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(AzureLocation location, string publisherName)
         {
@@ -495,8 +495,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
@@ -529,8 +529,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineImageResource> GetVirtualMachineImages(AzureLocation location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
