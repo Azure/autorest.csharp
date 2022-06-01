@@ -130,16 +130,22 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (inheritedType != null && inheritedType.IsFrameworkType)
                 return inheritedType;
 
+            // try exact match
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
-                    inheritedType = match;
+                    return match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(this, MyProperties) : inheritedType;
+            // try superset match
+            var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
+            if (supersetBaseType != null)
+                return supersetBaseType;
+
+            return inheritedType;
         }
 
         protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
