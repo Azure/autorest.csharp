@@ -129,99 +129,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private Dictionary<string, Schema> UpdateBodyParameterNames()
-        {
-            Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
-            Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    foreach (var request in operation.Requests)
-                    {
-                        var httpRequest = request.Protocol.Http as HttpRequest;
-                        if (httpRequest is null)
-                            continue;
-
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
-                        if (bodyParam is null)
-                            continue;
-
-                        IncrementCount(usageCounts, bodyParam);
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        var responseSchema = response.ResponseSchema;
-                        if (responseSchema is null)
-                            continue;
-
-                        IncrementCount(usageCounts, responseSchema);
-                    }
-                }
-            }
-
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    foreach (var request in operation.Requests)
-                    {
-                        if (request.Protocol.Http is not HttpRequest httpRequest)
-                            continue;
-
-                        if (httpRequest.Method != HttpMethod.Patch && httpRequest.Method != HttpMethod.Put && httpRequest.Method != HttpMethod.Post)
-                            continue;
-
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
-                        if (bodyParam is null)
-                            continue;
-
-                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
-                            continue;
-
-                        if (count != 1)
-                        {
-                            //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
-                            continue;
-                        }
-
-                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
-                        var operationSet = RawRequestPathToOperationSets[requestPath];
-                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        if (resourceDataModelName.Key is not null)
-                        {
-                            //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
-                            //types use the same model they should have a common name, but since this case doesn't exist yet
-                            //we don't know for sure
-                            if (requestPath.IsExpandable)
-                                throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
-                            var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
-                            updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
-                        }
-                        else
-                        {
-                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
-                        }
-                    }
-                }
-            }
-            return updatedModels;
-        }
-
-        private static void IncrementCount(Dictionary<Schema, int> usageCounts, Schema schema)
-        {
-            if (usageCounts.ContainsKey(schema))
-            {
-                usageCounts[schema]++;
-            }
-            else
-            {
-                usageCounts.Add(schema, 1);
-            }
-        }
-
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
@@ -235,19 +142,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
             }
 
-#if false
-            //this is where we update
-            var updatedModels = UpdateBodyParameterNames();
-            foreach (var (oldName, schema) in updatedModels)
-            {
-                resourceModels.Remove(schema);
-                _nameToTypeProvider.Remove(oldName);
-                var model = BuildModel(schema);
-                resourceModels.Add(schema, model);
-                _nameToTypeProvider.Add(schema.Name, model);
-            }
-
-            // second, collect any model which can be replaced as whole (not as a property or as a base class)
+            // collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new List<MgmtObjectType>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
@@ -278,7 +173,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // third, update the entries in cache maps with the new model instances
+            // update the entries in cache maps with the new model instances
             foreach (var replacedType in replacedTypes)
             {
                 var schema = replacedType.ObjectSchema;
@@ -286,7 +181,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _nameToTypeProvider[name] = replacedType;
                 resourceModels[schema] = replacedType;
             }
-#endif
 
             return resourceModels;
         }
