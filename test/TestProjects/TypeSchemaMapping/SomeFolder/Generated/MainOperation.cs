@@ -17,7 +17,7 @@ namespace CustomNamespace
 {
     internal partial class MainOperation : Operation<CustomizedModel>, IOperationSource<CustomizedModel>
     {
-        private readonly OperationInternals<CustomizedModel> _operation;
+        private readonly OperationInternal<CustomizedModel> _operation;
 
         /// <summary> Initializes a new instance of MainOperation for mocking. </summary>
         protected MainOperation()
@@ -26,11 +26,14 @@ namespace CustomNamespace
 
         internal MainOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<CustomizedModel>(clientDiagnostics, nextLinkOperation, response, "MainOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override CustomizedModel Value => _operation.Value;
@@ -42,7 +45,7 @@ namespace CustomNamespace
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

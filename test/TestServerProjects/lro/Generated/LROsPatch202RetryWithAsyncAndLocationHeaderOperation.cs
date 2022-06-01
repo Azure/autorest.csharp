@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running patch request, service returns a 202 to the initial request with async and location header. </summary>
     public partial class LROsPatch202RetryWithAsyncAndLocationHeaderOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationInternals<Product> _operation;
+        private readonly OperationInternal<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPatch202RetryWithAsyncAndLocationHeaderOperation for mocking. </summary>
         protected LROsPatch202RetryWithAsyncAndLocationHeaderOperation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPatch202RetryWithAsyncAndLocationHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPatch202RetryWithAsyncAndLocationHeaderOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPatch202RetryWithAsyncAndLocationHeaderOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override Product Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

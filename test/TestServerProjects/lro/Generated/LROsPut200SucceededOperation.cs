@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
     public partial class LROsPut200SucceededOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationInternals<Product> _operation;
+        private readonly OperationInternal<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPut200SucceededOperation for mocking. </summary>
         protected LROsPut200SucceededOperation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPut200SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut200SucceededOperation");
+            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPut200SucceededOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override Product Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
