@@ -146,6 +146,7 @@ stages:
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               displayName: 'Update generator version in Azure SDK repo'
+              timeoutInMinutes: 120
             - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
               parameters:
                 BaseBranchName: main
