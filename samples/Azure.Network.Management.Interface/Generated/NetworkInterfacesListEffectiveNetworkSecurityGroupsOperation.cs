@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Gets all network security groups applied to a network interface. </summary>
     public partial class NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation : Operation<EffectiveNetworkSecurityGroupListResult>, IOperationSource<EffectiveNetworkSecurityGroupListResult>
     {
-        private readonly OperationInternals<EffectiveNetworkSecurityGroupListResult> _operation;
+        private readonly OperationInternal<EffectiveNetworkSecurityGroupListResult> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation for mocking. </summary>
         protected NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation()
@@ -28,11 +28,14 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<EffectiveNetworkSecurityGroupListResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
+            IOperation<EffectiveNetworkSecurityGroupListResult> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<EffectiveNetworkSecurityGroupListResult>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override EffectiveNetworkSecurityGroupListResult Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace Azure.Network.Management.Interface
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
