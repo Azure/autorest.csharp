@@ -29,7 +29,7 @@ namespace paging
 
         internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            IOperation<AsyncPageable<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
             _operation = new OperationInternal<AsyncPageable<Product>>(clientDiagnostics, nextLinkOperation, response, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
         }

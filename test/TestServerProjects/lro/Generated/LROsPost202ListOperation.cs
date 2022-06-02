@@ -29,7 +29,7 @@ namespace lro
 
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            IOperation<IReadOnlyList<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
             _operation = new OperationInternal<IReadOnlyList<Product>>(clientDiagnostics, nextLinkOperation, response, "LROsPost202ListOperation");
         }
 

@@ -121,6 +121,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return operation.ResultType != null ? new CSharpType(typeof(IOperationSource<>), operation.ResultType) : null;
         }
 
+        protected virtual CSharpType GetNextLinkOperationType(LongRunningOperation operation)
+        {
+            return operation.ResultType != null ? new CSharpType(typeof(IOperation<>), operation.ResultType) : typeof(IOperation);
+        }
+
         protected virtual CSharpType GetBaseType(LongRunningOperation operation)
         {
             return operation.ResultType != null ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Operation));
@@ -160,7 +165,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var nextLinkOperationVariable = new CodeWriterDeclaration("nextLinkOperation");
                 writer
-                    .Append($"var {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
+                    .Append($"{GetNextLinkOperationType(operation)} {nextLinkOperationVariable:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}(")
                     .AppendIf($"this, ", operation.ResultType != null)
                     .Line($"pipeline, request.Method, request.Uri.ToUri(), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia});")
                     .Line($"_operation = new {helperType}(clientDiagnostics, nextLinkOperation, response, { operation.Diagnostics.ScopeName:L});");

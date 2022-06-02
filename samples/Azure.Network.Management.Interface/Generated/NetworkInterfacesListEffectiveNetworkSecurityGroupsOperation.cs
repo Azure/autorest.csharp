@@ -28,7 +28,7 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            IOperation<EffectiveNetworkSecurityGroupListResult> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
             _operation = new OperationInternal<EffectiveNetworkSecurityGroupListResult>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
         }
 
