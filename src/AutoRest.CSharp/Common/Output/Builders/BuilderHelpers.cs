@@ -180,5 +180,16 @@ namespace AutoRest.CSharp.Output.Builders
 
             return name;
         }
+
+        public static string UpdateDescription(ObjectSchema schema)
+        {
+            if (schema.Discriminator is not null)
+            {
+                var childrenList = schema.Children!.All.Select(s => $"<see cref=\"{s.CSharpName()}\"/>");
+                return $"{System.Environment.NewLine}Please note <see cref=\"{schema.CSharpName()}\"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed." +
+                    $"{System.Environment.NewLine}The available derived classes include {string.Join(", ", childrenList)}.";
+            }
+            return string.Empty;
+        }
     }
 }

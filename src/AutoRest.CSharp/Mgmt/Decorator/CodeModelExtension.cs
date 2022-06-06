@@ -312,21 +312,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 throw new InvalidOperationException($"Multiple api-version values found in the operation group: {operationGroup.Key}. Please rename the operation group for some operations so that all operations in one operation group share the same API version.");
             }
         }
-
-        public static void UpdateDescriptionWithDiscriminator(this IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in allSchemas)
-            {
-                if (schema is not ObjectSchema objectSchema)
-                    continue;
-
-                if (objectSchema.Discriminator is not null)
-                {
-                    var childrenList = objectSchema.Children!.All.Select(s => $"<see cref=\"{s.CSharpName()}\"/>");
-                    schema.Language.Default.Description += $"{System.Environment.NewLine}Please note <see cref=\"{schema.CSharpName()}\"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed." +
-                        $"{System.Environment.NewLine}The available derived classes include {string.Join(", ", childrenList)}.";
-                }
-            }
-        }
     }
 }
