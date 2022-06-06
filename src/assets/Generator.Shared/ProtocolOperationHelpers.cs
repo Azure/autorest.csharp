@@ -74,7 +74,6 @@ namespace Azure.Core
             return operation;
         }
 
-        //private struct VoidValue { }
         private class ConvertOperation<TFrom, TTo> : Operation<TTo>
             where TFrom : notnull
             where TTo : notnull
