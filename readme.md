@@ -10,12 +10,19 @@ ___
 
 # C# code generator for AutoRest V3
 
-- [Prerequisites](#prerequisites)
-- [Build](#build)
-- [Test](#test)
-- [Use in azure-sdk-net repo](#use-in-azure-sdk-net-repo)
-- [Use outside of the azure-sdk-net repo](#use-outside-of-the-azure-sdk-net-repo)
-- [Customizing the generated code](#customizing-the-generated-code)
+- [C# code generator for AutoRest V3](#c-code-generator-for-autorest-v3)
+  - [Prerequisites](#prerequisites)
+  - [Build](#build)
+  - [Test](#test)
+    - [Testing Details](#testing-details)
+    - [Testing generator changes against Azure SDK without a PR](#testing-generator-changes-against-azure-sdk-without-a-pr)
+  - [Types of .NET Client Libraries to generate](#types-of-net-client-libraries-to-generate)
+  - [Use in `azure-sdk-net` repo](#use-in-azure-sdk-net-repo)
+    - [PR Integration with Azure SDK Repository](#pr-integration-with-azure-sdk-repository)
+  - [Use outside of the `azure-sdk-net` repo](#use-outside-of-the-azure-sdk-net-repo)
+  - [Debugging](#debugging)
+  - [Debugging transforms](#debugging-transforms)
+  - [Customizing the generated code](#customizing-the-generated-code)
     - [Make a model internal](#make-a-model-internal)
     - [Rename a model class](#rename-a-model-class)
     - [Change a model namespace](#change-a-model-namespace)
@@ -81,6 +88,14 @@ These instructions are only a general outline, see [the script](https://github.c
 - Copy created nuget package to your local nuget source
 - Update package.props
 - `dotnet restore -S directory` (where directory is replaced with the name of the directory)
+
+## Types of .NET Client Libraries to generate
+
+This code generator: autorest.csharp can generate three types of .NET client libraries:
+
+- DPG: This is Data-plane client library. Autorest.csharp will generate DPG by default. This library will only contain protocol method. Please refer to [Protocol method](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md). Refer to one DPG library [DeviceUpdate](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate/src/Generated).
+- HLC:  This is Generation1 convenience Data-plane client library. This library will define convenience methods together with models. Refer to one HLC library [MetricsAdvisor](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/metricsadvisor/Azure.AI.MetricsAdvisor/src/Generated). Set flag `generation1-convenience-client: true` if you want to generate HLC.
+- Management-plane Client: This is Management-plane client library. Refer to one Management-plane library [AppConfiguration](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/appconfiguration/Azure.ResourceManager.AppConfiguration/src/Generated). Set flag `azure-arm: true` if you want to generate management-plane library.
 
 ## Use in `azure-sdk-net` repo
 
