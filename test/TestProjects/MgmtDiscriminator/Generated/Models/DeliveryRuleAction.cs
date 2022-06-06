@@ -9,8 +9,8 @@ namespace MgmtDiscriminator.Models
 {
     /// <summary>
     /// An action for the delivery rule.
-    /// Please note &lt;see cref=&quot;DeliveryRuleAction&quot;/&gt; is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
-    /// The available derived classes include &lt;see cref=&quot;UrlRedirectAction&quot;/&gt;, &lt;see cref=&quot;UrlSigningAction&quot;/&gt;, &lt;see cref=&quot;OriginGroupOverrideAction&quot;/&gt;, &lt;see cref=&quot;UrlRewriteAction&quot;/&gt;, &lt;see cref=&quot;DeliveryRuleRequestHeaderAction&quot;/&gt;, &lt;see cref=&quot;DeliveryRuleResponseHeaderAction&quot;/&gt;, &lt;see cref=&quot;DeliveryRuleCacheExpirationAction&quot;/&gt;, &lt;see cref=&quot;DeliveryRuleCacheKeyQueryStringAction&quot;/&gt;, &lt;see cref=&quot;DeliveryRuleRouteConfigurationOverrideAction&quot;/&gt;.
+    /// Please note <see cref="DeliveryRuleAction"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
+    /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/>, <see cref="UrlSigningAction"/>.
     /// </summary>
     public partial class DeliveryRuleAction
     {

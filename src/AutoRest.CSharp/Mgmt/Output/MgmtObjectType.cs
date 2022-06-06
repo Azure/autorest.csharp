@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.CreateDescription(ObjectSchema) + BuilderHelpers.UpdateDescription(ObjectSchema);
+            return BuilderHelpers.CreateDescription(ObjectSchema) + BuilderHelpers.UpdateDescription(this);
         }
 
         private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
@@ -174,24 +174,24 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (TypeFactory.IsList(type))
                 {
-                    if (type.Arguments.FirstOrDefault().Implementation is MgmtObjectType objectType)
+                    if (!type.Arguments.FirstOrDefault().IsFrameworkType && type.Arguments.FirstOrDefault().Implementation is MgmtObjectType objectType)
                     {
-                        updatedDescription = BuilderHelpers.UpdateDescription(objectType.ObjectSchema);
+                        updatedDescription = BuilderHelpers.UpdateDescription(objectType);
                     }
                 }
                 else if (TypeFactory.IsDictionary(type))
                 {
-                    var objectTypes = type.Arguments.Where(arg => arg.Implementation is MgmtObjectType);
+                    var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
                     if (objectTypes.Count() > 0)
                     {
-                        var subDescription = objectTypes.Select(o => BuilderHelpers.UpdateDescription(((MgmtObjectType)o.Implementation).ObjectSchema));
+                        var subDescription = objectTypes.Select(o => BuilderHelpers.UpdateDescription((MgmtObjectType)o.Implementation));
                         updatedDescription = string.Join("", subDescription);
                     }
                 }
             }
             else if (type.Implementation is MgmtObjectType objectType)
             {
-                updatedDescription = BuilderHelpers.UpdateDescription(objectType.ObjectSchema);
+                updatedDescription = BuilderHelpers.UpdateDescription(objectType);
             }
             return updatedDescription.IsNullOrEmpty() ? property :
                 new ObjectTypeProperty(property.Declaration,

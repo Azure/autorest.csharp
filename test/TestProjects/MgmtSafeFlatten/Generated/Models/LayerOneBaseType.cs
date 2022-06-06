@@ -8,8 +8,9 @@
 namespace MgmtSafeFlatten.Models
 {
     /// <summary>
-    /// Please note &lt;see cref=&quot;LayerOneBaseType&quot;/&gt; is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
-    /// The available derived classes include &lt;see cref=&quot;LayerOneFooType&quot;/&gt;, &lt;see cref=&quot;LayerOneBarType&quot;/&gt;.
+    /// The LayerOneBaseType.
+    /// Please note <see cref="LayerOneBaseType"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
+    /// The available derived classes include <see cref="LayerOneFooType"/>, <see cref="LayerOneBarType"/>.
     /// </summary>
     public partial class LayerOneBaseType
     {

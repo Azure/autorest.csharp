@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -181,12 +182,12 @@ namespace AutoRest.CSharp.Output.Builders
             return name;
         }
 
-        public static string UpdateDescription(ObjectSchema schema)
+        public static string UpdateDescription(MgmtObjectType objectType)
         {
-            if (schema.Discriminator is not null)
+            if (objectType.Discriminator?.HasDescendants == true)
             {
-                var childrenList = schema.Children!.All.Select(s => $"<see cref=\"{s.CSharpName()}\"/>");
-                return $"{System.Environment.NewLine}Please note <see cref=\"{schema.CSharpName()}\"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed." +
+                var childrenList = objectType.Discriminator.Implementations.Select(implementation => $"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
+                return $"{System.Environment.NewLine}Please note <see cref=\"{objectType.Type.Name}\"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed." +
                     $"{System.Environment.NewLine}The available derived classes include {string.Join(", ", childrenList)}.";
             }
             return string.Empty;
