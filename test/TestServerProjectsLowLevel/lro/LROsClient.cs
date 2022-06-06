@@ -17,6 +17,8 @@ namespace lro_LowLevel
     /// <summary> The LROs service client. </summary>
     public partial class LROsClient
     {
+        /// <summary> Add the convenience method for testing. </summary>
+        ///  When protocol method returns a response without content, it will return Operation. The convienience method is to verify no break occurs in asyncronous convienience methods.
         public virtual async Task<Operation> DeleteValue204SucceededAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             var requestContext = new RequestContext { CancellationToken = cancellationToken };
@@ -34,6 +36,8 @@ namespace lro_LowLevel
             }
         }
 
+        /// <summary> Add the convenience method for testing. </summary>
+        ///  When protocol method returns a response without content, it will return Operation. The convienience method is to verify no break occurs in synchronous convienience methods.
         public virtual Operation DeleteValue204Succeeded(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             var requestContext = new RequestContext { CancellationToken = cancellationToken };
