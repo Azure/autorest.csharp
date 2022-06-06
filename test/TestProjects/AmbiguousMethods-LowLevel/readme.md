@@ -18,6 +18,7 @@ See MethodAmbiguityResolver.cs for details.
 
 ``` yaml
 require: $(this-folder)/../../../readme.md
+title: AmbiguousMethodsLowLevel
 input-file:
 - $(this-folder)/AmbiguousMethods.json
 - $(this-folder)/UnambiguousMethods.json

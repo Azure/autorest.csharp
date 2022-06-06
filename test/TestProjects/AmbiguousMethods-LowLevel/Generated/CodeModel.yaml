@@ -1,6 +1,6 @@
 !CodeModel 
 info: !Info 
-  title: AmbiguousMethods_LowLevel
+  title: AmbiguousMethodsLowLevel
 schemas: !Schemas 
   numbers:
     - !NumberSchema &ref_7
