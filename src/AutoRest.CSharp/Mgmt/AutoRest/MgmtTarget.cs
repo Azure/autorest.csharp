@@ -5,14 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -44,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public static async Task Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             var addedFilenames = new HashSet<string>();
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -153,10 +156,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
+            await project.PostProcess(PostProcess);
 
-            project.RemoveUnusedModels(modelsToKeep).GetAwaiter().GetResult();
+        }
+
+        private static async Task<Project> PostProcess(Project project)
+        {
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            project = await Internalizer.InternalizeAsync(project, modelsToKeep);
+
+            project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
+
+            return project;
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)

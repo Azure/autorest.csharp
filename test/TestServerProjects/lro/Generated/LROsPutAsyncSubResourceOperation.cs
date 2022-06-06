@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request with sub resource. </summary>
     public partial class LROsPutAsyncSubResourceOperation : Operation<SubProduct>, IOperationSource<SubProduct>
     {
-        private readonly OperationInternals<SubProduct> _operation;
+        private readonly OperationInternal<SubProduct> _operation;
 
         /// <summary> Initializes a new instance of LROsPutAsyncSubResourceOperation for mocking. </summary>
         protected LROsPutAsyncSubResourceOperation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPutAsyncSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncSubResourceOperation");
+            IOperation<SubProduct> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<SubProduct>(clientDiagnostics, nextLinkOperation, response, "LROsPutAsyncSubResourceOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override SubProduct Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
