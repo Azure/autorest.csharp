@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + BuilderHelpers.UpdateDescription(this);
+            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + BuilderHelpers.CreateExtraDescriptionWithDiscriminator(this);
         }
 
         private string _clientPrefix;
