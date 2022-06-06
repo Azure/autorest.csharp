@@ -34,7 +34,7 @@ namespace MgmtSafeFlatten
         /// <param name="layerOneType">
         /// The single value prop with discriminator.
         /// Please note <see cref="LayerOneBaseType"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
-        /// The available derived classes include <see cref="LayerOneFooType"/>, <see cref="LayerOneBarType"/>.
+        /// The available derived classes include <see cref="LayerOneBarType"/>, <see cref="LayerOneFooType"/>.
         /// </param>
         /// <param name="layerOneConflict"> The single value prop with conflict. </param>
         internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict) : base(id, name, resourceType, systemData, tags, location)
@@ -64,7 +64,7 @@ namespace MgmtSafeFlatten
         /// <summary>
         /// The single value prop with discriminator.
         /// Please note <see cref="LayerOneBaseType"/> is the base class. In order to more specifically assign or retrieve the value of this property, the derived class is needed.
-        /// The available derived classes include <see cref="LayerOneFooType"/>, <see cref="LayerOneBarType"/>.
+        /// The available derived classes include <see cref="LayerOneBarType"/>, <see cref="LayerOneFooType"/>.
         /// </summary>
         public LayerOneBaseType LayerOneType { get; set; }
         /// <summary> The single value prop with conflict. </summary>
