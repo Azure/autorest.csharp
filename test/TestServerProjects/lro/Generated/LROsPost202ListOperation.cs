@@ -20,7 +20,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
     public partial class LROsPost202ListOperation : Operation<IReadOnlyList<Product>>, IOperationSource<IReadOnlyList<Product>>
     {
-        private readonly OperationInternals<IReadOnlyList<Product>> _operation;
+        private readonly OperationInternal<IReadOnlyList<Product>> _operation;
 
         /// <summary> Initializes a new instance of LROsPost202ListOperation for mocking. </summary>
         protected LROsPost202ListOperation()
@@ -29,11 +29,14 @@ namespace lro
 
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
+            IOperation<IReadOnlyList<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<IReadOnlyList<Product>>(clientDiagnostics, nextLinkOperation, response, "LROsPost202ListOperation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override IReadOnlyList<Product> Value => _operation.Value;
@@ -45,7 +48,7 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);
