@@ -145,7 +145,7 @@ namespace Azure.Management.Storage
             Optional<GeoReplicationStats> geoReplicationStats = default;
             Optional<bool> failoverInProgress = default;
             Optional<LargeFileSharesState> largeFileSharesState = default;
-            Optional<IReadOnlyList<PrivateEndpointConnectionData>> privateEndpointConnections = default;
+            Optional<IReadOnlyList<StoragePrivateEndpointConnectionData>> privateEndpointConnections = default;
             Optional<RoutingPreference> routingPreference = default;
             Optional<BlobRestoreStatus> blobRestoreStatus = default;
             Optional<bool> allowBlobPublicAccess = default;
@@ -211,7 +211,7 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -226,7 +226,7 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
@@ -460,10 +460,10 @@ namespace Azure.Management.Storage
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
+                            List<StoragePrivateEndpointConnectionData> array = new List<StoragePrivateEndpointConnectionData>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
+                                array.Add(StoragePrivateEndpointConnectionData.DeserializeStoragePrivateEndpointConnectionData(item));
                             }
                             privateEndpointConnections = array;
                             continue;

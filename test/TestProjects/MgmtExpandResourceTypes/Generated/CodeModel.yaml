@@ -125,7 +125,7 @@ schemas: !Schemas
           name: CaaRecordFlags
           description: The flags for this CAA record as an integer between 0 and 255.
       protocol: !Protocols {}
-    - !NumberSchema &ref_114
+    - !NumberSchema &ref_116
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -1328,7 +1328,7 @@ schemas: !Schemas
     - *ref_41
     - *ref_42
     - *ref_43
-    - !ObjectSchema &ref_97
+    - !ObjectSchema &ref_98
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1414,7 +1414,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_47
-    - !ObjectSchema &ref_120
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1674,7 +1674,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_56
-    - !ObjectSchema &ref_139
+    - !ObjectSchema &ref_142
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1698,7 +1698,7 @@ schemas: !Schemas
           description: Describes a request to update a DNS zone.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_146
+    - !ObjectSchema &ref_150
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1741,7 +1741,7 @@ schemas: !Schemas
           description: The response to a Zone List or ListAll operation.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_148
+    - !ObjectSchema &ref_152
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1778,7 +1778,7 @@ schemas: !Schemas
           description: Represents the properties of the Dns Resource Reference Request.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_150
+    - !ObjectSchema &ref_155
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1945,12 +1945,13 @@ operationGroups:
     $key: RecordSets
     operations:
       - !Operation 
+        operationId: RecordSets_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_92
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -1962,7 +1963,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -1974,7 +1975,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -1988,7 +1989,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_95
+          - !Parameter &ref_96
             schema: *ref_86
             implementation: Method
             required: true
@@ -2000,7 +2001,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_96
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2013,8 +2014,8 @@ operationGroups:
                 in: header
           - *ref_87
           - *ref_88
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_92
             parameters:
               - !Parameter 
                 schema: *ref_89
@@ -2068,12 +2069,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_92
+        signatureParameters:
           - *ref_93
           - *ref_94
           - *ref_95
           - *ref_96
+          - *ref_97
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -2090,7 +2093,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2108,12 +2111,13 @@ operationGroups:
             description: Updates a record set within a DNS zone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_99
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2125,7 +2129,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_100
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2137,7 +2141,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2151,7 +2155,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_102
+          - !Parameter &ref_104
             schema: *ref_86
             implementation: Method
             required: true
@@ -2163,7 +2167,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_103
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2174,7 +2178,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_104
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2187,8 +2191,8 @@ operationGroups:
                 in: header
           - *ref_87
           - *ref_88
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_100
             parameters:
               - !Parameter 
                 schema: *ref_89
@@ -2203,7 +2207,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_98
+              - !Parameter &ref_99
                 schema: *ref_48
                 implementation: Method
                 required: true
@@ -2229,7 +2233,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_98
+              - *ref_99
             language: !Languages 
               default:
                 name: ''
@@ -2242,13 +2246,15 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_99
+        requests:
           - *ref_100
+        signatureParameters:
           - *ref_101
           - *ref_102
           - *ref_103
           - *ref_104
+          - *ref_105
+          - *ref_106
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -2278,7 +2284,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2296,12 +2302,13 @@ operationGroups:
             description: Creates or updates a record set within a DNS zone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_105
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -2313,7 +2320,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_106
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -2325,7 +2332,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_107
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -2339,7 +2346,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_110
             schema: *ref_86
             implementation: Method
             required: true
@@ -2351,7 +2358,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_109
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2391,11 +2398,11 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_105
-          - *ref_106
           - *ref_107
           - *ref_108
           - *ref_109
+          - *ref_110
+          - *ref_111
         responses:
           - !Response 
             language: !Languages 
@@ -2417,7 +2424,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2435,12 +2442,13 @@ operationGroups:
             description: Deletes a record set from a DNS zone. This operation cannot be undone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_110
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -2452,7 +2460,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_111
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -2464,7 +2472,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_112
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -2478,7 +2486,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_113
+          - !Parameter &ref_115
             schema: *ref_86
             implementation: Method
             required: true
@@ -2519,10 +2527,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_110
-          - *ref_111
           - *ref_112
           - *ref_113
+          - *ref_114
+          - *ref_115
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -2539,7 +2547,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2557,12 +2565,13 @@ operationGroups:
             description: Gets a record set.
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_ListByType
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_115
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -2574,7 +2583,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_116
+          - !Parameter &ref_118
             schema: *ref_1
             implementation: Method
             required: true
@@ -2586,7 +2595,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_117
+          - !Parameter &ref_119
             schema: *ref_86
             implementation: Method
             required: true
@@ -2598,8 +2607,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_118
-            schema: *ref_114
+          - !Parameter &ref_120
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -2609,7 +2618,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_119
+          - !Parameter &ref_121
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2649,14 +2658,14 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_115
-          - *ref_116
           - *ref_117
           - *ref_118
           - *ref_119
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -2670,7 +2679,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2693,12 +2702,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_ListByDnsZone
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_121
+          - !Parameter &ref_123
             schema: *ref_1
             implementation: Method
             required: true
@@ -2710,7 +2720,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_122
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             required: true
@@ -2722,8 +2732,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_123
-            schema: *ref_114
+          - !Parameter &ref_125
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -2733,7 +2743,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_124
+          - !Parameter &ref_126
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2773,13 +2783,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_121
-          - *ref_122
           - *ref_123
           - *ref_124
+          - *ref_125
+          - *ref_126
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -2793,7 +2803,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2816,12 +2826,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: RecordSets_ListAllByDnsZone
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_125
+          - !Parameter &ref_127
             schema: *ref_1
             implementation: Method
             required: true
@@ -2833,7 +2844,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_126
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             required: true
@@ -2845,8 +2856,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_127
-            schema: *ref_114
+          - !Parameter &ref_129
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -2856,7 +2867,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_128
+          - !Parameter &ref_130
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2896,13 +2907,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_125
-          - *ref_126
           - *ref_127
           - *ref_128
+          - *ref_129
+          - *ref_130
         responses:
           - !SchemaResponse 
-            schema: *ref_120
+            schema: *ref_122
             language: !Languages 
               default:
                 name: ''
@@ -2916,7 +2927,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2947,12 +2958,13 @@ operationGroups:
     $key: Zones
     operations:
       - !Operation 
+        operationId: Zones_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_130
+          - !Parameter &ref_133
             schema: *ref_1
             implementation: Method
             required: true
@@ -2964,7 +2976,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_131
+          - !Parameter &ref_134
             schema: *ref_1
             implementation: Method
             required: true
@@ -2976,7 +2988,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_132
+          - !Parameter &ref_135
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2987,7 +2999,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_133
+          - !Parameter &ref_136
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3000,8 +3012,8 @@ operationGroups:
                 in: header
           - *ref_87
           - *ref_88
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_132
             parameters:
               - !Parameter 
                 schema: *ref_89
@@ -3016,7 +3028,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_129
+              - !Parameter &ref_131
                 schema: *ref_50
                 implementation: Method
                 required: true
@@ -3042,7 +3054,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_129
+              - *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -3055,11 +3067,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_130
-          - *ref_131
+        requests:
           - *ref_132
+        signatureParameters:
           - *ref_133
+          - *ref_134
+          - *ref_135
+          - *ref_136
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -3089,7 +3103,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3107,12 +3121,13 @@ operationGroups:
             description: Creates or updates a DNS zone. Does not modify DNS records within the zone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Zones_Delete
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_134
+          - !Parameter &ref_137
             schema: *ref_1
             implementation: Method
             required: true
@@ -3124,7 +3139,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_135
+          - !Parameter &ref_138
             schema: *ref_1
             implementation: Method
             required: true
@@ -3136,7 +3151,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_136
+          - !Parameter &ref_139
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3176,9 +3191,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_134
-          - *ref_135
-          - *ref_136
+          - *ref_137
+          - *ref_138
+          - *ref_139
         responses:
           - !Response 
             language: !Languages 
@@ -3209,7 +3224,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3229,12 +3244,13 @@ operationGroups:
             description: 'Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.'
         protocol: !Protocols {}
       - !Operation 
+        operationId: Zones_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_137
+          - !Parameter &ref_140
             schema: *ref_1
             implementation: Method
             required: true
@@ -3246,7 +3262,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_138
+          - !Parameter &ref_141
             schema: *ref_1
             implementation: Method
             required: true
@@ -3287,8 +3303,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_137
-          - *ref_138
+          - *ref_140
+          - *ref_141
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -3305,7 +3321,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3323,12 +3339,13 @@ operationGroups:
             description: Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Zones_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_141
+          - !Parameter &ref_145
             schema: *ref_1
             implementation: Method
             required: true
@@ -3340,7 +3357,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_142
+          - !Parameter &ref_146
             schema: *ref_1
             implementation: Method
             required: true
@@ -3352,7 +3369,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_143
+          - !Parameter &ref_147
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3365,8 +3382,8 @@ operationGroups:
                 in: header
           - *ref_87
           - *ref_88
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_144
             parameters:
               - !Parameter 
                 schema: *ref_89
@@ -3381,8 +3398,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_140
-                schema: *ref_139
+              - !Parameter &ref_143
+                schema: *ref_142
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3407,7 +3424,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_140
+              - *ref_143
             language: !Languages 
               default:
                 name: ''
@@ -3420,10 +3437,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_144
         signatureParameters:
-          - *ref_141
-          - *ref_142
-          - *ref_143
+          - *ref_145
+          - *ref_146
+          - *ref_147
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -3440,7 +3459,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3458,12 +3477,13 @@ operationGroups:
             description: Updates a DNS zone. Does not modify DNS records within the zone.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Zones_ListByResourceGroup
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_144
+          - !Parameter &ref_148
             schema: *ref_1
             implementation: Method
             required: true
@@ -3475,8 +3495,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_145
-            schema: *ref_114
+          - !Parameter &ref_149
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -3515,11 +3535,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_144
-          - *ref_145
+          - *ref_148
+          - *ref_149
         responses:
           - !SchemaResponse 
-            schema: *ref_146
+            schema: *ref_150
             language: !Languages 
               default:
                 name: ''
@@ -3533,7 +3553,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3556,13 +3576,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: Zones_List
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
           - *ref_85
-          - !Parameter &ref_147
-            schema: *ref_114
+          - !Parameter &ref_151
+            schema: *ref_116
             implementation: Method
             language: !Languages 
               default:
@@ -3601,10 +3622,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_147
+          - *ref_151
         responses:
           - !SchemaResponse 
-            schema: *ref_146
+            schema: *ref_150
             language: !Languages 
               default:
                 name: ''
@@ -3618,7 +3639,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3649,6 +3670,7 @@ operationGroups:
     $key: DnsResourceReference
     operations:
       - !Operation 
+        operationId: DnsResourceReference_GetByTargetResources
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
@@ -3656,8 +3678,8 @@ operationGroups:
           - *ref_85
           - *ref_87
           - *ref_88
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_154
             parameters:
               - !Parameter 
                 schema: *ref_89
@@ -3672,8 +3694,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_149
-                schema: *ref_148
+              - !Parameter &ref_153
+                schema: *ref_152
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3698,7 +3720,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_149
+              - *ref_153
             language: !Languages 
               default:
                 name: ''
@@ -3711,10 +3733,12 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_154
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_150
+            schema: *ref_155
             language: !Languages 
               default:
                 name: ''
@@ -3728,7 +3752,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -3753,8 +3777,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

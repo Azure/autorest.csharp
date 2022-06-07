@@ -147,7 +147,7 @@ schemas: !Schemas
           name: NonResourceChildName
           description: Name.
       protocol: !Protocols {}
-    - !StringSchema &ref_161
+    - !StringSchema &ref_163
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1786,7 +1786,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_3
-    - !ObjectSchema &ref_150
+    - !ObjectSchema &ref_151
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1831,7 +1831,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_29
-    - !ObjectSchema &ref_157
+    - !ObjectSchema &ref_159
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1875,7 +1875,7 @@ schemas: !Schemas
           description: The List operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_160
+    - !ObjectSchema &ref_162
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1942,7 +1942,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_64
     - *ref_30
-    - !ObjectSchema &ref_169
+    - !ObjectSchema &ref_172
       type: object
       apiVersions:
         - !ApiVersion 
@@ -1987,7 +1987,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_31
-    - !ObjectSchema &ref_178
+    - !ObjectSchema &ref_182
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2032,7 +2032,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_32
-    - !ObjectSchema &ref_186
+    - !ObjectSchema &ref_191
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2077,7 +2077,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_33
-    - !ObjectSchema &ref_195
+    - !ObjectSchema &ref_201
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2122,7 +2122,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_34
-    - !ObjectSchema &ref_202
+    - !ObjectSchema &ref_209
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2167,7 +2167,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_35
-    - !ObjectSchema &ref_209
+    - !ObjectSchema &ref_217
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2212,7 +2212,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_36
-    - !ObjectSchema &ref_219
+    - !ObjectSchema &ref_228
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2257,7 +2257,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_37
-    - !ObjectSchema &ref_229
+    - !ObjectSchema &ref_239
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2302,7 +2302,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_38
-    - !ObjectSchema &ref_237
+    - !ObjectSchema &ref_248
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2347,7 +2347,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_39
-    - !ObjectSchema &ref_244
+    - !ObjectSchema &ref_256
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2392,7 +2392,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_40
-    - !ObjectSchema &ref_253
+    - !ObjectSchema &ref_266
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2437,7 +2437,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_41
-    - !ObjectSchema &ref_257
+    - !ObjectSchema &ref_271
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2482,7 +2482,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_42
-    - !ObjectSchema &ref_262
+    - !ObjectSchema &ref_277
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2527,7 +2527,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_43
-    - !ObjectSchema &ref_267
+    - !ObjectSchema &ref_283
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2572,7 +2572,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_44
-    - !ObjectSchema &ref_271
+    - !ObjectSchema &ref_288
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2617,7 +2617,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_45
-    - !ObjectSchema &ref_278
+    - !ObjectSchema &ref_296
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2662,7 +2662,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_46
-    - !ObjectSchema &ref_287
+    - !ObjectSchema &ref_306
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2707,7 +2707,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_47
-    - !ObjectSchema &ref_296
+    - !ObjectSchema &ref_316
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2752,7 +2752,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_48
-    - !ObjectSchema &ref_303
+    - !ObjectSchema &ref_324
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2797,7 +2797,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_49
-    - !ObjectSchema &ref_309
+    - !ObjectSchema &ref_331
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2842,7 +2842,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_50
-    - !ObjectSchema &ref_316
+    - !ObjectSchema &ref_339
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2887,7 +2887,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_51
-    - !ObjectSchema &ref_325
+    - !ObjectSchema &ref_349
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2932,7 +2932,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_52
-    - !ObjectSchema &ref_334
+    - !ObjectSchema &ref_359
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2977,7 +2977,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_53
-    - !ObjectSchema &ref_341
+    - !ObjectSchema &ref_367
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3021,7 +3021,7 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_342
+    - !ObjectSchema &ref_368
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3111,7 +3111,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_94
-    - !ObjectSchema &ref_345
+    - !ObjectSchema &ref_372
       type: object
       apiVersions:
         - !ApiVersion 
@@ -3421,12 +3421,13 @@ operationGroups:
     $key: Fakes
     operations:
       - !Operation 
+        operationId: Fakes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_146
+          - !Parameter &ref_147
             schema: *ref_1
             implementation: Method
             required: true
@@ -3440,8 +3441,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_146
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -3495,8 +3496,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
+        requests:
           - *ref_146
+        signatureParameters:
+          - *ref_147
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -3517,12 +3520,13 @@ operationGroups:
             description: Create or update an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_147
+          - !Parameter &ref_148
             schema: *ref_1
             implementation: Method
             required: true
@@ -3534,7 +3538,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_148
+          - !Parameter &ref_149
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3574,8 +3578,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_147
           - *ref_148
+          - *ref_149
         responses:
           - !SchemaResponse 
             schema: *ref_2
@@ -3596,12 +3600,13 @@ operationGroups:
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
+        operationId: Fakes_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_149
+          - !Parameter &ref_150
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3641,10 +3646,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_149
+          - *ref_150
         responses:
           - !SchemaResponse 
-            schema: *ref_150
+            schema: *ref_151
             language: !Languages 
               default:
                 name: ''
@@ -3675,12 +3680,13 @@ operationGroups:
     $key: FakeParentWithAncestorWithNonResChWithLocs
     operations:
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_152
+          - !Parameter &ref_154
             schema: *ref_1
             implementation: Method
             required: true
@@ -3692,7 +3698,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_153
+          - !Parameter &ref_155
             schema: *ref_1
             implementation: Method
             required: true
@@ -3706,8 +3712,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_153
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -3722,7 +3728,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_151
+              - !Parameter &ref_152
                 schema: *ref_29
                 implementation: Method
                 required: true
@@ -3748,7 +3754,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_151
+              - *ref_152
             language: !Languages 
               default:
                 name: ''
@@ -3761,9 +3767,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_152
+        requests:
           - *ref_153
+        signatureParameters:
+          - *ref_154
+          - *ref_155
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -3784,12 +3792,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_154
+          - !Parameter &ref_156
             schema: *ref_1
             implementation: Method
             required: true
@@ -3801,7 +3810,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_155
+          - !Parameter &ref_157
             schema: *ref_1
             implementation: Method
             required: true
@@ -3842,8 +3851,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_154
-          - *ref_155
+          - *ref_156
+          - *ref_157
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -3864,12 +3873,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_156
+          - !Parameter &ref_158
             schema: *ref_1
             implementation: Method
             required: true
@@ -3910,10 +3920,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_156
+          - *ref_158
         responses:
           - !SchemaResponse 
-            schema: *ref_157
+            schema: *ref_159
             language: !Languages 
               default:
                 name: ''
@@ -3936,12 +3946,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_158
+          - !Parameter &ref_160
             schema: *ref_1
             implementation: Method
             required: true
@@ -3953,7 +3964,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_159
+          - !Parameter &ref_161
             schema: *ref_1
             implementation: Method
             required: true
@@ -3994,11 +4005,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_158
-          - *ref_159
+          - *ref_160
+          - *ref_161
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -4021,6 +4032,7 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -4057,7 +4069,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_157
+            schema: *ref_159
             language: !Languages 
               default:
                 name: ''
@@ -4080,13 +4092,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_162
-            schema: *ref_161
+          - !Parameter &ref_164
+            schema: *ref_163
             implementation: Method
             required: true
             language: !Languages 
@@ -4126,10 +4139,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_162
+          - *ref_164
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -4160,12 +4173,13 @@ operationGroups:
     $key: FakeParentWithAncestorWithNonResChes
     operations:
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_164
+          - !Parameter &ref_167
             schema: *ref_1
             implementation: Method
             required: true
@@ -4177,7 +4191,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_165
+          - !Parameter &ref_168
             schema: *ref_1
             implementation: Method
             required: true
@@ -4191,8 +4205,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_166
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -4207,7 +4221,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_163
+              - !Parameter &ref_165
                 schema: *ref_30
                 implementation: Method
                 required: true
@@ -4233,7 +4247,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_163
+              - *ref_165
             language: !Languages 
               default:
                 name: ''
@@ -4246,9 +4260,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_166
         signatureParameters:
-          - *ref_164
-          - *ref_165
+          - *ref_167
+          - *ref_168
         responses:
           - !SchemaResponse 
             schema: *ref_30
@@ -4269,12 +4285,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_166
+          - !Parameter &ref_169
             schema: *ref_1
             implementation: Method
             required: true
@@ -4286,7 +4303,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_167
+          - !Parameter &ref_170
             schema: *ref_1
             implementation: Method
             required: true
@@ -4327,8 +4344,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_166
-          - *ref_167
+          - *ref_169
+          - *ref_170
         responses:
           - !SchemaResponse 
             schema: *ref_30
@@ -4349,12 +4366,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChes_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_168
+          - !Parameter &ref_171
             schema: *ref_1
             implementation: Method
             required: true
@@ -4395,10 +4413,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_168
+          - *ref_171
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4421,12 +4439,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_170
+          - !Parameter &ref_173
             schema: *ref_1
             implementation: Method
             required: true
@@ -4438,7 +4457,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_171
+          - !Parameter &ref_174
             schema: *ref_1
             implementation: Method
             required: true
@@ -4479,11 +4498,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_170
-          - *ref_171
+          - *ref_173
+          - *ref_174
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -4506,6 +4525,7 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithNonResChes_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -4542,7 +4562,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_169
+            schema: *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -4573,12 +4593,13 @@ operationGroups:
     $key: FakeParentWithAncestorWithLocs
     operations:
       - !Operation 
+        operationId: FakeParentWithAncestorWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_173
+          - !Parameter &ref_177
             schema: *ref_1
             implementation: Method
             required: true
@@ -4590,7 +4611,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_174
+          - !Parameter &ref_178
             schema: *ref_1
             implementation: Method
             required: true
@@ -4604,8 +4625,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_176
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -4620,7 +4641,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_172
+              - !Parameter &ref_175
                 schema: *ref_31
                 implementation: Method
                 required: true
@@ -4646,7 +4667,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_172
+              - *ref_175
             language: !Languages 
               default:
                 name: ''
@@ -4659,9 +4680,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_176
         signatureParameters:
-          - *ref_173
-          - *ref_174
+          - *ref_177
+          - *ref_178
         responses:
           - !SchemaResponse 
             schema: *ref_31
@@ -4682,12 +4705,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_175
+          - !Parameter &ref_179
             schema: *ref_1
             implementation: Method
             required: true
@@ -4699,7 +4723,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_176
+          - !Parameter &ref_180
             schema: *ref_1
             implementation: Method
             required: true
@@ -4740,8 +4764,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_175
-          - *ref_176
+          - *ref_179
+          - *ref_180
         responses:
           - !SchemaResponse 
             schema: *ref_31
@@ -4762,12 +4786,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithLocs_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_177
+          - !Parameter &ref_181
             schema: *ref_1
             implementation: Method
             required: true
@@ -4808,10 +4833,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_177
+          - *ref_181
         responses:
           - !SchemaResponse 
-            schema: *ref_178
+            schema: *ref_182
             language: !Languages 
               default:
                 name: ''
@@ -4834,6 +4859,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithLocs_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -4870,7 +4896,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_178
+            schema: *ref_182
             language: !Languages 
               default:
                 name: ''
@@ -4893,13 +4919,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestorWithLocs_ListTestByLocations
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_179
-            schema: *ref_161
+          - !Parameter &ref_183
+            schema: *ref_163
             implementation: Method
             required: true
             language: !Languages 
@@ -4939,10 +4966,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_179
+          - *ref_183
         responses:
           - !SchemaResponse 
-            schema: *ref_178
+            schema: *ref_182
             language: !Languages 
               default:
                 name: ''
@@ -4973,12 +5000,13 @@ operationGroups:
     $key: FakeParentWithAncestors
     operations:
       - !Operation 
+        operationId: FakeParentWithAncestors_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_181
+          - !Parameter &ref_186
             schema: *ref_1
             implementation: Method
             required: true
@@ -4990,7 +5018,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_182
+          - !Parameter &ref_187
             schema: *ref_1
             implementation: Method
             required: true
@@ -5004,8 +5032,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_185
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -5020,7 +5048,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_180
+              - !Parameter &ref_184
                 schema: *ref_32
                 implementation: Method
                 required: true
@@ -5046,7 +5074,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_180
+              - *ref_184
             language: !Languages 
               default:
                 name: ''
@@ -5059,9 +5087,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_185
         signatureParameters:
-          - *ref_181
-          - *ref_182
+          - *ref_186
+          - *ref_187
         responses:
           - !SchemaResponse 
             schema: *ref_32
@@ -5082,12 +5112,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestors_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_183
+          - !Parameter &ref_188
             schema: *ref_1
             implementation: Method
             required: true
@@ -5099,7 +5130,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_184
+          - !Parameter &ref_189
             schema: *ref_1
             implementation: Method
             required: true
@@ -5140,8 +5171,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_183
-          - *ref_184
+          - *ref_188
+          - *ref_189
         responses:
           - !SchemaResponse 
             schema: *ref_32
@@ -5162,12 +5193,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestors_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_185
+          - !Parameter &ref_190
             schema: *ref_1
             implementation: Method
             required: true
@@ -5208,10 +5240,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_185
+          - *ref_190
         responses:
           - !SchemaResponse 
-            schema: *ref_186
+            schema: *ref_191
             language: !Languages 
               default:
                 name: ''
@@ -5234,6 +5266,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithAncestors_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -5270,7 +5303,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_186
+            schema: *ref_191
             language: !Languages 
               default:
                 name: ''
@@ -5301,12 +5334,13 @@ operationGroups:
     $key: FakeParentWithNonResChes
     operations:
       - !Operation 
+        operationId: FakeParentWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_188
+          - !Parameter &ref_194
             schema: *ref_1
             implementation: Method
             required: true
@@ -5318,7 +5352,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_189
+          - !Parameter &ref_195
             schema: *ref_1
             implementation: Method
             required: true
@@ -5332,8 +5366,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_193
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -5348,7 +5382,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_187
+              - !Parameter &ref_192
                 schema: *ref_33
                 implementation: Method
                 required: true
@@ -5374,7 +5408,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_187
+              - *ref_192
             language: !Languages 
               default:
                 name: ''
@@ -5387,9 +5421,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_193
         signatureParameters:
-          - *ref_188
-          - *ref_189
+          - *ref_194
+          - *ref_195
         responses:
           - !SchemaResponse 
             schema: *ref_33
@@ -5410,12 +5446,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_190
+          - !Parameter &ref_196
             schema: *ref_1
             implementation: Method
             required: true
@@ -5427,7 +5464,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_191
+          - !Parameter &ref_197
             schema: *ref_1
             implementation: Method
             required: true
@@ -5468,8 +5505,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_190
-          - *ref_191
+          - *ref_196
+          - *ref_197
         responses:
           - !SchemaResponse 
             schema: *ref_33
@@ -5490,12 +5527,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_192
+          - !Parameter &ref_198
             schema: *ref_1
             implementation: Method
             required: true
@@ -5507,7 +5545,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_193
+          - !Parameter &ref_199
             schema: *ref_1
             implementation: Method
             required: true
@@ -5548,11 +5586,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_192
-          - *ref_193
+          - *ref_198
+          - *ref_199
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -5570,12 +5608,13 @@ operationGroups:
             description: Lists all.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParentWithNonResChes_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_194
+          - !Parameter &ref_200
             schema: *ref_1
             implementation: Method
             required: true
@@ -5616,10 +5655,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_194
+          - *ref_200
         responses:
           - !SchemaResponse 
-            schema: *ref_195
+            schema: *ref_201
             language: !Languages 
               default:
                 name: ''
@@ -5650,12 +5689,13 @@ operationGroups:
     $key: FakeParents
     operations:
       - !Operation 
+        operationId: FakeParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_197
+          - !Parameter &ref_204
             schema: *ref_1
             implementation: Method
             required: true
@@ -5667,7 +5707,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_198
+          - !Parameter &ref_205
             schema: *ref_1
             implementation: Method
             required: true
@@ -5681,8 +5721,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_203
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -5697,7 +5737,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_196
+              - !Parameter &ref_202
                 schema: *ref_34
                 implementation: Method
                 required: true
@@ -5723,7 +5763,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_196
+              - *ref_202
             language: !Languages 
               default:
                 name: ''
@@ -5736,9 +5776,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_203
         signatureParameters:
-          - *ref_197
-          - *ref_198
+          - *ref_204
+          - *ref_205
         responses:
           - !SchemaResponse 
             schema: *ref_34
@@ -5759,12 +5801,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_199
+          - !Parameter &ref_206
             schema: *ref_1
             implementation: Method
             required: true
@@ -5776,7 +5819,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_200
+          - !Parameter &ref_207
             schema: *ref_1
             implementation: Method
             required: true
@@ -5817,8 +5860,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_199
-          - *ref_200
+          - *ref_206
+          - *ref_207
         responses:
           - !SchemaResponse 
             schema: *ref_34
@@ -5839,12 +5882,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: FakeParents_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_201
+          - !Parameter &ref_208
             schema: *ref_1
             implementation: Method
             required: true
@@ -5885,10 +5929,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_201
+          - *ref_208
         responses:
           - !SchemaResponse 
-            schema: *ref_202
+            schema: *ref_209
             language: !Languages 
               default:
                 name: ''
@@ -5919,12 +5963,13 @@ operationGroups:
     $key: ResGrpParentWithAncestorWithNonResChWithLocs
     operations:
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_204
+          - !Parameter &ref_212
             schema: *ref_1
             implementation: Method
             required: true
@@ -5936,7 +5981,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_205
+          - !Parameter &ref_213
             schema: *ref_1
             implementation: Method
             required: true
@@ -5950,8 +5995,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_211
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -5966,7 +6011,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_203
+              - !Parameter &ref_210
                 schema: *ref_35
                 implementation: Method
                 required: true
@@ -5992,7 +6037,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_203
+              - *ref_210
             language: !Languages 
               default:
                 name: ''
@@ -6005,9 +6050,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_211
         signatureParameters:
-          - *ref_204
-          - *ref_205
+          - *ref_212
+          - *ref_213
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -6028,12 +6075,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_206
+          - !Parameter &ref_214
             schema: *ref_1
             implementation: Method
             required: true
@@ -6045,7 +6093,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_207
+          - !Parameter &ref_215
             schema: *ref_1
             implementation: Method
             required: true
@@ -6086,8 +6134,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_206
-          - *ref_207
+          - *ref_214
+          - *ref_215
         responses:
           - !SchemaResponse 
             schema: *ref_35
@@ -6108,12 +6156,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_208
+          - !Parameter &ref_216
             schema: *ref_1
             implementation: Method
             required: true
@@ -6154,10 +6203,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_208
+          - *ref_216
         responses:
           - !SchemaResponse 
-            schema: *ref_209
+            schema: *ref_217
             language: !Languages 
               default:
                 name: ''
@@ -6180,12 +6229,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_210
+          - !Parameter &ref_218
             schema: *ref_1
             implementation: Method
             required: true
@@ -6197,7 +6247,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_211
+          - !Parameter &ref_219
             schema: *ref_1
             implementation: Method
             required: true
@@ -6238,11 +6288,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_210
-          - *ref_211
+          - *ref_218
+          - *ref_219
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -6265,6 +6315,7 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChWithLocs_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -6272,7 +6323,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_142
-          - !Parameter &ref_212
+          - !Parameter &ref_220
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -6310,10 +6361,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_212
+          - *ref_220
         responses:
           - !SchemaResponse 
-            schema: *ref_209
+            schema: *ref_217
             language: !Languages 
               default:
                 name: ''
@@ -6344,12 +6395,13 @@ operationGroups:
     $key: ResGrpParentWithAncestorWithNonResChes
     operations:
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_214
+          - !Parameter &ref_223
             schema: *ref_1
             implementation: Method
             required: true
@@ -6361,7 +6413,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_215
+          - !Parameter &ref_224
             schema: *ref_1
             implementation: Method
             required: true
@@ -6375,8 +6427,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_222
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -6391,7 +6443,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_213
+              - !Parameter &ref_221
                 schema: *ref_36
                 implementation: Method
                 required: true
@@ -6417,7 +6469,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_213
+              - *ref_221
             language: !Languages 
               default:
                 name: ''
@@ -6430,9 +6482,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_222
         signatureParameters:
-          - *ref_214
-          - *ref_215
+          - *ref_223
+          - *ref_224
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -6453,12 +6507,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_216
+          - !Parameter &ref_225
             schema: *ref_1
             implementation: Method
             required: true
@@ -6470,7 +6525,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_217
+          - !Parameter &ref_226
             schema: *ref_1
             implementation: Method
             required: true
@@ -6511,8 +6566,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_216
-          - *ref_217
+          - *ref_225
+          - *ref_226
         responses:
           - !SchemaResponse 
             schema: *ref_36
@@ -6533,12 +6588,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChes_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_218
+          - !Parameter &ref_227
             schema: *ref_1
             implementation: Method
             required: true
@@ -6579,10 +6635,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_218
+          - *ref_227
         responses:
           - !SchemaResponse 
-            schema: *ref_219
+            schema: *ref_228
             language: !Languages 
               default:
                 name: ''
@@ -6605,12 +6661,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_220
+          - !Parameter &ref_229
             schema: *ref_1
             implementation: Method
             required: true
@@ -6622,7 +6679,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_221
+          - !Parameter &ref_230
             schema: *ref_1
             implementation: Method
             required: true
@@ -6663,11 +6720,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_220
-          - *ref_221
+          - *ref_229
+          - *ref_230
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -6690,6 +6747,7 @@ operationGroups:
               nextLinkName: null
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithNonResChes_ListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -6697,7 +6755,7 @@ operationGroups:
           - *ref_140
           - *ref_141
           - *ref_142
-          - !Parameter &ref_222
+          - !Parameter &ref_231
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -6735,10 +6793,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_222
+          - *ref_231
         responses:
           - !SchemaResponse 
-            schema: *ref_219
+            schema: *ref_228
             language: !Languages 
               default:
                 name: ''
@@ -6769,12 +6827,13 @@ operationGroups:
     $key: ResGrpParentWithAncestorWithLocs
     operations:
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_224
+          - !Parameter &ref_234
             schema: *ref_1
             implementation: Method
             required: true
@@ -6786,7 +6845,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_225
+          - !Parameter &ref_235
             schema: *ref_1
             implementation: Method
             required: true
@@ -6800,8 +6859,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_233
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -6816,7 +6875,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_223
+              - !Parameter &ref_232
                 schema: *ref_37
                 implementation: Method
                 required: true
@@ -6842,7 +6901,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_223
+              - *ref_232
             language: !Languages 
               default:
                 name: ''
@@ -6855,9 +6914,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_233
         signatureParameters:
-          - *ref_224
-          - *ref_225
+          - *ref_234
+          - *ref_235
         responses:
           - !SchemaResponse 
             schema: *ref_37
@@ -6878,12 +6939,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_226
+          - !Parameter &ref_236
             schema: *ref_1
             implementation: Method
             required: true
@@ -6895,7 +6957,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_227
+          - !Parameter &ref_237
             schema: *ref_1
             implementation: Method
             required: true
@@ -6936,8 +6998,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_226
-          - *ref_227
+          - *ref_236
+          - *ref_237
         responses:
           - !SchemaResponse 
             schema: *ref_37
@@ -6958,12 +7020,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_228
+          - !Parameter &ref_238
             schema: *ref_1
             implementation: Method
             required: true
@@ -7004,10 +7067,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_228
+          - *ref_238
         responses:
           - !SchemaResponse 
-            schema: *ref_229
+            schema: *ref_239
             language: !Languages 
               default:
                 name: ''
@@ -7030,6 +7093,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithLocs_ListTest
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -7066,7 +7130,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_229
+            schema: *ref_239
             language: !Languages 
               default:
                 name: ''
@@ -7089,13 +7153,14 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestorWithLocs_ListAll
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_230
-            schema: *ref_161
+          - !Parameter &ref_240
+            schema: *ref_163
             implementation: Method
             required: true
             language: !Languages 
@@ -7135,10 +7200,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_230
+          - *ref_240
         responses:
           - !SchemaResponse 
-            schema: *ref_209
+            schema: *ref_217
             language: !Languages 
               default:
                 name: ''
@@ -7169,12 +7234,13 @@ operationGroups:
     $key: ResGrpParentWithAncestors
     operations:
       - !Operation 
+        operationId: ResGrpParentWithAncestors_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_232
+          - !Parameter &ref_243
             schema: *ref_1
             implementation: Method
             required: true
@@ -7186,7 +7252,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_233
+          - !Parameter &ref_244
             schema: *ref_1
             implementation: Method
             required: true
@@ -7200,8 +7266,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_242
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -7216,7 +7282,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_231
+              - !Parameter &ref_241
                 schema: *ref_38
                 implementation: Method
                 required: true
@@ -7242,7 +7308,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_231
+              - *ref_241
             language: !Languages 
               default:
                 name: ''
@@ -7255,9 +7321,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_242
         signatureParameters:
-          - *ref_232
-          - *ref_233
+          - *ref_243
+          - *ref_244
         responses:
           - !SchemaResponse 
             schema: *ref_38
@@ -7278,12 +7346,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestors_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_234
+          - !Parameter &ref_245
             schema: *ref_1
             implementation: Method
             required: true
@@ -7295,7 +7364,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_235
+          - !Parameter &ref_246
             schema: *ref_1
             implementation: Method
             required: true
@@ -7336,8 +7405,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_234
-          - *ref_235
+          - *ref_245
+          - *ref_246
         responses:
           - !SchemaResponse 
             schema: *ref_38
@@ -7358,12 +7427,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestors_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_236
+          - !Parameter &ref_247
             schema: *ref_1
             implementation: Method
             required: true
@@ -7404,10 +7474,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_236
+          - *ref_247
         responses:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_248
             language: !Languages 
               default:
                 name: ''
@@ -7430,6 +7500,7 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithAncestors_NonPageableListBySubscription
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -7466,7 +7537,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_237
+            schema: *ref_248
             language: !Languages 
               default:
                 name: ''
@@ -7492,12 +7563,13 @@ operationGroups:
     $key: ResGrpParentWithNonResChes
     operations:
       - !Operation 
+        operationId: ResGrpParentWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_239
+          - !Parameter &ref_251
             schema: *ref_1
             implementation: Method
             required: true
@@ -7509,7 +7581,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_240
+          - !Parameter &ref_252
             schema: *ref_1
             implementation: Method
             required: true
@@ -7523,8 +7595,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_250
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -7539,7 +7611,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_238
+              - !Parameter &ref_249
                 schema: *ref_39
                 implementation: Method
                 required: true
@@ -7565,7 +7637,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_238
+              - *ref_249
             language: !Languages 
               default:
                 name: ''
@@ -7578,9 +7650,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_250
         signatureParameters:
-          - *ref_239
-          - *ref_240
+          - *ref_251
+          - *ref_252
         responses:
           - !SchemaResponse 
             schema: *ref_39
@@ -7601,12 +7675,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_241
+          - !Parameter &ref_253
             schema: *ref_1
             implementation: Method
             required: true
@@ -7618,7 +7693,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_242
+          - !Parameter &ref_254
             schema: *ref_1
             implementation: Method
             required: true
@@ -7659,8 +7734,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_241
-          - *ref_242
+          - *ref_253
+          - *ref_254
         responses:
           - !SchemaResponse 
             schema: *ref_39
@@ -7681,12 +7756,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithNonResChes_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_243
+          - !Parameter &ref_255
             schema: *ref_1
             implementation: Method
             required: true
@@ -7727,10 +7803,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_243
+          - *ref_255
         responses:
           - !SchemaResponse 
-            schema: *ref_244
+            schema: *ref_256
             language: !Languages 
               default:
                 name: ''
@@ -7753,12 +7829,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParentWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_245
+          - !Parameter &ref_257
             schema: *ref_1
             implementation: Method
             required: true
@@ -7770,7 +7847,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_246
+          - !Parameter &ref_258
             schema: *ref_1
             implementation: Method
             required: true
@@ -7811,11 +7888,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_245
-          - *ref_246
+          - *ref_257
+          - *ref_258
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -7846,12 +7923,13 @@ operationGroups:
     $key: ResGrpParents
     operations:
       - !Operation 
+        operationId: ResGrpParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_248
+          - !Parameter &ref_261
             schema: *ref_1
             implementation: Method
             required: true
@@ -7863,7 +7941,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_249
+          - !Parameter &ref_262
             schema: *ref_1
             implementation: Method
             required: true
@@ -7877,8 +7955,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_260
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -7893,7 +7971,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_247
+              - !Parameter &ref_259
                 schema: *ref_40
                 implementation: Method
                 required: true
@@ -7919,7 +7997,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_247
+              - *ref_259
             language: !Languages 
               default:
                 name: ''
@@ -7932,9 +8010,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_260
         signatureParameters:
-          - *ref_248
-          - *ref_249
+          - *ref_261
+          - *ref_262
         responses:
           - !SchemaResponse 
             schema: *ref_40
@@ -7955,12 +8035,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_250
+          - !Parameter &ref_263
             schema: *ref_1
             implementation: Method
             required: true
@@ -7972,7 +8053,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_251
+          - !Parameter &ref_264
             schema: *ref_1
             implementation: Method
             required: true
@@ -8013,8 +8094,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_250
-          - *ref_251
+          - *ref_263
+          - *ref_264
         responses:
           - !SchemaResponse 
             schema: *ref_40
@@ -8035,12 +8116,13 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: ResGrpParents_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_252
+          - !Parameter &ref_265
             schema: *ref_1
             implementation: Method
             required: true
@@ -8081,10 +8163,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_252
+          - *ref_265
         responses:
           - !SchemaResponse 
-            schema: *ref_253
+            schema: *ref_266
             language: !Languages 
               default:
                 name: ''
@@ -8110,12 +8192,13 @@ operationGroups:
     $key: SubParentWithNonResChWithLocs
     operations:
       - !Operation 
+        operationId: SubParentWithNonResChWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_255
+          - !Parameter &ref_269
             schema: *ref_1
             implementation: Method
             required: true
@@ -8129,8 +8212,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_268
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -8145,7 +8228,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_254
+              - !Parameter &ref_267
                 schema: *ref_41
                 implementation: Method
                 required: true
@@ -8171,7 +8254,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_254
+              - *ref_267
             language: !Languages 
               default:
                 name: ''
@@ -8184,8 +8267,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_268
         signatureParameters:
-          - *ref_255
+          - *ref_269
         responses:
           - !SchemaResponse 
             schema: *ref_41
@@ -8206,12 +8291,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_256
+          - !Parameter &ref_270
             schema: *ref_1
             implementation: Method
             required: true
@@ -8252,7 +8338,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_256
+          - *ref_270
         responses:
           - !SchemaResponse 
             schema: *ref_41
@@ -8273,6 +8359,7 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -8309,7 +8396,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_257
+            schema: *ref_271
             language: !Languages 
               default:
                 name: ''
@@ -8332,12 +8419,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChWithLocs_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_258
+          - !Parameter &ref_272
             schema: *ref_1
             implementation: Method
             required: true
@@ -8378,10 +8466,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_258
+          - *ref_272
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -8412,12 +8500,13 @@ operationGroups:
     $key: SubParentWithNonResChes
     operations:
       - !Operation 
+        operationId: SubParentWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_260
+          - !Parameter &ref_275
             schema: *ref_1
             implementation: Method
             required: true
@@ -8431,8 +8520,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_274
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -8447,7 +8536,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_259
+              - !Parameter &ref_273
                 schema: *ref_42
                 implementation: Method
                 required: true
@@ -8473,7 +8562,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_259
+              - *ref_273
             language: !Languages 
               default:
                 name: ''
@@ -8486,8 +8575,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_274
         signatureParameters:
-          - *ref_260
+          - *ref_275
         responses:
           - !SchemaResponse 
             schema: *ref_42
@@ -8508,12 +8599,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_261
+          - !Parameter &ref_276
             schema: *ref_1
             implementation: Method
             required: true
@@ -8554,7 +8646,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_261
+          - *ref_276
         responses:
           - !SchemaResponse 
             schema: *ref_42
@@ -8575,6 +8667,7 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChes_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -8611,7 +8704,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_262
+            schema: *ref_277
             language: !Languages 
               default:
                 name: ''
@@ -8634,12 +8727,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_263
+          - !Parameter &ref_278
             schema: *ref_1
             implementation: Method
             required: true
@@ -8680,10 +8774,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_263
+          - *ref_278
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -8714,12 +8808,13 @@ operationGroups:
     $key: SubParentWithLocs
     operations:
       - !Operation 
+        operationId: SubParentWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_265
+          - !Parameter &ref_281
             schema: *ref_1
             implementation: Method
             required: true
@@ -8733,8 +8828,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_280
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -8749,7 +8844,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_264
+              - !Parameter &ref_279
                 schema: *ref_43
                 implementation: Method
                 required: true
@@ -8775,7 +8870,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_264
+              - *ref_279
             language: !Languages 
               default:
                 name: ''
@@ -8788,8 +8883,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_280
         signatureParameters:
-          - *ref_265
+          - *ref_281
         responses:
           - !SchemaResponse 
             schema: *ref_43
@@ -8810,12 +8907,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_266
+          - !Parameter &ref_282
             schema: *ref_1
             implementation: Method
             required: true
@@ -8856,7 +8954,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_266
+          - *ref_282
         responses:
           - !SchemaResponse 
             schema: *ref_43
@@ -8877,6 +8975,7 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParentWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -8913,7 +9012,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_267
+            schema: *ref_283
             language: !Languages 
               default:
                 name: ''
@@ -8944,12 +9043,13 @@ operationGroups:
     $key: SubParents
     operations:
       - !Operation 
+        operationId: SubParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_269
+          - !Parameter &ref_286
             schema: *ref_1
             implementation: Method
             required: true
@@ -8963,8 +9063,8 @@ operationGroups:
                 in: path
           - *ref_141
           - *ref_142
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_285
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -8979,7 +9079,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_268
+              - !Parameter &ref_284
                 schema: *ref_44
                 implementation: Method
                 required: true
@@ -9005,7 +9105,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_268
+              - *ref_284
             language: !Languages 
               default:
                 name: ''
@@ -9018,8 +9118,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_285
         signatureParameters:
-          - *ref_269
+          - *ref_286
         responses:
           - !SchemaResponse 
             schema: *ref_44
@@ -9040,12 +9142,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_270
+          - !Parameter &ref_287
             schema: *ref_1
             implementation: Method
             required: true
@@ -9086,7 +9189,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_270
+          - *ref_287
         responses:
           - !SchemaResponse 
             schema: *ref_44
@@ -9107,6 +9210,7 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: SubParents_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -9143,7 +9247,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_271
+            schema: *ref_288
             language: !Languages 
               default:
                 name: ''
@@ -9174,12 +9278,13 @@ operationGroups:
     $key: MgmtGrpParentWithNonResChWithLocs
     operations:
       - !Operation 
+        operationId: MgmtGrpParentWithNonResChWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_273
+          - !Parameter &ref_291
             schema: *ref_1
             implementation: Method
             required: true
@@ -9192,7 +9297,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_274
+          - !Parameter &ref_292
             schema: *ref_1
             implementation: Method
             required: true
@@ -9204,8 +9309,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_290
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -9220,7 +9325,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_272
+              - !Parameter &ref_289
                 schema: *ref_45
                 implementation: Method
                 required: true
@@ -9246,7 +9351,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_272
+              - *ref_289
             language: !Languages 
               default:
                 name: ''
@@ -9259,712 +9364,14 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters:
-          - *ref_273
-          - *ref_274
-        responses:
-          - !SchemaResponse 
-            schema: *ref_45
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: CreateOrUpdate
-            description: Create or update.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_275
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithNonResChWithLocName
-                description: Name.
-                serializedName: mgmtGrpParentWithNonResChWithLocName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_276
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
         requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_275
-          - *ref_276
-        responses:
-          - !SchemaResponse 
-            schema: *ref_45
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - *ref_141
-          - !Parameter &ref_277
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_277
-        responses:
-          - !SchemaResponse 
-            schema: *ref_278
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: List
-            description: Lists all in a resource group.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_279
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithNonResChWithLocName
-                description: Name.
-                serializedName: mgmtGrpParentWithNonResChWithLocName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_280
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}/nonResourceChild
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_279
-          - *ref_280
-        responses:
-          - !SchemaResponse 
-            schema: *ref_160
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-pageable:
-            nextLinkName: null
-        language: !Languages 
-          default:
-            name: ListNonResourceChild
-            description: Lists all.
-            paging:
-              nextLinkName: null
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: MgmtGrpParentWithNonResChWithLocs
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: MgmtGrpParentWithNonResChes
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_282
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithNonResChName
-                description: Name.
-                serializedName: mgmtGrpParentWithNonResChName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_283
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_143
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_281
-                schema: *ref_46
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the Create.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_281
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_282
-          - *ref_283
-        responses:
-          - !SchemaResponse 
-            schema: *ref_46
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: CreateOrUpdate
-            description: Create or update.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_284
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithNonResChName
-                description: Name.
-                serializedName: mgmtGrpParentWithNonResChName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_285
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_284
-          - *ref_285
-        responses:
-          - !SchemaResponse 
-            schema: *ref_46
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - *ref_141
-          - !Parameter &ref_286
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_286
-        responses:
-          - !SchemaResponse 
-            schema: *ref_287
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: List
-            description: Lists all in a resource group.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_288
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithNonResChName
-                description: Name.
-                serializedName: mgmtGrpParentWithNonResChName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_289
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}/nonResourceChild
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_288
-          - *ref_289
-        responses:
-          - !SchemaResponse 
-            schema: *ref_160
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-pageable:
-            nextLinkName: null
-        language: !Languages 
-          default:
-            name: ListNonResourceChild
-            description: Lists all.
-            paging:
-              nextLinkName: null
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: MgmtGrpParentWithNonResChes
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: MgmtGrpParentWithLocs
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_140
-          - !Parameter &ref_291
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: mgmtGrpParentWithLocName
-                description: Name.
-                serializedName: mgmtGrpParentWithLocName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_141
-          - !Parameter &ref_292
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: Management Group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_143
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_290
-                schema: *ref_47
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the Create.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_144
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_290
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
+          - *ref_290
         signatureParameters:
           - *ref_291
           - *ref_292
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -9982,6 +9389,7 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MgmtGrpParentWithNonResChWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -9993,9 +9401,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: mgmtGrpParentWithLocName
+                name: mgmtGrpParentWithNonResChWithLocName
                 description: Name.
-                serializedName: mgmtGrpParentWithLocName
+                serializedName: mgmtGrpParentWithNonResChWithLocName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -10035,7 +9443,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -10043,7 +9451,7 @@ operationGroups:
           - *ref_294
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -10061,6 +9469,7 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MgmtGrpParentWithNonResChWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
@@ -10102,7 +9511,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -10110,6 +9519,718 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_296
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Lists all in a resource group.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithNonResChWithLocs_ListNonResourceChild
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_297
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithNonResChWithLocName
+                description: Name.
+                serializedName: mgmtGrpParentWithNonResChWithLocName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_298
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}/nonResourceChild
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_297
+          - *ref_298
+        responses:
+          - !SchemaResponse 
+            schema: *ref_162
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: null
+        language: !Languages 
+          default:
+            name: ListNonResourceChild
+            description: Lists all.
+            paging:
+              nextLinkName: null
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: MgmtGrpParentWithNonResChWithLocs
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: MgmtGrpParentWithNonResChes
+    operations:
+      - !Operation 
+        operationId: MgmtGrpParentWithNonResChes_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_301
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithNonResChName
+                description: Name.
+                serializedName: mgmtGrpParentWithNonResChName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_302
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requestMediaTypes:
+          application/json: !Request &ref_300
+            parameters:
+              - !Parameter 
+                schema: *ref_143
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_299
+                schema: *ref_46
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Create.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_299
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_300
+        signatureParameters:
+          - *ref_301
+          - *ref_302
+        responses:
+          - !SchemaResponse 
+            schema: *ref_46
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or update.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithNonResChes_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_303
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithNonResChName
+                description: Name.
+                serializedName: mgmtGrpParentWithNonResChName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_304
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_303
+          - *ref_304
+        responses:
+          - !SchemaResponse 
+            schema: *ref_46
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithNonResChes_List
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - *ref_141
+          - !Parameter &ref_305
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_305
+        responses:
+          - !SchemaResponse 
+            schema: *ref_306
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Lists all in a resource group.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithNonResChes_ListNonResourceChild
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_307
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithNonResChName
+                description: Name.
+                serializedName: mgmtGrpParentWithNonResChName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_308
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}/nonResourceChild
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_307
+          - *ref_308
+        responses:
+          - !SchemaResponse 
+            schema: *ref_162
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: null
+        language: !Languages 
+          default:
+            name: ListNonResourceChild
+            description: Lists all.
+            paging:
+              nextLinkName: null
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: MgmtGrpParentWithNonResChes
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: MgmtGrpParentWithLocs
+    operations:
+      - !Operation 
+        operationId: MgmtGrpParentWithLocs_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_311
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithLocName
+                description: Name.
+                serializedName: mgmtGrpParentWithLocName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_312
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requestMediaTypes:
+          application/json: !Request &ref_310
+            parameters:
+              - !Parameter 
+                schema: *ref_143
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_309
+                schema: *ref_47
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Create.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_309
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_310
+        signatureParameters:
+          - *ref_311
+          - *ref_312
+        responses:
+          - !SchemaResponse 
+            schema: *ref_47
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or update.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithLocs_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - !Parameter &ref_313
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: mgmtGrpParentWithLocName
+                description: Name.
+                serializedName: mgmtGrpParentWithLocName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_141
+          - !Parameter &ref_314
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_313
+          - *ref_314
+        responses:
+          - !SchemaResponse 
+            schema: *ref_47
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: MgmtGrpParentWithLocs_List
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_140
+          - *ref_141
+          - !Parameter &ref_315
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: Management Group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_144
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_315
+        responses:
+          - !SchemaResponse 
+            schema: *ref_316
             language: !Languages 
               default:
                 name: ''
@@ -10140,12 +10261,13 @@ operationGroups:
     $key: MgmtGroupParents
     operations:
       - !Operation 
+        operationId: MgmtGroupParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_298
+          - !Parameter &ref_319
             schema: *ref_1
             implementation: Method
             required: true
@@ -10158,7 +10280,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_299
+          - !Parameter &ref_320
             schema: *ref_1
             implementation: Method
             required: true
@@ -10170,8 +10292,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_318
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -10186,7 +10308,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_297
+              - !Parameter &ref_317
                 schema: *ref_48
                 implementation: Method
                 required: true
@@ -10212,7 +10334,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_297
+              - *ref_317
             language: !Languages 
               default:
                 name: ''
@@ -10225,9 +10347,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_318
         signatureParameters:
-          - *ref_298
-          - *ref_299
+          - *ref_319
+          - *ref_320
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -10248,12 +10372,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MgmtGroupParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_300
+          - !Parameter &ref_321
             schema: *ref_1
             implementation: Method
             required: true
@@ -10266,7 +10391,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_301
+          - !Parameter &ref_322
             schema: *ref_1
             implementation: Method
             required: true
@@ -10305,8 +10430,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_300
-          - *ref_301
+          - *ref_321
+          - *ref_322
         responses:
           - !SchemaResponse 
             schema: *ref_48
@@ -10327,13 +10452,14 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: MgmtGroupParents_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_302
+          - !Parameter &ref_323
             schema: *ref_1
             implementation: Method
             required: true
@@ -10372,10 +10498,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_302
+          - *ref_323
         responses:
           - !SchemaResponse 
-            schema: *ref_303
+            schema: *ref_324
             language: !Languages 
               default:
                 name: ''
@@ -10406,13 +10532,14 @@ operationGroups:
     $key: TenantTests
     operations:
       - !Operation 
+        operationId: TenantTests_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_304
+          - !Parameter &ref_325
             schema: *ref_1
             implementation: Method
             required: true
@@ -10424,7 +10551,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_305
+          - !Parameter &ref_326
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -10462,8 +10589,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_304
-          - *ref_305
+          - *ref_325
+          - *ref_326
         responses:
           - !SchemaResponse 
             schema: *ref_49
@@ -10484,13 +10611,14 @@ operationGroups:
             description: Gets a billing account by its ID.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantTests_Create
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_307
+          - !Parameter &ref_329
             schema: *ref_1
             implementation: Method
             required: true
@@ -10502,8 +10630,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_328
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -10518,7 +10646,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_306
+              - !Parameter &ref_327
                 schema: *ref_49
                 implementation: Method
                 required: true
@@ -10544,7 +10672,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_306
+              - *ref_327
             language: !Languages 
               default:
                 name: ''
@@ -10557,8 +10685,10 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_328
         signatureParameters:
-          - *ref_307
+          - *ref_329
         responses:
           - !SchemaResponse 
             schema: *ref_49
@@ -10583,12 +10713,13 @@ operationGroups:
             description: Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantTests_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_308
+          - !Parameter &ref_330
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -10627,10 +10758,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_308
+          - *ref_330
         responses:
           - !SchemaResponse 
-            schema: *ref_309
+            schema: *ref_331
             language: !Languages 
               default:
                 name: ''
@@ -10661,12 +10792,13 @@ operationGroups:
     $key: TenantParentWithNonResChWithLocs
     operations:
       - !Operation 
+        operationId: TenantParentWithNonResChWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_311
+          - !Parameter &ref_334
             schema: *ref_1
             implementation: Method
             required: true
@@ -10679,7 +10811,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_312
+          - !Parameter &ref_335
             schema: *ref_1
             implementation: Method
             required: true
@@ -10691,8 +10823,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_333
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -10707,7 +10839,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_310
+              - !Parameter &ref_332
                 schema: *ref_50
                 implementation: Method
                 required: true
@@ -10733,7 +10865,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_310
+              - *ref_332
             language: !Languages 
               default:
                 name: ''
@@ -10746,9 +10878,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_333
         signatureParameters:
-          - *ref_311
-          - *ref_312
+          - *ref_334
+          - *ref_335
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -10769,12 +10903,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_313
+          - !Parameter &ref_336
             schema: *ref_1
             implementation: Method
             required: true
@@ -10787,7 +10922,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_314
+          - !Parameter &ref_337
             schema: *ref_1
             implementation: Method
             required: true
@@ -10826,8 +10961,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_313
-          - *ref_314
+          - *ref_336
+          - *ref_337
         responses:
           - !SchemaResponse 
             schema: *ref_50
@@ -10848,13 +10983,14 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_315
+          - !Parameter &ref_338
             schema: *ref_1
             implementation: Method
             required: true
@@ -10893,10 +11029,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_315
+          - *ref_338
         responses:
           - !SchemaResponse 
-            schema: *ref_316
+            schema: *ref_339
             language: !Languages 
               default:
                 name: ''
@@ -10919,12 +11055,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChWithLocs_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_317
+          - !Parameter &ref_340
             schema: *ref_1
             implementation: Method
             required: true
@@ -10937,7 +11074,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_318
+          - !Parameter &ref_341
             schema: *ref_1
             implementation: Method
             required: true
@@ -10976,11 +11113,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_317
-          - *ref_318
+          - *ref_340
+          - *ref_341
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -11011,12 +11148,13 @@ operationGroups:
     $key: TenantParentWithNonResChes
     operations:
       - !Operation 
+        operationId: TenantParentWithNonResChes_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_320
+          - !Parameter &ref_344
             schema: *ref_1
             implementation: Method
             required: true
@@ -11029,7 +11167,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_321
+          - !Parameter &ref_345
             schema: *ref_1
             implementation: Method
             required: true
@@ -11041,8 +11179,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_343
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -11057,7 +11195,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_319
+              - !Parameter &ref_342
                 schema: *ref_51
                 implementation: Method
                 required: true
@@ -11083,7 +11221,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_319
+              - *ref_342
             language: !Languages 
               default:
                 name: ''
@@ -11096,9 +11234,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_343
         signatureParameters:
-          - *ref_320
-          - *ref_321
+          - *ref_344
+          - *ref_345
         responses:
           - !SchemaResponse 
             schema: *ref_51
@@ -11119,12 +11259,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChes_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_322
+          - !Parameter &ref_346
             schema: *ref_1
             implementation: Method
             required: true
@@ -11137,7 +11278,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_323
+          - !Parameter &ref_347
             schema: *ref_1
             implementation: Method
             required: true
@@ -11176,8 +11317,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_322
-          - *ref_323
+          - *ref_346
+          - *ref_347
         responses:
           - !SchemaResponse 
             schema: *ref_51
@@ -11198,13 +11339,14 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChes_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_324
+          - !Parameter &ref_348
             schema: *ref_1
             implementation: Method
             required: true
@@ -11243,10 +11385,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_324
+          - *ref_348
         responses:
           - !SchemaResponse 
-            schema: *ref_325
+            schema: *ref_349
             language: !Languages 
               default:
                 name: ''
@@ -11269,12 +11411,13 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithNonResChes_ListNonResourceChild
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_326
+          - !Parameter &ref_350
             schema: *ref_1
             implementation: Method
             required: true
@@ -11287,7 +11430,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_327
+          - !Parameter &ref_351
             schema: *ref_1
             implementation: Method
             required: true
@@ -11326,11 +11469,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_326
-          - *ref_327
+          - *ref_350
+          - *ref_351
         responses:
           - !SchemaResponse 
-            schema: *ref_160
+            schema: *ref_162
             language: !Languages 
               default:
                 name: ''
@@ -11361,12 +11504,13 @@ operationGroups:
     $key: TenantParentWithLocs
     operations:
       - !Operation 
+        operationId: TenantParentWithLocs_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_329
+          - !Parameter &ref_354
             schema: *ref_1
             implementation: Method
             required: true
@@ -11379,7 +11523,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_330
+          - !Parameter &ref_355
             schema: *ref_1
             implementation: Method
             required: true
@@ -11391,8 +11535,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_353
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -11407,7 +11551,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_328
+              - !Parameter &ref_352
                 schema: *ref_52
                 implementation: Method
                 required: true
@@ -11433,7 +11577,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_328
+              - *ref_352
             language: !Languages 
               default:
                 name: ''
@@ -11446,9 +11590,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_353
         signatureParameters:
-          - *ref_329
-          - *ref_330
+          - *ref_354
+          - *ref_355
         responses:
           - !SchemaResponse 
             schema: *ref_52
@@ -11469,12 +11615,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithLocs_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_331
+          - !Parameter &ref_356
             schema: *ref_1
             implementation: Method
             required: true
@@ -11487,7 +11634,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_332
+          - !Parameter &ref_357
             schema: *ref_1
             implementation: Method
             required: true
@@ -11526,8 +11673,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_331
-          - *ref_332
+          - *ref_356
+          - *ref_357
         responses:
           - !SchemaResponse 
             schema: *ref_52
@@ -11548,13 +11695,14 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParentWithLocs_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_333
+          - !Parameter &ref_358
             schema: *ref_1
             implementation: Method
             required: true
@@ -11593,10 +11741,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_333
+          - *ref_358
         responses:
           - !SchemaResponse 
-            schema: *ref_334
+            schema: *ref_359
             language: !Languages 
               default:
                 name: ''
@@ -11627,12 +11775,13 @@ operationGroups:
     $key: TenantParents
     operations:
       - !Operation 
+        operationId: TenantParents_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_336
+          - !Parameter &ref_362
             schema: *ref_1
             implementation: Method
             required: true
@@ -11645,7 +11794,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_337
+          - !Parameter &ref_363
             schema: *ref_1
             implementation: Method
             required: true
@@ -11657,8 +11806,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_361
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -11673,7 +11822,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_335
+              - !Parameter &ref_360
                 schema: *ref_53
                 implementation: Method
                 required: true
@@ -11699,7 +11848,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_335
+              - *ref_360
             language: !Languages 
               default:
                 name: ''
@@ -11712,9 +11861,11 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_361
         signatureParameters:
-          - *ref_336
-          - *ref_337
+          - *ref_362
+          - *ref_363
         responses:
           - !SchemaResponse 
             schema: *ref_53
@@ -11735,12 +11886,13 @@ operationGroups:
             description: Create or update.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParents_Get
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
-          - !Parameter &ref_338
+          - !Parameter &ref_364
             schema: *ref_1
             implementation: Method
             required: true
@@ -11753,7 +11905,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-          - !Parameter &ref_339
+          - !Parameter &ref_365
             schema: *ref_1
             implementation: Method
             required: true
@@ -11792,8 +11944,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_338
-          - *ref_339
+          - *ref_364
+          - *ref_365
         responses:
           - !SchemaResponse 
             schema: *ref_53
@@ -11814,13 +11966,14 @@ operationGroups:
             description: Retrieves information.
         protocol: !Protocols {}
       - !Operation 
+        operationId: TenantParents_List
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_141
-          - !Parameter &ref_340
+          - !Parameter &ref_366
             schema: *ref_1
             implementation: Method
             required: true
@@ -11859,10 +12012,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_340
+          - *ref_366
         responses:
           - !SchemaResponse 
-            schema: *ref_341
+            schema: *ref_367
             language: !Languages 
               default:
                 name: ''
@@ -11893,14 +12046,15 @@ operationGroups:
     $key: Quotas
     operations:
       - !Operation 
+        operationId: Quotas_Update
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_140
           - *ref_142
-          - !Parameter &ref_344
-            schema: *ref_161
+          - !Parameter &ref_371
+            schema: *ref_163
             implementation: Method
             required: true
             language: !Languages 
@@ -11912,8 +12066,8 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_141
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_370
             parameters:
               - !Parameter 
                 schema: *ref_143
@@ -11928,8 +12082,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_343
-                schema: *ref_342
+              - !Parameter &ref_369
+                schema: *ref_368
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -11954,7 +12108,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_343
+              - *ref_369
             language: !Languages 
               default:
                 name: ''
@@ -11967,11 +12121,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_370
         signatureParameters:
-          - *ref_344
+          - *ref_371
         responses:
           - !SchemaResponse 
-            schema: *ref_345
+            schema: *ref_372
             language: !Languages 
               default:
                 name: ''
@@ -11996,8 +12152,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://management.azure.com/.default
 language: !Languages 

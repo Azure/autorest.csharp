@@ -45,6 +45,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<SBSubscriptionResource>> GetSBSubscriptionAsync(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetSBSubscriptions().GetAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
@@ -60,6 +61,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<SBSubscriptionResource> GetSBSubscription(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetSBSubscriptions().Get(subscriptionName, cancellationToken);

@@ -91,7 +91,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
             finally
             {
-                await Server.ResetAsync();
+                // await Server.ResetAsync();
                 Return();
             }
         }

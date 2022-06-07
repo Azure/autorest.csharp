@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using MgmtExtensionResource.Models;
 
@@ -47,6 +47,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return await tenantResource.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
@@ -62,6 +63,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return tenantResource.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
@@ -102,6 +104,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return await GetSubscriptionPolicyDefinitions(subscriptionResource).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
@@ -117,6 +120,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return GetSubscriptionPolicyDefinitions(subscriptionResource).Get(policyDefinitionName, cancellationToken);
@@ -166,14 +170,14 @@ namespace MgmtExtensionResource
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="options"> Information to validate. </param>
+        /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public static async Task<Response> ValidateSomethingOrphanedPostAsync(this SubscriptionResource subscriptionResource, ValidateSomethingOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public static async Task<Response> ValidateSomethingOrphanedPostAsync(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            Argument.AssertNotNull(content, nameof(content));
 
-            return await GetExtensionClient(subscriptionResource).ValidateSomethingOrphanedPostAsync(options, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -182,14 +186,14 @@ namespace MgmtExtensionResource
         /// Operation Id: OrphanedPost_ValidateSomething
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="options"> Information to validate. </param>
+        /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public static Response ValidateSomethingOrphanedPost(this SubscriptionResource subscriptionResource, ValidateSomethingOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public static Response ValidateSomethingOrphanedPost(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
+            Argument.AssertNotNull(content, nameof(content));
 
-            return GetExtensionClient(subscriptionResource).ValidateSomethingOrphanedPost(options, cancellationToken);
+            return GetExtensionClient(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
         private static ManagementGroupResourceExtensionClient GetExtensionClient(ManagementGroupResource managementGroupResource)
@@ -219,6 +223,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return await GetManagementGroupPolicyDefinitions(managementGroupResource).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
@@ -234,6 +239,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return GetManagementGroupPolicyDefinitions(managementGroupResource).Get(policyDefinitionName, cancellationToken);

@@ -99,7 +99,12 @@ namespace ResourceClients_LowLevel
         /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceGroup.GetItems");
+            return GetItemsImplementationAsync("ResourceGroup.GetItems", context);
+        }
+
+        private AsyncPageable<BinaryData> GetItemsImplementationAsync(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -120,7 +125,12 @@ namespace ResourceClients_LowLevel
         /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceGroup.GetItems");
+            return GetItemsImplementation("ResourceGroup.GetItems", context);
+        }
+
+        private Pageable<BinaryData> GetItemsImplementation(string diagnosticsScopeName, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do

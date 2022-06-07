@@ -28,8 +28,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(true, "AvailabilitySetResource", "Update")]
         [TestCase(true, "AvailabilitySetResource", "UpdateAsync")]
-        [TestCase(false, "UnpatchableResource", "Update")]
-        [TestCase(false, "UnpatchableResource", "UpdateAsync")]
+        [TestCase(true, "UnpatchableResource", "Update")]
+        [TestCase(true, "UnpatchableResource", "UpdateAsync")]
         public void ValidateMethod(bool exist, string className, string methodName)
         {
             var resource = Assembly.GetExecutingAssembly().GetType($"MgmtOperations.{className}");

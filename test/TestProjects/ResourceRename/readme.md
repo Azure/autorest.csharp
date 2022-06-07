@@ -16,6 +16,10 @@ payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 
+# the remover will remove this since this is not internally used or a reference type if we do not have this configuration
+keep-orphaned-models:
+- AnyObjectTests
+
 directive:
   - rename-model:
       from: SshPublicKeyResource

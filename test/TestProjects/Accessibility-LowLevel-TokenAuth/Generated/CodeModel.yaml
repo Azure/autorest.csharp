@@ -54,13 +54,14 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: Operation
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_5
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -101,6 +102,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_5
         signatureParameters: []
         responses:
           - !Response 
@@ -118,13 +121,14 @@ operationGroups:
             description: ''
         protocol: !Protocols {}
       - !Operation 
+        operationId: OperationInternal
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_1
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_7
             parameters:
               - !Parameter 
                 schema: *ref_2
@@ -139,7 +143,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_5
+              - !Parameter &ref_6
                 schema: *ref_3
                 implementation: Method
                 required: false
@@ -152,7 +156,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_5
+              - *ref_6
             language: !Languages 
               default:
                 name: ''
@@ -165,6 +169,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_7
         signatureParameters: []
         responses:
           - !Response 
@@ -191,8 +197,8 @@ operationGroups:
 security: !Security 
   authenticationRequired: true
   schemes:
-    - !AADTokenSecurityScheme 
-      type: AADToken
+    - !OAuth2SecurityScheme 
+      type: OAuth2
       scopes:
         - https://test.azure.com/.default
 language: !Languages 

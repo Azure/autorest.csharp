@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             "ResourceIdentifier" => type,
             "SystemData" => type,
-            _ => ReferenceTypes.IsMgmtReferenceType (type) ? typeof(string) : null,
+            _ => null,
         };
 
         internal IEnumerable<Attribute> GetCustomAttributes()
@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor)
         {
             var parameters = ctor.GetParameters()
-                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, false))
+                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
                 .ToArray();
 
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();

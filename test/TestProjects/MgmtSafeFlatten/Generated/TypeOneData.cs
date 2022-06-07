@@ -31,11 +31,13 @@ namespace MgmtSafeFlatten
         /// <param name="location"> The location. </param>
         /// <param name="myType"> The details of the type. </param>
         /// <param name="layerOne"> The single value prop. </param>
+        /// <param name="layerOneType"> The single value prop with discriminator. </param>
         /// <param name="layerOneConflict"> The single value prop with conflict. </param>
-        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, WritableSubResource layerOneConflict) : base(id, name, resourceType, systemData, tags, location)
+        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict) : base(id, name, resourceType, systemData, tags, location)
         {
             MyType = myType;
             LayerOne = layerOne;
+            LayerOneType = layerOneType;
             LayerOneConflict = layerOneConflict;
         }
 
@@ -55,6 +57,8 @@ namespace MgmtSafeFlatten
             }
         }
 
+        /// <summary> The single value prop with discriminator. </summary>
+        public LayerOneBaseType LayerOneType { get; set; }
         /// <summary> The single value prop with conflict. </summary>
         internal WritableSubResource LayerOneConflict { get; set; }
         /// <summary> Gets or sets Id. </summary>

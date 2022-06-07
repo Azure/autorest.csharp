@@ -58,7 +58,7 @@ namespace ExactMatchInheritance
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Put
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="data"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -90,7 +90,7 @@ namespace ExactMatchInheritance
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
         /// Operation Id: ExactMatchModel5s_Put
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="data"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -243,7 +243,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(exactMatchModel5SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -270,66 +270,8 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var response = GetIfExists(exactMatchModel5SName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
-        /// Operation Id: ExactMatchModel5s_Get
-        /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
-        public virtual async Task<Response<ExactMatchModel5Resource>> GetIfExistsAsync(string exactMatchModel5SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-
-            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<ExactMatchModel5Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
-        /// Operation Id: ExactMatchModel5s_Get
-        /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
-        public virtual Response<ExactMatchModel5Resource> GetIfExists(string exactMatchModel5SName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(exactMatchModel5SName, nameof(exactMatchModel5SName));
-
-            using var scope = _exactMatchModel5ClientDiagnostics.CreateScope("ExactMatchModel5Collection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, exactMatchModel5SName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<ExactMatchModel5Resource>(null, response.GetRawResponse());
-                return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -38,15 +38,23 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Initializes a new instance of DocumentTranslationClient. </summary>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential) : this(endpoint, credential, new DocumentTranslationClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of DocumentTranslationClient. </summary>
+        /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, DocumentTranslationClientOptions options = null)
+        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential, DocumentTranslationClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new DocumentTranslationClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -875,7 +883,12 @@ namespace Azure.AI.DocumentTranslation
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
+            return GetTranslationsStatusImplementationAsync("DocumentTranslationClient.GetTranslationsStatus", top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
+        }
+
+        private AsyncPageable<BinaryData> GetTranslationsStatusImplementationAsync(string diagnosticsScopeName, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -997,7 +1010,12 @@ namespace Azure.AI.DocumentTranslation
         /// </remarks>
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
+            return GetTranslationsStatusImplementation("DocumentTranslationClient.GetTranslationsStatus", top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
+        }
+
+        private Pageable<BinaryData> GetTranslationsStatusImplementation(string diagnosticsScopeName, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1113,7 +1131,12 @@ namespace Azure.AI.DocumentTranslation
         /// </remarks>
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
+            return GetDocumentsStatusImplementationAsync("DocumentTranslationClient.GetDocumentsStatus", id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
+        }
+
+        private AsyncPageable<BinaryData> GetDocumentsStatusImplementationAsync(string diagnosticsScopeName, Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
+        {
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1229,7 +1252,12 @@ namespace Azure.AI.DocumentTranslation
         /// </remarks>
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
+            return GetDocumentsStatusImplementation("DocumentTranslationClient.GetDocumentsStatus", id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
+        }
+
+        private Pageable<BinaryData> GetDocumentsStatusImplementation(string diagnosticsScopeName, Guid id, int? top, int? skip, int? maxpagesize, IEnumerable<Guid> ids, IEnumerable<string> statuses, DateTimeOffset? createdDateTimeUtcStart, DateTimeOffset? createdDateTimeUtcEnd, IEnumerable<string> orderBy, RequestContext context)
+        {
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1255,8 +1283,9 @@ namespace Azure.AI.DocumentTranslation
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1313,7 +1342,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -1321,7 +1350,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
                 return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1342,8 +1371,9 @@ namespace Azure.AI.DocumentTranslation
         /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1400,7 +1430,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-        public virtual Operation<BinaryData> StartTranslation(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> StartTranslation(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -1408,7 +1438,7 @@ namespace Azure.AI.DocumentTranslation
             scope.Start();
             try
             {
-                using HttpMessage message = CreateStartTranslationRequest(content, context);
+                using HttpMessage message = CreateStartTranslationRequest(content, contentType, context);
                 return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DocumentTranslationClient.StartTranslation", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
@@ -1418,7 +1448,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        internal HttpMessage CreateStartTranslationRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateStartTranslationRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
@@ -1429,7 +1459,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath("/batches", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }

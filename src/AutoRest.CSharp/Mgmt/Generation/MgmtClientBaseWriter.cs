@@ -22,7 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Management;
+using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -276,11 +276,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
-            //TODO we need to figure out why Tenant is a child of Tenant, this shouldn't happen but this work around
-            //will keep us from trying to make a call to [Resource]Collection inside [Resource]
-            if (resourceCollection.ResourceName == This.ResourceName)
-                return;
-
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
             var methodSignature = getOperation.MethodSignature with
@@ -293,7 +288,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
 
             _writer.Line();
-            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync))
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, true, new List<Attribute> { new ForwardsClientCallsAttribute() }))
             {
                 WriteResourceEntry(resourceCollection, isAsync);
             }
@@ -534,7 +529,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return scope;
         }
 
-        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool enableAttributes = false, IEnumerable<Attribute>? attributes = default)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -548,6 +543,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnDesc is not null)
                 _writer.WriteXmlDocumentationReturns(returnDesc);
 
+            if (enableAttributes && attributes is not null)
+            {
+                foreach (var attribute in attributes)
+                {
+                    _writer.Line($"[{attribute.GetType()}]");
+                }
+            }
             return _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
@@ -897,7 +899,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
+                        if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

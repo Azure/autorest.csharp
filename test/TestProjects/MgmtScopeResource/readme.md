@@ -42,7 +42,7 @@ request-path-to-scope-resource-types:
 override-operation-name:
   ResourceLinks_ListAtSourceScope: GetAll
 operation-positions:
-  /{scope}/providers/Microsoft.Resources/links: collection
+  ResourceLinks_ListAtSourceScope: collection
 directive:
   # PolicyDefinition resource has the corresponding method written using `scope`, therefore the "ById" methods are no longer required. Remove those
   - remove-operation: FakePolicyAssignments_DeleteById

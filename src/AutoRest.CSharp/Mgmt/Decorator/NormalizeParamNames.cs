@@ -30,23 +30,38 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
-                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema, dataSchemaHash);
+                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaHash);
                         }
                     }
                 }
             }
         }
 
-        private static string GetNewName(string paramName, ObjectSchema objectSchema, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        internal static string GetNewName(string paramName, string schemaName, CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
         {
-            if (objectSchema.Name.EndsWith("Options", StringComparison.Ordinal))
+            if (schemaName.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
 
-            if (objectSchema.Name.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(objectSchema.Name))
+            if (schemaName.EndsWith("Info", StringComparison.Ordinal))
+                return "info";
+
+            if (schemaName.EndsWith("Details", StringComparison.Ordinal))
+                return "details";
+
+            if (schemaName.EndsWith("Content", StringComparison.Ordinal))
+                return "content";
+
+            if (schemaName.EndsWith("Patch", StringComparison.Ordinal))
+                return "patch";
+
+            if (schemaName.EndsWith("Input", StringComparison.Ordinal))
+                return "input";
+
+            if (schemaName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(schemaName))
                 return "data";
 
-            if (paramName.Equals("parameters", StringComparison.Ordinal))
-                return objectSchema.Name.FirstCharToLowerCase();
+            if (paramName.Equals("parameters", StringComparison.OrdinalIgnoreCase))
+                return schemaName.FirstCharToLowerCase();
 
             return paramName;
         }

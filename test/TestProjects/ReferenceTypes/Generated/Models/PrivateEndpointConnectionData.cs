@@ -6,7 +6,6 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -27,13 +26,13 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
-        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
+        /// <param name="connectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
         [SerializationConstructor]
-        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
+        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, ReferenceTypesPrivateLinkServiceConnectionState connectionState, ReferenceTypesPrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, resourceType, systemData)
         {
             PrivateEndpoint = privateEndpoint;
-            PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
+            ConnectionState = connectionState;
             ProvisioningState = provisioningState;
         }
 
@@ -46,8 +45,8 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
-        public PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
+        public ReferenceTypesPrivateLinkServiceConnectionState ConnectionState { get; set; }
         /// <summary> The provisioning state of the private endpoint connection resource. </summary>
-        public PrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
+        public ReferenceTypesPrivateEndpointConnectionProvisioningState? ProvisioningState { get; }
     }
 }

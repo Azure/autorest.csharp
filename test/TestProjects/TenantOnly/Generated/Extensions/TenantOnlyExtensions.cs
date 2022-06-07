@@ -46,6 +46,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<BillingAccountResource>> GetBillingAccountAsync(this TenantResource tenantResource, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await tenantResource.GetBillingAccounts().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
@@ -62,6 +63,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<BillingAccountResource> GetBillingAccount(this TenantResource tenantResource, string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             return tenantResource.GetBillingAccounts().Get(billingAccountName, expand, cancellationToken);

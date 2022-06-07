@@ -10,7 +10,7 @@ using Azure.Core;
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel11. </summary>
-    internal partial class ExactMatchModel11
+    public partial class ExactMatchModel11
     {
         /// <summary> Initializes a new instance of ExactMatchModel11. </summary>
         public ExactMatchModel11()

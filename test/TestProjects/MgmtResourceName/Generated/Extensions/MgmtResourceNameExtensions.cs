@@ -44,6 +44,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetMachines().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
@@ -58,6 +59,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<MachineResource> GetMachine(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetMachines().Get(machineName, cancellationToken);
@@ -80,6 +82,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<Disk>> GetDiskAsync(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetDisks().GetAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
@@ -94,6 +97,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<Disk> GetDisk(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetDisks().Get(diskResourceName, cancellationToken);
@@ -116,6 +120,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<Memory>> GetMemoryAsync(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetMemories().GetAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
@@ -130,6 +135,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<Memory> GetMemory(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetMemories().Get(memoryResourceName, cancellationToken);
@@ -145,13 +151,14 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetNetworks().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
@@ -159,13 +166,14 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
-        /// Operation Id: NetworkResources_Get
+        /// Operation Id: networkResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<NetworkResource> GetNetwork(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetNetworks().Get(networkResourceName, cancellationToken);
@@ -181,13 +189,14 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
+        /// Operation Id: displayResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<DisplayResource>> GetDisplayResourceAsync(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetDisplayResources().GetAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
@@ -195,13 +204,14 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/displayResources/{displayResourceName}
-        /// Operation Id: DisplayResources_Get
+        /// Operation Id: displayResources_Get
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<DisplayResource> GetDisplayResource(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetDisplayResources().Get(displayResourceName, cancellationToken);

@@ -59,7 +59,7 @@ namespace TenantOnly
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Create
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="data"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -92,7 +92,7 @@ namespace TenantOnly
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Create
         /// </summary>
-        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="data"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -254,7 +254,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(billingAccountName, expand: expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -282,68 +282,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = GetIfExists(billingAccountName, expand: expand, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
-        /// </summary>
-        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public virtual async Task<Response<BillingAccountResource>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
-
-            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _billingAccountRestClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<BillingAccountResource>(null, response.GetRawResponse());
-                return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// Operation Id: BillingAccounts_Get
-        /// </summary>
-        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public virtual Response<BillingAccountResource> GetIfExists(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
-
-            using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccountCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _billingAccountRestClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<BillingAccountResource>(null, response.GetRawResponse());
-                return Response.FromValue(new BillingAccountResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

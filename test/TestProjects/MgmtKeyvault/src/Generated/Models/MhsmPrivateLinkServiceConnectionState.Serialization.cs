@@ -35,7 +35,7 @@ namespace MgmtKeyvault.Models
 
         internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element)
         {
-            Optional<PrivateEndpointServiceConnectionStatus> status = default;
+            Optional<MgmtKeyvaultPrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
             Optional<ActionsRequired> actionsRequired = default;
             foreach (var property in element.EnumerateObject())
@@ -47,7 +47,7 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    status = new PrivateEndpointServiceConnectionStatus(property.Value.GetString());
+                    status = new MgmtKeyvaultPrivateEndpointServiceConnectionStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("description"))

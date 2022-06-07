@@ -45,6 +45,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetResourceModel1s().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
@@ -59,6 +60,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<ResourceModel1Resource> GetResourceModel1(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetResourceModel1s().Get(resourceModel1SName, cancellationToken);
@@ -81,6 +83,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetTrackedResourceModel1s().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
@@ -95,6 +98,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        [ForwardsClientCalls]
         public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetTrackedResourceModel1s().Get(trackedResourceModel1SName, cancellationToken);

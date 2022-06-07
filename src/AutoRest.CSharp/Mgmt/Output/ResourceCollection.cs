@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => p.IsRequired))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -172,8 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
-            var requestPath = operation.GetHttpPath();
-            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(operation.OperationId!, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -206,12 +205,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = clientPrefix.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parent = Resource.Parent().First();
-            var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+            var parent = ResourceName.Equals("Tenant", StringComparison.Ordinal) ? null : Resource.Parent().First();
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
-            lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
-            lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+            if (parent is not null)
+            {
+                var parentType = parent is MgmtExtensions mgmtExtensions ? mgmtExtensions.ArmCoreType : parent.Type;
+                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of <see cref=\"{parentType}\" />.");
+                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of <see cref=\"{parentType}\" />.");
+            }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
         }
@@ -233,12 +235,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure.")));
-                result.Add(MgmtClientOperation.FromOperation(
-                    new MgmtRestOperation(
-                        getMgmtRestOperation,
-                        "GetIfExists",
-                        getMgmtRestOperation.MgmtReturnType,
-                        $"Tries to get details for this resource from the service.")));
+                //result.Add(MgmtClientOperation.FromOperation(
+                //    new MgmtRestOperation(
+                //        getMgmtRestOperation,
+                //        "GetIfExists",
+                //        getMgmtRestOperation.MgmtReturnType,
+                //        $"Tries to get details for this resource from the service.")));
             }
 
             return result;

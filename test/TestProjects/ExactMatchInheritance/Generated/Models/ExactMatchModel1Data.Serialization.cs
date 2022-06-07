@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -21,12 +23,35 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
+            if (Optional.IsCollectionDefined(SupportingUris))
+            {
+                writer.WritePropertyName("supportingUris");
+                writer.WriteStartArray();
+                foreach (var item in SupportingUris)
+                {
+                    writer.WriteStringValue(item.AbsoluteUri);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Type1))
+            {
+                writer.WritePropertyName("type1");
+                writer.WriteStringValue(Type1.Value);
+            }
+            if (Optional.IsDefined(Type2))
+            {
+                writer.WritePropertyName("type2");
+                writer.WriteStringValue(Type2);
+            }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
         {
             Optional<string> @new = default;
+            Optional<IList<Uri>> supportingUris = default;
+            Optional<ResourceType> type1 = default;
+            Optional<string> type2 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -36,6 +61,36 @@ namespace ExactMatchInheritance
                 if (property.NameEquals("new"))
                 {
                     @new = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("supportingUris"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<Uri> array = new List<Uri>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(new Uri(item.GetString()));
+                    }
+                    supportingUris = array;
+                    continue;
+                }
+                if (property.NameEquals("type1"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type1 = new ResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("type2"))
+                {
+                    type2 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -50,7 +105,7 @@ namespace ExactMatchInheritance
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
@@ -59,7 +114,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), type2.Value);
         }
     }
 }
