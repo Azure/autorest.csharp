@@ -23,13 +23,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter KeyAuth = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, false);
         public static readonly Parameter TokenAuth = new("tokenCredential", "The token credential to copy", new CSharpType(typeof(TokenCredential)), null, false);
 
-        public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request.", RequestContentType, null, true, RequestLocation: RequestLocation.Body);
-        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, false, RequestLocation: RequestLocation.Body);
+        public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentType, null, true, RequestLocation: RequestLocation.Body);
+        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request. Details of the request body schema are in the Remarks section below.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, false, RequestLocation: RequestLocation.Body);
 
         public static readonly Parameter MatchConditionsParameter = new("matchConditions", "The content to send as the request conditions of the request.", MatchConditionsType, Constant.Default(RequestConditionsType), false, RequestLocation: RequestLocation.Header);
         public static readonly Parameter RequestConditionsParameter = new("requestConditions", "The content to send as the request conditions of the request.", RequestConditionsType, Constant.Default(RequestConditionsType), false, RequestLocation: RequestLocation.Header);
 
-        public static readonly Parameter RequestContext = new("context", "The request context, which can override default behaviors on the request on a per-call basis.", RequestContextNullableType, Constant.Default(RequestContextNullableType), false);
+        public static readonly Parameter RequestContext = new("context", "The request context, which can override default behaviors of the client pipeline on a per-call basis.", RequestContextNullableType, Constant.Default(RequestContextNullableType), false);
 
         public static readonly Parameter WaitForCompletion = new("waitUntil", "\"F:Azure.WaitUntil.Completed\" if the method should wait to return until the long-running operation has completed on the service; \"F:Azure.WaitUntil.Started\" if it should return after starting the operation. For more information on long-running operations, please see <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md\"> Azure.Core Long-Running Operation samples</see>.", new CSharpType(typeof(WaitUntil)), null, false);
 

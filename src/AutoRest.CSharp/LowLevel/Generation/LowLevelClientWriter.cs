@@ -482,11 +482,19 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = new MethodSignature(clientMethod.RequestMethod.Name, clientMethod.RequestMethod.Description, clientMethod.RequestMethod.Accessibility | Virtual, returnType, null, parameters)
                 .WithAsync(async);
 
-            writer.WriteMethodDocumentation(methodSignature);
+            WriteMethodDocumentation(writer, methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
+        }
+
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature)
+        {
+            codeWriter.WriteMethodDocumentation(methodSignature);
+
+            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+            codeWriter.WriteDocumentationLines($"<response>", $"</response>", $"The response returned from the service. Details of the request body schema are in the Remarks section below.");
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
