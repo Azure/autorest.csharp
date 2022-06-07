@@ -15,15 +15,16 @@ namespace Azure.Core
     internal abstract class OperationInternalBase
     {
         private readonly ClientDiagnostics _diagnostics;
-        private readonly string _updateStatusScopeName;
         private readonly IReadOnlyDictionary<string, string>? _scopeAttributes;
         private readonly DelayStrategy? _fallbackStrategy;
         private readonly AsyncLockWithValue<Response> _responseLock;
 
+        protected readonly string _operationTypeName;
+
         protected OperationInternalBase(Response rawResponse)
         {
             _diagnostics = new ClientDiagnostics(ClientOptions.Default);
-            _updateStatusScopeName = string.Empty;
+            _operationTypeName = string.Empty;
             _scopeAttributes = default;
             _fallbackStrategy = default;
             _responseLock = new AsyncLockWithValue<Response>(rawResponse);
@@ -32,7 +33,7 @@ namespace Azure.Core
         protected OperationInternalBase(ClientDiagnostics clientDiagnostics, string operationTypeName, IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null, DelayStrategy? fallbackStrategy = null)
         {
             _diagnostics = clientDiagnostics;
-            _updateStatusScopeName = $"{operationTypeName}.UpdateStatus";
+            _operationTypeName = operationTypeName;
             _scopeAttributes = scopeAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             _fallbackStrategy = fallbackStrategy;
             _responseLock = new AsyncLockWithValue<Response>();
@@ -188,20 +189,29 @@ namespace Azure.Core
                 return lockOrValue.Value;
             }
 
-            var poller = new OperationPoller(_fallbackStrategy);
-            var response = async
-                ? await poller.WaitForCompletionResponseAsync(this, pollingInterval, cancellationToken).ConfigureAwait(false)
-                : poller.WaitForCompletionResponse(this, pollingInterval, cancellationToken);
+            using var scope = CreateScope(string.IsNullOrEmpty(_operationTypeName) ? string.Empty : $"{_operationTypeName}.WaitForCompletionResponse");
+            try
+            {
+                var poller = new OperationPoller(_fallbackStrategy);
+                var response = async
+                    ? await poller.WaitForCompletionResponseAsync(this, pollingInterval, cancellationToken).ConfigureAwait(false)
+                    : poller.WaitForCompletionResponse(this, pollingInterval, cancellationToken);
 
-            lockOrValue.SetValue(response);
-            return response;
+                lockOrValue.SetValue(response);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         protected abstract ValueTask<Response> UpdateStatusAsync(bool async, CancellationToken cancellationToken);
 
-        protected DiagnosticScope CreateScope()
+        protected DiagnosticScope CreateScope(string scopeName)
         {
-            DiagnosticScope scope = _diagnostics.CreateScope(_updateStatusScopeName);
+            DiagnosticScope scope = _diagnostics.CreateScope(scopeName);
 
             if (_scopeAttributes != null)
             {

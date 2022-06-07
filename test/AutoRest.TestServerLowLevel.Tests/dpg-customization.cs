@@ -103,9 +103,8 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             await result.WaitForCompletionAsync();
-            // TO-DO: we will add the assert back after fix https://github.com/Azure/autorest.csharp/issues/2236
-            // diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletion");
-            // CollectionAssert.IsEmpty(diagnosticListener.Scopes);
+            diagnosticListener.AssertAndRemoveScope("DPGClient.Lro.WaitForCompletionResponse");
+            CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             JsonData responseBody = JsonData.FromBytes(result.Value.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
@@ -122,7 +121,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
             await lro.WaitForCompletionAsync();
-            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletion");
+            diagnosticListener.AssertAndRemoveScope("DPGClient.LroValue.WaitForCompletionResponse");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
             Assert.AreEqual("model", $"{lro.Value.Received}");
         });

@@ -83,7 +83,7 @@ namespace Azure.Core
             {
                 _operation = operation;
                 _diagnostics = diagnostics;
-                _waitForCompletionScopeName = $"{operationName}.{nameof(WaitForCompletion)}";
+                _waitForCompletionScopeName = $"{operationName}.{nameof(WaitForCompletionResponse)}";
                 _updateStatusScopeName = $"{operationName}.{nameof(UpdateStatus)}";
                 _convertFunc = convertFunc;
                 _response = null;
