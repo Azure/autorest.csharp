@@ -28,7 +28,7 @@ namespace MgmtNonStringPathVariable
     public partial class BarResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="BarResource"/> instance. </summary>
-        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string barName)
+        public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, int barName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}";
             return new ResourceIdentifier(resourceId);
