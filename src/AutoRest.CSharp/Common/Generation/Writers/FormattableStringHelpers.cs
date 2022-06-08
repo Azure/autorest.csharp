@@ -9,17 +9,19 @@ using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
-        public static FormattableString Join(this ICollection<FormattableString> fss, string separator)
+        public static FormattableString Join(this ICollection<FormattableString> fss, string separator, string? lastSeparator = null)
             => fss.Count switch
             {
                 0 => $"",
                 1 => fss.First(),
+                _ when lastSeparator is not null => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")).ReplaceLast(separator, lastSeparator), fss.ToArray<object>()),
                 _ => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")), fss.ToArray<object>())
             };
 

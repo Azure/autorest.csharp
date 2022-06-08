@@ -7,7 +7,11 @@
 
 namespace MgmtDiscriminator.Models
 {
-    /// <summary> An action for the delivery rule. </summary>
+    /// <summary>
+    /// An action for the delivery rule.
+    /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
+    /// </summary>
     public partial class DeliveryRuleAction
     {
         /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
