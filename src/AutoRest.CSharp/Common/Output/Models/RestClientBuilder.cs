@@ -90,6 +90,15 @@ namespace AutoRest.CSharp.Output.Models
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
 
+            string docurl = "";
+            if (operation.ExternalDocs != null && !operation.ExternalDocs.Url.IsNullOrEmpty())
+            {
+                docurl = operation.ExternalDocs.Url;
+            } else
+            {
+                docurl = $"https://docs.microsoft.com/en-us/rest/api/{ _context.DefaultNamespace.Replace('.', '/')}/{operation.CSharpName()}";
+            }
+
             return new RestClientMethod(
                 operation.CSharpName(),
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -101,7 +110,8 @@ namespace AutoRest.CSharp.Output.Models
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
                 operation,
-                buildContext.RequestConditionFlag
+                buildContext.RequestConditionFlag,
+                docurl
             );
         }
 

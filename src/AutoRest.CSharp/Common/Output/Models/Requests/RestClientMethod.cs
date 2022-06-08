@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None)
+        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, RequestConditionHeaders conditionRequestFlag = RequestConditionHeaders.None, string docurl = "")
         {
             Name = name;
             Request = request;
@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             Accessibility = GetAccessibility(accessibility);
             Operation = operation;
             ConditionHeaderFlag = conditionRequestFlag;
+            DocUrl = docurl;
         }
 
         private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
@@ -48,5 +49,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public MethodSignatureModifiers Accessibility { get; }
         public Operation Operation { get; }
         public RequestConditionHeaders ConditionHeaderFlag { get; set; }
+        public string DocUrl { get; }
     }
 }

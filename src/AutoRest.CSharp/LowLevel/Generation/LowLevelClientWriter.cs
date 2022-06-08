@@ -501,7 +501,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = clientMethod.Signature.WithAsync(async);
 
             writer.WriteMethodDocumentation(methodSignature);
-            WriteSchemaDocumentationRemarks(writer, clientMethod.OperationSchemas);
+            WriteSchemaDocumentationRemarks(writer, clientMethod);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
@@ -516,19 +516,23 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ResponseClassifierType(statusCodes);
         }
 
-        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelOperationSchemaInfo documentationSchemas)
+        private static void WriteSchemaDocumentationRemarks(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
+            var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
+            AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", false);
 
             if (schemas.Count > 0)
             {
-                writer.WriteXmlDocumentation("remarks", $"{schemas}");
+                writer.WriteXmlDocumentation("remarks", $"{docinfo}{schemas}");
             }
 
+            static FormattableString AddDocumentLinkInfo(CodeWriter writer, RestClientMethod restMethod)
+            {
+                return $"Below is the JSON schema for the request and response payloads.{Environment.NewLine}Additional information can be found in the service REST API documentation:{Environment.NewLine}{restMethod.DocUrl}{Environment.NewLine}";
+            }
             static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
             {
                 if (schema == null)
@@ -559,7 +563,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var row in doc.DocumentationRows)
             {
-                var required = showRequired && row.Required ? " (required)" : string.Empty;
+                var required = showRequired ? (row.Required ? " # Required." : " # Optional.") : string.Empty;
+                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # <Description>{row.Description}</Description>" : $" <Description>{row.Description}</Description>");
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
                 builder.AppendIndentation(indentation).Append($"{row.Name}: ");
@@ -573,10 +578,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendIndentation(indentation + 2).AppendLine("{");
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
                         builder.AppendIndentation(indentation + 2).AppendLine("}");
-                        builder.AppendIndentation(indentation).AppendLine($"]{required},");
+                        builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
                     }
                     else
-                        builder.AppendLine($"[{rowType}]{required},");
+                        builder.AppendLine($"[{rowType}],{required}{description}");
                 }
                 else
                 {
@@ -586,15 +591,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         var docToProcess = docDict[rowType];
                         docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
                         BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
-                        builder.AppendIndentation(indentation).Append("}").AppendLine($"{required},");
+                        builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
                     }
                     else
-                        builder.AppendLine($"{rowType}{required},");
+                        builder.AppendLine($"{rowType},{required}{description}");
                 }
             }
             // Remove the last "," by first removing ",\n", then add back "\n".
-            builder.Length -= 1 + Environment.NewLine.Length;
-            builder.AppendLine();
+            //builder.Length -= 1 + Environment.NewLine.Length;
+            //builder.AppendLine();
         }
 
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
