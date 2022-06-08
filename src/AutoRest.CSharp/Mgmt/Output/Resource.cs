@@ -388,6 +388,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return FormattableStringHelpers.Join(lines, "\r\n");
         }
 
+        private static Type? ToFormatTypeByName(string? name) => name switch
+        {
+            "location" => typeof(AzureLocation),
+            _ => null
+        };
+
+        private Parameter CreateResourceIdentifierParameter(Segment segment)
+        {
+            CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
+            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
+        }
+
         /// <summary>
         /// Returns the different method signature for different base path of this resource
         /// </summary>
@@ -400,7 +412,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, ValidationType.AssertNotNull, null)).ToArray());
+                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
         }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
