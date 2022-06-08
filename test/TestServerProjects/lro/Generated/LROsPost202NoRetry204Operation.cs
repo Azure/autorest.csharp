@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
     public partial class LROsPost202NoRetry204Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationInternals<Product> _operation;
+        private readonly OperationInternal<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPost202NoRetry204Operation for mocking. </summary>
         protected LROsPost202NoRetry204Operation()
@@ -28,11 +28,14 @@ namespace lro
 
         internal LROsPost202NoRetry204Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202NoRetry204Operation");
+            IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
+            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsPost202NoRetry204Operation");
         }
 
         /// <inheritdoc />
-        public override string Id => _operation.Id;
+#pragma warning disable CA1822
+        public override string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
 
         /// <inheritdoc />
         public override Product Value => _operation.Value;
@@ -44,7 +47,7 @@ namespace lro
         public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
-        public override Response GetRawResponse() => _operation.GetRawResponse();
+        public override Response GetRawResponse() => _operation.RawResponse;
 
         /// <inheritdoc />
         public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);

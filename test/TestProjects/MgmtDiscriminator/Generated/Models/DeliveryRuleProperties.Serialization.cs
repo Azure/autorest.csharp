@@ -21,6 +21,11 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("order");
                 writer.WriteNumberValue(Order.Value);
             }
+            if (Optional.IsDefined(Conditions))
+            {
+                writer.WritePropertyName("conditions");
+                writer.WriteObjectValue(Conditions);
+            }
             if (Optional.IsCollectionDefined(Actions))
             {
                 writer.WritePropertyName("actions");
@@ -31,13 +36,26 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
+            if (Optional.IsCollectionDefined(ExtraMappingInfo))
+            {
+                writer.WritePropertyName("extraMappingInfo");
+                writer.WriteStartObject();
+                foreach (var item in ExtraMappingInfo)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             writer.WriteEndObject();
         }
 
         internal static DeliveryRuleProperties DeserializeDeliveryRuleProperties(JsonElement element)
         {
             Optional<int> order = default;
+            Optional<DeliveryRuleCondition> conditions = default;
             Optional<IList<DeliveryRuleAction>> actions = default;
+            Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"))
@@ -48,6 +66,16 @@ namespace MgmtDiscriminator.Models
                         continue;
                     }
                     order = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("conditions"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value);
                     continue;
                 }
                 if (property.NameEquals("actions"))
@@ -65,8 +93,23 @@ namespace MgmtDiscriminator.Models
                     actions = array;
                     continue;
                 }
+                if (property.NameEquals("extraMappingInfo"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, DeliveryRuleAction.DeserializeDeliveryRuleAction(property0.Value));
+                    }
+                    extraMappingInfo = dictionary;
+                    continue;
+                }
             }
-            return new DeliveryRuleProperties(Optional.ToNullable(order), Optional.ToList(actions));
+            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo));
         }
     }
 }

@@ -171,5 +171,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
         }
+
+        protected override string CreateDescription()
+        {
+            throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
+        }
     }
 }

@@ -44,7 +44,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
-            Description = BuilderHelpers.CreateDescription(objectSchema);
 
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
@@ -577,6 +576,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return objectProperty != null;
+        }
+
+        protected override string CreateDescription()
+        {
+            return BuilderHelpers.CreateDescription(ObjectSchema);
         }
     }
 }

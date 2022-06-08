@@ -172,14 +172,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsSharedDocument(Document document) => document.Folders.Contains(SharedFolder);
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
 
-        public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
+        /// <summary>
+        /// This method delegates the caller to do something on the generated code project
+        /// </summary>
+        /// <param name="processor"></param>
+        /// <returns></returns>
+        public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
-            _project = await Internalizer.InternalizeAsync(_project, modelsToKeep);
-        }
-
-        public async Task RemoveUnusedModels(ImmutableHashSet<string> modelsToKeep)
-        {
-            _project = await Remover.RemoveUnusedAsync(_project, modelsToKeep);
+            _project = await processor(_project);
         }
     }
 }
