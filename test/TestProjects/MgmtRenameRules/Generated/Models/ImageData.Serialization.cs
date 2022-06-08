@@ -61,7 +61,7 @@ namespace MgmtRenameRules
             Optional<WritableSubResource> sourceVirtualMachine = default;
             Optional<ImageStorageProfile> storageProfile = default;
             Optional<string> provisioningState = default;
-            Optional<HyperVGenerationTypes> hyperVGeneration = default;
+            Optional<HyperVGenerationType> hyperVGeneration = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -140,7 +140,7 @@ namespace MgmtRenameRules
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hyperVGeneration = new HyperVGenerationTypes(property0.Value.GetString());
+                            hyperVGeneration = new HyperVGenerationType(property0.Value.GetString());
                             continue;
                         }
                     }

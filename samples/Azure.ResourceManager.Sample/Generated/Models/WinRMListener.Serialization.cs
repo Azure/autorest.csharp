@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static WinRMListener DeserializeWinRMListener(JsonElement element)
         {
-            Optional<ProtocolTypes> protocol = default;
+            Optional<ProtocolType> protocol = default;
             Optional<Uri> certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    protocol = property.Value.GetString().ToProtocolTypes();
+                    protocol = property.Value.GetString().ToProtocolType();
                     continue;
                 }
                 if (property.NameEquals("certificateUrl"))

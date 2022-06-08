@@ -96,7 +96,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<VirtualMachineScaleSetResource>> GetAsync(ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetResource>> GetAsync(ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
             scope.Start();
@@ -121,7 +121,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineScaleSetResource> Get(ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSetResource> Get(ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSetResource.Get");
             scope.Start();

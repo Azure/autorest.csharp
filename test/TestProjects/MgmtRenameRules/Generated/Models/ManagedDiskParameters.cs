@@ -22,14 +22,14 @@ namespace MgmtRenameRules.Models
         /// <param name="id"> Resource Id. </param>
         /// <param name="storageAccountType"> Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk. </param>
         /// <param name="diskEncryptionSet"> Specifies the customer managed disk encryption set resource id for the managed disk. </param>
-        internal ManagedDiskParameters(string id, StorageAccountTypes? storageAccountType, WritableSubResource diskEncryptionSet) : base(id)
+        internal ManagedDiskParameters(string id, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet) : base(id)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
         }
 
         /// <summary> Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk. </summary>
-        public StorageAccountTypes? StorageAccountType { get; set; }
+        public StorageAccountType? StorageAccountType { get; set; }
         /// <summary> Specifies the customer managed disk encryption set resource id for the managed disk. </summary>
         internal WritableSubResource DiskEncryptionSet { get; set; }
         /// <summary> Gets or sets Id. </summary>

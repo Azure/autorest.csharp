@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <param name="automaticOSUpgradeProperties"> Describes automatic OS upgrade properties on the image. </param>
         /// <param name="hyperVGeneration"> Specifies the HyperVGeneration Type. </param>
         /// <param name="disallowed"> Specifies disallowed configuration for the VirtualMachine created from the image. </param>
-        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationTypes? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationType? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
         {
             Plan = plan;
             OsDiskImage = osDiskImage;
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Contains the os disk image information. </summary>
         internal OSDiskImage OsDiskImage { get; set; }
         /// <summary> The operating system of the osDiskImage. </summary>
-        public OperatingSystemTypes? OsDiskImageOperatingSystem
+        public OperatingSystemType? OsDiskImageOperatingSystem
         {
-            get => OsDiskImage is null ? default(OperatingSystemTypes?) : OsDiskImage.OperatingSystem;
+            get => OsDiskImage is null ? default(OperatingSystemType?) : OsDiskImage.OperatingSystem;
             set
             {
                 OsDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
@@ -78,11 +78,11 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Specifies the HyperVGeneration Type. </summary>
-        public HyperVGenerationTypes? HyperVGeneration { get; set; }
+        public HyperVGenerationType? HyperVGeneration { get; set; }
         /// <summary> Specifies disallowed configuration for the VirtualMachine created from the image. </summary>
         internal DisallowedConfiguration Disallowed { get; set; }
         /// <summary> VM disk types which are disallowed. </summary>
-        public VmDiskTypes? DisallowedVmDiskType
+        public VmDiskType? DisallowedVmDiskType
         {
             get => Disallowed is null ? default : Disallowed.VmDiskType;
             set

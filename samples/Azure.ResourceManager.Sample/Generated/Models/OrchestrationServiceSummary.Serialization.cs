@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static OrchestrationServiceSummary DeserializeOrchestrationServiceSummary(JsonElement element)
         {
-            Optional<OrchestrationServiceNames> serviceName = default;
+            Optional<OrchestrationServiceName> serviceName = default;
             Optional<OrchestrationServiceState> serviceState = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    serviceName = new OrchestrationServiceNames(property.Value.GetString());
+                    serviceName = new OrchestrationServiceName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("serviceState"))
