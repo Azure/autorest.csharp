@@ -336,6 +336,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOperations\\Generated"
     },
+    "MgmtOptionalConstant": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOptionalConstant\\Generated"
+    },
     "MgmtParamOrdering": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtParamOrdering\\Generated"
