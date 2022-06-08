@@ -100,7 +100,7 @@ namespace dpg_customization_LowLevel
             scope.Start();
             try
             {
-                var lro = await LroAsync(waitUntil, mode, requestContext).ConfigureAwait(false);
+                LowLevelFuncOperation<BinaryData> lro = (LowLevelFuncOperation<BinaryData>)await LroAsync(waitUntil, mode, requestContext).ConfigureAwait(false);
                 return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
@@ -122,7 +122,7 @@ namespace dpg_customization_LowLevel
             scope.Start();
             try
             {
-                var lro = Lro(waitUntil, mode, requestContext);
+                LowLevelFuncOperation<BinaryData> lro = (LowLevelFuncOperation<BinaryData>)Lro(waitUntil, mode, requestContext);
                 return LowLevelOperationHelpers.Convert(lro, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)

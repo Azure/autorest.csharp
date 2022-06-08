@@ -13,7 +13,7 @@ namespace Azure.Core
 {
     internal static class LowLevelOperationHelpers
     {
-        public static Operation<TTo> Convert<TFrom, TTo>(Operation<TFrom> operation, Func<Response, TTo> convertFunc, ClientDiagnostics diagnostics, string scopeName)
+        public static Operation<TTo> Convert<TFrom, TTo>(LowLevelFuncOperation<TFrom> operation, Func<Response, TTo> convertFunc, ClientDiagnostics diagnostics, string scopeName)
             where TFrom : notnull
             where TTo : notnull
             => new ConvertOperation<TFrom, TTo>(operation, diagnostics, scopeName, convertFunc);
@@ -74,19 +74,16 @@ namespace Azure.Core
         {
             private readonly Operation<TFrom> _operation;
             private readonly ClientDiagnostics _diagnostics;
-            private readonly string _waitForCompletionScopeName;
-            private readonly string _updateStatusScopeName;
             private readonly Func<Response, TTo> _convertFunc;
             private Response<TTo>? _response;
 
-            public ConvertOperation(Operation<TFrom> operation, ClientDiagnostics diagnostics, string operationName, Func<Response, TTo> convertFunc)
+            public ConvertOperation(LowLevelFuncOperation<TFrom> operation, ClientDiagnostics diagnostics, string operationName, Func<Response, TTo> convertFunc)
             {
                 _operation = operation;
                 _diagnostics = diagnostics;
-                _waitForCompletionScopeName = $"{operationName}.{nameof(WaitForCompletionResponse)}";
-                _updateStatusScopeName = $"{operationName}.{nameof(UpdateStatus)}";
                 _convertFunc = convertFunc;
                 _response = null;
+                operation.SetOperationTypeName(operationName);
             }
 
             public override string Id => _operation.Id;
@@ -102,16 +99,7 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                using var scope = CreateScope(_updateStatusScopeName);
-                try
-                {
-                    return _operation.UpdateStatus(cancellationToken);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return _operation.UpdateStatus(cancellationToken);
             }
 
             public override async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
@@ -121,16 +109,7 @@ namespace Azure.Core
                     return GetRawResponse();
                 }
 
-                using var scope = CreateScope(_updateStatusScopeName);
-                try
-                {
-                    return await _operation.UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await _operation.UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
             }
 
             public override Response<TTo> WaitForCompletion(CancellationToken cancellationToken = default)
@@ -140,17 +119,8 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_waitForCompletionScopeName);
-                try
-                {
-                    var result = _operation.WaitForCompletion(cancellationToken);
-                    return CreateResponseOfTTo(result);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var result = _operation.WaitForCompletion(cancellationToken);
+                return CreateResponseOfTTo(result);
             }
 
             public override Response<TTo> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken)
@@ -160,17 +130,8 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_waitForCompletionScopeName);
-                try
-                {
-                    var result = _operation.WaitForCompletion(pollingInterval, cancellationToken);
-                    return CreateResponseOfTTo(result);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var result = _operation.WaitForCompletion(pollingInterval, cancellationToken);
+                return CreateResponseOfTTo(result);
             }
 
             public override async ValueTask<Response<TTo>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
@@ -180,17 +141,8 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_waitForCompletionScopeName);
-                try
-                {
-                    var result = await _operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                    return CreateResponseOfTTo(result);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var result = await _operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return CreateResponseOfTTo(result);
             }
 
             public override async ValueTask<Response<TTo>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
@@ -200,17 +152,8 @@ namespace Azure.Core
                     return _response;
                 }
 
-                using var scope = CreateScope(_waitForCompletionScopeName);
-                try
-                {
-                    var result = await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
-                    return CreateResponseOfTTo(result);
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var result = await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false);
+                return CreateResponseOfTTo(result);
             }
 
             private TTo GetOrCreateValue()

@@ -19,7 +19,7 @@ namespace Azure.Core
         private readonly DelayStrategy? _fallbackStrategy;
         private readonly AsyncLockWithValue<Response> _responseLock;
 
-        protected readonly string _operationTypeName;
+        protected string _operationTypeName;
 
         protected OperationInternalBase(Response rawResponse)
         {
@@ -224,6 +224,8 @@ namespace Azure.Core
             scope.Start();
             return scope;
         }
+
+        public void SetOperationTypeName(string operationTypeName) => _operationTypeName = operationTypeName;
 
         protected async ValueTask<RequestFailedException> CreateException(bool async, Response response) => async
             ? await _diagnostics.CreateRequestFailedExceptionAsync(response).ConfigureAwait(false)

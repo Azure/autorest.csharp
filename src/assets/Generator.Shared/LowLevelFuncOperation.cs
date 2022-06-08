@@ -39,6 +39,8 @@ namespace Azure.Core
         /// <inheritdoc />
         public override bool HasValue => _operation.HasValue;
 
+        public void SetOperationTypeName(string scopeName) => _operation.SetOperationTypeName(scopeName);
+
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.RawResponse;
 
