@@ -583,6 +583,7 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_14
+                required: true
                 serializedName: passName
                 language: !Languages 
                   default:
@@ -591,6 +592,7 @@ schemas: !Schemas
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_15
+                required: false
                 serializedName: protocol
                 language: !Languages 
                   default:
@@ -599,6 +601,7 @@ schemas: !Schemas
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_16
+                required: false
                 serializedName: certificateUrl
                 language: !Languages 
                   default:

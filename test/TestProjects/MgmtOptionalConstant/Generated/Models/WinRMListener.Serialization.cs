@@ -16,11 +16,8 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PassName))
-            {
-                writer.WritePropertyName("passName");
-                writer.WriteStringValue(PassName.Value.ToSerialString());
-            }
+            writer.WritePropertyName("passName");
+            writer.WriteStringValue(PassName);
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol");
@@ -36,19 +33,14 @@ namespace MgmtOptionalConstant.Models
 
         internal static WinRMListener DeserializeWinRMListener(JsonElement element)
         {
-            Optional<PassNames> passName = default;
+            string passName = default;
             Optional<ProtocolTypes> protocol = default;
             Optional<Uri> certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    passName = property.Value.GetString().ToPassNames();
+                    passName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("protocol"))
@@ -72,7 +64,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new WinRMListener(Optional.ToNullable(passName), Optional.ToNullable(protocol), certificateUrl.Value);
+            return new WinRMListener(passName, Optional.ToNullable(protocol), certificateUrl.Value);
         }
     }
 }
