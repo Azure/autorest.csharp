@@ -109,7 +109,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, systemData, tags, location, sku.Value, properties.Value);
+            return new ManagedHsmData(id, name, type, systemData, tags, location, properties.Value, sku.Value);
         }
     }
 }

@@ -98,7 +98,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel5(id, name, type, systemData, tags, location, @new.Value, foo.Value);
+            return new SupersetModel5(id, name, type, systemData, tags, location, foo.Value, @new.Value);
         }
     }
 }

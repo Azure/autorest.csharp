@@ -147,7 +147,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MgmtKeyvaultPrivateEndpointConnectionData(id, name, type, systemData, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), location.Value, Optional.ToDictionary(tags));
         }
     }
 }
