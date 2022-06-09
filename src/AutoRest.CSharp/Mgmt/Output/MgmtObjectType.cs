@@ -124,11 +124,47 @@ namespace AutoRest.CSharp.Mgmt.Output
             return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
         }
 
+        private bool IsDescendantOf(SchemaObjectType schemaObjectType)
+        {
+            if (schemaObjectType.Discriminator == null)
+                return false;
+            var descendantTypes = schemaObjectType.Discriminator.Implementations.Select(implementation => implementation.Type).ToHashSet();
+
+            return descendantTypes.Contains(Type);
+        }
+
         protected override CSharpType? CreateInheritedType()
         {
+            // find from the customized code to see if we already have this type defined with a base class
+            if (ExistingType != null && ExistingType.BaseType != null)
+            {
+                // if this type is defined with a base class, we have to use the same base class here
+                // otherwise the compiler will throw an error
+                if (Context.TypeFactory.TryCreateType(ExistingType.BaseType, out var existingBaseType))
+                {
+                    // if we could find a type in the TypeProviders, we return that
+                    if (!existingBaseType.IsFrameworkType)
+                        return existingBaseType;
+                }
+                // if we did not find that type, this means the customization code is referencing something unrecognized
+            }
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType != null && inheritedType.IsFrameworkType)
-                return inheritedType;
+            if (inheritedType != null)
+            {
+                if (inheritedType.IsFrameworkType)
+                    return inheritedType;
+                else
+                {
+                    // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
+                    // by checking if this type is one of its descendants
+                    var baseTypeProvider = inheritedType.Implementation;
+                    if (baseTypeProvider is SchemaObjectType schemaObjectType && IsDescendantOf(schemaObjectType))
+                    {
+                        // if the base type has a discriminator and this type is one of them
+                        return inheritedType;
+                    }
+                }
+            }
 
             // try exact match
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
@@ -140,7 +176,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     return match;
                 }
             }
-            // try superset match
+
+            // try superset match if this is not a type from discriminator
             var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
             if (supersetBaseType != null)
                 return supersetBaseType;
