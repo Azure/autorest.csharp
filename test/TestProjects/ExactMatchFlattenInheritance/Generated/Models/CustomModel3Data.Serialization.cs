@@ -22,21 +22,30 @@ namespace ExactMatchFlattenInheritance
                 writer.WritePropertyName("foo");
                 writer.WriteStringValue(Foo);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("name");
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("type");
-            writer.WriteStringValue(ResourceType);
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
+            }
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(ResourceType);
+            }
             writer.WriteEndObject();
         }
 
         internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element)
         {
             Optional<string> foo = default;
-            ResourceIdentifier id = default;
-            string name = default;
-            ResourceType? type = default;
+            Optional<ResourceIdentifier> id = default;
+            Optional<string> name = default;
+            Optional<ResourceType?> type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -47,6 +56,11 @@ namespace ExactMatchFlattenInheritance
                 }
                 if (property.NameEquals("id"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -57,6 +71,11 @@ namespace ExactMatchFlattenInheritance
                 }
                 if (property.NameEquals("type"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -71,7 +90,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel3Data(id, name, type, systemData.Value, foo.Value);
+            return new CustomModel3Data(id.Value, name.Value, Optional.ToNullable(type), systemData.Value, foo.Value);
         }
     }
 }

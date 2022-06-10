@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 //ReferenceType for inheritance do not have public constructor, and currently there are ResourceData, TrackedResourceData, WritableResourceData.
                 //We treat Id, Name, ResourceType, Location in ResourceData/TrackedResourceData as required.
-                if (!property.DeclaringType!.Name.Equals("WrtiableResourceData", StringComparison.Ordinal))
+                if (!property.DeclaringType!.Name.Equals("WritableResourceData", StringComparison.Ordinal))
                 {
                     if (property.Name == "Id" ||
                         property.Name == "Name" ||
