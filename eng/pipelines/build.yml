@@ -10,9 +10,12 @@ pr:
 
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
-  OfficialBuildId: $(Build.BuildNumber)
   PullRequestNumber: $(System.PullRequest.PullRequestNumber)
   IsPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
+  ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+    OfficialBuildId: 'pr$(System.PullRequest.PullRequestNumber)'
+  ${{ else }}:
+    OfficialBuildId: $(Build.BuildNumber)
   NugetSecurityAnalysisWarningLevel: 'none'
 
 resources:
