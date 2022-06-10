@@ -5,73 +5,53 @@
 
 #nullable disable
 
-using System.Collections.Generic;
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
-    public partial class SupersetModel4Data : IUtf8JsonSerializable
+    public partial class SupersetModel8 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
+            if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("new");
-                writer.WriteStringValue(New);
+                writer.WritePropertyName("foo");
+                writer.WriteStringValue(Foo);
             }
-            if (Optional.IsCollectionDefined(Tags))
+            if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("tags");
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(ResourceType))
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(ResourceType);
+            }
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel4Data DeserializeSupersetModel4Data(JsonElement element)
+        internal static SupersetModel8 DeserializeSupersetModel8(JsonElement element)
         {
-            Optional<string> @new = default;
-            Optional<IDictionary<string, string>> tags = default;
-            AzureLocation location = default;
+            Optional<string> foo = default;
             Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            Optional<ResourceType?> type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
+                if (property.NameEquals("foo"))
                 {
-                    @new = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("tags"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
-                    }
-                    tags = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("location"))
-                {
-                    location = new AzureLocation(property.Value.GetString());
+                    foo = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -110,7 +90,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel4Data(id, name, type, systemData, Optional.ToDictionary(tags), location, @new.Value);
+            return new SupersetModel8(id, name, type, systemData, foo.Value);
         }
     }
 }

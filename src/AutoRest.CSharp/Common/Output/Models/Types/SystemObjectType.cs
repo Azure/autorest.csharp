@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
                 prop.SerializedName = GetSerializedName(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
-                prop.Required = true;
+                prop.Required = GetRequired(property);
                 prop.Language.Default.Name = property.Name;
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
@@ -158,6 +158,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (property.Name == "Tags")
                 return false;
             return property.GetSetMethod() == null;
+        }
+
+        private bool GetRequired(PropertyInfo property)
+        {
+            var publicCtor = property.DeclaringType?.GetConstructors().Where(c => c.IsPublic).FirstOrDefault();
+            if (publicCtor == null)
+            {
+                //ReferenceType for inheritance do not have public constructor, and currently there are ResourceData, TrackedResourceData, WritableResourceData.
+                //Only Location in TrackedResourceData is required.
+                if (property.Name == "Location")
+                    return true;
+                else
+                    return false;
+            }
+            return publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
         }
 
         private string GetPropertySummary(MethodInfo? setter)

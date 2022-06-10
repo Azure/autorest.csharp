@@ -71,10 +71,10 @@ namespace Azure.Management.Storage
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element)
         {
             Optional<StorageSku> sku = default;
-            ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
-            SystemData systemData = default;
+            Optional<ResourceIdentifier> id = default;
+            Optional<string> name = default;
+            Optional<ResourceType> type = default;
+            Optional<SystemData> systemData = default;
             Optional<CorsRules> cors = default;
             Optional<string> defaultServiceVersion = default;
             Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
@@ -98,6 +98,11 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("id"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -108,11 +113,21 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("type"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
