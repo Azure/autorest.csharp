@@ -521,8 +521,30 @@ namespace AutoRest.CSharp.Generation.Writers
             var docinfo = AddDocumentLinkInfo(writer, clientMethod.RequestMethod);
             var schemas = new List<FormattableString>();
 
-            AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
-            AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", false);
+            // check if it is base schema. if so, add children schemas.
+            if ((clientMethod.OperationSchemas.RequestBodySchema is ObjectSchema objSchema) && objSchema.Children != null && objSchema.Children.All.Count > 0)
+            {
+                foreach (Schema s in objSchema.Children.All)
+                {
+                    AddDocumentationForSchema(schemas, s, $"{s.CSharpName()} Request Body", true);
+                }
+            } else
+            {
+                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            }
+            //AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
+            if ((clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responsObjSchema) && responsObjSchema.Children != null && responsObjSchema.Children.All.Count > 0)
+            {
+                foreach (Schema s in responsObjSchema.Children.All)
+                {
+                    AddDocumentationForSchema(schemas, s, $"{s.CSharpName()} Response Body", true);
+                }
+            }
+            else
+            {
+                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Response Body", true);
+            }
+            //AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", false);
 
             if (schemas.Count > 0)
             {
@@ -640,6 +662,20 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (Property prop in s.Properties)
                             {
+                                if (prop.Schema is ChoiceSchema cs && o.DiscriminatorValue != null)
+                                {
+                                    if (s.Discriminator != null && s.Discriminator.Property.Language.Default.Name == prop.Language.Default.Name)
+                                    {
+                                        propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
+                                            prop.SerializedName,
+                                            o.DiscriminatorValue,
+                                            prop.Required ?? false,
+                                            BuilderHelpers.EscapeXmlDescription(prop.Language.Default.Description)));
+
+                                        schemasToExplore.Enqueue(prop.Schema);
+                                        continue;
+                                    }
+                                }
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     prop.SerializedName,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(prop.Schema)),
