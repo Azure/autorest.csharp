@@ -22,15 +22,13 @@ namespace SupersetInheritance
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <param name="new"></param>
-        /// <param name="model8"> This model has writable id, name, type and should inherit from WritableResourceData. </param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
-        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel8 model8, SupersetModel7SystemData systemData)
+        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
             New = @new;
-            Model8 = model8;
             SystemData = systemData;
         }
 
@@ -42,8 +40,6 @@ namespace SupersetInheritance
         public string ResourceType { get; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
-        /// <summary> This model has writable id, name, type and should inherit from WritableResourceData. </summary>
-        public SupersetModel8 Model8 { get; set; }
         /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
         public SupersetModel7SystemData SystemData { get; }
     }

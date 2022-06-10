@@ -21,11 +21,6 @@ namespace SupersetInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(Model8))
-            {
-                writer.WritePropertyName("model8");
-                writer.WriteObjectValue(Model8);
-            }
             writer.WriteEndObject();
         }
 
@@ -35,7 +30,6 @@ namespace SupersetInheritance
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> @new = default;
-            Optional<SupersetModel8> model8 = default;
             Optional<SupersetModel7SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -59,16 +53,6 @@ namespace SupersetInheritance
                     @new = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("model8"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    model8 = SupersetModel8.DeserializeSupersetModel8(property.Value);
-                    continue;
-                }
                 if (property.NameEquals("systemData"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -80,7 +64,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel7Data(id.Value, name.Value, type.Value, @new.Value, model8.Value, systemData.Value);
+            return new SupersetModel7Data(id.Value, name.Value, type.Value, @new.Value, systemData.Value);
         }
     }
 }

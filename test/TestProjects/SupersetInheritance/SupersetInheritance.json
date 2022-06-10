@@ -871,9 +871,6 @@
                 "new": {
                     "type": "string"
                 },
-                "model8": {
-                    "$ref": "#/definitions/SupersetModel8"
-                },
                 "systemData": {
                     "description": "Metadata pertaining to creation and last modification of the resource.",
                     "type": "object",
@@ -913,24 +910,6 @@
                 }
             },
             "description": "The response from the List Storage Accounts operation."
-        },
-        "SupersetModel8": {
-            "description": "This model has writable id, name, type and should inherit from WritableResourceData.",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "foo": {
-                    "type": "string"
-                }
-            }
         }
     },
     "parameters": {
