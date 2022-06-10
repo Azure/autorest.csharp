@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models
                 docurl = operation.ExternalDocs.Url;
             } else
             {
-                docurl = $"https://docs.microsoft.com/rest/api/{_context.DefaultLibraryName}/{operation.OperationId?.Replace('_', '/')}";
+                docurl = $"https://docs.microsoft.com/rest/api/{_context.CodeModel.Language.Default.Name}/{operation.OperationId?.Replace('_', '/')}";
             }
 
             return new RestClientMethod(
