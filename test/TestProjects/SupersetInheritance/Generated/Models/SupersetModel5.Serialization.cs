@@ -49,9 +49,9 @@ namespace SupersetInheritance.Models
             Optional<string> @new = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -87,11 +87,6 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -102,11 +97,6 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -121,7 +111,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel5(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value, foo.Value);
+            return new SupersetModel5(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value, foo.Value);
         }
     }
 }

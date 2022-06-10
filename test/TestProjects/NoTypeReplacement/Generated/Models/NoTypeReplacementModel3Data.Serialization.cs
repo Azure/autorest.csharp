@@ -28,9 +28,9 @@ namespace NoTypeReplacement
         internal static NoTypeReplacementModel3Data DeserializeNoTypeReplacementModel3Data(JsonElement element)
         {
             Optional<MiddleResourceModel> foo = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -46,11 +46,6 @@ namespace NoTypeReplacement
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -61,11 +56,6 @@ namespace NoTypeReplacement
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -80,7 +70,7 @@ namespace NoTypeReplacement
                     continue;
                 }
             }
-            return new NoTypeReplacementModel3Data(id.Value, name.Value, type, systemData.Value, foo.Value);
+            return new NoTypeReplacementModel3Data(id, name, type, systemData.Value, foo.Value);
         }
     }
 }

@@ -27,9 +27,9 @@ namespace MgmtResourceName
         internal static NetworkData DeserializeNetworkData(JsonElement element)
         {
             Optional<string> @new = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -40,11 +40,6 @@ namespace MgmtResourceName
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -55,11 +50,6 @@ namespace MgmtResourceName
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -74,7 +64,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new NetworkData(id.Value, name.Value, type, systemData.Value, @new.Value);
+            return new NetworkData(id, name, type, systemData.Value, @new.Value);
         }
     }
 }

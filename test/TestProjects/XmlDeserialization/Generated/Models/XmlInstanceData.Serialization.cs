@@ -23,19 +23,14 @@ namespace XmlDeserialization
 
         internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element)
         {
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -46,11 +41,6 @@ namespace XmlDeserialization
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -65,30 +55,21 @@ namespace XmlDeserialization
                     continue;
                 }
             }
-            return new XmlInstanceData(id.Value, name.Value, type, systemData.Value);
+            return new XmlInstanceData(id, name, type, systemData.Value);
         }
 
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "XmlInstance");
-            if (Optional.IsDefined(Id))
-            {
-                writer.WriteStartElement("id");
-                writer.WriteValue(Id);
-                writer.WriteEndElement();
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WriteStartElement("name");
-                writer.WriteValue(Name);
-                writer.WriteEndElement();
-            }
-            if (Optional.IsDefined(ResourceType))
-            {
-                writer.WriteStartElement("type");
-                writer.WriteValue(ResourceType);
-                writer.WriteEndElement();
-            }
+            writer.WriteStartElement("id");
+            writer.WriteValue(Id);
+            writer.WriteEndElement();
+            writer.WriteStartElement("name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteStartElement("type");
+            writer.WriteValue(ResourceType);
+            writer.WriteEndElement();
             if (Optional.IsDefined(SystemData))
             {
                 writer.WriteStartElement("systemData");

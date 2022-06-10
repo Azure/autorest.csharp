@@ -23,9 +23,9 @@ namespace OmitOperationGroups.Models
         {
             Optional<string> f = default;
             Optional<string> g = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -41,11 +41,6 @@ namespace OmitOperationGroups.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -56,11 +51,6 @@ namespace OmitOperationGroups.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -75,7 +65,7 @@ namespace OmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model3(id.Value, name.Value, type, systemData.Value, f.Value, g.Value);
+            return new Model3(id, name, type, systemData.Value, f.Value, g.Value);
         }
     }
 }

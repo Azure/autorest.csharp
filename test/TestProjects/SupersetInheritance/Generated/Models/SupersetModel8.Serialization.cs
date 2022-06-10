@@ -22,30 +22,21 @@ namespace SupersetInheritance.Models
                 writer.WritePropertyName("foo");
                 writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(ResourceType))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(ResourceType);
-            }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("type");
+            writer.WriteStringValue(ResourceType);
             writer.WriteEndObject();
         }
 
         internal static SupersetModel8 DeserializeSupersetModel8(JsonElement element)
         {
             Optional<string> foo = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType?> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType? type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -56,11 +47,6 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -71,11 +57,6 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -90,7 +71,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel8(id.Value, name.Value, Optional.ToNullable(type), systemData.Value, foo.Value);
+            return new SupersetModel8(id, name, type, systemData.Value, foo.Value);
         }
     }
 }

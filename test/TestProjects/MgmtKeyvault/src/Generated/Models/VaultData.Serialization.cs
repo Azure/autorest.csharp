@@ -20,9 +20,9 @@ namespace MgmtKeyvault
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             VaultProperties properties = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -53,11 +53,6 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -68,11 +63,6 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -87,7 +77,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new VaultData(id.Value, name.Value, type, systemData.Value, location.Value, Optional.ToDictionary(tags), properties);
+            return new VaultData(id, name, type, systemData.Value, location.Value, Optional.ToDictionary(tags), properties);
         }
     }
 }

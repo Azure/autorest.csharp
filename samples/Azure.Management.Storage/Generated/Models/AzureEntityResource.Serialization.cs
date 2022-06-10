@@ -22,9 +22,9 @@ namespace Azure.Management.Storage.Models
         internal static AzureEntityResource DeserializeAzureEntityResource(JsonElement element)
         {
             Optional<string> etag = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -35,11 +35,6 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -50,11 +45,6 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -69,7 +59,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new AzureEntityResource(id.Value, name.Value, type, systemData.Value, etag.Value);
+            return new AzureEntityResource(id, name, type, systemData.Value, etag.Value);
         }
     }
 }

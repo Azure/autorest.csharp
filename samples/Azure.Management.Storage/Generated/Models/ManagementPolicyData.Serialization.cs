@@ -31,9 +31,9 @@ namespace Azure.Management.Storage
 
         internal static ManagementPolicyData DeserializeManagementPolicyData(JsonElement element)
         {
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
             Optional<ManagementPolicySchema> policy = default;
@@ -41,11 +41,6 @@ namespace Azure.Management.Storage
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -56,11 +51,6 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -107,7 +97,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new ManagementPolicyData(id.Value, name.Value, type, systemData.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
+            return new ManagementPolicyData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
         }
     }
 }

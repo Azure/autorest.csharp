@@ -16,9 +16,9 @@ namespace MgmtExtensionResource
         internal static SubSingletonData DeserializeSubSingletonData(JsonElement element)
         {
             Optional<string> something = default;
-            Optional<ResourceIdentifier> id = default;
-            Optional<string> name = default;
-            Optional<ResourceType> type = default;
+            ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -29,11 +29,6 @@ namespace MgmtExtensionResource
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -44,11 +39,6 @@ namespace MgmtExtensionResource
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
@@ -63,7 +53,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new SubSingletonData(id.Value, name.Value, type, systemData.Value, something.Value);
+            return new SubSingletonData(id, name, type, systemData.Value, something.Value);
         }
     }
 }

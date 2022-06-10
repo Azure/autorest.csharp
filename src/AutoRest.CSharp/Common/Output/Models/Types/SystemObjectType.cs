@@ -167,11 +167,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (publicCtor == null)
             {
                 //ReferenceType for inheritance do not have public constructor, and currently there are ResourceData, TrackedResourceData, WritableResourceData.
-                //Only Location in TrackedResourceData is required.
-                if (property.Name == "Location")
-                    return true;
-                else
-                    return false;
+                //We treat Id, Name, ResourceType, Location in ResourceData/TrackedResourceData as required.
+                if (!property.DeclaringType!.Name.Equals("WrtiableResourceData", StringComparison.Ordinal))
+                {
+                    if (property.Name == "Id" ||
+                        property.Name == "Name" ||
+                        property.Name == "ResourceType" ||
+                        property.Name == "Location")
+                        return true;
+                }
+                return false;
             }
             return publicCtor.GetParameters().Any(param => param.Name?.Equals(property.Name, StringComparison.OrdinalIgnoreCase) == true && param.GetType() == property.GetType());
         }
