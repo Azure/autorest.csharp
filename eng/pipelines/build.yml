@@ -11,8 +11,8 @@ pr:
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
-  PullRequestId: $(System.PullRequest.PullRequestId)
-  IsPullRequest: eq($(Build.Reason), 'PullRequest')
+  PullRequestNumber: $(System.PullRequest.PullRequestNumber)
+  IsPullRequest: $[eq(Build.Reason, 'PullRequest')]
   NugetSecurityAnalysisWarningLevel: 'none'
 
 resources:
