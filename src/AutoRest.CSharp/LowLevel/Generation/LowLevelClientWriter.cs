@@ -532,7 +532,6 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
             }
-            //AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Request Body", true);
             if ((clientMethod.OperationSchemas.ResponseBodySchema is ObjectSchema responsObjSchema) && responsObjSchema.Children != null && responsObjSchema.Children.All.Count > 0)
             {
                 foreach (Schema s in responsObjSchema.Children.All)
@@ -542,9 +541,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.RequestBodySchema, "Response Body", true);
+                AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", true);
             }
-            //AddDocumentationForSchema(schemas, clientMethod.OperationSchemas.ResponseBodySchema, "Response Body", false);
 
             if (schemas.Count > 0)
             {
@@ -619,9 +617,6 @@ namespace AutoRest.CSharp.Generation.Writers
                         builder.AppendLine($"{rowType},{required}{description}");
                 }
             }
-            // Remove the last "," by first removing ",\n", then add back "\n".
-            //builder.Length -= 1 + Environment.NewLine.Length;
-            //builder.AppendLine();
         }
 
         private static SchemaDocumentation[]? GetSchemaDocumentationsForSchema(Schema schema, string schemaName)
