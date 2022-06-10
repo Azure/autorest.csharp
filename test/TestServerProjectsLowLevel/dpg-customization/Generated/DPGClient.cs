@@ -64,9 +64,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/getModel
+        /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -94,9 +98,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/getModel
+        /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -125,14 +133,18 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/postModel
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   hello: string (required)
+        ///   hello: string, # Required.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -162,14 +174,18 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> or <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/postModel
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   hello: string (required)
+        ///   hello: string, # Required.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// Schema for <c>LROProduct Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -198,14 +214,17 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/getPages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
         ///     {
-        ///       received: &quot;raw&quot; | &quot;model&quot;
+        ///       received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   ], # Optional.
+        ///   nextLink: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -239,14 +258,17 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/getPages
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   values: [
         ///     {
-        ///       received: &quot;raw&quot; | &quot;model&quot;
+        ///       received: &quot;raw&quot; | &quot;model&quot;, # Required.
         ///     }
-        ///   ],
-        ///   nextLink: string
+        ///   ], # Optional.
+        ///   nextLink: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -281,10 +303,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/lro
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;,
-        ///   provisioningState: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 
@@ -313,10 +338,13 @@ namespace dpg_customization_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/DPGClient/lro
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   received: &quot;raw&quot; | &quot;model&quot;,
-        ///   provisioningState: string
+        ///   received: &quot;raw&quot; | &quot;model&quot;, # Required.
+        ///   provisioningState: string, # Required.
         /// }
         /// </code>
         /// 

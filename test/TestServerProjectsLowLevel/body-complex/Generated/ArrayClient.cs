@@ -59,15 +59,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -91,15 +88,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -125,15 +119,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -161,15 +152,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -195,15 +183,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -227,15 +212,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -261,15 +243,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -297,15 +276,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -331,15 +307,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 
@@ -363,15 +336,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/array/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   array: [string]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   array: [string], # Optional.
         /// }
         /// </code>
         /// 

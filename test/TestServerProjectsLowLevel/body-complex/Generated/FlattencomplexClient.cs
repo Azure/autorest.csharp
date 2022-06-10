@@ -58,13 +58,17 @@ namespace body_complex_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/flattencomplex/getValid
+        /// Schema for <c>MyDerivedType Response Body</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -87,13 +91,17 @@ namespace body_complex_LowLevel
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/flattencomplex/getValid
+        /// Schema for <c>MyDerivedType Response Body</c>:
         /// <code>{
-        ///   kind: &quot;Kind1&quot;,
-        ///   propB1: string,
+        ///   kind: Kind1, # Required.
+        ///   propB1: string, # Optional.
         ///   helper: {
-        ///     propBH1: string
-        ///   }
+        ///     propBH1: string, # Optional.
+        ///   }, # Optional.
+        ///   propD1: string, # Optional.
         /// }
         /// </code>
         /// 

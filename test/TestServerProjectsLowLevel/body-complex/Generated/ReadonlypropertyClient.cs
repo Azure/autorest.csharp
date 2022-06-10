@@ -59,16 +59,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/readonlyproperty/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string,
-        ///   size: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: string, # Optional.
+        ///   size: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -92,16 +89,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/readonlyproperty/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: string,
-        ///   size: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: string, # Optional.
+        ///   size: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -127,16 +121,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/readonlyproperty/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string,
-        ///   size: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: string, # Optional.
+        ///   size: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -164,16 +155,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/readonlyproperty/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: string,
-        ///   size: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: string, # Optional.
+        ///   size: number, # Optional.
         /// }
         /// </code>
         /// 

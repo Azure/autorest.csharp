@@ -61,17 +61,14 @@ namespace body_complex_LowLevel
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -95,17 +92,14 @@ namespace body_complex_LowLevel
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -131,17 +125,14 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -169,17 +160,14 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -205,17 +193,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getInvalid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -239,17 +224,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getInvalid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -273,17 +255,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -307,17 +286,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -341,17 +317,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -375,17 +348,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -409,17 +379,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 
@@ -443,17 +410,14 @@ namespace body_complex_LowLevel
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/basic/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   id: number,
-        ///   name: string,
-        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   id: number, # Optional. <Description>Basic Id</Description>
+        ///   name: string, # Optional. <Description>Name property with a very long description that does not fit on a single line and a line break.</Description>
+        ///   color: &quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;, # Optional.
         /// }
         /// </code>
         /// 

@@ -59,16 +59,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getInt
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -92,16 +89,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getInt
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -127,16 +121,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putInt
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -164,16 +155,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putInt
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -199,16 +187,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getLong
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -232,16 +217,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getLong
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -267,16 +249,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putLong
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -304,16 +283,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putLong
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -339,16 +315,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getFloat
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -372,16 +345,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getFloat
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -407,16 +377,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putFloat
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -444,16 +411,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putFloat
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field2: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field2: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -479,16 +443,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDouble
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -512,16 +473,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDouble
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -547,16 +505,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDouble
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -584,16 +539,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDouble
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field1: number,
-        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field1: number, # Optional.
+        ///   field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: number, # Optional.
         /// }
         /// </code>
         /// 
@@ -619,16 +571,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getBool
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -652,16 +601,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getBool
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -687,16 +633,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putBool
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -724,16 +667,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putBool
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field_true: boolean,
-        ///   field_false: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field_true: boolean, # Optional.
+        ///   field_false: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -759,17 +699,14 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getString
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -793,17 +730,14 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getString
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -829,17 +763,14 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putString
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -867,17 +798,14 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putString
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string,
-        ///   empty: string,
-        ///   null: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string, # Optional.
+        ///   empty: string, # Optional.
+        ///   null: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -903,16 +831,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDate
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DateWrapperField, # Optional.
+        ///   leap: DateWrapperLeap, # Optional.
         /// }
         /// </code>
         /// 
@@ -936,16 +861,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDate
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DateWrapperField, # Optional.
+        ///   leap: DateWrapperLeap, # Optional.
         /// }
         /// </code>
         /// 
@@ -971,16 +893,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDate
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DateWrapperField, # Optional.
+        ///   leap: DateWrapperLeap, # Optional.
         /// }
         /// </code>
         /// 
@@ -1008,16 +927,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDate
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: DateWrapperField,
-        ///   leap: DateWrapperLeap
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DateWrapperField, # Optional.
+        ///   leap: DateWrapperLeap, # Optional.
         /// }
         /// </code>
         /// 
@@ -1043,16 +959,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDateTime
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1076,16 +989,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDateTime
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1111,16 +1021,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDateTime
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1148,16 +1055,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDateTime
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1183,16 +1087,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDateTimeRfc1123
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1216,16 +1117,13 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDateTimeRfc1123
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1251,16 +1149,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDateTimeRfc1123
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1288,16 +1183,13 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDateTimeRfc1123
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: string (ISO 8601 Format),
-        ///   now: string (ISO 8601 Format)
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: string (ISO 8601 Format), # Optional.
+        ///   now: string (ISO 8601 Format), # Optional.
         /// }
         /// </code>
         /// 
@@ -1323,15 +1215,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDuration
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DurationWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1355,15 +1244,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getDuration
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DurationWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1389,15 +1275,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDuration
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DurationWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1425,15 +1308,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putDuration
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: DurationWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: DurationWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1459,15 +1339,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getByte
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: ByteWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1491,15 +1368,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/getByte
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: ByteWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1525,15 +1399,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putByte
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: ByteWrapperField, # Optional.
         /// }
         /// </code>
         /// 
@@ -1561,15 +1432,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/primitive/putByte
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   field: ByteWrapperField
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   field: ByteWrapperField, # Optional.
         /// }
         /// </code>
         /// 

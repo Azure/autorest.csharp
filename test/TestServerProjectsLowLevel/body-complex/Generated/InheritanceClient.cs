@@ -59,25 +59,22 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/inheritance/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   color: string,
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
+        ///       food: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
+        ///   breed: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -101,25 +98,22 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/inheritance/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   color: string,
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
+        ///       food: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
+        ///   breed: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -145,25 +139,22 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/inheritance/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   color: string,
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
+        ///       food: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
+        ///   breed: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -191,25 +182,22 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/inheritance/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   color: string,
+        ///   color: string, # Optional.
         ///   hates: [
         ///     {
-        ///       id: number,
-        ///       name: string,
-        ///       food: string
+        ///       id: number, # Optional.
+        ///       name: string, # Optional.
+        ///       food: string, # Optional.
         ///     }
-        ///   ],
-        ///   id: number,
-        ///   name: string,
-        ///   breed: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   id: number, # Optional.
+        ///   name: string, # Optional.
+        ///   breed: string, # Optional.
         /// }
         /// </code>
         /// 

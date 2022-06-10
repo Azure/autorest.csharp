@@ -59,15 +59,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -91,15 +89,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -123,15 +119,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError204Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -155,15 +149,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError204Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -187,15 +179,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError201Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -219,15 +209,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError201Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -251,15 +239,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError202None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -283,15 +269,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError202None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -315,15 +299,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -347,15 +329,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model204NoModelDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -379,15 +359,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -411,15 +389,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -443,15 +419,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError201Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -475,15 +449,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError201Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -507,15 +479,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -539,15 +509,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200Model201ModelDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -571,15 +539,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -603,15 +569,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -635,15 +599,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError201Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -667,15 +629,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError201Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -699,15 +659,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError404Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -731,15 +689,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError404Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -763,15 +719,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -795,15 +749,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA201ModelC404ModelDDefaultError400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -826,15 +778,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -853,15 +796,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -880,15 +814,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -907,15 +832,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -934,15 +850,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -961,15 +868,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -1133,9 +1031,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1159,9 +1061,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1185,9 +1091,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1211,9 +1121,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/getDefaultModelA200None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1236,14 +1150,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1262,14 +1168,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1288,14 +1186,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1314,14 +1204,6 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <remarks>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   statusCode: string
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1485,9 +1367,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1511,9 +1397,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1537,9 +1427,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1563,9 +1457,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1589,9 +1487,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1615,9 +1517,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA200Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1641,9 +1547,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1667,9 +1577,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400None
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1693,9 +1607,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1719,9 +1637,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1745,9 +1667,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1771,9 +1697,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA400Invalid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1797,9 +1727,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA202Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -1823,9 +1757,13 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestHttpInfrastructureTestService/multipleResponses/get200ModelA202Valid
+        /// Schema for <c>B Response Body</c>:
         /// <code>{
-        ///   statusCode: string
+        ///   statusCode: string, # Optional.
+        ///   textStatusCode: string, # Optional.
         /// }
         /// </code>
         /// 

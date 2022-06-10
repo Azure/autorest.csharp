@@ -59,18 +59,113 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getValid
+        /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Response Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 
@@ -94,18 +189,113 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getValid
+        /// Schema for <c>Salmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Response Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Response Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 
@@ -131,18 +321,113 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValid
+        /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Request Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 
@@ -170,18 +455,113 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValid
+        /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Request Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 
@@ -207,16 +587,15 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getDotSyntax
+        /// Schema for <c>DotSalmon Response Body</c>:
         /// <code>{
-        ///   fish.type: string,
-        ///   species: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -240,16 +619,15 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getDotSyntax
+        /// Schema for <c>DotSalmon Response Body</c>:
         /// <code>{
-        ///   fish.type: string,
-        ///   species: string
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   fish.type: string, # Required.
+        ///   species: string, # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
         /// 
@@ -273,26 +651,23 @@ namespace body_complex_LowLevel
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -316,26 +691,23 @@ namespace body_complex_LowLevel
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -359,26 +731,23 @@ namespace body_complex_LowLevel
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithoutDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -402,26 +771,23 @@ namespace body_complex_LowLevel
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComposedWithoutDiscriminator
         /// Schema for <c>Response Body</c>:
         /// <code>{
         ///   sampleSalmon: {
-        ///     fish.type: string,
-        ///     species: string,
-        ///     location: string,
-        ///     iswild: boolean
-        ///   },
-        ///   salmons: [DotSalmon],
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///     location: string, # Optional.
+        ///     iswild: boolean, # Optional.
+        ///   }, # Optional.
+        ///   salmons: [DotSalmon], # Optional.
         ///   sampleFish: {
-        ///     fish.type: string,
-        ///     species: string
-        ///   },
-        ///   fishes: [DotFish]
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///     fish.type: string, # Required.
+        ///     species: string, # Optional.
+        ///   }, # Optional.
+        ///   fishes: [DotFish], # Optional.
         /// }
         /// </code>
         /// 
@@ -445,27 +811,25 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComplicated
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -489,27 +853,25 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
-        /// Schema for <c>Response Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/getComplicated
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -535,27 +897,25 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putComplicated
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -583,27 +943,25 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putComplicated
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -631,44 +989,43 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putMissingDiscriminator
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -696,44 +1053,43 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putMissingDiscriminator
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string (required),
-        ///       species: string,
-        ///       length: number (required),
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Body</c>:
+        /// Schema for <c>SmartSalmon Response Body</c>:
         /// <code>{
-        ///   fishtype: string,
-        ///   species: string,
-        ///   length: number,
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
         ///   siblings: [
         ///     {
-        ///       fishtype: string,
-        ///       species: string,
-        ///       length: number,
-        ///       siblings: [Fish]
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
         ///     }
-        ///   ],
-        ///   location: string,
-        ///   iswild: boolean
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -761,18 +1117,113 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValidMissingRequired
+        /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Request Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 
@@ -800,18 +1251,113 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
-        /// Schema for <c>Request Body</c>:
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/polymorphism/putValidMissingRequired
+        /// Schema for <c>Salmon Request Body</c>:
         /// <code>{
-        ///   fishtype: string (required),
-        ///   species: string,
-        ///   length: number (required),
-        ///   siblings: [Fish]
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
         /// }
         /// </code>
-        /// Schema for <c>Response Error</c>:
+        /// Schema for <c>SmartSalmon Request Body</c>:
         /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   location: string, # Optional.
+        ///   iswild: boolean, # Optional.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   college_degree: string, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Shark Request Body</c>:
+        /// <code>{
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        /// }
+        /// </code>
+        /// Schema for <c>Sawshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   picture: SawsharkPicture, # Optional.
+        /// }
+        /// </code>
+        /// Schema for <c>Goblinshark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
+        ///   jawsize: number, # Optional.
+        ///   color: &quot;pink&quot; | &quot;gray&quot; | &quot;brown&quot; | &quot;RED&quot; | &quot;red&quot;, # Optional. <Description>Colors possible</Description>
+        /// }
+        /// </code>
+        /// Schema for <c>Cookiecuttershark Request Body</c>:
+        /// <code>{
+        ///   age: number, # Optional.
+        ///   birthday: string (ISO 8601 Format), # Required.
+        ///   fishtype: string, # Required.
+        ///   species: string, # Optional.
+        ///   length: number, # Required.
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string, # Required.
+        ///       species: string, # Optional.
+        ///       length: number, # Required.
+        ///       siblings: [Fish], # Optional.
+        ///     }
+        ///   ], # Optional.
         /// }
         /// </code>
         /// 

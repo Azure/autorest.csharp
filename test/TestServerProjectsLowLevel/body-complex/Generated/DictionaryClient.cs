@@ -59,15 +59,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -91,15 +88,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getValid
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -125,15 +119,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -161,15 +152,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putValid
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -195,15 +183,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -227,15 +212,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getEmpty
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -261,15 +243,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -297,15 +276,12 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/putEmpty
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -331,15 +307,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -363,15 +336,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNull
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -395,15 +365,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 
@@ -427,15 +394,12 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/AutoRestComplexTestService/dictionary/getNotProvided
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;
-        /// }
-        /// </code>
-        /// Schema for <c>Response Error</c>:
-        /// <code>{
-        ///   status: number,
-        ///   message: string
+        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. <Description>Dictionary of &lt;string&gt;</Description>
         /// }
         /// </code>
         /// 

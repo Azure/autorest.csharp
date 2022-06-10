@@ -117,16 +117,19 @@ namespace ProtocolMethodsInRestClient
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/TestService/Create
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
@@ -151,16 +154,19 @@ namespace ProtocolMethodsInRestClient
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
+        /// Below is the JSON schema for the request and response payloads.
+        /// Additional information can be found in the service REST API documentation:
+        /// https://docs.microsoft.com/rest/api/TestService/Create
         /// Schema for <c>Request Body</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// Schema for <c>Response Body</c>:
         /// <code>{
-        ///   name: string,
-        ///   id: string
+        ///   name: string, # Optional.
+        ///   id: string, # Optional.
         /// }
         /// </code>
         /// 
