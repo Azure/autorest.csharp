@@ -44,7 +44,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel3Resource(ArmClient client, CustomModel3Data data) : this(client, new ResourceIdentifier(data.Id))
+        internal CustomModel3Resource(ArmClient client, CustomModel3Data data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;

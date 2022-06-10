@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace ExactMatchFlattenInheritance.Models
 {
@@ -20,8 +22,6 @@ namespace ExactMatchFlattenInheritance.Models
                 writer.WritePropertyName("foo");
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("properties");
-            writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -38,15 +38,15 @@ namespace ExactMatchFlattenInheritance.Models
                 writer.WriteStringValue(ResourceType);
             }
             writer.WriteEndObject();
-            writer.WriteEndObject();
         }
 
         internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element)
         {
             Optional<int> foo = default;
-            Optional<string> id = default;
+            Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<ResourceType?> type = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -59,35 +59,43 @@ namespace ExactMatchFlattenInheritance.Models
                     foo = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    foreach (var property0 in property.Value.EnumerateObject())
+                    id = new ResourceIdentifier(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        if (property0.NameEquals("id"))
-                        {
-                            id = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("name"))
-                        {
-                            name = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("type"))
-                        {
-                            type = property0.Value.GetString();
-                            continue;
-                        }
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
                     }
+                    type = new ResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), id.Value, name.Value, type.Value);
+            return new AzureResourceFlattenModel4(id, name, type, systemData, Optional.ToNullable(foo));
         }
     }
 }

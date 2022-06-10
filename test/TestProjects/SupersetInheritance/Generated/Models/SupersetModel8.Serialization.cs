@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace SupersetInheritance.Models
 {
@@ -15,6 +17,11 @@ namespace SupersetInheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo");
+                writer.WriteStringValue(Foo);
+            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -30,25 +37,31 @@ namespace SupersetInheritance.Models
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(ResourceType);
             }
-            if (Optional.IsDefined(Foo))
-            {
-                writer.WritePropertyName("foo");
-                writer.WriteStringValue(Foo);
-            }
             writer.WriteEndObject();
         }
 
         internal static SupersetModel8 DeserializeSupersetModel8(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             Optional<string> foo = default;
+            Optional<ResourceIdentifier> id = default;
+            Optional<string> name = default;
+            Optional<ResourceType?> type = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("foo"))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -58,16 +71,26 @@ namespace SupersetInheritance.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("foo"))
+                if (property.NameEquals("systemData"))
                 {
-                    foo = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
             }
-            return new SupersetModel8(id.Value, name.Value, type.Value, foo.Value);
+            return new SupersetModel8(id, name, type, systemData, foo.Value);
         }
     }
 }
