@@ -86,7 +86,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new MgmtKeyvaultResourceData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags));
+            return new MgmtKeyvaultResourceData(id.Value, name.Value, type, systemData.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

@@ -18,10 +18,10 @@ namespace constants
     internal partial class ContantsRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Enum8 _headerConstant;
-        private readonly Enum9 _queryConstant;
-        private readonly Enum10 _pathConstant;
         private readonly Uri _endpoint;
+        private readonly bool _headerConstant;
+        private readonly int _queryConstant;
+        private readonly string _pathConstant;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,19 +29,20 @@ namespace constants
         /// <summary> Initializes a new instance of ContantsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="headerConstant"> Constant header property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="pathConstant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathConstant"/> is an empty string, and was expected to be non-empty. </exception>
+        public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, bool headerConstant = true, int queryConstant = 100, string pathConstant = "path")
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _headerConstant = headerConstant;
             _queryConstant = queryConstant;
-            _pathConstant = pathConstant;
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            _pathConstant = pathConstant ?? throw new ArgumentNullException(nameof(pathConstant));
         }
 
         internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueNoDefaultRequest(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)
@@ -804,10 +805,10 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/clientConstants/", false);
-            uri.AppendPath(_pathConstant.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant.ToString(), true);
+            uri.AppendPath(_pathConstant, true);
+            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant.ToString());
+            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 

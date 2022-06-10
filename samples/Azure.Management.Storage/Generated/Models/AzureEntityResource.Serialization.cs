@@ -69,7 +69,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new AzureEntityResource(id, name, type, systemData, etag.Value);
+            return new AzureEntityResource(id.Value, name.Value, type, systemData.Value, etag.Value);
         }
     }
 }

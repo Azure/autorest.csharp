@@ -262,7 +262,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new FakePolicyAssignmentData(id, name, type, systemData, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
+            return new FakePolicyAssignmentData(id.Value, name.Value, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
         }
     }
 }

@@ -74,7 +74,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new DiskData(id, name, type, systemData, @new.Value);
+            return new DiskData(id.Value, name.Value, type, systemData.Value, @new.Value);
         }
     }
 }

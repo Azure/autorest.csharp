@@ -110,7 +110,7 @@ namespace MgmtExtensionCommonRestOperation
                     continue;
                 }
             }
-            return new TypeTwoData(id, name, type, systemData, Optional.ToDictionary(tags), location, myType.Value);
+            return new TypeTwoData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value);
         }
     }
 }

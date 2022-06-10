@@ -127,7 +127,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StoragePrivateLinkResource(id, name, type, systemData, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new StoragePrivateLinkResource(id.Value, name.Value, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
     }
 }

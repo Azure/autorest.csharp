@@ -110,7 +110,7 @@ namespace SubscriptionExtensions
                     continue;
                 }
             }
-            return new ToasterData(id, name, type, systemData, Optional.ToDictionary(tags), location, foo.Value);
+            return new ToasterData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value);
         }
     }
 }

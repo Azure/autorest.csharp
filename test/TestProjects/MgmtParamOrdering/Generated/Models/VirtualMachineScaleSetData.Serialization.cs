@@ -125,7 +125,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData, Optional.ToDictionary(tags), location, Optional.ToList(zones));
+            return new VirtualMachineScaleSetData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToList(zones));
         }
     }
 }

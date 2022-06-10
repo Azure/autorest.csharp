@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyData(id, name, type, systemData, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
+            return new ObjectReplicationPolicyData(id.Value, name.Value, type, systemData.Value, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
         }
     }
 }

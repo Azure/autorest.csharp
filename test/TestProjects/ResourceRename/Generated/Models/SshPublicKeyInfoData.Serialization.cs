@@ -80,7 +80,7 @@ namespace ResourceRename
                     continue;
                 }
             }
-            return new SshPublicKeyInfoData(id, name, type, systemData, properties.Value);
+            return new SshPublicKeyInfoData(id.Value, name.Value, type, systemData.Value, properties.Value);
         }
     }
 }

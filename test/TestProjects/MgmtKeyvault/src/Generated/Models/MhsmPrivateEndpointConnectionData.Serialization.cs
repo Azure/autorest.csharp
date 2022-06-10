@@ -191,7 +191,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new MhsmPrivateEndpointConnectionData(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new MhsmPrivateEndpointConnectionData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

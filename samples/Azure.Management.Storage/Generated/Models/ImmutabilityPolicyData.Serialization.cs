@@ -144,7 +144,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new ImmutabilityPolicyData(id, name, type, systemData, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+            return new ImmutabilityPolicyData(id.Value, name.Value, type, systemData.Value, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
         }
     }
 }

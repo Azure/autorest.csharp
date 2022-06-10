@@ -74,7 +74,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new ResourceModel1Data(id, name, type, systemData, foo.Value);
+            return new ResourceModel1Data(id.Value, name.Value, type, systemData.Value, foo.Value);
         }
     }
 }

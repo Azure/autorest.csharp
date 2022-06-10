@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, systemData, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value);
+            return new VirtualMachineScaleSetRollingUpgradeData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, policy.Value, runningStatus.Value, progress.Value, error.Value);
         }
     }
 }

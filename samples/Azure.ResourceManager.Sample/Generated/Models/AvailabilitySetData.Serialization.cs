@@ -222,7 +222,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses));
+            return new AvailabilitySetData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses));
         }
     }
 }

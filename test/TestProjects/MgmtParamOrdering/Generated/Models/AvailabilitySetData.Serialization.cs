@@ -110,7 +110,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, systemData, Optional.ToDictionary(tags), location, bar.Value);
+            return new AvailabilitySetData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
         }
     }
 }

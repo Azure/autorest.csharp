@@ -68,7 +68,7 @@ namespace SingletonResource
                     continue;
                 }
             }
-            return new IgnitionData(id, name, type, systemData, Optional.ToNullable(pushButton));
+            return new IgnitionData(id.Value, name.Value, type, systemData.Value, Optional.ToNullable(pushButton));
         }
     }
 }

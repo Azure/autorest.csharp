@@ -74,7 +74,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel2Data(id, name, type, systemData, foo.Value);
+            return new CustomModel2Data(id.Value, name.Value, type, systemData.Value, foo.Value);
         }
     }
 }

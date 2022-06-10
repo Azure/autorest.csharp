@@ -114,7 +114,7 @@ namespace MgmtCollectionParent
                     continue;
                 }
             }
-            return new OrderResourceData(id, name, type, systemData, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory));
+            return new OrderResourceData(id.Value, name.Value, type, systemData.Value, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory));
         }
     }
 }

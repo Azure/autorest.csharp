@@ -147,7 +147,7 @@ namespace SupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new TrackedResourceModel2(id, name, type, systemData, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value);
         }
     }
 }

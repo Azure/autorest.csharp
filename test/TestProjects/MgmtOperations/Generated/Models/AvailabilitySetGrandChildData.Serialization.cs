@@ -110,7 +110,7 @@ namespace MgmtOperations
                     continue;
                 }
             }
-            return new AvailabilitySetGrandChildData(id, name, type, systemData, Optional.ToDictionary(tags), location, bar.Value);
+            return new AvailabilitySetGrandChildData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
         }
     }
 }

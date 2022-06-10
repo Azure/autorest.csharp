@@ -116,7 +116,7 @@ namespace MgmtNonStringPathVariable
                     continue;
                 }
             }
-            return new FakeData(id, name, type, systemData, Optional.ToDictionary(tags), location, properties.Value);
+            return new FakeData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
         }
     }
 }

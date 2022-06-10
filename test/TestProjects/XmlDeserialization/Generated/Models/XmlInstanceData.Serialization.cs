@@ -65,7 +65,7 @@ namespace XmlDeserialization
                     continue;
                 }
             }
-            return new XmlInstanceData(id, name, type, systemData);
+            return new XmlInstanceData(id.Value, name.Value, type, systemData.Value);
         }
 
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)

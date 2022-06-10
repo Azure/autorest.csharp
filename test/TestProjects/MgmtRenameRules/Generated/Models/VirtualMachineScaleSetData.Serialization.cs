@@ -394,7 +394,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

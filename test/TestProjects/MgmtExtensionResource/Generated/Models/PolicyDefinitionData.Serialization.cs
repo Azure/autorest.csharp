@@ -197,7 +197,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new PolicyDefinitionData(id, name, type, systemData, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
+            return new PolicyDefinitionData(id.Value, name.Value, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
         }
     }
 }

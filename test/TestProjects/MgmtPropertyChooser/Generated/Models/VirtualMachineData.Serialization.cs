@@ -354,7 +354,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

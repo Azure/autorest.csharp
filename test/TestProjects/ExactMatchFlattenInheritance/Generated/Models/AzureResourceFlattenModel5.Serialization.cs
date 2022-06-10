@@ -79,7 +79,7 @@ namespace ExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel5(id, name, type, systemData, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel5(id.Value, name.Value, type, systemData.Value, Optional.ToNullable(foo));
         }
     }
 }

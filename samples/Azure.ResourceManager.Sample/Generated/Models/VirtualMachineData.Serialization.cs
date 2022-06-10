@@ -475,7 +475,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, Optional.ToDictionary(tags), location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

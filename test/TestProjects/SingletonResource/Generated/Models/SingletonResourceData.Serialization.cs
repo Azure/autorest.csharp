@@ -74,7 +74,7 @@ namespace SingletonResource
                     continue;
                 }
             }
-            return new SingletonResourceData(id, name, type, systemData, @new.Value);
+            return new SingletonResourceData(id.Value, name.Value, type, systemData.Value, @new.Value);
         }
     }
 }

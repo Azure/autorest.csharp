@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ProximityPlacementGroupData(id, name, type, systemData, Optional.ToDictionary(tags), location, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value);
+            return new ProximityPlacementGroupData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(proximityPlacementGroupType), Optional.ToList(virtualMachines), Optional.ToList(virtualMachineScaleSets), Optional.ToList(availabilitySets), colocationStatus.Value);
         }
     }
 }

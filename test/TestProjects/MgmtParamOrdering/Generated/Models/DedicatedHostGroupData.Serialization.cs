@@ -110,7 +110,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, systemData, Optional.ToDictionary(tags), location, foo.Value);
+            return new DedicatedHostGroupData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value);
         }
     }
 }

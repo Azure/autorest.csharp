@@ -74,7 +74,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new NetworkData(id, name, type, systemData, @new.Value);
+            return new NetworkData(id.Value, name.Value, type, systemData.Value, @new.Value);
         }
     }
 }

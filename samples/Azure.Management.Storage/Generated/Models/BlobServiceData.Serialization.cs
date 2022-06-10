@@ -229,7 +229,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new BlobServiceData(id, name, type, systemData, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value);
+            return new BlobServiceData(id.Value, name.Value, type, systemData.Value, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value);
         }
     }
 }

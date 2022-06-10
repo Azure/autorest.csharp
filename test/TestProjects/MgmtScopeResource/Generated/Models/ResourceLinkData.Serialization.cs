@@ -80,7 +80,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new ResourceLinkData(id, name, type, systemData, properties.Value);
+            return new ResourceLinkData(id.Value, name.Value, type, systemData.Value, properties.Value);
         }
     }
 }

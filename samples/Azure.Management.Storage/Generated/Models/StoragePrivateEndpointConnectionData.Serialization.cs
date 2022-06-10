@@ -123,7 +123,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new StoragePrivateEndpointConnectionData(id, name, type, systemData, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
+            return new StoragePrivateEndpointConnectionData(id.Value, name.Value, type, systemData.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

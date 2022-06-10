@@ -95,7 +95,7 @@ namespace ExactMatchFlattenInheritance.Models
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel4(id, name, type, systemData, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel4(id.Value, name.Value, Optional.ToNullable(type), systemData.Value, Optional.ToNullable(foo));
         }
     }
 }

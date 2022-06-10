@@ -75,7 +75,7 @@ namespace OmitOperationGroups.Models
                     continue;
                 }
             }
-            return new Model3(id, name, type, systemData, f.Value, g.Value);
+            return new Model3(id.Value, name.Value, type, systemData.Value, f.Value, g.Value);
         }
     }
 }

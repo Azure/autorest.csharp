@@ -121,7 +121,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel5(id, name, type, systemData, Optional.ToDictionary(tags), location, @new.Value, foo.Value);
+            return new SupersetModel5(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value, foo.Value);
         }
     }
 }

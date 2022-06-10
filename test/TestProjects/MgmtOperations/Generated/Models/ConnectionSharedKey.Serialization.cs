@@ -107,7 +107,7 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, systemData, Optional.ToDictionary(tags), location, value);
+            return new ConnectionSharedKey(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, value);
         }
     }
 }

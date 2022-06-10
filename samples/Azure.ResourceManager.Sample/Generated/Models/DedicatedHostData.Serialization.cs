@@ -223,7 +223,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostData(id, name, type, systemData, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
+            return new DedicatedHostData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
         }
     }
 }

@@ -108,7 +108,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, systemData, Optional.ToDictionary(tags), location, properties);
+            return new EnvironmentContainerResourceData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, properties);
         }
     }
 }

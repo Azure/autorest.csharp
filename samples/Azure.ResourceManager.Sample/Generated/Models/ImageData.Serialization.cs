@@ -170,7 +170,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ImageData(id, name, type, systemData, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
         }
     }
 }

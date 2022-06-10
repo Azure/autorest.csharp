@@ -107,7 +107,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new BlobInventoryPolicyData(id, name, type, systemData, Optional.ToNullable(lastModifiedTime), policy.Value);
+            return new BlobInventoryPolicyData(id.Value, name.Value, type, systemData.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
         }
     }
 }

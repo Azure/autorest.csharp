@@ -110,7 +110,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel5Data(id, name, type, systemData, Optional.ToDictionary(tags), location, @new.Value);
+            return new ExactMatchModel5Data(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value);
         }
     }
 }

@@ -116,7 +116,7 @@ namespace MgmtNonStringPathVariable
                     continue;
                 }
             }
-            return new BarData(id, name, type, systemData, Optional.ToDictionary(tags), location, properties.Value);
+            return new BarData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value);
         }
     }
 }

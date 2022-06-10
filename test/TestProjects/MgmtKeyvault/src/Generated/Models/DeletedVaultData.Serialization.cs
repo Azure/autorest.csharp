@@ -69,7 +69,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new DeletedVaultData(id, name, type, systemData, properties.Value);
+            return new DeletedVaultData(id.Value, name.Value, type, systemData.Value, properties.Value);
         }
     }
 }

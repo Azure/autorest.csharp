@@ -115,7 +115,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new ManagedHsmResource(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value);
+            return new ManagedHsmResource(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value);
         }
     }
 }

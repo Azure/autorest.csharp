@@ -74,7 +74,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new MachineData(id, name, type, systemData, @new.Value);
+            return new MachineData(id.Value, name.Value, type, systemData.Value, @new.Value);
         }
     }
 }

@@ -80,7 +80,7 @@ namespace NoTypeReplacement
                     continue;
                 }
             }
-            return new NoTypeReplacementModel1Data(id, name, type, systemData, foo);
+            return new NoTypeReplacementModel1Data(id.Value, name.Value, type, systemData.Value, foo);
         }
     }
 }

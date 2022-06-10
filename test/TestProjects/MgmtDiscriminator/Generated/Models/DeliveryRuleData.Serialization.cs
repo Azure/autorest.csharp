@@ -80,7 +80,7 @@ namespace MgmtDiscriminator
                     continue;
                 }
             }
-            return new DeliveryRuleData(id, name, type, systemData, properties.Value);
+            return new DeliveryRuleData(id.Value, name.Value, type, systemData.Value, properties.Value);
         }
     }
 }

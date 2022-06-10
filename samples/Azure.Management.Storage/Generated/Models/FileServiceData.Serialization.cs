@@ -138,7 +138,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, systemData, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
+            return new FileServiceData(id.Value, name.Value, type, systemData.Value, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
         }
     }
 }

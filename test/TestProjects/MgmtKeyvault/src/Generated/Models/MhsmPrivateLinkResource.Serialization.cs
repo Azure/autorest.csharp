@@ -178,7 +178,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResource(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new MhsmPrivateLinkResource(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
     }
 }

@@ -179,7 +179,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, systemData, Optional.ToDictionary(tags), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
+            return new VirtualMachineExtensionImageData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
         }
     }
 }

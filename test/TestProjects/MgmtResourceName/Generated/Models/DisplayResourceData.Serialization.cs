@@ -74,7 +74,7 @@ namespace MgmtResourceName
                     continue;
                 }
             }
-            return new DisplayResourceData(id, name, type, systemData, @new.Value);
+            return new DisplayResourceData(id.Value, name.Value, type, systemData.Value, @new.Value);
         }
     }
 }

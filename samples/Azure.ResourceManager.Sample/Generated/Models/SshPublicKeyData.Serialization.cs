@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new SshPublicKeyData(id, name, type, systemData, Optional.ToDictionary(tags), location, publicKey.Value);
+            return new SshPublicKeyData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, publicKey.Value);
         }
     }
 }

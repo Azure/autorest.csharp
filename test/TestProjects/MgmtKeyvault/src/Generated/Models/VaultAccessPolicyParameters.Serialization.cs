@@ -77,7 +77,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new VaultAccessPolicyParameters(id, name, type, systemData, location.Value, properties);
+            return new VaultAccessPolicyParameters(id.Value, name.Value, type, systemData.Value, location.Value, properties);
         }
     }
 }

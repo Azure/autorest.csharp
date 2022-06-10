@@ -90,7 +90,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel8(id, name, type, systemData, foo.Value);
+            return new SupersetModel8(id.Value, name.Value, Optional.ToNullable(type), systemData.Value, foo.Value);
         }
     }
 }

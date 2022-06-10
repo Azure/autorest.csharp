@@ -90,7 +90,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new CustomModel3Data(id, name, type, systemData, foo.Value);
+            return new CustomModel3Data(id.Value, name.Value, Optional.ToNullable(type), systemData.Value, foo.Value);
         }
     }
 }

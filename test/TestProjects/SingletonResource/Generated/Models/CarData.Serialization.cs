@@ -74,7 +74,7 @@ namespace SingletonResource
                     continue;
                 }
             }
-            return new CarData(id, name, type, systemData, horsepower.Value);
+            return new CarData(id.Value, name.Value, type, systemData.Value, horsepower.Value);
         }
     }
 }

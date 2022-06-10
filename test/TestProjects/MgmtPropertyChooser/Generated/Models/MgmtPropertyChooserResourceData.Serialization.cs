@@ -99,7 +99,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new MgmtPropertyChooserResourceData(id, name, type, systemData, location, Optional.ToDictionary(tags));
+            return new MgmtPropertyChooserResourceData(id.Value, name.Value, type, systemData.Value, location, Optional.ToDictionary(tags));
         }
     }
 }

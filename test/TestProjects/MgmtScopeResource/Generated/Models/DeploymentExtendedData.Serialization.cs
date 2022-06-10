@@ -92,7 +92,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new DeploymentExtendedData(id, name, type, systemData, location.Value, properties.Value, Optional.ToDictionary(tags));
+            return new DeploymentExtendedData(id.Value, name.Value, type, systemData.Value, location.Value, properties.Value, Optional.ToDictionary(tags));
         }
     }
 }

@@ -63,7 +63,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new SubSingletonData(id, name, type, systemData, something.Value);
+            return new SubSingletonData(id.Value, name.Value, type, systemData.Value, something.Value);
         }
     }
 }

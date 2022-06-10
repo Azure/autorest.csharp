@@ -74,7 +74,7 @@ namespace OmitOperationGroups.Models
                     continue;
                 }
             }
-            return new ModelQ(id, name, type, systemData, m.Value);
+            return new ModelQ(id.Value, name.Value, type, systemData.Value, m.Value);
         }
     }
 }

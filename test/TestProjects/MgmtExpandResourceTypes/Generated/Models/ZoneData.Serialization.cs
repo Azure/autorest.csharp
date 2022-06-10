@@ -244,7 +244,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
+            return new ZoneData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks));
         }
     }
 }

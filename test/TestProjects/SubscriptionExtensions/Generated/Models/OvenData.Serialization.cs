@@ -110,7 +110,7 @@ namespace SubscriptionExtensions
                     continue;
                 }
             }
-            return new OvenData(id, name, type, systemData, Optional.ToDictionary(tags), location, bar.Value);
+            return new OvenData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
         }
     }
 }

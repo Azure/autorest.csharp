@@ -132,7 +132,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new ManagedHsmData(id, name, type, systemData, Optional.ToDictionary(tags), location, sku.Value, properties.Value);
+            return new ManagedHsmData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, properties.Value);
         }
     }
 }

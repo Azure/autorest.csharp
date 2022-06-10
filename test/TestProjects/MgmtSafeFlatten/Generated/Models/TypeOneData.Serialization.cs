@@ -160,7 +160,7 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
+            return new TypeOneData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
         }
     }
 }

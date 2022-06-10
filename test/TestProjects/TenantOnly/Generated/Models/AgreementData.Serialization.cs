@@ -86,7 +86,7 @@ namespace TenantOnly
                     continue;
                 }
             }
-            return new AgreementData(id, name, type, systemData, foo.Value, location.Value, Optional.ToDictionary(tags));
+            return new AgreementData(id.Value, name.Value, type, systemData.Value, foo.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

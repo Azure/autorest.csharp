@@ -110,7 +110,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new TenantParentWithNonResChWithLocData(id, name, type, systemData, Optional.ToDictionary(tags), location, bar.Value);
+            return new TenantParentWithNonResChWithLocData(id.Value, name.Value, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
         }
     }
 }

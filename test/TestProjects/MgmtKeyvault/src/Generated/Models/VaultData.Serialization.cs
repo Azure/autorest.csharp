@@ -87,7 +87,7 @@ namespace MgmtKeyvault
                     continue;
                 }
             }
-            return new VaultData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags), properties);
+            return new VaultData(id.Value, name.Value, type, systemData.Value, location.Value, Optional.ToDictionary(tags), properties);
         }
     }
 }

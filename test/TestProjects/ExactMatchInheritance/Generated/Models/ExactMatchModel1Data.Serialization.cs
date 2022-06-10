@@ -129,7 +129,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), type2.Value);
+            return new ExactMatchModel1Data(id.Value, name.Value, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), type2.Value);
         }
     }
 }
