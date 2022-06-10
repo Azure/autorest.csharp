@@ -191,6 +191,51 @@ schemas: !Schemas
           name: ModelAsStringRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
+    - !ChoiceSchema &ref_19
+      choices:
+        - !ChoiceValue 
+          value: true
+          language:
+            default:
+              name: 'True'
+              description: ''
+      type: choice
+      choiceType: *ref_1
+      language: !Languages 
+        default:
+          name: Enum8
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_20
+      choices:
+        - !ChoiceValue 
+          value: 100
+          language:
+            default:
+              name: OneHundred
+              description: ''
+      type: choice
+      choiceType: *ref_2
+      language: !Languages 
+        default:
+          name: Enum9
+          description: ''
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_21
+      choices:
+        - !ChoiceValue 
+          value: path
+          language:
+            default:
+              name: Path
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: Enum10
+          description: ''
+      protocol: !Protocols {}
     - !ChoiceSchema &ref_11
       choices:
         - !ChoiceValue 
@@ -611,36 +656,6 @@ schemas: !Schemas
           name: NoModelAsStringRequiredOneValueDefaultOpEnum
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_19
-      type: constant
-      value: !ConstantValue 
-        value: true
-      valueType: *ref_1
-      language: !Languages 
-        default:
-          name: Constant28
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_20
-      type: constant
-      value: !ConstantValue 
-        value: 100
-      valueType: *ref_2
-      language: !Languages 
-        default:
-          name: Constant29
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_21
-      type: constant
-      value: !ConstantValue 
-        value: path
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Constant30
-          description: ''
-      protocol: !Protocols {}
     - !ConstantSchema &ref_5
       type: constant
       apiVersions:
@@ -1059,7 +1074,7 @@ globalParameters:
       x-ms-priority: 0
     language: !Languages 
       default:
-        name: headerConstant
+        name: HeaderConstant
         description: Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'
         serializedName: header-constant
     protocol: !Protocols 
@@ -1073,7 +1088,7 @@ globalParameters:
       x-ms-priority: 1
     language: !Languages 
       default:
-        name: queryConstant
+        name: QueryConstant
         description: Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'
         serializedName: query-constant
     protocol: !Protocols 
@@ -1087,7 +1102,7 @@ globalParameters:
       x-ms-priority: 2
     language: !Languages 
       default:
-        name: pathConstant
+        name: PathConstant
         description: Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'
         serializedName: path-constant
     protocol: !Protocols 

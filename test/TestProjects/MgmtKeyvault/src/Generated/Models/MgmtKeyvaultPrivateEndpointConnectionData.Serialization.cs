@@ -50,10 +50,10 @@ namespace MgmtKeyvault
             Optional<string> etag = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
-            ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
-            SystemData systemData = default;
+            Optional<ResourceIdentifier> id = default;
+            Optional<string> name = default;
+            Optional<ResourceType> type = default;
+            Optional<SystemData> systemData = default;
             Optional<SubResource> privateEndpoint = default;
             Optional<MgmtKeyvaultPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtKeyvaultPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -86,6 +86,11 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("id"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
@@ -96,11 +101,21 @@ namespace MgmtKeyvault
                 }
                 if (property.NameEquals("type"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }

@@ -5,14 +5,10 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
-using Azure.ResourceManager.Models;
-
 namespace SupersetInheritance.Models
 {
     /// <summary> This model has writable id, name, type and should inherit from WritableResourceData. </summary>
-    public partial class SupersetModel8 : WritableResourceData
+    public partial class SupersetModel8
     {
         /// <summary> Initializes a new instance of SupersetModel8. </summary>
         public SupersetModel8()
@@ -20,16 +16,24 @@ namespace SupersetInheritance.Models
         }
 
         /// <summary> Initializes a new instance of SupersetModel8. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="resourceType"> The resourceType. </param>
-        /// <param name="systemData"> The systemData. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="resourceType"></param>
         /// <param name="foo"></param>
-        internal SupersetModel8(ResourceIdentifier id, string name, ResourceType? resourceType, SystemData systemData, string foo) : base(id, name, resourceType, systemData)
+        internal SupersetModel8(string id, string name, string resourceType, string foo)
         {
+            Id = id;
+            Name = name;
+            ResourceType = resourceType;
             Foo = foo;
         }
 
+        /// <summary> Gets or sets the id. </summary>
+        public string Id { get; set; }
+        /// <summary> Gets or sets the name. </summary>
+        public string Name { get; set; }
+        /// <summary> Gets or sets the resource type. </summary>
+        public string ResourceType { get; set; }
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }
