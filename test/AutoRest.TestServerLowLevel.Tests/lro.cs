@@ -24,6 +24,7 @@ namespace AutoRest.TestServer.Tests
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(waitUntil, value);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -35,6 +36,7 @@ namespace AutoRest.TestServer.Tests
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(waitUntil, value);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -46,6 +48,7 @@ namespace AutoRest.TestServer.Tests
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(waitUntil, value);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -57,6 +60,7 @@ namespace AutoRest.TestServer.Tests
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
             var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(waitUntil, value);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -152,6 +156,10 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).DeleteAsyncNoHeaderInRetryAsync(waitUntil);
+
+            // Assert down cast exception
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
+
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -159,6 +167,8 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var operation = new LROsClient(Key, endpoint, null).DeleteAsyncNoHeaderInRetry(waitUntil);
+            // Assert down cast exception
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -166,6 +176,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).DeleteAsyncNoRetrySucceededAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -173,6 +184,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var operation = new LROsClient(Key, endpoint, null).DeleteAsyncNoRetrySucceeded(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -220,6 +232,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).DeleteAsyncRetrySucceededAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -227,6 +240,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var operation = new LROsClient(Key, endpoint, null).DeleteAsyncRetrySucceeded(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -234,6 +248,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).Delete204SucceededAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -241,6 +256,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var operation = new LROsClient(Key, endpoint, null).Delete204Succeeded(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -248,6 +264,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var operation = await new LROsClient(Key, endpoint, null).DeleteNoHeaderInRetryAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -255,8 +272,25 @@ namespace AutoRest.TestServer.Tests
         public Task LRODeleteNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var operation = new LROsClient(Key, endpoint, null).DeleteNoHeaderInRetry(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
+
+        [Test]
+        public Task LRODeleteValueInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            Operation operation = await new LROsClient(Key, endpoint, null).DeleteValue204SucceededAsync(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        }, true);
+
+        [Test]
+        public Task LRODeleteValueInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            Operation operation = new LROsClient(Key, endpoint, null).DeleteValue204Succeeded(waitUntil);
+            Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
+            return WaitForCompletion(operation, waitUntil);
+        }, true);
 
         [Test]
         public Task LRODeleteProvisioningCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
