@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -45,7 +44,7 @@ namespace ExactMatchFlattenInheritance.Models
             Optional<int> foo = default;
             Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
-            Optional<ResourceType?> type = default;
+            Optional<ResourceType> type = default;
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {

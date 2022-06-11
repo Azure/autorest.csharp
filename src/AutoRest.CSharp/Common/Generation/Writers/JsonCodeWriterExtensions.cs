@@ -441,6 +441,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var type = objectProperty.ValueType;
                     if (!jsonProperty.IsRequired)
                     {
+                        if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))
+                            type = new CSharpType(type.Arguments[0].FrameworkType);
                         type = new CSharpType(typeof(Optional<>), type);
                     }
 
