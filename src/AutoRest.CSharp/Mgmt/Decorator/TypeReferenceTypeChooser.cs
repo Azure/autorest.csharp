@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Check whether a <c>MgmtObjectType</c> class can be replaced by an external type, and return the external type if available.
+        /// Check whether a <see cref="MgmtObjectType"/> class can be replaced by an external type, and return the external type if available.
         /// </summary>
         /// <param name="typeToReplace">Type to check</param>
         /// <returns>Matched external type or null if not found</returns>
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Check whether there is a match for the given schema.
         /// </summary>
-        /// <param name="schema"><c>ObjectSchema</c> of the target type</param>
+        /// <param name="schema"><see cref="ObjectSchema"/> of the target type</param>
         /// <returns></returns>
         public static bool HasMatch(ObjectSchema schema)
         {

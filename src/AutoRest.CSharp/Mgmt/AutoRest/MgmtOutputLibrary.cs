@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, ResourceData> RawRequestPathToResourceData { get; }
 
         /// <summary>
-        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
+        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResourceCollection"/>
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
@@ -202,6 +202,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         }
                         else
                         {
+                            updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
                             BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
                         }
                     }
@@ -235,7 +236,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
             }
 
-            //this is where we update
+            // update some body parameter type names and parameter names
             var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
@@ -244,46 +245,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var model = BuildModel(schema);
                 resourceModels.Add(schema, model);
                 _nameToTypeProvider.Add(schema.Name, model);
-            }
-
-            // second, collect any model which can be replaced as whole (not as a property or as a base class)
-            var replacedTypes = new List<MgmtObjectType>();
-            foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
-            {
-                TypeProvider? type;
-
-                if (resourceModels.TryGetValue(schema, out type))
-                {
-                    if (type is MgmtObjectType mgmtObjectType)
-                    {
-                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
-                        if (csharpType != null)
-                        {
-                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
-                            switch (mgmtObjectType)
-                            {
-                                case ResourceData resourceData:
-                                    replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                                case MgmtReferenceType referenceType:
-                                    replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                                default:
-                                    replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // third, update the entries in cache maps with the new model instances
-            foreach (var replacedType in replacedTypes)
-            {
-                var schema = replacedType.ObjectSchema;
-                var name = schema.Name;
-                _nameToTypeProvider[name] = replacedType;
-                resourceModels[schema] = replacedType;
             }
 
             return resourceModels;
@@ -757,21 +718,39 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
-        private TypeProvider BuildModel(Schema schema) => schema switch
+        private TypeProvider BuildModel(Schema schema) => CheckReplaceType(schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
+            SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, MgmtContext.Context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
             ? new MgmtReferenceType(objectSchema)
             : new MgmtObjectType(objectSchema),
             _ => throw new NotImplementedException()
-        };
+        });
 
-        private TypeProvider BuildResourceModel(Schema schema) => schema switch
+        private static TypeProvider CheckReplaceType(TypeProvider type)
+        {
+            if (type is MgmtObjectType mgmtType)
+            {
+                var replacedType = TypeReferenceTypeChooser.GetExactMatch(mgmtType);
+                if (replacedType != null)
+                {
+                    return mgmtType switch
+                    {
+                        Output.ResourceData => new ResourceData(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace),
+                        MgmtReferenceType => new MgmtReferenceType(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace),
+                        _ => new MgmtObjectType(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace)
+                    };
+                }
+            }
+            return type;
+        }
+
+        private TypeProvider BuildResourceModel(Schema schema) => CheckReplaceType(schema switch
         {
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
-        };
+        });
 
         private void ReorderOperationParameters()
         {
