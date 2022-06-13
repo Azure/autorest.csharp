@@ -198,8 +198,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             if (requestPath.IsExpandable)
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, ResourceDataSchemaNameToOperationSets);
                             updatedModels.Add(bodyParam.Schema);
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, ResourceDataSchemaNameToOperationSets);
                         }
                         else
                         {
