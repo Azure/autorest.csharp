@@ -192,6 +192,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     return true;
             }
 
+            // This means that this type has been replaced
+            if (model is SystemObjectType)
+                return true;
+
             return false;
         }
     }
