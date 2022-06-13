@@ -7,7 +7,7 @@
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    /// <summary> The VMScaleSetConvertToSinglePlacementGroupInput. </summary>
+    /// <summary> The VMScaleSetConvertToSinglePlacementGroupContent. </summary>
     public partial class VMScaleSetConvertToSinglePlacementGroupContent
     {
         /// <summary> Initializes a new instance of <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>

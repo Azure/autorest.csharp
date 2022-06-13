@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
-                    var propertyType = CreatePropertyType(property);
+                    var propertyType = UpdatePropertyDescription(CreatePropertyType(property));
                     yield return propertyType;
                 }
             }
@@ -158,6 +159,47 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return objectProperty;
+        }
+
+        protected override string CreateDescription()
+        {
+            return BuilderHelpers.CreateDescription(ObjectSchema) + BuilderHelpers.CreateExtraDescriptionWithDiscriminator(this);
+        }
+
+        private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
+        {
+            CSharpType type = property.ValueType;
+            string updatedDescription = string.Empty;
+            if (type.IsFrameworkType)
+            {
+                if (TypeFactory.IsList(type))
+                {
+                    if (!type.Arguments.First().IsFrameworkType && type.Arguments.First().Implementation is MgmtObjectType objectType)
+                    {
+                        updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+                    }
+                }
+                else if (TypeFactory.IsDictionary(type))
+                {
+                    var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
+                    if (objectTypes.Count() > 0)
+                    {
+                        var subDescription = objectTypes.Select(o => BuilderHelpers.CreateExtraDescriptionWithDiscriminator((MgmtObjectType)o.Implementation));
+                        updatedDescription = string.Join("", subDescription);
+                    }
+                }
+            }
+            else if (type.Implementation is MgmtObjectType objectType)
+            {
+                updatedDescription = BuilderHelpers.CreateExtraDescriptionWithDiscriminator(objectType);
+            }
+            return updatedDescription.IsNullOrEmpty() ? property :
+                new ObjectTypeProperty(property.Declaration,
+                property.Description + updatedDescription,
+                property.IsReadOnly,
+                property.SchemaProperty,
+                property.ValueType,
+                property.OptionalViaNullability);
         }
     }
 }
