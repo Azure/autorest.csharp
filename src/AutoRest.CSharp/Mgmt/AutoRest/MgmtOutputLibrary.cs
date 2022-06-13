@@ -80,7 +80,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
         private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels;
-        private IEnumerable<Schema> _allSchemas;
 
         private Dictionary<string, string> _mergedOperations;
 
@@ -91,7 +90,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
-            CodeModelTransformer.Transform();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
@@ -111,8 +109,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
 
-            _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets); // TODO --  this is also a code model transform function, but it is using something in the library as well, therefore it cannot be moved
+            // TODO -- find a way to get rid of this input parameter
+            CodeModelTransformer.Transform(ResourceDataSchemaNameToOperationSets);
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -217,7 +215,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
             // first, construct resource data models
-            foreach (var schema in _allSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
                 _schemaOrNameToModels.Add(schema, model);
