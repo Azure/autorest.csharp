@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool MatchProperty(Type sourceType, MgmtObjectType targetType, Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null, bool fromArePropertyTypesMatch = false)
         {
-            if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val == childPropertyType)
+            if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val.Equals(childPropertyType))
                 return true;
 
             if (DoesPropertyReferenceItself(sourceType, targetType, parentPropertyType, childPropertyType))
