@@ -237,9 +237,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
-                _nameToTypeProvider.Remove(schema);
                 var model = BuildModel(schema);
-                _nameToTypeProvider.Add(schema, model);
+                _nameToTypeProvider[schema] = model;
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)

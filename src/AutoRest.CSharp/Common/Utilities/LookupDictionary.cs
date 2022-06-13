@@ -40,7 +40,11 @@ namespace AutoRest.CSharp.Common.Utilities
         public TValue this[TKey key]
         {
             get => _values[key];
-            set => Add(key, value);
+            set
+            {
+                _values[key] = value;
+                _valuesAlter[Convert(key)] = value;
+            }
         }
 
         public TValue this[TAlterKey alterKey]
