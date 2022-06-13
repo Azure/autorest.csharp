@@ -702,9 +702,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            _nameToTypeProvider.TryGetValue(originalName, out TypeProvider? provider);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
-            return provider?.Type;
+            // find schema by name
+            if (!AllSchemaMap.IsPopulated)
+            {
+                var schema = _allSchemas.FirstOrDefault(schema => schema.Name.Equals(originalName));
+                if (schema != null)
+                    return FindTypeForSchema(schema);
+                return null;
+            }
+            else
+            {
+                _nameToTypeProvider.TryGetValue(originalName, out TypeProvider? provider);
+                provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
+                return provider?.Type;
+            }
         }
 
         public bool TryGetTypeProvider(string originalName, [MaybeNullWhen(false)] out TypeProvider provider)
