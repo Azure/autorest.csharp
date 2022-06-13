@@ -15,6 +15,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaRenamer.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
             BodyParameterNormalizer.UpdatePatchOperations();
+            FrameworkTypeUpdater.ValidateAndUpdate();
+            SealedChoicesUpdater.UpdateSealChoiceTypes();
+            CommonSingleWordModels.Update();
+            RenameTimeToOn.Update();
+            RearrangeParameterOrder.Update();
 
             CodeModelValidator.Validate();
         }

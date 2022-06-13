@@ -112,14 +112,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
 
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            _allSchemas.VerifyAndUpdateFrameworkTypes();
-            _allSchemas.UpdateSealChoiceTypes();
-            CommonSingleWordModels.Update(_allSchemas);
-            NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
-            RenameTimeToOn.UpdateNames(_allSchemas);
-
-            // We can only manipulate objects from the code model, not RestClientMethod
-            ReorderOperationParameters();
+            NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets); // TODO --  this is also a code model transform function, but it is using something in the library as well, therefore it cannot be moved
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -760,29 +753,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
-
-        private void ReorderOperationParameters()
-        {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
-                    if (httpRequest != null)
-                    {
-                        var orderedParams = operation.Parameters
-                            .Where(p => p.In == HttpParameterIn.Path)
-                            .OrderBy(
-                                p => httpRequest.Path.IndexOf(
-                                    "{" + p.CSharpName() + "}",
-                                    StringComparison.InvariantCultureIgnoreCase));
-                        operation.Parameters = orderedParams.Concat(operation.Parameters
-                                .Where(p => p.In != HttpParameterIn.Path).ToList())
-                            .ToList();
-                    }
-                }
-            }
-        }
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {

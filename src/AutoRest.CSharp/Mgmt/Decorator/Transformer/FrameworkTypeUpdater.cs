@@ -2,52 +2,22 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
-    internal static class CodeModelExtension
+    internal static class FrameworkTypeUpdater
     {
         // max number of words to keep if trimming the property
         private const int MaxTrimmingPropertyWordCount = 2;
 
-        private static readonly List<string> EnumValuesShouldBePrompted = new()
+        public static void ValidateAndUpdate()
         {
-            "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
-        };
-
-        public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
-        {
-            var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
-            foreach (var schema in allSchemas)
-            {
-                if (schema is not SealedChoiceSchema choiceSchema)
-                    continue;
-
-                // rearrange the sequence in the choices
-                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices, wordCandidates);
-            }
-        }
-
-        internal static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
-        {
-            return originalValues.OrderBy(choice =>
-            {
-                var name = choice.CSharpName();
-                var index = wordCandidates.IndexOf(name);
-                return index >= 0 ? index : wordCandidates.Count;
-            }).ToList();
-        }
-
-        public static void VerifyAndUpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in allSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;
