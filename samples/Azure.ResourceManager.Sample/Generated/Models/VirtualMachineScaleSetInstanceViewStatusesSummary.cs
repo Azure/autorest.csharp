@@ -13,13 +13,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Instance view statuses summary for virtual machines of a virtual machine scale set. </summary>
     internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary()
         {
             StatusesSummary = new ChangeTrackingList<VirtualMachineStatusCodeCount>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceViewStatusesSummary. </summary>
         /// <param name="statusesSummary"> The extensions information. </param>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary(IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
         {

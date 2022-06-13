@@ -14,13 +14,13 @@ namespace Pagination.Models
     /// <summary> The PageSizeNumericModelListResult. </summary>
     internal partial class PageSizeNumericModelListResult
     {
-        /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelListResult"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeNumericModelListResult. </summary>
         internal PageSizeNumericModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeNumericModelData>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelListResult"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeNumericModelListResult. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeNumericModelListResult(IReadOnlyList<PageSizeNumericModelData> value, string nextLink)

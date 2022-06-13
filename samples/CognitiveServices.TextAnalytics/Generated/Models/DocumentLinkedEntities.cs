@@ -14,7 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentLinkedEntities. </summary>
     public partial class DocumentLinkedEntities
     {
-        /// <summary> Initializes a new instance of <see cref="DocumentLinkedEntities"/>. </summary>
+        /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Warnings = warnings.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="DocumentLinkedEntities"/>. </summary>
+        /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>

@@ -14,7 +14,7 @@ namespace ResourceRename.Models
     /// <summary> Model which contains the Any and AnyObject variants. </summary>
     internal partial class AnyObjectTests
     {
-        /// <summary> Initializes a new instance of <see cref="AnyObjectTests"/>. </summary>
+        /// <summary> Initializes a new instance of AnyObjectTests. </summary>
         internal AnyObjectTests()
         {
             AnyList = new ChangeTrackingList<BinaryData>();

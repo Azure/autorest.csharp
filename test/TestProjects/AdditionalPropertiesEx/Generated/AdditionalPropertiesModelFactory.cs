@@ -12,7 +12,7 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.OutputAdditionalPropertiesModel"/>. </summary>
+        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
@@ -23,7 +23,7 @@ namespace AdditionalPropertiesEx.Models
             return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.OutputAdditionalPropertiesModelStruct"/>. </summary>
+        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>

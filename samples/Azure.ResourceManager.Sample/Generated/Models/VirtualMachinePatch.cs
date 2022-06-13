@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a Virtual Machine Update. </summary>
     public partial class VirtualMachinePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineUpdate. </summary>
         public VirtualMachinePatch()
         {
             Zones = new ChangeTrackingList<string>();

@@ -12,12 +12,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes the properties of the last installed patch summary. </summary>
     public partial class LastPatchInstallationSummary
     {
-        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
+        /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
         internal LastPatchInstallationSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
+        /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
         /// <param name="status"> The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;. </param>
         /// <param name="installationActivityId"> The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs. </param>
         /// <param name="maintenanceWindowExceeded"> Describes whether the operation ran out of time before it completed all its intended actions. </param>

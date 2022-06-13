@@ -10,12 +10,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes a virtual machine scale set virtual machine profile. </summary>
     public partial class VirtualMachineScaleSetVmProfile
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
         public VirtualMachineScaleSetVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
         /// <param name="osProfile"> Specifies the operating system settings for the virtual machines in the scale set. </param>
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="networkProfile"> Specifies properties of the network interfaces of the virtual machines in the scale set. </param>

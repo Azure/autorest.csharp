@@ -10,7 +10,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The input for OrchestrationServiceState. </summary>
     public partial class OrchestrationServiceStateContent
     {
-        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
+        /// <summary> Initializes a new instance of OrchestrationServiceStateInput. </summary>
         /// <param name="serviceName"> The name of the service. </param>
         /// <param name="action"> The action to be performed. </param>
         public OrchestrationServiceStateContent(OrchestrationServiceNames serviceName, OrchestrationServiceStateAction action)

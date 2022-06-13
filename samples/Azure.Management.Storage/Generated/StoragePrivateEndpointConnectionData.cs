@@ -15,12 +15,12 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the StoragePrivateEndpointConnection data model. </summary>
     public partial class StoragePrivateEndpointConnectionData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionData. </summary>
         public StoragePrivateEndpointConnectionData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateEndpointConnectionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

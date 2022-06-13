@@ -14,13 +14,13 @@ namespace Pagination.Models
     /// <summary> The PageSizeStringModelListResult. </summary>
     internal partial class PageSizeStringModelListResult
     {
-        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeStringModelListResult. </summary>
         internal PageSizeStringModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeStringModelData>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeStringModelListResult. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeStringModelListResult(IReadOnlyList<PageSizeStringModelData> value, string nextLink)

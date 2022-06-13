@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Virtual Machine Scale Set OS Upgrade History operation response. </summary>
     public partial class UpgradeOperationHistoricalStatusInfo
     {
-        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
+        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
         internal UpgradeOperationHistoricalStatusInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
+        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
         /// <param name="properties"> Information about the properties of the upgrade operation. </param>
         /// <param name="upgradeOperationHistoricalStatusInfoType"> Resource type. </param>
         /// <param name="location"> Resource location. </param>

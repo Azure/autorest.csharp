@@ -15,12 +15,12 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class representing the SBSubscription data model. </summary>
     public partial class SBSubscriptionData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="SBSubscriptionData"/>. </summary>
+        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
         public SBSubscriptionData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SBSubscriptionData"/>. </summary>
+        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

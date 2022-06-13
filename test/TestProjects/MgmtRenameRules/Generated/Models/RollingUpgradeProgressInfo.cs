@@ -10,12 +10,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Information about the number of virtual machine instances in each upgrade state. </summary>
     public partial class RollingUpgradeProgressInfo
     {
-        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
+        /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
         internal RollingUpgradeProgressInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
+        /// <summary> Initializes a new instance of RollingUpgradeProgressInfo. </summary>
         /// <param name="successfulInstanceCount"> The number of instances that have been successfully upgraded. </param>
         /// <param name="failedInstanceCount"> The number of instances that have failed to be upgraded successfully. </param>
         /// <param name="inProgressInstanceCount"> The number of instances that are currently being upgraded. </param>

@@ -14,7 +14,7 @@ namespace MgmtKeyvault.Models
     /// <summary> Properties of the vault. </summary>
     public partial class VaultProperties
     {
-        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
+        /// <summary> Initializes a new instance of VaultProperties. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
@@ -31,7 +31,7 @@ namespace MgmtKeyvault.Models
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionItem>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
+        /// <summary> Initializes a new instance of VaultProperties. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="accessPolicies"> An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required. </param>

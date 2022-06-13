@@ -10,12 +10,12 @@ namespace CognitiveSearch.Models
     /// <summary> Base type for similarity algorithms. Similarity algorithms are used to calculate scores that tie queries to documents. The higher the score, the more relevant the document is to that specific query. Those scores are used to rank the search results. </summary>
     public partial class Similarity
     {
-        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
+        /// <summary> Initializes a new instance of Similarity. </summary>
         public Similarity()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
+        /// <summary> Initializes a new instance of Similarity. </summary>
         /// <param name="odataType"></param>
         internal Similarity(string odataType)
         {

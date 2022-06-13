@@ -14,13 +14,13 @@ namespace SingletonResource
     /// <summary> A class representing the ParentResource data model. </summary>
     public partial class ParentResourceData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="ParentResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="location"> The location. </param>
         public ParentResourceData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ParentResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

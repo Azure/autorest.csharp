@@ -10,12 +10,12 @@ namespace Inheritance.Models
     /// <summary> The BaseClassWithDiscriminator. </summary>
     public partial class BaseClassWithDiscriminator : BaseClass
     {
-        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
+        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
         public BaseClassWithDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
+        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="discriminatorProperty"></param>
         internal BaseClassWithDiscriminator(string baseClassProperty, string discriminatorProperty) : base(baseClassProperty)

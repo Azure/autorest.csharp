@@ -13,7 +13,7 @@ namespace MgmtKeyvault.Models
     /// <summary> Parameters for creating or updating a vault. </summary>
     public partial class VaultPatch
     {
-        /// <summary> Initializes a new instance of <see cref="VaultPatch"/>. </summary>
+        /// <summary> Initializes a new instance of VaultPatchParameters. </summary>
         public VaultPatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();

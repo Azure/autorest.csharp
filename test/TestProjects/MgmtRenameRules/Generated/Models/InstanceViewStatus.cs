@@ -12,12 +12,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Instance view status. </summary>
     public partial class InstanceViewStatus
     {
-        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
+        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
         public InstanceViewStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
+        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
         /// <param name="code"> The status code. </param>
         /// <param name="level"> The level code. </param>
         /// <param name="displayStatus"> The short localizable label for the status. </param>

@@ -12,12 +12,12 @@ namespace MgmtCollectionParent.Models
     /// <summary> Resource stage details. </summary>
     public partial class StageDetails
     {
-        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
+        /// <summary> Initializes a new instance of StageDetails. </summary>
         internal StageDetails()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
+        /// <summary> Initializes a new instance of StageDetails. </summary>
         /// <param name="stageStatus"> Stage status. </param>
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>

@@ -15,13 +15,13 @@ namespace SupersetInheritance.Models
     /// <summary> This model should inherit from SupersetModel4. </summary>
     public partial class SupersetModel5 : SupersetModel4Data
     {
-        /// <summary> Initializes a new instance of <see cref="SupersetModel5"/>. </summary>
+        /// <summary> Initializes a new instance of SupersetModel5. </summary>
         /// <param name="location"> The location. </param>
         public SupersetModel5(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SupersetModel5"/>. </summary>
+        /// <summary> Initializes a new instance of SupersetModel5. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

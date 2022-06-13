@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class ReferenceTypesPlan
     {
-        /// <summary> Initializes a new instance of <see cref="ReferenceTypesPlan"/>. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesPlan. </summary>
         /// <param name="name"> A user defined name of the 3rd Party Artifact that is being procured. </param>
         /// <param name="publisher"> The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic. </param>
         /// <param name="product"> The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. </param>
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Fake.Models
             Product = product;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ReferenceTypesPlan"/>. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesPlan. </summary>
         /// <param name="name"> A user defined name of the 3rd Party Artifact that is being procured. </param>
         /// <param name="publisher"> The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic. </param>
         /// <param name="product"> The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. </param>

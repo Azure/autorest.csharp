@@ -16,13 +16,13 @@ namespace MgmtKeyvault
     /// <summary> A class representing the MhsmPrivateEndpointConnection data model. </summary>
     public partial class MhsmPrivateEndpointConnectionData : Models.ManagedHsmResource
     {
-        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
         /// <param name="location"> The location. </param>
         public MhsmPrivateEndpointConnectionData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

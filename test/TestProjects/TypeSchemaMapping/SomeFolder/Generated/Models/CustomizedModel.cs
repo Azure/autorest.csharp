@@ -13,7 +13,7 @@ namespace CustomNamespace
     internal partial class CustomizedModel
     {
 
-        /// <summary> Initializes a new instance of <see cref="CustomizedModel"/>. </summary>
+        /// <summary> Initializes a new instance of CustomizedModel. </summary>
         /// <param name="propertyRenamedAndTypeChanged"> . </param>
         /// <param name="field"> . </param>
         /// <param name="customizedFancyField"> Fruit. </param>

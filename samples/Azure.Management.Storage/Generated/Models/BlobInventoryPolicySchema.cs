@@ -14,7 +14,7 @@ namespace Azure.Management.Storage.Models
     /// <summary> The storage account blob inventory policy rules. </summary>
     public partial class BlobInventoryPolicySchema
     {
-        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicySchema"/>. </summary>
+        /// <summary> Initializes a new instance of BlobInventoryPolicySchema. </summary>
         /// <param name="enabled"> Policy is enabled if set to true. </param>
         /// <param name="inventoryRuleType"> The valid value is Inventory. </param>
         /// <param name="rules"> The storage account blob inventory policy rules. The rule is applied when it is enabled. </param>
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
             Rules = rules.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicySchema"/>. </summary>
+        /// <summary> Initializes a new instance of BlobInventoryPolicySchema. </summary>
         /// <param name="enabled"> Policy is enabled if set to true. </param>
         /// <param name="inventoryRuleType"> The valid value is Inventory. </param>
         /// <param name="rules"> The storage account blob inventory policy rules. The rule is applied when it is enabled. </param>

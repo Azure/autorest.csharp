@@ -12,12 +12,12 @@ namespace SupersetInheritance
     /// <summary> A class representing the SupersetModel7 data model. </summary>
     public partial class SupersetModel7Data
     {
-        /// <summary> Initializes a new instance of <see cref="SupersetModel7Data"/>. </summary>
+        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
         public SupersetModel7Data()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SupersetModel7Data"/>. </summary>
+        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>

@@ -14,13 +14,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a Virtual Machine Scale Set Extension. </summary>
     public partial class VirtualMachineScaleSetExtensionPatch : SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionPatch"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdate. </summary>
         public VirtualMachineScaleSetExtensionPatch()
         {
             ProvisionAfterExtensions = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionPatch"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdate. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the extension. </param>
         /// <param name="resourceType"> Resource type. </param>

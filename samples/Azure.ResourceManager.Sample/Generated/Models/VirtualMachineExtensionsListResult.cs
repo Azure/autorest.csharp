@@ -14,13 +14,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The List Extension operation response. </summary>
     internal partial class VirtualMachineExtensionsListResult
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
         internal VirtualMachineExtensionsListResult()
         {
             Value = new ChangeTrackingList<VirtualMachineExtensionData>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
         /// <param name="value"> The list of extensions. </param>
         internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionData> value)
         {

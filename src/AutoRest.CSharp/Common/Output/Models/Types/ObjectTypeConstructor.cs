@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             Signature = new ConstructorSignature(
                 name,
-                $"Initializes a new instance of <see cref=\"{name}\"/>",
+                $"Initializes a new instance of {name}",
                 modifiers,
                 parameters,
                 new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>()));

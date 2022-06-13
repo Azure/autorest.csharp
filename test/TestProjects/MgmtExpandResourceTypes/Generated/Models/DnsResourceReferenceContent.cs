@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Represents the properties of the Dns Resource Reference Request. </summary>
     public partial class DnsResourceReferenceContent
     {
-        /// <summary> Initializes a new instance of <see cref="DnsResourceReferenceContent"/>. </summary>
+        /// <summary> Initializes a new instance of DnsResourceReferenceRequest. </summary>
         public DnsResourceReferenceContent()
         {
             TargetResources = new ChangeTrackingList<WritableSubResource>();

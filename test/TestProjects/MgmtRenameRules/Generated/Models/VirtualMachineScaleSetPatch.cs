@@ -15,7 +15,7 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdate. </summary>
         public VirtualMachineScaleSetPatch()
         {
         }

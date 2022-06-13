@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a network interface reference. </summary>
     public partial class NetworkInterfaceReference : SubResource
     {
-        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceReference"/>. </summary>
+        /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
         public NetworkInterfaceReference()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceReference"/>. </summary>
+        /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="primary"> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </param>
         internal NetworkInterfaceReference(string id, bool? primary) : base(id)

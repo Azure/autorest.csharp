@@ -14,14 +14,14 @@ namespace MgmtKeyvault.Models
     /// <summary> A private link resource. </summary>
     public partial class MgmtKeyvaultPrivateLinkResource : MgmtKeyvaultResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateLinkResource"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResource. </summary>
         public MgmtKeyvaultPrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateLinkResource"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateLinkResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

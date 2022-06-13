@@ -10,12 +10,12 @@ namespace Pagination
     /// <summary> A class representing the PageSizeStringModel data model. </summary>
     public partial class PageSizeStringModelData
     {
-        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelData"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeStringModelData. </summary>
         public PageSizeStringModelData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelData"/>. </summary>
+        /// <summary> Initializes a new instance of PageSizeStringModelData. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>

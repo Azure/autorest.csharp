@@ -14,7 +14,7 @@ namespace MgmtKeyvault.Models
     /// <summary> Properties of the vault. </summary>
     public partial class VaultPatchProperties
     {
-        /// <summary> Initializes a new instance of <see cref="VaultPatchProperties"/>. </summary>
+        /// <summary> Initializes a new instance of VaultPatchProperties. </summary>
         public VaultPatchProperties()
         {
             AccessPolicies = new ChangeTrackingList<AccessPolicyEntry>();

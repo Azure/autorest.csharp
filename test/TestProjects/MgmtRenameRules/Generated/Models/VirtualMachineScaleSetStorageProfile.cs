@@ -13,13 +13,13 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes a virtual machine scale set storage profile. </summary>
     public partial class VirtualMachineScaleSetStorageProfile
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetStorageProfile"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetStorageProfile. </summary>
         public VirtualMachineScaleSetStorageProfile()
         {
             DataDisks = new ChangeTrackingList<VirtualMachineScaleSetDataDisk>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetStorageProfile"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetStorageProfile. </summary>
         /// <param name="imageReference"> Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. </param>
         /// <param name="osDisk"> Specifies information about the operating system disk used by the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). </param>
         /// <param name="dataDisks"> Specifies the parameters that are used to add data disks to the virtual machines in the scale set. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). </param>

@@ -13,13 +13,13 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
+        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         public ArrayWrapper()
         {
             Array = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
+        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         /// <param name="array"></param>
         internal ArrayWrapper(IList<string> array)
         {

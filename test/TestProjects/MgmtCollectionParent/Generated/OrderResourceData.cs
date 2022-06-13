@@ -15,14 +15,14 @@ namespace MgmtCollectionParent
     /// <summary> A class representing the OrderResource data model. </summary>
     public partial class OrderResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="OrderResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of OrderResourceData. </summary>
         internal OrderResourceData()
         {
             OrderItemIds = new ChangeTrackingList<string>();
             OrderStageHistory = new ChangeTrackingList<StageDetails>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="OrderResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of OrderResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

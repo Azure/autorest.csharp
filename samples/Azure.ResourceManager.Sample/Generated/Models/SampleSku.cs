@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name. </summary>
     public partial class SampleSku
     {
-        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
+        /// <summary> Initializes a new instance of SampleSku. </summary>
         public SampleSku()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
+        /// <summary> Initializes a new instance of SampleSku. </summary>
         /// <param name="name"> The sku name. </param>
         /// <param name="tier"> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </param>
         /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>

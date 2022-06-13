@@ -12,12 +12,12 @@ namespace Azure.Management.Storage.Models
     /// <summary> Storage account keys creation time. </summary>
     public partial class KeyCreationTime
     {
-        /// <summary> Initializes a new instance of <see cref="KeyCreationTime"/>. </summary>
+        /// <summary> Initializes a new instance of KeyCreationTime. </summary>
         internal KeyCreationTime()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="KeyCreationTime"/>. </summary>
+        /// <summary> Initializes a new instance of KeyCreationTime. </summary>
         /// <param name="key1"></param>
         /// <param name="key2"></param>
         internal KeyCreationTime(DateTimeOffset? key1, DateTimeOffset? key2)

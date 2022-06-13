@@ -7,10 +7,10 @@
 
 namespace MgmtRenameRules.Models
 {
-    /// <summary> The VmScaleSetConvertToSinglePlacementGroupContent. </summary>
+    /// <summary> The VmScaleSetConvertToSinglePlacementGroupInput. </summary>
     public partial class VmScaleSetConvertToSinglePlacementGroupContent
     {
-        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupInput. </summary>
         public VmScaleSetConvertToSinglePlacementGroupContent()
         {
         }

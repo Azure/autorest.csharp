@@ -13,12 +13,12 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class representing the SharedGallery data model. </summary>
     public partial class SharedGalleryData : PirSharedGalleryResource
     {
-        /// <summary> Initializes a new instance of <see cref="SharedGalleryData"/>. </summary>
+        /// <summary> Initializes a new instance of SharedGalleryData. </summary>
         internal SharedGalleryData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SharedGalleryData"/>. </summary>
+        /// <summary> Initializes a new instance of SharedGalleryData. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>

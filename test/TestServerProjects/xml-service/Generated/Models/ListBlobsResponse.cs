@@ -12,7 +12,7 @@ namespace xml_service.Models
     /// <summary> An enumeration of blobs. </summary>
     public partial class ListBlobsResponse
     {
-        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
+        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
@@ -57,7 +57,7 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
+        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>

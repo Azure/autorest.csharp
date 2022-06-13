@@ -15,13 +15,13 @@ namespace MgmtMultipleParentResource
     /// <summary> A class representing the TheParent data model. </summary>
     public partial class TheParentData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="TheParentData"/>. </summary>
+        /// <summary> Initializes a new instance of TheParentData. </summary>
         /// <param name="location"> The location. </param>
         public TheParentData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="TheParentData"/>. </summary>
+        /// <summary> Initializes a new instance of TheParentData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

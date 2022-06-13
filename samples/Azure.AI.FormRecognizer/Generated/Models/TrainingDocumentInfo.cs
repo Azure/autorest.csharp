@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training document. </summary>
     public partial class TrainingDocumentInfo
     {
-        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
@@ -37,7 +37,7 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
         }
 
-        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
+        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Describes a Virtual Machine Image. </summary>
     public partial class VirtualMachineImage : VirtualMachineImageResource
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             DataDiskImages = new ChangeTrackingList<DataDiskImage>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>

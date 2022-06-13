@@ -15,7 +15,7 @@ namespace SingletonResource.Models
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class ParentResourceListResult
     {
-        /// <summary> Initializes a new instance of <see cref="ParentResourceListResult"/>. </summary>
+        /// <summary> Initializes a new instance of ParentResourceListResult. </summary>
         /// <param name="value"> The list of parent resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ParentResourceListResult(IEnumerable<ParentResourceData> value)
@@ -28,7 +28,7 @@ namespace SingletonResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="ParentResourceListResult"/>. </summary>
+        /// <summary> Initializes a new instance of ParentResourceListResult. </summary>
         /// <param name="value"> The list of parent resource. </param>
         /// <param name="nextLink"> The URI to fetch the next page. </param>
         internal ParentResourceListResult(IReadOnlyList<ParentResourceData> value, string nextLink)

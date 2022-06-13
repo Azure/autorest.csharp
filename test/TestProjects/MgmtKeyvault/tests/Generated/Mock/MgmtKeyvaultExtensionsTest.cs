@@ -52,9 +52,9 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Validate a vault name
             var subscriptionResource = GetArmClient().GetSubscriptionResource(SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000"));
-            MgmtKeyvault.Models.VaultCheckNameAvailabilityContent content = new MgmtKeyvault.Models.VaultCheckNameAvailabilityContent(name: "sample-vault");
+            MgmtKeyvault.Models.VaultCheckNameAvailabilityParameters vaultName = new MgmtKeyvault.Models.VaultCheckNameAvailabilityParameters(name: "sample-vault");
 
-            await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
+            await subscriptionResource.CheckNameAvailabilityVaultAsync(vaultName);
         }
 
         [RecordedTest]

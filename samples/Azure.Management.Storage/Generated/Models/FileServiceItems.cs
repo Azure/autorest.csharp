@@ -14,13 +14,13 @@ namespace Azure.Management.Storage.Models
     /// <summary> The FileServiceItems. </summary>
     internal partial class FileServiceItems
     {
-        /// <summary> Initializes a new instance of <see cref="FileServiceItems"/>. </summary>
+        /// <summary> Initializes a new instance of FileServiceItems. </summary>
         internal FileServiceItems()
         {
             Value = new ChangeTrackingList<FileServiceData>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="FileServiceItems"/>. </summary>
+        /// <summary> Initializes a new instance of FileServiceItems. </summary>
         /// <param name="value"> List of file services returned. </param>
         internal FileServiceItems(IReadOnlyList<FileServiceData> value)
         {

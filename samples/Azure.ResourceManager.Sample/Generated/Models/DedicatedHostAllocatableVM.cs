@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Represents the dedicated host unutilized capacity in terms of a specific VM size. </summary>
     public partial class DedicatedHostAllocatableVM
     {
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
+        /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
         internal DedicatedHostAllocatableVM()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
+        /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
         /// <param name="vmSize"> VM size in terms of which the unutilized capacity is represented. </param>
         /// <param name="count"> Maximum number of VMs of size vmSize that can fit in the dedicated host&apos;s remaining capacity. </param>
         internal DedicatedHostAllocatableVM(string vmSize, double? count)

@@ -13,7 +13,7 @@ namespace CustomNamespace
     /// <summary> The ModelStruct. </summary>
     internal readonly partial struct RenamedModelStruct
     {
-        /// <summary> Initializes a new instance of <see cref="RenamedModelStruct"/>. </summary>
+        /// <summary> Initializes a new instance of RenamedModelStruct. </summary>
         /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>

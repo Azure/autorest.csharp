@@ -10,12 +10,12 @@ namespace MgmtRenameRules.Models
     /// <summary> The SubResourceReadOnly. </summary>
     public partial class SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
+        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
         public SubResourceReadOnly()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
+        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
         /// <param name="id"> Resource Id. </param>
         internal SubResourceReadOnly(string id)
         {

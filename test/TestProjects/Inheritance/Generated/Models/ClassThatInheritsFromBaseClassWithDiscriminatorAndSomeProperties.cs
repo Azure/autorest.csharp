@@ -10,13 +10,13 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
     public partial class ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties : BaseClassWithDiscriminator
     {
-        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties"/>. </summary>
+        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
         public ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties()
         {
             DiscriminatorProperty = "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties";
         }
 
-        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties"/>. </summary>
+        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="discriminatorProperty"></param>
         /// <param name="someProperty"></param>

@@ -10,12 +10,12 @@ namespace CognitiveSearch.Models
     /// <summary> Base type for data deletion detection policies. </summary>
     public partial class DataDeletionDetectionPolicy
     {
-        /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
+        /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
         public DataDeletionDetectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
+        /// <summary> Initializes a new instance of DataDeletionDetectionPolicy. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
         internal DataDeletionDetectionPolicy(string odataType)
         {

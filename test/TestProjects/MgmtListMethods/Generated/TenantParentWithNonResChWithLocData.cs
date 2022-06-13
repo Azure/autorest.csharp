@@ -14,13 +14,13 @@ namespace MgmtListMethods
     /// <summary> A class representing the TenantParentWithNonResChWithLoc data model. </summary>
     public partial class TenantParentWithNonResChWithLocData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="TenantParentWithNonResChWithLocData"/>. </summary>
+        /// <summary> Initializes a new instance of TenantParentWithNonResChWithLocData. </summary>
         /// <param name="location"> The location. </param>
         public TenantParentWithNonResChWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="TenantParentWithNonResChWithLocData"/>. </summary>
+        /// <summary> Initializes a new instance of TenantParentWithNonResChWithLocData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

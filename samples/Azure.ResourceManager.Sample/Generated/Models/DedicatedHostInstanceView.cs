@@ -13,13 +13,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The instance view of a dedicated host. </summary>
     public partial class DedicatedHostInstanceView
     {
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of DedicatedHostInstanceView. </summary>
         internal DedicatedHostInstanceView()
         {
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of DedicatedHostInstanceView. </summary>
         /// <param name="assetId"> Specifies the unique id of the dedicated physical machine on which the dedicated host resides. </param>
         /// <param name="availableCapacity"> Unutilized capacity of the dedicated host. </param>
         /// <param name="statuses"> The resource status information. </param>

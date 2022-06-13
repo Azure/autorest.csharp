@@ -10,7 +10,7 @@ namespace Inheritance.Models
     /// <summary> The BaseClassWithExtensibleEnumDiscriminator. </summary>
     internal partial class BaseClassWithExtensibleEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of <see cref="BaseClassWithExtensibleEnumDiscriminator"/>. </summary>
+        /// <summary> Initializes a new instance of BaseClassWithExtensibleEnumDiscriminator. </summary>
         internal BaseClassWithExtensibleEnumDiscriminator()
         {
         }

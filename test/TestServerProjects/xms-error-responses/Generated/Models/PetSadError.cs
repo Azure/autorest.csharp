@@ -10,13 +10,13 @@ namespace xms_error_responses.Models
     /// <summary> The PetSadError. </summary>
     public partial class PetSadError : PetActionError
     {
-        /// <summary> Initializes a new instance of <see cref="PetSadError"/>. </summary>
+        /// <summary> Initializes a new instance of PetSadError. </summary>
         internal PetSadError()
         {
             ErrorType = "PetSadError";
         }
 
-        /// <summary> Initializes a new instance of <see cref="PetSadError"/>. </summary>
+        /// <summary> Initializes a new instance of PetSadError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>

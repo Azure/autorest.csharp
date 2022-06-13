@@ -13,12 +13,12 @@ namespace SingletonResource
     /// <summary> A class representing the SingletonResource data model. </summary>
     public partial class SingletonResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="SingletonResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
         public SingletonResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SingletonResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

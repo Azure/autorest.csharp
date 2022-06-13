@@ -10,12 +10,12 @@ namespace Azure.Management.Storage.Models
     /// <summary> The SignedIdentifier. </summary>
     public partial class SignedIdentifier
     {
-        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
+        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
         public SignedIdentifier()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
+        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
         /// <param name="id"> An unique identifier of the stored access policy. </param>
         /// <param name="accessPolicy"> Access policy. </param>
         internal SignedIdentifier(string id, AccessPolicy accessPolicy)

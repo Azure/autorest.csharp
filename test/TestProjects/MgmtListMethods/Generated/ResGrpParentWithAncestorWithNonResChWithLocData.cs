@@ -14,13 +14,13 @@ namespace MgmtListMethods
     /// <summary> A class representing the ResGrpParentWithAncestorWithNonResChWithLoc data model. </summary>
     public partial class ResGrpParentWithAncestorWithNonResChWithLocData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithAncestorWithNonResChWithLocData"/>. </summary>
+        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChWithLocData. </summary>
         /// <param name="location"> The location. </param>
         public ResGrpParentWithAncestorWithNonResChWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithAncestorWithNonResChWithLocData"/>. </summary>
+        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChWithLocData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

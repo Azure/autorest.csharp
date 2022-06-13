@@ -10,12 +10,12 @@ namespace subscriptionId_apiVersion.Models
     /// <summary> The SampleResourceGroup. </summary>
     public partial class SampleResourceGroup
     {
-        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
+        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
         internal SampleResourceGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
+        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
         /// <param name="name"> resource group name &apos;testgroup101&apos;. </param>
         /// <param name="location"> resource group location &apos;West US&apos;. </param>
         internal SampleResourceGroup(string name, string location)

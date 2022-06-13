@@ -16,12 +16,12 @@ namespace MgmtKeyvault
     /// <summary> A class representing the MgmtKeyvaultPrivateEndpointConnection data model. </summary>
     public partial class MgmtKeyvaultPrivateEndpointConnectionData : MgmtKeyvaultResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionData. </summary>
         public MgmtKeyvaultPrivateEndpointConnectionData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultPrivateEndpointConnectionData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultPrivateEndpointConnectionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

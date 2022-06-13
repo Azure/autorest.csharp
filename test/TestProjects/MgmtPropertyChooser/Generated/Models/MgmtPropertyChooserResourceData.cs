@@ -15,7 +15,7 @@ namespace MgmtPropertyChooser.Models
     /// <summary> The Resource model definition. </summary>
     public partial class MgmtPropertyChooserResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public MgmtPropertyChooserResourceData(string location)
@@ -29,7 +29,7 @@ namespace MgmtPropertyChooser.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -13,14 +13,14 @@ namespace MgmtRenameRules.Models
     /// <summary> The instance view of a virtual machine scale set VM. </summary>
     public partial class VirtualMachineScaleSetVmInstanceView
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
         internal VirtualMachineScaleSetVmInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
         /// <param name="platformUpdateDomain"> The Update Domain count. </param>
         /// <param name="platformFaultDomain"> The Fault Domain count. </param>
         /// <param name="rdpThumbPrint"> The Remote desktop certificate thumbprint. </param>

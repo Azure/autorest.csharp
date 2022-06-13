@@ -13,7 +13,7 @@ namespace body_complex.Models
     /// <summary> The Fish. </summary>
     public partial class Fish
     {
-        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
+        /// <summary> Initializes a new instance of Fish. </summary>
         /// <param name="length"></param>
         public Fish(float length)
         {
@@ -21,7 +21,7 @@ namespace body_complex.Models
             Siblings = new ChangeTrackingList<Fish>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
+        /// <summary> Initializes a new instance of Fish. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

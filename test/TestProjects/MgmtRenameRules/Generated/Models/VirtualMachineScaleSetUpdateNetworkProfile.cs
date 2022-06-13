@@ -14,7 +14,7 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes a virtual machine scale set network profile. </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkProfile
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkProfile"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkProfile. </summary>
         public VirtualMachineScaleSetUpdateNetworkProfile()
         {
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateNetworkConfiguration>();

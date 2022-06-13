@@ -14,14 +14,14 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateEndpointConnectionList
     {
-        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionList"/>. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
         [InitializationConstructor]
         public PrivateEndpointConnectionList()
         {
             Value = new ChangeTrackingList<PrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionList"/>. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
         [SerializationConstructor]
         internal PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value)

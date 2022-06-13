@@ -14,12 +14,12 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the ImmutabilityPolicy data model. </summary>
     public partial class ImmutabilityPolicyData : AzureEntityResource
     {
-        /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyData"/>. </summary>
+        /// <summary> Initializes a new instance of ImmutabilityPolicyData. </summary>
         public ImmutabilityPolicyData()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyData"/>. </summary>
+        /// <summary> Initializes a new instance of ImmutabilityPolicyData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -12,7 +12,7 @@ namespace ModelWithConverterUsage.Models
     /// <summary> The ModelStruct. </summary>
     public readonly partial struct ModelStruct
     {
-        /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
+        /// <summary> Initializes a new instance of ModelStruct. </summary>
         /// <param name="modelProperty"> . </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelProperty"/> is null. </exception>
         public ModelStruct(string modelProperty)

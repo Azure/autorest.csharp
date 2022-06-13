@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The List Proximity Placement Group operation response. </summary>
     internal partial class ProximityPlacementGroupListResult
     {
-        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/>. </summary>
+        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
         /// <param name="value"> The list of proximity placement groups. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ProximityPlacementGroupListResult(IEnumerable<ProximityPlacementGroupData> value)
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/>. </summary>
+        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
         /// <param name="value"> The list of proximity placement groups. </param>
         /// <param name="nextLink"> The URI to fetch the next page of proximity placement groups. </param>
         internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink)

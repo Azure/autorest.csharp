@@ -12,7 +12,7 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> Describes a Virtual Machine run command. </summary>
     public partial class SubParentPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of <see cref="SubParentPatch"/>. </summary>
+        /// <summary> Initializes a new instance of SubParentUpdate. </summary>
         public SubParentPatch()
         {
         }

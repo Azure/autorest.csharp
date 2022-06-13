@@ -10,12 +10,12 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassAndRedefinesAProperty. </summary>
     public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : BaseClass
     {
-        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndRedefinesAProperty"/>. </summary>
+        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndRedefinesAProperty. </summary>
         public ClassThatInheritsFromBaseClassAndRedefinesAProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndRedefinesAProperty"/>. </summary>
+        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndRedefinesAProperty. </summary>
         /// <param name="baseClassProperty"></param>
         internal ClassThatInheritsFromBaseClassAndRedefinesAProperty(string baseClassProperty) : base(baseClassProperty)
         {

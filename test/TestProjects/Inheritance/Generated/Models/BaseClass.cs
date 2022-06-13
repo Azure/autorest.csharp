@@ -10,12 +10,12 @@ namespace Inheritance.Models
     /// <summary> The BaseClass. </summary>
     public partial class BaseClass
     {
-        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
+        /// <summary> Initializes a new instance of BaseClass. </summary>
         public BaseClass()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
+        /// <summary> Initializes a new instance of BaseClass. </summary>
         /// <param name="baseClassProperty"></param>
         internal BaseClass(string baseClassProperty)
         {

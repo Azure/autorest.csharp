@@ -13,13 +13,13 @@ namespace Azure.Management.Storage.Models
     /// <summary> A list of private link resources. </summary>
     internal partial class StoragePrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResourceListResult"/>. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateLinkResourceListResult. </summary>
         internal StoragePrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<StoragePrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResourceListResult"/>. </summary>
+        /// <summary> Initializes a new instance of StoragePrivateLinkResourceListResult. </summary>
         /// <param name="value"> Array of private link resources. </param>
         internal StoragePrivateLinkResourceListResult(IReadOnlyList<StoragePrivateLinkResource> value)
         {

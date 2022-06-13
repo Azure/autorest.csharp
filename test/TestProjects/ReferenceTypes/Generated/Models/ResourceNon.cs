@@ -10,7 +10,7 @@ namespace ReferenceTypes.Models
     /// <summary> Common fields that are returned in the response for all Azure Resource Manager resources. </summary>
     internal partial class ResourceNon
     {
-        /// <summary> Initializes a new instance of <see cref="ResourceNon"/>. </summary>
+        /// <summary> Initializes a new instance of ResourceNon. </summary>
         internal ResourceNon()
         {
         }

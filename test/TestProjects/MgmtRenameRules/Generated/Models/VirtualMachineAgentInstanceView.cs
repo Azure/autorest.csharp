@@ -13,14 +13,14 @@ namespace MgmtRenameRules.Models
     /// <summary> The instance view of the VM Agent running on the virtual machine. </summary>
     public partial class VirtualMachineAgentInstanceView
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
         internal VirtualMachineAgentInstanceView()
         {
             ExtensionHandlers = new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
         /// <param name="vmAgentVersion"> The VM Agent full version. </param>
         /// <param name="extensionHandlers"> The virtual machine extension handler instance view. </param>
         /// <param name="statuses"> The resource status information. </param>

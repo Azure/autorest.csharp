@@ -14,7 +14,7 @@ namespace additionalProperties.Models
     /// <summary> The PetAPInPropertiesWithAPString. </summary>
     public partial class PetAPInPropertiesWithAPString
     {
-        /// <summary> Initializes a new instance of <see cref="PetAPInPropertiesWithAPString"/>. </summary>
+        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
         /// <param name="id"></param>
         /// <param name="odataLocation"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="odataLocation"/> is null. </exception>
@@ -31,7 +31,7 @@ namespace additionalProperties.Models
             MoreAdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="PetAPInPropertiesWithAPString"/>. </summary>
+        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>

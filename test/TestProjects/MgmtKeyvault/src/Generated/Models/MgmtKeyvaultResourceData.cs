@@ -14,13 +14,13 @@ namespace MgmtKeyvault.Models
     /// <summary> Key Vault resource. </summary>
     public partial class MgmtKeyvaultResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultResourceData. </summary>
         public MgmtKeyvaultResourceData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="MgmtKeyvaultResourceData"/>. </summary>
+        /// <summary> Initializes a new instance of MgmtKeyvaultResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

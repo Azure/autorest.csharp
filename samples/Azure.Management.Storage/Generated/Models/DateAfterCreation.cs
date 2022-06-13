@@ -10,7 +10,7 @@ namespace Azure.Management.Storage.Models
     /// <summary> Object to define the number of days after creation. </summary>
     internal partial class DateAfterCreation
     {
-        /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/>. </summary>
+        /// <summary> Initializes a new instance of DateAfterCreation. </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
         public DateAfterCreation(float daysAfterCreationGreaterThan)
         {

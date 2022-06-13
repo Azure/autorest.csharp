@@ -12,12 +12,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Describes the uri of a disk. </summary>
     internal partial class VirtualHardDisk
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
         public VirtualHardDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
+        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
         /// <param name="uri"> Specifies the virtual hard disk&apos;s uri. </param>
         internal VirtualHardDisk(Uri uri)
         {

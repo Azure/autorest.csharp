@@ -13,12 +13,12 @@ namespace MgmtKeyvault.Models
     /// <summary> Private endpoint connection item. </summary>
     public partial class PrivateEndpointConnectionItem
     {
-        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionItem"/>. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionItem. </summary>
         internal PrivateEndpointConnectionItem()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionItem"/>. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionItem. </summary>
         /// <param name="id"> Id of private endpoint connection. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>

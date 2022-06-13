@@ -10,12 +10,12 @@ namespace MgmtRenameRules.Models
     /// <summary> Response after calling a manual recovery walk. </summary>
     public partial class RecoveryWalkResponse
     {
-        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
+        /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
         internal RecoveryWalkResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
+        /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
         /// <param name="walkPerformed"> Whether the recovery walk was performed. </param>
         /// <param name="nextPlatformUpdateDomain"> The next update domain that needs to be walked. Null means walk spanning all update domains has been completed. </param>
         internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain)

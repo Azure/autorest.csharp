@@ -10,12 +10,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Inner error details. </summary>
     public partial class InnerError
     {
-        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
+        /// <summary> Initializes a new instance of InnerError. </summary>
         internal InnerError()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
+        /// <summary> Initializes a new instance of InnerError. </summary>
         /// <param name="exceptiontype"> The exception type. </param>
         /// <param name="errordetail"> The internal error message or exception dump. </param>
         internal InnerError(string exceptiontype, string errordetail)

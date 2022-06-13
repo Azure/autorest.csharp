@@ -14,13 +14,13 @@ namespace SubscriptionExtensions
     /// <summary> A class representing the Toaster data model. </summary>
     public partial class ToasterData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of <see cref="ToasterData"/>. </summary>
+        /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
         public ToasterData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ToasterData"/>. </summary>
+        /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
