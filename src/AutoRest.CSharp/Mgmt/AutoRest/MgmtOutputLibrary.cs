@@ -231,7 +231,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // first, construct resource data models
             foreach (var schema in _allSchemas)
             {
-                var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
+                var model = CheckReplaceType(
+                    ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ?
+                    BuildResourceModel(schema) :
+                    BuildModel(schema));
                 resourceModels.Add(schema, model);
                 _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
             }
@@ -242,7 +245,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 resourceModels.Remove(schema);
                 _nameToTypeProvider.Remove(oldName);
-                var model = BuildModel(schema);
+                var model = CheckReplaceType(BuildModel(schema));
                 resourceModels.Add(schema, model);
                 _nameToTypeProvider.Add(schema.Name, model);
             }
@@ -718,7 +721,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
-        private TypeProvider BuildModel(Schema schema) => CheckReplaceType(schema switch
+        private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, MgmtContext.Context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
@@ -726,7 +729,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ? new MgmtReferenceType(objectSchema)
             : new MgmtObjectType(objectSchema),
             _ => throw new NotImplementedException()
-        });
+        };
+
+        private TypeProvider BuildResourceModel(Schema schema) => schema switch
+        {
+            ObjectSchema objectSchema => new ResourceData(objectSchema),
+            _ => throw new NotImplementedException()
+        };
 
         private static TypeProvider CheckReplaceType(TypeProvider type)
         {
@@ -735,22 +744,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var replacedType = TypeReferenceTypeChooser.GetExactMatch(mgmtType);
                 if (replacedType != null)
                 {
-                    return mgmtType switch
-                    {
-                        Output.ResourceData => new ResourceData(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace),
-                        MgmtReferenceType => new MgmtReferenceType(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace),
-                        _ => new MgmtObjectType(mgmtType.ObjectSchema, replacedType.Name, replacedType.Namespace)
-                    };
+                    return replacedType.Implementation;
                 }
             }
             return type;
         }
-
-        private TypeProvider BuildResourceModel(Schema schema) => CheckReplaceType(schema switch
-        {
-            ObjectSchema objectSchema => new ResourceData(objectSchema),
-            _ => throw new NotImplementedException()
-        });
 
         private void ReorderOperationParameters()
         {
