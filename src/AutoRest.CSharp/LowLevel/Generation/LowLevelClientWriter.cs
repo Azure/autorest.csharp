@@ -508,9 +508,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature)
         {
             codeWriter.WriteMethodDocumentation(methodSignature);
-
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
-            codeWriter.WriteDocumentationLines($"<response>", $"</response>", $"The response returned from the service. Details of the request body schema are in the Remarks section below.");
         }
 
         private static ResponseClassifierType CreateResponseClassifierType(RestClientMethod method)
@@ -527,7 +525,10 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemas = new List<FormattableString>();
 
             AddDocumentationForSchema(schemas, documentationSchemas.RequestBodySchema, "Request Body", true);
-            AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false);
+            if (AddDocumentationForSchema(schemas, documentationSchemas.ResponseBodySchema, "Response Body", false))
+            {
+                writer.WriteDocumentationLines($"<response>", $"</response>", $"The response returned from the service. Details of the response body schema are in the Remarks section below.");
+            }
             AddDocumentationForSchema(schemas, documentationSchemas.ResponseErrorSchema, "Response Error", false);
 
             if (schemas.Count > 0)
@@ -535,11 +536,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
 
-            static void AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
+            static bool AddDocumentationForSchema(List<FormattableString> formattedSchemas, Schema? schema, string schemaName, bool showRequried)
             {
                 if (schema == null)
                 {
-                    return;
+                    return false;
                 }
 
                 var docs = GetSchemaDocumentationsForSchema(schema, schemaName);
@@ -547,7 +548,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (docs != null)
                 {
                     formattedSchemas.Add($"Schema for <c>{schemaName}</c>:{Environment.NewLine}<code>{BuildSchemaFromDocs(docs, showRequried)}</code>{Environment.NewLine}");
+                    return true;
                 }
+
+                return false;
             }
         }
 

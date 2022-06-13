@@ -58,7 +58,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
@@ -78,7 +77,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response GetItem(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");

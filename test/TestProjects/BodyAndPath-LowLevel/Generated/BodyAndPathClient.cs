@@ -64,7 +64,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -91,7 +90,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -120,7 +118,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -149,7 +146,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -177,7 +173,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -206,7 +201,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -230,7 +224,6 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -250,7 +243,6 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response GetBodyAndPaths(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -270,7 +262,6 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -290,7 +281,6 @@ namespace BodyAndPath_LowLevel
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response GetItems(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -317,7 +307,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
@@ -349,7 +338,6 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));

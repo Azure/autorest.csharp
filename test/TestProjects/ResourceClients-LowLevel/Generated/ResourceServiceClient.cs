@@ -62,7 +62,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Method that belongs to the top level service. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> GetParametersAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -82,7 +81,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Method that belongs to the top level service. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response GetParameters(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -102,7 +100,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual async Task<Response> GetGroupsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
@@ -122,7 +119,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Response GetGroups(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
@@ -142,7 +138,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
             return GetAllItemsImplementationAsync("ResourceServiceClient.GetAllItems", context);
@@ -168,7 +163,6 @@ namespace ResourceClients_LowLevel
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <response> The response returned from the service. Details of the request body schema are in the Remarks section below. </response>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
             return GetAllItemsImplementation("ResourceServiceClient.GetAllItems", context);
