@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -77,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
-        private Dictionary<string, TypeProvider> _nameToTypeProvider;
+        private LookupDictionary<Schema, string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
 
         private Dictionary<string, string> _mergedOperations;
@@ -105,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
-            _nameToTypeProvider = new Dictionary<string, TypeProvider>();
+            _nameToTypeProvider = new LookupDictionary<Schema, string, TypeProvider>(schema => schema.Name);
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
@@ -225,25 +226,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
-            var resourceModels = new Dictionary<Schema, TypeProvider>();
-
             // first, construct resource data models
             foreach (var schema in _allSchemas)
             {
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
-                resourceModels.Add(schema, model);
-                _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
+                _nameToTypeProvider.Add(schema, model);
             }
 
             //this is where we update
             var updatedModels = UpdateBodyParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
-                resourceModels.Remove(schema);
-                _nameToTypeProvider.Remove(oldName);
+                _nameToTypeProvider.Remove(schema);
                 var model = BuildModel(schema);
-                resourceModels.Add(schema, model);
-                _nameToTypeProvider.Add(schema.Name, model);
+                _nameToTypeProvider.Add(schema, model);
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
@@ -252,7 +248,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 TypeProvider? type;
 
-                if (resourceModels.TryGetValue(schema, out type))
+                if (_nameToTypeProvider.TryGetValue(schema, out type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
@@ -280,13 +276,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // third, update the entries in cache maps with the new model instances
             foreach (var replacedType in replacedTypes)
             {
-                var schema = replacedType.ObjectSchema;
-                var name = schema.Name;
-                _nameToTypeProvider[name] = replacedType;
-                resourceModels[schema] = replacedType;
+                _nameToTypeProvider[replacedType.ObjectSchema] = replacedType;
             }
 
-            return resourceModels;
+            return _nameToTypeProvider;
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
