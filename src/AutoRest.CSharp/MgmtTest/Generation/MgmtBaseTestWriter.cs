@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -35,6 +36,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         private HashSet<KeyValuePair<string, string>> _operationExamples = new HashSet<KeyValuePair<string, string>>();
         private Dictionary<string, int> _testMethodIndex = new Dictionary<string, int>();
+        public bool usingValidExampleModel = true;
 
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
@@ -193,7 +195,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        public static ExampleValue? FindPropertyValue(ObjectType ot, ExampleValue ev, ObjectTypeProperty targetProperty)
+        public static ExampleValue? FindPropertyValue(TypeProvider ot, ExampleValue ev, ObjectTypeProperty targetProperty)
         {
             foreach (var exampleProperty in ev.Properties)
             {
@@ -256,21 +258,39 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return constructor;
         }
 
-        public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty, ExampleValue ev)
+        private bool IsSingleProperty(ObjectTypeProperty targetProperty, ExampleValue ev)
         {
-            bool isSingleProperty = targetProperty.IsSinglePropertyObject(out _);
             if (MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
             {
                 var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
                 if (mappedTypeProvider is SchemaObjectType mappedSot)
                 {
-                    isSingleProperty = (new ObjectTypeProperty(targetProperty.Declaration, targetProperty.Description, targetProperty.IsReadOnly, targetProperty.SchemaProperty, mappedSot.Type)).IsSinglePropertyObject(out _);
+                    targetProperty = new ObjectTypeProperty(targetProperty.Declaration, targetProperty.Description, targetProperty.IsReadOnly, targetProperty.SchemaProperty, mappedSot.Type);
                 }
             }
-            return isSingleProperty ? variableName : $"{variableName}.{targetProperty.Declaration.Name}";
+            return targetProperty.IsSinglePropertyObject(out _);
         }
 
-        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
+        public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty, ExampleValue ev, bool inSingleProperty)
+        {
+            if (inSingleProperty)   return variableName;
+            bool isSingleProperty = this.IsSingleProperty(targetProperty, ev);
+            if (isSingleProperty)
+            {
+                Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
+                heiarchyStack.Push(targetProperty);
+                targetProperty.BuildHeirarchy(heiarchyStack);
+
+                var innerProperty = heiarchyStack.Pop();
+                var immediateParentProperty = heiarchyStack.Pop();
+                string immediateParentPropertyName = immediateParentProperty.Declaration.GetPropertyName();
+                string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentPropertyName);
+                return $"{variableName}.{myPropertyName}";
+            }
+            return $"{variableName}.{targetProperty.Declaration.Name}";
+        }
+
+        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, bool inSingleProperty)
         {
             // Find Polimophismed schema
             if (sot is SchemaObjectType && MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
@@ -297,13 +317,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (targetProperty is null)
                 {
                     writer.Append($"default, /* Can't find property for this parameter!*/");
+                    usingValidExampleModel = false;
                     continue;
                 }
                 var paramValue = FindPropertyValue(sot, ev, targetProperty);
                 writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
-                    WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}");
+                    WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue, inSingleProperty)}", IsSingleProperty(targetProperty, paramValue));
                 }
                 else
                 {
@@ -340,7 +361,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
 
             if (hasUnconsumedProperties)
-                WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
+                WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties, inSingleProperty);
 
             // assign readonly list and dictionary properties.
             foreach (var objectType in sot.EnumerateHierarchy())
@@ -352,13 +373,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                     if (paramValue is not null)
                     {
-                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}"));
+                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty, paramValue, inSingleProperty)}", IsSingleProperty(targetProperty, paramValue)));
                     }
                 }
             }
         }
 
-        public CodeWriterDelegate CreateAssignmentWriterDelegate(CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
+        public CodeWriterDelegate CreateAssignmentWriterDelegate(CSharpType cst, ExampleValue exampleValue, FormattableString variableName, bool inSingleProperty)
         {
             return writer =>
             {
@@ -368,7 +389,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     foreach (var element in exampleValue.Elements)
                     {
                         writer.Append($"{variableName}.Add(");
-                        WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
+                        WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]", inSingleProperty);
                         writer.Line($");");
                         idx++;
                     }
@@ -379,7 +400,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var keyDelegate = WriteStringValue(cst.Arguments[0], entry.Key);
                         writer.Append($"{variableName}[{keyDelegate}] = ");
-                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{keyDelegate}]");
+                        WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{keyDelegate}]", inSingleProperty);
                         writer.Line($";");
                     }
                 }
@@ -396,7 +417,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties)
+        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties, bool inSingleProperty)
         {
             using (writer.Scope($"", newLine: false))
             {
@@ -409,16 +430,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                         if (paramValue is not null)
                         {
-                            FormattableString newVariableName = $"{PropertyVaraibleName(variableName, targetProperty, paramValue)}";
+                            FormattableString newVariableName = $"{PropertyVaraibleName(variableName, targetProperty, paramValue, inSingleProperty)}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
                                 AddTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                                 consumedProperties.Add(targetProperty);
                             }
-                            else if (!targetProperty.IsSinglePropertyObject(out _))
+                            else
                             {
                                 writer.Append($"{targetProperty.Declaration.Name:D} = ");
-                                WriteExampleValue(writer, targetProperty.ValueType, paramValue, newVariableName);
+                                WriteExampleValue(writer, targetProperty.ValueType, paramValue, newVariableName, IsSingleProperty(targetProperty, paramValue));
                                 writer.Append($", ");
                                 consumedProperties.Add(targetProperty);
                             }
@@ -473,6 +494,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             switch ($"{cst.Namespace}.{cst.Name}")
             {
                 case "System.Collections.Generic.IList":
+                case "System.Collections.Generic.IEnumerable":
                     using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
                     {
                         var idx = 0;
@@ -552,6 +574,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     writer.Append($"{typeof(TimeSpan)}.Parse({value:L})");
                     return true;
                 case "System.Uri":
+                    if (!Uri.IsWellFormedUriString(value, UriKind.RelativeOrAbsolute))
+                    {
+                        value = "https://mockedUri";
+                    }
                     writer.Append($"new {typeof(Uri)}({value:L})");
                     return true;
                 case "System.Byte[]":
@@ -608,16 +634,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
+        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName, bool inSingleProperty = false)
         {
             TypeProvider? tp = cst.IsFrameworkType ? null : cst.Implementation;
             switch (tp)
             {
                 case SchemaObjectType sot:
-                    WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName);
+                    WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName, inSingleProperty);
                     break;
                 case SystemObjectType sot:
-                    WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName);
+                    WriteSchemaObjectExampleValue(writer, sot, exampleValue, variableName, inSingleProperty);
                     break;
                 case EnumType enumType:
                     WriteEnumTypeExampleValue(writer, enumType, exampleValue);
@@ -667,6 +693,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public List<KeyValuePair<string, FormattableString>> WriteOperationParameters(IEnumerable<Parameter> methodParameters, ExampleModel exampleModel)
         {
+            usingValidExampleModel = true;
             var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
@@ -687,6 +714,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     if (passThruParameter.Validation != ValidationType.None)
                     {
                         _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
+                        usingValidExampleModel = false;
                     }
                     else
                     {
@@ -695,6 +723,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     paramName = $"{paramNameDeclare}";
                 }
                 parameterValues.Add(new KeyValuePair<string, FormattableString>(passThruParameter.Name, paramName));
+            }
+            if (!usingValidExampleModel) {
+                _writer.UseNamespace("NUnit.Framework");
+                _writer.Line($"Assert.Inconclusive(\"Skip this test because parameters are not fullly generated!\");");
             }
             return parameterValues;
         }
@@ -784,7 +816,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 i++;
             }
-            return exampleValue ?? "00000000-0000-0000-0000-000000000000";
+
+            if (type == "subscriptions" && !Guid.TryParse(exampleValue, out _))
+            {
+                exampleValue = "00000000-0000-0000-0000-000000000000";
+            }
+            return exampleValue ?? "NA";
         }
 
         protected static CodeWriterDelegate WriteGetExtension(MgmtExtensions extensions, RequestPath requestPath, ExampleModel exampleModel)
@@ -793,8 +830,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 if (extensions == MgmtContext.Library.TenantExtensions)
                 {
-                    writer.UseNamespace("System.Linq");
-                    writer.Append($"GetArmClient().GetTenants().First()");
+                    writer.Append($"await (GetArmClient().GetTenants().GetAllAsync().FirstOrDefaultAsync((TenantResource) => true))");
                 }
                 else if (extensions == MgmtContext.Library.ResourceGroupExtensions)
                 {

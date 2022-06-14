@@ -84,14 +84,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
                 heiarchyStack.Push(property);
-                BuildHeirarchy(property, heiarchyStack);
+                property.BuildHeirarchy(heiarchyStack);
                 if (Configuration.AzureArm && heiarchyStack.Count > 1)
                 {
                     var innerProperty = heiarchyStack.Pop();
                     var immediateParentProperty = heiarchyStack.Pop();
 
-                    string immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
-                    string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
+                    string immediateParentPropertyName = immediateParentProperty.Declaration.GetPropertyName();
+                    string myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentPropertyName);
                     string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
                     WriteProperty(writer, property, "internal");
                     bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
@@ -268,76 +268,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private string GetCombinedPropertyName(string immediateParentPropertyName, MemberDeclarationOptions property)
-        {
-            string parentName = immediateParentPropertyName;
-
-            if (property.Type.Equals(typeof(bool)) || property.Type.Equals(typeof(bool?)))
-            {
-                return property.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{parentName}{property.Name}" : property.Name;
-            }
-
-            if (property.Name.Equals("Id", StringComparison.Ordinal))
-                return $"{parentName}{property.Name}";
-
-            if (immediateParentPropertyName.EndsWith(property.Name, StringComparison.Ordinal))
-                return immediateParentPropertyName;
-
-            IEnumerable<string> parentWords = immediateParentPropertyName.SplitByCamelCase();
-            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
-                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
-            {
-                parentWords = parentWords.Take(parentWords.Count() - 1);
-            }
-
-            var parentWordArray = parentWords.ToArray();
-            var parentWordsHash = new HashSet<string>(parentWordArray);
-            var nameWords = property.Name.SplitByCamelCase().ToArray();
-            var lastWord = string.Empty;
-            for (int i = 0; i < nameWords.Length; i++)
-            {
-                var word = nameWords[i];
-                lastWord = word;
-                if (parentWordsHash.Contains(word))
-                {
-                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
-                    {
-                        parentWords = parentWords.Take(parentWords.Count() - 2);
-                        break;
-                    }
-                    {
-                        return property.Name;
-                    }
-                }
-
-                //need to depluralize the last word and check
-                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
-                    return property.Name;
-            }
-
-            parentName = string.Join("", parentWords);
-
-            return $"{parentName}{property.Name}";
-        }
-
-        private string GetPropertyName(MemberDeclarationOptions property)
-        {
-            const string properties = "Properties";
-            if (property.Name.Equals(properties, StringComparison.Ordinal))
-            {
-                string typeName = property.Type.Name;
-                int index = typeName.IndexOf(properties);
-                if (index > -1 && index + properties.Length == typeName.Length)
-                    return typeName.Substring(0, index);
-
-                return typeName;
-            }
-            return property.Name;
-        }
-
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
@@ -347,15 +277,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
 
             writer.Line();
-        }
-
-        private void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            if (property.IsSinglePropertyObject(out var childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
-            }
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
