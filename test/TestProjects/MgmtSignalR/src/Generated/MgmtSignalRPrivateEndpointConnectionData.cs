@@ -27,12 +27,12 @@ namespace MgmtSignalR
         /// <param name="systemData"> The systemData. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
         /// <param name="privateEndpoint"> Private endpoint associated with the private endpoint connection. </param>
-        /// <param name="privateLinkServiceConnectionState"> Connection state. </param>
-        internal MgmtSignalRPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ProvisioningState? provisioningState, WritableSubResource privateEndpoint, MgmtSignalRPrivateLinkServiceConnectionState privateLinkServiceConnectionState) : base(id, name, resourceType, systemData)
+        /// <param name="connectionState"> Connection state. </param>
+        internal MgmtSignalRPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ProvisioningState? provisioningState, WritableSubResource privateEndpoint, MgmtSignalRPrivateLinkServiceConnectionState connectionState) : base(id, name, resourceType, systemData)
         {
             ProvisioningState = provisioningState;
             PrivateEndpoint = privateEndpoint;
-            PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
+            ConnectionState = connectionState;
         }
 
         /// <summary> Provisioning state of the private endpoint connection. </summary>
@@ -52,6 +52,6 @@ namespace MgmtSignalR
         }
 
         /// <summary> Connection state. </summary>
-        public MgmtSignalRPrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
+        public MgmtSignalRPrivateLinkServiceConnectionState ConnectionState { get; set; }
     }
 }

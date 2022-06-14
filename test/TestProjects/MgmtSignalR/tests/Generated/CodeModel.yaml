@@ -2014,7 +2014,7 @@ schemas: !Schemas
                                           serializedName: privateLinkServiceConnectionState
                                           language: !Languages &ref_271
                                             default:
-                                              name: privateLinkServiceConnectionState
+                                              name: connectionState
                                               description: Connection state
                                           protocol: !Protocols {}
                                       serializationFormats:

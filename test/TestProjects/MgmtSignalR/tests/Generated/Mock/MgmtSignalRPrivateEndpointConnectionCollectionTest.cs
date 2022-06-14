@@ -32,7 +32,7 @@ namespace MgmtSignalR.Tests.Mock
             string privateEndpointConnectionName = "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e";
             MgmtSignalR.MgmtSignalRPrivateEndpointConnectionData data = new MgmtSignalR.MgmtSignalRPrivateEndpointConnectionData()
             {
-                PrivateLinkServiceConnectionState = new MgmtSignalR.Models.MgmtSignalRPrivateLinkServiceConnectionState()
+                ConnectionState = new MgmtSignalR.Models.MgmtSignalRPrivateLinkServiceConnectionState()
                 {
                     Status = new MgmtSignalR.Models.PrivateLinkServiceConnectionStatus("Approved"),
                     Description = null,
