@@ -16,7 +16,7 @@ namespace MgmtOptionalConstant.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("passName");
-            writer.WriteStringValue(PassName);
+            writer.WriteStringValue(PassName.ToString());
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol");
@@ -27,13 +27,13 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
         {
-            string passName = default;
+            PassNames passName = default;
             Optional<ProtocolTypes> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
                 {
-                    passName = property.Value.GetString();
+                    passName = new PassNames(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("protocol"))

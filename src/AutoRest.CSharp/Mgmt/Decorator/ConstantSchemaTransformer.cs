@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             foreach (var operation in MgmtContext.CodeModel.OperationGroups.SelectMany(og => og.Operations))
             {
+                // change the schema on operations (only for optional)
                 foreach (var parameter in operation.Parameters)
                 {
                     if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
@@ -44,9 +45,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
 
+                // change the schema on models (optional and required)
                 foreach (var property in MgmtContext.CodeModel.Schemas.Objects.SelectMany(o => o.Properties))
                 {
-                    if (property.IsRequired || property.Schema is not ConstantSchema constantSchema)
+                    if (property.Schema is not ConstantSchema constantSchema)
                         continue;
 
                     var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
