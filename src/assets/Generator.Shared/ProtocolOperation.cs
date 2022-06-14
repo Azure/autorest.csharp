@@ -10,13 +10,13 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal class LowLevelFuncOperation<T> : Operation<T>, IOperation<T> where T : notnull
+    internal class ProtocolOperation<T> : Operation<T>, IOperation<T> where T : notnull
     {
         private readonly Func<Response, T> _resultSelector;
         private readonly OperationInternal<T> _operation;
         private readonly IOperation _nextLinkOperation;
 
-        internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
+        internal ProtocolOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _resultSelector = resultSelector;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
