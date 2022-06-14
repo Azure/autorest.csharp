@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 if (kv.Key.StartsWith('*'))
                 {
                     rule.Pattern = MatchPattern.StartWith;
-                    rule.Name = kv.Key.Substring(1);
+                    rule.Name = kv.Key.TrimStart('*');
                 }
                 else if (kv.Key.EndsWith('*'))
                 {
