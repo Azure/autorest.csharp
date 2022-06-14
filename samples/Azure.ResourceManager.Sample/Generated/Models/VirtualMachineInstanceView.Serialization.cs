@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> computerName = default;
             Optional<string> osName = default;
             Optional<string> osVersion = default;
-            Optional<AvailableHyperVGenerationType> hyperVGeneration = default;
+            Optional<HyperVGenerationType> hyperVGeneration = default;
             Optional<string> rdpThumbPrint = default;
             Optional<VirtualMachineAgentInstanceView> vmAgent = default;
             Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    hyperVGeneration = new AvailableHyperVGenerationType(property.Value.GetString());
+                    hyperVGeneration = new HyperVGenerationType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("rdpThumbPrint"))

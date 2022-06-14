@@ -46,4 +46,8 @@ directive:
     transform: >
       $["x-ms-format"] = "resource-type";
       $["x-ms-client-name"] = "ResourceType";
+  - from: MgmtRenameRules.json
+    where: $.definitions
+    transform: >
+      $.HyperVGenerationType['x-ms-enum'].name = 'HyperVGenerationType';
 ```

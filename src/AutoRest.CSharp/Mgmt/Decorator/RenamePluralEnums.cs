@@ -12,8 +12,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class RenamePluralEnums
     {
-        private const string prefix = "Available";
-
         public static void Update(IEnumerable<Schema> schemas)
         {
             HashSet<string> checkedNames = new HashSet<string>();
@@ -22,11 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;
                 schema.Language.Default.Name = schema.Language.Default.Name.LastWordToSingular(inputIsKnownToBePlural: false);
-                if (checkedNames.Contains(schema.Language.Default.Name))
-                {
-                    schema.Language.Default.Name = prefix + schema.Language.Default.Name;
-                }
-                checkedNames.Add(schema.Language.Default.Name);
             }
         }
     }

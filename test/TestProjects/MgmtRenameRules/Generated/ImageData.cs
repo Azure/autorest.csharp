@@ -33,7 +33,7 @@ namespace MgmtRenameRules
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, AvailableHyperVGenerationType? hyperVGeneration) : base(id, name, resourceType, systemData, tags, location)
+        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration) : base(id, name, resourceType, systemData, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
@@ -60,6 +60,6 @@ namespace MgmtRenameRules
         /// <summary> The provisioning state. </summary>
         public string ProvisioningState { get; }
         /// <summary> Gets the HyperVGenerationType of the VirtualMachine created from the image. </summary>
-        public AvailableHyperVGenerationType? HyperVGeneration { get; set; }
+        public HyperVGenerationType? HyperVGeneration { get; set; }
     }
 }
