@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure;
@@ -112,7 +113,12 @@ namespace MgmtKeyvault.Tests.Mock
             var vaultResourceId = MgmtKeyvault.VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
             var vaultResource = GetArmClient().GetVaultResource(vaultResourceId);
             MgmtKeyvault.Models.AccessPolicyUpdateKind operationKind = MgmtKeyvault.Models.AccessPolicyUpdateKind.Add;
-            MgmtKeyvault.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: null));
+            MgmtKeyvault.Models.VaultAccessPolicyParameters vaultAccessPolicyParameters = new MgmtKeyvault.Models.VaultAccessPolicyParameters(properties: new MgmtKeyvault.Models.VaultAccessPolicyProperties(accessPolicies: new List<MgmtKeyvault.Models.AccessPolicyEntry>()
+{
+new MgmtKeyvault.Models.AccessPolicyEntry(tenantId: Guid.Parse("00000000-0000-0000-0000-000000000000"),objectId: "00000000-0000-0000-0000-000000000000",permissions: new MgmtKeyvault.Models.Permissions()),}));
+            vaultAccessPolicyParameters.AccessPolicies[0].Permissions.Keys.Add(new MgmtKeyvault.Models.KeyPermissions("encrypt"));
+            vaultAccessPolicyParameters.AccessPolicies[0].Permissions.Secrets.Add(new MgmtKeyvault.Models.SecretPermissions("get"));
+            vaultAccessPolicyParameters.AccessPolicies[0].Permissions.Certificates.Add(new MgmtKeyvault.Models.CertificatePermissions("get"));
 
             await vaultResource.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
         }
