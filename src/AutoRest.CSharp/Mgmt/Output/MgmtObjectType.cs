@@ -166,17 +166,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            // try exact match
-            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
-            if (typeToReplace != null)
-            {
-                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
-                if (match != null)
-                {
-                    return match;
-                }
-            }
-
             // try superset match if this is not a type from discriminator
             var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
             if (supersetBaseType != null)
