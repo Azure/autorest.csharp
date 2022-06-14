@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SealedChoicesUpdater.UpdateSealChoiceTypes();
             CommonSingleWordModels.Update();
             RenameTimeToOn.Update();
+            RenamePluralEnums.Update();
             RearrangeParameterOrder.Update();
             NormalizeParamNames.Update(dataSchemaDict);
 
