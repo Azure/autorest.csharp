@@ -11,13 +11,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ConstantSchemaTransformer
     {
-        public static void TransformToSealedChoice()
+        public static void TransformToChoice()
         {
             var constantSchemas = new HashSet<ConstantSchema>(MgmtContext.CodeModel.Schemas.Constants);
             if (!constantSchemas.Any())
                 return;
 
-            Dictionary<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new();
+            Dictionary<ConstantSchema, ChoiceSchema> convertedChoiceSchemas = new();
 
             foreach (var operation in MgmtContext.CodeModel.OperationGroups.SelectMany(og => og.Operations))
             {
@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
                         continue;
 
-                    var sealedChoiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                    parameter.Schema = sealedChoiceSchema;
+                    var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
+                    parameter.Schema = choiceSchema;
                     operation.SignatureParameters.Add(parameter);
                 }
 
@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
                             continue;
 
-                        var sealedChoiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        parameter.Schema = sealedChoiceSchema;
+                        var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
+                        parameter.Schema = choiceSchema;
                         request.SignatureParameters.Add(parameter);
                     }
                 }
@@ -49,13 +49,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (property.IsRequired || property.Schema is not ConstantSchema constantSchema)
                         continue;
 
-                    var sealedChoiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                    property.Schema = sealedChoiceSchema;
+                    var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
+                    property.Schema = choiceSchema;
                 }
             }
 
             foreach (var choiceSchema in convertedChoiceSchemas.Values)
-                MgmtContext.CodeModel.Schemas.SealedChoices.Add(choiceSchema);
+                MgmtContext.CodeModel.Schemas.Choices.Add(choiceSchema);
         }
 
         private static V ComputeIfAbsent<K, V>(Dictionary<K, V> dict, K key, Func<K, V> generator) where K : notnull
@@ -69,28 +69,32 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return generated;
         }
 
-        private static SealedChoiceSchema ConvertToChoiceSchema(ConstantSchema constantSchema)
+        private static ChoiceSchema ConvertToChoiceSchema(ConstantSchema constantSchema)
         {
-            SealedChoiceSchema sealedChoiceSchema = new();
-            sealedChoiceSchema.Type = AllSchemaTypes.SealedChoice;
-            sealedChoiceSchema.ChoiceType = (PrimitiveSchema)constantSchema.ValueType;
-            sealedChoiceSchema.DefaultValue = constantSchema.DefaultValue;
-            sealedChoiceSchema.Language = constantSchema.Language;
+            var choiceValue = constantSchema.Value.Value.ToString();
+            ChoiceValue choice = new()
+            {
+                Value = choiceValue,
+                Language = constantSchema.Value.Language != null ?
+                                constantSchema.Value.Language :
+                                new Languages
+                                {
+                                    Default = new Language
+                                    {
+                                        Name = choiceValue,
+                                    }
+                                }
+            };
 
-            ChoiceValue choice = new();
-            choice.Value = constantSchema.Value.Value.ToString();
-            if (constantSchema.Value.Language != null)
-                choice.Language = constantSchema.Value.Language;
-            else
-                choice.Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = choice.Value
-                    }
-                };
-            sealedChoiceSchema.Choices = new[] { choice };
-            return sealedChoiceSchema;
+            ChoiceSchema choiceSchema = new()
+            {
+                Type = AllSchemaTypes.Choice,
+                ChoiceType = (PrimitiveSchema)constantSchema.ValueType,
+                DefaultValue = constantSchema.DefaultValue,
+                Language = constantSchema.Language,
+                Choices = new[] { choice }
+            };
+            return choiceSchema;
         }
     }
 }
