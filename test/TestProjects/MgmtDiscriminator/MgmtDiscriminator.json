@@ -6,12 +6,20 @@
         "version": "2020-06-01"
     },
     "host": "management.azure.com",
-    "schemes": ["https"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "security": [
         {
-            "azure_auth": ["user_impersonation"]
+            "azure_auth": [
+                "user_impersonation"
+            ]
         }
     ],
     "securityDefinitions": {
@@ -28,7 +36,9 @@
     "paths": {
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules": {
             "get": {
-                "tags": ["DeliveryRules"],
+                "tags": [
+                    "DeliveryRules"
+                ],
                 "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_List",
                 "parameters": [
@@ -60,7 +70,9 @@
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}": {
             "get": {
-                "tags": ["DeliveryRules"],
+                "tags": [
+                    "DeliveryRules"
+                ],
                 "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Get",
                 "parameters": [
@@ -97,7 +109,9 @@
                 }
             },
             "put": {
-                "tags": ["DeliveryRules"],
+                "tags": [
+                    "DeliveryRules"
+                ],
                 "description": "Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Create",
                 "parameters": [
@@ -156,7 +170,9 @@
                 "x-ms-long-running-operation": true
             },
             "delete": {
-                "tags": ["DeliveryRules"],
+                "tags": [
+                    "DeliveryRules"
+                ],
                 "description": "Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
                 "operationId": "DeliveryRules_Delete",
                 "parameters": [
@@ -202,7 +218,10 @@
         "DeliveryRule": {
             "description": "A rule that specifies a set of actions and conditions",
             "type": "object",
-            "required": ["order", "actions"],
+            "required": [
+                "order",
+                "actions"
+            ],
             "properties": {
                 "id": {
                     "description": "The resource id of this rule",
@@ -228,13 +247,27 @@
                             "type": "integer",
                             "format": "int32"
                         },
+                        "conditions": {
+                            "description": "The condition that must be matched for the actions to be executed",
+                            "type": "object",
+                            "$ref": "#/definitions/DeliveryRuleCondition"
+                        },
                         "actions": {
                             "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/DeliveryRuleAction"
                             },
-                            "x-ms-identifiers": ["name"]
+                            "x-ms-identifiers": [
+                                "name"
+                            ]
+                        },
+                        "extraMappingInfo": {
+                            "description": "A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.",
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/DeliveryRuleAction"
+                            }
                         }
                     }
                 }
@@ -253,10 +286,256 @@
                 }
             }
         },
+        "DeliveryRuleCondition": {
+            "description": "A condition for the delivery rule.",
+            "discriminator": "name",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "The name of the condition for the delivery rule.",
+                    "type": "string",
+                    "enum": [
+                        "RemoteAddress",
+                        "RequestMethod",
+                        "QueryString"
+                    ],
+                    "x-ms-enum": {
+                        "name": "MatchVariable",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "DeliveryRuleRemoteAddressCondition": {
+            "description": "Defines the RemoteAddress condition for the delivery rule.",
+            "x-ms-discriminator-value": "RemoteAddress",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DeliveryRuleCondition"
+                }
+            ],
+            "required": [
+                "parameters"
+            ],
+            "properties": {
+                "parameters": {
+                    "description": "Defines the parameters for the condition.",
+                    "$ref": "#/definitions/RemoteAddressMatchConditionParameters"
+                }
+            }
+        },
+        "DeliveryRuleRequestMethodCondition": {
+            "description": "Defines the RequestMethod condition for the delivery rule.",
+            "x-ms-discriminator-value": "RequestMethod",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DeliveryRuleCondition"
+                }
+            ],
+            "required": [
+                "parameters"
+            ],
+            "properties": {
+                "parameters": {
+                    "description": "Defines the parameters for the condition.",
+                    "$ref": "#/definitions/RequestMethodMatchConditionParameters"
+                }
+            }
+        },
+        "DeliveryRuleQueryStringCondition": {
+            "description": "Defines the QueryString condition for the delivery rule.",
+            "x-ms-discriminator-value": "QueryString",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DeliveryRuleCondition"
+                }
+            ],
+            "required": [
+                "parameters"
+            ],
+            "properties": {
+                "parameters": {
+                    "description": "Defines the parameters for the condition.",
+                    "$ref": "#/definitions/QueryStringMatchConditionParameters"
+                }
+            }
+        },
+        "RemoteAddressMatchConditionParameters": {
+            "description": "Defines the parameters for RemoteAddress match conditions",
+            "required": [
+                "operator",
+                "typeName"
+            ],
+            "properties": {
+                "typeName": {
+                    "type": "string",
+                    "enum": [
+                        "DeliveryRuleRemoteAddressConditionParameters"
+                    ]
+                },
+                "operator": {
+                    "description": "Describes operator to be matched",
+                    "type": "string",
+                    "enum": [
+                        "Any",
+                        "IPMatch",
+                        "GeoMatch"
+                    ],
+                    "x-ms-enum": {
+                        "name": "RemoteAddressOperator",
+                        "modelAsString": true
+                    }
+                },
+                "negateCondition": {
+                    "description": "Describes if this is negate condition or not",
+                    "type": "boolean"
+                },
+                "matchValues": {
+                    "description": "Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "transforms": {
+                    "description": "List of transforms",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transform"
+                    }
+                }
+            }
+        },
+        "RequestMethodMatchConditionParameters": {
+            "description": "Defines the parameters for RequestMethod match conditions",
+            "required": [
+                "operator",
+                "typeName"
+            ],
+            "properties": {
+                "typeName": {
+                    "type": "string",
+                    "enum": [
+                        "DeliveryRuleRequestMethodConditionParameters"
+                    ]
+                },
+                "operator": {
+                    "description": "Describes operator to be matched",
+                    "type": "string",
+                    "enum": [
+                        "Equal"
+                    ],
+                    "x-ms-enum": {
+                        "name": "RequestMethodOperator",
+                        "modelAsString": true
+                    }
+                },
+                "negateCondition": {
+                    "description": "Describes if this is negate condition or not",
+                    "type": "boolean"
+                },
+                "transforms": {
+                    "description": "List of transforms",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transform"
+                    }
+                },
+                "matchValues": {
+                    "description": "The match value for the condition of the delivery rule",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "GET",
+                            "HEAD",
+                            "POST",
+                            "PUT",
+                            "DELETE",
+                            "OPTIONS",
+                            "TRACE"
+                        ]
+                    }
+                }
+            }
+        },
+        "QueryStringMatchConditionParameters": {
+            "description": "Defines the parameters for QueryString match conditions",
+            "required": [
+                "operator",
+                "typeName"
+            ],
+            "properties": {
+                "typeName": {
+                    "type": "string",
+                    "enum": [
+                        "DeliveryRuleQueryStringConditionParameters"
+                    ]
+                },
+                "operator": {
+                    "description": "Describes operator to be matched",
+                    "type": "string",
+                    "enum": [
+                        "Any",
+                        "Equal",
+                        "Contains",
+                        "BeginsWith",
+                        "EndsWith",
+                        "LessThan",
+                        "LessThanOrEqual",
+                        "GreaterThan",
+                        "GreaterThanOrEqual",
+                        "RegEx"
+                    ],
+                    "x-ms-enum": {
+                        "name": "QueryStringOperator",
+                        "modelAsString": true
+                    }
+                },
+                "negateCondition": {
+                    "description": "Describes if this is negate condition or not",
+                    "type": "boolean"
+                },
+                "matchValues": {
+                    "description": "The match value for the condition of the delivery rule",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "transforms": {
+                    "description": "List of transforms",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/transform"
+                    }
+                }
+            }
+        },
+        "transform": {
+            "description": "Describes what transforms are applied before matching",
+            "type": "string",
+            "enum": [
+                "Lowercase",
+                "Uppercase",
+                "Trim",
+                "UrlDecode",
+                "UrlEncode",
+                "RemoveNulls"
+            ],
+            "x-ms-enum": {
+                "name": "transform",
+                "modelAsString": true
+            }
+        },
         "DeliveryRuleAction": {
             "description": "An action for the delivery rule.",
             "discriminator": "name",
-            "required": ["name"],
+            "required": [
+                "name"
+            ],
             "properties": {
                 "name": {
                     "description": "The name of the action for the delivery rule.",
@@ -287,7 +566,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -297,11 +578,16 @@
         },
         "UrlRedirectActionParameters": {
             "description": "Defines the parameters for the url redirect action.",
-            "required": ["redirectType", "typeName"],
+            "required": [
+                "redirectType",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleUrlRedirectActionParameters"]
+                    "enum": [
+                        "DeliveryRuleUrlRedirectActionParameters"
+                    ]
                 },
                 "redirectType": {
                     "description": "The redirect type the rule will use when redirecting traffic.",
@@ -320,7 +606,11 @@
                 "destinationProtocol": {
                     "description": "Protocol to use for the redirect. The default value is MatchRequest",
                     "type": "string",
-                    "enum": ["MatchRequest", "Http", "Https"],
+                    "enum": [
+                        "MatchRequest",
+                        "Http",
+                        "Https"
+                    ],
                     "x-ms-enum": {
                         "name": "DestinationProtocol",
                         "modelAsString": true
@@ -352,7 +642,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -362,16 +654,22 @@
         },
         "UrlSigningActionParameters": {
             "description": "Defines the parameters for the Url Signing action.",
-            "required": ["typeName"],
+            "required": [
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleUrlSigningActionParameters"]
+                    "enum": [
+                        "DeliveryRuleUrlSigningActionParameters"
+                    ]
                 },
                 "algorithm": {
                     "description": "Algorithm to use for URL signing",
                     "type": "string",
-                    "enum": ["SHA256"],
+                    "enum": [
+                        "SHA256"
+                    ],
                     "x-ms-enum": {
                         "name": "algorithm",
                         "modelAsString": true
@@ -383,18 +681,27 @@
                     "items": {
                         "$ref": "#/definitions/UrlSigningParamIdentifier"
                     },
-                    "x-ms-identifiers": ["paramName"]
+                    "x-ms-identifiers": [
+                        "paramName"
+                    ]
                 }
             }
         },
         "UrlSigningParamIdentifier": {
             "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
-            "required": ["paramIndicator", "paramName"],
+            "required": [
+                "paramIndicator",
+                "paramName"
+            ],
             "properties": {
                 "paramIndicator": {
                     "description": "Indicates the purpose of the parameter",
                     "type": "string",
-                    "enum": ["Expires", "KeyId", "Signature"],
+                    "enum": [
+                        "Expires",
+                        "KeyId",
+                        "Signature"
+                    ],
                     "x-ms-enum": {
                         "name": "paramIndicator",
                         "modelAsString": true
@@ -414,7 +721,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -424,11 +733,16 @@
         },
         "OriginGroupOverrideActionParameters": {
             "description": "Defines the parameters for the origin group override action.",
-            "required": ["originGroup", "typeName"],
+            "required": [
+                "originGroup",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleOriginGroupOverrideActionParameters"]
+                    "enum": [
+                        "DeliveryRuleOriginGroupOverrideActionParameters"
+                    ]
                 },
                 "originGroup": {
                     "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
@@ -445,7 +759,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -455,11 +771,17 @@
         },
         "UrlRewriteActionParameters": {
             "description": "Defines the parameters for the url rewrite action.",
-            "required": ["sourcePattern", "destination", "typeName"],
+            "required": [
+                "sourcePattern",
+                "destination",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleUrlRewriteActionParameters"]
+                    "enum": [
+                        "DeliveryRuleUrlRewriteActionParameters"
+                    ]
                 },
                 "sourcePattern": {
                     "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
@@ -483,7 +805,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -499,7 +823,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -509,16 +835,26 @@
         },
         "HeaderActionParameters": {
             "description": "Defines the parameters for the request header action.",
-            "required": ["headerAction", "headerName", "typeName"],
+            "required": [
+                "headerAction",
+                "headerName",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleHeaderActionParameters"]
+                    "enum": [
+                        "DeliveryRuleHeaderActionParameters"
+                    ]
                 },
                 "headerAction": {
                     "description": "Action to perform",
                     "type": "string",
-                    "enum": ["Append", "Overwrite", "Delete"],
+                    "enum": [
+                        "Append",
+                        "Overwrite",
+                        "Delete"
+                    ],
                     "x-ms-enum": {
                         "name": "HeaderAction",
                         "modelAsString": true
@@ -542,7 +878,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -552,16 +890,26 @@
         },
         "CacheExpirationActionParameters": {
             "description": "Defines the parameters for the cache expiration action.",
-            "required": ["cacheBehavior", "cacheType", "typeName"],
+            "required": [
+                "cacheBehavior",
+                "cacheType",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
-                    "enum": ["DeliveryRuleCacheExpirationActionParameters"]
+                    "enum": [
+                        "DeliveryRuleCacheExpirationActionParameters"
+                    ]
                 },
                 "cacheBehavior": {
                     "description": "Caching behavior for the requests",
                     "type": "string",
-                    "enum": ["BypassCache", "Override", "SetIfMissing"],
+                    "enum": [
+                        "BypassCache",
+                        "Override",
+                        "SetIfMissing"
+                    ],
                     "x-ms-enum": {
                         "name": "cacheBehavior",
                         "modelAsString": true
@@ -570,7 +918,9 @@
                 "cacheType": {
                     "description": "The level at which the content needs to be cached.",
                     "type": "string",
-                    "enum": ["All"],
+                    "enum": [
+                        "All"
+                    ],
                     "x-ms-enum": {
                         "name": "CacheType",
                         "modelAsString": true
@@ -593,7 +943,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -603,7 +955,10 @@
         },
         "CacheKeyQueryStringActionParameters": {
             "description": "Defines the parameters for the cache-key query string action.",
-            "required": ["queryStringBehavior", "typeName"],
+            "required": [
+                "queryStringBehavior",
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
@@ -614,7 +969,12 @@
                 "queryStringBehavior": {
                     "description": "Caching behavior for the requests",
                     "type": "string",
-                    "enum": ["Include", "IncludeAll", "Exclude", "ExcludeAll"],
+                    "enum": [
+                        "Include",
+                        "IncludeAll",
+                        "Exclude",
+                        "ExcludeAll"
+                    ],
                     "x-ms-enum": {
                         "name": "queryStringBehavior",
                         "modelAsString": true
@@ -636,7 +996,9 @@
                     "$ref": "#/definitions/DeliveryRuleAction"
                 }
             ],
-            "required": ["parameters"],
+            "required": [
+                "parameters"
+            ],
             "properties": {
                 "parameters": {
                     "description": "Defines the parameters for the action.",
@@ -647,7 +1009,9 @@
         "RouteConfigurationOverrideActionParameters": {
             "description": "Defines the parameters for the route configuration override action.",
             "type": "object",
-            "required": ["typeName"],
+            "required": [
+                "typeName"
+            ],
             "properties": {
                 "typeName": {
                     "type": "string",
@@ -674,7 +1038,11 @@
                 "forwardingProtocol": {
                     "description": "Protocol this rule will use when forwarding traffic to backends.",
                     "type": "string",
-                    "enum": ["HttpOnly", "HttpsOnly", "MatchRequest"],
+                    "enum": [
+                        "HttpOnly",
+                        "HttpsOnly",
+                        "MatchRequest"
+                    ],
                     "x-ms-enum": {
                         "name": "ForwardingProtocol",
                         "modelAsString": true
@@ -728,7 +1096,10 @@
                     "items": {
                         "$ref": "#/definitions/ErrorDetail"
                     },
-                    "x-ms-identifiers": ["message", "target"],
+                    "x-ms-identifiers": [
+                        "message",
+                        "target"
+                    ],
                     "description": "The error details."
                 },
                 "additionalInfo": {
