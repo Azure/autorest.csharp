@@ -2,20 +2,18 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class UrlToUri
     {
         private static readonly char LowerCaseI = 'i';
 
-        public static void UpdateSuffix(IEnumerable<Schema> schemas)
+        public static void UpdateSuffix()
         {
-            foreach (var schema in schemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;

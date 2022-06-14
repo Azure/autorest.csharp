@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
@@ -79,7 +80,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
         private LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels;
-        private IEnumerable<Schema> _allSchemas;
 
         private Dictionary<string, string> _mergedOperations;
 
@@ -90,8 +90,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
-            OmitOperationGroups.RemoveOperationGroups();
-            MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
@@ -110,19 +108,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
-            MgmtContext.CodeModel.VerifyApiVersions();
-            MgmtContext.CodeModel.UpdateAcronyms();
-            _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            UrlToUri.UpdateSuffix(_allSchemas);
-            MgmtContext.CodeModel.UpdatePatchOperations();
-            _allSchemas.VerifyAndUpdateFrameworkTypes();
-            _allSchemas.UpdateSealChoiceTypes();
-            CommonSingleWordModels.Update(_allSchemas);
-            NormalizeParamNames.Update(ResourceDataSchemaNameToOperationSets);
-            RenameTimeToOn.UpdateNames(_allSchemas);
 
-            // We can only manipulate objects from the code model, not RestClientMethod
-            ReorderOperationParameters();
+            // TODO -- find a way to get rid of this input parameter
+            CodeModelTransformer.Transform(ResourceDataSchemaNameToOperationSets);
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -227,7 +215,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
             // first, construct resource data models
-            foreach (var schema in _allSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
                 _schemaOrNameToModels.Add(schema, model);
@@ -763,29 +751,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
-
-        private void ReorderOperationParameters()
-        {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
-                    if (httpRequest != null)
-                    {
-                        var orderedParams = operation.Parameters
-                            .Where(p => p.In == HttpParameterIn.Path)
-                            .OrderBy(
-                                p => httpRequest.Path.IndexOf(
-                                    "{" + p.CSharpName() + "}",
-                                    StringComparison.InvariantCultureIgnoreCase));
-                        operation.Parameters = orderedParams.Concat(operation.Parameters
-                                .Where(p => p.In != HttpParameterIn.Path).ToList())
-                            .ToList();
-                    }
-                }
-            }
-        }
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {

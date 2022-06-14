@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class NormalizeParamNames
     {
-        public static void Update(CachedDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        public static void Update(CachedDictionary<string, HashSet<OperationSet>> dataSchemaDict)
         {
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
-                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaHash);
+                            param.Language.Default.Name = GetNewName(param.Language.Default.Name, objectSchema.Name, dataSchemaDict);
                         }
                     }
                 }
