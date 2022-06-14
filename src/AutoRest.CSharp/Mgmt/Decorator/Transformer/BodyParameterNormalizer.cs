@@ -8,7 +8,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class BodyParameterNormalizer
     {
@@ -58,7 +58,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parameter.Schema is ChoiceSchema ||
                 parameter.Schema is SealedChoiceSchema ||
                 parameter.Schema is ObjectSchema)
-                CodeModelExtension.UpdateAcronym(parameter.Schema);
+                SchemaRenamer.UpdateAcronym(parameter.Schema);
+        }
+
+        public static void UpdatePatchOperations()
+        {
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.GetHttpMethod() == HttpMethod.Patch)
+                    {
+                        var bodyParameter = operation.GetBodyParameter();
+                        if (bodyParameter != null)
+                            bodyParameter.Required = true;
+                    }
+                }
+            }
         }
     }
 }

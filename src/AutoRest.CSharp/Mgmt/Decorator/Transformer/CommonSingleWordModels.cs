@@ -9,7 +9,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.ResourceManager;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class CommonSingleWordModels
     {
@@ -39,9 +39,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             "PrivateLinkResourceListResult",
         };
 
-        public static void Update(IEnumerable<Schema> allSchemas)
+        public static void Update()
         {
-            foreach (var schema in allSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (_schemasToChange.Contains(schema.Name))
                 {

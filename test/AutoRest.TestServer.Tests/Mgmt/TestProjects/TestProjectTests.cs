@@ -15,6 +15,7 @@ using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using NUnit.Framework;
+using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

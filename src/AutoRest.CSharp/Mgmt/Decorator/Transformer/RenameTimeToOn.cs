@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class RenameTimeToOn
     {
-        public static void UpdateNames(IEnumerable<Schema> schemas)
+        public static void Update()
         {
-            foreach (var schema in schemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;
