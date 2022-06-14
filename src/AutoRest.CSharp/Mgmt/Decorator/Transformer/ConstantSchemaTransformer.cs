@@ -54,7 +54,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                        property.Schema = choiceSchema;
+                        if (!property.IsRequired)
+                        {
+                            property.Schema = choiceSchema;
+                        }
+                        else
+                        {
+                            constantSchema.ValueType = choiceSchema;
+                        }
                     }
                 }
             }

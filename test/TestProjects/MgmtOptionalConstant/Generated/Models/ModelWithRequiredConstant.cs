@@ -11,10 +11,9 @@ namespace MgmtOptionalConstant.Models
     public partial class ModelWithRequiredConstant
     {
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
-        /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
-        public ModelWithRequiredConstant(PassNames passName)
+        public ModelWithRequiredConstant()
         {
-            PassName = passName;
+            PassName = PassNames.OobeSystem;
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
