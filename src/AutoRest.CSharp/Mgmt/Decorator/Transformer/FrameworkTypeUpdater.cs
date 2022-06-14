@@ -30,9 +30,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         arraySchema.ElementType.Type = AllSchemaTypes.Uri;
                     else if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String && property.Schema.Extensions?.Format == null)
                         throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add \"x-ms-format\": \"{XMsFormat.DurationConstant}\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
-                    // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
                     else if (property.CSharpName().Equals("Type", StringComparison.Ordinal))
                     {
+                        // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
                         if (objSchema.IsResourceData() || objSchema.CSharpName().Contains("NameAvailability", StringComparison.Ordinal))
                         {
                             property.Language.Default.Name = "resourceType";

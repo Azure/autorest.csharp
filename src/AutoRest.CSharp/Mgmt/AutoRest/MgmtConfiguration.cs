@@ -347,6 +347,7 @@ namespace AutoRest.CSharp.Input
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
                 renameRules: renameRules,
+                formatByNameRules: formatByNameRules,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
