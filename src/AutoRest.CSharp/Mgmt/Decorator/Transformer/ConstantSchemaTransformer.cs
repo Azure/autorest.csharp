@@ -46,18 +46,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
 
                 // change the schema on models (optional and required)
-                foreach (var property in MgmtContext.CodeModel.Schemas.Objects.SelectMany(o => o.Properties))
+                foreach (var obj in MgmtContext.CodeModel.Schemas.Objects)
                 {
-                    if (property.Schema is not ConstantSchema constantSchema)
-                        continue;
+                    foreach (var property in obj.Properties)
+                    {
+                        if (property.Schema is not ConstantSchema constantSchema || CheckPropertyExtension(property))
+                            continue;
 
-                    var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
-                    property.Schema = choiceSchema;
+                        var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
+                        property.Schema = choiceSchema;
+                    }
                 }
             }
 
             foreach (var choiceSchema in convertedChoiceSchemas.Values)
                 MgmtContext.CodeModel.Schemas.Choices.Add(choiceSchema);
+        }
+
+        private static bool CheckPropertyExtension(Property property)
+        {
+            if (property.Extensions?.TryGetValue("x-ms-contant", out var value) ?? false)
+            {
+                return "true".Equals(value.ToString());
+            }
+            return false;
         }
 
         private static V ComputeIfAbsent<K, V>(Dictionary<K, V> dict, K key, Func<K, V> generator) where K : notnull

@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepOrphanedModels { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
-        public IReadOnlyList<string> NoResourceSuffix { get;}
+        public IReadOnlyList<string> NoResourceSuffix { get; }
 
         public bool IsArmCore { get; }
         public TestModelerConfiguration? TestModeler { get; }
