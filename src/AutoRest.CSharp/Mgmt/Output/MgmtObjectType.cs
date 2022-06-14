@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -166,21 +167,22 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            // try exact match
+            // try to replace the base type if this is not a type from discriminator
+            // try exact match first
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
-                    return match;
+                    inheritedType = match;
                 }
             }
 
-            // try superset match if this is not a type from discriminator
+            // try superset match because our superset match is checking the proper superset
             var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
             if (supersetBaseType != null)
-                return supersetBaseType;
+                inheritedType = supersetBaseType;
 
             return inheritedType;
         }
