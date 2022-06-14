@@ -20,6 +20,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string ReferenceAttributeName = "ReferenceTypeAttribute";
         internal const string OptionalPropertiesName = "OptionalProperties";
 
+        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
+
+        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        {
+            return _valueCache.TryGetValue(schema, out result);
+        }
+
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        {
+            if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
+                return result;
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
+            {
+                List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
+                if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
+                {
+                    result = GetCSharpType(originalType, parentType);
+                    _valueCache.TryAdd(originalType.ObjectSchema, result);
+                    return result;
+                }
+            }
+            _valueCache.TryAdd(originalType.ObjectSchema, null);
+            return null;
+        }
+
         public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
