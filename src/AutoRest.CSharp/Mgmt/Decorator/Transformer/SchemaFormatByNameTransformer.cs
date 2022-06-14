@@ -28,6 +28,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             public string ExtentionType { get; set; }
         }
 
+        /// <summary>
+        /// Change the Schema's format by its name.
+        /// </summary>
         internal static void Update()
         {
             IReadOnlyList<FormatByName> rules = NormalizeFormatByNameRules(Configuration.MgmtConfiguration.FormatByNameRules);
@@ -35,49 +38,51 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 return;
             foreach (Schema schema in MgmtContext.CodeModel.AllSchemas)
             {
-                TryUpdateSchema(schema.CSharpName(), schema, rules);
+                TryUpdateSchemaFormat(schema.CSharpName(), schema, rules);
             }
         }
 
-        private static void TryUpdateSchema(string name, Schema schema, IReadOnlyList<FormatByName> rules)
+        private static void TryUpdateSchemaFormat(string name, Schema schema, IReadOnlyList<FormatByName> rules)
         {
             if (schema is ArraySchema arraySchema)
             {
-                if (arraySchema.ElementType is StringSchema)
-                    TryUpdateSchema(schema.CSharpName(), arraySchema.ElementType, rules);
-                return;
+                TryUpdateSchemaFormat(name, arraySchema.ElementType, rules);
+            }
+            if (schema is DictionarySchema dictSchema)
+            {
+                TryUpdateSchemaFormat(name, dictSchema.ElementType, rules);
             }
             else if (schema is ObjectSchema objSchema)
             {
                 foreach (var property in objSchema.Properties)
                 {
-                    TryUpdateSchema(property.CSharpName(), property.Schema, rules);
+                    TryUpdateSchemaFormat(property.CSharpName(), property.Schema, rules);
                 }
             }
-
-            if (schema.Type != AllSchemaTypes.String)
-                return;
-            foreach (var rule in rules)
+            else if (schema is PrimitiveSchema)
             {
-                bool isMatch = false;
-                switch (rule.Pattern)
+                foreach (var rule in rules)
                 {
-                    case MatchPattern.StartWith:
-                        isMatch = name.StartsWith(rule.Name, StringComparison.Ordinal);
-                        break;
-                    case MatchPattern.EndWith:
-                        isMatch = name.EndsWith(rule.Name, StringComparison.Ordinal);
-                        break;
-                    case MatchPattern.Full:
-                        isMatch = (string.Compare(name, rule.Name, StringComparison.Ordinal) == 0);
-                        break;
-                }
-                if (isMatch)
-                {
-                    if (rule.IsPrimitiveType)
-                        schema.Type = rule.PrimitiveType;
-                    else if (schema.Extensions != null)
-                        schema.Extensions.Format = rule.ExtentionType;
+                    bool isMatch = false;
+                    switch (rule.Pattern)
+                    {
+                        case MatchPattern.StartWith:
+                            isMatch = name.StartsWith(rule.Name, StringComparison.Ordinal);
+                            break;
+                        case MatchPattern.EndWith:
+                            isMatch = name.EndsWith(rule.Name, StringComparison.Ordinal);
+                            break;
+                        case MatchPattern.Full:
+                            isMatch = (string.Compare(name, rule.Name, StringComparison.Ordinal) == 0);
+                            break;
+                    }
+                    if (isMatch)
+                    {
+                        if (rule.IsPrimitiveType)
+                            schema.Type = rule.PrimitiveType;
+                        else if (schema.Extensions != null)
+                            schema.Extensions.Format = rule.ExtentionType;
+                    }
                 }
             }
         }
