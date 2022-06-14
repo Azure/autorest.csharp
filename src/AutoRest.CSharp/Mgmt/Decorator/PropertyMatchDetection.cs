@@ -98,9 +98,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
             {
-                if (childProperty.Declaration.Name.EndsWith("Type"))
+                // If exact property name match fails, try to match ResourceType with Type, match ManagedServiceIdentityType and SystemAssignedServiceIdentityType with Type or XXType.
+                if (childProperty.Declaration.Name.Equals("Type", StringComparison.Ordinal))
                 {
-                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type")).Value;
+                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal)).Value;
+                }
+                else if (childProperty.Declaration.Name.EndsWith("Type", StringComparison.Ordinal))
+                {
+                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type", StringComparison.Ordinal) && !p.Key.Equals("ResourceType", StringComparison.Ordinal)).Value;
                 }
                 if (parentProperty == null)
                     return false;
