@@ -590,7 +590,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", _apiVersion, true);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

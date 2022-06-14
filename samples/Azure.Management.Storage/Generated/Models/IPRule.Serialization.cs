@@ -20,7 +20,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action");
-                writer.WriteStringValue(Action.Value.ToSerialString());
+                writer.WriteStringValue(Action.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -43,7 +43,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    action = property.Value.GetString().ToAction();
+                    action = new Action(property.Value.GetString());
                     continue;
                 }
             }

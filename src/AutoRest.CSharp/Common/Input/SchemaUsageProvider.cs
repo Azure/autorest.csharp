@@ -152,6 +152,11 @@ namespace AutoRest.CSharp.Input
             {
                 Apply(usages, arraySchema.ElementType, usage);
             }
+            else if (schema is ConstantSchema constantSchmea)
+            {
+                // the value type of a ConstantSchema might be an choice (transformed in class AutoRest.CSharp.Mgmt.Decorator.Transformer.ConstantSchemaTransformer
+                Apply(usages, constantSchmea.ValueType, usage);
+            }
         }
 
         public SchemaTypeUsage GetUsage(Schema schema)
