@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Mgmt.Decorator
+namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class RenamePluralEnums
     {
-        public static void Update(IEnumerable<Schema> schemas)
+        public static void Update()
         {
-            HashSet<string> checkedNames = new HashSet<string>();
-            foreach (var schema in schemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;
