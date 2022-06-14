@@ -2527,8 +2527,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -3467,8 +3465,6 @@ schemas: !Schemas
                                                   - properties
                                                   - natGateway
                                                 serializedName: natGateway
-                                                extensions:
-                                                  x-ms-azure-resource: true
                                                 language: !Languages 
                                                   default:
                                                     name: natGateway
@@ -4495,8 +4491,6 @@ schemas: !Schemas
                                                     - !Property 
                                                       schema: *ref_11
                                                       serializedName: ddosCustomPolicy
-                                                      extensions:
-                                                        x-ms-azure-resource: true
                                                       language: !Languages 
                                                         default:
                                                           name: ddosCustomPolicy
@@ -4610,8 +4604,6 @@ schemas: !Schemas
                                                   - properties
                                                   - publicIPPrefix
                                                 serializedName: publicIPPrefix
-                                                extensions:
-                                                  x-ms-azure-resource: true
                                                 language: !Languages 
                                                   default:
                                                     name: publicIPPrefix
@@ -5103,8 +5095,6 @@ schemas: !Schemas
                                                                 - outboundRule
                                                               readOnly: true
                                                               serializedName: outboundRule
-                                                              extensions:
-                                                                x-ms-azure-resource: true
                                                               language: !Languages 
                                                                 default:
                                                                   name: outboundRule
@@ -5218,8 +5208,6 @@ schemas: !Schemas
                                                                 - properties
                                                                 - frontendIPConfiguration
                                                               serializedName: frontendIPConfiguration
-                                                              extensions:
-                                                                x-ms-azure-resource: true
                                                               language: !Languages 
                                                                 default:
                                                                   name: frontendIPConfiguration
@@ -5735,8 +5723,6 @@ schemas: !Schemas
                                                         - properties
                                                         - publicIPPrefix
                                                       serializedName: publicIPPrefix
-                                                      extensions:
-                                                        x-ms-azure-resource: true
                                                       language: !Languages 
                                                         default:
                                                           name: publicIPPrefix
@@ -5876,8 +5862,6 @@ schemas: !Schemas
                                             - properties
                                             - frontendIPConfiguration
                                           serializedName: frontendIPConfiguration
-                                          extensions:
-                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: frontendIPConfiguration
@@ -5889,8 +5873,6 @@ schemas: !Schemas
                                             - properties
                                             - backendAddressPool
                                           serializedName: backendAddressPool
-                                          extensions:
-                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: backendAddressPool
@@ -5902,8 +5884,6 @@ schemas: !Schemas
                                             - properties
                                             - probe
                                           serializedName: probe
-                                          extensions:
-                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: probe
@@ -6208,8 +6188,6 @@ schemas: !Schemas
                                             - properties
                                             - frontendIPConfiguration
                                           serializedName: frontendIPConfiguration
-                                          extensions:
-                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: frontendIPConfiguration
@@ -6392,8 +6370,6 @@ schemas: !Schemas
                                             - properties
                                             - backendAddressPool
                                           serializedName: backendAddressPool
-                                          extensions:
-                                            x-ms-azure-resource: true
                                           language: !Languages 
                                             default:
                                               name: backendAddressPool
@@ -6979,8 +6955,6 @@ schemas: !Schemas
             - virtualMachine
           readOnly: true
           serializedName: virtualMachine
-          extensions:
-            x-ms-azure-resource: true
           language: !Languages 
             default:
               name: virtualMachine
@@ -7506,8 +7480,6 @@ schemas: !Schemas
                 - !Property 
                   schema: *ref_11
                   serializedName: networkSecurityGroup
-                  extensions:
-                    x-ms-azure-resource: true
                   language: !Languages 
                     default:
                       name: networkSecurityGroup
@@ -7523,8 +7495,6 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_11
                         serializedName: subnet
-                        extensions:
-                          x-ms-azure-resource: true
                         language: !Languages 
                           default:
                             name: subnet
@@ -7533,8 +7503,6 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_11
                         serializedName: networkInterface
-                        extensions:
-                          x-ms-azure-resource: true
                         language: !Languages 
                           default:
                             name: networkInterface

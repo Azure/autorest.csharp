@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Humanizer;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -88,13 +89,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var innerProperty = heiarchyStack.Pop();
                     var immediateParentProperty = heiarchyStack.Pop();
-                    WriteProperty(writer, property, "internal");
 
                     string immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
                     string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
                     string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+                    WriteProperty(writer, property, "internal");
+                    bool isOverridenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                    var nullable = isOverridenValueType ? "?" : String.Empty;
                     writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
-                    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type} {myPropertyName:D}"))
+                    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type}{nullable} {myPropertyName:D}"))
                     {
                         if (!property.IsReadOnly && innerProperty.IsReadOnly)
                         {
@@ -102,22 +105,17 @@ namespace AutoRest.CSharp.Generation.Writers
                             {
                                 if (innerProperty.Declaration.Type.Arguments.Length > 0)
                                 {
-                                    using (writer.Scope($"get"))
-                                    {
-                                        writer.Line($"if ({property.Declaration.Name:D} is null)");
-                                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                                        writer.Line($"return {property.Declaration.Name:D}.{childPropertyName};");
-                                    }
+                                    WriteGetWithNullCheck(writer, property, childPropertyName);
                                 }
                                 else
                                 {
-                                    writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                                    WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
                                 }
                             }
                             else if (HasCtorWithSingleParam(property, innerProperty))
                             {
-                                writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
-                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                                WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
+                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
                             }
                             else
                             {
@@ -126,19 +124,14 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
                         {
-                            writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                            WriteGetWithDefault(writer, property, innerProperty, childPropertyName, isOverridenValueType);
                             if (HasDefaultPublicCtor(property))
                             {
-                                using (writer.Scope($"set"))
-                                {
-                                    writer.Line($"if ({property.Declaration.Name:D} is null)");
-                                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
-                                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
-                                }
+                                WriteSetWithNullCheck(writer, property, childPropertyName, isOverridenValueType);
                             }
                             else if (HasCtorWithSingleParam(property, innerProperty))
                             {
-                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                                WriteSetWithSingleParamCtor(writer, property, isOverridenValueType);
                             }
                             else
                             {
@@ -147,12 +140,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            writer.Line($"get => {property.Declaration.Name:D}.{childPropertyName};");
-                            if (!innerProperty.IsReadOnly)
+                            nullable = property.IsReadOnly ? "?" : String.Empty;
+                            writer.Line($"get => {property.Declaration.Name:D}{nullable}.{childPropertyName};");
+                            if (!property.IsReadOnly && !innerProperty.IsReadOnly)
                                 writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
                         }
                     }
-
                     writer.Line();
                 }
                 else
@@ -160,6 +153,74 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteProperty(writer, property);
                 }
             }
+        }
+
+        private static void WriteSetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName, bool isOverridenValueType)
+        {
+            using (writer.Scope($"set"))
+            {
+                if (isOverridenValueType)
+                {
+                    using (writer.Scope($"if (value.HasValue)"))
+                    {
+                        writer.Line($"if ({property.Declaration.Name:D} is null)");
+                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                        writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value.Value;");
+                    }
+                    using (writer.Scope($"else"))
+                    {
+                        writer.Line($"{property.Declaration.Name:D} = null;");
+                    }
+                }
+                else
+                {
+                    writer.Line($"if ({property.Declaration.Name:D} is null)");
+                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
+                }
+            }
+        }
+
+        private static void WriteGetWithNullCheck(CodeWriter writer, ObjectTypeProperty property, string childPropertyName)
+        {
+            using (writer.Scope($"get"))
+            {
+                writer.Line($"if ({property.Declaration.Name:D} is null)");
+                writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                writer.Line($"return {property.Declaration.Name:D}.{childPropertyName};");
+            }
+        }
+
+        private static void WriteGetWithDefault(CodeWriter writer, ObjectTypeProperty property, ObjectTypeProperty innerProperty, string childPropertyName, bool isOverridenValueType)
+        {
+            FormattableString defaultType = isOverridenValueType ? (FormattableString)$"{innerProperty.Declaration.Type}?" : (FormattableString)$"{innerProperty.Declaration.Type}";
+            writer.Line($"get => {property.Declaration.Name:D} is null ? default({defaultType}) : {property.Declaration.Name:D}.{childPropertyName};");
+        }
+
+        private static void WriteSetWithSingleParamCtor(CodeWriter writer, ObjectTypeProperty property, bool isOverridenValueType)
+        {
+            if (isOverridenValueType)
+            {
+                using (writer.Scope($"set"))
+                {
+                    writer.Line($"{property.Declaration.Name:D} = value.HasValue ? new {property.Declaration.Type}(value.Value) : null;");
+                }
+            }
+            else
+            {
+                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+            }
+        }
+
+        private bool AllCtorsContainMyProperty(ObjectType enclosingType, ObjectTypeProperty property)
+        {
+            foreach (var ctor in enclosingType.Constructors)
+            {
+                if (!ctor.Signature.Parameters.Any(p => p.Name == property.Declaration.Name.Camelize() && p.Type.Equals(property.Declaration.Type)))
+                    return false;
+            }
+
+            return true;
         }
 
         private bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
@@ -304,7 +365,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{property.Description}";
             }
             var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
+            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
             if (property.IsReadOnly)
             {
                 return $"Gets the {splitDeclarationName}";

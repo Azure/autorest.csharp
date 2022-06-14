@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetArrayEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetArrayEmptyAsync(new());
 
             var data = await ToStringArrayAsync(result.ContentStream);
             CollectionAssert.IsEmpty(data);
@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayItemEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetArrayItemEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetArrayItemEmptyAsync(new());
 
             var data = await ToStringArrayAsync(result.ContentStream);
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, Enumerable.Empty<object>(), new object[] { "7", "8", "9" } }, data);
@@ -39,7 +39,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayItemNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetArrayItemNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetArrayItemNullAsync(new());
 
             var data = await ToStringArrayAsync(result.ContentStream);
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, null, new object[] { "7", "8", "9" } }, data);
@@ -49,7 +49,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayArrayNull() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new ArrayClient(Key, host).GetArrayNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetArrayNullAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await ToStringArrayAsync(result.ContentStream));
         });
@@ -57,7 +57,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetArrayValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetArrayValidAsync(new());
 
             var data = await ToStringArrayAsync(result.ContentStream);
             CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, new object[] { "4", "5", "6" }, new object[] { "7", "8", "9" } }, data);
@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBase64Url() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetBase64UrlAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetBase64UrlAsync(new());
 
             var data = await ToByteArrayAsync(result.ContentStream, "U");
             CollectionAssert.AreEqual(new byte[] { 97, 32, 115, 116, 114, 105, 110, 103, 32, 116, 104, 97, 116, 32, 103, 101, 116, 115, 32, 101, 110, 99, 111, 100, 101, 100, 32, 119, 105, 116, 104, 32, 98, 97, 115, 101, 54, 52, 117, 114, 108 }, data[0]);
@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetBooleanTfftAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetBooleanTfftAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(true, (bool)responseBody[0]);
@@ -89,7 +89,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetBooleanInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetBooleanInvalidNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(true, (bool)responseBody[0]);
@@ -100,7 +100,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanWithString() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetBooleanInvalidStringAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetBooleanInvalidStringAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(true, (bool)responseBody[0]);
@@ -111,7 +111,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayByteValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetByteValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetByteValidAsync(new());
 
             var data = await ToByteArrayAsync(result.ContentStream, "D");
             CollectionAssert.AreEqual(new[] { new[] { 255, 255, 255, 250 }, new[] { 1, 2, 3 }, new[] { 37, 41, 67 } }, data);
@@ -120,7 +120,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayByteWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetByteInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetByteInvalidNullAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<InvalidOperationException>(), async () => await ToByteArrayAsync(result.ContentStream, "D"));
         });
@@ -128,7 +128,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetComplexEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetComplexEmptyAsync(new());
 
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.Zero(responseBody.Length);
@@ -137,7 +137,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexItemEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetComplexItemEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetComplexItemEmptyAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(3, responseBody.Length);
@@ -153,7 +153,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayComplexItemNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetComplexItemNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetComplexItemNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(3, responseBody.Length);
@@ -170,14 +170,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayComplexNull() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new ArrayClient(Key, host).GetComplexNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetComplexNullAsync(new());
             Assert.IsEmpty(result.Content.ToString());
         });
 
         [Test]
         public Task GetArrayComplexValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetComplexValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetComplexValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(3, responseBody.Length);
@@ -195,7 +195,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeRfc1123Valid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateTimeRfc1123ValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateTimeRfc1123ValidAsync(new());
             var data = await ToDateTimeArrayAsync(result.ContentStream);
 
             CollectionAssert.AreEqual(new[]
@@ -209,7 +209,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateTimeValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateTimeValidAsync(new());
             var data = await ToDateTimeArrayAsync(result.ContentStream);
 
             CollectionAssert.AreEqual(new[]
@@ -223,7 +223,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeWithInvalidChars() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateTimeInvalidCharsAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateTimeInvalidCharsAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await ToDateTimeArrayAsync(result.ContentStream));
         });
@@ -231,7 +231,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateTimeWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateTimeInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateTimeInvalidNullAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await ToDateTimeArrayAsync(result.ContentStream));
         });
@@ -239,7 +239,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateValidAsync(new());
             var data = await ToDateTimeArrayAsync(result.ContentStream);
 
             CollectionAssert.AreEqual(new[]
@@ -253,7 +253,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateWithInvalidChars() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateInvalidCharsAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateInvalidCharsAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await ToDateTimeArrayAsync(result.ContentStream));
         });
@@ -261,7 +261,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDateWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDateInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDateInvalidNullAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<Exception>(), async () => await ToDateTimeArrayAsync(result.ContentStream));
         });
@@ -269,7 +269,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDictionaryEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDictionaryEmptyAsync(new());
             var data = await ToDictionaryAsync(result.ContentStream);
 
             CollectionAssert.IsEmpty(data);
@@ -278,7 +278,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryItemEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDictionaryItemEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDictionaryItemEmptyAsync(new());
 
             var data = await ToDictionaryAsync(result.ContentStream);
             var values = data.ToArray();
@@ -293,7 +293,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryItemNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDictionaryItemNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDictionaryItemNullAsync(new());
 
             var data = await ToDictionaryAsync(result.ContentStream);
             var values = data.ToArray();
@@ -309,7 +309,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayDictionaryNull() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new ArrayClient(Key, host).GetDictionaryNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDictionaryNullAsync(new());
 
             Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await ToDictionaryAsync(result.ContentStream));
         });
@@ -317,7 +317,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDictionaryValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDictionaryValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDictionaryValidAsync(new());
 
             var data = await ToDictionaryAsync(result.ContentStream);
             var values = data.ToArray();
@@ -332,7 +332,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDoubleValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDoubleValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDoubleValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(0, (double)responseBody[0]);
@@ -343,7 +343,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDoubleWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDoubleInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDoubleInvalidNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(0, (double)responseBody[0]);
@@ -354,7 +354,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDoubleWithString() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDoubleInvalidStringAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDoubleInvalidStringAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (double)responseBody[0]);
@@ -365,7 +365,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayDurationValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetDurationValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetDurationValidAsync(new());
             using var document = await JsonDocument.ParseAsync(result.ContentStream).ConfigureAwait(false);
             List<TimeSpan> array = new List<TimeSpan>();
             foreach (var item in document.RootElement.EnumerateArray())
@@ -383,14 +383,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayEmpty() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetEmptyAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetEmptyAsync(new());
             Assert.AreEqual("[]", result.Content.ToString());
         });
 
         [Test]
         public Task GetArrayEnumValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetEnumValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetEnumValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("foo1", (string)responseBody[0]);
@@ -401,7 +401,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayFloatValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetFloatValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetFloatValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(0, (float)responseBody[0]);
@@ -412,7 +412,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayFloatWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetFloatInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetFloatInvalidNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(0, (float)responseBody[0]);
@@ -423,7 +423,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayFloatWithString() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetFloatInvalidStringAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetFloatInvalidStringAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (float)responseBody[0]);
@@ -434,7 +434,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayIntegerValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetIntegerValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetIntegerValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (int)responseBody[0]);
@@ -446,7 +446,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayIntegerWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetIntInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetIntInvalidNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (int)responseBody[0]);
@@ -457,7 +457,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayIntegerWithString() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetIntInvalidStringAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetIntInvalidStringAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (int)responseBody[0]);
@@ -468,14 +468,14 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayInvalid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetInvalidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetInvalidAsync(new());
             Assert.Throws(Is.InstanceOf<Exception>(), () => JsonData.FromBytes(result.Content.ToMemory()));
         });
 
         [Test]
         public Task GetArrayLongValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetLongValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetLongValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (long)responseBody[0]);
@@ -487,7 +487,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayLongWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetLongInvalidNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetLongInvalidNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (long)responseBody[0]);
@@ -498,7 +498,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayLongWithString() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetLongInvalidStringAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetLongInvalidStringAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual(1, (long)responseBody[0]);
@@ -510,7 +510,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetArrayNull() => Test(async (host) =>
         {
             // Empty response body
-            var result = await new ArrayClient(Key, host).GetNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetNullAsync(new());
 
             Assert.IsEmpty(result.Content.ToString());
         });
@@ -518,7 +518,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringEnumValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetStringEnumValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetStringEnumValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("foo1", (string)responseBody[0]);
@@ -529,7 +529,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetStringValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetStringValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("foo1", (string)responseBody[0]);
@@ -540,7 +540,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringWithNull() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetStringWithNullAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetStringWithNullAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("foo", (string)responseBody[0]);
@@ -551,7 +551,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayStringWithNumber() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetStringWithInvalidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetStringWithInvalidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("foo", (string)responseBody[0]);
@@ -562,7 +562,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayUuidValid() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetUuidValidAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetUuidValidAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("6dcc7237-45fe-45c4-8a6b-3a8a3f625652", (string)responseBody[0]);
@@ -573,7 +573,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayUuidWithInvalidChars() => Test(async (host) =>
         {
-            var result = await new ArrayClient(Key, host).GetUuidInvalidCharsAsync(new());
+            var result = await new ArrayClient(Key, host, null).GetUuidInvalidCharsAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
 
             Assert.AreEqual("6dcc7237-45fe-45c4-8a6b-3a8a3f625652", (string)responseBody[0]);
@@ -584,21 +584,21 @@ namespace AutoRest.TestServer.Tests
         public Task PutArrayArrayValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { new[] { "1", "2", "3" }, new[] { "4", "5", "6" }, new[] { "7", "8", "9" }});
-            return await new ArrayClient(Key, host).PutArrayValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutArrayValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayBooleanValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { true, false, false, true });
-            return await new ArrayClient(Key, host).PutBooleanTfftAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutBooleanTfftAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayByteValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { new byte[] { 255, 255, 255, 250 }, new byte[] { 1, 2, 3 }, new byte[] { 37, 41, 67 } });
-            return await new ArrayClient(Key, host).PutByteValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutByteValidAsync(RequestContent.Create(data));
         });
 
         [Test]
@@ -619,7 +619,7 @@ namespace AutoRest.TestServer.Tests
                 ["integer"] = 5,
                 ["string"] = "6",
             }});
-            return await new ArrayClient(Key, host).PutComplexValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutComplexValidAsync(RequestContent.Create(data));
         });
 
         [Test]
@@ -631,49 +631,49 @@ namespace AutoRest.TestServer.Tests
                 new Dictionary<string, string>() { { "4", "four" }, { "5", "five" }, { "6", "six" } },
                 new Dictionary<string, string>() { { "7", "seven" }, { "8", "eight" }, { "9", "nine" } }
             });
-            return await new ArrayClient(Key, host).PutDictionaryValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutDictionaryValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayDoubleValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { 0, -0.01, -1.2e20 });
-            return await new ArrayClient(Key, host).PutDoubleValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutDoubleValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayEmpty() => TestStatus(async (host) =>
         {
             var data = new JsonData(Array.Empty<string>());
-            return await new ArrayClient(Key, host).PutEmptyAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutEmptyAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayEnumValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { "foo1", "foo2", "foo3" });
-            return await new ArrayClient(Key, host).PutEnumValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutEnumValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayFloatValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { 0, -0.01f, -1.2e20f });
-            return await new ArrayClient(Key, host).PutFloatValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutFloatValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayIntegerValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { 1, -1, 3, 300 });
-            return await new ArrayClient(Key, host).PutIntegerValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutIntegerValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayLongValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { 1, -1, 3, 300L });
-            return await new ArrayClient(Key, host).PutLongValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutLongValidAsync(RequestContent.Create(data));
         });
 
         [Test]
@@ -685,14 +685,14 @@ namespace AutoRest.TestServer.Tests
                 "foo2",
                 "foo3"
             });
-            return await new ArrayClient(Key, host).PutStringEnumValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutStringEnumValidAsync(RequestContent.Create(data));
         });
 
         [Test]
         public Task PutArrayStringValid() => TestStatus(async (host) =>
         {
             var data = new JsonData(new[] { "foo1", "foo2", "foo3" });
-            return await new ArrayClient(Key, host).PutStringValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutStringValidAsync(RequestContent.Create(data));
         });
 
         [Test]
@@ -704,7 +704,7 @@ namespace AutoRest.TestServer.Tests
                 Guid.Parse("d1399005-30f7-40d6-8da6-dd7c89ad34db"),
                 Guid.Parse("f42f6aa1-a5bc-4ddf-907e-5f915de43205")
             });
-            return await new ArrayClient(Key, host).PutUuidValidAsync(RequestContent.Create(data));
+            return await new ArrayClient(Key, host, null).PutUuidValidAsync(RequestContent.Create(data));
         });
 
         private async Task<IReadOnlyList<IDictionary<string, string>>> ToDictionaryAsync(Stream contentStream)

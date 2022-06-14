@@ -205,6 +205,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
                 throw new System.InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }
+            // TODO: The deserialize type value logic is existing in multiple writers, similar but slightly different,
+            //       should be abstracted into one place in future refactoring.
+            if (type.FrameworkType == typeof(Azure.ETag) ||
+                type.FrameworkType == typeof(Uri) ||
+                type.FrameworkType == typeof(Azure.Core.ResourceIdentifier) ||
+                type.FrameworkType == typeof(Azure.Core.ResourceType) ||
+                type.FrameworkType == typeof(Azure.Core.AzureLocation))
+            {
+                return $"new {type.FrameworkType}({rawExpression})";
+            }
+
             return $"{type.FrameworkType}.Parse({rawExpression})";
         }
 

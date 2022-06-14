@@ -841,7 +841,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null)
+                if (operation.MgmtReturnType is not null && MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType))
                 {
                     _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
                 }
@@ -899,7 +899,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
+                        if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

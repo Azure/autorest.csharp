@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var i = 0;
             while (i < words.Count)
             {
-                if (tryToFindGroup(words.TakeLast(words.Count - i), out var groupWords))
+                if (TryToFindGroup(words.TakeLast(words.Count - i), out var groupWords))
                 {
                     var newWord = string.Join("", groupWords);
                     words[i] = newWord;
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return words;
         }
 
-        private static bool tryToFindGroup(IEnumerable<string> words, out IEnumerable<string> groupWords)
+        private static bool TryToFindGroup(IEnumerable<string> words, out IEnumerable<string> groupWords)
         {
             if (PropertyGroupWordsRootTrieNode == null)
             {

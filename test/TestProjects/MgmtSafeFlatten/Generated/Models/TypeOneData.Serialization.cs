@@ -29,6 +29,11 @@ namespace MgmtSafeFlatten
                 writer.WritePropertyName("layerOne");
                 writer.WriteObjectValue(LayerOne);
             }
+            if (Optional.IsDefined(LayerOneType))
+            {
+                writer.WritePropertyName("layerOneType");
+                writer.WriteObjectValue(LayerOneType);
+            }
             if (Optional.IsDefined(LayerOneConflict))
             {
                 writer.WritePropertyName("layerOneConflict");
@@ -51,6 +56,7 @@ namespace MgmtSafeFlatten
         {
             Optional<string> myType = default;
             Optional<LayerOneSingle> layerOne = default;
+            Optional<LayerOneBaseType> layerOneType = default;
             Optional<WritableSubResource> layerOneConflict = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
@@ -75,6 +81,16 @@ namespace MgmtSafeFlatten
                     layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
                     continue;
                 }
+                if (property.NameEquals("layerOneType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value);
+                    continue;
+                }
                 if (property.NameEquals("layerOneConflict"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -97,7 +113,7 @@ namespace MgmtSafeFlatten
                 }
                 if (property.NameEquals("location"))
                 {
-                    location = property.Value.GetString();
+                    location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -112,7 +128,7 @@ namespace MgmtSafeFlatten
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new ResourceType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("systemData"))
@@ -121,7 +137,7 @@ namespace MgmtSafeFlatten
                     continue;
                 }
             }
-            return new TypeOneData(id, name, type, systemData, tags, location, myType.Value, layerOne.Value, layerOneConflict);
+            return new TypeOneData(id, name, type, systemData, tags, location, myType.Value, layerOne.Value, layerOneType.Value, layerOneConflict);
         }
     }
 }

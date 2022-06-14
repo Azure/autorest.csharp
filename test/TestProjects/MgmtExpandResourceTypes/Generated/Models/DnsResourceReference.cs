@@ -36,8 +36,7 @@ namespace MgmtExpandResourceTypes.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier TargetResourceId
         {
-            get => TargetResource.Id;
-            set => TargetResource.Id = value;
+            get => TargetResource?.Id;
         }
     }
 }

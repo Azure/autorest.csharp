@@ -59,7 +59,8 @@ namespace AutoRest.CSharp.Output.Models.Requests.Tests
                 "test parameter",
                 inputType,
                 null,
-                false
+                ValidationType.None,
+                null
             ));
         }
     }

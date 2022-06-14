@@ -34,21 +34,24 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The key for the tag.",
             typeof(string),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         private static readonly Parameter TagValueParameter = new Parameter(
             "value",
             "The value for the tag.",
             typeof(string),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         private static readonly Parameter TagSetParameter = new Parameter(
             "tags",
             "The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
-            true);
+            ValidationType.AssertNotNull,
+            null);
 
         /// <summary>
         /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
@@ -385,6 +388,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return FormattableStringHelpers.Join(lines, "\r\n");
         }
 
+        private static Type? ToFormatTypeByName(string? name) => name switch
+        {
+            "location" => typeof(AzureLocation),
+            _ => null
+        };
+
+        private Parameter CreateResourceIdentifierParameter(Segment segment)
+        {
+            CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
+            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
+        }
+
         /// <summary>
         /// Returns the different method signature for different base path of this resource
         /// </summary>
@@ -397,7 +412,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
-                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray());
+                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
         }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
@@ -414,9 +429,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.ArmResource), DefaultValue: null, Validate: false);
-        public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
+        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
+        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
     }
 }

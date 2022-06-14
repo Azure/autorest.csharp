@@ -470,7 +470,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -488,7 +488,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -570,7 +570,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
@@ -588,7 +588,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
@@ -667,7 +667,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -685,7 +685,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredTwoValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
@@ -764,7 +764,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 
@@ -782,7 +782,7 @@ namespace constants
         /// <summary> Puts constants to the testserver. </summary>
         /// <param name="input"> The ModelAsStringRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = default, CancellationToken cancellationToken = default)
+        public Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 

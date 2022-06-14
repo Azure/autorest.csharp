@@ -37,16 +37,23 @@ namespace dpg_customization_LowLevel
 
         /// <summary> Initializes a new instance of DPGClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
+        public DPGClient(AzureKeyCredential credential) : this(credential, new Uri("http://localhost:3000"), new DPGClientOptions())
+        {
+        }
+
+        /// <summary> Initializes a new instance of DPGClient. </summary>
+        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public DPGClient(AzureKeyCredential credential, Uri endpoint = null, DPGClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="endpoint"/> is null. </exception>
+        public DPGClient(AzureKeyCredential credential, Uri endpoint, DPGClientOptions options)
         {
             Argument.AssertNotNull(credential, nameof(credential));
-            endpoint ??= new Uri("http://localhost:3000");
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new DPGClientOptions();
 
-            ClientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -291,7 +298,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -323,7 +330,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

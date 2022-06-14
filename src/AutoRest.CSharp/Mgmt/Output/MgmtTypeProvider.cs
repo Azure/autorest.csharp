@@ -37,10 +37,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
-        public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: IdParamDescription,
-                Type: typeof(ResourceIdentifier), DefaultValue: null, Validate: false);
-        public static Parameter ArmClientParameter => new Parameter(Name: "client", Description: $"The client parameters to use in these operations.",
-            Type: typeof(ArmClient), DefaultValue: null, Validate: false);
+        public Parameter ResourceIdentifierParameter => new(Name: "id", Description: IdParamDescription, Type: typeof(ResourceIdentifier), DefaultValue: null, ValidationType.None, null);
+        public static Parameter ArmClientParameter => new(Name: "client", Description: $"The client parameters to use in these operations.", Type: typeof(ArmClient), DefaultValue: null, ValidationType.None, null);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";

@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.23.3"
+  "@autorest/modelerfour": "4.23.5"
 modelerfour:
   always-create-content-type-parameter: true
 pipeline:
@@ -56,6 +56,16 @@ testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
+```
+
+## Customization
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.definitions.PrivateEndpointConnectionProperties
+    transform: >
+      $.properties.privateLinkServiceConnectionState["x-ms-client-name"] = "connectionState";   
 ```
 
 ## Help

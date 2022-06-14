@@ -6877,7 +6877,7 @@ schemas: !Schemas
                               serializedName: privateLinkServiceConnectionState
                               language: !Languages 
                                 default:
-                                  name: privateLinkServiceConnectionState
+                                  name: connectionState
                                   description: A collection of information about the state of the connection between service consumer and provider.
                               protocol: !Protocols {}
                             - !Property 
@@ -10721,8 +10721,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -10848,8 +10846,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error

@@ -1396,8 +1396,6 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
           serializedName: error
-          extensions:
-            x-ms-external: true
           language: !Languages 
             default:
               name: error
@@ -1868,8 +1866,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_48
           serializedName: RecordSet
-          extensions:
-            x-ms-azure-resource: true
           language: !Languages 
             default:
               name: recordSet
