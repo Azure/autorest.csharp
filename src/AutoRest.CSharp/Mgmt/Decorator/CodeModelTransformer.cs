@@ -23,8 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             CommonSingleWordModels.Update();
             RenameTimeToOn.Update();
             RearrangeParameterOrder.Update();
-            NormalizeParamNames.Update(dataSchemaDict);
             SchemaRenamer.UpdateAcronyms();
+
+            NormalizeParamNames.Update(dataSchemaDict);
 
             CodeModelValidator.Validate();
         }
