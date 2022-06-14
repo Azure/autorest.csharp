@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtOptionalConstant.Models
 {
-    public partial class AdditionalContent : IUtf8JsonSerializable
+    public partial class ModelWithOptionalConstant : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,30 +20,18 @@ namespace MgmtOptionalConstant.Models
                 writer.WritePropertyName("passName");
                 writer.WriteStringValue(PassName.Value.ToString());
             }
-            if (Optional.IsDefined(ComponentName))
-            {
-                writer.WritePropertyName("componentName");
-                writer.WriteStringValue(ComponentName.Value.ToString());
-            }
             if (Optional.IsDefined(SettingName))
             {
                 writer.WritePropertyName("settingName");
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
-            if (Optional.IsDefined(Content))
-            {
-                writer.WritePropertyName("content");
-                writer.WriteStringValue(Content);
-            }
             writer.WriteEndObject();
         }
 
-        internal static AdditionalContent DeserializeAdditionalContent(JsonElement element)
+        internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element)
         {
             Optional<PassNames> passName = default;
-            Optional<ComponentNames> componentName = default;
             Optional<SettingNames> settingName = default;
-            Optional<string> content = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
@@ -56,16 +44,6 @@ namespace MgmtOptionalConstant.Models
                     passName = new PassNames(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("componentName"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    componentName = new ComponentNames(property.Value.GetString());
-                    continue;
-                }
                 if (property.NameEquals("settingName"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -76,13 +54,8 @@ namespace MgmtOptionalConstant.Models
                     settingName = property.Value.GetString().ToSettingNames();
                     continue;
                 }
-                if (property.NameEquals("content"))
-                {
-                    content = property.Value.GetString();
-                    continue;
-                }
             }
-            return new AdditionalContent(Optional.ToNullable(passName), Optional.ToNullable(componentName), Optional.ToNullable(settingName), content.Value);
+            return new ModelWithOptionalConstant(Optional.ToNullable(passName), Optional.ToNullable(settingName));
         }
     }
 }

@@ -114,7 +114,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/VirtualMachineUpdate"
+                            "$ref": "#/definitions/OptionalMachineUpdate"
                         },
                         "description": "Parameters supplied to the Update Virtual Machine operation."
                     },
@@ -220,7 +220,7 @@
                             "instanceView"
                         ],
                         "x-ms-enum": {
-                            "name": "InstanceViewTypes",
+                            "name": "OptionalMachineExpand",
                             "modelAsString": false
                         }
                     },
@@ -313,27 +313,6 @@
         }
     },
     "definitions": {
-        "Plan": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "The plan ID."
-                },
-                "publisher": {
-                    "type": "string",
-                    "description": "The publisher ID."
-                },
-                "product": {
-                    "type": "string",
-                    "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
-                },
-                "promotionCode": {
-                    "type": "string",
-                    "description": "The promotion code."
-                }
-            },
-            "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-        },
         "PassNameSchema": {
             "type": "string",
             "description": "The pass name. Currently, the only allowable value is OobeSystem.",
@@ -345,21 +324,10 @@
                 "modelAsString": false
             }
         },
-        "AdditionalContent": {
+        "ModelWithOptionalConstant": {
             "properties": {
                 "passName": {
                     "$ref": "#/definitions/PassNameSchema"
-                },
-                "componentName": {
-                    "type": "string",
-                    "description": "The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
-                    "enum": [
-                        "Microsoft-Windows-Shell-Setup"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ComponentNames",
-                        "modelAsString": false
-                    }
                 },
                 "settingName": {
                     "type": "string",
@@ -372,15 +340,11 @@
                         "name": "SettingNames",
                         "modelAsString": false
                     }
-                },
-                "content": {
-                    "type": "string",
-                    "description": "Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted."
                 }
             },
             "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied."
         },
-        "WinRMListener": {
+        "ModelWithRequiredConstant": {
             "properties": {
                 "passName": {
                     "$ref": "#/definitions/PassNameSchema"
@@ -396,10 +360,6 @@
                         "name": "ProtocolTypes",
                         "modelAsString": false
                     }
-                },
-                "certificateUrl": {
-                    "type": "string",
-                    "description": "This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  \"data\":\"<Base64-encoded-certificate>\",<br>  \"dataType\":\"pfx\",<br>  \"password\":\"<pfx-file-password>\"<br>}"
                 }
             },
             "description": "Describes Protocol and thumbprint of Windows Remote Management listener",
@@ -410,30 +370,19 @@
         "OptionalMachineProperties": {
             "properties": {
                 "listener": {
-                    "$ref": "#/definitions/WinRMListener"
+                    "$ref": "#/definitions/ModelWithRequiredConstant"
                 },
                 "content": {
-                    "$ref": "#/definitions/AdditionalContent"
+                    "$ref": "#/definitions/ModelWithOptionalConstant"
                 }
             },
             "description": "Describes the properties of a Virtual Machine."
         },
         "OptionalMachine": {
             "properties": {
-                "plan": {
-                    "$ref": "#/definitions/Plan",
-                    "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-                },
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/OptionalMachineProperties"
-                },
-                "zones": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The virtual machine zones."
                 }
             },
             "allOf": [
@@ -443,22 +392,11 @@
             ],
             "description": "Describes a Virtual Machine."
         },
-        "VirtualMachineUpdate": {
+        "OptionalMachineUpdate": {
             "properties": {
-                "plan": {
-                    "$ref": "#/definitions/Plan",
-                    "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
-                },
                 "properties": {
                     "x-ms-client-flatten": true,
                     "$ref": "#/definitions/OptionalMachineProperties"
-                },
-                "zones": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The virtual machine zones."
                 }
             },
             "allOf": [
@@ -486,91 +424,6 @@
                 "value"
             ],
             "description": "The List Virtual Machine operation response."
-        },
-        "Sku": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "The sku name."
-                },
-                "tier": {
-                    "type": "string",
-                    "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"
-                },
-                "capacity": {
-                    "type": "integer",
-                    "format": "int64",
-                    "description": "Specifies the number of virtual machines in the scale set."
-                }
-            },
-            "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
-        },
-        "ApiErrorBase": {
-            "properties": {
-                "code": {
-                    "type": "string",
-                    "description": "The error code."
-                },
-                "target": {
-                    "type": "string",
-                    "description": "The target of the particular error."
-                },
-                "message": {
-                    "type": "string",
-                    "description": "The error message."
-                }
-            },
-            "description": "Api error base."
-        },
-        "InnerError": {
-            "properties": {
-                "exceptiontype": {
-                    "type": "string",
-                    "description": "The exception type."
-                },
-                "errordetail": {
-                    "type": "string",
-                    "description": "The internal error message or exception dump."
-                }
-            },
-            "description": "Inner error details."
-        },
-        "CloudError": {
-            "x-ms-external": true,
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/ApiError"
-                }
-            },
-            "description": "An error response from the Compute service."
-        },
-        "ApiError": {
-            "properties": {
-                "details": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ApiErrorBase"
-                    },
-                    "description": "The Api error details"
-                },
-                "innererror": {
-                    "$ref": "#/definitions/InnerError",
-                    "description": "The Api inner error"
-                },
-                "code": {
-                    "type": "string",
-                    "description": "The error code."
-                },
-                "target": {
-                    "type": "string",
-                    "description": "The target of the particular error."
-                },
-                "message": {
-                    "type": "string",
-                    "description": "The error message."
-                }
-            },
-            "description": "Api error."
         },
         "Resource": {
             "description": "The Resource model definition.",

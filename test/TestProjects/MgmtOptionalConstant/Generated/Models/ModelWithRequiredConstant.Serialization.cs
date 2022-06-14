@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtOptionalConstant.Models
 {
-    public partial class WinRMListener : IUtf8JsonSerializable
+    public partial class ModelWithRequiredConstant : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,19 +22,13 @@ namespace MgmtOptionalConstant.Models
                 writer.WritePropertyName("protocol");
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
-            if (Optional.IsDefined(CertificateUri))
-            {
-                writer.WritePropertyName("certificateUrl");
-                writer.WriteStringValue(CertificateUri.AbsoluteUri);
-            }
             writer.WriteEndObject();
         }
 
-        internal static WinRMListener DeserializeWinRMListener(JsonElement element)
+        internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
         {
             string passName = default;
             Optional<ProtocolTypes> protocol = default;
-            Optional<Uri> certificateUrl = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("passName"))
@@ -53,18 +46,8 @@ namespace MgmtOptionalConstant.Models
                     protocol = property.Value.GetString().ToProtocolTypes();
                     continue;
                 }
-                if (property.NameEquals("certificateUrl"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        certificateUrl = null;
-                        continue;
-                    }
-                    certificateUrl = new Uri(property.Value.GetString());
-                    continue;
-                }
             }
-            return new WinRMListener(passName, Optional.ToNullable(protocol), certificateUrl.Value);
+            return new ModelWithRequiredConstant(passName, Optional.ToNullable(protocol));
         }
     }
 }

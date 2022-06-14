@@ -85,7 +85,7 @@ namespace MgmtOptionalConstant
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(this ResourceGroupResource resourceGroupResource, string name, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
             return await resourceGroupResource.GetOptionalMachines().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -102,7 +102,7 @@ namespace MgmtOptionalConstant
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<OptionalMachineResource> GetOptionalMachine(this ResourceGroupResource resourceGroupResource, string name, InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public static Response<OptionalMachineResource> GetOptionalMachine(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
             return resourceGroupResource.GetOptionalMachines().Get(name, expand, cancellationToken);
         }

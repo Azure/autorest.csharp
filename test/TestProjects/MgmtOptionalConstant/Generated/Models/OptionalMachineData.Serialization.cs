@@ -18,21 +18,6 @@ namespace MgmtOptionalConstant
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
-            {
-                writer.WritePropertyName("plan");
-                writer.WriteObjectValue(Plan);
-            }
-            if (Optional.IsCollectionDefined(Zones))
-            {
-                writer.WritePropertyName("zones");
-                writer.WriteStartArray();
-                foreach (var item in Zones)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
             foreach (var item in Tags)
@@ -61,43 +46,16 @@ namespace MgmtOptionalConstant
 
         internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element)
         {
-            Optional<MgmtOptionalConstantPlan> plan = default;
-            Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            Optional<WinRMListener> listener = default;
-            Optional<AdditionalContent> content = default;
+            Optional<ModelWithRequiredConstant> listener = default;
+            Optional<ModelWithOptionalConstant> content = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("plan"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    plan = MgmtOptionalConstantPlan.DeserializeMgmtOptionalConstantPlan(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("zones"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    zones = array;
-                    continue;
-                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -149,7 +107,7 @@ namespace MgmtOptionalConstant
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            listener = WinRMListener.DeserializeWinRMListener(property0.Value);
+                            listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("content"))
@@ -159,14 +117,14 @@ namespace MgmtOptionalConstant
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            content = AdditionalContent.DeserializeAdditionalContent(property0.Value);
+                            content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new OptionalMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(zones), listener.Value, content.Value);
+            return new OptionalMachineData(id, name, type, systemData, tags, location, listener.Value, content.Value);
         }
     }
 }

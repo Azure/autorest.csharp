@@ -15,21 +15,6 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Plan))
-            {
-                writer.WritePropertyName("plan");
-                writer.WriteObjectValue(Plan);
-            }
-            if (Optional.IsCollectionDefined(Zones))
-            {
-                writer.WritePropertyName("zones");
-                writer.WriteStartArray();
-                foreach (var item in Zones)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");

@@ -96,7 +96,7 @@ namespace MgmtOptionalConstant
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<OptionalMachineResource>> GetAsync(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<OptionalMachineResource>> GetAsync(OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineResource.Get");
             scope.Start();
@@ -121,7 +121,7 @@ namespace MgmtOptionalConstant
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<OptionalMachineResource> Get(InstanceViewTypes? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<OptionalMachineResource> Get(OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _optionalMachineOptionalsClientDiagnostics.CreateScope("OptionalMachineResource.Get");
             scope.Start();

@@ -19,7 +19,6 @@ namespace MgmtOptionalConstant
         /// <param name="location"> The location. </param>
         public OptionalMachineData(AzureLocation location) : base(location)
         {
-            Zones = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of OptionalMachineData. </summary>
@@ -29,25 +28,17 @@ namespace MgmtOptionalConstant
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
-        /// <param name="zones"> The virtual machine zones. </param>
         /// <param name="listener"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
         /// <param name="content"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtOptionalConstantPlan plan, IList<string> zones, WinRMListener listener, AdditionalContent content) : base(id, name, resourceType, systemData, tags, location)
+        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ModelWithRequiredConstant listener, ModelWithOptionalConstant content) : base(id, name, resourceType, systemData, tags, location)
         {
-            Plan = plan;
-            Zones = zones;
             Listener = listener;
             Content = content;
         }
 
-        /// <summary> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </summary>
-        public MgmtOptionalConstantPlan Plan { get; set; }
-        /// <summary> The virtual machine zones. </summary>
-        public IList<string> Zones { get; }
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
-        public WinRMListener Listener { get; set; }
+        public ModelWithRequiredConstant Listener { get; set; }
         /// <summary> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </summary>
-        public AdditionalContent Content { get; set; }
+        public ModelWithOptionalConstant Content { get; set; }
     }
 }

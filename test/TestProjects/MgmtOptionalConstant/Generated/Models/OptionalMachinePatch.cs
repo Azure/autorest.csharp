@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-using Azure.Core;
-
 namespace MgmtOptionalConstant.Models
 {
     /// <summary> Describes a Virtual Machine Update. </summary>
@@ -16,16 +13,11 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of OptionalMachinePatch. </summary>
         public OptionalMachinePatch()
         {
-            Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </summary>
-        public MgmtOptionalConstantPlan Plan { get; set; }
-        /// <summary> The virtual machine zones. </summary>
-        public IList<string> Zones { get; }
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
-        public WinRMListener Listener { get; set; }
+        public ModelWithRequiredConstant Listener { get; set; }
         /// <summary> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </summary>
-        public AdditionalContent Content { get; set; }
+        public ModelWithOptionalConstant Content { get; set; }
     }
 }
