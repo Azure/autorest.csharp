@@ -153,18 +153,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
-        /// <param name="proximityPlacementGroupUpdate"> Parameters supplied to the Update Proximity Placement Group operation. </param>
+        /// <param name="patch"> Parameters supplied to the Update Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/> or <paramref name="proximityPlacementGroupUpdate"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ProximityPlacementGroupData>> UpdateAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupPatch proximityPlacementGroupUpdate, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupData>> UpdateAsync(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
-            Argument.AssertNotNull(proximityPlacementGroupUpdate, nameof(proximityPlacementGroupUpdate));
+            Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, proximityPlacementGroupUpdate);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, patch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -184,18 +184,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
-        /// <param name="proximityPlacementGroupUpdate"> Parameters supplied to the Update Proximity Placement Group operation. </param>
+        /// <param name="patch"> Parameters supplied to the Update Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/> or <paramref name="proximityPlacementGroupUpdate"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ProximityPlacementGroupData> Update(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupPatch proximityPlacementGroupUpdate, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupData> Update(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupPatch patch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
-            Argument.AssertNotNull(proximityPlacementGroupUpdate, nameof(proximityPlacementGroupUpdate));
+            Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, proximityPlacementGroupUpdate);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, proximityPlacementGroupName, patch);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

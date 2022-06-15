@@ -5,13 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Rename;
@@ -33,6 +38,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 
         private static Parameter? GetBodyParameter(MgmtClientOperation operation)
             => operation.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
+        private static Parameter? GetBodyParameter(RestClientMethod restClientMethod)
+            => restClientMethod.Parameters.FirstOrDefault(p => p.RequestLocation == RequestLocation.Body);
 
         private static Dictionary<CSharpType, string> GetBodyParameterTypes()
         {
@@ -123,41 +130,70 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
                 .Append(MgmtContext.Library.ExtensionWrapper);
+
             // iterate all operations to get their body parameter
             foreach (var mgmtTypeProvider in mgmtTypeProviders)
             {
-                var typeSymbol = SymbolFinder.GetNullableTypeSymbol(compilation, mgmtTypeProvider.Type);
-                if (typeSymbol == null) // sometimes we might do not have generated provider (it is empty for instance)
+                project = await RenameParameterNamesInTypeProviderAsync(
+                    compilation, project, mgmtTypeProvider, updatedTypes,
+                    provider => ToDictionary(provider.AllOperations, op => op.Name),
+                    GetBodyParameter);
+            }
+
+            foreach (var restClient in MgmtContext.Library.RestClients)
+            {
+                project = await RenameParameterNamesInTypeProviderAsync(
+                    compilation, project, restClient, updatedTypes,
+                    client => ToDictionary(client.Methods, m => m.Name),
+                    GetBodyParameter);
+            }
+
+            return project;
+        }
+
+        private static async Task<Project> RenameParameterNamesInTypeProviderAsync<TProvider, TMethod>(Compilation compilation, Project project, TProvider typeProvider, Dictionary<CSharpType, string> updatedTypes,
+            Func<TProvider, Dictionary<string, List<TMethod>>> methodDictSelector,
+            Func<TMethod, Parameter?> bodyParameterSelector) where TProvider : TypeProvider where TMethod : notnull
+        {
+            var typeSymbol = SymbolFinder.GetNullableTypeSymbol(compilation, typeProvider.Type);
+            if (typeSymbol == null) // sometimes we might do not have the generated type provider (it is empty or is removed by remover because it is never used)
+                return project;
+
+            // just in case that we have method with the same name
+            var methodDict = methodDictSelector(typeProvider);
+            foreach (var methodSymbol in typeSymbol.GetMembers().OfType<IMethodSymbol>())
+            {
+                // skip those methods that are not a RestClientMethod
+                if (!methodDict.TryGetValue(NormalizeMethodName(methodSymbol), out var methods))
                     continue;
 
-                // this has issues when there are method overloads
-                var clientOperations = new Dictionary<string, List<MgmtClientOperation>>();
-                foreach (var operation in mgmtTypeProvider.AllOperations)
+                foreach (var method in methods)
                 {
-                    if (!clientOperations.ContainsKey(operation.Name))
-                        clientOperations.Add(operation.Name, new List<MgmtClientOperation>());
-                    clientOperations[operation.Name].Add(operation);
-                }
-                // iterate all the methods on this type
-                foreach (var methodSymbol in typeSymbol.GetMembers().OfType<IMethodSymbol>())
-                {
-                    // skip those methods that are not a MgmtClientOperation
-                    if (!clientOperations.TryGetValue(NormalizeMethodName(methodSymbol.Name), out var operations))
+                    var bodyParameter = bodyParameterSelector(method);
+                    if (bodyParameter == null || bodyParameter.Type.IsFrameworkType)
                         continue;
-                    foreach (var operation in operations)
-                    {
-                        // get the body parameter
-                        var bodyParameter = GetBodyParameter(operation);
-                        if (bodyParameter == null || bodyParameter.Type.IsFrameworkType)
-                            continue;
 
-                        var parameterSymbol = GetParameterSymbol(compilation, methodSymbol, GetModifiedTypeSymbol(compilation, bodyParameter.Type, updatedTypes));
+                    var parameterSymbol = GetParameterSymbol(compilation, methodSymbol, GetModifiedTypeSymbol(compilation, bodyParameter.Type, updatedTypes));
 
-                        project = await RenameSymbolAsync(project, parameterSymbol, GetNewParameterName(parameterSymbol));
-                    }
+                    project = await RenameSymbolAsync(project, parameterSymbol, GetNewParameterName(parameterSymbol));
                 }
             }
+
             return project;
+        }
+
+        private static Dictionary<TKey, List<TValue>> ToDictionary<TKey, TValue>(IEnumerable<TValue> source, Func<TValue, TKey> keySelector) where TKey : notnull
+        {
+            var result = new Dictionary<TKey, List<TValue>>();
+            foreach (var item in source)
+            {
+                var key = keySelector(item);
+                if (!result.ContainsKey(key))
+                    result.Add(key, new List<TValue>());
+                result[key].Add(item);
+            }
+
+            return result;
         }
 
         private static INamedTypeSymbol GetModifiedTypeSymbol(Compilation compilation, CSharpType type, Dictionary<CSharpType, string> updatedTypes)
@@ -172,14 +208,22 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             }
         }
 
-        private static string NormalizeMethodName(string methodName)
-        {
-            if (methodName.EndsWith("Async", StringComparison.Ordinal))
-            {
-                return methodName.ReplaceLast("Async", "");
-            }
+        private static string NormalizeMethodName(IMethodSymbol method)
+            => IsTask(method.ReturnType) ? method.Name.ReplaceLast("Async", "") : method.Name;
 
-            return methodName;
+        private static bool IsTask(ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol.Name != "Task")
+                return false;
+            // get the full namespace value
+            var builder = new StringBuilder();
+            var @namespace = typeSymbol.ContainingNamespace;
+            while (!@namespace.IsGlobalNamespace)
+            {
+                builder.Append(@namespace.Name).Append(".");
+                @namespace = @namespace.ContainingNamespace;
+            }
+            return builder.ToString() == "Tasks.Threading.System.";
         }
 
         private static IParameterSymbol GetParameterSymbol(Compilation compilation, IMethodSymbol methodSymbol, INamedTypeSymbol parameterTypeSymbol)
