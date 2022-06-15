@@ -15,7 +15,13 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 keep-orphaned-models: AvailabilitySetSkuTypes
-
+format-by-name-rules:
+  'TenantId': 'uuid'
+  'ResourceType': 'resource-type'
+  'Etag': 'etag'
+  'Location': 'azure-location'
+  '*Uri': 'Uri'
+  '*Uris': 'Uri'
 directive:
   - rename-model:
       from: SshPublicKey
@@ -29,12 +35,6 @@ directive:
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade
-  - from: swagger-document
-    where: $.definitions
-    transform: >
-      $.VirtualMachineImageResource.properties.location["x-ms-format"] = "azure-location";
-      $.VirtualMachineScaleSetListOSUpgradeHistory.properties.etag["x-ms-format"] = "etag";
-      $.VirtualMachineScaleSetSku.properties.resourceType["x-ms-format"] = "resource-type";
   - from: swagger-document
     where: $.paths..parameters[?(@.name === "location")]
     transform: >

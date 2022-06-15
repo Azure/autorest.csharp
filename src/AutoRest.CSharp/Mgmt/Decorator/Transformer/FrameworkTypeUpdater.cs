@@ -24,11 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.CSharpName().EndsWith("Uri", StringComparison.Ordinal))
-                        property.Schema.Type = AllSchemaTypes.Uri;
-                    else if (property.CSharpName().EndsWith("Uris", StringComparison.Ordinal) && property.Schema is ArraySchema arraySchema)
-                        arraySchema.ElementType.Type = AllSchemaTypes.Uri;
-                    else if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String && property.Schema.Extensions?.Format == null)
+                    if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String && property.Schema.Extensions?.Format == null)
                         throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add \"x-ms-format\": \"{XMsFormat.DurationConstant}\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
                     else if (property.CSharpName().Equals("Type", StringComparison.Ordinal))
                     {

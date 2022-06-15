@@ -28,6 +28,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             public string ExtentionType { get; set; }
         }
 
+
+        private static Dictionary<Guid, bool> schemaStatus = new Dictionary<Guid, bool>();
+
         /// <summary>
         /// Change the Schema's format by its name.
         /// </summary>
@@ -48,10 +51,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {
                 TryUpdateSchemaFormat(name, arraySchema.ElementType, rules);
             }
-            if (schema is DictionarySchema dictSchema)
-            {
-                TryUpdateSchemaFormat(name, dictSchema.ElementType, rules);
-            }
             else if (schema is ObjectSchema objSchema)
             {
                 foreach (var property in objSchema.Properties)
@@ -61,9 +60,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
             else if (schema is PrimitiveSchema)
             {
+                if (schemaStatus.ContainsKey(schema.Id))
+                {
+                    return;
+                }
+
+                bool isMatch = false;
                 foreach (var rule in rules)
                 {
-                    bool isMatch = false;
                     switch (rule.Pattern)
                     {
                         case MatchPattern.StartWith:
@@ -78,12 +82,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     }
                     if (isMatch)
                     {
+                        var oldType = schema.Type.ToString();
                         if (rule.IsPrimitiveType)
                             schema.Type = rule.PrimitiveType;
-                        else if (schema.Extensions != null)
+                        else
+                        {
+                            if (schema.Extensions == null)
+                                schema.Extensions = new RecordOfStringAndAny();
                             schema.Extensions.Format = rule.ExtentionType;
+                        }
+                        break;
                     }
                 }
+                schemaStatus[schema.Id] = isMatch;
             }
         }
         private static IReadOnlyList<FormatByName> NormalizeFormatByNameRules(IReadOnlyDictionary<string, string> formatByNameRules)
@@ -101,10 +112,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
                 else
                 {
+                    rule.IsPrimitiveType = true;
                     AllSchemaTypes primitiveType;
-                    if (!Enum.TryParse<AllSchemaTypes>(kv.Value, result: out primitiveType))
+                    if (!Enum.TryParse<AllSchemaTypes>(kv.Value, true, result: out primitiveType))
                     {
-                        // Invalid type
+                        Console.Error.WriteLine($"  Invalid FormatByName rule: {kv.Value} : {kv.Value}.");
                         continue;
                     }
                     rule.PrimitiveType = primitiveType;
@@ -112,12 +124,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 // Match pattern
                 if (kv.Key.StartsWith('*'))
                 {
-                    rule.Pattern = MatchPattern.StartWith;
+                    rule.Pattern = MatchPattern.EndWith;
                     rule.Name = kv.Key.TrimStart('*');
                 }
                 else if (kv.Key.EndsWith('*'))
                 {
-                    rule.Pattern = MatchPattern.EndWith;
+                    rule.Pattern = MatchPattern.StartWith;
                     rule.Name = kv.Key.TrimEnd('*');
                 }
                 else
