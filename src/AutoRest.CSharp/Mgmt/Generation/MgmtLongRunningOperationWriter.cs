@@ -60,8 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"private readonly {_operationInternalType} _operation;");
                     _writer.Line();
 
-                    var referencedGenericString = _isGeneric ? "{T}" : string.Empty;
-                    _writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{_name}{referencedGenericString}\" /> for mocking.");
+                    _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_name} for mocking.");
                     using (_writer.Scope($"protected {_name}()"))
                     {
                     }
