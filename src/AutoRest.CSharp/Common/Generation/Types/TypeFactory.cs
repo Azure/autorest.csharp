@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public static bool CanBeInitializedInline(CSharpType type, Constant? defaultValue)
         {
-             Debug.Assert(defaultValue.HasValue);
+            Debug.Assert(defaultValue.HasValue);
 
             if (type.Equals(typeof(string)))
             {
@@ -278,7 +278,12 @@ namespace AutoRest.CSharp.Generation.Types
             return type;
         }
 
+        private static bool NoTypeValidator(System.Type type) => true;
+
         public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
+            => TryCreateType(symbol, NoTypeValidator, out type);
+
+        public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
             type = null;
             INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
@@ -297,7 +302,7 @@ namespace AutoRest.CSharp.Generation.Types
             var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
             var existingType = Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
 
-            if (existingType != null)
+            if (existingType != null && validator(existingType))
             {
                 var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
                 type = new CSharpType(existingType, false, arguments);

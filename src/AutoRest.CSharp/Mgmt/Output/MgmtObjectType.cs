@@ -134,6 +134,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             return descendantTypes.Contains(Type);
         }
 
+        private static bool ShouldIncludeArmCoreType(Type type)
+        {
+            return SystemObjectType.TryGetCtor(type, ReferenceClassFinder.InitializationCtorAttributeName, out _);
+        }
+
         protected override CSharpType? CreateInheritedType()
         {
             // find from the customized code to see if we already have this type defined with a base class
@@ -141,13 +146,21 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 // if this type is defined with a base class, we have to use the same base class here
                 // otherwise the compiler will throw an error
-                if (Context.TypeFactory.TryCreateType(ExistingType.BaseType, out var existingBaseType))
+                if (Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
                 {
-                    // if we could find a type in the TypeProviders, we return that
+                    // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
                     if (!existingBaseType.IsFrameworkType)
                         return existingBaseType;
+                    // if it is a framework type, first we check if it is System.Object. Since it is base type for everything, we would not want it to override anything in our code
+                    if (!existingBaseType.Equals(typeof(object)))
+                    {
+                        // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
+                        // in order to let the constructor builder have the ability to get base constructor
+                        return CSharpType.FromSystemType(Context, existingBaseType.FrameworkType);
+                    }
                 }
                 // if we did not find that type, this means the customization code is referencing something unrecognized
+                // or the customization code is not specifying a base type
             }
             CSharpType? inheritedType = base.CreateInheritedType();
             if (inheritedType != null)
