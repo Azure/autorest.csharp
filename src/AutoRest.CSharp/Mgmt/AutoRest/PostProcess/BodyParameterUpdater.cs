@@ -117,8 +117,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             foreach ((var typeToRename, var newName) in updatedTypes)
             {
                 compilation = await GetCompilationAsync(project);
-                var symbolToRename = SymbolFinder.GetTypeSymbol(compilation, typeToRename);
-                project = await RenameDocumentAsync(project, symbolToRename, newName);
+                var typeSymbolToRename = SymbolFinder.GetTypeSymbol(compilation, typeToRename);
+
+                project = await RenameDocumentAsync(project, typeSymbolToRename, newName);
+
+                compilation = await GetCompilationAsync(project);
+                typeSymbolToRename = SymbolFinder.GetTypeSymbol(compilation, typeToRename.Namespace, newName);
+
+                // first rename the containing methods that ends with the old name inside this type
+                foreach (var method in typeSymbolToRename.GetMembers().OfType<IMethodSymbol>())
+                {
+                    if (method.Name.EndsWith(typeToRename.Name))
+                    {
+                        project = await RenameSymbolAsync(project, method, method.Name.ReplaceLast(typeToRename.Name, newName));
+                    }
+                }
             }
 
             return project;
@@ -129,7 +142,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             var compilation = await GetCompilationAsync(project);
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
-                .Append(MgmtContext.Library.ExtensionWrapper);
+                .Append(MgmtContext.Library.ExtensionWrapper)
+                .Append(MgmtContext.Library.ArmResourceExtensionsClient)
+                .Append(MgmtContext.Library.ManagementGroupExtensionsClient)
+                .Append(MgmtContext.Library.ResourceGroupExtensionsClient)
+                .Append(MgmtContext.Library.SubscriptionExtensionsClient)
+                .Append(MgmtContext.Library.TenantExtensionsClient);
 
             // iterate all operations to get their body parameter
             foreach (var mgmtTypeProvider in mgmtTypeProviders)
@@ -229,18 +247,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
         private static IParameterSymbol GetParameterSymbol(Compilation compilation, IMethodSymbol methodSymbol, INamedTypeSymbol parameterTypeSymbol)
             => methodSymbol.Parameters.First(parameterSymbol => parameterSymbol.Type.Equals(parameterTypeSymbol, SymbolEqualityComparer.Default));
 
-        private static async Task<Project> RenameDocumentAsync(Project project, ISymbol symbolToRename, string newName)
+        private static async Task<Project> RenameDocumentAsync(Project project, INamedTypeSymbol typeToRename, string newName)
         {
             var solution = project.Solution;
             var projectId = project.Id;
+
             // rename the containing document's name, which will automatically rename the containing symbol that matches the name of the document
             var actions = new List<Renamer.RenameDocumentActionSet>();
-            foreach (var definition in symbolToRename.DeclaringSyntaxReferences)
+            foreach (var definition in typeToRename.DeclaringSyntaxReferences)
             {
                 var document = project.GetDocument(definition.SyntaxTree);
                 Debug.Assert(document != null);
-                // TODO -- need to see if the replace could cause some unexpected result
-                var newDocumentName = document.Name.ReplaceLast(symbolToRename.Name, newName);
+
+                var newDocumentName = document.Name.ReplaceLast(typeToRename.Name, newName);
                 actions.Add(await Renamer.RenameDocumentAsync(document, newDocumentName));
             }
 

@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetExtensionPatch DeserializeVirtualMachineScaleSetExtensionUpdate(JsonElement element)
+        internal static VirtualMachineScaleSetExtensionPatch DeserializeVirtualMachineScaleSetExtensionPatch(JsonElement element)
         {
             Optional<string> name = default;
             Optional<string> type = default;
