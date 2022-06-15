@@ -21,7 +21,7 @@ namespace ExactMatchFlattenInheritance
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="ExactMatchFlattenInheritanceArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of ExactMatchFlattenInheritanceArmOperation for mocking. </summary>
         protected ExactMatchFlattenInheritanceArmOperation()
         {
         }

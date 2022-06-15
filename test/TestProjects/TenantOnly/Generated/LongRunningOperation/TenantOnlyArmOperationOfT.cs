@@ -21,7 +21,7 @@ namespace TenantOnly
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="TenantOnlyArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of TenantOnlyArmOperation for mocking. </summary>
         protected TenantOnlyArmOperation()
         {
         }

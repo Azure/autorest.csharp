@@ -21,7 +21,7 @@ namespace MgmtSubscriptionNameParameter
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="MgmtSubscriptionNameParameterArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of MgmtSubscriptionNameParameterArmOperation for mocking. </summary>
         protected MgmtSubscriptionNameParameterArmOperation()
         {
         }

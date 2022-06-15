@@ -21,7 +21,7 @@ namespace OmitOperationGroups
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="OmitOperationGroupsArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of OmitOperationGroupsArmOperation for mocking. </summary>
         protected OmitOperationGroupsArmOperation()
         {
         }

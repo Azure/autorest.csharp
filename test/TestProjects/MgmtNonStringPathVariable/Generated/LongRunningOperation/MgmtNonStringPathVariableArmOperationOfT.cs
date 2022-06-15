@@ -21,7 +21,7 @@ namespace MgmtNonStringPathVariable
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="MgmtNonStringPathVariableArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of MgmtNonStringPathVariableArmOperation for mocking. </summary>
         protected MgmtNonStringPathVariableArmOperation()
         {
         }

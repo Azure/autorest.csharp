@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="SampleArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of SampleArmOperation for mocking. </summary>
         protected SampleArmOperation()
         {
         }

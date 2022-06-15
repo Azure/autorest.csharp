@@ -23,7 +23,7 @@ namespace ExactMatchInheritance
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5SRestOperations" />. </summary>
+        /// <summary> Initializes a new instance of ExactMatchModel5SRestOperations/>. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>

@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="MgmtExpandResourceTypesArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of MgmtExpandResourceTypesArmOperation for mocking. </summary>
         protected MgmtExpandResourceTypesArmOperation()
         {
         }

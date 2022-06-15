@@ -21,7 +21,7 @@ namespace MgmtMultipleParentResource
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResourceArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of MgmtMultipleParentResourceArmOperation for mocking. </summary>
         protected MgmtMultipleParentResourceArmOperation()
         {
         }

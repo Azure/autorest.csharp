@@ -21,7 +21,7 @@ namespace ResourceRename
     {
         private readonly OperationInternal _operation;
 
-        /// <summary> Initializes a new instance of <see cref="ResourceRenameArmOperation" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of ResourceRenameArmOperation for mocking. </summary>
         protected ResourceRenameArmOperation()
         {
         }

@@ -21,7 +21,7 @@ namespace MgmtDiscriminator
     {
         private readonly OperationInternal<T> _operation;
 
-        /// <summary> Initializes a new instance of <see cref="MgmtDiscriminatorArmOperation{T}" /> for mocking. </summary>
+        /// <summary> Initializes a new instance of MgmtDiscriminatorArmOperation for mocking. </summary>
         protected MgmtDiscriminatorArmOperation()
         {
         }
