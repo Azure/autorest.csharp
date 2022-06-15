@@ -66,6 +66,32 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the translation status for a specific document based on the request Id and document Id.
         /// 
@@ -125,6 +151,32 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetDocumentStatus(Guid.NewGuid(), Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("characterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the translation status for a specific document based on the request Id and document Id.
         /// 
@@ -183,6 +235,34 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
@@ -246,6 +326,34 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetTranslationStatus(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
@@ -309,6 +417,34 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call CancelTranslationAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.CancelTranslationAsync(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Cancel a currently processing or queued translation.
         /// Cancel a currently processing or queued translation.
@@ -375,6 +511,34 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call CancelTranslation with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.CancelTranslation(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Cancel a currently processing or queued translation.
         /// Cancel a currently processing or queued translation.
@@ -440,6 +604,22 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedDocumentFormatsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetSupportedDocumentFormatsAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
@@ -483,6 +663,22 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedDocumentFormats and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetSupportedDocumentFormats();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
@@ -526,6 +722,22 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetSupportedGlossaryFormatsAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
@@ -569,6 +781,22 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedGlossaryFormats and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetSupportedGlossaryFormats();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("format").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("fileExtensions").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("contentTypes").Item[0].ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("defaultVersion").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("versions").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
@@ -612,6 +840,18 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedStorageSourcesAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetSupportedStorageSourcesAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns a list of storage sources/options supported by the Document Translation service.
         /// 
@@ -646,6 +886,18 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetSupportedStorageSources and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetSupportedStorageSources();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns a list of storage sources/options supported by the Document Translation service.
         /// 
@@ -706,6 +958,55 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationsStatusAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetTranslationsStatusAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetTranslationsStatusAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetTranslationsStatusAsync(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns a list of batch requests submitted and the status for each request.
         /// This list only contains batch requests submitted by the user (based on the resource).
@@ -821,6 +1122,55 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetTranslationsStatus and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetTranslationsStatus();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetTranslationsStatus with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetTranslationsStatus(1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("total").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("failed").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("success").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("inProgress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("cancelled").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        /// Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns a list of batch requests submitted and the status for each request.
         /// This list only contains batch requests submitted by the user (based on the resource).
@@ -937,6 +1287,49 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentsStatusAsync with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetDocumentsStatusAsync(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetDocumentsStatusAsync with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetDocumentsStatusAsync(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("characterCharged").ToString());
+        /// Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the status for all documents in a batch document translation request.
         ///             
@@ -1046,6 +1439,49 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <example>
+        /// This sample shows how to call GetDocumentsStatus with required parameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetDocumentsStatus(Guid.NewGuid());
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// ]]></code>
+        /// This sample shows how to call GetDocumentsStatus with all parameters, and how to parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetDocumentsStatus(Guid.NewGuid(), 1234, 1234, 1234, new Guid[]{Guid.NewGuid()}, new String[]{"<statuses>"}, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, new String[]{"<orderBy>"});
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("path").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("sourcePath").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("createdDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("lastActionDateTimeUtc").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("status").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("to").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("progress").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("id").ToString());
+        /// Console.WriteLine(result.GetProperty("value").Item[0].GetProperty("characterCharged").ToString());
+        /// Console.WriteLine(result.GetProperty("@nextLink").ToString());
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Returns the status for all documents in a batch document translation request.
         ///             
@@ -1132,6 +1568,50 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call StartTranslationAsync with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// var data = new {
+        ///     inputs = new[] {
+        ///         new {
+        ///             source = new {
+        ///                 sourceUrl = "<SourceInputSourceUrl>",
+        ///                 filter = new {
+        ///                     prefix = "<DocumentFilterPrefix>",
+        ///                     suffix = "<DocumentFilterSuffix>",
+        ///                 },
+        ///                 language = "<SourceInputLanguage>",
+        ///                 storageSource = "<AzureBlob>",
+        ///             },
+        ///             targets = new[] {
+        ///                 new {
+        ///                     targetUrl = "<TargetInputTargetUrl>",
+        ///                     category = "<TargetInputCategory>",
+        ///                     language = "<TargetInputLanguage>",
+        ///                     glossaries = new[] {
+        ///                         new {
+        ///                             glossaryUrl = "<GlossaryUrl>",
+        ///                             format = "<GlossaryFormat>",
+        ///                             version = "<GlossaryVersion>",
+        ///                             storageSource = "<AzureBlob>",
+        ///                         }
+        ///                     },
+        ///                     storageSource = "<AzureBlob>",
+        ///                 }
+        ///             },
+        ///             storageType = "<Folder>",
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = await client.StartTranslationAsync(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.
@@ -1215,6 +1695,50 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
+        /// <example>
+        /// This sample shows how to call StartTranslation with required parameters and request content.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new DocumentTranslationClient(endpoint, credential);
+        /// 
+        /// var data = new {
+        ///     inputs = new[] {
+        ///         new {
+        ///             source = new {
+        ///                 sourceUrl = "<SourceInputSourceUrl>",
+        ///                 filter = new {
+        ///                     prefix = "<DocumentFilterPrefix>",
+        ///                     suffix = "<DocumentFilterSuffix>",
+        ///                 },
+        ///                 language = "<SourceInputLanguage>",
+        ///                 storageSource = "<AzureBlob>",
+        ///             },
+        ///             targets = new[] {
+        ///                 new {
+        ///                     targetUrl = "<TargetInputTargetUrl>",
+        ///                     category = "<TargetInputCategory>",
+        ///                     language = "<TargetInputLanguage>",
+        ///                     glossaries = new[] {
+        ///                         new {
+        ///                             glossaryUrl = "<GlossaryUrl>",
+        ///                             format = "<GlossaryFormat>",
+        ///                             version = "<GlossaryVersion>",
+        ///                             storageSource = "<AzureBlob>",
+        ///                         }
+        ///                     },
+        ///                     storageSource = "<AzureBlob>",
+        ///                 }
+        ///             },
+        ///             storageType = "<Folder>",
+        ///         }
+        ///     },
+        /// };
+        /// 
+        /// Response response = client.StartTranslation(WaitUntil.Completed, RequestContent.Create(data), ContentType.ApplicationOctetStream);
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         /// <remarks>
         /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
         /// Each request can contain multiple documents and must contain a source and destination container for each document.

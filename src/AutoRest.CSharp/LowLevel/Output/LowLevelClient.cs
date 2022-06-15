@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Output.Models
                 var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", null, Public | Virtual, subClient.Type, null, methodParameters.ToArray());
                 FieldDeclaration? cachingField = methodParameters.Any() ? null : new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
 
-                yield return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
+                yield return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters, subClient.Type.Name);
             }
         }
 

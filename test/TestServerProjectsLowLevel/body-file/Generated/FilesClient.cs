@@ -60,6 +60,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetFileAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetFileAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -80,6 +91,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetFile.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetFile();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -100,6 +122,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetFileLargeAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetFileLargeAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -120,6 +153,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetFileLarge.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetFileLarge();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetFileLarge(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -140,6 +184,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyFileAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetEmptyFileAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -160,6 +215,17 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyFile.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new FilesClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetEmptyFile();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetEmptyFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");

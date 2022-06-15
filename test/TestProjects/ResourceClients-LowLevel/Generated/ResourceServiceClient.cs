@@ -63,6 +63,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetParametersAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetParametersAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetParametersAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -83,6 +95,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetParameters and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetParameters();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetParameters(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -103,6 +127,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGroupsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetGroupsAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetGroupsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
@@ -123,6 +159,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGroups and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetGroups();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetGroups(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
@@ -143,6 +191,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
+        /// <example>
+        /// This sample shows how to call GetAllItemsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetAllItemsAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
             return GetAllItemsImplementationAsync("ResourceServiceClient.GetAllItems", context);
@@ -169,6 +229,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
+        /// <example>
+        /// This sample shows how to call GetAllItems and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetAllItems();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
             return GetAllItemsImplementation("ResourceServiceClient.GetAllItems", context);

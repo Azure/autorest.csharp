@@ -62,6 +62,17 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyAsync with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PathsClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetEmptyAsync("<accountName>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -86,6 +97,17 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmpty with required parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new PathsClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetEmpty("<accountName>");
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));

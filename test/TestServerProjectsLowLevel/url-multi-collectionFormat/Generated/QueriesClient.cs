@@ -62,6 +62,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiNullAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiNullAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiNullAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiNullAsync(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -83,6 +103,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiNull.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiNull();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiNull with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiNull(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -104,6 +144,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiEmptyAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiEmptyAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiEmptyAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiEmptyAsync(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -125,6 +185,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiEmpty.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiEmpty();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiEmpty with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiEmpty(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -146,6 +226,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiValidAsync.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiValidAsync();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiValidAsync with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = await client.ArrayStringMultiValidAsync(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -167,6 +267,26 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call ArrayStringMultiValid.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiValid();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// This sample shows how to call ArrayStringMultiValid with all parameters.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new QueriesClient(endpoint, credential);
+        /// 
+        /// Response response = client.ArrayStringMultiValid(new String[]{"<arrayQuery>"});
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");

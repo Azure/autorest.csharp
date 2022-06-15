@@ -60,6 +60,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyErrorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetEmptyErrorAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -80,6 +92,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetEmptyError and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetEmptyError();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetEmptyError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
@@ -100,6 +124,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoModelErrorAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetNoModelErrorAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -120,6 +156,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoModelError and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetNoModelError();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetNoModelError(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
@@ -140,6 +188,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoModelEmptyAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = await client.GetNoModelEmptyAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
@@ -160,6 +220,18 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetNoModelEmpty and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpFailureClient(endpoint, credential);
+        /// 
+        /// Response response = client.GetNoModelEmpty();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetNoModelEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");

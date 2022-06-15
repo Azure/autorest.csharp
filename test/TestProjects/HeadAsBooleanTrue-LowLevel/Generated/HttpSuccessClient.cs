@@ -60,6 +60,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head200Async.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = await client.Head200Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -80,6 +91,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head200.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = client.Head200();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response<bool> Head200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -100,6 +122,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head204Async.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = await client.Head204Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -120,6 +153,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head204.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = client.Head204();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response<bool> Head204(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -140,6 +184,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head404Async.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = await client.Head404Async();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -160,6 +215,17 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call Head404.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new HttpSuccessClient(endpoint, credential);
+        /// 
+        /// Response response = client.Head404();
+        /// Console.WriteLine(response.Status);
+        /// ]]></code>
+        /// </example>
         public virtual Response<bool> Head404(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");

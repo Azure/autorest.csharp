@@ -57,6 +57,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGroupAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
+        /// 
+        /// Response response = await client.GetGroupAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -77,6 +89,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <example>
+        /// This sample shows how to call GetGroup and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
+        /// 
+        /// Response response = client.GetGroup();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Response GetGroup(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -97,6 +121,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
+        /// <example>
+        /// This sample shows how to call GetItemsAsync and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
+        /// 
+        /// Response response = await client.GetItemsAsync();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
         {
             return GetItemsImplementationAsync("ResourceGroup.GetItems", context);
@@ -123,6 +159,18 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. </returns>
+        /// <example>
+        /// This sample shows how to call GetItems and parse the result.
+        /// <code><![CDATA[
+        /// var credential = new DefaultAzureCredential();
+        /// var endpoint = new Uri("<https://my-account-name.azure.com>");
+        /// var client = new ResourceServiceClient(endpoint, credential).GetResourceGroup("<groupId>");
+        /// 
+        /// Response response = client.GetItems();
+        /// JsonElement result = JsonDocument.Parse(GetContentFromResponse(response)).RootElement;
+        /// Console.WriteLine(result.ToString());
+        /// ]]></code>
+        /// </example>
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
         {
             return GetItemsImplementation("ResourceGroup.GetItems", context);
