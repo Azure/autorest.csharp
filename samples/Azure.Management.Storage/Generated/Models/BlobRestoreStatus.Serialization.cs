@@ -47,7 +47,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    parameters = BlobRestoreContent.DeserializeBlobRestoreParameters(property.Value);
+                    parameters = BlobRestoreContent.DeserializeBlobRestoreContent(property.Value);
                     continue;
                 }
             }

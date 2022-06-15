@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static BlobRestoreContent DeserializeBlobRestoreParameters(JsonElement element)
+        internal static BlobRestoreContent DeserializeBlobRestoreContent(JsonElement element)
         {
             DateTimeOffset timeToRestore = default;
             IList<BlobRestoreRange> blobRanges = default;
